@@ -7,13 +7,11 @@
 <meta name="description" content="Researchly helps high school and undergrad students find research opportunities matched to them, through a short guided interview. Join the waitlist.">
 <style>
   :root{
-    --cover:#C6602F; --cover-light:#E08A54; --cover-dark:#8C3F1E;
-    --spine:#7A3418; --pages:#F3E3C8; --pages-shadow:#E4CBA0; --ribbon:#3F7D5C;
+    --cover:#C6602F; --pages:#F3E3C8; --ribbon:#3F7D5C;
     --face:#3B2A1E; --gold:#D9A441;
-    --wood-deep:#1B120C; --wood-mid:#2E2015; --wood-shelf:#3F2C1C;
-    --lamp-warm:#F4B36B; --lamp-core:#FFE3B0; --parchment:#F3E7CE;
+    --wood-deep:#1B120C;
+    --lamp-warm:#F4B36B; --parchment:#F3E7CE;
     --dusk-cool:#1A1B21;
-    --glass-rim:#A08A63; --glass-rim-dark:#7C6A4C; --glass-lens:rgba(232,232,222,.14);
 
     --container-max-width: 1280px;
     --container-pad: 64px;
@@ -69,71 +67,27 @@
     position:relative; flex:1; overflow:hidden;
     display:flex; align-items:center;
     min-height: 660px;
+    background-color: var(--wood-deep);
+    background-image: url('assets/hero-scene.jpg');
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
   }
-  /* content stays within the shared max-width container; decorative
-     background layers (grain, bokeh, contour, constellation, glow, dust, veil)
-     remain full-bleed on .hero */
+  /* subtle scrim so headline copy stays legible over the photo regardless of crop/viewport */
+  .hero::before{
+    content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background: linear-gradient(90deg, rgba(15,10,7,.35) 0%, rgba(15,10,7,.1) 45%, rgba(15,10,7,0) 62%);
+  }
   .hero-inner{
     position:relative; z-index:4; width:100%; height:100%;
-    display:flex; align-items:center; justify-content:space-between; gap:32px;
+    display:flex; align-items:center;
   }
 
-  /* ---------- background atmosphere: 4 layers, all subtle, all behind content ---------- */
-
-  /* layer 2 — blurred bokeh library: real rectangular shelf shapes, genuinely blurred so edges dissolve */
-  .bokeh-library{
-    position:absolute; inset:0; z-index:0; pointer-events:none;
-    opacity:.35; filter: blur(16px);
-  }
-  .bokeh-shelf{ position:absolute; border-radius:6px; }
-
-  /* layer 3 — topographic contour lines: organic nested loops in the gap between headline and mascot */
-  .contour-field{
-    position:absolute; z-index:1; pointer-events:none;
-    width:190px; height:190px; left:47%; top:50%;
-    transform: translate(-50%,-50%);
-  }
-
-  /* layer 4 — constellation / knowledge graph, sparse accent in the emptiest corner */
-  .constellation{ position:absolute; top:6%; left:4%; width:230px; height:auto; z-index:1; pointer-events:none; }
-
-  /* layer 1 — paper grain, sits above every other background layer, textures them via blend mode */
-  .paper-grain{
-    position:absolute; inset:0; z-index:3; pointer-events:none;
-    opacity:.05; mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  /* hanging lamp, right side — dimensional pendant shade */
-  .lamp-rig{ position:absolute; right: 9%; top:0; z-index:5; display:flex; flex-direction:column; align-items:center; }
-  .lamp-cord{ width:2px; height: 50px; background: linear-gradient(180deg, var(--wood-mid), #150e09); }
-  .lamp-fixture{ width: 128px; height: 92px; overflow:visible; }
-  .lamp-bulb{
-    width:15px; height:15px; border-radius:50%; margin-top:-10px;
-    background: var(--lamp-core);
-    box-shadow: 0 0 30px 13px rgba(244,179,107,.82);
-    animation: lamp-flicker 2.6s ease-out forwards;
-  }
-
-  /* light spreading from the lamp — wide reach */
-  .lamp-glow{
-    position:absolute; right: -10%; top: -12%;
-    width: 1320px; height: 1320px; border-radius:50%;
-    background: radial-gradient(circle, var(--lamp-warm) 0%, rgba(244,179,107,.5) 32%, rgba(244,179,107,.15) 58%, rgba(244,179,107,0) 76%);
-    mix-blend-mode: screen;
-    z-index:1;
-    transform-origin: 70% 18%;
-    animation: glow-flicker 2.6s ease-out forwards;
-  }
   .dark-veil{
     position:absolute; inset:0; z-index:6; pointer-events:none;
     background: var(--wood-deep);
     animation: veil-fade 2.6s ease-out forwards;
   }
-
-  /* dust catching the light */
-  .dust-field{ position:absolute; inset:0; z-index:2; pointer-events:none; opacity:0; animation: fade-in 1.4s ease-out 1.6s forwards; }
-  .dust{ position:absolute; width:3px; height:3px; border-radius:50%; background: var(--lamp-core); opacity:.5; animation: dust-drift 16s linear infinite; }
 
   /* copy */
   .hero-text{ position:relative; z-index:4; max-width: 480px; flex: 0 1 480px; animation: content-in .9s ease-out 1.9s both; }
@@ -178,47 +132,8 @@
   }
   .cta-btn:hover{ transform: translateY(-2px); box-shadow: 0 18px 30px -10px rgba(0,0,0,.65); }
 
-  /* mascot — floating, higher and further right, no ground beneath him */
-  .mascot-focal{
-    position:relative; z-index:4; flex: 1 1 420px; min-width:340px;
-    display:flex; align-items:center; justify-content:center;
-    transform: translate(10%, -14%);
-  }
-  .mascot-figure{
-    position:relative; width:100%; max-width:560px; aspect-ratio: 1 / 1.08;
-    display:flex; align-items:center; justify-content:center;
-    animation: mascot-enter .5s ease-in-out 2s both;
-  }
-  .mascot-highlight{
-    position:absolute; top:50%; left:50%; transform: translate(-50%,-50%);
-    width: 115%; height: 100%; border-radius:50%;
-    background: radial-gradient(circle, rgba(255,227,176,.5) 0%, rgba(255,227,176,0) 68%);
-    mix-blend-mode: screen;
-  }
-  .mascot-instance{ width: 84%; height:auto; position:relative; z-index:2; }
-  .mascot-wave-arm{ transform-box: fill-box; transform-origin: 15% 40%; }
-
-  .sparkle{ position:absolute; z-index:3; pointer-events:none; }
-  .sparkle svg{ width:100%; height:100%; }
-
   @media (prefers-reduced-motion: no-preference){
-    .anim-bob{ animation: bob 4.6s ease-in-out infinite; }
-    .mascot-wave-arm{ animation: wave-arm 1.5s ease-in-out 2.4s 1; }
-    .sparkle{ animation: twinkle 3.4s ease-in-out infinite; }
     .kicker{ animation: kicker-shimmer 3.2s ease-in-out 2.9s infinite; }
-  }
-  @keyframes bob{ 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-12px); } }
-  @keyframes wave-arm{
-    0%{ transform: rotate(0deg); } 20%{ transform: rotate(-20deg); }
-    38%{ transform: rotate(6deg); } 56%{ transform: rotate(-15deg); }
-    74%{ transform: rotate(3deg); } 100%{ transform: rotate(0deg); }
-  }
-  @keyframes twinkle{
-    0%,100%{ opacity:0; transform:scale(.6); } 50%{ opacity:1; transform:scale(1); }
-  }
-  @keyframes mascot-enter{
-    0%{ opacity:0; transform: translateX(-68vw) rotate(-4deg); }
-    100%{ opacity:1; transform: translateX(0) rotate(-4deg); }
   }
   @keyframes kicker-shimmer{
     0%{ background-position: 160% 0; }
@@ -228,37 +143,11 @@
     0%{opacity:.97;} 8%{opacity:.6;} 14%{opacity:.95;} 22%{opacity:.5;}
     28%{opacity:.92;} 36%{opacity:.35;} 55%{opacity:.12;} 75%{opacity:.02;} 100%{opacity:0;}
   }
-  @keyframes glow-flicker{
-    0%{opacity:0; transform:scale(.32);} 8%{opacity:.5; transform:scale(.46);}
-    14%{opacity:.06; transform:scale(.38);} 22%{opacity:.65; transform:scale(.58);}
-    28%{opacity:.1; transform:scale(.46);} 36%{opacity:.8; transform:scale(.76);}
-    55%{opacity:.95; transform:scale(.96);} 75%{opacity:1; transform:scale(1.03);}
-    100%{opacity:1; transform:scale(1);}
-  }
-  @keyframes lamp-flicker{
-    0%{opacity:.05;} 8%{opacity:.55;} 14%{opacity:.08;} 22%{opacity:.7;}
-    28%{opacity:.12;} 36%{opacity:.85;} 60%{opacity:.95;} 100%{opacity:1;}
-  }
   @keyframes content-in{ 0%{opacity:0; transform:translateY(14px);} 100%{opacity:1; transform:translateY(0);} }
-  @keyframes fade-in{ 0%{opacity:0;} 100%{opacity:1;} }
-  @keyframes dust-drift{
-    0%{ transform: translate(0,0); opacity:0; }
-    10%{ opacity:.5; }
-    90%{ opacity:.35; }
-    100%{ transform: translate(14px,-140px); opacity:0; }
-  }
 
   @media (prefers-reduced-motion: reduce){
     .dark-veil{ animation:none; opacity:0; }
-    .lamp-glow{ animation:none; opacity:1; transform:scale(1); }
-    .lamp-bulb{ animation:none; opacity:1; }
     .hero-text{ animation:none; opacity:1; transform:none; }
-    .mascot-figure{ animation:none; opacity:1; transform: rotate(-4deg); }
-    .dust-field{ animation:none; opacity:1; }
-    .dust{ animation:none; }
-    .anim-bob{ animation:none; }
-    .mascot-wave-arm{ animation:none; }
-    .sparkle{ animation:none; opacity:.8; }
     .kicker{ animation:none; }
   }
 
@@ -285,17 +174,9 @@
   /* ---------- mobile ---------- */
   @media (max-width: 860px){
     .site-nav{ padding-top: 18px; padding-bottom: 18px; }
-    .hero{ min-height: 700px; }
-    .hero-inner{
-      flex-direction:column; align-items:center; justify-content:flex-end;
-      text-align:center; padding-top: 32px; padding-bottom: 40px; height:auto;
-    }
-    .hero-text{ max-width:100%; order:2; }
-    .sub{ margin-left:auto; margin-right:auto; }
-    .lamp-rig{ right:auto; left:50%; transform:translateX(-50%); }
-    .lamp-glow{ right:auto; left:50%; top:-30%; width:1000px; height:1000px; transform-origin:50% 30%; margin-left:-500px; }
-    .mascot-focal{ order:1; flex:0 0 auto; margin-bottom:8px; transform:none; }
-    .mascot-figure{ max-width:320px; }
+    .hero{ min-height: 620px; background-position: 68% center; }
+    .hero-inner{ align-items:flex-end; padding-top: 32px; padding-bottom: 40px; height:auto; }
+    .hero-text{ max-width:100%; }
   }
 </style>
 </head>
@@ -303,26 +184,6 @@
 
 <svg class="visually-hidden" aria-hidden="true">
   <defs>
-    <symbol id="mascot-idle" viewBox="0 0 240 260">
-      <polygon points="60,40 150,40 172,62 172,188 150,210 60,210 38,188 38,62" fill="var(--cover)"/>
-      <polygon points="38,62 172,62 172,125 38,125" fill="var(--cover-light)" opacity=".55"/>
-      <polygon points="38,150 172,150 172,188 150,210 60,210 38,188" fill="var(--cover-dark)" opacity=".35"/>
-      <polygon points="38,62 38,188 18,175 18,75" fill="var(--spine)"/>
-      <polygon points="38,62 172,62 192,45 58,45" fill="var(--pages)"/>
-      <polygon points="172,62 192,45 192,172 172,188" fill="var(--pages-shadow)"/>
-      <polygon points="100,45 116,45 120,100 108,84 96,100" fill="var(--ribbon)"/>
-      <polygon points="38,130 18,140 22,162 40,155" fill="var(--cover-dark)"/>
-      <polygon class="mascot-wave-arm" points="172,130 192,140 188,162 170,155" fill="var(--cover-dark)"/>
-      <polygon points="26.4,150.5 17.6,190.3 14.4,189.7 21.6,149.5" fill="var(--glass-rim-dark)"/>
-      <circle cx="13.5" cy="203" r="13" fill="var(--glass-lens)" stroke="var(--glass-rim)" stroke-width="4"/>
-      <polygon points="66,210 90,210 84,236 70,236" fill="var(--cover-dark)"/>
-      <polygon points="120,210 144,210 140,236 126,236" fill="var(--cover-dark)"/>
-      <ellipse cx="68" cy="132" rx="9" ry="5" fill="var(--ribbon)" opacity=".35"/>
-      <ellipse cx="144" cy="132" rx="9" ry="5" fill="var(--ribbon)" opacity=".35"/>
-      <circle cx="88" cy="118" r="6.5" fill="var(--face)"/>
-      <circle cx="124" cy="118" r="6.5" fill="var(--face)"/>
-      <path d="M80,142 Q106,158 132,142" stroke="var(--face)" stroke-width="6" fill="none" stroke-linecap="round"/>
-    </symbol>
     <symbol id="mascot-tiny" viewBox="0 0 60 60">
       <polygon points="14,10 40,10 48,18 48,46 40,54 14,54 8,46 8,18" fill="var(--cover)"/>
       <polygon points="8,18 40,18 46,12 16,12" fill="var(--pages)"/>
@@ -330,9 +191,6 @@
       <circle cx="21" cy="30" r="2.3" fill="var(--face)"/>
       <circle cx="33" cy="30" r="2.3" fill="var(--face)"/>
       <path d="M19,37 Q27,43 35,37" stroke="var(--face)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
-    </symbol>
-    <symbol id="sparkle-star" viewBox="0 0 20 20">
-      <path d="M10,0 L12,8 L20,10 L12,12 L10,20 L8,12 L0,10 L8,8 Z" fill="currentColor"/>
     </symbol>
   </defs>
 </svg>
@@ -346,93 +204,6 @@
 </div>
 
 <div class="hero">
-  <div class="bokeh-library" aria-hidden="true">
-    <span class="bokeh-shelf" style="left:38%;top:8%;width:140px;height:60px;background:#8B6F47;"></span>
-    <span class="bokeh-shelf" style="left:52%;top:14%;width:110px;height:75px;background:#A0826D;"></span>
-    <span class="bokeh-shelf" style="left:66%;top:6%;width:130px;height:65px;background:#6B4F3A;"></span>
-    <span class="bokeh-shelf" style="left:80%;top:12%;width:150px;height:70px;background:#C9A876;"></span>
-    <span class="bokeh-shelf" style="left:42%;top:38%;width:120px;height:80px;background:#6B4F3A;"></span>
-    <span class="bokeh-shelf" style="left:58%;top:34%;width:145px;height:65px;background:#A0826D;"></span>
-    <span class="bokeh-shelf" style="left:74%;top:40%;width:110px;height:75px;background:#8B6F47;"></span>
-    <span class="bokeh-shelf" style="left:88%;top:36%;width:130px;height:70px;background:#C9A876;"></span>
-    <span class="bokeh-shelf" style="left:48%;top:64%;width:135px;height:70px;background:#A0826D;"></span>
-    <span class="bokeh-shelf" style="left:66%;top:68%;width:120px;height:65px;background:#8B6F47;"></span>
-    <span class="bokeh-shelf" style="left:82%;top:62%;width:140px;height:75px;background:#6B4F3A;"></span>
-  </div>
-
-  <svg class="contour-field" viewBox="0 0 200 200" aria-hidden="true">
-    <defs>
-      <path id="contour-loop" d="M100,20 C130,18 155,35 165,60 C175,85 170,115 155,140 C140,165 110,175 85,168 C60,160 40,140 32,115 C24,88 30,58 55,38 C70,26 85,22 100,20 Z"/>
-    </defs>
-    <g fill="none" stroke="var(--parchment)" stroke-width="1.2">
-      <use href="#contour-loop" transform="translate(100,100) scale(0.42) translate(-100,-100)" opacity=".12"/>
-      <use href="#contour-loop" transform="translate(100,100) scale(0.56) translate(-100,-100)" opacity=".1"/>
-      <use href="#contour-loop" transform="translate(100,100) scale(0.7) translate(-100,-100)" opacity=".11"/>
-      <use href="#contour-loop" transform="translate(100,100) scale(0.84) translate(-100,-100)" opacity=".09"/>
-      <use href="#contour-loop" transform="translate(100,100) scale(0.98) translate(-100,-100)" opacity=".08"/>
-      <use href="#contour-loop" transform="translate(100,100) scale(1.12) translate(-100,-100)" opacity=".08"/>
-    </g>
-  </svg>
-
-  <div class="paper-grain" aria-hidden="true"></div>
-
-  <svg class="constellation" viewBox="0 0 220 150" aria-hidden="true">
-    <g stroke="var(--parchment)" stroke-width="1" fill="none" opacity=".16">
-      <line x1="18" y1="26" x2="64" y2="52"/>
-      <line x1="64" y1="52" x2="50" y2="96"/>
-      <line x1="64" y1="52" x2="118" y2="38"/>
-      <line x1="118" y1="38" x2="156" y2="70"/>
-      <line x1="50" y1="96" x2="100" y2="112"/>
-    </g>
-    <g fill="var(--lamp-warm)">
-      <circle cx="18" cy="26" r="2.4" opacity=".5"/>
-      <circle cx="64" cy="52" r="3" opacity=".6"/>
-      <circle cx="50" cy="96" r="2.2" opacity=".45"/>
-      <circle cx="118" cy="38" r="2.6" opacity=".55"/>
-      <circle cx="156" cy="70" r="2.1" opacity=".4"/>
-      <circle cx="100" cy="112" r="2.2" opacity=".42"/>
-    </g>
-  </svg>
-
-  <div class="lamp-glow"></div>
-
-  <div class="dust-field">
-    <span class="dust" style="left:52%;top:18%;animation-delay:-2s;"></span>
-    <span class="dust" style="left:61%;top:34%;animation-delay:-6s;"></span>
-    <span class="dust" style="left:70%;top:12%;animation-delay:-9s;"></span>
-    <span class="dust" style="left:66%;top:52%;animation-delay:-3s;"></span>
-    <span class="dust" style="left:78%;top:40%;animation-delay:-11s;"></span>
-    <span class="dust" style="left:58%;top:66%;animation-delay:-1s;"></span>
-    <span class="dust" style="left:85%;top:24%;animation-delay:-7s;"></span>
-    <span class="dust" style="left:73%;top:70%;animation-delay:-4.5s;"></span>
-    <span class="dust" style="left:48%;top:44%;animation-delay:-13s;"></span>
-    <span class="dust" style="left:90%;top:58%;animation-delay:-8.5s;"></span>
-  </div>
-
-  <div class="lamp-rig">
-    <div class="lamp-cord"></div>
-    <svg class="lamp-fixture" viewBox="0 0 140 100">
-      <defs>
-        <linearGradient id="shadeGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#F3D191"/>
-          <stop offset="55%" stop-color="var(--gold)"/>
-          <stop offset="100%" stop-color="var(--cover-dark)"/>
-        </linearGradient>
-        <radialGradient id="shadeInner" cx="50%" cy="10%" r="75%">
-          <stop offset="0%" stop-color="#3A2A12" stop-opacity=".85"/>
-          <stop offset="100%" stop-color="#1B120C" stop-opacity=".95"/>
-        </radialGradient>
-      </defs>
-      <rect x="60" y="0" width="20" height="8" rx="3" fill="var(--wood-mid)"/>
-      <polygon points="52,8 88,8 132,84 8,84" fill="url(#shadeGrad)"/>
-      <polygon points="52,8 88,8 82,20 58,20" fill="#F8E2B2" opacity=".65"/>
-      <polygon points="88,8 132,84 106,84 76,16" fill="#000000" opacity=".14"/>
-      <ellipse cx="70" cy="84" rx="62" ry="7" fill="var(--wood-mid)" opacity=".55"/>
-      <ellipse cx="70" cy="80" rx="50" ry="9" fill="url(#shadeInner)"/>
-    </svg>
-    <div class="lamp-bulb"></div>
-  </div>
-
   <div class="hero-inner container">
     <div class="hero-text">
       <p class="kicker">Waitlist now open</p>
@@ -441,16 +212,6 @@
       <p class="sub">A short guided interview turns "I don't know where to start" into a personalized map of research programs worth applying to.</p>
       <div class="cta-wrap">
         <button class="cta-btn" type="button" id="heroCta">Join the waitlist →</button>
-      </div>
-    </div>
-
-    <div class="mascot-focal">
-      <div class="mascot-figure">
-        <div class="mascot-highlight"></div>
-        <svg class="mascot-instance anim-bob" viewBox="0 0 240 260"><use href="#mascot-idle"/></svg>
-        <span class="sparkle" style="width:16px;height:16px;top:6%;left:8%;color:var(--lamp-warm);animation-delay:.2s;"><svg><use href="#sparkle-star"/></svg></span>
-        <span class="sparkle" style="width:11px;height:11px;top:16%;right:2%;color:var(--gold);animation-delay:1.3s;"><svg><use href="#sparkle-star"/></svg></span>
-        <span class="sparkle" style="width:13px;height:13px;bottom:34%;left:0%;color:var(--lamp-warm);animation-delay:2.1s;"><svg><use href="#sparkle-star"/></svg></span>
       </div>
     </div>
   </div>
