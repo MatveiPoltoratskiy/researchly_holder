@@ -3,491 +3,317 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The GOAT Database</title>
+<title>Researchly — Change the world</title>
+<meta name="description" content="Researchly helps high school and undergrad students find research opportunities matched to them, through a short guided interview. Join the waitlist.">
 <style>
-  :root {
-    --court-orange: #e8590c;
-    --court-cream: #fff4e6;
-    --lakers-purple: #4a2b7a;
-    --lakers-gold: #fdb927;
-    --ink: #1a1523;
+  :root{
+    --cover:#C6602F; --cover-light:#E08A54; --cover-dark:#8C3F1E;
+    --spine:#7A3418; --pages:#F3E3C8; --pages-shadow:#E4CBA0; --ribbon:#3F7D5C;
+    --face:#3B2A1E; --gold:#D9A441;
+    --wood-deep:#1B120C; --wood-mid:#2E2015; --wood-shelf:#3F2C1C;
+    --lamp-warm:#F4B36B; --lamp-core:#FFE3B0; --parchment:#F3E7CE;
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    min-height:100vh;
+    display:flex; flex-direction:column;
+    background: var(--wood-deep);
+    color: var(--parchment);
+    font-family: Georgia, "Iowan Old Style", serif;
+    overflow-x:hidden;
+  }
+  svg{ display:block; }
+  .visually-hidden{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+
+  /* ---------- nav ---------- */
+  .site-nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 22px 44px; position:relative; z-index:20;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .brand svg{ width:30px; height:30px; }
+  .brand span{
+    font-size:18px; font-weight:600; letter-spacing:-.01em;
+    color: var(--parchment);
+    font-family: "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  }
+  .nav-cta{
+    font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; font-weight:700;
+    border:none; cursor:pointer;
+    background: var(--parchment); color: var(--wood-deep);
+    padding:11px 20px; border-radius:999px;
   }
 
-  * { box-sizing: border-box; }
-
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    background: linear-gradient(180deg, var(--lakers-purple) 0%, #6b3fa0 45%, #8a5bc2 100%);
-    color: white;
-    overflow-x: hidden;
+  /* ---------- hero shell ---------- */
+  .hero{
+    position:relative; flex:1; overflow:hidden;
+    display:flex; align-items:center;
+    padding: 0 64px; min-height: 560px;
   }
 
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 24px 48px;
-    position: relative;
-    z-index: 10;
+  /* library shelving backdrop */
+  .lib-shelves{ position:absolute; inset:0; z-index:0; }
+  .shelf-row{
+    position:absolute; left:-4%; right:-4%; height: 52px;
+    display:flex; align-items:flex-end; gap:5px;
+    filter: blur(1.5px);
+  }
+  .shelf-row::after{
+    content:""; position:absolute; left:0; right:0; bottom:-7px; height:7px;
+    background: linear-gradient(180deg, var(--wood-shelf), var(--wood-mid));
+  }
+  .shelf-row span{ flex:1; align-self:flex-end; height:70%; border-radius:2px 2px 0 0; background: var(--wood-shelf); }
+  .shelf-row span:nth-child(3n){ background:#4A3420; height:88%; }
+  .shelf-row span:nth-child(5n){ background:#5C4128; height:62%; }
+  .shelf-row span:nth-child(7n){ background:#2A1D14; height:96%; }
+
+  /* copy */
+  .hero-text{ position:relative; z-index:4; max-width: 460px; animation: content-in .9s ease-out 1.9s both; }
+  .kicker{
+    font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; letter-spacing:.14em;
+    text-transform:uppercase; color: var(--lamp-warm); margin:0 0 16px; font-weight:700;
+  }
+  h1{
+    margin:0;
+    font-family: "Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+    font-weight: 500;
+    font-size: clamp(42px, 5.6vw, 72px);
+    line-height:1.04;
+    color: var(--parchment);
+    text-wrap: balance;
+  }
+  .tagline{
+    margin: 10px 0 0;
+    font-family: "Iowan Old Style",Palatino,Georgia,serif;
+    font-style: italic;
+    font-size: clamp(18px, 2vw, 22px);
+    color: var(--lamp-warm);
+  }
+  .sub{
+    font-family:"Segoe UI",system-ui,sans-serif;
+    font-size: 15.5px; line-height:1.6; color: rgba(243,231,206,.72);
+    max-width: 400px; margin: 18px 0 0;
+  }
+  .cta-wrap{ margin-top: 30px; }
+  .cta-btn{
+    font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:15.5px;
+    border:none; cursor:pointer; display:inline-flex; align-items:center; gap:10px;
+    background: var(--cover); color: #FFF7EC;
+    padding: 16px 34px; border-radius: 999px;
+    box-shadow: 0 14px 26px -10px rgba(0,0,0,.6);
   }
 
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 800;
-    font-size: 1.3rem;
+  /* hanging lamp, right side */
+  .lamp-rig{ position:absolute; right: 13%; top:0; z-index:5; display:flex; flex-direction:column; align-items:center; }
+  .lamp-cord{ width:2px; height: 56px; background: linear-gradient(180deg, var(--wood-mid), #150e09); }
+  .lamp-fixture{ width: 92px; height: 60px; overflow:visible; }
+  .lamp-bulb{
+    width:14px; height:14px; border-radius:50%; margin-top:-8px;
+    background: var(--lamp-core);
+    box-shadow: 0 0 26px 11px rgba(244,179,107,.8);
+    animation: lamp-flicker 2.6s ease-out forwards;
   }
 
-  .logo-icon {
-    width: 36px;
-    height: 36px;
-    background: var(--lakers-gold);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
+  /* light spreading from the lamp */
+  .lamp-glow{
+    position:absolute; right: -8%; top: -10%;
+    width: 980px; height: 980px; border-radius:50%;
+    background: radial-gradient(circle, var(--lamp-warm) 0%, rgba(244,179,107,.55) 30%, rgba(244,179,107,.12) 55%, rgba(244,179,107,0) 72%);
+    mix-blend-mode: screen;
+    z-index:1;
+    transform-origin: 70% 18%;
+    animation: glow-flicker 2.6s ease-out forwards;
+  }
+  .dark-veil{
+    position:absolute; inset:0; z-index:6; pointer-events:none;
+    background: var(--wood-deep);
+    animation: veil-fade 2.6s ease-out forwards;
   }
 
-  .menu-icon {
-    font-size: 1.5rem;
-    cursor: pointer;
+  /* dust catching the light */
+  .dust-field{ position:absolute; inset:0; z-index:2; pointer-events:none; opacity:0; animation: fade-in 1.4s ease-out 1.6s forwards; }
+  .dust{ position:absolute; width:3px; height:3px; border-radius:50%; background: var(--lamp-core); opacity:.5; animation: dust-drift 16s linear infinite; }
+
+  /* signature book, focal point beneath the lamp */
+  .book-focal{
+    position:absolute; right: 15%; bottom: 6%; z-index:4;
+    width: 320px; height: 300px;
+    display:flex; align-items:flex-end; justify-content:center;
+    animation: content-in 1s ease-out 2s both;
+  }
+  .book-shadow{
+    position:absolute; bottom: 4px; width: 210px; height: 34px;
+    background: radial-gradient(ellipse, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 72%);
+    filter: blur(2px);
+  }
+  .book-highlight{
+    position:absolute; left:50%; bottom: 20px; transform: translateX(-50%);
+    width: 300px; height: 300px; border-radius:50%;
+    background: radial-gradient(circle, rgba(255,227,176,.55) 0%, rgba(255,227,176,0) 68%);
+    mix-blend-mode: screen;
+  }
+  .book-stack{ position:absolute; bottom: 10px; left:50%; transform: translateX(-50%); display:flex; align-items:flex-end; gap:0; z-index:1; }
+  .book{ width:150px; height:26px; border-radius:4px; margin-top:-6px; }
+  .book.b1{ background:var(--spine); transform: rotate(-2deg); width:190px; }
+  .book.b2{ background:var(--gold); transform: rotate(1.5deg); width:170px; }
+  .book.b3{ background:var(--ribbon); transform: rotate(-1deg); width:150px; }
+  .mascot-instance{ width: 232px; height:252px; position:relative; z-index:2; }
+
+  @media (prefers-reduced-motion: no-preference){
+    .anim-bob{ animation: bob 5s ease-in-out infinite; }
+  }
+  @keyframes bob{ 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-9px); } }
+
+  @keyframes veil-fade{
+    0%{opacity:.97;} 8%{opacity:.6;} 14%{opacity:.95;} 22%{opacity:.5;}
+    28%{opacity:.92;} 36%{opacity:.35;} 55%{opacity:.12;} 75%{opacity:.02;} 100%{opacity:0;}
+  }
+  @keyframes glow-flicker{
+    0%{opacity:0; transform:scale(.32);} 8%{opacity:.5; transform:scale(.46);}
+    14%{opacity:.06; transform:scale(.38);} 22%{opacity:.65; transform:scale(.58);}
+    28%{opacity:.1; transform:scale(.46);} 36%{opacity:.8; transform:scale(.76);}
+    55%{opacity:.95; transform:scale(.96);} 75%{opacity:1; transform:scale(1.03);}
+    100%{opacity:1; transform:scale(1);}
+  }
+  @keyframes lamp-flicker{
+    0%{opacity:.05;} 8%{opacity:.55;} 14%{opacity:.08;} 22%{opacity:.7;}
+    28%{opacity:.12;} 36%{opacity:.85;} 60%{opacity:.95;} 100%{opacity:1;}
+  }
+  @keyframes content-in{ 0%{opacity:0; transform:translateY(14px);} 100%{opacity:1; transform:translateY(0);} }
+  @keyframes fade-in{ 0%{opacity:0;} 100%{opacity:1;} }
+  @keyframes dust-drift{
+    0%{ transform: translate(0,0); opacity:0; }
+    10%{ opacity:.5; }
+    90%{ opacity:.35; }
+    100%{ transform: translate(14px,-140px); opacity:0; }
   }
 
-  .hero {
-    position: relative;
-    padding: 60px 48px 140px;
-    max-width: 1400px;
-    margin: 0 auto;
+  @media (prefers-reduced-motion: reduce){
+    .dark-veil{ animation:none; opacity:0; }
+    .lamp-glow{ animation:none; opacity:1; transform:scale(1); }
+    .lamp-bulb{ animation:none; opacity:1; }
+    .hero-text, .book-focal{ animation:none; opacity:1; transform:none; }
+    .dust-field{ animation:none; opacity:1; }
+    .dust{ animation:none; }
+    .anim-bob{ animation:none; }
   }
 
-  .hero-content {
-    position: relative;
-    z-index: 5;
-    max-width: 700px;
-  }
-
-  h1 {
-    font-size: 4.5rem;
-    font-weight: 900;
-    line-height: 1.05;
-    margin: 0 0 24px;
-    text-shadow: 0 4px 20px rgba(0,0,0,0.2);
-  }
-
-  .subtitle {
-    font-size: 1.2rem;
-    color: #e8d9ff;
-    max-width: 500px;
-    margin-bottom: 36px;
-    line-height: 1.5;
-  }
-
-  .cta-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background: var(--court-orange);
-    color: white;
-    padding: 18px 32px;
-    border-radius: 14px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    text-decoration: none;
-    box-shadow: 0 8px 24px rgba(232,89,12,0.4);
-    transition: transform 0.2s ease;
-    border: none;
-    cursor: pointer;
-  }
-
-  .cta-btn:hover {
-    transform: translateY(-3px);
-  }
-
-  .ball-emoji {
-    display: inline-block;
-    animation: spin 3s linear infinite;
-  }
-
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  .stat-line {
-    margin-top: 24px;
-    color: var(--lakers-gold);
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  /* Floating court scene */
-  .court-scene {
-    position: absolute;
-    right: -60px;
-    top: 40px;
-    width: 640px;
-    max-width: 55vw;
-    z-index: 1;
-    animation: float 5s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-18px); }
-  }
-
-  .hoop {
-    position: relative;
-    width: 100%;
-  }
-
-  .backboard {
-    width: 200px;
-    height: 130px;
-    background: rgba(255,255,255,0.9);
-    border: 6px solid #333;
-    border-radius: 4px;
-    margin-left: auto;
-    margin-right: 60px;
-    position: relative;
-  }
-
-  .rim {
-    position: absolute;
-    bottom: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90px;
-    height: 14px;
-    background: var(--court-orange);
-    border-radius: 50%;
-  }
-
-  .net {
-    position: absolute;
-    bottom: -60px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 50px;
-    background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 4px,
-      rgba(255,255,255,0.6) 4px,
-      rgba(255,255,255,0.6) 6px
-    ),
-    repeating-linear-gradient(
-      -45deg,
-      transparent,
-      transparent 4px,
-      rgba(255,255,255,0.6) 4px,
-      rgba(255,255,255,0.6) 6px
-    );
-    clip-path: polygon(15% 0%, 85% 0%, 65% 100%, 35% 100%);
-  }
-
-  .basketball {
-    position: absolute;
-    font-size: 4rem;
-    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
-    animation: bounce 1.8s ease-in-out infinite;
-  }
-
-  .basketball.b1 { top: 20px; left: 20px; animation-delay: 0s; }
-  .basketball.b2 { top: 180px; left: 200px; font-size: 2.5rem; animation-delay: 0.6s; }
-  .basketball.b3 { top: 280px; left: 80px; font-size: 3rem; animation-delay: 1.2s; }
-
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-40px) scale(1.05); }
-  }
-
-  .crown {
-    position: absolute;
-    top: -50px;
-    left: 40px;
-    font-size: 3rem;
-    animation: wobble 2.5s ease-in-out infinite;
-    animation-delay: 2.4s;
-    opacity: 0;
-    animation-fill-mode: forwards;
-  }
-
-  .crown {
-    animation: crownIn 0.4s ease-out 2.3s forwards, wobble 2.5s ease-in-out infinite 2.7s;
-  }
-
-  @keyframes crownIn {
-    from { opacity: 0; transform: translateY(-20px) scale(0.5); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-  }
-
-  @keyframes wobble {
-    0%, 100% { transform: rotate(-8deg); }
-    50% { transform: rotate(8deg); }
-  }
-
-  /* Flying dunker */
-  .dunker-wrap {
-    position: absolute;
-    top: -40px;
-    left: -420px;
-    width: 260px;
-    height: 260px;
-    z-index: 4;
-    animation: dunkFly 2.2s cubic-bezier(0.34, 1.1, 0.64, 1) forwards;
-  }
-
-  @keyframes dunkFly {
-    0% {
-      transform: translate(0, 220px) rotate(-25deg) scale(0.7);
-      opacity: 0;
+  /* ---------- mobile ---------- */
+  @media (max-width: 860px){
+    .site-nav{ padding: 18px 22px; }
+    .hero{
+      flex-direction:column; align-items:center; justify-content:flex-end;
+      text-align:center; padding: 32px 24px 40px; min-height: 640px;
     }
-    12% {
-      opacity: 1;
+    .hero-text{ max-width:100%; order:2; }
+    .sub{ margin-left:auto; margin-right:auto; }
+    .lamp-rig{ right:auto; left:50%; transform:translateX(-50%); }
+    .lamp-glow{ right:auto; left:50%; top:-30%; width:820px; height:820px; transform-origin:50% 30%; margin-left:-410px; }
+    .book-focal{
+      position:relative; right:auto; bottom:auto; order:1;
+      width: 260px; height: 250px; margin: 0 auto 18px;
     }
-    55% {
-      transform: translate(430px, -70px) rotate(8deg) scale(1.05);
-    }
-    72% {
-      transform: translate(500px, 10px) rotate(18deg) scale(1);
-    }
-    85% {
-      transform: translate(516px, 40px) rotate(22deg) scale(0.98);
-    }
-    100% {
-      transform: translate(510px, 46px) rotate(20deg) scale(0.96);
-      opacity: 1;
-    }
-  }
-
-  .dunker {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-
-  .dunker-emoji {
-    font-size: 5.5rem;
-    display: inline-block;
-    filter: drop-shadow(0 20px 24px rgba(0,0,0,0.35));
-    animation: dunkerSpin 2.2s ease-in-out forwards;
-  }
-
-  @keyframes dunkerSpin {
-    0% { transform: rotate(0deg); }
-    50% { transform: rotate(-10deg); }
-    75% { transform: rotate(15deg); }
-    100% { transform: rotate(8deg); }
-  }
-
-  .dunk-trail {
-    position: absolute;
-    top: 50%;
-    left: -180px;
-    width: 180px;
-    height: 4px;
-    background: linear-gradient(90deg, transparent, rgba(253,185,39,0.7));
-    border-radius: 4px;
-    animation: trailFade 2.2s ease-out forwards;
-  }
-
-  @keyframes trailFade {
-    0% { opacity: 0; }
-    15% { opacity: 0.8; }
-    60% { opacity: 0.5; }
-    100% { opacity: 0; }
-  }
-
-  .impact-burst {
-    position: absolute;
-    top: 40px;
-    left: 460px;
-    font-size: 2.5rem;
-    opacity: 0;
-    animation: burstPop 0.5s ease-out 2.15s forwards;
-    z-index: 6;
-  }
-
-  @keyframes burstPop {
-    0% { opacity: 0; transform: scale(0.3) rotate(0deg); }
-    50% { opacity: 1; transform: scale(1.3) rotate(15deg); }
-    100% { opacity: 0; transform: scale(1.6) rotate(20deg); }
-  }
-
-  .rim.shake {
-    animation: rimShake 0.4s ease-out 2.15s;
-  }
-
-  @keyframes rimShake {
-    0%, 100% { transform: translateX(-50%) rotate(0deg); }
-    25% { transform: translateX(-50%) rotate(-6deg); }
-    75% { transform: translateX(-50%) rotate(6deg); }
-  }
-
-  /* Clouds/confetti background */
-  .bg-decor {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  .glow {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px);
-    opacity: 0.35;
-  }
-
-  .glow1 { width: 300px; height: 300px; background: var(--lakers-gold); top: -50px; left: 10%; }
-  .glow2 { width: 250px; height: 250px; background: var(--court-orange); bottom: 0; left: 50%; }
-
-  /* Testimonials */
-  .testimonials {
-    background: var(--court-cream);
-    padding: 60px 48px 80px;
-    margin-top: -40px;
-    border-radius: 40px 40px 0 0;
-    position: relative;
-    z-index: 5;
-  }
-
-  .testimonial-grid {
-    display: flex;
-    gap: 24px;
-    max-width: 1300px;
-    margin: 0 auto;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .t-card {
-    background: rgb(32, 64, 151);
-    border-radius: 20px;
-    padding: 28px;
-    flex: 1;
-    min-width: 280px;
-    max-width: 380px;
-    color: var(--ink);
-    box-shadow: 0 6px 20px rgba(74,43,122,0.08);
-    transform: translateY(0);
-    transition: transform 0.3s ease;
-  }
-
-  .t-card:hover {
-    transform: translateY(-8px);
-  }
-
-  .stars {
-    color: var(--lakers-gold);
-    filter: drop-shadow(0 0 2px rgba(0,0,0,0.15));
-    margin-bottom: 14px;
-    font-size: 1.1rem;
-  }
-
-  .quote-mark {
-    font-size: 2rem;
-    color: var(--court-orange);
-    font-weight: 900;
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-
-  .t-text {
-    line-height: 1.6;
-    font-size: 1rem;
-  }
-
-  @media (max-width: 900px) {
-    h1 { font-size: 2.8rem; }
-    .hero { padding: 40px 24px 80px; }
-    .court-scene { display: none; }
-    nav { padding: 20px 24px; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
+    .mascot-instance{ width:190px; height:206px; }
   }
 </style>
 </head>
 <body>
 
-<div class="bg-decor">
-  <div class="glow glow1"></div>
-  <div class="glow glow2"></div>
-</div>
+<svg class="visually-hidden" aria-hidden="true">
+  <defs>
+    <symbol id="mascot-idle" viewBox="0 0 240 260">
+      <polygon points="60,40 150,40 172,62 172,188 150,210 60,210 38,188 38,62" fill="var(--cover)"/>
+      <polygon points="38,62 172,62 172,125 38,125" fill="var(--cover-light)" opacity=".55"/>
+      <polygon points="38,150 172,150 172,188 150,210 60,210 38,188" fill="var(--cover-dark)" opacity=".35"/>
+      <polygon points="38,62 38,188 18,175 18,75" fill="var(--spine)"/>
+      <polygon points="38,62 172,62 192,45 58,45" fill="var(--pages)"/>
+      <polygon points="172,62 192,45 192,172 172,188" fill="var(--pages-shadow)"/>
+      <polygon points="100,45 116,45 120,100 108,84 96,100" fill="var(--ribbon)"/>
+      <polygon points="38,130 18,140 22,162 40,155" fill="var(--cover-dark)"/>
+      <polygon points="172,130 192,140 188,162 170,155" fill="var(--cover-dark)"/>
+      <polygon points="66,210 90,210 84,236 70,236" fill="var(--cover-dark)"/>
+      <polygon points="120,210 144,210 140,236 126,236" fill="var(--cover-dark)"/>
+      <ellipse cx="68" cy="132" rx="9" ry="5" fill="var(--ribbon)" opacity=".35"/>
+      <ellipse cx="144" cy="132" rx="9" ry="5" fill="var(--ribbon)" opacity=".35"/>
+      <circle cx="88" cy="118" r="6.5" fill="var(--face)"/>
+      <circle cx="124" cy="118" r="6.5" fill="var(--face)"/>
+      <path d="M80,142 Q106,158 132,142" stroke="var(--face)" stroke-width="6" fill="none" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="mascot-tiny" viewBox="0 0 60 60">
+      <polygon points="14,10 40,10 48,18 48,46 40,54 14,54 8,46 8,18" fill="var(--cover)"/>
+      <polygon points="8,18 40,18 46,12 16,12" fill="var(--pages)"/>
+      <polygon points="26,12 32,12 34,28 29,22 24,28" fill="var(--ribbon)"/>
+      <circle cx="21" cy="30" r="2.3" fill="var(--face)"/>
+      <circle cx="33" cy="30" r="2.3" fill="var(--face)"/>
+      <path d="M19,37 Q27,43 35,37" stroke="var(--face)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
 
-<nav>
-  <div class="logo">
-    <div class="logo-icon">👑</div>
-    RESEARCHLY
+<div class="site-nav">
+  <div class="brand">
+    <svg viewBox="0 0 60 60"><use href="#mascot-tiny"/></svg>
+    <span>Researchly</span>
   </div>
-  <div class="menu-icon">☰</div>
-</nav>
+  <button class="nav-cta" type="button">Join the waitlist</button>
+</div>
 
 <div class="hero">
-  <div class="hero-content">
-    <h1>RESEARCHLY<br>Waitlist open now</h1>
-    <p class="subtitle">Stop guessing when local research opportunities are open. We find them for you — tailored to you. 🎓 Premed • Law • Research Waitlist open 👇</p>
-    <button class="cta-btn">
-      <span class="ball-emoji">🏀</span> Get Started →
-    </button>
-    <div class="stat-line">⭐ Trusted by 15,000+ hoop heads</div>
+  <div class="lib-shelves">
+    <div class="shelf-row" style="top:4%;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="shelf-row" style="top:36%;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="shelf-row" style="top:68%;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
   </div>
 
-  <div class="court-scene">
-    <div class="crown">👑</div>
+  <div class="lamp-glow"></div>
 
-    <div class="dunker-wrap">
-      <div class="dunk-trail"></div>
-      <span class="dunker-emoji">🤾🏾‍♂️</span>
-    </div>
-    <div class="impact-burst">💥</div>
+  <div class="dust-field">
+    <span class="dust" style="left:52%;top:18%;animation-delay:-2s;"></span>
+    <span class="dust" style="left:61%;top:34%;animation-delay:-6s;"></span>
+    <span class="dust" style="left:70%;top:12%;animation-delay:-9s;"></span>
+    <span class="dust" style="left:66%;top:52%;animation-delay:-3s;"></span>
+    <span class="dust" style="left:78%;top:40%;animation-delay:-11s;"></span>
+    <span class="dust" style="left:58%;top:66%;animation-delay:-1s;"></span>
+    <span class="dust" style="left:85%;top:24%;animation-delay:-7s;"></span>
+    <span class="dust" style="left:73%;top:70%;animation-delay:-4.5s;"></span>
+    <span class="dust" style="left:48%;top:44%;animation-delay:-13s;"></span>
+    <span class="dust" style="left:90%;top:58%;animation-delay:-8.5s;"></span>
+  </div>
 
-    <div class="hoop">
-      <div class="backboard">
-        <div class="rim shake"></div>
-        <div class="net"></div>
-      </div>
-      <div class="basketball b1">🏀</div>
-      <div class="basketball b2">🏀</div>
-      <div class="basketball b3">🏀</div>
+  <div class="lamp-rig">
+    <div class="lamp-cord"></div>
+    <svg class="lamp-fixture" viewBox="0 0 92 60">
+      <polygon points="34,0 58,0 92,52 0,52" fill="var(--gold)"/>
+      <polygon points="34,0 58,0 50,14 42,14" fill="#EAC888"/>
+      <polygon points="10,52 82,52 68,40 24,40" fill="var(--wood-deep)" opacity=".55"/>
+    </svg>
+    <div class="lamp-bulb"></div>
+  </div>
+
+  <div class="hero-text">
+    <p class="kicker">Waitlist now open</p>
+    <h1>Researchly</h1>
+    <p class="tagline">Change the world.</p>
+    <p class="sub">A short guided interview turns "I don't know where to start" into a personalized map of research programs worth applying to.</p>
+    <div class="cta-wrap">
+      <button class="cta-btn" type="button">Join the waitlist →</button>
     </div>
   </div>
+
+  <div class="book-focal">
+    <div class="book-highlight"></div>
+    <div class="book-shadow"></div>
+    <div class="book-stack">
+      <div class="book b1"></div>
+      <div class="book b2"></div>
+      <div class="book b3"></div>
+    </div>
+    <svg class="mascot-instance anim-bob" viewBox="0 0 240 260"><use href="#mascot-idle"/></svg>
+  </div>
+
+  <div class="dark-veil"></div>
 </div>
-
-<div class="testimonials">
-  <div class="testimonial-grid">
-    <div class="t-card">
-      <div class="stars">★★★★★</div>
-      <div class="quote-mark">"</div>
-      <div class="t-text">Four championships with three different teams. Nobody does it like King James.</div>
-    </div>
-    <div class="t-card">
-      <div class="stars">★★★★★</div>
-      <div class="quote-mark">"</div>
-      <div class="t-text">Passed Kareem for the all-time scoring record. Still going strong at an age most players have retired.</div>
-    </div>
-    <div class="t-card">
-      <div class="stars">★★★★★</div>
-      <div class="quote-mark">"</div>
-      <div class="t-text">20+ seasons of pure dominance. The longevity alone settles the debate.</div>
-    </div>
-  </div>
-</div>
-
 
 <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 </body>
