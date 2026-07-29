@@ -80,39 +80,29 @@
 
   /* ---------- background atmosphere: 4 layers, all subtle, all behind content ---------- */
 
-  /* layer 1 — paper grain, base texture across the whole scene */
-  .paper-grain{
-    position:absolute; inset:0; z-index:0; pointer-events:none;
-    opacity:.05; mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  /* layer 2 — blurred bokeh library, soft warm shelf-like forms, no hard edges */
+  /* layer 2 — blurred bokeh library: real rectangular shelf shapes, genuinely blurred so edges dissolve */
   .bokeh-library{
     position:absolute; inset:0; z-index:0; pointer-events:none;
-    opacity:.55; filter: blur(26px);
-    background:
-      radial-gradient(ellipse 200px 64px at 6% 20%, rgba(63,44,28,.55), transparent 70%),
-      radial-gradient(ellipse 240px 80px at 20% 16%, rgba(122,52,24,.4), transparent 70%),
-      radial-gradient(ellipse 190px 60px at 36% 22%, rgba(63,44,28,.5), transparent 70%),
-      radial-gradient(ellipse 230px 78px at 58% 14%, rgba(217,164,65,.16), transparent 70%),
-      radial-gradient(ellipse 210px 66px at 76% 20%, rgba(122,52,24,.4), transparent 70%),
-      radial-gradient(ellipse 240px 82px at 94% 24%, rgba(63,44,28,.5), transparent 70%),
-      radial-gradient(ellipse 220px 70px at 10% 54%, rgba(63,44,28,.45), transparent 70%),
-      radial-gradient(ellipse 230px 76px at 32% 58%, rgba(122,52,24,.32), transparent 70%),
-      radial-gradient(ellipse 210px 66px at 62% 52%, rgba(63,44,28,.4), transparent 70%),
-      radial-gradient(ellipse 240px 80px at 88% 56%, rgba(122,52,24,.4), transparent 70%),
-      radial-gradient(ellipse 200px 64px at 14% 88%, rgba(63,44,28,.38), transparent 70%),
-      radial-gradient(ellipse 230px 76px at 42% 90%, rgba(63,44,28,.4), transparent 70%),
-      radial-gradient(ellipse 210px 66px at 74% 86%, rgba(122,52,24,.36), transparent 70%);
+    opacity:.35; filter: blur(16px);
   }
+  .bokeh-shelf{ position:absolute; border-radius:6px; }
 
-  /* layer 3 — topographic contour lines, sparse, clustered near the headline (left), clear of the mascot */
-  .contour-field{ position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden; }
-  .contour-line{ position:absolute; border: 1px solid rgba(243,231,206,.07); }
+  /* layer 3 — topographic contour lines: organic nested loops in the gap between headline and mascot */
+  .contour-field{
+    position:absolute; z-index:1; pointer-events:none;
+    width:190px; height:190px; left:47%; top:50%;
+    transform: translate(-50%,-50%);
+  }
 
   /* layer 4 — constellation / knowledge graph, sparse accent in the emptiest corner */
   .constellation{ position:absolute; top:6%; left:4%; width:230px; height:auto; z-index:1; pointer-events:none; }
+
+  /* layer 1 — paper grain, sits above every other background layer, textures them via blend mode */
+  .paper-grain{
+    position:absolute; inset:0; z-index:3; pointer-events:none;
+    opacity:.05; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
 
   /* hanging lamp, right side — dimensional pendant shade */
   .lamp-rig{ position:absolute; right: 9%; top:0; z-index:5; display:flex; flex-direction:column; align-items:center; }
@@ -206,13 +196,6 @@
     mix-blend-mode: screen;
   }
   .mascot-instance{ width: 84%; height:auto; position:relative; z-index:2; }
-  .mascot-spotlight{
-    position:absolute; inset:0; z-index:3; pointer-events:none;
-    opacity:0; transition: opacity .4s ease;
-    background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(255,227,176,.6) 0%, rgba(244,179,107,.24) 34%, rgba(244,179,107,0) 60%);
-    mix-blend-mode: screen;
-  }
-  .mascot-spotlight.is-active{ opacity:1; }
   .mascot-wave-arm{ transform-box: fill-box; transform-origin: 15% 40%; }
 
   .sparkle{ position:absolute; z-index:3; pointer-events:none; }
@@ -277,7 +260,6 @@
     .mascot-wave-arm{ animation:none; }
     .sparkle{ animation:none; opacity:.8; }
     .kicker{ animation:none; }
-    .mascot-spotlight{ display:none; }
   }
 
   /* ---------- Card Catalog Confetti ---------- */
@@ -364,16 +346,35 @@
 </div>
 
 <div class="hero">
-  <div class="bokeh-library" aria-hidden="true"></div>
-  <div class="paper-grain" aria-hidden="true"></div>
-
-  <div class="contour-field" aria-hidden="true">
-    <span class="contour-line" style="width:160px;height:120px;top:42%;left:10%;border-radius:58% 42% 55% 45% / 45% 58% 42% 55%;"></span>
-    <span class="contour-line" style="width:230px;height:175px;top:36%;left:4%;border-radius:52% 48% 45% 55% / 55% 45% 58% 42%;"></span>
-    <span class="contour-line" style="width:300px;height:230px;top:30%;left:-2%;border-radius:48% 52% 58% 42% / 42% 55% 45% 58%;"></span>
-    <span class="contour-line" style="width:380px;height:290px;top:24%;left:-8%;border-radius:55% 45% 48% 52% / 48% 55% 45% 52%;"></span>
-    <span class="contour-line" style="width:460px;height:350px;top:18%;left:-14%;border-radius:45% 55% 52% 48% / 55% 45% 55% 45%;"></span>
+  <div class="bokeh-library" aria-hidden="true">
+    <span class="bokeh-shelf" style="left:38%;top:8%;width:140px;height:60px;background:#8B6F47;"></span>
+    <span class="bokeh-shelf" style="left:52%;top:14%;width:110px;height:75px;background:#A0826D;"></span>
+    <span class="bokeh-shelf" style="left:66%;top:6%;width:130px;height:65px;background:#6B4F3A;"></span>
+    <span class="bokeh-shelf" style="left:80%;top:12%;width:150px;height:70px;background:#C9A876;"></span>
+    <span class="bokeh-shelf" style="left:42%;top:38%;width:120px;height:80px;background:#6B4F3A;"></span>
+    <span class="bokeh-shelf" style="left:58%;top:34%;width:145px;height:65px;background:#A0826D;"></span>
+    <span class="bokeh-shelf" style="left:74%;top:40%;width:110px;height:75px;background:#8B6F47;"></span>
+    <span class="bokeh-shelf" style="left:88%;top:36%;width:130px;height:70px;background:#C9A876;"></span>
+    <span class="bokeh-shelf" style="left:48%;top:64%;width:135px;height:70px;background:#A0826D;"></span>
+    <span class="bokeh-shelf" style="left:66%;top:68%;width:120px;height:65px;background:#8B6F47;"></span>
+    <span class="bokeh-shelf" style="left:82%;top:62%;width:140px;height:75px;background:#6B4F3A;"></span>
   </div>
+
+  <svg class="contour-field" viewBox="0 0 200 200" aria-hidden="true">
+    <defs>
+      <path id="contour-loop" d="M100,20 C130,18 155,35 165,60 C175,85 170,115 155,140 C140,165 110,175 85,168 C60,160 40,140 32,115 C24,88 30,58 55,38 C70,26 85,22 100,20 Z"/>
+    </defs>
+    <g fill="none" stroke="var(--parchment)" stroke-width="1.2">
+      <use href="#contour-loop" transform="translate(100,100) scale(0.42) translate(-100,-100)" opacity=".12"/>
+      <use href="#contour-loop" transform="translate(100,100) scale(0.56) translate(-100,-100)" opacity=".1"/>
+      <use href="#contour-loop" transform="translate(100,100) scale(0.7) translate(-100,-100)" opacity=".11"/>
+      <use href="#contour-loop" transform="translate(100,100) scale(0.84) translate(-100,-100)" opacity=".09"/>
+      <use href="#contour-loop" transform="translate(100,100) scale(0.98) translate(-100,-100)" opacity=".08"/>
+      <use href="#contour-loop" transform="translate(100,100) scale(1.12) translate(-100,-100)" opacity=".08"/>
+    </g>
+  </svg>
+
+  <div class="paper-grain" aria-hidden="true"></div>
 
   <svg class="constellation" viewBox="0 0 220 150" aria-hidden="true">
     <g stroke="var(--parchment)" stroke-width="1" fill="none" opacity=".16">
@@ -447,7 +448,6 @@
       <div class="mascot-figure">
         <div class="mascot-highlight"></div>
         <svg class="mascot-instance anim-bob" viewBox="0 0 240 260"><use href="#mascot-idle"/></svg>
-        <div class="mascot-spotlight" aria-hidden="true"></div>
         <span class="sparkle" style="width:16px;height:16px;top:6%;left:8%;color:var(--lamp-warm);animation-delay:.2s;"><svg><use href="#sparkle-star"/></svg></span>
         <span class="sparkle" style="width:11px;height:11px;top:16%;right:2%;color:var(--gold);animation-delay:1.3s;"><svg><use href="#sparkle-star"/></svg></span>
         <span class="sparkle" style="width:13px;height:13px;bottom:34%;left:0%;color:var(--lamp-warm);animation-delay:2.1s;"><svg><use href="#sparkle-star"/></svg></span>
@@ -499,20 +499,6 @@
       btn.addEventListener('mouseenter', function(){ burstConfetti(btn, 5); });
       btn.addEventListener('click', function(){ burstConfetti(btn, 16); });
     });
-
-    // Mascot spotlight: soft warm glow follows the cursor near the mascot.
-    var mascotFigure = document.querySelector('.mascot-figure');
-    var spotlight = document.querySelector('.mascot-spotlight');
-    var canHover = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (mascotFigure && spotlight && canHover && !reduceMotion){
-      mascotFigure.addEventListener('mousemove', function(e){
-        var rect = mascotFigure.getBoundingClientRect();
-        spotlight.style.setProperty('--mx', ((e.clientX - rect.left) / rect.width * 100) + '%');
-        spotlight.style.setProperty('--my', ((e.clientY - rect.top) / rect.height * 100) + '%');
-      });
-      mascotFigure.addEventListener('mouseenter', function(){ spotlight.classList.add('is-active'); });
-      mascotFigure.addEventListener('mouseleave', function(){ spotlight.classList.remove('is-active'); });
-    }
 
     // Scroll past the hero -> bridge into a cooler tone.
     var afterHero = document.getElementById('afterHero');
