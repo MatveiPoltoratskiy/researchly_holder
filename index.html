@@ -13,6 +13,7 @@
     --wood-deep:#1B120C; --wood-mid:#2E2015; --wood-shelf:#3F2C1C;
     --lamp-warm:#F4B36B; --lamp-core:#FFE3B0; --parchment:#F3E7CE;
     --dusk-cool:#1A1B21;
+    --glass-rim:#A08A63; --glass-rim-dark:#7C6A4C; --glass-lens:rgba(232,232,222,.14);
 
     --container-max-width: 1280px;
     --container-pad: 64px;
@@ -179,12 +180,12 @@
 
   /* mascot — floating, higher and further right, no ground beneath him */
   .mascot-focal{
-    position:relative; z-index:4; flex: 1 1 320px; min-width:260px;
+    position:relative; z-index:4; flex: 1 1 420px; min-width:340px;
     display:flex; align-items:center; justify-content:center;
     transform: translate(10%, -14%);
   }
   .mascot-figure{
-    position:relative; width:100%; max-width:420px; aspect-ratio: 1 / 1.08;
+    position:relative; width:100%; max-width:560px; aspect-ratio: 1 / 1.08;
     display:flex; align-items:center; justify-content:center;
     animation: mascot-enter .5s ease-in-out 2s both;
   }
@@ -194,7 +195,7 @@
     background: radial-gradient(circle, rgba(255,227,176,.5) 0%, rgba(255,227,176,0) 68%);
     mix-blend-mode: screen;
   }
-  .mascot-instance{ width: 78%; height:auto; position:relative; z-index:2; }
+  .mascot-instance{ width: 84%; height:auto; position:relative; z-index:2; }
   .mascot-spotlight{
     position:absolute; inset:0; z-index:3; pointer-events:none;
     opacity:0; transition: opacity .4s ease;
@@ -312,7 +313,7 @@
     .lamp-rig{ right:auto; left:50%; transform:translateX(-50%); }
     .lamp-glow{ right:auto; left:50%; top:-30%; width:1000px; height:1000px; transform-origin:50% 30%; margin-left:-500px; }
     .mascot-focal{ order:1; flex:0 0 auto; margin-bottom:8px; transform:none; }
-    .mascot-figure{ max-width:250px; }
+    .mascot-figure{ max-width:320px; }
   }
 </style>
 </head>
@@ -330,6 +331,8 @@
       <polygon points="100,45 116,45 120,100 108,84 96,100" fill="var(--ribbon)"/>
       <polygon points="38,130 18,140 22,162 40,155" fill="var(--cover-dark)"/>
       <polygon class="mascot-wave-arm" points="172,130 192,140 188,162 170,155" fill="var(--cover-dark)"/>
+      <polygon points="26.4,150.5 17.6,190.3 14.4,189.7 21.6,149.5" fill="var(--glass-rim-dark)"/>
+      <circle cx="13.5" cy="203" r="13" fill="var(--glass-lens)" stroke="var(--glass-rim)" stroke-width="4"/>
       <polygon points="66,210 90,210 84,236 70,236" fill="var(--cover-dark)"/>
       <polygon points="120,210 144,210 140,236 126,236" fill="var(--cover-dark)"/>
       <ellipse cx="68" cy="132" rx="9" ry="5" fill="var(--ribbon)" opacity=".35"/>
