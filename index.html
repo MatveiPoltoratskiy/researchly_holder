@@ -175,7 +175,7 @@
     perspective: 1400px;
     animation: content-in .8s ease-out .3s both;
   }
-  .hero-card-scale{ transform: scale(1.32); transform-origin: top center; }
+  .hero-card-scale{ transform: scale(1.18); transform-origin: top center; }
   .hero-card-inner{
     position:relative;
     background: var(--card-bg);
@@ -218,24 +218,26 @@
   .card-rail span.is-active{ background: var(--pill-amber-bg); color: var(--cover-dark); }
 
   .card-main{ flex:1; min-width:0; }
-  .card-label{ font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:700; letter-spacing:.03em; color:var(--navy-soft); text-transform:uppercase; margin-bottom:8px; }
+  .card-label{ font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:700; letter-spacing:.03em; color:var(--navy-soft); text-transform:uppercase; margin-bottom:5px; }
   .match-row{
     display:flex; align-items:center; gap:10px;
-    padding:10px 0; border-top:1px solid var(--card-border);
+    padding:7px 0; border-top:1px solid var(--card-border);
   }
   .card-main .match-row:first-of-type{ border-top:none; padding-top:0; }
   .u-badge{
-    width:34px; height:34px; border-radius:9px; flex:none;
+    width:30px; height:30px; border-radius:9px; flex:none;
     display:flex; align-items:center; justify-content:center;
     font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:11px; color:#fff;
   }
   .u-badge--a{ background:var(--cover); }
   .u-badge--b{ background:var(--pine); }
   .u-badge--c{ background:var(--navy); }
+  .u-badge--d{ background:var(--gold); }
+  .u-badge--e{ background:var(--ribbon); }
   .match-info{ min-width:0; flex:1; }
   .match-name{ font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:13px; color:var(--navy); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .match-uni{ font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; color:var(--navy-soft); margin-top:1px; }
-  .match-tags{ display:flex; gap:5px; margin-top:6px; flex-wrap:wrap; }
+  .match-tags{ display:flex; gap:5px; margin-top:4px; flex-wrap:wrap; }
   .tag{ font-family:"Segoe UI",system-ui,sans-serif; font-size:10px; font-weight:600; padding:2.5px 7px; border-radius:999px; background:var(--pill-bg); color:var(--pill-text); white-space:nowrap; }
   .tag.tag-green{ background:var(--pill-green-bg); color:var(--pill-green-text); }
   .tag.tag-amber{ background:var(--pill-amber-bg); color:var(--pill-amber-text); }
@@ -295,7 +297,7 @@
   /* ---------- testimonial carousel: floats over the plaza/prop level, like the mockup card floats over the mountains ---------- */
   .reviews-section{
     position:relative; z-index:6;
-    margin-top: clamp(-300px, -25vw, -170px);
+    margin-top: clamp(-308px, -25.5vw, -178px);
     padding-bottom: 8px;
   }
   .reviews-kicker{
@@ -549,6 +551,26 @@
               </div>
               <div class="match-score"><div class="pct">90%</div><div class="lbl">Match</div></div>
             </div>
+
+            <div class="match-row">
+              <div class="u-badge u-badge--d">M</div>
+              <div class="match-info">
+                <div class="match-name">Research Science Institute</div>
+                <div class="match-uni">MIT / Center for Excellence in Education</div>
+                <div class="match-tags"><span class="tag">Summer</span><span class="tag">High School</span><span class="tag tag-green">High Match</span></div>
+              </div>
+              <div class="match-score"><div class="pct">89%</div><div class="lbl">Match</div></div>
+            </div>
+
+            <div class="match-row">
+              <div class="u-badge u-badge--e">SB</div>
+              <div class="match-info">
+                <div class="match-name">Simons Summer Research Program</div>
+                <div class="match-uni">Stony Brook University</div>
+                <div class="match-tags"><span class="tag">Summer</span><span class="tag">High School</span><span class="tag tag-amber">Good Match</span></div>
+              </div>
+              <div class="match-score"><div class="pct">86%</div><div class="lbl">Match</div></div>
+            </div>
           </div>
         </div>
         <div class="card-foot">View full roadmap →</div>
@@ -558,7 +580,7 @@
   </div>
 
   <div class="landscape-wrap">
-    <svg class="scene-svg" viewBox="0 0 1536 560" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+    <svg class="scene-svg" viewBox="0 0 1536 538" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
       <!-- back mountains -->
       <polygon points="0,560 0,320 90,260 180,300 260,230 340,280 430,190 520,260 610,210 700,150 780,200 860,160 950,220 1040,180 1130,240 1220,190 1310,250 1400,210 1480,260 1536,230 1536,560" fill="var(--sage-back)"/>
 
