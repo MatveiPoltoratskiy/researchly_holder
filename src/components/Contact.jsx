@@ -64,12 +64,8 @@ export default function Contact() {
     <section className="contact-section container">
       <div className="contact-head">
         <p className="kicker">Get in touch</p>
-        <h1>
-          Questions? <span className="circle-mark">We're here.</span>
-        </h1>
-        <p className="sub contact-sub">
-          Send us a note about a program, a partnership, or anything else on your mind — we read every message.
-        </p>
+        <h1>Questions? We're here.</h1>
+        <p className="sub contact-sub">Reach out anytime — we read every message.</p>
       </div>
 
       <div className="contact-card">
