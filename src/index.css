@@ -77,7 +77,7 @@ svg{ display:block; }
 .sketch-hex-b{ right:6%; top:6%; width:150px; opacity:.55; }
 .sketch-note{
   font-family:"Bradley Hand","Segoe Print","Comic Sans MS",cursive;
-  font-size:17px; line-height:1.35; color: rgba(30,37,64,.22);
+  font-size:17px; line-height:1.35; color: rgba(30,37,64,.12);
   max-width:150px;
 }
 .sketch-note-b{ left:2%; top:41%; transform: rotate(-3deg); }
