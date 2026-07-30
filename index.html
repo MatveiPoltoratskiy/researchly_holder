@@ -21,7 +21,7 @@
     --pill-green-bg:#DFEFDE; --pill-green-text:#2E7A4C;
     --pill-amber-bg:#F1E4C6; --pill-amber-text:#8C5A24;
     --card-bg:#FCFAF2; --card-border:rgba(30,37,64,.09);
-    --symbol-tan:#C8A27A;
+    --symbol-tan:#8C5A2E;
 
     --container-max-width: 1280px;
     --container-pad: 64px;
@@ -91,7 +91,6 @@
     font-size:17px; line-height:1.35; color: var(--navy-soft);
     max-width:150px;
   }
-  .sketch-note-a{ left:39%; top:9%; text-align:left; transform: rotate(-2deg); }
   .sketch-note-b{ left:2%; top:41%; transform: rotate(-3deg); }
   .sketch-note-c{ right:2%; top:52%; text-align:right; transform: rotate(2deg); }
   .sketch-formula{
@@ -102,14 +101,21 @@
 
   @media (max-width: 900px){ .hero-sketch{ display:none; } }
 
-  /* dense research-symbol texture: sits behind the doodles/landscape, fades from bottom to top */
+  /* research-symbol texture: a single even band just above the landscape, nowhere else */
   .symbol-field{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
   .symbol-field span{
     position:absolute; color: var(--symbol-tan);
-    font-family: Georgia, "Times New Roman", serif;
-    white-space:nowrap; will-change:opacity;
-    transition: opacity 1.6s ease;
+    font-family: "SF Mono", "Courier New", ui-monospace, monospace;
+    white-space:nowrap; will-change:transform,opacity;
+    transition: opacity .15s ease;
+    transform: translate(-50%, calc(-50% - var(--wave-amp, 8px))) rotate(var(--rot, 0deg));
+    animation: symbol-wave var(--wave-dur, 6s) ease-in-out var(--wave-delay, 0s) infinite;
   }
+  @keyframes symbol-wave{
+    0%, 100%{ transform: translate(-50%, calc(-50% - var(--wave-amp, 8px))) rotate(var(--rot, 0deg)); }
+    50%{ transform: translate(-50%, calc(-50% + var(--wave-amp, 8px))) rotate(var(--rot, 0deg)); }
+  }
+  @media (prefers-reduced-motion: reduce){ .symbol-field span{ animation:none; } }
   @media (max-width: 900px){ .symbol-field{ display:none; } }
 
   .hero-top{
@@ -169,7 +175,7 @@
     perspective: 1400px;
     animation: content-in .8s ease-out .3s both;
   }
-  .hero-card-scale{ transform: scale(1.12); transform-origin: top center; }
+  .hero-card-scale{ transform: scale(1.32); transform-origin: top center; }
   .hero-card-inner{
     position:relative;
     background: var(--card-bg);
@@ -223,9 +229,9 @@
     display:flex; align-items:center; justify-content:center;
     font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:11px; color:#fff;
   }
-  .u-badge--a{ background:#8C1D1D; }
-  .u-badge--b{ background:#161616; }
-  .u-badge--c{ background:#7A1420; }
+  .u-badge--a{ background:var(--cover); }
+  .u-badge--b{ background:var(--pine); }
+  .u-badge--c{ background:var(--navy); }
   .match-info{ min-width:0; flex:1; }
   .match-name{ font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:13px; color:var(--navy); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .match-uni{ font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; color:var(--navy-soft); margin-top:1px; }
@@ -284,7 +290,47 @@
     100%{ transform: translate(-50%,-50%) translate(var(--dx), var(--dy)) rotate(var(--rot)); opacity:0; }
   }
 
-  .after-hero{ height: 12vh; background: var(--cream); }
+  .after-hero{ height: 7vh; background: var(--cream); }
+
+  /* ---------- testimonial carousel: floats over the plaza/prop level, like the mockup card floats over the mountains ---------- */
+  .reviews-section{
+    position:relative; z-index:6;
+    margin-top: clamp(-300px, -25vw, -170px);
+    padding-bottom: 8px;
+  }
+  .reviews-kicker{
+    text-align:center;
+    font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; letter-spacing:.14em;
+    text-transform:uppercase; font-weight:700; color: var(--cover-dark);
+    margin: 0 0 18px;
+  }
+  .reviews-track-wrap{ overflow:hidden; width:100%; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+  .reviews-track{
+    display:flex; gap:22px; width:max-content;
+    animation: reviews-scroll 52s linear infinite;
+  }
+  .review-card{
+    flex: 0 0 auto; width: 330px;
+    background: var(--card-bg); border:1px solid var(--card-border); border-radius:18px;
+    padding: 24px 26px; box-shadow: 0 24px 46px -22px rgba(30,37,64,.32);
+  }
+  .review-head{ display:flex; align-items:center; justify-content:space-between; }
+  .review-quote{
+    width:36px; height:36px; border-radius:11px; flex:none;
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-family: Georgia, serif; font-size:25px; line-height:1;
+  }
+  .review-stars{ color: var(--cover); font-size:16px; letter-spacing:2.5px; }
+  .review-text{
+    font-family:"Segoe UI",system-ui,sans-serif; font-size:16px; line-height:1.6;
+    color: var(--navy-soft); margin: 15px 0 0;
+  }
+  @keyframes reviews-scroll{ from{ transform: translateX(0); } to{ transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce){ .reviews-track{ animation:none; } }
+  @media (max-width: 900px){
+    .reviews-section{ margin-top: 16px; }
+    .review-card{ width:270px; }
+  }
 
   /* ---------- mobile ---------- */
   @media (max-width: 900px){
@@ -431,7 +477,6 @@
   <div class="hero-sketch sketch-hex-a" aria-hidden="true"><svg viewBox="0 0 140 110"><use href="#deco-hex"/></svg></div>
   <div class="hero-sketch sketch-hex-b" aria-hidden="true"><svg viewBox="0 0 140 110"><use href="#deco-hex"/></svg></div>
   <div class="hero-sketch sketch-graph" aria-hidden="true"><svg viewBox="0 0 110 76"><use href="#deco-graph"/></svg></div>
-  <p class="hero-sketch sketch-note sketch-note-a" aria-hidden="true">The best research begins with the right question.</p>
   <p class="hero-sketch sketch-note sketch-note-b" aria-hidden="true">Curiosity leads to discovery.</p>
   <p class="hero-sketch sketch-note sketch-note-c" aria-hidden="true">Impact → Publication → Prestige</p>
   <p class="hero-sketch sketch-formula formula-a" aria-hidden="true">C&#8330;H&#8321;&#8320;N&#8322;O&#8322;</p>
@@ -478,7 +523,7 @@
             <div class="match-row">
               <div class="u-badge u-badge--a">S</div>
               <div class="match-info">
-                <div class="match-name">Stanford Summer Research Program</div>
+                <div class="match-name">Summer Undergraduate Research Program</div>
                 <div class="match-uni">Stanford University</div>
                 <div class="match-tags"><span class="tag">Summer</span><span class="tag">In-person</span><span class="tag tag-green">High Match</span></div>
               </div>
@@ -486,23 +531,23 @@
             </div>
 
             <div class="match-row">
-              <div class="u-badge u-badge--b">MIT</div>
+              <div class="u-badge u-badge--b">J</div>
               <div class="match-info">
-                <div class="match-name">MIT UROP</div>
-                <div class="match-uni">Massachusetts Institute of Technology</div>
-                <div class="match-tags"><span class="tag">Year-round</span><span class="tag">In-person</span><span class="tag tag-green">High Match</span></div>
+                <div class="match-name">Undergraduate Research Fellows</div>
+                <div class="match-uni">The Jackson Laboratory</div>
+                <div class="match-tags"><span class="tag">Year-round</span><span class="tag">Paid</span><span class="tag tag-green">High Match</span></div>
               </div>
-              <div class="match-score"><div class="pct">92%</div><div class="lbl">Match</div></div>
+              <div class="match-score"><div class="pct">93%</div><div class="lbl">Match</div></div>
             </div>
 
             <div class="match-row">
-              <div class="u-badge u-badge--c">H</div>
+              <div class="u-badge u-badge--c">C</div>
               <div class="match-info">
-                <div class="match-name">Harvard SURF</div>
-                <div class="match-uni">Harvard University</div>
-                <div class="match-tags"><span class="tag">Summer</span><span class="tag">In-person</span><span class="tag tag-amber">Good Match</span></div>
+                <div class="match-name">Undergraduate Research Apprenticeship</div>
+                <div class="match-uni">Cold Spring Harbor Laboratory</div>
+                <div class="match-tags"><span class="tag">Summer</span><span class="tag">Research</span><span class="tag tag-amber">Good Match</span></div>
               </div>
-              <div class="match-score"><div class="pct">89%</div><div class="lbl">Match</div></div>
+              <div class="match-score"><div class="pct">90%</div><div class="lbl">Match</div></div>
             </div>
           </div>
         </div>
@@ -572,11 +617,34 @@
   </div>
 </div>
 
+<section class="reviews-section">
+  <p class="reviews-kicker">Beta testers say&hellip;</p>
+  <div class="reviews-track-wrap">
+    <div class="reviews-track" id="reviewsTrack">
+      <div class="review-card"><div class="review-head"><span class="review-quote" style="background:var(--cover)">&ldquo;</span><span class="review-stars">★★★★★</span></div><p class="review-text">Bro this is actually sick, I found research internships that I didn&rsquo;t know even existed even with my resume being cooked.</p></div>
+      <div class="review-card"><div class="review-head"><span class="review-quote" style="background:var(--pine)">&ldquo;</span><span class="review-stars">★★★★★</span></div><p class="review-text">Clean layout overall. Didn&rsquo;t feel overwhelming, which is rare for research and all of these websites in one.</p></div>
+      <div class="review-card"><div class="review-head"><span class="review-quote" style="background:var(--navy)">&ldquo;</span><span class="review-stars">★★★★★</span></div><p class="review-text">ngl I thought this was gonna be another ChatGPT wrapper but it&rsquo;s actually saving my med school requirements.</p></div>
+      <div class="review-card"><div class="review-head"><span class="review-quote" style="background:var(--cover)">&ldquo;</span><span class="review-stars">★★★★★</span></div><p class="review-text">Everything just makes sense. It&rsquo;s like a mix of Khan Academy and research opportunities in one.</p></div>
+      <div class="review-card"><div class="review-head"><span class="review-quote" style="background:var(--pine)">&ldquo;</span><span class="review-stars">★★★★★</span></div><p class="review-text">This would&rsquo;ve saved me days when I was looking for summer research a few months ago, crazy find.</p></div>
+      <div class="review-card"><div class="review-head"><span class="review-quote" style="background:var(--navy)">&ldquo;</span><span class="review-stars">★★★★★</span></div><p class="review-text">Finally something that is a free tool for students, and I actually understand what I&rsquo;m supposed to do next instead of opening 15 tabs.</p></div>
+      <div class="review-card"><div class="review-head"><span class="review-quote" style="background:var(--cover)">&ldquo;</span><span class="review-stars">★★★★★</span></div><p class="review-text">I didn&rsquo;t even realize there were research programs for high school students. This roadmap helped me understand where I could start!</p></div>
+      <div class="review-card"><div class="review-head"><span class="review-quote" style="background:var(--pine)">&ldquo;</span><span class="review-stars">★★★★★</span></div><p class="review-text">It feels like the kind of tool I wish existed when I first started looking into research, would&rsquo;ve saved me hours.</p></div>
+      <div class="review-card"><div class="review-head"><span class="review-quote" style="background:var(--navy)">&ldquo;</span><span class="review-stars">★★★★★</span></div><p class="review-text">I finally know where to start, I&rsquo;m so mad I didn&rsquo;t have this during summer internship season&hellip;</p></div>
+    </div>
+  </div>
+</section>
+
 <section class="after-hero" aria-hidden="true"></section>
 
 <script>
   (function(){
     var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Duplicate the review track once so a -50% translateX loops seamlessly.
+    var reviewsTrack = document.getElementById('reviewsTrack');
+    if (reviewsTrack){
+      reviewsTrack.innerHTML += reviewsTrack.innerHTML;
+    }
 
     // Card Catalog Confetti: a burst of small index-card particles on CTA hover/click.
     var confettiColors = ['var(--cover)', 'var(--gold)', 'var(--match-green)', 'var(--ribbon)'];
@@ -653,9 +721,11 @@
     var symbolField = document.getElementById('symbolField');
     var heroEl = document.querySelector('.hero');
     var landscapeEl = document.querySelector('.landscape-wrap');
-    var cardInnerEl = document.getElementById('mockCard');
     var symbolEls = [];
 
+    // Confined to a single even band just above the landscape, nowhere else in
+    // the hero. A jittered grid (rather than free random scatter) keeps spacing
+    // and opacity roughly equal across the band for a controlled, orderly look.
     function buildSymbolField(){
       if (!symbolField || !heroEl || !landscapeEl) return;
       symbolField.innerHTML = '';
@@ -665,54 +735,52 @@
       var landscapeRect = landscapeEl.getBoundingClientRect();
       if (!heroRect.height) return;
 
-      var maxYpx = (landscapeRect.top - heroRect.top) + 30;
-      var maxYpct = Math.max(10, Math.min(100, (maxYpx / heroRect.height) * 100));
+      // Center the band inside the mountain silhouette zone (not above it) so the
+      // hills, drawn on top, hide most of it — only the jagged peak line lets
+      // symbols show through, like they're peeking out from behind the hills.
+      var landscapeTopPct = (landscapeRect.top - heroRect.top) / heroRect.height * 100;
+      var landscapeHeightPct = landscapeRect.height / heroRect.height * 100;
+      var bandCenterPct = landscapeTopPct + landscapeHeightPct * 0.28;
+      var bandHeightPct = landscapeHeightPct * 0.30;
+      var bandTopPct = Math.max(0, bandCenterPct - bandHeightPct / 2);
 
-      var pad = 18;
-      var cardZone = null;
-      if (cardInnerEl){
-        var cardRect = cardInnerEl.getBoundingClientRect();
-        cardZone = {
-          left: cardRect.left - heroRect.left - pad,
-          right: cardRect.right - heroRect.left + pad,
-          top: cardRect.top - heroRect.top - pad,
-          bottom: cardRect.bottom - heroRect.top + pad
-        };
-      }
+      var cols = 24, rows = 5;
+      var cellW = 100 / cols;
+      var cellH = bandHeightPct / rows;
 
-      var count = 140;
-      var created = 0, attempts = 0;
-      while (created < count && attempts < count * 8){
-        attempts++;
-        var yPct = Math.pow(Math.random(), 0.55) * maxYpct;
-        var xPct = Math.random() * 100;
-        var xpx = xPct / 100 * heroRect.width;
-        var ypx = yPct / 100 * heroRect.height;
-        if (cardZone && xpx > cardZone.left && xpx < cardZone.right && ypx > cardZone.top && ypx < cardZone.bottom) continue;
+      for (var row = 0; row < rows; row++){
+        for (var col = 0; col < cols; col++){
+          var xPct = (col + 0.5) * cellW + (Math.random() - 0.5) * cellW * 0.4;
+          var yPct = bandTopPct + (row + 0.5) * cellH + (Math.random() - 0.5) * cellH * 0.4;
 
-        var densityT = maxYpct > 0 ? yPct / maxYpct : 1;
-        var opacity = 0.04 + densityT * 0.06 + Math.random() * 0.02;
-        var fontSize = 10 + Math.random() * 12;
-        var rot = -8 + Math.random() * 16;
+          var opacity = 0.22 + Math.random() * 0.06;
+          var fontSize = 12 + Math.random() * 6;
+          var rot = -5 + Math.random() * 10;
+          var waveAmp = 5 + Math.random() * 3;
+          var waveDur = 5.4 + Math.random() * 0.6;
+          var waveDelay = (xPct / 100) * waveDur * 0.9;
 
-        var span = document.createElement('span');
-        span.textContent = randSymbol();
-        span.style.left = xPct.toFixed(2) + '%';
-        span.style.top = yPct.toFixed(2) + '%';
-        span.style.fontSize = fontSize.toFixed(1) + 'px';
-        span.style.transform = 'translate(-50%,-50%) rotate(' + rot.toFixed(1) + 'deg)';
-        span.style.opacity = opacity.toFixed(3);
-        span.dataset.targetOpacity = opacity.toFixed(3);
-        symbolField.appendChild(span);
-        symbolEls.push(span);
-        created++;
+          var span = document.createElement('span');
+          span.textContent = randSymbol();
+          span.style.left = xPct.toFixed(2) + '%';
+          span.style.top = yPct.toFixed(2) + '%';
+          span.style.fontSize = fontSize.toFixed(1) + 'px';
+          span.style.setProperty('--rot', rot.toFixed(1) + 'deg');
+          span.style.setProperty('--wave-amp', waveAmp.toFixed(1) + 'px');
+          span.style.setProperty('--wave-dur', waveDur.toFixed(2) + 's');
+          span.style.setProperty('--wave-delay', '-' + waveDelay.toFixed(2) + 's');
+          span.style.opacity = opacity.toFixed(3);
+          span.dataset.targetOpacity = opacity.toFixed(3);
+          symbolField.appendChild(span);
+          symbolEls.push(span);
+        }
       }
     }
 
     function cycleSymbols(){
       var n = symbolEls.length;
       if (!n) return;
-      var swapCount = Math.max(1, Math.round(n * (0.05 + Math.random() * 0.05)));
+      var swapCount = Math.max(1, Math.round(n * (0.12 + Math.random() * 0.13)));
       var idxs = {};
       while (Object.keys(idxs).length < swapCount && Object.keys(idxs).length < n){
         idxs[Math.floor(Math.random() * n)] = true;
@@ -728,12 +796,12 @@
           requestAnimationFrame(function(){
             el.style.opacity = el.dataset.targetOpacity;
           });
-        }, 900);
+        }, 90);
       });
     }
 
     function scheduleSymbolCycle(){
-      var delay = 6000 + Math.random() * 6000;
+      var delay = 1000 + Math.random() * 1000;
       setTimeout(function(){
         cycleSymbols();
         scheduleSymbolCycle();
