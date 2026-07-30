@@ -7,7 +7,7 @@
 <meta name="description" content="Researchly helps high school and undergrad students find research opportunities matched to them, through a short guided interview. Join the waitlist.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..900&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --cover:#DD6B2E; --cover-light:#F2915A; --cover-dark:#A94F1E;
@@ -58,12 +58,12 @@
     padding-top: 24px; padding-bottom: 24px;
     position:relative; z-index:20;
   }
-  .brand{ display:flex; align-items:center; gap:11px; }
-  .brand svg{ width:36px; height:36px; }
+  .brand{ display:flex; align-items:center; gap:9px; }
+  .brand img{ height:40px; width:auto; display:block; }
   .brand span{
-    font-size:20px; font-weight:700; letter-spacing:-.01em;
-    color: var(--navy);
-    font-family: "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    font-size:21px; font-weight:700; letter-spacing:-.01em;
+    color: #081100;
+    font-family: "Poppins","Segoe UI",system-ui,sans-serif;
   }
   .nav-cta{
     font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; font-weight:700;
@@ -319,10 +319,13 @@
     padding-bottom: 8px;
   }
   .reviews-kicker{
+    display:table; margin: 0 auto 18px;
     text-align:center;
     font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; letter-spacing:.14em;
     text-transform:uppercase; font-weight:700; color: var(--cover-dark);
-    margin: 0 0 18px;
+    background:#fff; border-radius:999px;
+    padding:10px 22px;
+    box-shadow: 0 14px 30px -16px rgba(30,37,64,.35), 0 0 0 1px var(--card-border);
   }
   .reviews-track-wrap{ overflow:hidden; width:100%; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
   .reviews-track{
@@ -486,7 +489,7 @@
 
 <div class="site-nav container">
   <div class="brand">
-    <svg viewBox="0 0 60 60"><use href="#mascot-tiny"/></svg>
+    <img src="assets/mascot-logo.png" alt="Researchly">
     <span>Researchly</span>
   </div>
   <button class="nav-cta" type="button" id="navCta">Join the waitlist</button>
