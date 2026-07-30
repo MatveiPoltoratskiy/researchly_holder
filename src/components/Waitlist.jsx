@@ -92,10 +92,10 @@ export default function Waitlist() {
         aria-live="polite"
       >
         {status === 'idle' || status === 'submitting' ? (
-          <>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-check" /></svg>
-            No spam. We'll only email you when spots open.
-          </>
+          <span className="waitlist-count">
+            <span className="waitlist-count-dot" aria-hidden="true" />
+            50+ people have already joined the waitlist
+          </span>
         ) : (
           message
         )}
