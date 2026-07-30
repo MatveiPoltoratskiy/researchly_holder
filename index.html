@@ -85,10 +85,7 @@
   /* faint decorative sketches scattered across the cream field */
   .hero-sketch{ position:absolute; color: var(--navy-faint); pointer-events:none; z-index:1; }
   .hero-sketch svg{ display:block; overflow:visible; }
-  .sketch-dna{ left:1%; top:10%; width:70px; opacity:.55; }
-  .sketch-hex-a{ left:26%; top:5%; width:130px; opacity:.55; }
   .sketch-hex-b{ right:6%; top:6%; width:150px; opacity:.55; }
-  .sketch-graph{ right:1%; top:34%; width:110px; opacity:.6; }
   .sketch-note{
     font-family:"Bradley Hand","Segoe Print","Comic Sans MS",cursive;
     font-size:17px; line-height:1.35; color: var(--navy-soft);
@@ -100,7 +97,6 @@
     font-family: Georgia, serif; font-style:italic; font-size:14px; color: var(--navy-faint);
   }
   .formula-a{ right:9%; top:14%; }
-  .formula-b{ right:5%; top:19%; font-size:19px; }
 
   @media (max-width: 900px){ .hero-sketch{ display:none; } }
 
@@ -124,11 +120,11 @@
   .hero-top{
     position:relative; z-index:5; width:100%;
     display:flex; align-items:flex-start; justify-content:space-between; gap:36px;
-    padding-top: 34px; padding-bottom: 6px;
+    padding-top: 20px; padding-bottom: 6px;
   }
 
   /* copy */
-  .hero-text{ max-width: 540px; flex: 0 1 540px; padding-top: 26px; animation: content-in .8s ease-out .15s both; }
+  .hero-text{ max-width: 540px; flex: 0 1 540px; padding-top: 12px; animation: content-in .8s ease-out .15s both; }
   .kicker{
     font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; letter-spacing:.14em;
     text-transform:uppercase; margin:0 0 16px; font-weight:700;
@@ -158,6 +154,20 @@
     100%{ background-position: -220% 50%; }
   }
   @media (prefers-reduced-motion: reduce){ h1{ animation:none; background-position: 40% 50%; } }
+  .circle-mark{
+    position:relative; display:inline-block; z-index:1;
+    color: var(--navy); -webkit-text-fill-color: var(--navy);
+    background:none; -webkit-background-clip:initial; background-clip:initial;
+  }
+  .circle-mark::after{
+    content:"";
+    position:absolute;
+    z-index:-1;
+    left:-75%; right:-75%; top:-15%; bottom:-23%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Cpath d='M72,16 C60,11 71,6 66,14 C90,3 138,4 166,19 C190,32 194,52 180,66 C168,82 138,94 102,95 C65,96 30,86 17,64 C6,45 11,24 35,14 C48,8 60,9 72,16 C81,20 85,11 94,9' fill='none' stroke='%23D8382A' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-size:100% 100%;
+    pointer-events:none;
+  }
   .tagline{
     margin: 14px 0 0;
     font-family: "Iowan Old Style",Palatino,Georgia,serif;
@@ -167,8 +177,18 @@
   }
   .sub{
     font-family:"Segoe UI",system-ui,sans-serif;
-    font-size: 21.5px; line-height:1.6; color: var(--navy-soft);
+    font-size: 21.5px; line-height:1.6; color: var(--navy);
     max-width: 500px; margin: 20px 0 0;
+  }
+  .sub-lead{ font-weight:700; }
+  .sub-accent{
+    font-weight:700; color: var(--navy);
+    text-decoration: underline; text-decoration-color: var(--cover-dark);
+    text-decoration-thickness: 2px; text-underline-offset: 3px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 60' preserveAspectRatio='none'%3E%3Cpath d='M1,21 C30,10 70,27 110,15 C150,5 190,25 230,13 C260,6 285,19 299,11 L299,45 C270,55 235,39 200,51 C165,60 125,41 90,53 C55,61 25,45 1,49 Z' fill='%23D9A441' fill-opacity='0.55'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-size: 100% 84%; background-position: 0 92%;
+    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+    padding: 1px 4px;
   }
   .cta-wrap{ margin-top: 30px; display:flex; flex-direction:column; align-items:flex-start; gap:14px; }
   .cta-btn{
@@ -338,7 +358,7 @@
   /* ---------- testimonial carousel: floats over the plaza/prop level, like the mockup card floats over the mountains ---------- */
   .reviews-section{
     position:relative; z-index:6;
-    margin-top: clamp(-308px, -25.5vw, -178px);
+    margin-top: clamp(-380px, -30vw, -240px);
     padding-bottom: 8px;
   }
   .reviews-kicker{
@@ -413,16 +433,6 @@
     <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 
     <!-- decorative sketches -->
-    <symbol id="deco-dna" viewBox="0 0 60 220">
-      <path d="M10 5 C40 35,10 65,40 95 C10 125,40 155,10 185 C40 205,10 220,40 220" fill="none" stroke="currentColor" stroke-width="2"/>
-      <path d="M50 5 C20 35,50 65,20 95 C50 125,20 155,50 185 C20 205,50 220,20 220" fill="none" stroke="currentColor" stroke-width="2"/>
-      <g stroke="currentColor" stroke-width="1.6">
-        <line x1="14" y1="18" x2="46" y2="18"/><line x1="18" y1="46" x2="38" y2="46"/>
-        <line x1="14" y1="80" x2="46" y2="80"/><line x1="18" y1="110" x2="38" y2="110"/>
-        <line x1="14" y1="142" x2="46" y2="142"/><line x1="18" y1="172" x2="38" y2="172"/>
-        <line x1="14" y1="200" x2="46" y2="200"/>
-      </g>
-    </symbol>
     <symbol id="deco-hex" viewBox="0 0 140 110">
       <g fill="none" stroke="currentColor" stroke-width="1.6">
         <line x1="20" y1="55" x2="55" y2="30"/><line x1="55" y1="30" x2="95" y2="35"/>
@@ -434,15 +444,6 @@
         <circle cx="120" cy="65" r="4"/><circle cx="60" cy="75" r="4"/><circle cx="95" cy="90" r="4"/>
       </g>
     </symbol>
-    <symbol id="deco-graph" viewBox="0 0 110 76">
-      <path d="M4 4v68h104" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-      <polyline points="10,55 30,40 46,50 64,20 82,32 100,10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <g fill="currentColor">
-        <circle cx="10" cy="55" r="2.6"/><circle cx="30" cy="40" r="2.6"/><circle cx="46" cy="50" r="2.6"/>
-        <circle cx="64" cy="20" r="2.6"/><circle cx="82" cy="32" r="2.6"/><circle cx="100" cy="10" r="2.6"/>
-      </g>
-    </symbol>
-
     <!-- scene pieces -->
     <symbol id="scene-pin" viewBox="0 0 24 32">
       <path d="M12 1c6 0 10 4.6 10 10.2C22 18.6 12 31 12 31S2 18.6 2 11.2C2 5.6 6 1 12 1Z" fill="var(--pin-fill,#fff)" stroke="var(--pin-stroke,#A94F1E)" stroke-width="1.8"/>
@@ -519,23 +520,19 @@
 </div>
 
 <div class="hero">
-  <div class="hero-sketch sketch-dna" aria-hidden="true"><svg viewBox="0 0 60 220"><use href="#deco-dna"/></svg></div>
-  <div class="hero-sketch sketch-hex-a" aria-hidden="true"><svg viewBox="0 0 140 110"><use href="#deco-hex"/></svg></div>
   <div class="hero-sketch sketch-hex-b" aria-hidden="true"><svg viewBox="0 0 140 110"><use href="#deco-hex"/></svg></div>
-  <div class="hero-sketch sketch-graph" aria-hidden="true"><svg viewBox="0 0 110 76"><use href="#deco-graph"/></svg></div>
   <p class="hero-sketch sketch-note sketch-note-b" aria-hidden="true">Curiosity leads to discovery.</p>
   <p class="hero-sketch sketch-note sketch-note-c" aria-hidden="true">Impact → Publication → Prestige</p>
   <p class="hero-sketch sketch-formula formula-a" aria-hidden="true">C&#8330;H&#8321;&#8320;N&#8322;O&#8322;</p>
-  <p class="hero-sketch sketch-formula formula-b" aria-hidden="true">E = mc&sup2;</p>
 
   <div class="symbol-field" id="symbolField" aria-hidden="true"></div>
 
   <div class="hero-top container">
     <div class="hero-text">
       <p class="kicker">Join the waitlist</p>
-      <h1>Come with no plan.<br>Leave with research positions.</h1>
+      <h1>Come with no <span class="circle-mark">plan.</span><br>Leave with research positions.</h1>
       <p class="tagline">Turn ambition into action.</p>
-      <p class="sub">Tell us your interests. We&rsquo;ll match you with research opportunities, internships, and summer programs, then build a personalized roadmap to help you get there.</p>
+      <p class="sub"><span class="sub-lead">Tell us your interests.</span> We&rsquo;ll match you with <span class="sub-accent">research opportunities, internships, and summer programs</span>, then build a <span class="sub-accent">personalized roadmap</span> to help you get there.</p>
       <div class="cta-wrap">
         <button class="cta-btn" type="button" id="heroCta">Join the waitlist →</button>
       </div>
