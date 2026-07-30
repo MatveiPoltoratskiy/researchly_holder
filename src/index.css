@@ -47,7 +47,7 @@ svg{ display:block; }
   padding-top: 24px; padding-bottom: 24px;
   position:relative; z-index:20;
 }
-.brand{ display:flex; align-items:center; gap:9px; }
+.brand{ display:flex; align-items:center; gap:9px; text-decoration:none; cursor:pointer; }
 .brand img{ height:40px; width:auto; display:block; }
 .brand span{
   font-size:21px; font-weight:700; letter-spacing:-.01em;

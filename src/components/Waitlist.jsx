@@ -79,7 +79,6 @@ export default function Waitlist() {
           className="waitlist-submit"
           type="submit"
           disabled={isSubmitting}
-          onMouseEnter={(e) => burstConfetti(e.currentTarget, 5)}
         >
           {isSubmitting ? 'Joining…' : 'Join the waitlist →'}
         </button>
