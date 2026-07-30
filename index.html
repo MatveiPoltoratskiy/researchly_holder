@@ -21,6 +21,7 @@
     --pill-green-bg:#DFEFDE; --pill-green-text:#2E7A4C;
     --pill-amber-bg:#F1E4C6; --pill-amber-text:#8C5A24;
     --card-bg:#FCFAF2; --card-border:rgba(30,37,64,.09);
+    --symbol-tan:#C8A27A;
 
     --container-max-width: 1280px;
     --container-pad: 64px;
@@ -101,6 +102,16 @@
 
   @media (max-width: 900px){ .hero-sketch{ display:none; } }
 
+  /* dense research-symbol texture: sits behind the doodles/landscape, fades from bottom to top */
+  .symbol-field{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .symbol-field span{
+    position:absolute; color: var(--symbol-tan);
+    font-family: Georgia, "Times New Roman", serif;
+    white-space:nowrap; will-change:opacity;
+    transition: opacity 1.6s ease;
+  }
+  @media (max-width: 900px){ .symbol-field{ display:none; } }
+
   .hero-top{
     position:relative; z-index:5; width:100%;
     display:flex; align-items:flex-start; justify-content:space-between; gap:36px;
@@ -118,7 +129,7 @@
     margin:0;
     font-family: "Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
     font-weight: 800;
-    font-size: clamp(46px, 5.6vw, 72px);
+    font-size: clamp(50px, 6.1vw, 78px);
     line-height:1.02;
     color: var(--navy);
     text-wrap: balance;
@@ -127,20 +138,20 @@
     margin: 12px 0 0;
     font-family: "Iowan Old Style",Palatino,Georgia,serif;
     font-weight: 700; font-style: normal; letter-spacing:.01em;
-    font-size: clamp(19px, 2.1vw, 23px);
+    font-size: clamp(21px, 2.3vw, 25px);
     color: var(--cover);
   }
   .sub{
     font-family:"Segoe UI",system-ui,sans-serif;
-    font-size: 16.5px; line-height:1.6; color: var(--navy-soft);
+    font-size: 18px; line-height:1.6; color: var(--navy-soft);
     max-width: 420px; margin: 18px 0 0;
   }
   .cta-wrap{ margin-top: 30px; display:flex; flex-direction:column; align-items:flex-start; gap:14px; }
   .cta-btn{
-    font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:15.5px;
+    font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:17px;
     border:none; cursor:pointer; display:inline-flex; align-items:center; gap:10px;
     background: var(--cover); color: #FFF7EC;
-    padding: 16px 34px; border-radius: 999px;
+    padding: 17px 37px; border-radius: 999px;
     box-shadow: 0 14px 26px -10px rgba(169,79,30,.55);
     transition: transform .18s ease, box-shadow .18s ease;
   }
@@ -158,6 +169,7 @@
     perspective: 1400px;
     animation: content-in .8s ease-out .3s both;
   }
+  .hero-card-scale{ transform: scale(1.12); transform-origin: top center; }
   .hero-card-inner{
     position:relative;
     background: var(--card-bg);
@@ -425,6 +437,8 @@
   <p class="hero-sketch sketch-formula formula-a" aria-hidden="true">C&#8330;H&#8321;&#8320;N&#8322;O&#8322;</p>
   <p class="hero-sketch sketch-formula formula-b" aria-hidden="true">E = mc&sup2;</p>
 
+  <div class="symbol-field" id="symbolField" aria-hidden="true"></div>
+
   <div class="hero-top container">
     <div class="hero-text">
       <p class="kicker">Waitlist now open</p>
@@ -437,6 +451,7 @@
     </div>
 
     <div class="hero-card" aria-hidden="true">
+      <div class="hero-card-scale">
       <div class="hero-card-inner" id="mockCard">
         <div class="card-sheen"></div>
         <div class="card-head">
@@ -492,6 +507,7 @@
           </div>
         </div>
         <div class="card-foot">View full roadmap →</div>
+      </div>
       </div>
     </div>
   </div>
@@ -621,6 +637,116 @@
         if (raf) cancelAnimationFrame(raf);
         card.classList.remove('is-tilting');
         card.style.transform = '';
+      });
+    }
+
+    // Research symbol field: dense, fixed-position academic texture behind the
+    // landscape. Positions never move; a small slice of symbols cross-fades to a
+    // new glyph every 6-12s so the field reads as alive without ever scrolling.
+    var POOL = ['α','β','γ','δ','λ','μ','π','Ω','Σ','Δ','θ','φ','Ψ','Ξ','ε','ρ','τ','ω',
+      'H₂O','NH₃','CO₂','C₆H₁₂O₆','NaCl','O₂','CH₄','C₆H₁₀N₂O₂',
+      '∫','∇','∂','∞','≈','≠','√','∴','±',
+      'E = mc²','F = ma','ħ','ΔE','v = λf',
+      'DNA','RNA','ATP','mRNA','ADP'];
+    function randSymbol(){ return POOL[Math.floor(Math.random() * POOL.length)]; }
+
+    var symbolField = document.getElementById('symbolField');
+    var heroEl = document.querySelector('.hero');
+    var landscapeEl = document.querySelector('.landscape-wrap');
+    var cardInnerEl = document.getElementById('mockCard');
+    var symbolEls = [];
+
+    function buildSymbolField(){
+      if (!symbolField || !heroEl || !landscapeEl) return;
+      symbolField.innerHTML = '';
+      symbolEls = [];
+
+      var heroRect = heroEl.getBoundingClientRect();
+      var landscapeRect = landscapeEl.getBoundingClientRect();
+      if (!heroRect.height) return;
+
+      var maxYpx = (landscapeRect.top - heroRect.top) + 30;
+      var maxYpct = Math.max(10, Math.min(100, (maxYpx / heroRect.height) * 100));
+
+      var pad = 18;
+      var cardZone = null;
+      if (cardInnerEl){
+        var cardRect = cardInnerEl.getBoundingClientRect();
+        cardZone = {
+          left: cardRect.left - heroRect.left - pad,
+          right: cardRect.right - heroRect.left + pad,
+          top: cardRect.top - heroRect.top - pad,
+          bottom: cardRect.bottom - heroRect.top + pad
+        };
+      }
+
+      var count = 140;
+      var created = 0, attempts = 0;
+      while (created < count && attempts < count * 8){
+        attempts++;
+        var yPct = Math.pow(Math.random(), 0.55) * maxYpct;
+        var xPct = Math.random() * 100;
+        var xpx = xPct / 100 * heroRect.width;
+        var ypx = yPct / 100 * heroRect.height;
+        if (cardZone && xpx > cardZone.left && xpx < cardZone.right && ypx > cardZone.top && ypx < cardZone.bottom) continue;
+
+        var densityT = maxYpct > 0 ? yPct / maxYpct : 1;
+        var opacity = 0.04 + densityT * 0.06 + Math.random() * 0.02;
+        var fontSize = 10 + Math.random() * 12;
+        var rot = -8 + Math.random() * 16;
+
+        var span = document.createElement('span');
+        span.textContent = randSymbol();
+        span.style.left = xPct.toFixed(2) + '%';
+        span.style.top = yPct.toFixed(2) + '%';
+        span.style.fontSize = fontSize.toFixed(1) + 'px';
+        span.style.transform = 'translate(-50%,-50%) rotate(' + rot.toFixed(1) + 'deg)';
+        span.style.opacity = opacity.toFixed(3);
+        span.dataset.targetOpacity = opacity.toFixed(3);
+        symbolField.appendChild(span);
+        symbolEls.push(span);
+        created++;
+      }
+    }
+
+    function cycleSymbols(){
+      var n = symbolEls.length;
+      if (!n) return;
+      var swapCount = Math.max(1, Math.round(n * (0.05 + Math.random() * 0.05)));
+      var idxs = {};
+      while (Object.keys(idxs).length < swapCount && Object.keys(idxs).length < n){
+        idxs[Math.floor(Math.random() * n)] = true;
+      }
+      Object.keys(idxs).forEach(function(key){
+        var el = symbolEls[key];
+        if (!el) return;
+        el.style.opacity = '0';
+        setTimeout(function(){
+          var next = randSymbol(), tries = 0;
+          while (next === el.textContent && tries < 5){ next = randSymbol(); tries++; }
+          el.textContent = next;
+          requestAnimationFrame(function(){
+            el.style.opacity = el.dataset.targetOpacity;
+          });
+        }, 900);
+      });
+    }
+
+    function scheduleSymbolCycle(){
+      var delay = 6000 + Math.random() * 6000;
+      setTimeout(function(){
+        cycleSymbols();
+        scheduleSymbolCycle();
+      }, delay);
+    }
+
+    if (symbolField && heroEl && landscapeEl){
+      buildSymbolField();
+      if (!reduceMotion) scheduleSymbolCycle();
+      var symbolResizeTimer;
+      window.addEventListener('resize', function(){
+        clearTimeout(symbolResizeTimer);
+        symbolResizeTimer = setTimeout(buildSymbolField, 300);
       });
     }
   })();
