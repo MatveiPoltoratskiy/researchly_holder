@@ -107,7 +107,7 @@
   .symbol-field span{
     position:absolute; color: var(--symbol-tan);
     font-family: "SF Mono", "Courier New", ui-monospace, monospace;
-    white-space:nowrap; will-change:transform,opacity;
+    white-space:nowrap;
     transition: opacity .15s ease;
     transform: translate(-50%, calc(-50% - var(--wave-amp, 8px))) rotate(var(--rot, 0deg));
     animation: symbol-wave var(--wave-dur, 6s) ease-in-out var(--wave-delay, 0s) infinite;
@@ -820,7 +820,7 @@
       var bandHeightPct = landscapeHeightPct * 0.30;
       var bandTopPct = Math.max(0, bandCenterPct - bandHeightPct / 2);
 
-      var cols = 24, rows = 5;
+      var cols = 12, rows = 3;
       var cellW = 100 / cols;
       var cellH = bandHeightPct / rows;
 
