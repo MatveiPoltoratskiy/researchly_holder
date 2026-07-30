@@ -109,13 +109,13 @@ export default function Waitlist() {
         role={status === 'error' ? 'alert' : undefined}
         aria-live="polite"
       >
-        {status === 'error' ? (
-          message
+        {status === 'idle' || status === 'submitting' ? (
+          <span className="waitlist-count">
+            <span className="waitlist-count-dot" aria-hidden="true" />
+            50+ people have already joined the waitlist
+          </span>
         ) : (
-          <>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-check" /></svg>
-            No spam. EVER! Stay tuned, big things are coming.
-          </>
+          message
         )}
       </p>
     </div>
