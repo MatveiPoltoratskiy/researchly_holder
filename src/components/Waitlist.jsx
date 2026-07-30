@@ -34,7 +34,7 @@ export default function Waitlist() {
 
     if (!error) {
       setStatus('success')
-      setMessage("You're on the list! We'll email you when spots open.")
+      setMessage("You're on the list. We'll reach out as spots open.")
       setEmail('')
       if (buttonRef.current) burstConfetti(buttonRef.current, 16)
       return
@@ -42,7 +42,7 @@ export default function Waitlist() {
 
     if (error.code === '23505') {
       setStatus('success')
-      setMessage("You're already on the list — we'll be in touch.")
+      setMessage("You're already on the list. We'll reach out as spots open.")
       setEmail('')
       return
     }
@@ -52,6 +52,19 @@ export default function Waitlist() {
   }
 
   const isSubmitting = status === 'submitting'
+
+  if (status === 'success') {
+    return (
+      <div className="cta-wrap">
+        <div className="waitlist-success" role="status" aria-live="polite">
+          <svg className="waitlist-success-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 12.5l5 5L20 6" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          <span>{message}</span>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="cta-wrap">
@@ -80,23 +93,29 @@ export default function Waitlist() {
           type="submit"
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Joining…' : 'Join the waitlist →'}
+          {isSubmitting ? (
+            <svg className="btn-spinner" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeDasharray="34 100" />
+            </svg>
+          ) : (
+            'Join the waitlist →'
+          )}
         </button>
       </form>
 
       <p
         id="waitlist-status"
-        className={`waitlist-status ${status === 'success' ? 'is-success' : status === 'error' ? 'is-error' : 'is-trust'}`}
+        className={`waitlist-status ${status === 'error' ? 'is-error' : 'is-trust'}`}
         role={status === 'error' ? 'alert' : undefined}
         aria-live="polite"
       >
-        {status === 'idle' || status === 'submitting' ? (
+        {status === 'error' ? (
+          message
+        ) : (
           <>
             <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-check" /></svg>
             No spam. We'll only email you when spots open.
           </>
-        ) : (
-          message
         )}
       </p>
     </div>
