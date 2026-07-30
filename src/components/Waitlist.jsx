@@ -21,6 +21,12 @@ export default function Waitlist() {
       return
     }
 
+    if (!supabase) {
+      setStatus('error')
+      setMessage('Something went wrong. Please try again later.')
+      return
+    }
+
     setStatus('submitting')
     setMessage('')
 
