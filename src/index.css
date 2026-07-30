@@ -168,7 +168,7 @@ h1{
 .sub{
   font-family:"Segoe UI",system-ui,sans-serif;
   font-size: 21.5px; line-height:1.6; color: var(--navy);
-  max-width: 500px; margin: 20px 0 0;
+  max-width: 540px; margin: 20px 0 0;
 }
 .sub-lead{ font-weight:700; }
 .sub-accent{

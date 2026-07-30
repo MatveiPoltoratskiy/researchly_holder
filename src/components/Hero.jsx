@@ -145,11 +145,10 @@ export default function Hero() {
         <div className="hero-text">
           <p className="kicker">Join the waitlist</p>
           <h1>
-            Come with no <span className="circle-mark">plan.</span>
+            Come <span className="circle-mark">lost.</span>
             <br />
-            Leave with research positions.
+            Leave with research opportunities.
           </h1>
-          <p className="tagline">Turn ambition into action.</p>
           <p className="sub">
             <span className="sub-lead">Tell us your interests.</span> We&rsquo;ll match you with{' '}
             <span className="sub-accent">research opportunities, internships, and summer programs</span>, then build a{' '}

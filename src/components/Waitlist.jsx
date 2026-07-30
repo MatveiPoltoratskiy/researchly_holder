@@ -114,7 +114,7 @@ export default function Waitlist() {
         ) : (
           <>
             <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-check" /></svg>
-            No spam. EVER! We'll only email you when spots open.
+            No spam. EVER! Stay tuned, big things are coming.
           </>
         )}
       </p>
