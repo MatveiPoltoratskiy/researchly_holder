@@ -1,8 +1,5 @@
-import { burstConfetti } from '../lib/confetti'
-
 export default function Navbar() {
-  function handleClick(e) {
-    burstConfetti(e.currentTarget, 16)
+  function handleClick() {
     const input = document.getElementById('waitlist-email')
     if (input) {
       input.scrollIntoView({ behavior: 'smooth', block: 'center' })
@@ -10,22 +7,13 @@ export default function Navbar() {
     }
   }
 
-  function handleMouseEnter(e) {
-    burstConfetti(e.currentTarget, 5)
-  }
-
   return (
     <div className="site-nav container">
-      <div className="brand">
+      <a className="brand" href="/" aria-label="Researchly home">
         <img src="/assets/mascot-logo.png" alt="Researchly" />
         <span>Researchly</span>
-      </div>
-      <button
-        className="nav-cta"
-        type="button"
-        onMouseEnter={handleMouseEnter}
-        onClick={handleClick}
-      >
+      </a>
+      <button className="nav-cta" type="button" onClick={handleClick}>
         Join the waitlist
       </button>
     </div>
