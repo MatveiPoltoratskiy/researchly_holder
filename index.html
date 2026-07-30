@@ -130,7 +130,7 @@
   /* copy */
   .hero-text{ max-width: 540px; flex: 0 1 540px; padding-top: 26px; animation: content-in .8s ease-out .15s both; }
   .kicker{
-    font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; letter-spacing:.14em;
+    font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; letter-spacing:.14em;
     text-transform:uppercase; margin:0 0 16px; font-weight:700;
     color: var(--cover-dark);
   }
@@ -138,7 +138,7 @@
     margin:0;
     font-family: "Fraunces", "Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
     font-weight: 700;
-    font-size: clamp(32px, 4.4vw, 50px);
+    font-size: clamp(35px, 4.8vw, 55px);
     line-height:1.1;
     color: var(--navy);
     text-wrap: balance;
@@ -162,20 +162,20 @@
     margin: 14px 0 0;
     font-family: "Iowan Old Style",Palatino,Georgia,serif;
     font-weight: 700; font-style: normal; letter-spacing:.01em;
-    font-size: clamp(24px, 2.6vw, 29px);
+    font-size: clamp(26px, 2.8vw, 32px);
     color: var(--cover);
   }
   .sub{
     font-family:"Segoe UI",system-ui,sans-serif;
-    font-size: 20px; line-height:1.6; color: var(--navy-soft);
-    max-width: 480px; margin: 20px 0 0;
+    font-size: 21.5px; line-height:1.6; color: var(--navy-soft);
+    max-width: 500px; margin: 20px 0 0;
   }
   .cta-wrap{ margin-top: 30px; display:flex; flex-direction:column; align-items:flex-start; gap:14px; }
   .cta-btn{
-    font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:18.5px;
+    font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:19.5px;
     border:none; cursor:pointer; display:inline-flex; align-items:center; gap:10px;
     background: var(--cover); color: #FFF7EC;
-    padding: 18px 40px; border-radius: 999px;
+    padding: 18px 41px; border-radius: 999px;
     box-shadow: 0 14px 26px -10px rgba(169,79,30,.55);
     transition: transform .18s ease, box-shadow .18s ease;
   }
@@ -188,12 +188,33 @@
 
   /* ---------- mockup card ---------- */
   .hero-card{
+    position:relative;
     flex: 0 1 440px; max-width:440px; width:100%;
     margin-top: 10px;
     perspective: 1400px;
     animation: content-in .8s ease-out .3s both;
   }
   .hero-card-scale{ transform: scale(1.18); transform-origin: top center; }
+
+  /* mascot floats in and settles beside the card, spilling onto the landscape */
+  .hero-mascot{
+    position:absolute; right:-9%; bottom:-38%; width:40%; z-index:8;
+    pointer-events:none; opacity:0;
+    animation: mascot-in 1.15s cubic-bezier(.22,.85,.32,1.05) 1.05s both;
+  }
+  .hero-mascot-float{ animation: mascot-bob 3.8s ease-in-out 2.2s infinite; }
+  .hero-mascot img{ width:100%; height:auto; display:block; filter: drop-shadow(0 16px 18px rgba(30,37,64,.32)); }
+  @keyframes mascot-in{
+    0%{ opacity:0; transform: translate(46px,74px) rotate(-14deg) scale(.6); }
+    55%{ opacity:1; transform: translate(-8px,-10px) rotate(4deg) scale(1.06); }
+    78%{ transform: translate(3px,4px) rotate(-2deg) scale(.98); }
+    100%{ opacity:1; transform: translate(0,0) rotate(0deg) scale(1); }
+  }
+  @keyframes mascot-bob{
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(-6px); }
+  }
+  @media (max-width: 900px){ .hero-mascot{ width:34%; right:-3%; bottom:-26%; } }
   .hero-card-inner{
     position:relative;
     background: var(--card-bg);
@@ -295,6 +316,8 @@
     .hero-text, .hero-card{ animation:none; opacity:1; transform:none; }
     .hero-card-inner{ animation:none; }
     .tree-group, .plant-leaves, .pin-marker{ animation:none; }
+    .hero-mascot{ animation:none; opacity:1; transform:none; }
+    .hero-mascot-float{ animation:none; }
   }
 
   /* ---------- Card Catalog Confetti ---------- */
@@ -596,6 +619,11 @@
         </div>
         <div class="card-foot">View full roadmap →</div>
       </div>
+      </div>
+      <div class="hero-mascot" aria-hidden="true">
+        <div class="hero-mascot-float">
+          <img src="assets/mascot-logo.png" alt="">
+        </div>
       </div>
     </div>
   </div>
