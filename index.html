@@ -7,33 +7,39 @@
 <meta name="description" content="Researchly helps high school and undergrad students find research opportunities matched to them, through a short guided interview. Join the waitlist.">
 <style>
   :root{
-    --cover:#C6602F; --cover-light:#E08A54; --cover-dark:#8C3F1E;
-    --spine:#7A3418; --pages:#F3E3C8; --pages-shadow:#E4CBA0; --ribbon:#3F7D5C;
+    --cover:#DD6B2E; --cover-light:#F2915A; --cover-dark:#A94F1E;
+    --spine:#8C4A22; --pages:#FBF3E1; --pages-shadow:#EEDFC0; --ribbon:#3F7D5C;
     --face:#3B2A1E; --gold:#D9A441;
-    --wood-deep:#1B120C; --wood-mid:#2E2015;
-    --lamp-warm:#F4B36B; --lamp-core:#FFE3B0; --parchment:#F3E7CE;
-    --dusk-cool:#1A1B21;
-    --glass-rim:#A08A63; --glass-rim-dark:#7C6A4C; --glass-lens:rgba(232,232,222,.14);
+    --glass-rim:#A08A63; --glass-rim-dark:#7C6A4C; --glass-lens:rgba(255,255,255,.5);
+
+    --cream:#F4EAD6; --cream-deep:#ECDDBB;
+    --navy:#1E2540; --navy-soft:rgba(30,37,64,.68); --navy-faint:rgba(30,37,64,.4);
+    --sage-back:#CBD8B2; --sage-mid:#9BB683; --sage-front:#688656; --pine:#415C39;
+    --road:#E9D9AF; --road-line:#FBF4DF; --stone:#E3D5B3;
+    --match-green:#2E7A4C;
+    --pill-bg:#EEE7D2; --pill-text:#6B5A38;
+    --pill-green-bg:#DFEFDE; --pill-green-text:#2E7A4C;
+    --pill-amber-bg:#F1E4C6; --pill-amber-text:#8C5A24;
+    --card-bg:#FCFAF2; --card-border:rgba(30,37,64,.09);
 
     --container-max-width: 1280px;
     --container-pad: 64px;
   }
   @media (max-width: 1023px){ :root{ --container-pad: 40px; } }
-  @media (max-width: 767px){ :root{ --container-pad: 32px; } }
+  @media (max-width: 767px){ :root{ --container-pad: 24px; } }
   *,*::before,*::after{ box-sizing:border-box; }
   html,body{ margin:0; padding:0; }
   body{
     min-height:100vh;
     display:flex; flex-direction:column;
-    background: var(--wood-deep);
-    color: var(--parchment);
+    background: var(--cream);
+    color: var(--navy);
     font-family: Georgia, "Iowan Old Style", serif;
     overflow-x:hidden;
   }
   svg{ display:block; }
   .visually-hidden{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
 
-  /* ---------- layout container (single source of truth) ---------- */
   .container{
     width:100%;
     max-width: var(--container-max-width);
@@ -45,205 +51,212 @@
   /* ---------- nav ---------- */
   .site-nav{
     display:flex; align-items:center; justify-content:space-between;
-    padding-top: 22px; padding-bottom: 22px;
+    padding-top: 24px; padding-bottom: 24px;
     position:relative; z-index:20;
   }
   .brand{ display:flex; align-items:center; gap:11px; }
-  .brand svg{ width:37px; height:37px; }
+  .brand svg{ width:36px; height:36px; }
   .brand span{
-    font-size:19px; font-weight:600; letter-spacing:-.01em;
-    color: var(--parchment);
+    font-size:20px; font-weight:700; letter-spacing:-.01em;
+    color: var(--navy);
     font-family: "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
   }
   .nav-cta{
     font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; font-weight:700;
     border:none; cursor:pointer;
-    background: var(--parchment); color: var(--wood-deep);
+    background: var(--cover); color:#FFF6EC;
     padding:13px 25px; border-radius:999px;
+    box-shadow: 0 10px 20px -10px rgba(169,79,30,.55);
     transition: transform .18s ease, box-shadow .18s ease;
   }
-  .nav-cta:hover{ transform: translateY(-1px); box-shadow: 0 8px 18px -8px rgba(0,0,0,.5); }
+  .nav-cta:hover{ transform: translateY(-1px); box-shadow: 0 14px 24px -10px rgba(169,79,30,.6); }
 
   /* ---------- hero shell ---------- */
   .hero{
     position:relative; flex:1; overflow:hidden;
-    display:flex; align-items:center;
-    min-height: 660px;
-    background-color: var(--wood-deep);
-  }
-  /* layer 1 — blurred library backdrop, tiled from a small clean photo patch (no mascot/lamp/text baked in) */
-  .library-bg{
-    position:absolute; inset:0; z-index:0; pointer-events:none;
-    background-image: url('assets/library-bg.jpg');
-    background-repeat: repeat;
-    background-size: 580px 460px;
-    opacity:.85;
-  }
-  .hero-inner{
-    position:relative; z-index:4; width:100%; height:100%;
-    display:flex; align-items:center; justify-content:space-between; gap:32px;
+    background: var(--cream);
+    padding-bottom: 0;
   }
 
-  /* ---------- hanging lamp: fixture is always visible; the bulb/glow/embers animate the on-sequence ---------- */
-  .lamp-rig{ position:absolute; right: 9%; top:0; z-index:5; display:flex; flex-direction:column; align-items:center; }
-  .lamp-cord{ width:2px; height: 50px; background: linear-gradient(180deg, var(--wood-mid), #150e09); }
-  .lamp-fixture{ width: 128px; height: 92px; overflow:visible; }
-  .lamp-bulb{
-    width:15px; height:15px; border-radius:50%; margin-top:-10px;
-    background: var(--lamp-core);
-    box-shadow: 0 0 30px 13px rgba(244,179,107,.82);
-    opacity:0;
-    animation: bulb-flicker 2.4s ease-out forwards;
+  /* faint decorative sketches scattered across the cream field */
+  .hero-sketch{ position:absolute; color: var(--navy-faint); pointer-events:none; z-index:1; }
+  .hero-sketch svg{ display:block; overflow:visible; }
+  .sketch-dna{ left:1%; top:10%; width:70px; opacity:.55; }
+  .sketch-hex-a{ left:26%; top:5%; width:130px; opacity:.55; }
+  .sketch-hex-b{ right:6%; top:6%; width:150px; opacity:.55; }
+  .sketch-graph{ right:1%; top:34%; width:110px; opacity:.6; }
+  .sketch-note{
+    font-family:"Bradley Hand","Segoe Print","Comic Sans MS",cursive;
+    font-size:17px; line-height:1.35; color: var(--navy-soft);
+    max-width:150px;
   }
-  .lamp-embers{ position:absolute; left:50%; top:118px; width:0; height:0; pointer-events:none; }
-  .ember{
-    position:absolute; width:3px; height:3px; border-radius:50%;
-    background: var(--lamp-core);
-    box-shadow: 0 0 6px 2px rgba(244,179,107,.75);
-    opacity:0;
-    animation: ember-drift 1.05s ease-out both;
+  .sketch-note-a{ left:39%; top:9%; text-align:left; transform: rotate(-2deg); }
+  .sketch-note-b{ left:2%; top:41%; transform: rotate(-3deg); }
+  .sketch-note-c{ right:2%; top:52%; text-align:right; transform: rotate(2deg); }
+  .sketch-formula{
+    font-family: Georgia, serif; font-style:italic; font-size:14px; color: var(--navy-faint);
   }
+  .formula-a{ right:9%; top:14%; }
+  .formula-b{ right:5%; top:19%; font-size:19px; }
 
-  /* light spreading outward from the lamp — this, not a page-wide fade, is what reveals the scene */
-  .lamp-glow{
-    position:absolute; right: -10%; top: -12%;
-    width: 1320px; height: 1320px; border-radius:50%;
-    background: radial-gradient(circle, var(--lamp-warm) 0%, rgba(244,179,107,.5) 32%, rgba(244,179,107,.15) 58%, rgba(244,179,107,0) 76%);
-    mix-blend-mode: screen;
-    z-index:1;
-    transform-origin: 70% 18%;
-    opacity:0; transform:scale(.22);
-    animation: glow-flicker 2.4s ease-out forwards;
-  }
+  @media (max-width: 900px){ .hero-sketch{ display:none; } }
 
-  /* dust catching the light — only appears once the lamp has stabilized */
-  .dust-field{ position:absolute; inset:0; z-index:2; pointer-events:none; opacity:0; animation: dust-reveal 1.2s ease-out 2.4s forwards; }
-  .dust{ position:absolute; width:3px; height:3px; border-radius:50%; background: var(--lamp-core); opacity:.5; animation: dust-drift 16s linear infinite; }
+  .hero-top{
+    position:relative; z-index:5; width:100%;
+    display:flex; align-items:flex-start; justify-content:space-between; gap:36px;
+    padding-top: 34px; padding-bottom: 26px;
+  }
 
   /* copy */
-  .hero-text{ position:relative; z-index:4; max-width: 480px; flex: 0 1 480px; animation: content-in .9s ease-out 2s both; }
+  .hero-text{ max-width: 470px; flex: 0 1 470px; padding-top: 26px; animation: content-in .8s ease-out .15s both; }
   .kicker{
     font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; letter-spacing:.14em;
     text-transform:uppercase; margin:0 0 16px; font-weight:700;
-    color: var(--lamp-warm);
-    background: linear-gradient(100deg, var(--lamp-warm) 35%, #FFF3DD 50%, var(--lamp-warm) 65%);
-    background-size: 220% 100%;
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--cover-dark);
   }
   h1{
     margin:0;
     font-family: "Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
     font-weight: 800;
-    font-size: clamp(46px, 5.9vw, 76px);
+    font-size: clamp(46px, 5.6vw, 72px);
     line-height:1.02;
-    color: var(--parchment);
+    color: var(--navy);
     text-wrap: balance;
   }
   .tagline{
     margin: 12px 0 0;
     font-family: "Iowan Old Style",Palatino,Georgia,serif;
-    font-weight: 600; font-style: normal; letter-spacing:.01em;
+    font-weight: 700; font-style: normal; letter-spacing:.01em;
     font-size: clamp(19px, 2.1vw, 23px);
-    color: var(--lamp-warm);
+    color: var(--cover);
   }
   .sub{
     font-family:"Segoe UI",system-ui,sans-serif;
-    font-size: 16.5px; line-height:1.6; color: rgba(243,231,206,.72);
+    font-size: 16.5px; line-height:1.6; color: var(--navy-soft);
     max-width: 420px; margin: 18px 0 0;
   }
-  .cta-wrap{ margin-top: 30px; }
+  .cta-wrap{ margin-top: 30px; display:flex; flex-direction:column; align-items:flex-start; gap:14px; }
   .cta-btn{
     font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:15.5px;
     border:none; cursor:pointer; display:inline-flex; align-items:center; gap:10px;
     background: var(--cover); color: #FFF7EC;
     padding: 16px 34px; border-radius: 999px;
-    box-shadow: 0 14px 26px -10px rgba(0,0,0,.6);
+    box-shadow: 0 14px 26px -10px rgba(169,79,30,.55);
     transition: transform .18s ease, box-shadow .18s ease;
   }
-  .cta-btn:hover{ transform: translateY(-2px); box-shadow: 0 18px 30px -10px rgba(0,0,0,.65); }
+  .cta-btn:hover{ transform: translateY(-2px); box-shadow: 0 18px 30px -10px rgba(169,79,30,.6); }
+  .trust-line{
+    font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; color: var(--navy-soft);
+    display:flex; align-items:center; gap:7px; margin:0;
+  }
+  .trust-line svg{ width:14px; height:14px; }
 
-  /* mascot — floating, upper right, holding the magnifying glass */
-  .mascot-focal{
-    position:relative; z-index:4; flex: 1 1 420px; min-width:340px;
+  /* ---------- mockup card ---------- */
+  .hero-card{
+    flex: 0 1 440px; max-width:440px; width:100%;
+    margin-top: 10px;
+    perspective: 1400px;
+    animation: content-in .8s ease-out .3s both;
+  }
+  .hero-card-inner{
+    position:relative;
+    background: var(--card-bg);
+    border:1px solid var(--card-border);
+    border-radius:20px;
+    padding:22px 22px 18px;
+    box-shadow: 0 30px 60px -24px rgba(30,37,64,.28), 0 4px 14px -6px rgba(30,37,64,.12);
+    transform-style: preserve-3d;
+    transition: transform .12s ease-out, box-shadow .25s ease;
+    cursor: default;
+    animation: card-float 6s ease-in-out infinite;
+  }
+  .hero-card-inner.is-tilting{ transition: transform .06s linear; animation-play-state: paused; }
+  .card-sheen{
+    position:absolute; inset:0; border-radius:20px; pointer-events:none;
+    background: radial-gradient(circle at 50% 0%, rgba(255,255,255,.55), transparent 60%);
+    opacity:0; transition: opacity .3s ease;
+    mix-blend-mode: soft-light;
+  }
+  .hero-card-inner:hover .card-sheen{ opacity:1; }
+  .card-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+  .card-head-left{ display:flex; align-items:center; gap:10px; }
+  .card-head-left svg{ width:26px; height:26px; flex:none; }
+  .card-title{ font-size:16.5px; font-weight:700; color:var(--navy); font-family:"Iowan Old Style",Palatino,Georgia,serif; }
+  .card-sub{ font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; color:var(--navy-soft); margin-top:2px; max-width:230px; }
+  .card-avatar{
+    width:32px; height:32px; border-radius:50%; flex:none;
+    background: linear-gradient(135deg, var(--cover-light), var(--cover));
     display:flex; align-items:center; justify-content:center;
-    transform: translate(10%, -14%);
   }
-  .mascot-figure{
-    position:relative; width:100%; max-width:560px; aspect-ratio: 1 / 1.08;
+  .card-avatar svg{ width:16px; height:16px; }
+
+  .card-body{ display:flex; gap:14px; margin-top:18px; }
+  .card-rail{ display:flex; flex-direction:column; gap:14px; padding-top:2px; }
+  .card-rail span{
+    width:30px; height:30px; border-radius:9px; display:flex; align-items:center; justify-content:center;
+    color: var(--navy-soft);
+  }
+  .card-rail span svg{ width:16px; height:16px; }
+  .card-rail span.is-active{ background: var(--pill-amber-bg); color: var(--cover-dark); }
+
+  .card-main{ flex:1; min-width:0; }
+  .card-label{ font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:700; letter-spacing:.03em; color:var(--navy-soft); text-transform:uppercase; margin-bottom:8px; }
+  .match-row{
+    display:flex; align-items:center; gap:10px;
+    padding:10px 0; border-top:1px solid var(--card-border);
+  }
+  .card-main .match-row:first-of-type{ border-top:none; padding-top:0; }
+  .u-badge{
+    width:34px; height:34px; border-radius:9px; flex:none;
     display:flex; align-items:center; justify-content:center;
-    animation: mascot-enter .5s ease-in-out 1.8s both;
+    font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:11px; color:#fff;
   }
-  .mascot-highlight{
-    position:absolute; top:50%; left:50%; transform: translate(-50%,-50%);
-    width: 115%; height: 100%; border-radius:50%;
-    background: radial-gradient(circle, rgba(255,227,176,.5) 0%, rgba(255,227,176,0) 68%);
-    mix-blend-mode: screen;
-  }
-  .mascot-instance{ width: 84%; height:auto; position:relative; z-index:2; }
-  .mascot-wave-arm{ transform-box: fill-box; transform-origin: 15% 40%; }
+  .u-badge--a{ background:#8C1D1D; }
+  .u-badge--b{ background:#161616; }
+  .u-badge--c{ background:#7A1420; }
+  .match-info{ min-width:0; flex:1; }
+  .match-name{ font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:13px; color:var(--navy); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .match-uni{ font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; color:var(--navy-soft); margin-top:1px; }
+  .match-tags{ display:flex; gap:5px; margin-top:6px; flex-wrap:wrap; }
+  .tag{ font-family:"Segoe UI",system-ui,sans-serif; font-size:10px; font-weight:600; padding:2.5px 7px; border-radius:999px; background:var(--pill-bg); color:var(--pill-text); white-space:nowrap; }
+  .tag.tag-green{ background:var(--pill-green-bg); color:var(--pill-green-text); }
+  .tag.tag-amber{ background:var(--pill-amber-bg); color:var(--pill-amber-text); }
+  .match-score{ text-align:right; flex:none; }
+  .match-score .pct{ font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:16px; color:var(--match-green); line-height:1; }
+  .match-score .lbl{ font-family:"Segoe UI",system-ui,sans-serif; font-size:9.5px; color:var(--navy-soft); }
 
-  @media (prefers-reduced-motion: no-preference){
-    .mascot-instance{ animation: mascot-float 5.2s ease-in-out infinite; }
-    .mascot-wave-arm{ animation: wave-arm 1.5s ease-in-out 2.2s 1; }
-    .kicker{ animation: kicker-shimmer 3.2s ease-in-out 3s infinite; }
+  .card-foot{
+    margin-top:14px; padding-top:12px; border-top:1px solid var(--card-border);
+    text-align:center; font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:700;
+    color:var(--cover-dark);
   }
-  @keyframes mascot-float{
-    0%,100%{ transform: translateY(0) rotate(-4deg); }
-    50%{ transform: translateY(-14px) rotate(-6deg); }
-  }
-  @keyframes wave-arm{
-    0%{ transform: rotate(0deg); } 20%{ transform: rotate(-20deg); }
-    38%{ transform: rotate(6deg); } 56%{ transform: rotate(-15deg); }
-    74%{ transform: rotate(3deg); } 100%{ transform: rotate(0deg); }
-  }
-  @keyframes mascot-enter{
-    0%{ opacity:0; transform: translateX(-68vw) rotate(-4deg); }
-    100%{ opacity:1; transform: translateX(0) rotate(-4deg); }
-  }
-  @keyframes kicker-shimmer{
-    0%{ background-position: 160% 0; }
-    100%{ background-position: -60% 0; }
-  }
-  @keyframes content-in{ 0%{opacity:0; transform:translateY(14px);} 100%{opacity:1; transform:translateY(0);} }
 
-  /* lamp on-sequence: two irregular flickers, then fully on and stable */
-  @keyframes bulb-flicker{
-    0%{opacity:0;} 5%{opacity:.5;} 8%{opacity:.08;} 9%{opacity:.05;}
-    27%{opacity:.06;} 34%{opacity:.75;} 38%{opacity:.1;}
-    44%{opacity:.55;} 55%{opacity:.8;} 68%{opacity:.92;} 100%{opacity:1;}
+  /* ---------- illustrated low-poly scene ---------- */
+  .landscape-wrap{ position:relative; z-index:2; margin-top:-18px; }
+  .scene-svg{ display:block; width:100%; height:auto; }
+  .tree-group{ transform-box: fill-box; transform-origin:50% 100%; animation: tree-sway 5s ease-in-out infinite; }
+  .tree-group:nth-child(odd){ animation-duration:6.2s; animation-delay:-1.4s; }
+  .plant-leaves{ transform-box: fill-box; transform-origin:50% 100%; animation: tree-sway 4.6s ease-in-out infinite; }
+  .pin-marker{ transform-box: fill-box; transform-origin:50% 100%; animation: pin-bob 2.8s ease-in-out infinite; }
+
+  @keyframes tree-sway{
+    0%,100%{ transform: rotate(-1.1deg); }
+    50%{ transform: rotate(1.1deg); }
   }
-  @keyframes glow-flicker{
-    0%{opacity:0; transform:scale(.22);} 5%{opacity:.4; transform:scale(.3);}
-    8%{opacity:.05; transform:scale(.26);} 9%{opacity:.03; transform:scale(.26);}
-    27%{opacity:.04; transform:scale(.28);} 34%{opacity:.55; transform:scale(.5);}
-    38%{opacity:.08; transform:scale(.4);}
-    44%{opacity:.42; transform:scale(.58);} 55%{opacity:.68; transform:scale(.76);}
-    68%{opacity:.88; transform:scale(.92);} 100%{opacity:1; transform:scale(1);}
+  @keyframes pin-bob{
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(-3px); }
   }
-  @keyframes ember-drift{
-    0%{ opacity:0; transform: translate(0,0) scale(1); }
-    15%{ opacity:.9; }
-    100%{ opacity:0; transform: translate(var(--ex,6px), 60px) scale(.4); }
+  @keyframes card-float{
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(-7px); }
   }
-  @keyframes dust-reveal{ 0%{opacity:0;} 100%{opacity:1;} }
-  @keyframes dust-drift{
-    0%{ transform: translate(0,0); opacity:0; }
-    10%{ opacity:.5; }
-    90%{ opacity:.35; }
-    100%{ transform: translate(14px,-140px); opacity:0; }
-  }
+  @keyframes content-in{ 0%{opacity:0; transform:translateY(16px);} 100%{opacity:1; transform:translateY(0);} }
 
   @media (prefers-reduced-motion: reduce){
-    .lamp-bulb{ animation:none; opacity:1; }
-    .lamp-glow{ animation:none; opacity:1; transform:scale(1); }
-    .lamp-embers{ display:none; }
-    .dust-field{ animation:none; opacity:1; }
-    .dust{ animation:none; }
-    .hero-text{ animation:none; opacity:1; transform:none; }
-    .mascot-figure{ animation:none; opacity:1; transform: rotate(-4deg); }
-    .mascot-wave-arm{ animation:none; }
-    .kicker{ animation:none; }
+    .hero-text, .hero-card{ animation:none; opacity:1; transform:none; }
+    .hero-card-inner{ animation:none; }
+    .tree-group, .plant-leaves, .pin-marker{ animation:none; }
   }
 
   /* ---------- Card Catalog Confetti ---------- */
@@ -259,27 +272,16 @@
     100%{ transform: translate(-50%,-50%) translate(var(--dx), var(--dy)) rotate(var(--rot)); opacity:0; }
   }
 
-  /* ---------- scroll: bridge into a cooler tone ---------- */
-  .after-hero{
-    height: 46vh; background: var(--wood-deep);
-    transition: background-color .8s ease;
-  }
-  .after-hero.tone-cool{ background: var(--dusk-cool); }
+  .after-hero{ height: 12vh; background: var(--cream); }
 
   /* ---------- mobile ---------- */
-  @media (max-width: 860px){
-    .site-nav{ padding-top: 18px; padding-bottom: 18px; }
-    .hero{ min-height: 700px; }
-    .hero-inner{
-      flex-direction:column; align-items:center; justify-content:flex-end;
-      text-align:center; padding-top: 32px; padding-bottom: 40px; height:auto;
-    }
-    .hero-text{ max-width:100%; order:2; }
+  @media (max-width: 900px){
+    .hero-top{ flex-direction:column; align-items:center; text-align:center; padding-top:12px; }
+    .hero-text{ max-width:100%; padding-top:8px; align-items:center; }
+    .cta-wrap{ align-items:center; }
     .sub{ margin-left:auto; margin-right:auto; }
-    .lamp-rig{ right:auto; left:50%; transform:translateX(-50%); }
-    .lamp-glow{ right:auto; left:50%; top:-30%; width:1000px; height:1000px; transform-origin:50% 30%; margin-left:-500px; }
-    .mascot-focal{ order:1; flex:0 0 auto; margin-bottom:8px; transform:none; }
-    .mascot-figure{ max-width:320px; }
+    .hero-card{ max-width:400px; margin-top:8px; }
+    .landscape-wrap{ margin-top:20px; }
   }
 </style>
 </head>
@@ -287,26 +289,7 @@
 
 <svg class="visually-hidden" aria-hidden="true">
   <defs>
-    <symbol id="mascot-idle" viewBox="0 0 240 260">
-      <polygon points="60,40 150,40 172,62 172,188 150,210 60,210 38,188 38,62" fill="var(--cover)"/>
-      <polygon points="38,62 172,62 172,125 38,125" fill="var(--cover-light)" opacity=".55"/>
-      <polygon points="38,150 172,150 172,188 150,210 60,210 38,188" fill="var(--cover-dark)" opacity=".35"/>
-      <polygon points="38,62 38,188 18,175 18,75" fill="var(--spine)"/>
-      <polygon points="38,62 172,62 192,45 58,45" fill="var(--pages)"/>
-      <polygon points="172,62 192,45 192,172 172,188" fill="var(--pages-shadow)"/>
-      <polygon points="100,45 116,45 120,100 108,84 96,100" fill="var(--ribbon)"/>
-      <polygon points="38,130 18,140 22,162 40,155" fill="var(--cover-dark)"/>
-      <polygon class="mascot-wave-arm" points="172,130 192,140 188,162 170,155" fill="var(--cover-dark)"/>
-      <polygon points="26.4,150.5 17.6,190.3 14.4,189.7 21.6,149.5" fill="var(--glass-rim-dark)"/>
-      <circle cx="13.5" cy="203" r="13" fill="var(--glass-lens)" stroke="var(--glass-rim)" stroke-width="4"/>
-      <polygon points="66,210 90,210 84,236 70,236" fill="var(--cover-dark)"/>
-      <polygon points="120,210 144,210 140,236 126,236" fill="var(--cover-dark)"/>
-      <ellipse cx="68" cy="132" rx="9" ry="5" fill="var(--ribbon)" opacity=".35"/>
-      <ellipse cx="144" cy="132" rx="9" ry="5" fill="var(--ribbon)" opacity=".35"/>
-      <circle cx="88" cy="118" r="6.5" fill="var(--face)"/>
-      <circle cx="124" cy="118" r="6.5" fill="var(--face)"/>
-      <path d="M80,142 Q106,158 132,142" stroke="var(--face)" stroke-width="6" fill="none" stroke-linecap="round"/>
-    </symbol>
+    <!-- brand mascot -->
     <symbol id="mascot-tiny" viewBox="0 0 60 60">
       <polygon points="14,10 40,10 48,18 48,46 40,54 14,54 8,46 8,18" fill="var(--cover)"/>
       <polygon points="8,18 40,18 46,12 16,12" fill="var(--pages)"/>
@@ -314,6 +297,111 @@
       <circle cx="21" cy="30" r="2.3" fill="var(--face)"/>
       <circle cx="33" cy="30" r="2.3" fill="var(--face)"/>
       <path d="M19,37 Q27,43 35,37" stroke="var(--face)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    </symbol>
+
+    <!-- simple line icons -->
+    <symbol id="icon-home" viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-list" viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="icon-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M15 9l-2 6-4 2 2-6z" fill="currentColor"/></symbol>
+    <symbol id="icon-bookmark" viewBox="0 0 24 24"><path d="M7 4h10v16l-5-4-5 4Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-user" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M5 20c1.2-3.6 4-5.4 7-5.4s5.8 1.8 7 5.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="icon-avatar" viewBox="0 0 24 24"><circle cx="12" cy="9" r="4" fill="#fff"/><path d="M4 21c1.4-4.4 4.6-6.6 8-6.6s6.6 2.2 8 6.6" fill="#fff"/></symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+
+    <!-- decorative sketches -->
+    <symbol id="deco-dna" viewBox="0 0 60 220">
+      <path d="M10 5 C40 35,10 65,40 95 C10 125,40 155,10 185 C40 205,10 220,40 220" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M50 5 C20 35,50 65,20 95 C50 125,20 155,50 185 C20 205,50 220,20 220" fill="none" stroke="currentColor" stroke-width="2"/>
+      <g stroke="currentColor" stroke-width="1.6">
+        <line x1="14" y1="18" x2="46" y2="18"/><line x1="18" y1="46" x2="38" y2="46"/>
+        <line x1="14" y1="80" x2="46" y2="80"/><line x1="18" y1="110" x2="38" y2="110"/>
+        <line x1="14" y1="142" x2="46" y2="142"/><line x1="18" y1="172" x2="38" y2="172"/>
+        <line x1="14" y1="200" x2="46" y2="200"/>
+      </g>
+    </symbol>
+    <symbol id="deco-hex" viewBox="0 0 140 110">
+      <g fill="none" stroke="currentColor" stroke-width="1.6">
+        <line x1="20" y1="55" x2="55" y2="30"/><line x1="55" y1="30" x2="95" y2="35"/>
+        <line x1="95" y1="35" x2="120" y2="65"/><line x1="55" y1="30" x2="60" y2="75"/>
+        <line x1="60" y1="75" x2="20" y2="55"/><line x1="60" y1="75" x2="95" y2="90"/>
+      </g>
+      <g fill="currentColor">
+        <circle cx="20" cy="55" r="4"/><circle cx="55" cy="30" r="4"/><circle cx="95" cy="35" r="4"/>
+        <circle cx="120" cy="65" r="4"/><circle cx="60" cy="75" r="4"/><circle cx="95" cy="90" r="4"/>
+      </g>
+    </symbol>
+    <symbol id="deco-graph" viewBox="0 0 110 76">
+      <path d="M4 4v68h104" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <polyline points="10,55 30,40 46,50 64,20 82,32 100,10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <g fill="currentColor">
+        <circle cx="10" cy="55" r="2.6"/><circle cx="30" cy="40" r="2.6"/><circle cx="46" cy="50" r="2.6"/>
+        <circle cx="64" cy="20" r="2.6"/><circle cx="82" cy="32" r="2.6"/><circle cx="100" cy="10" r="2.6"/>
+      </g>
+    </symbol>
+
+    <!-- scene pieces -->
+    <symbol id="scene-pin" viewBox="0 0 24 32">
+      <path d="M12 1c6 0 10 4.6 10 10.2C22 18.6 12 31 12 31S2 18.6 2 11.2C2 5.6 6 1 12 1Z" fill="var(--pin-fill,#fff)" stroke="var(--pin-stroke,#A94F1E)" stroke-width="1.8"/>
+      <circle cx="12" cy="11.5" r="4" fill="var(--pin-stroke,#A94F1E)"/>
+    </symbol>
+    <symbol id="scene-trees" viewBox="0 0 44 62">
+      <rect x="20" y="48" width="4" height="12" fill="#5B4327"/>
+      <polygon points="22,4 34,30 10,30" fill="var(--pine)"/>
+      <polygon points="22,16 36,40 8,40" fill="var(--sage-front)"/>
+      <polygon points="22,28 38,52 6,52" fill="var(--sage-mid)"/>
+    </symbol>
+    <symbol id="prop-microscope" viewBox="0 0 140 180">
+      <ellipse cx="70" cy="168" rx="46" ry="8" fill="#000" opacity=".08"/>
+      <polygon points="34,160 106,160 96,146 44,146" fill="#B9AF98"/>
+      <rect x="60" y="118" width="20" height="30" rx="3" fill="#CFC6AE"/>
+      <path d="M70 40 C40 40 32 78 44 118 L86 118 C94 84 100 40 70 40Z" fill="#DED4BA"/>
+      <path d="M70 40 C50 40 42 70 48 100 L70 100 Z" fill="#EEE6D2" opacity=".7"/>
+      <rect x="30" y="100" width="80" height="14" rx="4" fill="#B9AF98"/>
+      <circle cx="70" cy="107" r="5" fill="#3B2A1E"/>
+      <rect x="60" y="10" width="20" height="34" rx="6" fill="#8C4A22"/>
+      <rect x="64" y="4" width="12" height="12" rx="3" fill="#3B2A1E"/>
+      <rect x="76" y="60" width="34" height="8" rx="4" fill="#8C4A22"/>
+      <circle cx="112" cy="64" r="7" fill="#3B2A1E"/>
+    </symbol>
+    <symbol id="prop-books" viewBox="0 0 210 150">
+      <ellipse cx="105" cy="144" rx="95" ry="8" fill="#000" opacity=".08"/>
+      <g font-family="Segoe UI, sans-serif" font-size="13" font-weight="700" fill="#F6EFDD">
+        <rect x="10" y="108" width="190" height="30" rx="5" fill="#4C6B3E"/>
+        <text x="24" y="127">Biology</text>
+        <rect x="16" y="80" width="178" height="30" rx="5" fill="#2A3A5C"/>
+        <text x="30" y="99">Chemistry</text>
+        <rect x="10" y="52" width="190" height="30" rx="5" fill="#7A2E2E"/>
+        <text x="24" y="71">Neuroscience</text>
+        <rect x="20" y="24" width="170" height="30" rx="5" fill="#8C5A24"/>
+        <text x="34" y="43">Data Science</text>
+      </g>
+    </symbol>
+    <symbol id="prop-flasks" viewBox="0 0 180 200">
+      <ellipse cx="90" cy="192" rx="80" ry="8" fill="#000" opacity=".08"/>
+      <rect x="10" y="30" width="6" height="150" fill="#8C7A56"/>
+      <rect x="128" y="30" width="6" height="150" fill="#8C7A56"/>
+      <rect x="10" y="30" width="124" height="6" fill="#8C7A56"/>
+      <g>
+        <rect x="24" y="70" width="16" height="90" rx="7" fill="#EDE6D3" stroke="#C9BE9E" stroke-width="1.5"/>
+        <rect x="24" y="118" width="16" height="42" rx="6" fill="var(--cover)"/>
+        <rect x="58" y="55" width="16" height="105" rx="7" fill="#EDE6D3" stroke="#C9BE9E" stroke-width="1.5"/>
+        <rect x="58" y="100" width="16" height="60" rx="6" fill="var(--sage-front)"/>
+        <rect x="92" y="65" width="16" height="95" rx="7" fill="#EDE6D3" stroke="#C9BE9E" stroke-width="1.5"/>
+        <rect x="92" y="112" width="16" height="48" rx="6" fill="#3F6B7A"/>
+      </g>
+      <path d="M150 40 h14 l4 22 16 60 a10 10 0 0 1-10 14 h-30 a10 10 0 0 1-10-14 l16-60Z" fill="#EDE6D3" stroke="#C9BE9E" stroke-width="1.5"/>
+      <path d="M143 96 a10 10 0 0 0-2 8 l-2 8 a10 10 0 0 0 10 14 h30 a10 10 0 0 0 10-14 l-2-8a10 10 0 0 0-2-8Z" fill="#3F6B7A" opacity=".85"/>
+    </symbol>
+    <symbol id="prop-plant" viewBox="0 0 130 160">
+      <ellipse cx="65" cy="152" rx="55" ry="8" fill="#000" opacity=".08"/>
+      <polygon points="30,110 100,110 90,150 40,150" fill="#B9622F"/>
+      <polygon points="30,110 100,110 95,122 35,122" fill="#D97C3F"/>
+      <polygon points="40,150 90,150 86,158 44,158" fill="#8C4A22"/>
+      <g class="plant-leaves">
+        <path d="M65 112 C40 90 30 55 45 20 C60 55 62 90 65 112Z" fill="var(--pine)"/>
+        <path d="M65 112 C90 88 100 55 88 18 C70 52 66 88 65 112Z" fill="var(--sage-front)"/>
+        <path d="M65 112 C55 80 55 45 65 15 C78 45 76 80 65 112Z" fill="var(--sage-mid)"/>
+      </g>
     </symbol>
   </defs>
 </svg>
@@ -327,82 +415,155 @@
 </div>
 
 <div class="hero">
-  <div class="library-bg" aria-hidden="true"></div>
+  <div class="hero-sketch sketch-dna" aria-hidden="true"><svg viewBox="0 0 60 220"><use href="#deco-dna"/></svg></div>
+  <div class="hero-sketch sketch-hex-a" aria-hidden="true"><svg viewBox="0 0 140 110"><use href="#deco-hex"/></svg></div>
+  <div class="hero-sketch sketch-hex-b" aria-hidden="true"><svg viewBox="0 0 140 110"><use href="#deco-hex"/></svg></div>
+  <div class="hero-sketch sketch-graph" aria-hidden="true"><svg viewBox="0 0 110 76"><use href="#deco-graph"/></svg></div>
+  <p class="hero-sketch sketch-note sketch-note-a" aria-hidden="true">The best research begins with the right question.</p>
+  <p class="hero-sketch sketch-note sketch-note-b" aria-hidden="true">Curiosity leads to discovery.</p>
+  <p class="hero-sketch sketch-note sketch-note-c" aria-hidden="true">Impact → Publication → Prestige</p>
+  <p class="hero-sketch sketch-formula formula-a" aria-hidden="true">C&#8330;H&#8321;&#8320;N&#8322;O&#8322;</p>
+  <p class="hero-sketch sketch-formula formula-b" aria-hidden="true">E = mc&sup2;</p>
 
-  <div class="lamp-rig">
-    <div class="lamp-cord"></div>
-    <svg class="lamp-fixture" viewBox="0 0 140 100">
-      <defs>
-        <linearGradient id="shadeGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#F3D191"/>
-          <stop offset="55%" stop-color="var(--gold)"/>
-          <stop offset="100%" stop-color="var(--cover-dark)"/>
-        </linearGradient>
-        <radialGradient id="shadeInner" cx="50%" cy="10%" r="75%">
-          <stop offset="0%" stop-color="#3A2A12" stop-opacity=".85"/>
-          <stop offset="100%" stop-color="#1B120C" stop-opacity=".95"/>
-        </radialGradient>
-      </defs>
-      <rect x="60" y="0" width="20" height="8" rx="3" fill="var(--wood-mid)"/>
-      <polygon points="52,8 88,8 132,84 8,84" fill="url(#shadeGrad)"/>
-      <polygon points="52,8 88,8 82,20 58,20" fill="#F8E2B2" opacity=".65"/>
-      <polygon points="88,8 132,84 106,84 76,16" fill="#000000" opacity=".14"/>
-      <ellipse cx="70" cy="84" rx="62" ry="7" fill="var(--wood-mid)" opacity=".55"/>
-      <ellipse cx="70" cy="80" rx="50" ry="9" fill="url(#shadeInner)"/>
-    </svg>
-    <div class="lamp-bulb"></div>
-    <div class="lamp-embers" aria-hidden="true">
-      <span class="ember" style="left:-14px; top:0; --ex:-10px; animation-delay:.1s;"></span>
-      <span class="ember" style="left:6px; top:4px; --ex:14px; animation-delay:.4s;"></span>
-      <span class="ember" style="left:-4px; top:-6px; --ex:2px; animation-delay:.65s;"></span>
-      <span class="ember" style="left:12px; top:-2px; --ex:20px; animation-delay:.9s;"></span>
-      <span class="ember" style="left:-16px; top:6px; --ex:-18px; animation-delay:1.15s;"></span>
-      <span class="ember" style="left:2px; top:2px; --ex:-6px; animation-delay:1.4s;"></span>
-    </div>
-  </div>
-  <div class="lamp-glow" aria-hidden="true"></div>
-
-  <div class="dust-field" aria-hidden="true">
-    <span class="dust" style="left:52%;top:18%;animation-delay:-2s;"></span>
-    <span class="dust" style="left:61%;top:34%;animation-delay:-6s;"></span>
-    <span class="dust" style="left:70%;top:12%;animation-delay:-9s;"></span>
-    <span class="dust" style="left:66%;top:52%;animation-delay:-3s;"></span>
-    <span class="dust" style="left:78%;top:40%;animation-delay:-11s;"></span>
-    <span class="dust" style="left:58%;top:66%;animation-delay:-1s;"></span>
-    <span class="dust" style="left:85%;top:24%;animation-delay:-7s;"></span>
-    <span class="dust" style="left:73%;top:70%;animation-delay:-4.5s;"></span>
-    <span class="dust" style="left:48%;top:44%;animation-delay:-13s;"></span>
-    <span class="dust" style="left:90%;top:58%;animation-delay:-8.5s;"></span>
-  </div>
-
-  <div class="hero-inner container">
+  <div class="hero-top container">
     <div class="hero-text">
       <p class="kicker">Waitlist now open</p>
       <h1>Researchly</h1>
       <p class="tagline">Change the world.</p>
-      <p class="sub">A short guided interview turns "I don't know where to start" into a personalized map of research programs worth applying to.</p>
+      <p class="sub">A short guided interview turns &ldquo;I don&rsquo;t know where to start&rdquo; into a personalized map of research programs worth applying to.</p>
       <div class="cta-wrap">
         <button class="cta-btn" type="button" id="heroCta">Join the waitlist →</button>
       </div>
     </div>
 
-    <div class="mascot-focal">
-      <div class="mascot-figure">
-        <div class="mascot-highlight"></div>
-        <svg class="mascot-instance" viewBox="0 0 240 260"><use href="#mascot-idle"/></svg>
+    <div class="hero-card" aria-hidden="true">
+      <div class="hero-card-inner" id="mockCard">
+        <div class="card-sheen"></div>
+        <div class="card-head">
+          <div class="card-head-left">
+            <svg viewBox="0 0 60 60"><use href="#mascot-tiny"/></svg>
+            <div>
+              <div class="card-title">Your Research Path</div>
+              <div class="card-sub">Personalized matches based on your goals and interests.</div>
+            </div>
+          </div>
+          <div class="card-avatar"><svg viewBox="0 0 24 24"><use href="#icon-avatar"/></svg></div>
+        </div>
+        <div class="card-body">
+          <div class="card-rail">
+            <span class="is-active"><svg viewBox="0 0 24 24"><use href="#icon-home"/></svg></span>
+            <span><svg viewBox="0 0 24 24"><use href="#icon-list"/></svg></span>
+            <span><svg viewBox="0 0 24 24"><use href="#icon-compass"/></svg></span>
+            <span><svg viewBox="0 0 24 24"><use href="#icon-bookmark"/></svg></span>
+            <span><svg viewBox="0 0 24 24"><use href="#icon-user"/></svg></span>
+          </div>
+          <div class="card-main">
+            <div class="card-label">Top program matches</div>
+
+            <div class="match-row">
+              <div class="u-badge u-badge--a">S</div>
+              <div class="match-info">
+                <div class="match-name">Stanford Summer Research Program</div>
+                <div class="match-uni">Stanford University</div>
+                <div class="match-tags"><span class="tag">Summer</span><span class="tag">In-person</span><span class="tag tag-green">High Match</span></div>
+              </div>
+              <div class="match-score"><div class="pct">96%</div><div class="lbl">Match</div></div>
+            </div>
+
+            <div class="match-row">
+              <div class="u-badge u-badge--b">MIT</div>
+              <div class="match-info">
+                <div class="match-name">MIT UROP</div>
+                <div class="match-uni">Massachusetts Institute of Technology</div>
+                <div class="match-tags"><span class="tag">Year-round</span><span class="tag">In-person</span><span class="tag tag-green">High Match</span></div>
+              </div>
+              <div class="match-score"><div class="pct">92%</div><div class="lbl">Match</div></div>
+            </div>
+
+            <div class="match-row">
+              <div class="u-badge u-badge--c">H</div>
+              <div class="match-info">
+                <div class="match-name">Harvard SURF</div>
+                <div class="match-uni">Harvard University</div>
+                <div class="match-tags"><span class="tag">Summer</span><span class="tag">In-person</span><span class="tag tag-amber">Good Match</span></div>
+              </div>
+              <div class="match-score"><div class="pct">89%</div><div class="lbl">Match</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-foot">View full roadmap →</div>
       </div>
     </div>
   </div>
+
+  <div class="landscape-wrap">
+    <svg class="scene-svg" viewBox="0 0 1536 560" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <!-- back mountains -->
+      <polygon points="0,560 0,320 90,260 180,300 260,230 340,280 430,190 520,260 610,210 700,150 780,200 860,160 950,220 1040,180 1130,240 1220,190 1310,250 1400,210 1480,260 1536,230 1536,560" fill="var(--sage-back)"/>
+
+      <!-- campus hill -->
+      <ellipse cx="810" cy="255" rx="230" ry="115" fill="var(--sage-mid)"/>
+      <rect x="742" y="152" width="40" height="55" fill="#EDE0C2"/>
+      <polygon points="736,152 788,152 762,120" fill="var(--cover-dark)"/>
+      <rect x="792" y="122" width="55" height="88" fill="#EDE0C2"/>
+      <polygon points="785,122 852,122 818,80" fill="var(--cover-dark)"/>
+      <rect x="812" y="60" width="10" height="24" fill="#EDE0C2"/>
+      <rect x="856" y="158" width="38" height="52" fill="#EDE0C2"/>
+      <polygon points="850,158 898,158 874,124" fill="var(--cover-dark)"/>
+
+      <!-- mid mountains -->
+      <polygon points="0,560 0,380 70,330 150,360 230,300 310,350 400,290 480,340 570,270 650,330 730,280 820,340 900,290 990,350 1080,300 1170,360 1260,310 1350,350 1440,300 1536,340 1536,560" fill="var(--sage-mid)"/>
+
+      <!-- far trees -->
+      <use class="tree-group" href="#scene-trees" x="130" y="330" width="34" height="46"/>
+      <use class="tree-group" href="#scene-trees" x="300" y="320" width="30" height="42"/>
+      <use class="tree-group" href="#scene-trees" x="1230" y="320" width="32" height="44"/>
+      <use class="tree-group" href="#scene-trees" x="1400" y="330" width="30" height="42"/>
+
+      <!-- front flanking hills -->
+      <polygon points="0,560 0,420 60,380 140,400 220,360 300,400 380,360 460,410 520,460 520,560" fill="var(--sage-front)"/>
+      <polygon points="1020,560 1020,460 1090,400 1160,420 1240,370 1320,410 1400,370 1480,400 1536,420 1536,560" fill="var(--sage-front)"/>
+
+      <!-- near trees along the valley -->
+      <use class="tree-group" href="#scene-trees" x="470" y="368" width="44" height="62"/>
+      <use class="tree-group" href="#scene-trees" x="540" y="380" width="38" height="54"/>
+      <use class="tree-group" href="#scene-trees" x="980" y="378" width="40" height="56"/>
+      <use class="tree-group" href="#scene-trees" x="1050" y="368" width="44" height="62"/>
+
+      <!-- road -->
+      <path d="M660,560 C640,480 700,430 760,380 C800,350 770,300 800,260 C815,235 800,210 812,185 L850,185 C838,210 852,235 838,260 C868,300 838,350 878,380 C940,430 980,480 960,560 Z" fill="var(--road)"/>
+      <path d="M745,545 C735,470 780,420 800,380 C815,350 812,300 826,255 C832,235 828,215 831,198" fill="none" stroke="var(--road-line)" stroke-width="4" stroke-dasharray="10 10" stroke-linecap="round"/>
+
+      <use class="pin-marker" href="#scene-pin" x="822" y="178" width="14" height="18" style="--pin-fill:#fff; --pin-stroke:var(--cover-dark); animation-delay:-.3s;"/>
+      <use class="pin-marker" href="#scene-pin" x="838" y="238" width="16" height="21" style="--pin-fill:#fff; --pin-stroke:var(--cover-dark); animation-delay:-1.1s;"/>
+      <use class="pin-marker" href="#scene-pin" x="782" y="300" width="18" height="24" style="--pin-fill:#fff; --pin-stroke:var(--cover-dark); animation-delay:-.7s;"/>
+      <use class="pin-marker" href="#scene-pin" x="888" y="378" width="20" height="26" style="--pin-fill:#fff; --pin-stroke:var(--cover-dark); animation-delay:-1.9s;"/>
+      <use class="pin-marker" href="#scene-pin" x="742" y="452" width="28" height="36" style="--pin-fill:var(--cover); --pin-stroke:var(--cover-dark); animation-delay:0s;"/>
+
+      <!-- foreground plaza -->
+      <rect x="0" y="460" width="1536" height="100" fill="var(--stone)"/>
+      <g stroke="#00000012" stroke-width="1">
+        <line x1="0" y1="490" x2="1536" y2="490"/>
+        <line x1="0" y1="520" x2="1536" y2="520"/>
+      </g>
+
+      <!-- props -->
+      <use href="#prop-books" x="30" y="378" width="220" height="157"/>
+      <use href="#prop-microscope" x="260" y="336" width="150" height="193"/>
+      <use href="#prop-flasks" x="1170" y="322" width="185" height="206"/>
+      <use href="#prop-plant" x="1385" y="342" width="140" height="172"/>
+    </svg>
+  </div>
 </div>
 
-<section class="after-hero" id="afterHero" aria-hidden="true"></section>
+<section class="after-hero" aria-hidden="true"></section>
 
 <script>
   (function(){
     var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Card Catalog Confetti: a burst of small index-card particles on CTA hover/click.
-    var confettiColors = ['var(--cover)', 'var(--gold)', 'var(--lamp-warm)', 'var(--ribbon)'];
+    var confettiColors = ['var(--cover)', 'var(--gold)', 'var(--match-green)', 'var(--ribbon)'];
     function burstConfetti(originEl, count){
       if (reduceMotion || !originEl) return;
       var rect = originEl.getBoundingClientRect();
@@ -437,15 +598,30 @@
       btn.addEventListener('click', function(){ burstConfetti(btn, 16); });
     });
 
-    // Scroll past the hero -> bridge into a cooler tone.
-    var afterHero = document.getElementById('afterHero');
-    if (afterHero && 'IntersectionObserver' in window){
-      var io = new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){
-          afterHero.classList.toggle('tone-cool', entry.isIntersecting);
+    // Mockup card: a cursor-tracking tilt + sheen so it reads as a live surface,
+    // not a flat screenshot. No clickable controls live inside it.
+    var card = document.getElementById('mockCard');
+    if (card && !reduceMotion){
+      var raf = null;
+      card.addEventListener('mousemove', function(e){
+        var rect = card.getBoundingClientRect();
+        var px = (e.clientX - rect.left) / rect.width;
+        var py = (e.clientY - rect.top) / rect.height;
+        var rotY = (px - 0.5) * 12;
+        var rotX = (0.5 - py) * 12;
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(function(){
+          card.classList.add('is-tilting');
+          card.style.transform = 'rotateX(' + rotX.toFixed(2) + 'deg) rotateY(' + rotY.toFixed(2) + 'deg) scale(1.015)';
         });
-      }, { threshold: 0.2 });
-      io.observe(afterHero);
+        var sheen = card.querySelector('.card-sheen');
+        if (sheen) sheen.style.background = 'radial-gradient(circle at ' + (px*100) + '% ' + (py*100) + '%, rgba(255,255,255,.6), transparent 60%)';
+      });
+      card.addEventListener('mouseleave', function(){
+        if (raf) cancelAnimationFrame(raf);
+        card.classList.remove('is-tilting');
+        card.style.transform = '';
+      });
     }
   })();
 </script>
