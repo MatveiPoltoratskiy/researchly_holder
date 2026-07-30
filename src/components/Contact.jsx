@@ -65,92 +65,89 @@ export default function Contact() {
       <div className="contact-head">
         <p className="kicker">Get in touch</p>
         <h1>Questions? We're here.</h1>
-        <p className="sub contact-sub">Reach out anytime — we read every message.</p>
+        {status === 'success' ? (
+          <p className="sub contact-sub contact-sub-success">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-check" /></svg>
+            Message sent! We'll get back to you soon.
+          </p>
+        ) : (
+          <p className="sub contact-sub">Send us your message.</p>
+        )}
       </div>
 
       <div className="contact-card">
-        {status === 'success' ? (
-          <div className="contact-success">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-check" /></svg>
-            <div>
-              <p className="contact-success-title">Message sent!</p>
-              <p className="contact-success-sub">Thanks for reaching out — we'll get back to you soon.</p>
-            </div>
-          </div>
-        ) : (
-          <form className="contact-form" onSubmit={handleSubmit} noValidate>
-            <div className="contact-grid">
-              <div className="contact-field">
-                <label htmlFor="contact-name">Name</label>
-                <input
-                  id="contact-name"
-                  className="contact-input"
-                  type="text"
-                  autoComplete="name"
-                  placeholder="Your name"
-                  value={form.name}
-                  onChange={updateField('name')}
-                  disabled={isSubmitting}
-                  required
-                />
-              </div>
-              <div className="contact-field">
-                <label htmlFor="contact-email">Email</label>
-                <input
-                  id="contact-email"
-                  className="contact-input"
-                  type="email"
-                  inputMode="email"
-                  autoComplete="email"
-                  placeholder="you@email.com"
-                  value={form.email}
-                  onChange={updateField('email')}
-                  disabled={isSubmitting}
-                  required
-                />
-              </div>
-            </div>
-
+        <form className="contact-form" onSubmit={handleSubmit} noValidate>
+          <div className="contact-grid">
             <div className="contact-field">
-              <label htmlFor="contact-subject">Subject</label>
+              <label htmlFor="contact-name">Name</label>
               <input
-                id="contact-subject"
+                id="contact-name"
                 className="contact-input"
                 type="text"
-                placeholder="What's this about?"
-                value={form.subject}
-                onChange={updateField('subject')}
+                autoComplete="name"
+                placeholder="Your name"
+                value={form.name}
+                onChange={updateField('name')}
                 disabled={isSubmitting}
                 required
               />
             </div>
-
             <div className="contact-field">
-              <label htmlFor="contact-message">Your question</label>
-              <textarea
-                id="contact-message"
-                className="contact-input contact-textarea"
-                placeholder="Ask us anything or share your thoughts…"
-                rows={5}
-                value={form.message}
-                onChange={updateField('message')}
+              <label htmlFor="contact-email">Email</label>
+              <input
+                id="contact-email"
+                className="contact-input"
+                type="email"
+                inputMode="email"
+                autoComplete="email"
+                placeholder="you@email.com"
+                value={form.email}
+                onChange={updateField('email')}
                 disabled={isSubmitting}
                 required
               />
             </div>
+          </div>
 
-            <div className="contact-foot">
-              <button className="waitlist-submit contact-submit" type="submit" disabled={isSubmitting}>
-                {isSubmitting ? 'Sending…' : 'Send message'}
-              </button>
-              {status === 'error' && (
-                <p className="waitlist-status is-error" role="alert" aria-live="polite">
-                  {errorMsg}
-                </p>
-              )}
-            </div>
-          </form>
-        )}
+          <div className="contact-field">
+            <label htmlFor="contact-subject">Subject</label>
+            <input
+              id="contact-subject"
+              className="contact-input"
+              type="text"
+              placeholder="What's this about?"
+              value={form.subject}
+              onChange={updateField('subject')}
+              disabled={isSubmitting}
+              required
+            />
+          </div>
+
+          <div className="contact-field">
+            <label htmlFor="contact-message">Your question</label>
+            <textarea
+              id="contact-message"
+              className="contact-input contact-textarea"
+              placeholder="Ask us anything or share your thoughts…"
+              rows={5}
+              value={form.message}
+              onChange={updateField('message')}
+              disabled={isSubmitting}
+              required
+            />
+          </div>
+
+          <div className="contact-foot">
+            <button className="waitlist-submit contact-submit" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? 'Sending…' : 'Send message'}
+            </button>
+            {status === 'error' && (
+              <p className="waitlist-status is-error" role="alert" aria-live="polite">
+                {errorMsg}
+              </p>
+            )}
+          </div>
+        </form>
       </div>
     </section>
   )
