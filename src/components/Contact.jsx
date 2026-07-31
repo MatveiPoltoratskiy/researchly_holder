@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { burstConfetti } from '../lib/confetti'
+import SymbolField from './SymbolField'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -14,7 +15,7 @@ export default function Contact() {
 
   useEffect(() => {
     if (status === 'success' && badgeRef.current) {
-      burstConfetti(badgeRef.current, 22)
+      burstConfetti(badgeRef.current, 34)
     }
   }, [status])
 
@@ -77,18 +78,24 @@ export default function Contact() {
         <p className="sub contact-sub">Send us your message.</p>
       </div>
 
+      <div className="contact-symbol-band" aria-hidden="true">
+        <SymbolField rows={2} cols={14} />
+      </div>
+
       {status === 'success' ? (
         <div className="contact-card contact-card-success" role="status" aria-live="polite">
           <div className="contact-success">
             <div className="contact-success-badge-wrap" ref={badgeRef}>
               <svg className="contact-success-badge" viewBox="0 0 80 80" aria-hidden="true">
-                <circle className="contact-success-ring" cx="40" cy="40" r="36" fill="none" stroke="currentColor" strokeWidth="3" />
-                <path className="contact-success-check" d="M24 41l11 11 21-23" fill="none" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
+                <circle className="contact-success-ring" cx="40" cy="40" r="35" fill="none" stroke="currentColor" strokeWidth="5" />
+                <path className="contact-success-check" d="M24 41l11 11 21-23" fill="none" stroke="currentColor" strokeWidth="6.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               <span className="contact-spark contact-spark-1" aria-hidden="true" />
               <span className="contact-spark contact-spark-2" aria-hidden="true" />
               <span className="contact-spark contact-spark-3" aria-hidden="true" />
               <span className="contact-spark contact-spark-4" aria-hidden="true" />
+              <span className="contact-spark contact-spark-5" aria-hidden="true" />
+              <span className="contact-spark contact-spark-6" aria-hidden="true" />
             </div>
             <h2 className="contact-success-title">Message sent!</h2>
             <p className="contact-success-sub">We'll get back to you soon.</p>
