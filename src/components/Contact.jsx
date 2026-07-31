@@ -80,7 +80,7 @@ export default function Contact() {
 
       <div className="contact-symbol-band" aria-hidden="true">
         <SymbolField
-          rows={4} cols={22}
+          rows={5} cols={26}
           opacityRange={[0.38, 0.5]}
           fontSizeRange={[20, 30]}
           colors={['var(--symbol-tan)', 'var(--cover-dark)', 'var(--ribbon)', 'var(--navy)', '#5C3A1E', 'var(--gold)']}
