@@ -90,7 +90,6 @@ svg{ display:block; }
   max-width:150px;
 }
 .sketch-note-b{ left:2%; top:41%; transform: rotate(-3deg); }
-.sketch-note-c{ right:2%; top:52%; text-align:right; transform: rotate(2deg); }
 .sketch-formula{
   font-family: Georgia, serif; font-style:italic; font-size:14px; color: var(--navy-faint);
 }
