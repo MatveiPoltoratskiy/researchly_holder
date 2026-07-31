@@ -396,46 +396,6 @@ h1{
   .review-card{ width:270px; }
 }
 
-/* ---------- how it works ---------- */
-.how-section{
-  position:relative; z-index:5;
-  padding: 12px 0 70px;
-  text-align:center;
-}
-.how-kicker{ display:table; margin: 0 auto 12px; }
-.how-heading{
-  margin: 0 0 44px;
-  font-family: "Fraunces", "Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
-  font-weight:700; font-size: clamp(26px, 3vw, 34px); line-height:1.2;
-  color: var(--navy); text-wrap: balance;
-}
-.how-grid{
-  display:grid; grid-template-columns: repeat(3, 1fr); gap:28px;
-  text-align:left;
-}
-.how-card{
-  background: var(--card-bg); border:1px solid var(--card-border); border-radius:18px;
-  padding: 26px 24px;
-  box-shadow: 0 24px 46px -26px rgba(30,37,64,.28);
-}
-.how-badge{
-  width:38px; height:38px; border-radius:11px; margin-bottom:16px;
-}
-.how-title{
-  margin:0 0 8px;
-  font-family:"Iowan Old Style",Palatino,Georgia,serif; font-size:18px; font-weight:700;
-  color: var(--navy);
-}
-.how-text{
-  margin:0;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:15px; line-height:1.55;
-  color: var(--navy-soft);
-}
-@media (max-width: 900px){
-  .how-grid{ grid-template-columns: 1fr; gap:18px; }
-  .how-section{ padding-bottom: 50px; }
-}
-
 /* ---------- waitlist form ---------- */
 .waitlist-form{ display:flex; align-items:stretch; gap:12px; flex-wrap:wrap; width:100%; }
 .waitlist-input{
