@@ -79,7 +79,12 @@ export default function Contact() {
       </div>
 
       <div className="contact-symbol-band" aria-hidden="true">
-        <SymbolField rows={4} cols={22} opacityRange={[0.38, 0.5]} fontSizeRange={[20, 30]} />
+        <SymbolField
+          rows={4} cols={22}
+          opacityRange={[0.38, 0.5]}
+          fontSizeRange={[20, 30]}
+          colors={['var(--symbol-tan)', 'var(--cover-dark)', 'var(--ribbon)', 'var(--navy)', '#5C3A1E', 'var(--gold)']}
+        />
       </div>
 
       {status === 'success' ? (
@@ -175,6 +180,7 @@ export default function Contact() {
             )}
           </div>
         </form>
+        <p className="contact-alt-email">*or contact: <a href="mailto:researchlybiz@gmail.com">researchlybiz@gmail.com</a></p>
       </div>
       )}
     </section>

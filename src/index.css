@@ -478,8 +478,8 @@ h1{
 }
 
 .contact-symbol-band{
-  position:absolute; left:50%; bottom:0; width:100vw; transform:translateX(-50%);
-  height:440px; z-index:0; overflow:hidden; pointer-events:none;
+  position:absolute; left:50%; bottom:-8vh; width:100vw; transform:translateX(-50%);
+  height:calc(440px + 8vh); z-index:0; overflow:hidden; pointer-events:none;
   -webkit-mask-image: radial-gradient(ellipse 62% 85% at 50% 55%, transparent 0%, transparent 32%, black 78%);
   mask-image: radial-gradient(ellipse 62% 85% at 50% 55%, transparent 0%, transparent 32%, black 78%);
 }
@@ -508,6 +508,12 @@ h1{
 
 .contact-foot{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-top:4px; }
 .contact-submit{ min-width:200px; }
+
+.contact-alt-email{
+  margin:18px 0 0; font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; color: var(--navy-faint);
+}
+.contact-alt-email a{ color: var(--navy-soft); font-weight:700; text-decoration:underline; text-decoration-color: var(--card-border); }
+.contact-alt-email a:hover{ color: var(--cover-dark); }
 
 .contact-card-success{
   position:relative; z-index:2; overflow:hidden;

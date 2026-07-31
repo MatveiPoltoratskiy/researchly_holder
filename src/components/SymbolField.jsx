@@ -13,7 +13,7 @@ function randSymbol() {
   return SYMBOL_POOL[Math.floor(Math.random() * SYMBOL_POOL.length)]
 }
 
-export default function SymbolField({ rows = 2, cols = 12, opacityRange = [0.22, 0.28], fontSizeRange = [12, 18] }) {
+export default function SymbolField({ rows = 2, cols = 12, opacityRange = [0.22, 0.28], fontSizeRange = [12, 18], colors = ['var(--symbol-tan)'] }) {
   const fieldRef = useRef(null)
   const elsRef = useRef([])
   const cycleTimerRef = useRef(null)
@@ -45,6 +45,7 @@ export default function SymbolField({ rows = 2, cols = 12, opacityRange = [0.22,
 
           const span = document.createElement('span')
           span.textContent = randSymbol()
+          span.style.color = colors[Math.floor(Math.random() * colors.length)]
           span.style.left = xPct.toFixed(2) + '%'
           span.style.top = yPct.toFixed(2) + '%'
           span.style.fontSize = fontSize.toFixed(1) + 'px'
