@@ -424,6 +424,19 @@ h1{
 .btn-spinner{ width:20px; height:20px; animation: btn-spin .8s linear infinite; }
 @keyframes btn-spin{ to{ transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce){ .btn-spinner{ animation-duration: 1.6s; } }
+.waitlist-success{
+  display:flex; align-items:center; gap:12px;
+  width:100%;
+  background: var(--card-bg);
+  border: 1.5px solid var(--glass-rim);
+  border-radius: 16px;
+  padding: 18px 22px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:16.5px; font-weight:600;
+  color: var(--navy);
+  animation: content-in .5s ease-out both;
+}
+.waitlist-success-icon{ width:19px; height:19px; flex:none; color: var(--cover-dark); }
+
 .waitlist-status{
   margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px;
   display:flex; align-items:center; gap:7px;
@@ -459,6 +472,13 @@ h1{
   max-width: 760px;
 }
 .contact-head{ position:relative; z-index:2; max-width:none; animation: content-in .8s ease-out .1s both; }
+.squiggle-underline{ position:relative; display:inline-block; }
+.squiggle-underline::after{
+  content:""; position:absolute; left:1%; right:1%; bottom:-4px; height:16px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 26' preserveAspectRatio='none'%3E%3Cpath d='M2,15 C18,4 32,24 48,13 C64,3 80,22 96,12 C112,3 128,21 144,11 C160,3 176,20 192,10 C208,3 224,19 240,10 C254,4 268,16 284,9 C290,7 294,8 298,7' fill='none' stroke='%23DD6B2E' stroke-width='4.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-size:100% 100%;
+  pointer-events:none;
+}
 .contact-sub{
   max-width:none; white-space:nowrap;
   font-family:"Poppins","Segoe UI",system-ui,sans-serif;

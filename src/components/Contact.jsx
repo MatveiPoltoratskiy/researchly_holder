@@ -74,7 +74,7 @@ export default function Contact() {
     <section className="contact-section container">
       <div className="contact-head">
         <p className="kicker">Get in touch</p>
-        <h1>Questions? We're here.</h1>
+        <h1>Questions? <span className="squiggle-underline">We're here.</span></h1>
         <p className="sub contact-sub">Send us a chat, suggestions, bugs, or anything on your mind!</p>
       </div>
 
