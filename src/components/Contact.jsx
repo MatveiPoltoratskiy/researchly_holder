@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { supabase } from '../lib/supabase'
+import { burstConfetti } from '../lib/confetti'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -9,6 +10,13 @@ export default function Contact() {
   const [form, setForm] = useState(initialForm)
   const [status, setStatus] = useState('idle') // idle | submitting | success | error
   const [errorMsg, setErrorMsg] = useState('')
+  const badgeRef = useRef(null)
+
+  useEffect(() => {
+    if (status === 'success' && badgeRef.current) {
+      burstConfetti(badgeRef.current, 22)
+    }
+  }, [status])
 
   function updateField(field) {
     return (e) => {
@@ -72,10 +80,16 @@ export default function Contact() {
       {status === 'success' ? (
         <div className="contact-card contact-card-success" role="status" aria-live="polite">
           <div className="contact-success">
-            <svg className="contact-success-badge" viewBox="0 0 80 80" aria-hidden="true">
-              <circle className="contact-success-ring" cx="40" cy="40" r="36" fill="none" stroke="currentColor" strokeWidth="3" />
-              <path className="contact-success-check" d="M24 41l11 11 21-23" fill="none" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <div className="contact-success-badge-wrap" ref={badgeRef}>
+              <svg className="contact-success-badge" viewBox="0 0 80 80" aria-hidden="true">
+                <circle className="contact-success-ring" cx="40" cy="40" r="36" fill="none" stroke="currentColor" strokeWidth="3" />
+                <path className="contact-success-check" d="M24 41l11 11 21-23" fill="none" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <span className="contact-spark contact-spark-1" aria-hidden="true" />
+              <span className="contact-spark contact-spark-2" aria-hidden="true" />
+              <span className="contact-spark contact-spark-3" aria-hidden="true" />
+              <span className="contact-spark contact-spark-4" aria-hidden="true" />
+            </div>
             <h2 className="contact-success-title">Message sent!</h2>
             <p className="contact-success-sub">We'll get back to you soon.</p>
           </div>
