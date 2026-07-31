@@ -54,6 +54,7 @@ export default function Contact() {
       return
     }
 
+    console.error('contact_messages insert error:', error)
     setStatus('error')
     setErrorMsg('Something went wrong. Please try again.')
   }
