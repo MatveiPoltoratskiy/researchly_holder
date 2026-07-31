@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { prefersReducedMotion } from '../lib/motion'
 
 const FAQS = [
@@ -46,10 +46,18 @@ function FaqItem({ index, q, a, list, isOpen, onToggle, revealDelay }) {
   const panelRef = useRef(null)
   const [maxHeight, setMaxHeight] = useState(0)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const el = panelRef.current
     if (!el) return
-    setMaxHeight(isOpen ? el.scrollHeight : 0)
+    if (isOpen) {
+      // rAF ensures the browser has actually painted the 0px state before we animate away
+      // from it — without this, opening from a fresh mount can skip straight to the final
+      // height with no transition to play.
+      const target = el.scrollHeight
+      const raf = requestAnimationFrame(() => setMaxHeight(target))
+      return () => cancelAnimationFrame(raf)
+    }
+    setMaxHeight(0)
   }, [isOpen])
 
   return (
