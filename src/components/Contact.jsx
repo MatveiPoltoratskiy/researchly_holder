@@ -66,16 +66,21 @@ export default function Contact() {
       <div className="contact-head">
         <p className="kicker">Get in touch</p>
         <h1>Questions? We're here.</h1>
-        {status === 'success' ? (
-          <p className="sub contact-sub contact-sub-success">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-check" /></svg>
-            Message sent! We'll get back to you soon.
-          </p>
-        ) : (
-          <p className="sub contact-sub">Send us your message.</p>
-        )}
+        <p className="sub contact-sub">Send us your message.</p>
       </div>
 
+      {status === 'success' ? (
+        <div className="contact-card contact-card-success" role="status" aria-live="polite">
+          <div className="contact-success">
+            <svg className="contact-success-badge" viewBox="0 0 80 80" aria-hidden="true">
+              <circle className="contact-success-ring" cx="40" cy="40" r="36" fill="none" stroke="currentColor" strokeWidth="3" />
+              <path className="contact-success-check" d="M24 41l11 11 21-23" fill="none" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <h2 className="contact-success-title">Message sent!</h2>
+            <p className="contact-success-sub">We'll get back to you soon.</p>
+          </div>
+        </div>
+      ) : (
       <div className="contact-card">
         <form className="contact-form" onSubmit={handleSubmit} noValidate>
           <div className="contact-grid">
@@ -150,6 +155,7 @@ export default function Contact() {
           </div>
         </form>
       </div>
+      )}
     </section>
   )
 }
