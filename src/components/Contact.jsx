@@ -79,7 +79,7 @@ export default function Contact() {
       </div>
 
       <div className="contact-symbol-band" aria-hidden="true">
-        <SymbolField rows={4} cols={22} opacityRange={[0.38, 0.5]} fontSizeRange={[10, 15]} />
+        <SymbolField rows={4} cols={22} opacityRange={[0.38, 0.5]} fontSizeRange={[20, 30]} />
       </div>
 
       {status === 'success' ? (

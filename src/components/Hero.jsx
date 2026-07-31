@@ -136,7 +136,6 @@ export default function Hero() {
       <div className="hero-sketch sketch-hex-b" aria-hidden="true"><svg viewBox="0 0 140 110"><use href="#deco-hex" /></svg></div>
       <div className="hero-sketch sketch-hex-a" aria-hidden="true"><svg viewBox="0 0 140 110"><use href="#deco-hex" /></svg></div>
       <p className="hero-sketch sketch-note sketch-note-b" aria-hidden="true">Curiosity leads to discovery.</p>
-      <p className="hero-sketch sketch-note sketch-note-c" aria-hidden="true">Impact → Publication → Prestige</p>
       <p className="hero-sketch sketch-formula formula-a" aria-hidden="true">C₆H₁₀N₂O₂</p>
 
       <div className="symbol-field" ref={symbolFieldRef} aria-hidden="true"></div>
