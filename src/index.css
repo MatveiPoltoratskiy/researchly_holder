@@ -459,8 +459,9 @@ h1{
   padding-top: 26px; padding-bottom: 100px;
   max-width: 760px;
 }
-.contact-head{ position:relative; z-index:2; max-width:600px; animation: content-in .8s ease-out .1s both; }
-.contact-sub{ max-width:560px; }
+.contact-head{ position:relative; z-index:2; max-width:none; animation: content-in .8s ease-out .1s both; }
+.contact-sub{ max-width:none; font-size:18.5px; white-space:nowrap; }
+@media (max-width:720px){ .contact-sub{ white-space:normal; } }
 
 .contact-card{
   position:relative; z-index:2;
