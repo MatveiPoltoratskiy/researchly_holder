@@ -13,7 +13,7 @@ function randSymbol() {
   return SYMBOL_POOL[Math.floor(Math.random() * SYMBOL_POOL.length)]
 }
 
-export default function SymbolField({ rows = 2, cols = 12 }) {
+export default function SymbolField({ rows = 2, cols = 12, opacityRange = [0.22, 0.28], fontSizeRange = [12, 18] }) {
   const fieldRef = useRef(null)
   const elsRef = useRef([])
   const cycleTimerRef = useRef(null)
@@ -36,8 +36,8 @@ export default function SymbolField({ rows = 2, cols = 12 }) {
           const xPct = (col + 0.5) * cellW + (Math.random() - 0.5) * cellW * 0.4
           const yPct = (row + 0.5) * cellH + (Math.random() - 0.5) * cellH * 0.4
 
-          const opacity = 0.22 + Math.random() * 0.06
-          const fontSize = 12 + Math.random() * 6
+          const opacity = opacityRange[0] + Math.random() * (opacityRange[1] - opacityRange[0])
+          const fontSize = fontSizeRange[0] + Math.random() * (fontSizeRange[1] - fontSizeRange[0])
           const rot = -5 + Math.random() * 10
           const waveAmp = 5 + Math.random() * 3
           const waveDur = 5.4 + Math.random() * 0.6

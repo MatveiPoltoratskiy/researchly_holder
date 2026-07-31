@@ -75,11 +75,11 @@ export default function Contact() {
       <div className="contact-head">
         <p className="kicker">Get in touch</p>
         <h1>Questions? We're here.</h1>
-        <p className="sub contact-sub">Send us your message.</p>
+        <p className="sub contact-sub">Send us a chat, suggestions, bugs, or anything on your mind!</p>
       </div>
 
       <div className="contact-symbol-band" aria-hidden="true">
-        <SymbolField rows={2} cols={14} />
+        <SymbolField rows={2} cols={14} opacityRange={[0.38, 0.5]} fontSizeRange={[16, 24]} />
       </div>
 
       {status === 'success' ? (

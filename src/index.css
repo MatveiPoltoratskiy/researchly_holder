@@ -474,8 +474,8 @@ h1{
 }
 
 .contact-symbol-band{
-  position:absolute; left:50%; bottom:0; width:100vw; transform:translateX(-50%);
-  height:170px; z-index:0; overflow:hidden; pointer-events:none;
+  position:absolute; left:50%; bottom:-20px; width:100vw; transform:translateX(-50%);
+  height:260px; z-index:0; overflow:hidden; pointer-events:none;
 }
 
 .contact-form{ display:flex; flex-direction:column; gap:20px; }
@@ -507,6 +507,12 @@ h1{
   position:relative; z-index:2; overflow:hidden;
   display:flex; align-items:center; justify-content:center;
   min-height: 380px; text-align:center;
+  border-radius:30px;
+  border:1.5px solid rgba(46,122,76,.16);
+  box-shadow:
+    0 36px 70px -26px rgba(30,37,64,.34),
+    0 10px 26px -10px rgba(30,37,64,.16),
+    0 0 0 6px rgba(46,122,76,.05);
   animation: content-in .5s ease-out both;
 }
 .contact-card-success::before{
@@ -514,7 +520,10 @@ h1{
   clip-path: circle(0% at 50% 46%);
   animation: contact-wipe .85s cubic-bezier(.3,1.6,.4,1) forwards;
 }
-.contact-success{ position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; gap:12px; }
+.contact-success{ position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; }
+.contact-success-badge-wrap{ margin-bottom:30px; }
+.contact-success-title{ margin:0; }
+.contact-success-sub{ margin-top:8px; }
 @keyframes contact-wipe{
   0%{ clip-path: circle(0% at 50% 46%); }
   65%{ clip-path: circle(168% at 50% 46%); }
