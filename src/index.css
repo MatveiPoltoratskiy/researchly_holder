@@ -410,7 +410,9 @@ h1{
 /* ---------- testimonial carousel: floats over the plaza/prop level, like the mockup card floats over the mountains ---------- */
 .reviews-section{
   position:relative; z-index:6;
-  margin-top: clamp(-380px, -30vw, -240px);
+  /* smaller pull-up than before: still floats over the hero art, but no longer overshoots past
+     its own content height and drags the section below it (FAQ) up into the hero too */
+  margin-top: clamp(-200px, -16vw, -110px);
   padding-bottom: 8px;
 }
 .reviews-kicker{
@@ -448,6 +450,109 @@ h1{
 @media (max-width: 900px){
   .reviews-section{ margin-top: 16px; }
   .review-card{ width:270px; }
+}
+
+/* ---------- faq ---------- */
+.faq-section{ padding: 36px 0 100px; }
+.faq-intro{
+  max-width: 620px; margin: 0 auto 48px;
+  text-align:center; display:flex; flex-direction:column; align-items:center;
+}
+.faq-intro .kicker{ display:table; margin: 0 auto 16px; }
+.faq-heading{
+  margin: 0 0 14px;
+  font-family: "Fraunces", "Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  font-weight:700; font-size: clamp(28px, 3.2vw, 38px); line-height:1.15;
+  color: var(--navy); text-wrap: balance;
+}
+.faq-sub{
+  margin: 0 0 26px; max-width: 420px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:15.5px; line-height:1.55;
+  color: var(--navy-soft);
+}
+.faq-hint{ display:flex; align-items:center; gap:14px; }
+.faq-hint-bubble{
+  position:relative;
+  background:#fff; border:1px solid var(--card-border); border-radius:16px 16px 4px 16px;
+  padding:14px 18px; max-width:220px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:14px; font-weight:700; color:var(--navy);
+  box-shadow: 0 14px 30px -18px rgba(30,37,64,.35);
+}
+.faq-hint-mascot{ width:48px; height:48px; flex:none; }
+
+.faq-list-col{ max-width: 760px; margin: 0 auto; display:flex; flex-direction:column; gap:14px; }
+.faq-item{
+  background: var(--card-bg); border:1px solid var(--card-border); border-radius:16px;
+  box-shadow: 0 18px 36px -26px rgba(30,37,64,.28);
+  transition: box-shadow .2s ease;
+}
+.faq-item.is-open{ box-shadow: 0 22px 44px -22px rgba(30,37,64,.34); }
+.faq-row{
+  width:100%; display:flex; align-items:center; gap:18px;
+  background:none; border:none; cursor:pointer; text-align:left;
+  padding: 24px 22px; font: inherit;
+}
+.faq-num{
+  flex:none; width:32px; height:32px; border-radius:999px;
+  display:flex; align-items:center; justify-content:center;
+  background: var(--pill-amber-bg); color: var(--cover-dark);
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:700;
+}
+.faq-q{
+  flex:1;
+  font-family:"Iowan Old Style",Palatino,Georgia,serif; font-size:17px; font-weight:700; line-height:1.15;
+  color: var(--navy);
+}
+.faq-toggle{
+  flex:none; width:28px; height:28px; border-radius:999px;
+  display:flex; align-items:center; justify-content:center;
+  border:1.5px solid var(--card-border); color: var(--cover-dark);
+}
+.faq-toggle svg .faq-vline{ transition: transform .22s ease; transform-box: fill-box; transform-origin:50% 50%; }
+.faq-item.is-open .faq-toggle{ background: var(--cover); border-color: var(--cover); color:#fff; }
+.faq-item.is-open .faq-toggle svg .faq-vline{ transform: scaleY(0); }
+/* max-height:0 here is the hard default — inline style (measured from real content height via
+   JS) overrides it when open. If the inline style ever fails to apply for any reason, this
+   default keeps the box collapsed instead of silently rendering full-height-but-invisible. */
+.faq-panel{
+  max-height:0; overflow:hidden; visibility:hidden;
+  padding: 0 22px 18px 72px;
+  transition: max-height .42s cubic-bezier(.22,.85,.32,1), visibility 0s linear .42s;
+}
+.faq-item.is-open .faq-panel{
+  visibility:visible;
+  transition: max-height .42s cubic-bezier(.22,.85,.32,1), visibility 0s linear 0s;
+}
+.faq-a{
+  margin:0;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:15px; line-height:1.6;
+  color: var(--navy-soft);
+}
+.faq-list{
+  margin: 10px 0 0; padding-left: 18px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:15px; line-height:1.7;
+  color: var(--navy-soft);
+}
+
+/* scroll-in reveal: intro and each row settle into place as the section enters view */
+.faq-reveal, .faq-item-reveal{
+  opacity:0; transform: translateY(34px) scale(.97);
+  transition: opacity .7s cubic-bezier(.22,.85,.32,1), transform .7s cubic-bezier(.22,.85,.32,1);
+}
+.faq-section.is-revealed .faq-reveal,
+.faq-section.is-revealed .faq-item-reveal{
+  opacity:1; transform:none;
+}
+@media (prefers-reduced-motion: reduce){
+  .faq-reveal, .faq-item-reveal{ opacity:1; transform:none; transition:none; }
+  .faq-panel{ transition:none; }
+}
+
+@media (max-width: 900px){
+  .faq-intro{ max-width:none; }
+  .faq-sub{ max-width:none; }
+  .faq-row{ padding: 20px 18px; gap:14px; }
+  .faq-panel{ padding-left: 18px; }
 }
 
 /* ---------- waitlist form ---------- */
