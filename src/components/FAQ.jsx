@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { prefersReducedMotion } from '../lib/motion'
 
 const FAQS = [
@@ -46,11 +46,39 @@ function FaqItem({ index, q, a, list, isOpen, onToggle, revealDelay }) {
   const panelRef = useRef(null)
   const [maxHeight, setMaxHeight] = useState(0)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const el = panelRef.current
     if (!el) return
-    setMaxHeight(isOpen ? el.scrollHeight : 0)
+    if (prefersReducedMotion()) {
+      // no transition plays, so onTransitionEnd never fires — jump straight to the
+      // unclamped resting state instead of getting stuck at the measured value forever
+      setMaxHeight(isOpen ? 'none' : 0)
+      return
+    }
+    if (isOpen) {
+      // rAF ensures the browser has actually painted the 0px state before we animate away
+      // from it — without this, opening from a fresh mount can skip straight to the final
+      // height with no transition to play.
+      const target = el.scrollHeight
+      const raf = requestAnimationFrame(() => setMaxHeight(target))
+      return () => cancelAnimationFrame(raf)
+    }
+    // closing: a transition can't reliably animate away from 'none' (browsers differ on how
+    // they interpolate it), so pin to the real pixel height first with transitions forced off,
+    // force a reflow to commit that instantly, then let the next frame animate 0 for real
+    el.style.transition = 'none'
+    el.style.maxHeight = el.scrollHeight + 'px'
+    el.getBoundingClientRect()
+    el.style.transition = ''
+    const raf = requestAnimationFrame(() => setMaxHeight(0))
+    return () => cancelAnimationFrame(raf)
   }, [isOpen])
+
+  function handlePanelTransitionEnd(e) {
+    // once fully open, drop the constraint entirely so the answer can never be clipped by a
+    // stale/rounded measurement (e.g. text reflowing after the height was first measured)
+    if (e.propertyName === 'max-height' && isOpen) setMaxHeight('none')
+  }
 
   return (
     <div className="faq-item-reveal" style={{ transitionDelay: revealDelay }}>
@@ -74,6 +102,7 @@ function FaqItem({ index, q, a, list, isOpen, onToggle, revealDelay }) {
           role="region"
           aria-hidden={!isOpen}
           style={{ maxHeight }}
+          onTransitionEnd={handlePanelTransitionEnd}
         >
           <p className="faq-a">{a}</p>
           {list && (
@@ -116,27 +145,29 @@ export default function FAQ() {
 
   return (
     <section className={`faq-section container${revealed ? ' is-revealed' : ''}`} ref={sectionRef}>
-      <div className="faq-intro faq-reveal">
-        <p className="kicker">Questions, answered</p>
-        <h2 className="faq-heading">Everything you need to know before you start.</h2>
-        <p className="faq-sub">How the interview, matches, and roadmap fit together.</p>
-        <div className="faq-hint">
-          <span className="faq-hint-bubble">Pick a question to get started.</span>
-          <svg className="faq-hint-mascot" viewBox="0 0 60 60" aria-hidden="true"><use href="#mascot-tiny" /></svg>
+      <div className="faq-layout">
+        <div className="faq-intro faq-reveal">
+          <p className="kicker">Questions, answered</p>
+          <h2 className="faq-heading">Everything you need to know before you start.</h2>
+          <p className="faq-sub">How the interview, matches, and roadmap fit together.</p>
+          <div className="faq-hint">
+            <span className="faq-hint-bubble">Pick a question to get started.</span>
+            <svg className="faq-hint-mascot" viewBox="0 0 60 60" aria-hidden="true"><use href="#mascot-tiny" /></svg>
+          </div>
         </div>
-      </div>
 
-      <div className="faq-list-col">
-        {FAQS.map((item, i) => (
-          <FaqItem
-            key={item.q}
-            index={i}
-            {...item}
-            isOpen={openIndex === i}
-            onToggle={() => setOpenIndex(openIndex === i ? -1 : i)}
-            revealDelay={`${80 + i * 70}ms`}
-          />
-        ))}
+        <div className="faq-list-col">
+          {FAQS.map((item, i) => (
+            <FaqItem
+              key={item.q}
+              index={i}
+              {...item}
+              isOpen={openIndex === i}
+              onToggle={() => setOpenIndex(openIndex === i ? -1 : i)}
+              revealDelay={`${80 + i * 70}ms`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   )
