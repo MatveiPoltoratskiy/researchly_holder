@@ -16,10 +16,10 @@
   --symbol-tan:#8C5A2E;
 
   --container-max-width: 1280px;
-  --container-pad: 64px;
+  --container-pad: 48px;
 }
-@media (max-width: 1023px){ :root{ --container-pad: 40px; } }
-@media (max-width: 767px){ :root{ --container-pad: 24px; } }
+@media (max-width: 1023px){ :root{ --container-pad: 32px; } }
+@media (max-width: 767px){ :root{ --container-pad: 20px; } }
 *,*::before,*::after{ box-sizing:border-box; }
 html,body{ margin:0; padding:0; }
 body{
@@ -459,29 +459,30 @@ h1{
 }
 .faq-item.is-open{ box-shadow: 0 22px 44px -22px rgba(30,37,64,.34); }
 .faq-row{
-  width:100%; display:flex; align-items:center; gap:16px;
+  width:100%; display:flex; align-items:center; gap:13px;
   background:none; border:none; cursor:pointer; text-align:left;
-  padding: 22px 22px; font: inherit;
+  padding: 17px 18px; font: inherit;
 }
 .faq-tag{
-  position:relative; flex:none; width:34px; height:30px;
-  display:flex; align-items:flex-end; justify-content:center; padding-bottom:4px;
-  background: var(--pages); border:1px solid var(--card-border); border-radius:5px 10px 10px 5px;
+  position:relative; flex:none; width:28px; height:25px;
+  display:flex; align-items:flex-end; justify-content:center; padding-bottom:3px;
+  background: var(--pages); border:1px solid var(--card-border); border-radius:4px 9px 9px 4px;
   transform: rotate(-4deg);
-  font-family:"Iowan Old Style",Palatino,Georgia,serif; font-weight:700; font-size:12px; color: var(--cover-dark);
+  font-family:"Iowan Old Style",Palatino,Georgia,serif; font-weight:700; font-size:11px; color: var(--cover-dark);
 }
 .faq-tag::before{
-  content:""; position:absolute; top:5px; left:50%; transform:translateX(-50%);
-  width:4px; height:4px; border-radius:50%; background: var(--navy-faint);
+  content:""; position:absolute; top:4px; left:50%; transform:translateX(-50%);
+  width:3.5px; height:3.5px; border-radius:50%; background: var(--navy-faint);
 }
-.faq-topic-icon{ flex:none; color: var(--navy-soft); }
+.faq-topic-icon{ flex:none; width:18px; height:18px; color: var(--navy-soft); }
 .faq-q{
   flex:1;
-  font-family:"Iowan Old Style",Palatino,Georgia,serif; font-size:17px; font-weight:700; line-height:1.15;
+  font-family: "Fraunces", "Iowan Old Style",Palatino,Georgia,serif;
+  font-weight:800; font-size:19px; line-height:1.2;
   color: var(--navy);
 }
 .faq-toggle{
-  flex:none; width:28px; height:28px; border-radius:999px;
+  flex:none; width:25px; height:25px; border-radius:999px;
   display:flex; align-items:center; justify-content:center;
   border:1.5px solid var(--card-border); color: var(--cover-dark);
   transition: transform .3s cubic-bezier(.4,0,.2,1), background-color .2s ease, border-color .2s ease, color .2s ease;
@@ -489,15 +490,23 @@ h1{
 .faq-item.is-open .faq-toggle{ background: var(--cover); border-color: var(--cover); color:#fff; transform: rotate(45deg); }
 /* max-height:0 here is the hard default — inline style (measured from real content height via
    JS) overrides it when open. If the inline style ever fails to apply for any reason, this
-   default keeps the box collapsed instead of silently rendering full-height-but-invisible. */
+   default keeps the box collapsed instead of silently rendering full-height-but-invisible.
+   Opacity fades faster than max-height on close so the text visibly clears out of the way
+   instead of sitting at full strength until the box abruptly clips it. */
 .faq-panel{
-  max-height:0; overflow:hidden; visibility:hidden;
-  padding: 0 22px 18px 108px;
-  transition: max-height .42s cubic-bezier(.22,.85,.32,1), visibility 0s linear .42s;
+  max-height:0; overflow:hidden; visibility:hidden; opacity:0;
+  padding: 0 18px 16px 90px;
+  transition:
+    max-height .42s cubic-bezier(.22,.85,.32,1),
+    opacity .22s ease,
+    visibility 0s linear .42s;
 }
 .faq-item.is-open .faq-panel{
-  visibility:visible;
-  transition: max-height .42s cubic-bezier(.22,.85,.32,1), visibility 0s linear 0s;
+  visibility:visible; opacity:1;
+  transition:
+    max-height .42s cubic-bezier(.22,.85,.32,1),
+    opacity .3s ease .1s,
+    visibility 0s linear 0s;
 }
 .faq-a{
   margin:0;
@@ -529,8 +538,8 @@ h1{
   .faq-intro{ position:static; flex:none; width:100%; max-width:none; align-items:flex-start; }
   .faq-sub{ max-width:none; }
   .faq-list-col{ max-width:100%; width:100%; }
-  .faq-row{ padding: 20px 18px; gap:14px; }
-  .faq-panel{ padding-left: 18px; }
+  .faq-row{ padding: 16px 16px; gap:12px; }
+  .faq-panel{ padding-left: 16px; }
   .faq-mascot{ width:120px; }
 }
 
