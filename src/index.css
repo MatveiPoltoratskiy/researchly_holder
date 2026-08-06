@@ -357,7 +357,7 @@ h1{
   position:relative; z-index:6;
   /* smaller pull-up than before: still floats over the hero art, but no longer overshoots past
      its own content height and drags the section below it (FAQ) up into the hero too */
-  margin-top: clamp(-200px, -16vw, -110px);
+  margin-top: clamp(-240px, -19vw, -140px);
   padding-bottom: 8px;
 }
 .reviews-kicker{
