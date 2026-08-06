@@ -12,6 +12,74 @@ export default function IconSprite() {
           <path d="M19,37 Q27,43 35,37" stroke="var(--face)" strokeWidth="2.4" fill="none" strokeLinecap="round" />
         </symbol>
 
+        {/* mascot poses — same body/face geometry as mascot-tiny (translated +6,+6 for prop bleed),
+            only tilt/arms/mouth/prop vary, so they read as one character in different moments */}
+        <symbol id="mascot-ask" viewBox="0 0 72 72">
+          <g transform="rotate(-6 34 38)">
+            <path d="M14,42 L6,50" stroke="var(--cover-dark)" strokeWidth="3.4" strokeLinecap="round" fill="none" />
+            <path d="M54,40 Q60,28 60,18" stroke="var(--cover-dark)" strokeWidth="3.4" strokeLinecap="round" fill="none" />
+            <path d="M27,60 L27,68" stroke="var(--cover-dark)" strokeWidth="3.4" strokeLinecap="round" />
+            <path d="M41,60 L41,68" stroke="var(--cover-dark)" strokeWidth="3.4" strokeLinecap="round" />
+            <polygon points="20,16 46,16 54,24 54,52 46,60 20,60 14,52 14,24" fill="var(--cover)" />
+            <polygon points="14,24 46,24 52,18 22,18" fill="var(--pages)" />
+            <polygon points="32,18 38,18 40,34 35,28 30,34" fill="var(--ribbon)" />
+            <path d="M24,31 l4,-2" stroke="var(--face)" strokeWidth="1.6" strokeLinecap="round" />
+            <path d="M36,29 l4,2" stroke="var(--face)" strokeWidth="1.6" strokeLinecap="round" />
+            <circle cx="27" cy="36" r="2.3" fill="var(--face)" />
+            <circle cx="39" cy="36" r="2.3" fill="var(--face)" />
+            <ellipse cx="33" cy="45" rx="4" ry="3" fill="var(--face)" />
+          </g>
+          <polygon points="58,4 70,4 70,14 62,14 58,18" fill="var(--pages)" stroke="var(--card-border)" strokeWidth="1" />
+          <circle cx="65" cy="9" r="1.4" fill="var(--cover-dark)" />
+        </symbol>
+
+        <symbol id="mascot-scout" viewBox="0 0 72 72">
+          <path d="M14,42 L6,50" stroke="var(--cover-dark)" strokeWidth="3.4" strokeLinecap="round" fill="none" />
+          <path d="M54,40 L65,34" stroke="var(--cover-dark)" strokeWidth="3.4" strokeLinecap="round" fill="none" />
+          <path d="M27,60 L27,68" stroke="var(--cover-dark)" strokeWidth="3.4" strokeLinecap="round" />
+          <path d="M41,60 L41,68" stroke="var(--cover-dark)" strokeWidth="3.4" strokeLinecap="round" />
+          <polygon points="20,16 46,16 54,24 54,52 46,60 20,60 14,52 14,24" fill="var(--cover)" />
+          <polygon points="14,24 46,24 52,18 22,18" fill="var(--pages)" />
+          <polygon points="32,18 38,18 40,34 35,28 30,34" fill="var(--ribbon)" />
+          <path d="M24,36 q3,-2 6,0" stroke="var(--face)" strokeWidth="1.8" fill="none" strokeLinecap="round" />
+          <circle cx="39" cy="36" r="2.3" fill="var(--face)" />
+          <path d="M25,43 Q33,49 41,43" stroke="var(--face)" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+          <circle cx="70" cy="30" r="7" fill="var(--glass-lens)" stroke="var(--glass-rim)" strokeWidth="2" />
+          <path d="M64.5,35.5 L60,40" stroke="var(--glass-rim-dark)" strokeWidth="2.6" strokeLinecap="round" />
+        </symbol>
+
+        <symbol id="mascot-map" viewBox="0 0 72 72">
+          <path d="M14,42 L20,50" stroke="var(--cover-dark)" strokeWidth="3.4" strokeLinecap="round" fill="none" />
+          <path d="M54,42 L48,50" stroke="var(--cover-dark)" strokeWidth="3.4" strokeLinecap="round" fill="none" />
+          <path d="M25,60 L23,68" stroke="var(--cover-dark)" strokeWidth="3.4" strokeLinecap="round" />
+          <path d="M43,60 L45,68" stroke="var(--cover-dark)" strokeWidth="3.4" strokeLinecap="round" />
+          <polygon points="20,16 46,16 54,24 54,52 46,60 20,60 14,52 14,24" fill="var(--cover)" />
+          <polygon points="14,24 46,24 52,18 22,18" fill="var(--pages)" />
+          <polygon points="32,18 38,18 46,36 35,28 30,34" fill="var(--ribbon)" />
+          <circle cx="27" cy="36" r="2.3" fill="var(--face)" />
+          <circle cx="39" cy="36" r="2.3" fill="var(--face)" />
+          <path d="M25,43 Q33,49 41,43" stroke="var(--face)" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+          <polygon points="18,48 50,46 52,64 16,66" fill="var(--pages)" stroke="var(--card-border)" strokeWidth="1" />
+          <path d="M24,54 L34,52" stroke="var(--ribbon)" strokeWidth="1.6" strokeLinecap="round" />
+          <path d="M28,58 L40,56" stroke="var(--ribbon)" strokeWidth="1.6" strokeLinecap="round" />
+          <circle cx="40" cy="60" r="1.8" fill="var(--cover-dark)" />
+        </symbol>
+
+        <symbol id="mascot-cheer" viewBox="0 0 72 72">
+          <path d="M14,40 L4,22" stroke="var(--cover-dark)" strokeWidth="3.4" strokeLinecap="round" fill="none" />
+          <path d="M54,40 L64,22" stroke="var(--cover-dark)" strokeWidth="3.4" strokeLinecap="round" fill="none" />
+          <path d="M27,60 q-2,4 -6,6" stroke="var(--cover-dark)" strokeWidth="3.4" strokeLinecap="round" fill="none" />
+          <path d="M41,60 q2,4 6,6" stroke="var(--cover-dark)" strokeWidth="3.4" strokeLinecap="round" fill="none" />
+          <polygon points="20,16 46,16 54,24 54,52 46,60 20,60 14,52 14,24" fill="var(--cover)" />
+          <polygon points="14,24 46,24 52,18 22,18" fill="var(--pages)" />
+          <polygon points="32,18 38,18 40,34 35,28 30,34" fill="var(--ribbon)" />
+          <circle cx="27" cy="36" r="2.3" fill="var(--face)" />
+          <circle cx="39" cy="36" r="2.3" fill="var(--face)" />
+          <path d="M22,43 Q33,52 44,43" stroke="var(--face)" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+          <path d="M16,68 Q34,78 52,68" stroke="var(--cover-light)" strokeWidth="2" fill="none" strokeDasharray="3 4" strokeLinecap="round" />
+          <polygon points="60,4 62,10 68,12 62,14 60,20 58,14 52,12 58,10" fill="var(--gold)" />
+        </symbol>
+
         {/* simple line icons */}
         <symbol id="icon-home" viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1Z" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" /></symbol>
         <symbol id="icon-list" viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></symbol>
@@ -31,6 +99,7 @@ export default function IconSprite() {
         <symbol id="icon-chat" viewBox="0 0 24 24"><path d="M4 5.5h16v11H10l-4 3.5v-3.5H4Z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" /></symbol>
         <symbol id="icon-map" viewBox="0 0 24 24"><path d="M9 4 4 6v14l5-2 6 2 5-2V4l-5 2-6-2Z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" /><path d="M9 4v14M15 6v14" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" /></symbol>
         <symbol id="icon-chevron-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></symbol>
+        <symbol id="icon-calendar" viewBox="0 0 24 24"><rect x="4" y="5.5" width="16" height="14.5" rx="2.5" fill="none" stroke="currentColor" strokeWidth="1.6" /><path d="M4 10h16M8 3.5v4M16 3.5v4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /><circle cx="9" cy="14.5" r="1" fill="currentColor" /><circle cx="14" cy="14.5" r="1" fill="currentColor" /></symbol>
         <symbol id="icon-plusminus" viewBox="0 0 24 24">
           <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
           <line className="faq-vline" x1="12" y1="5" x2="12" y2="19" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
