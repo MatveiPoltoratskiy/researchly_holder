@@ -2,11 +2,19 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { prefersReducedMotion } from '../lib/motion'
 import SymbolField from './SymbolField'
 
+const HOW_IT_WORKS_STEPS = [
+  { icon: 'chat', title: '1. Interview', sub: 'Tell us about you' },
+  { icon: 'search', title: '2. Match', sub: 'We find the best opportunities' },
+  { icon: 'map', title: '3. Roadmap', sub: 'Your step-by-step plan' },
+  { icon: 'rocket', title: '4. Apply', sub: 'Get deadlines, links, and guidance' },
+]
+
 const FAQS = [
   {
     q: 'How does it work?',
     icon: 'book',
-    a: "You'll answer a few questions about your interests, goals, and experience. Researchly then builds a personalized roadmap and recommends opportunities that match you.",
+    a: "We start with a quick interview about your interests and goals. Researchly then matches you with the best research opportunities, internships, and programs. Finally, we build a personalized roadmap so you know exactly what to do next.",
+    steps: HOW_IT_WORKS_STEPS,
   },
   {
     q: 'What kinds of opportunities will I find?',
@@ -49,7 +57,7 @@ const FAQS = [
   },
 ]
 
-function FaqItem({ index, q, a, list, icon, isOpen, onToggle, revealDelay }) {
+function FaqItem({ index, q, a, list, icon, steps, isOpen, onToggle, revealDelay }) {
   const panelId = `faq-panel-${index}`
   const panelRef = useRef(null)
   const [maxHeight, setMaxHeight] = useState(0)
@@ -73,9 +81,7 @@ function FaqItem({ index, q, a, list, icon, isOpen, onToggle, revealDelay }) {
           <span className="faq-tag">{String(index + 1).padStart(2, '0')}</span>
           <svg className="faq-topic-icon" width="20" height="20" aria-hidden="true"><use href={`#icon-${icon}`} /></svg>
           <span className="faq-q">{q}</span>
-          <span className="faq-toggle" aria-hidden="true">
-            <svg width="16" height="16"><use href="#icon-plusminus" /></svg>
-          </span>
+          <svg className="faq-toggle" width="16" height="16" aria-hidden="true"><use href="#icon-chevron-down" /></svg>
         </button>
         <div
           ref={panelRef}
@@ -93,6 +99,20 @@ function FaqItem({ index, q, a, list, icon, isOpen, onToggle, revealDelay }) {
               ))}
             </ul>
           )}
+          {steps && (
+            <div className="faq-steps">
+              {steps.map((step, si) => (
+                <div className="faq-step" key={step.title}>
+                  {si > 0 && <span className="faq-step-connector" aria-hidden="true" />}
+                  <span className="faq-step-badge">
+                    <svg width="22" height="22" aria-hidden="true"><use href={`#icon-${step.icon}`} /></svg>
+                  </span>
+                  <p className="faq-step-title">{step.title}</p>
+                  <p className="faq-step-sub">{step.sub}</p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -100,7 +120,7 @@ function FaqItem({ index, q, a, list, icon, isOpen, onToggle, revealDelay }) {
 }
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState(-1)
+  const [openIndex, setOpenIndex] = useState(0)
   const [revealed, setRevealed] = useState(false)
   const sectionRef = useRef(null)
 
@@ -134,7 +154,7 @@ export default function FAQ() {
         <p className="kicker">Questions, answered</p>
         <h2 className="faq-heading">Everything you need to know before you start.</h2>
         <span className="faq-heading-underline" aria-hidden="true" />
-        <p className="faq-sub">How the interview, matches, and roadmap fit together.</p>
+        <p className="faq-sub">Quick answers to the most common questions about Researchly.</p>
 
         <div className="faq-tip">
           <span className="faq-tip-pin" aria-hidden="true" />
