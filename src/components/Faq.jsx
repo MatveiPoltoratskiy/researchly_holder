@@ -36,9 +36,9 @@ const FAQS = [
     a: "The waitlist is completely free. Pricing for the full platform hasn't been announced yet.",
   },
   {
-    q: 'When will it launch?',
+    q: 'When can I start?',
     icon: 'rocket',
-    a: "We're currently building Researchly. Join the waitlist to be among the first to receive updates and early access announcements.",
+    a: "Researchly is in early access. Join the waitlist and we'll reach out as spots open. We're building it for students, and we'll share the details on access as we get closer.",
   },
   {
     q: "Does Researchly guarantee I'll get accepted?",
