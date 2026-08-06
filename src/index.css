@@ -4,7 +4,7 @@
   --face:#3B2A1E; --gold:#D9A441;
   --glass-rim:#A08A63; --glass-rim-dark:#7C6A4C; --glass-lens:rgba(255,255,255,.5);
 
-  --cream:#F4EAD6; --cream-deep:#ECDDBB;
+  --cream:#F8F1E3; --cream-deep:#F0E2C6;
   --navy:#1E2540; --navy-soft:rgba(30,37,64,.68); --navy-faint:rgba(30,37,64,.4);
   --sage-back:#CBD8B2; --sage-mid:#9BB683; --sage-front:#688656; --pine:#415C39;
   --road:#E9D9AF; --road-line:#FBF4DF; --stone:#E3D5B3;
@@ -709,9 +709,13 @@ h1{
   min-height:280px; display:flex; align-items:flex-end; justify-content:center;
   overflow:hidden;
 }
-.how-landscape-svg{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+.how-landscape-svg{
+  position:absolute; inset:0; width:100%; height:100%; display:block;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 14%, black 88%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 14%, black 88%, transparent 100%);
+}
 .how-landscape-cta{
-  position:relative; z-index:1; margin-bottom:34px;
+  position:relative; z-index:1; margin-bottom:56px;
   display:flex; flex-direction:column; align-items:center; gap:16px;
 }
 .how-landscape-cta p{
