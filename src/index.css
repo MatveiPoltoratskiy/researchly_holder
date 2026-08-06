@@ -407,49 +407,49 @@ h1{
 
 .faq-intro{
   position:relative; z-index:2;
-  flex:0 1 380px; position:sticky; top:110px;
+  flex:0 1 430px; position:sticky; top:110px;
   text-align:left; display:flex; flex-direction:column; align-items:flex-start;
 }
 .faq-heading{
-  margin: 0 0 10px;
+  margin: 0 0 12px;
   font-family: "Fraunces", "Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
-  font-weight:800; font-size: clamp(30px, 3.4vw, 42px); line-height:1.15;
+  font-weight:800; font-size: clamp(34px, 3.8vw, 48px); line-height:1.12;
   color: var(--navy); text-wrap: balance;
 }
 .faq-heading-underline{
-  display:block; width:150px; height:16px; margin-bottom:20px;
+  display:block; width:172px; height:18px; margin-bottom:22px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 26' preserveAspectRatio='none'%3E%3Cpath d='M2,15 C18,4 32,24 48,13 C64,3 80,22 96,12 C112,3 128,21 144,11 C160,3 176,20 192,10 C208,3 224,19 240,10 C254,4 268,16 284,9 C290,7 294,8 298,7' fill='none' stroke='%23A94F1E' stroke-width='4.5' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat:no-repeat; background-size:100% 100%;
 }
 .faq-sub{
-  margin: 0 0 28px; max-width: 340px;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:15.5px; line-height:1.55;
+  margin: 0 0 30px; max-width: 380px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:17.5px; line-height:1.55;
   color: var(--navy-soft);
 }
 
 .faq-tip{
   position:relative; align-self:flex-start;
-  background: var(--pages); border:1px solid var(--card-border); border-radius:4px 14px 14px 14px;
-  padding:18px 20px 20px; max-width:250px;
+  background: var(--pages); border:1px solid var(--card-border); border-radius:4px 16px 16px 16px;
+  padding:20px 24px 22px; max-width:290px;
   transform: rotate(-2.5deg);
   box-shadow: 0 18px 30px -18px rgba(30,37,64,.35);
-  margin-bottom:28px;
+  margin-bottom:30px;
 }
 .faq-tip-pin{
-  position:absolute; top:-9px; left:26px; width:14px; height:14px; border-radius:50%;
+  position:absolute; top:-10px; left:28px; width:16px; height:16px; border-radius:50%;
   background: var(--cover); box-shadow: 0 3px 6px rgba(0,0,0,.3);
 }
 .faq-tip-label{
-  margin:0 0 6px; font-family:"Bradley Hand","Segoe Print","Comic Sans MS",cursive;
-  font-size:16px; font-weight:700; color: var(--cover-dark);
+  margin:0 0 7px; font-family:"Bradley Hand","Segoe Print","Comic Sans MS",cursive;
+  font-size:18px; font-weight:700; color: var(--cover-dark);
 }
 .faq-tip-text{
   margin:0; font-family:"Bradley Hand","Segoe Print","Comic Sans MS",cursive;
-  font-size:14.5px; line-height:1.45; color: var(--navy-soft);
+  font-size:16.5px; line-height:1.45; color: var(--navy-soft);
 }
 .faq-tip-text strong{ color: var(--cover-dark); }
 
-.faq-mascot{ width:150px; height:auto; display:block; filter: drop-shadow(0 16px 22px rgba(30,37,64,.28)); }
+.faq-mascot{ width:185px; height:auto; display:block; filter: drop-shadow(0 16px 22px rgba(30,37,64,.28)); }
 
 .faq-list-col{ position:relative; z-index:2; flex:1 1 640px; max-width: 680px; display:flex; flex-direction:column; gap:16px; }
 .faq-item{
@@ -481,32 +481,23 @@ h1{
   transition: transform .3s cubic-bezier(.4,0,.2,1), color .2s ease;
 }
 .faq-item.is-open .faq-toggle{ color: var(--navy); transform: rotate(180deg); }
-/* max-height:0 here is the hard default — inline style (measured from real content height via
-   JS) overrides it when open. If the inline style ever fails to apply for any reason, this
-   default keeps the box collapsed instead of silently rendering full-height-but-invisible.
-   Opacity fades faster than max-height on close so the text visibly clears out of the way
-   instead of sitting at full strength until the box abruptly clips it. */
+/* grid-rows 0fr -> 1fr collapses/expands to exactly the content's real height, no JS
+   measurement involved — so it can never end up out of sync with the actual content
+   (unlike a JS-measured max-height, which is only as fresh as its last measurement). */
+.faq-panel-wrap{
+  display:grid; grid-template-rows: 0fr;
+  transition: grid-template-rows .42s cubic-bezier(.22,.85,.32,1);
+}
+.faq-item.is-open .faq-panel-wrap{ grid-template-rows: 1fr; }
 .faq-panel{
-  max-height:0; overflow:hidden; visibility:hidden; opacity:0;
-  padding: 0 20px 0 20px;
-  border-top: 1px solid transparent;
-  transition:
-    max-height .42s cubic-bezier(.22,.85,.32,1),
-    opacity .22s ease,
-    padding-top .42s cubic-bezier(.22,.85,.32,1),
-    border-color .1s linear .3s,
-    visibility 0s linear .42s;
+  overflow:hidden; min-height:0; opacity:0;
+  padding: 0 20px; border-top:1px solid transparent;
+  transition: opacity .22s ease, border-color .1s linear .3s, padding-top .1s linear;
 }
 .faq-item.is-open .faq-panel{
-  visibility:visible; opacity:1;
-  padding-top:18px; padding-bottom:22px;
+  opacity:1; padding-top:20px; padding-bottom:20px;
   border-top-color: var(--card-border);
-  transition:
-    max-height .42s cubic-bezier(.22,.85,.32,1),
-    opacity .3s ease .1s,
-    padding-top .42s cubic-bezier(.22,.85,.32,1),
-    border-color 0s linear 0s,
-    visibility 0s linear 0s;
+  transition: opacity .3s ease .12s, border-color 0s linear 0s, padding-top .1s linear;
 }
 .faq-a{
   margin:0;
@@ -544,7 +535,7 @@ h1{
 }
 @media (prefers-reduced-motion: reduce){
   .faq-reveal, .faq-item-reveal{ opacity:1; transform:none; transition:none; }
-  .faq-panel{ transition:none; }
+  .faq-panel-wrap, .faq-panel{ transition:none; }
 }
 
 @media (max-width: 900px){

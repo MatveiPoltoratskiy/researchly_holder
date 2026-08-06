@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { prefersReducedMotion } from '../lib/motion'
 import SymbolField from './SymbolField'
 
@@ -59,14 +59,6 @@ const FAQS = [
 
 function FaqItem({ index, q, a, list, icon, steps, isOpen, onToggle, revealDelay }) {
   const panelId = `faq-panel-${index}`
-  const panelRef = useRef(null)
-  const [maxHeight, setMaxHeight] = useState(0)
-
-  useLayoutEffect(() => {
-    const el = panelRef.current
-    if (!el) return
-    setMaxHeight(isOpen ? el.scrollHeight : 0)
-  }, [isOpen])
 
   return (
     <div className="faq-item-reveal" style={{ transitionDelay: revealDelay }}>
@@ -83,36 +75,31 @@ function FaqItem({ index, q, a, list, icon, steps, isOpen, onToggle, revealDelay
           <span className="faq-q">{q}</span>
           <svg className="faq-toggle" width="16" height="16" aria-hidden="true"><use href="#icon-chevron-down" /></svg>
         </button>
-        <div
-          ref={panelRef}
-          className="faq-panel"
-          id={panelId}
-          role="region"
-          aria-hidden={!isOpen}
-          style={{ maxHeight }}
-        >
-          <p className="faq-a">{a}</p>
-          {list && (
-            <ul className="faq-list">
-              {list.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          )}
-          {steps && (
-            <div className="faq-steps">
-              {steps.map((step, si) => (
-                <div className="faq-step" key={step.title}>
-                  {si > 0 && <span className="faq-step-connector" aria-hidden="true" />}
-                  <span className="faq-step-badge">
-                    <svg width="22" height="22" aria-hidden="true"><use href={`#icon-${step.icon}`} /></svg>
-                  </span>
-                  <p className="faq-step-title">{step.title}</p>
-                  <p className="faq-step-sub">{step.sub}</p>
-                </div>
-              ))}
-            </div>
-          )}
+        <div className="faq-panel-wrap" id={panelId} role="region" aria-hidden={!isOpen}>
+          <div className="faq-panel">
+            <p className="faq-a">{a}</p>
+            {list && (
+              <ul className="faq-list">
+                {list.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            )}
+            {steps && (
+              <div className="faq-steps">
+                {steps.map((step, si) => (
+                  <div className="faq-step" key={step.title}>
+                    {si > 0 && <span className="faq-step-connector" aria-hidden="true" />}
+                    <span className="faq-step-badge">
+                      <svg width="22" height="22" aria-hidden="true"><use href={`#icon-${step.icon}`} /></svg>
+                    </span>
+                    <p className="faq-step-title">{step.title}</p>
+                    <p className="faq-step-sub">{step.sub}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
