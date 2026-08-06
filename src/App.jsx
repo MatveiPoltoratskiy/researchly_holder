@@ -23,6 +23,7 @@ function Page() {
         <>
           <Hero />
           <ReviewCarousel />
+          <HowItWorks />
           <Faq />
         </>
       )}

@@ -1,25 +1,27 @@
 import { Link, useRouter } from '../lib/router'
+import { goToWaitlist } from '../lib/waitlist'
 
 export default function Navbar() {
-  const { navigate } = useRouter()
-
-  function focusWaitlistInput() {
-    const input = document.getElementById('waitlist-email')
-    if (input) {
-      input.scrollIntoView({ behavior: 'smooth', block: 'center' })
-      input.focus({ preventScroll: true })
-    }
-  }
+  const { path, navigate } = useRouter()
 
   function handleJoinClick() {
-    // some pages (home, how-it-works) have their own waitlist form; use it if present
-    // instead of always bouncing to "/", which would ignore a form already on screen
-    if (document.getElementById('waitlist-email')) {
-      focusWaitlistInput()
+    goToWaitlist(navigate)
+  }
+
+  // "How it works" now lives as a section on the homepage — scroll to it directly when
+  // already there, otherwise navigate home first and land on it once rendered. Can't use
+  // the shared <Link>, which always navigates before this handler runs.
+  function handleHowItWorksClick(e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+    e.preventDefault()
+    if (path === '/') {
+      document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
       return
     }
     navigate('/')
-    setTimeout(focusWaitlistInput, 60)
+    setTimeout(() => {
+      document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 60)
   }
 
   return (
@@ -29,9 +31,9 @@ export default function Navbar() {
         <span>Researchly</span>
       </Link>
       <div className="nav-right">
-        <Link className="nav-link" to="/how-it-works">
+        <a className="nav-link" href="/how-it-works" onClick={handleHowItWorksClick}>
           How it works
-        </Link>
+        </a>
         <Link className="nav-link" to="/contact">
           Contact
         </Link>
