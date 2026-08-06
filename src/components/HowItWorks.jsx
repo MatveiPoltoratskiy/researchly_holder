@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { prefersReducedMotion } from '../lib/motion'
 import { useRouter } from '../lib/router'
 import { goToWaitlist } from '../lib/waitlist'
+import SymbolField from './SymbolField'
 import { InterviewVisual, MatchVisual, RoadmapVisual, ApplyVisual } from './HowItWorksVisuals'
 
 const STEPS = [
@@ -134,6 +135,15 @@ function HowLandscape() {
 export default function HowItWorks() {
   return (
     <section className="how-section container" id="how-it-works">
+      <div className="how-symbol-field" aria-hidden="true">
+        <SymbolField
+          rows={8} cols={16}
+          opacityRange={[0.22, 0.32]}
+          fontSizeRange={[16, 24]}
+          colors={['var(--symbol-tan)', 'var(--cover-dark)', 'var(--ribbon)', 'var(--navy)', '#5C3A1E', 'var(--gold)']}
+        />
+      </div>
+
       <div className="how-head">
         <p className="kicker">How it works</p>
         <h2 className="how-heading">
