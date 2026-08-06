@@ -136,7 +136,7 @@ export default function FAQ() {
       <div className="faq-symbol-field" aria-hidden="true">
         <SymbolField
           rows={6} cols={22}
-          opacityRange={[0.32, 0.44]}
+          opacityRange={[0.22, 0.32]}
           fontSizeRange={[18, 27]}
           colors={['var(--symbol-tan)', 'var(--cover-dark)', 'var(--ribbon)', 'var(--navy)', '#5C3A1E', 'var(--gold)']}
         />
