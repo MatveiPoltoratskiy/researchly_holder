@@ -134,7 +134,12 @@ export default function FAQ() {
   return (
     <section className={`faq-section container${revealed ? ' is-revealed' : ''}`} ref={sectionRef}>
       <div className="faq-symbol-field" aria-hidden="true">
-        <SymbolField rows={3} cols={10} opacityRange={[0.16, 0.22]} fontSizeRange={[13, 19]} />
+        <SymbolField
+          rows={6} cols={22}
+          opacityRange={[0.32, 0.44]}
+          fontSizeRange={[18, 27]}
+          colors={['var(--symbol-tan)', 'var(--cover-dark)', 'var(--ribbon)', 'var(--navy)', '#5C3A1E', 'var(--gold)']}
+        />
       </div>
 
       <div className="faq-intro faq-reveal">
