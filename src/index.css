@@ -557,6 +557,171 @@ h1{
   .faq-step-connector{ display:none; }
 }
 
+/* ---------- how it works ---------- */
+.how-section{ position:relative; z-index:5; padding: 90px 0 120px; }
+
+.how-head{ max-width:680px; margin:0 auto 70px; text-align:center; }
+.how-head .kicker{ display:table; margin:0 auto 16px; }
+.how-sub{ max-width:560px; margin:20px auto 0; }
+
+.how-trail{ list-style:none; margin:0 auto; padding:0; max-width:920px; position:relative; }
+.how-step{
+  position:relative; z-index:1;
+  display:flex; flex-direction:column; align-items:flex-start; gap:22px;
+  margin-bottom:64px;
+  opacity:0; transform:translateY(24px);
+  transition: opacity .7s cubic-bezier(.22,.85,.32,1), transform .7s cubic-bezier(.22,.85,.32,1);
+}
+.how-step:last-child{ margin-bottom:0; }
+.how-step.is-in{ opacity:1; transform:none; }
+
+.how-node{
+  flex:none; width:40px; height:40px; border-radius:50%;
+  background:var(--card-bg); border:2px solid var(--cover); color:var(--cover-dark);
+  display:flex; align-items:center; justify-content:center;
+  font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:13px;
+}
+.how-copy{ max-width:460px; }
+.how-mascot{ display:block; margin-bottom:14px; filter: drop-shadow(0 10px 14px rgba(30,37,64,.2)); }
+.how-kicker{
+  margin:0 0 8px; font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:700;
+  letter-spacing:.1em; color:var(--cover-dark);
+}
+.how-title{
+  margin:0 0 10px; font-family:"Fraunces","Iowan Old Style",Palatino,Georgia,serif;
+  font-weight:800; font-size:clamp(22px,2.4vw,27px); line-height:1.25; color:var(--navy);
+}
+.how-desc{ margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:15.5px; line-height:1.6; color:rgba(30,37,64,.78); }
+.how-meta{
+  margin:14px 0 0; font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:700;
+  color:var(--navy-soft);
+}
+
+.how-visual{ width:100%; display:flex; justify-content:center; }
+.how-panel{
+  position:relative; width:100%; max-width:300px; min-height:210px;
+  background:var(--card-bg); border:1px solid var(--card-border); border-radius:20px;
+  padding:24px; display:flex; align-items:center; justify-content:center;
+  box-shadow: 0 20px 40px -26px rgba(30,37,64,.28);
+}
+.how-panel--01{ box-shadow: 0 20px 40px -26px rgba(30,37,64,.28), 0 0 70px -22px rgba(221,107,46,.35); }
+.how-panel--02{ box-shadow: 0 20px 40px -26px rgba(30,37,64,.28), 0 0 70px -22px rgba(63,125,92,.35); }
+.how-panel--03{ box-shadow: 0 20px 40px -26px rgba(30,37,64,.28), 0 0 70px -22px rgba(217,164,65,.4); }
+.how-panel--04{ box-shadow: 0 20px 40px -26px rgba(30,37,64,.28), 0 0 70px -22px rgba(63,125,92,.35); }
+
+/* visual 01 — interview card stack */
+.how-cardstack{ position:relative; width:100%; }
+.how-cardstack-back{
+  position:absolute; inset:0; border-radius:14px;
+}
+.how-cardstack-back-1{ background:var(--cream-deep); transform:rotate(-4deg) translateY(4px); }
+.how-cardstack-back-2{ background:var(--pages-shadow); transform:rotate(4deg) translateY(6px); }
+.how-cardstack-front{
+  position:relative; background:var(--pages); border:1px solid var(--card-border); border-radius:14px;
+  padding:14px 16px; display:flex; flex-direction:column; gap:9px;
+}
+.how-qrow{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:5px 0; }
+.how-qrow-label{ font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:700; color:var(--navy); }
+.how-qrow.is-pending .how-qrow-label{ color:var(--navy-faint); font-weight:600; }
+.how-qrow-chip{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:11px; font-weight:700; color:var(--cover-dark);
+  background:var(--pill-amber-bg); padding:3px 9px; border-radius:999px;
+}
+.how-qrow.is-active{ background:rgba(221,107,46,.08); margin:0 -8px; padding:5px 8px; border-radius:8px; }
+.how-qrow-cursor{
+  width:14px; height:2px; background:var(--cover); border-radius:2px;
+  animation: how-cursor-blink 1s ease-in-out infinite;
+}
+@keyframes how-cursor-blink{ 0%,100%{ opacity:1; } 50%{ opacity:.2; } }
+
+/* visual 02 — match funnel */
+.how-funnel{ width:100%; display:flex; flex-direction:column; align-items:center; gap:12px; }
+.how-funnel-noise{ display:flex; flex-wrap:wrap; gap:5px; justify-content:center; max-width:200px; }
+.how-funnel-noise span{
+  width:12px; height:12px; border-radius:4px; background:var(--pill-bg);
+  animation: how-noise-fade 2.6s ease-in-out infinite; animation-delay: var(--d, 0ms);
+}
+@keyframes how-noise-fade{ 0%,100%{ opacity:.9; } 50%{ opacity:.3; } }
+.how-funnel-chevron{ color:var(--cover-dark); }
+.how-funnel-result{ display:flex; flex-direction:column; gap:7px; width:100%; }
+.how-chip{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:700; color:#fff;
+  padding:7px 12px; border-radius:999px; text-align:center;
+}
+.how-chip--cover{ background:var(--cover); }
+.how-chip--ribbon{ background:var(--ribbon); }
+.how-chip--navy{ background:var(--navy); }
+
+/* visual 03 — roadmap timeline */
+.how-timeline{ position:relative; width:100%; padding-left:26px; }
+.how-timeline::before{
+  content:""; position:absolute; left:7px; top:4px; bottom:4px; width:0;
+  border-left:2px dashed var(--road-line);
+}
+.how-timeline-item{
+  position:relative; display:flex; align-items:center; gap:10px; padding:9px 0;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:600; color:var(--navy);
+}
+.how-timeline-item svg{ position:absolute; left:-26px; color:var(--cover-dark); flex:none; }
+
+/* visual 04 — apply clipboard + calendar */
+.how-clipboard{
+  position:relative; width:100%; background:var(--pages); border:1px solid var(--card-border);
+  border-radius:12px; padding:20px 16px 16px; display:flex; flex-direction:column; gap:9px;
+}
+.how-clipboard-clip{
+  position:absolute; top:-8px; left:50%; transform:translateX(-50%);
+  width:36px; height:14px; border-radius:6px; background:var(--spine);
+}
+.how-check-row{ display:flex; align-items:center; gap:9px; font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:600; color:var(--navy-faint); }
+.how-check-row.is-done{ color:var(--navy); }
+.how-check-box{
+  flex:none; width:16px; height:16px; border-radius:5px; border:1.5px solid var(--card-border);
+  display:flex; align-items:center; justify-content:center; background:#fff;
+}
+.how-check-row.is-done .how-check-box{ background:var(--pill-green-bg); border-color:var(--ribbon); }
+.how-cal-chip{
+  position:absolute; bottom:-14px; right:-10px; transform:rotate(5deg);
+  display:flex; align-items:center; gap:6px;
+  background:var(--card-bg); border:1px solid var(--card-border); border-radius:10px;
+  padding:8px 12px; box-shadow:0 12px 22px -12px rgba(30,37,64,.35);
+  color:var(--cover-dark); font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; font-weight:700;
+}
+
+/* closing waitlist CTA */
+.how-cta{
+  max-width:560px; margin:110px auto 0; text-align:center;
+  background:var(--card-bg); border:1px solid var(--card-border); border-radius:26px;
+  padding:48px 40px; box-shadow: 0 30px 60px -28px rgba(30,37,64,.28), 0 0 90px -20px rgba(221,107,46,.3);
+}
+.how-cta-mascot{ width:64px; height:64px; margin:0 auto 18px; display:block; }
+.how-cta h2{
+  margin:0; font-family:"Fraunces","Iowan Old Style",Palatino,Georgia,serif; font-weight:800;
+  font-size:clamp(24px,2.6vw,30px); color:var(--navy);
+}
+.how-cta .sub{ margin:12px auto 26px; max-width:420px; font-size:16px; }
+.how-cta .cta-wrap{ align-items:center; }
+.how-cta .waitlist-form{ justify-content:center; }
+
+@media (min-width: 901px){
+  .how-trail::before{
+    content:""; position:absolute; left:50%; top:0; bottom:40px; width:0;
+    transform:translateX(-50%); border-left:2px dashed var(--cover-light); z-index:0;
+  }
+  .how-step{ flex-direction:row; align-items:center; gap:0; margin-bottom:100px; }
+  .how-step:nth-child(even){ flex-direction:row-reverse; }
+  .how-step:nth-child(odd){ transform:translateX(-28px); }
+  .how-step:nth-child(even){ transform:translateX(28px); }
+  .how-step.is-in{ transform:none; }
+  .how-copy{ flex:1 1 0; max-width:400px; }
+  .how-node{ margin:0 32px; }
+  .how-visual{ flex:1 1 0; max-width:400px; }
+}
+
+@media (max-width: 900px){
+  .how-cta{ padding:36px 24px; }
+}
+
 /* ---------- waitlist form ---------- */
 .waitlist-form{ display:flex; align-items:stretch; gap:12px; flex-wrap:wrap; width:100%; }
 .waitlist-input{
