@@ -78,7 +78,11 @@ function StepRow({ step, index }) {
         <p className="how-meta">{step.meta}</p>
       </div>
       <div className="how-spine-mascot">
-        <svg className="how-mascot" width="56" height="56" viewBox="0 0 72 72" aria-hidden="true">
+        <svg
+          className="how-mascot"
+          width="60" height="60" viewBox="0 0 72 72" aria-hidden="true"
+          style={{ '--bob-delay': `${index * 0.4}s` }}
+        >
           <use href={`#${step.mascot}`} />
         </svg>
       </div>

@@ -24,7 +24,10 @@ export function InterviewVisual() {
         <span className="how-cardstack-back how-cardstack-back-2" aria-hidden="true" />
         <span className="how-cardstack-back how-cardstack-back-1" aria-hidden="true" />
         <div className="how-cardstack-front">
-          <PanelChrome label="Your interview" />
+          <div className="how-panel-chrome-row">
+            <PanelChrome label="Your interview" />
+            <span className="how-progress-label">3 of 5</span>
+          </div>
           {INTERVIEW_ROWS.map((row) => (
             <div className={`how-qrow is-${row.state}`} key={row.label}>
               <span className="how-qrow-label">{row.label}</span>
@@ -43,11 +46,21 @@ export function InterviewVisual() {
               )}
             </div>
           ))}
+          <button type="button" className="how-mock-btn" tabIndex={-1}>
+            Continue
+            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><use href="#icon-arrow" /></svg>
+          </button>
         </div>
       </div>
     </div>
   )
 }
+
+const MATCHES = [
+  { pct: '96%', tone: 'cover', name: 'Summer Research Program', tags: 'Summer · In-person', uni: 'Stanford University' },
+  { pct: '91%', tone: 'ribbon', name: 'Undergrad Fellows Program', tags: 'Year-round · Paid', uni: 'The Jackson Laboratory' },
+  { pct: '88%', tone: 'navy', name: 'Remote Research Apprenticeship', tags: 'Remote · High school', uni: 'Simons Foundation' },
+]
 
 export function MatchVisual() {
   return (
@@ -61,28 +74,21 @@ export function MatchVisual() {
         </div>
         <svg className="how-funnel-chevron" width="22" height="22" aria-hidden="true"><use href="#icon-chevron-down" /></svg>
         <div className="how-funnel-result">
-          <div className="how-match-row">
-            <span className="how-chip how-chip--cover">96%</span>
-            <div>
-              <p className="how-match-name">Summer Research Program</p>
-              <p className="how-match-tags">Summer · In-person</p>
+          {MATCHES.map((m) => (
+            <div className="how-match-row" key={m.name}>
+              <span className={`how-chip how-chip--${m.tone}`}>{m.pct}</span>
+              <div className="how-match-info">
+                <p className="how-match-name">{m.name}</p>
+                <p className="how-match-uni">{m.uni}</p>
+                <p className="how-match-tags">{m.tags}</p>
+              </div>
+              <svg className="how-match-go" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><use href="#icon-arrow" /></svg>
             </div>
-          </div>
-          <div className="how-match-row">
-            <span className="how-chip how-chip--ribbon">91%</span>
-            <div>
-              <p className="how-match-name">Undergrad Fellows Program</p>
-              <p className="how-match-tags">Year-round · Paid</p>
-            </div>
-          </div>
-          <div className="how-match-row">
-            <span className="how-chip how-chip--navy">88%</span>
-            <div>
-              <p className="how-match-name">Remote Research Apprenticeship</p>
-              <p className="how-match-tags">Remote · High school</p>
-            </div>
-          </div>
+          ))}
         </div>
+        <button type="button" className="how-mock-btn how-mock-btn--ghost" tabIndex={-1}>
+          See all 12 matches
+        </button>
       </div>
     </div>
   )
@@ -96,9 +102,16 @@ const MILESTONES = [
 ]
 
 export function RoadmapVisual() {
+  const doneCount = MILESTONES.filter((m) => m.done).length
   return (
     <div className="how-panel how-panel--03">
-      <PanelChrome label="Your roadmap" />
+      <div className="how-panel-chrome-row">
+        <PanelChrome label="Your roadmap" />
+        <span className="how-progress-label">{doneCount} of {MILESTONES.length}</span>
+      </div>
+      <div className="how-progress-track" aria-hidden="true">
+        <span className="how-progress-fill" style={{ width: `${(doneCount / MILESTONES.length) * 100}%` }} />
+      </div>
       <div className="how-timeline">
         {MILESTONES.map((m, i) => (
           <div className={`how-timeline-item${m.done ? ' is-done' : ''}`} key={m.text} style={{ '--d': `${i * 110}ms` }}>
@@ -141,6 +154,9 @@ export function ApplyVisual() {
             <span>{item.text}</span>
           </div>
         ))}
+        <button type="button" className="how-mock-btn how-mock-btn--muted" tabIndex={-1}>
+          Submit application
+        </button>
       </div>
       <div className="how-cal-chip">
         <svg width="18" height="18" aria-hidden="true"><use href="#icon-calendar" /></svg>

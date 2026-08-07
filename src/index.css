@@ -593,33 +593,37 @@ h1{
 .how-step:last-child{ margin-bottom:24px; }
 .how-step.is-in{ opacity:1; transform:none; }
 
-.how-copy{ max-width:520px; }
-.how-copy-top{ display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+.how-copy{ max-width:560px; }
+.how-copy-top{ display:flex; align-items:center; gap:12px; margin-bottom:14px; }
 .how-node{
-  flex:none; width:32px; height:32px; border-radius:50%;
+  flex:none; width:34px; height:34px; border-radius:50%;
   background:var(--card-bg); border:1.5px solid var(--cover); color:var(--cover-dark);
   display:flex; align-items:center; justify-content:center;
-  font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:12px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:12.5px;
 }
 .how-spine-mascot{ flex:none; display:flex; justify-content:center; }
-.how-mascot{ display:block; filter: drop-shadow(0 10px 14px rgba(30,37,64,.2)); }
+.how-mascot{
+  display:block; filter: drop-shadow(0 10px 14px rgba(30,37,64,.2));
+  animation: mascot-bob 3.6s ease-in-out infinite; animation-delay: var(--bob-delay, 0s);
+}
+@media (prefers-reduced-motion: reduce){ .how-mascot{ animation:none; } }
 .how-kicker{
-  margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:700;
+  margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:700;
   letter-spacing:.1em; color:var(--cover-dark);
 }
 .how-title{
-  margin:0 0 10px; font-family:"Fraunces","Iowan Old Style",Palatino,Georgia,serif;
-  font-weight:800; font-size:clamp(24px,2.6vw,31px); line-height:1.25; color:var(--navy);
+  margin:0 0 16px; font-family:"Fraunces","Iowan Old Style",Palatino,Georgia,serif;
+  font-weight:800; font-size:clamp(26px,2.9vw,34px); line-height:1.3; color:var(--navy);
 }
-.how-desc{ margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:16.5px; line-height:1.6; color:rgba(30,37,64,.78); }
+.how-desc{ margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:17.5px; line-height:1.7; color:rgba(30,37,64,.82); }
 .how-meta{
-  margin:14px 0 0; font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:700;
+  margin:18px 0 0; font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; font-weight:700;
   color:var(--navy-soft);
 }
 
 .how-visual{ width:100%; display:flex; justify-content:center; }
 .how-panel{
-  position:relative; width:100%; max-width:600px; min-height:340px;
+  position:relative; width:100%; max-width:660px; min-height:370px;
   background:var(--card-bg); border:1px solid var(--card-border); border-radius:24px;
   padding:32px 36px; display:flex; flex-direction:column; align-items:center; justify-content:center;
   box-shadow: 0 24px 48px -26px rgba(30,37,64,.3);
@@ -631,11 +635,28 @@ h1{
 
 /* shared "real interface" header used across all 4 mockups */
 .how-panel-chrome{ display:flex; align-items:center; gap:6px; width:100%; margin-bottom:14px; }
+.how-panel-chrome-row{ display:flex; align-items:center; justify-content:space-between; width:100%; margin-bottom:14px; }
+.how-panel-chrome-row .how-panel-chrome{ margin-bottom:0; width:auto; }
 .how-panel-dot{ width:6px; height:6px; border-radius:50%; background:var(--card-border); flex:none; }
 .how-panel-chrome-label{
   margin-left:6px; font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:700;
   letter-spacing:.03em; color:var(--navy-faint); text-transform:uppercase;
 }
+.how-progress-label{
+  flex:none; font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:700; color:var(--cover-dark);
+}
+.how-progress-track{ width:100%; height:5px; border-radius:999px; background:var(--pill-bg); margin-bottom:16px; overflow:hidden; }
+.how-progress-fill{ display:block; height:100%; background:var(--cover); border-radius:999px; transition:width .5s ease; }
+
+/* small buttons used to make each mockup read as a real, clickable interface */
+.how-mock-btn{
+  margin-top:14px; width:100%; display:flex; align-items:center; justify-content:center; gap:8px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; font-weight:700;
+  background:var(--cover); color:#fff; border:none; border-radius:999px; padding:11px 18px; cursor:default;
+}
+.how-mock-btn svg{ color:#fff; }
+.how-mock-btn--ghost{ background:none; border:1.5px solid var(--card-border); color:var(--navy); }
+.how-mock-btn--muted{ background:var(--pill-bg); color:var(--pill-text); }
 
 /* visual 01 — interview card stack */
 .how-cardstack{ position:relative; width:100%; }
@@ -681,16 +702,19 @@ h1{
 @keyframes how-noise-fade{ 0%,100%{ opacity:.9; } 50%{ opacity:.3; } }
 .how-funnel-chevron{ color:var(--cover-dark); }
 .how-funnel-result{ display:flex; flex-direction:column; gap:9px; width:100%; }
-.how-match-row{ display:flex; align-items:center; gap:11px; }
+.how-match-row{ display:flex; align-items:center; gap:12px; }
 .how-chip{
-  flex:none; font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:700; color:#fff;
-  width:38px; height:26px; border-radius:999px; display:flex; align-items:center; justify-content:center;
+  flex:none; font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; font-weight:700; color:#fff;
+  width:42px; height:28px; border-radius:999px; display:flex; align-items:center; justify-content:center;
 }
 .how-chip--cover{ background:var(--cover); }
 .how-chip--ribbon{ background:var(--ribbon); }
 .how-chip--navy{ background:var(--navy); }
-.how-match-name{ margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:700; color:var(--navy); }
+.how-match-info{ flex:1; min-width:0; }
+.how-match-name{ margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; font-weight:700; color:var(--navy); }
+.how-match-uni{ margin:2px 0 0; font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; color:var(--navy-faint); }
 .how-match-tags{ margin:2px 0 0; font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; color:var(--navy-soft); }
+.how-match-go{ flex:none; color:var(--navy-faint); }
 
 /* visual 03 — roadmap timeline */
 .how-timeline{ position:relative; width:100%; padding-left:30px; }
