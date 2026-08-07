@@ -21,11 +21,6 @@ export default function IconSprite() {
         <symbol id="icon-avatar" viewBox="0 0 24 24"><circle cx="12" cy="9" r="4" fill="#fff" /><path d="M4 21c1.4-4.4 4.6-6.6 8-6.6s6.6 2.2 8 6.6" fill="#fff" /></symbol>
         <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" /></symbol>
         <symbol id="icon-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.7" /><path d="M8 12.5l2.6 2.6L16 9.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></symbol>
-        <symbol id="icon-plusminus" viewBox="0 0 24 24">
-          <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-          <line className="faq-vline" x1="12" y1="5" x2="12" y2="19" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-        </symbol>
-
         {/* decorative sketches */}
         <symbol id="deco-hex" viewBox="0 0 140 110">
           <g fill="none" stroke="currentColor" strokeWidth="1.6">
