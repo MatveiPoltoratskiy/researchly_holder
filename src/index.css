@@ -208,7 +208,6 @@ h1{
   position:relative;
   flex: 0 1 500px; max-width:500px; width:100%;
   margin-top: 10px;
-  display:flex; flex-direction:column; align-items:center; gap:16px;
   animation: content-in .8s ease-out .3s both;
 }
 .hero-card{ position:relative; width:100%; perspective:1400px; }
@@ -220,12 +219,12 @@ h1{
    interview/loading phases play so it doesn't compete with them, then grows in once the
    matches are actually revealed. */
 .hero-mascot{
-  position:absolute; right:-6%; bottom:-24%; width:20%; z-index:8;
+  position:absolute; right:-6%; bottom:-16%; width:20%; z-index:8;
   pointer-events:none; opacity:0;
   animation: mascot-in 1.15s cubic-bezier(.22,.85,.32,1.05) 1.05s both;
   transition: width .5s cubic-bezier(.3,.85,.4,1), right .5s ease, bottom .5s ease;
 }
-.hero-mascot.is-compact{ width:10%; right:-8%; bottom:-8%; }
+.hero-mascot.is-compact{ width:10%; right:-8%; bottom:-3%; }
 @media (prefers-reduced-motion: reduce){ .hero-mascot{ transition:none; } }
 .hero-mascot-float{ animation: mascot-bob 3.8s ease-in-out 2.2s infinite; }
 .hero-mascot img{ width:100%; height:auto; display:block; filter: drop-shadow(0 16px 18px rgba(30,37,64,.32)); }
@@ -240,8 +239,8 @@ h1{
   50%{ transform: translateY(-6px); }
 }
 @media (max-width: 900px){
-  .hero-mascot{ width:18%; right:-2%; bottom:-14%; }
-  .hero-mascot.is-compact{ width:9%; right:-4%; bottom:-4%; }
+  .hero-mascot{ width:18%; right:-2%; bottom:-8%; }
+  .hero-mascot.is-compact{ width:9%; right:-4%; bottom:-1%; }
 }
 .hero-card-inner{
   position:relative;
@@ -320,7 +319,10 @@ h1{
 
 /* real, focusable controls for the hero demo — kept outside the decorative (aria-hidden)
    card itself so they're properly reachable by keyboard/AT, not just mouse */
-.hero-card-controls{ display:flex; align-items:center; justify-content:center; gap:10px; }
+.hero-card-controls{
+  position:absolute; left:50%; bottom:-58px; transform:translateX(-50%); z-index:9;
+  display:flex; align-items:center; justify-content:center; gap:10px;
+}
 .hero-card-control{
   display:flex; align-items:center; gap:6px;
   font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:800; color:var(--cover-dark);

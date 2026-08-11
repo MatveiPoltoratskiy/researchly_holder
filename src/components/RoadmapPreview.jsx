@@ -128,9 +128,9 @@ export default function RoadmapPreview() {
 
   return (
     <div className="hero-card-wrap">
-      <div className="hero-card" aria-hidden="true">
+      <div className="hero-card">
         <div className="hero-card-scale">
-          <div className="hero-card-inner" ref={cardRef}>
+          <div className="hero-card-inner" ref={cardRef} aria-hidden="true">
             <div className="card-sheen" ref={sheenRef}></div>
             <div className="card-head">
               <div className="card-head-left">
@@ -218,24 +218,26 @@ export default function RoadmapPreview() {
               <img src="/assets/mascot-logo.png" alt="" />
             </div>
           </div>
-        </div>
-      </div>
 
-      <div className="hero-card-controls">
-        <button type="button" className="hero-card-control" onClick={handleTogglePause}>
-          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
-            {paused ? (
-              <path d="M6 4l14 8-14 8Z" fill="currentColor" />
-            ) : (
-              <path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="currentColor" />
-            )}
-          </svg>
-          {paused ? 'Resume demo' : 'Pause demo'}
-        </button>
-        <button type="button" className="hero-card-control" onClick={handleReplay}>
-          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><use href="#icon-replay" /></svg>
-          Replay demo
-        </button>
+          {/* positioned absolutely (not in normal flow) so it can't push .hero-card-wrap
+              taller than before and get clipped by .hero's overflow:hidden */}
+          <div className="hero-card-controls">
+            <button type="button" className="hero-card-control" onClick={handleTogglePause}>
+              <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                {paused ? (
+                  <path d="M6 4l14 8-14 8Z" fill="currentColor" />
+                ) : (
+                  <path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="currentColor" />
+                )}
+              </svg>
+              {paused ? 'Resume' : 'Pause'}
+            </button>
+            <button type="button" className="hero-card-control" onClick={handleReplay}>
+              <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><use href="#icon-replay" /></svg>
+              Replay
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   )
