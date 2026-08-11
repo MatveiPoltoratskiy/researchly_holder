@@ -215,17 +215,14 @@ h1{
 
 /* mascot floats in and settles beside the card — lives inside .hero-card-scale (not as a
    sibling of it) so it scales together with the card and its offsets stay correct instead
-   of being computed against the card's smaller pre-transform box. Stays compact while the
-   interview/loading phases play so it doesn't compete with them, then grows in once the
-   matches are actually revealed. */
+   of being computed against the card's smaller pre-transform box. Only mounted once the
+   matches phase begins (not during the interview/loading phases, so it never sits over
+   that content), so its entrance animation plays fresh each time it appears. */
 .hero-mascot{
   position:absolute; right:-6%; bottom:-16%; width:20%; z-index:8;
   pointer-events:none; opacity:0;
   animation: mascot-in 1.15s cubic-bezier(.22,.85,.32,1.05) 1.05s both;
-  transition: width .5s cubic-bezier(.3,.85,.4,1), right .5s ease, bottom .5s ease;
 }
-.hero-mascot.is-compact{ width:10%; right:-8%; bottom:-3%; }
-@media (prefers-reduced-motion: reduce){ .hero-mascot{ transition:none; } }
 .hero-mascot-float{ animation: mascot-bob 3.8s ease-in-out 2.2s infinite; }
 .hero-mascot img{ width:100%; height:auto; display:block; filter: drop-shadow(0 16px 18px rgba(30,37,64,.32)); }
 @keyframes mascot-in{
@@ -240,7 +237,6 @@ h1{
 }
 @media (max-width: 900px){
   .hero-mascot{ width:18%; right:-2%; bottom:-8%; }
-  .hero-mascot.is-compact{ width:9%; right:-4%; bottom:-1%; }
 }
 .hero-card-inner{
   position:relative;

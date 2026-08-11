@@ -213,11 +213,13 @@ export default function RoadmapPreview() {
             {phase === 'matches' && <div className="card-foot">View full roadmap →</div>}
           </div>
 
-          <div className={`hero-mascot${phase !== 'matches' ? ' is-compact' : ''}`} aria-hidden="true">
-            <div className="hero-mascot-float">
-              <img src="/assets/mascot-logo.png" alt="" />
+          {phase === 'matches' && (
+            <div className="hero-mascot" aria-hidden="true">
+              <div className="hero-mascot-float">
+                <img src="/assets/mascot-logo.png" alt="" />
+              </div>
             </div>
-          </div>
+          )}
 
           {/* positioned absolutely (not in normal flow) so it can't push .hero-card-wrap
               taller than before and get clipped by .hero's overflow:hidden */}
