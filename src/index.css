@@ -215,7 +215,7 @@ h1{
 
 /* mascot floats in and settles beside the card, spilling onto the landscape */
 .hero-mascot{
-  position:absolute; right:-9%; bottom:-38%; width:40%; z-index:8;
+  position:absolute; right:-6%; bottom:-28%; width:28%; z-index:8;
   pointer-events:none; opacity:0;
   animation: mascot-in 1.15s cubic-bezier(.22,.85,.32,1.05) 1.05s both;
 }
@@ -231,7 +231,7 @@ h1{
   0%,100%{ transform: translateY(0); }
   50%{ transform: translateY(-6px); }
 }
-@media (max-width: 900px){ .hero-mascot{ width:34%; right:-3%; bottom:-26%; } }
+@media (max-width: 900px){ .hero-mascot{ width:24%; right:-2%; bottom:-18%; } }
 .hero-card-inner{
   position:relative;
   background: var(--card-bg);
@@ -303,9 +303,17 @@ h1{
 
 .card-foot{
   margin-top:14px; padding-top:12px; border-top:1px solid var(--card-border);
-  text-align:center; font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:700;
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:700;
   color:var(--cover-dark);
 }
+.card-replay{
+  display:flex; align-items:center; gap:5px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:700; color:var(--navy-soft);
+  background:none; border:none; cursor:pointer; padding:0;
+}
+.card-replay:hover{ color:var(--cover-dark); }
+.card-replay svg{ flex:none; }
 
 /* hero card, phase 1 — animated interview intro that plays once then hands off to .card-body */
 .card-interview{ margin-top:16px; animation: content-in .5s ease-out both; }

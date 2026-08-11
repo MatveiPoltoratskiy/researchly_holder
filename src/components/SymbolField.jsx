@@ -65,7 +65,7 @@ export default function SymbolField({ rows = 2, cols = 12, opacityRange = [0.22,
       const els = elsRef.current
       const n = els.length
       if (!n) return
-      const swapCount = Math.max(1, Math.round(n * (0.12 + Math.random() * 0.13)))
+      const swapCount = Math.max(1, Math.round(n * (0.08 + Math.random() * 0.08)))
       const idxs = {}
       while (Object.keys(idxs).length < swapCount && Object.keys(idxs).length < n) {
         idxs[Math.floor(Math.random() * n)] = true
@@ -90,7 +90,7 @@ export default function SymbolField({ rows = 2, cols = 12, opacityRange = [0.22,
     }
 
     function scheduleCycle() {
-      const delay = 1000 + Math.random() * 1000
+      const delay = 1800 + Math.random() * 1400
       cycleTimerRef.current = setTimeout(() => {
         cycleSymbols()
         scheduleCycle()

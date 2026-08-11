@@ -28,9 +28,10 @@ export default function RoadmapPreview() {
   const [phase, setPhase] = useState('interview')
   const [activeField, setActiveField] = useState(0)
   const [filledCount, setFilledCount] = useState(0)
+  const [runId, setRunId] = useState(0)
 
-  // plays once on mount: cursor "fills out" the interview field by field, then the
-  // card crossfades into the real matches list below
+  // plays on mount (and again whenever runId changes, via the replay button): cursor
+  // "fills out" the interview field by field, then the card crossfades into the matches list
   useEffect(() => {
     if (prefersReducedMotion()) {
       setPhase('matches')
@@ -55,7 +56,14 @@ export default function RoadmapPreview() {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [runId])
+
+  function handleReplay() {
+    setFilledCount(0)
+    setActiveField(0)
+    setPhase('interview')
+    setRunId((id) => id + 1)
+  }
 
   useEffect(() => {
     const card = cardRef.current
@@ -164,7 +172,15 @@ export default function RoadmapPreview() {
             </div>
           </div>
           )}
-          {phase === 'matches' && <div className="card-foot">View full roadmap →</div>}
+          {phase === 'matches' && (
+            <div className="card-foot">
+              View full roadmap →
+              <button type="button" className="card-replay" tabIndex={-1} onClick={handleReplay}>
+                <svg viewBox="0 0 24 24" width="13" height="13"><use href="#icon-replay" /></svg>
+                Replay
+              </button>
+            </div>
+          )}
         </div>
       </div>
       <div className="hero-mascot" aria-hidden="true">
