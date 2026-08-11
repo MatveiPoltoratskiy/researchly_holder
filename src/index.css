@@ -313,15 +313,10 @@ h1{
 .tree-group{ transform-box: fill-box; transform-origin:50% 100%; animation: tree-sway 5s ease-in-out infinite; }
 .tree-group:nth-child(odd){ animation-duration:6.2s; animation-delay:-1.4s; }
 .plant-leaves{ transform-box: fill-box; transform-origin:50% 100%; animation: tree-sway 4.6s ease-in-out infinite; }
-.pin-marker{ transform-box: fill-box; transform-origin:50% 100%; animation: pin-bob 2.8s ease-in-out infinite; }
 
 @keyframes tree-sway{
   0%,100%{ transform: rotate(-1.1deg); }
   50%{ transform: rotate(1.1deg); }
-}
-@keyframes pin-bob{
-  0%,100%{ transform: translateY(0); }
-  50%{ transform: translateY(-3px); }
 }
 @keyframes card-float{
   0%,100%{ transform: translateY(0); }
@@ -332,7 +327,7 @@ h1{
 @media (prefers-reduced-motion: reduce){
   .hero-text, .hero-card{ animation:none; opacity:1; transform:none; }
   .hero-card-inner{ animation:none; }
-  .tree-group, .plant-leaves, .pin-marker{ animation:none; }
+  .tree-group, .plant-leaves{ animation:none; }
   .hero-mascot{ animation:none; opacity:1; transform:none; }
   .hero-mascot-float{ animation:none; }
 }
@@ -558,7 +553,7 @@ h1{
 }
 
 /* ---------- how it works ---------- */
-.how-section{ position:relative; z-index:5; max-width:1560px; padding: 90px 0 120px; }
+.how-section{ position:relative; z-index:5; max-width:1560px; padding: 170px 0 120px; }
 .how-symbol-field{
   position:absolute; top:0; bottom:0; left:50%; width:100vw; transform:translateX(-50%);
   z-index:0; pointer-events:none; overflow:hidden;
@@ -623,7 +618,7 @@ h1{
 
 .how-visual{ width:100%; display:flex; justify-content:center; }
 .how-panel{
-  position:relative; width:100%; max-width:660px; min-height:370px;
+  position:relative; width:100%; max-width:760px; min-height:410px;
   background:var(--card-bg); border:1px solid var(--card-border); border-radius:24px;
   padding:32px 36px; display:flex; flex-direction:column; align-items:center; justify-content:center;
   box-shadow: 0 24px 48px -26px rgba(30,37,64,.3);
@@ -670,7 +665,7 @@ h1{
   padding:18px 20px 20px; display:flex; flex-direction:column; gap:11px;
 }
 .how-qrow{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:6px 0; }
-.how-qrow-label{ font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; font-weight:700; color:var(--navy); }
+.how-qrow-label{ font-family:"Segoe UI",system-ui,sans-serif; font-size:16px; font-weight:700; color:var(--navy); }
 .how-qrow-chip{
   font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:700; color:var(--cover-dark);
   background:var(--pill-amber-bg); padding:4px 11px; border-radius:999px;
@@ -711,7 +706,7 @@ h1{
 .how-chip--ribbon{ background:var(--ribbon); }
 .how-chip--navy{ background:var(--navy); }
 .how-match-info{ flex:1; min-width:0; }
-.how-match-name{ margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; font-weight:700; color:var(--navy); }
+.how-match-name{ margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:15px; font-weight:700; color:var(--navy); }
 .how-match-uni{ margin:2px 0 0; font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; color:var(--navy-faint); }
 .how-match-tags{ margin:2px 0 0; font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; color:var(--navy-soft); }
 .how-match-go{ flex:none; color:var(--navy-faint); }
@@ -723,8 +718,8 @@ h1{
   border-left:2px dashed var(--road-line);
 }
 .how-timeline-item{
-  position:relative; display:flex; align-items:center; gap:12px; padding:11px 0;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; font-weight:600; color:var(--navy-faint);
+  position:relative; display:flex; align-items:center; gap:12px; padding:12px 0;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:16px; font-weight:600; color:var(--navy-faint);
 }
 .how-timeline-item.is-done{ color:var(--navy); font-weight:700; }
 .how-timeline-item svg:first-child{ position:absolute; left:-30px; color:var(--cover-dark); flex:none; }
@@ -740,7 +735,7 @@ h1{
   position:absolute; top:-9px; left:50%; transform:translateX(-50%);
   width:42px; height:16px; border-radius:7px; background:var(--spine);
 }
-.how-check-row{ display:flex; align-items:center; gap:10px; font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; font-weight:600; color:var(--navy-faint); }
+.how-check-row{ display:flex; align-items:center; gap:10px; font-family:"Segoe UI",system-ui,sans-serif; font-size:15px; font-weight:600; color:var(--navy-faint); }
 .how-check-row.is-done{ color:var(--navy); }
 .how-check-box{
   flex:none; width:18px; height:18px; border-radius:6px; border:1.5px solid var(--card-border);
@@ -788,7 +783,7 @@ h1{
   .how-step.is-in{ transform:none; }
   .how-copy{ flex:1 1 0; max-width:480px; }
   .how-spine-mascot{ margin:0 36px; }
-  .how-visual{ flex:1 1 0; max-width:680px; overflow:visible; }
+  .how-visual{ flex:1 1 0; max-width:780px; overflow:visible; }
   /* let the panel push past the trail's own edge toward the page margin — whichever
      side is "outer" for that row, given even rows flip via row-reverse above */
   .how-step:nth-child(odd) .how-visual{ margin-right:-110px; }

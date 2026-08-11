@@ -163,15 +163,6 @@ export default function Hero() {
         <svg className="scene-svg" viewBox="0 0 1536 538" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
           <polygon points="0,560 0,320 90,260 180,300 260,230 340,280 430,190 520,260 610,210 700,150 780,200 860,160 950,220 1040,180 1130,240 1220,190 1310,250 1400,210 1480,260 1536,230 1536,560" fill="var(--sage-back)" />
 
-          <ellipse cx="810" cy="255" rx="230" ry="115" fill="var(--sage-mid)" />
-          <rect x="742" y="152" width="40" height="55" fill="#EDE0C2" />
-          <polygon points="736,152 788,152 762,120" fill="var(--cover-dark)" />
-          <rect x="792" y="122" width="55" height="88" fill="#EDE0C2" />
-          <polygon points="785,122 852,122 818,80" fill="var(--cover-dark)" />
-          <rect x="812" y="60" width="10" height="24" fill="#EDE0C2" />
-          <rect x="856" y="158" width="38" height="52" fill="#EDE0C2" />
-          <polygon points="850,158 898,158 874,124" fill="var(--cover-dark)" />
-
           <polygon points="0,560 0,380 70,330 150,360 230,300 310,350 400,290 480,340 570,270 650,330 730,280 820,340 900,290 990,350 1080,300 1170,360 1260,310 1350,350 1440,300 1536,340 1536,560" fill="var(--sage-mid)" />
 
           <use className="tree-group" href="#scene-trees" x="130" y="330" width="34" height="46" />
@@ -186,15 +177,6 @@ export default function Hero() {
           <use className="tree-group" href="#scene-trees" x="540" y="380" width="38" height="54" />
           <use className="tree-group" href="#scene-trees" x="980" y="378" width="40" height="56" />
           <use className="tree-group" href="#scene-trees" x="1050" y="368" width="44" height="62" />
-
-          <path d="M660,560 C640,480 700,430 760,380 C800,350 770,300 800,260 C815,235 800,210 812,185 L850,185 C838,210 852,235 838,260 C868,300 838,350 878,380 C940,430 980,480 960,560 Z" fill="var(--road)" />
-          <path d="M745,545 C735,470 780,420 800,380 C815,350 812,300 826,255 C832,235 828,215 831,198" fill="none" stroke="var(--road-line)" strokeWidth="4" strokeDasharray="10 10" strokeLinecap="round" />
-
-          <use className="pin-marker" href="#scene-pin" x="822" y="178" width="14" height="18" style={{ '--pin-fill': '#fff', '--pin-stroke': 'var(--cover-dark)', animationDelay: '-.3s' }} />
-          <use className="pin-marker" href="#scene-pin" x="838" y="238" width="16" height="21" style={{ '--pin-fill': '#fff', '--pin-stroke': 'var(--cover-dark)', animationDelay: '-1.1s' }} />
-          <use className="pin-marker" href="#scene-pin" x="782" y="300" width="18" height="24" style={{ '--pin-fill': '#fff', '--pin-stroke': 'var(--cover-dark)', animationDelay: '-.7s' }} />
-          <use className="pin-marker" href="#scene-pin" x="888" y="378" width="20" height="26" style={{ '--pin-fill': '#fff', '--pin-stroke': 'var(--cover-dark)', animationDelay: '-1.9s' }} />
-          <use className="pin-marker" href="#scene-pin" x="742" y="452" width="28" height="36" style={{ '--pin-fill': 'var(--cover)', '--pin-stroke': 'var(--cover-dark)', animationDelay: '0s' }} />
 
           <rect x="0" y="460" width="1536" height="100" fill="var(--stone)" />
           <g stroke="#00000012" strokeWidth="1">
