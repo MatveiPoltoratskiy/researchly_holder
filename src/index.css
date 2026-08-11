@@ -206,19 +206,24 @@ h1{
 /* ---------- mockup card ---------- */
 .hero-card{
   position:relative;
-  flex: 0 1 440px; max-width:440px; width:100%;
+  flex: 0 1 500px; max-width:500px; width:100%;
   margin-top: 10px;
   perspective: 1400px;
   animation: content-in .8s ease-out .3s both;
 }
-.hero-card-scale{ transform: scale(1.18); transform-origin: top center; }
+.hero-card-scale{ transform: scale(1.26); transform-origin: top center; }
 
-/* mascot floats in and settles beside the card, spilling onto the landscape */
+/* mascot floats in and settles beside the card, spilling onto the landscape — stays
+   compact while the interview/loading phases play so it doesn't compete with them,
+   then grows in once the matches are actually revealed */
 .hero-mascot{
   position:absolute; right:-6%; bottom:-28%; width:28%; z-index:8;
   pointer-events:none; opacity:0;
   animation: mascot-in 1.15s cubic-bezier(.22,.85,.32,1.05) 1.05s both;
+  transition: width .5s cubic-bezier(.3,.85,.4,1), right .5s ease, bottom .5s ease;
 }
+.hero-mascot.is-compact{ width:15%; right:1%; bottom:-13%; }
+@media (prefers-reduced-motion: reduce){ .hero-mascot{ transition:none; } }
 .hero-mascot-float{ animation: mascot-bob 3.8s ease-in-out 2.2s infinite; }
 .hero-mascot img{ width:100%; height:auto; display:block; filter: drop-shadow(0 16px 18px rgba(30,37,64,.32)); }
 @keyframes mascot-in{
@@ -231,7 +236,10 @@ h1{
   0%,100%{ transform: translateY(0); }
   50%{ transform: translateY(-6px); }
 }
-@media (max-width: 900px){ .hero-mascot{ width:24%; right:-2%; bottom:-18%; } }
+@media (max-width: 900px){
+  .hero-mascot{ width:24%; right:-2%; bottom:-18%; }
+  .hero-mascot.is-compact{ width:13%; right:2%; bottom:-8%; }
+}
 .hero-card-inner{
   position:relative;
   background: var(--card-bg);
@@ -303,17 +311,29 @@ h1{
 
 .card-foot{
   margin-top:14px; padding-top:12px; border-top:1px solid var(--card-border);
-  display:flex; align-items:center; justify-content:center; gap:14px;
+  display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap;
   font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:700;
   color:var(--cover-dark);
 }
 .card-replay{
-  display:flex; align-items:center; gap:5px;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:700; color:var(--navy-soft);
-  background:none; border:none; cursor:pointer; padding:0;
+  display:flex; align-items:center; gap:6px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; font-weight:800; color:var(--cover-dark);
+  background:var(--pill-amber-bg); border:1px solid rgba(221,107,46,.3); cursor:pointer;
+  padding:6px 13px; border-radius:999px; transition: background-color .18s ease, transform .18s ease;
 }
-.card-replay:hover{ color:var(--cover-dark); }
+.card-replay:hover{ background:var(--cover); color:#fff; border-color:var(--cover); transform:translateY(-1px); }
 .card-replay svg{ flex:none; }
+
+/* hero card, transitional "matching you" beat between the interview and the results —
+   kept very short (450ms) on purpose, just long enough to read as a real handoff */
+.card-loading{
+  margin-top:16px; min-height:190px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+  color:var(--cover-dark); font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:700;
+  animation: content-in .25s ease-out both;
+}
+.card-loading-spinner{ animation: btn-spin .7s linear infinite; }
+@media (prefers-reduced-motion: reduce){ .card-loading-spinner{ animation-duration:1.4s; } }
 
 /* hero card, phase 1 — animated interview intro that plays once then hands off to .card-body */
 .card-interview{ margin-top:16px; animation: content-in .5s ease-out both; }

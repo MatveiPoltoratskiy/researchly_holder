@@ -48,7 +48,10 @@ export default function RoadmapPreview() {
         await wait(600)
       }
       if (cancelled) return
-      await wait(850)
+      await wait(700)
+      if (cancelled) return
+      setPhase('loading')
+      await wait(450)
       if (cancelled) return
       setPhase('matches')
     }
@@ -111,16 +114,16 @@ export default function RoadmapPreview() {
               <div>
                 <div className="card-title">Your Research Path</div>
                 <div className="card-sub">
-                  {phase === 'interview'
-                    ? 'Tell us about you — takes 30 seconds.'
-                    : 'Personalized matches based on your goals and interests.'}
+                  {phase === 'interview' && 'Tell us about you — takes 30 seconds.'}
+                  {phase === 'loading' && 'Finding your matches…'}
+                  {phase === 'matches' && 'Personalized matches based on your goals and interests.'}
                 </div>
               </div>
             </div>
             <div className="card-avatar"><svg viewBox="0 0 24 24"><use href="#icon-avatar" /></svg></div>
           </div>
 
-          {phase === 'interview' ? (
+          {phase === 'interview' && (
             <div className="card-interview">
               <div className="card-label">Quick interview</div>
               <div className="card-irows">
@@ -140,7 +143,18 @@ export default function RoadmapPreview() {
                 </span>
               </div>
             </div>
-          ) : (
+          )}
+
+          {phase === 'loading' && (
+            <div className="card-loading">
+              <svg className="card-loading-spinner" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeDasharray="34 100" />
+              </svg>
+              <span>Finding your matches…</span>
+            </div>
+          )}
+
+          {phase === 'matches' && (
           <div className="card-body">
             <div className="card-rail">
               <span className="is-active"><svg viewBox="0 0 24 24"><use href="#icon-home" /></svg></span>
@@ -183,7 +197,7 @@ export default function RoadmapPreview() {
           )}
         </div>
       </div>
-      <div className="hero-mascot" aria-hidden="true">
+      <div className={`hero-mascot${phase !== 'matches' ? ' is-compact' : ''}`} aria-hidden="true">
         <div className="hero-mascot-float">
           <img src="/assets/mascot-logo.png" alt="" />
         </div>
