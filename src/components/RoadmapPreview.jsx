@@ -25,33 +25,51 @@ export default function RoadmapPreview() {
   const cardRef = useRef(null)
   const sheenRef = useRef(null)
   const rafRef = useRef(null)
+  const pausedRef = useRef(false)
   const [phase, setPhase] = useState('interview')
   const [activeField, setActiveField] = useState(0)
   const [filledCount, setFilledCount] = useState(0)
   const [runId, setRunId] = useState(0)
+  const [paused, setPaused] = useState(false)
 
-  // plays on mount (and again whenever runId changes, via the replay button): cursor
-  // "fills out" the interview field by field, then the card crossfades into the matches list
+  useEffect(() => {
+    pausedRef.current = paused
+  }, [paused])
+
+  // plays on mount (and again via the replay button): cursor "fills out" the interview
+  // field by field, then the card crossfades into the matches list. The pause button lets
+  // this be paused/resumed at any point without restarting it.
   useEffect(() => {
     if (prefersReducedMotion()) {
       setPhase('matches')
       return
     }
     let cancelled = false
+
+    async function pausableWait(ms) {
+      const step = 50
+      let elapsed = 0
+      while (elapsed < ms) {
+        if (cancelled) return
+        await wait(step)
+        if (!pausedRef.current) elapsed += step
+      }
+    }
+
     async function run() {
       for (let i = 0; i < INTERVIEW_FIELDS.length; i++) {
         if (cancelled) return
         setActiveField(i)
-        await wait(400)
+        await pausableWait(400)
         if (cancelled) return
         setFilledCount(i + 1)
-        await wait(430)
+        await pausableWait(430)
       }
       if (cancelled) return
-      await wait(500)
+      await pausableWait(500)
       if (cancelled) return
       setPhase('loading')
-      await wait(400)
+      await pausableWait(400)
       if (cancelled) return
       setPhase('matches')
     }
@@ -62,10 +80,15 @@ export default function RoadmapPreview() {
   }, [runId])
 
   function handleReplay() {
+    setPaused(false)
     setFilledCount(0)
     setActiveField(0)
     setPhase('interview')
     setRunId((id) => id + 1)
+  }
+
+  function handleTogglePause() {
+    setPaused((p) => !p)
   }
 
   useEffect(() => {
@@ -104,103 +127,115 @@ export default function RoadmapPreview() {
   }, [])
 
   return (
-    <div className="hero-card" aria-hidden="true">
-      <div className="hero-card-scale">
-        <div className="hero-card-inner" ref={cardRef}>
-          <div className="card-sheen" ref={sheenRef}></div>
-          <div className="card-head">
-            <div className="card-head-left">
-              <svg viewBox="0 0 60 60"><use href="#mascot-tiny" /></svg>
-              <div>
-                <div className="card-title">Your Research Path</div>
-                <div className="card-sub">
-                  {phase === 'interview' && 'Tell us about you — takes 30 seconds.'}
-                  {phase === 'loading' && 'Finding your matches…'}
-                  {phase === 'matches' && 'Personalized matches based on your goals and interests.'}
+    <div className="hero-card-wrap">
+      <div className="hero-card" aria-hidden="true">
+        <div className="hero-card-scale">
+          <div className="hero-card-inner" ref={cardRef}>
+            <div className="card-sheen" ref={sheenRef}></div>
+            <div className="card-head">
+              <div className="card-head-left">
+                <svg viewBox="0 0 60 60"><use href="#mascot-tiny" /></svg>
+                <div>
+                  <div className="card-title">Your Research Path</div>
+                  <div className="card-sub">
+                    {phase === 'interview' && 'Tell us about you — takes 30 seconds.'}
+                    {phase === 'loading' && 'Finding your matches…'}
+                    {phase === 'matches' && 'Personalized matches based on your goals and interests.'}
+                  </div>
                 </div>
               </div>
+              <div className="card-avatar"><svg viewBox="0 0 24 24"><use href="#icon-avatar" /></svg></div>
             </div>
-            <div className="card-avatar"><svg viewBox="0 0 24 24"><use href="#icon-avatar" /></svg></div>
-          </div>
 
-          {phase === 'interview' && (
-            <div className="card-interview">
-              <div className="card-label">Quick interview</div>
-              <div className="card-irows">
-                {INTERVIEW_FIELDS.map((f, i) => (
-                  <div
-                    key={f.label}
-                    className={`card-irow${i < filledCount ? ' is-done' : i === activeField ? ' is-active' : ''}`}
-                  >
-                    <span className="card-irow-label">{f.label}</span>
-                    {i < filledCount && <span className="card-irow-value">{f.value}</span>}
-                  </div>
-                ))}
-                <span className="card-cursor" style={{ '--row': activeField }} aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="16" height="16">
-                    <path d="M5 3l14 8-6 2-2 6z" fill="var(--navy)" stroke="#fff" strokeWidth="1.2" strokeLinejoin="round" />
-                  </svg>
-                </span>
-              </div>
-            </div>
-          )}
-
-          {phase === 'loading' && (
-            <div className="card-loading">
-              <svg className="card-loading-spinner" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
-                <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeDasharray="34 100" />
-              </svg>
-              <span>Finding your matches…</span>
-            </div>
-          )}
-
-          {phase === 'matches' && (
-          <div className="card-body">
-            <div className="card-rail">
-              <span className="is-active"><svg viewBox="0 0 24 24"><use href="#icon-home" /></svg></span>
-              <span><svg viewBox="0 0 24 24"><use href="#icon-list" /></svg></span>
-              <span><svg viewBox="0 0 24 24"><use href="#icon-compass" /></svg></span>
-              <span><svg viewBox="0 0 24 24"><use href="#icon-bookmark" /></svg></span>
-              <span><svg viewBox="0 0 24 24"><use href="#icon-user" /></svg></span>
-            </div>
-            <div className="card-main">
-              <div className="card-label">Top program matches</div>
-              {MATCHES.map((m) => (
-                <div className="match-row" key={m.name}>
-                  <div className={`u-badge u-badge--${m.variant}`}>{m.badge}</div>
-                  <div className="match-info">
-                    <div className="match-name">{m.name}</div>
-                    <div className="match-uni">{m.uni}</div>
-                    <div className="match-tags">
-                      {m.tags.map(([label, tone]) => (
-                        <span key={label} className={`tag${tone ? ` tag-${tone}` : ''}`}>{label}</span>
-                      ))}
+            {phase === 'interview' && (
+              <div className="card-interview">
+                <div className="card-label">Quick interview</div>
+                <div className="card-irows">
+                  {INTERVIEW_FIELDS.map((f, i) => (
+                    <div
+                      key={f.label}
+                      className={`card-irow${i < filledCount ? ' is-done' : i === activeField ? ' is-active' : ''}`}
+                    >
+                      <span className="card-irow-label">{f.label}</span>
+                      {i < filledCount && <span className="card-irow-value">{f.value}</span>}
                     </div>
-                  </div>
-                  <div className="match-score">
-                    <div className="pct">{m.pct}%</div>
-                    <div className="lbl">Match</div>
-                  </div>
+                  ))}
+                  <span className="card-cursor" style={{ '--row': activeField }} aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="16" height="16">
+                      <path d="M5 3l14 8-6 2-2 6z" fill="var(--navy)" stroke="#fff" strokeWidth="1.2" strokeLinejoin="round" />
+                    </svg>
+                  </span>
                 </div>
-              ))}
+              </div>
+            )}
+
+            {phase === 'loading' && (
+              <div className="card-loading">
+                <svg className="card-loading-spinner" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeDasharray="34 100" />
+                </svg>
+                <span>Finding your matches…</span>
+              </div>
+            )}
+
+            {phase === 'matches' && (
+              <div className="card-body">
+                <div className="card-rail">
+                  <span className="is-active"><svg viewBox="0 0 24 24"><use href="#icon-home" /></svg></span>
+                  <span><svg viewBox="0 0 24 24"><use href="#icon-list" /></svg></span>
+                  <span><svg viewBox="0 0 24 24"><use href="#icon-compass" /></svg></span>
+                  <span><svg viewBox="0 0 24 24"><use href="#icon-bookmark" /></svg></span>
+                  <span><svg viewBox="0 0 24 24"><use href="#icon-user" /></svg></span>
+                </div>
+                <div className="card-main">
+                  <div className="card-label">Top program matches</div>
+                  {MATCHES.map((m) => (
+                    <div className="match-row" key={m.name}>
+                      <div className={`u-badge u-badge--${m.variant}`}>{m.badge}</div>
+                      <div className="match-info">
+                        <div className="match-name">{m.name}</div>
+                        <div className="match-uni">{m.uni}</div>
+                        <div className="match-tags">
+                          {m.tags.map(([label, tone]) => (
+                            <span key={label} className={`tag${tone ? ` tag-${tone}` : ''}`}>{label}</span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="match-score">
+                        <div className="pct">{m.pct}%</div>
+                        <div className="lbl">Match</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            {phase === 'matches' && <div className="card-foot">View full roadmap →</div>}
+          </div>
+
+          <div className={`hero-mascot${phase !== 'matches' ? ' is-compact' : ''}`} aria-hidden="true">
+            <div className="hero-mascot-float">
+              <img src="/assets/mascot-logo.png" alt="" />
             </div>
           </div>
-          )}
-          {phase === 'matches' && (
-            <div className="card-foot">
-              View full roadmap →
-              <button type="button" className="card-replay" tabIndex={-1} onClick={handleReplay}>
-                <svg viewBox="0 0 24 24" width="13" height="13"><use href="#icon-replay" /></svg>
-                Replay
-              </button>
-            </div>
-          )}
         </div>
       </div>
-      <div className={`hero-mascot${phase !== 'matches' ? ' is-compact' : ''}`} aria-hidden="true">
-        <div className="hero-mascot-float">
-          <img src="/assets/mascot-logo.png" alt="" />
-        </div>
+
+      <div className="hero-card-controls">
+        <button type="button" className="hero-card-control" onClick={handleTogglePause}>
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+            {paused ? (
+              <path d="M6 4l14 8-14 8Z" fill="currentColor" />
+            ) : (
+              <path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="currentColor" />
+            )}
+          </svg>
+          {paused ? 'Resume demo' : 'Pause demo'}
+        </button>
+        <button type="button" className="hero-card-control" onClick={handleReplay}>
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><use href="#icon-replay" /></svg>
+          Replay demo
+        </button>
       </div>
     </div>
   )
