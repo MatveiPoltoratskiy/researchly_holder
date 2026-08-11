@@ -141,7 +141,7 @@ export default function HowItWorks() {
     <section className="how-section container" id="how-it-works">
       <div className="how-symbol-field" aria-hidden="true">
         <SymbolField
-          rows={4} cols={10}
+          rows={3} cols={8}
           opacityRange={[0.22, 0.32]}
           fontSizeRange={[16, 24]}
           colors={['var(--symbol-tan)', 'var(--cover-dark)', 'var(--ribbon)', 'var(--navy)', '#5C3A1E', 'var(--gold)']}

@@ -42,16 +42,16 @@ export default function RoadmapPreview() {
       for (let i = 0; i < INTERVIEW_FIELDS.length; i++) {
         if (cancelled) return
         setActiveField(i)
-        await wait(550)
+        await wait(400)
         if (cancelled) return
         setFilledCount(i + 1)
-        await wait(600)
+        await wait(430)
       }
       if (cancelled) return
-      await wait(700)
+      await wait(500)
       if (cancelled) return
       setPhase('loading')
-      await wait(450)
+      await wait(400)
       if (cancelled) return
       setPhase('matches')
     }
