@@ -1,5 +1,17 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { prefersReducedMotion } from '../lib/motion'
+
+const INTERVIEW_FIELDS = [
+  { label: 'Interest', value: 'Neuroscience' },
+  { label: 'Level', value: 'Junior' },
+  { label: 'Location', value: 'New York, NY' },
+  { label: 'Timing', value: 'Summer' },
+  { label: 'Paid?', value: "Doesn't matter" },
+]
+
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
 
 const MATCHES = [
   { badge: 'S', variant: 'a', name: 'Summer Undergraduate Research Program', uni: 'Stanford University', tags: [['Summer'], ['In-person'], ['High Match', 'green']], pct: 96 },
@@ -13,6 +25,37 @@ export default function RoadmapPreview() {
   const cardRef = useRef(null)
   const sheenRef = useRef(null)
   const rafRef = useRef(null)
+  const [phase, setPhase] = useState('interview')
+  const [activeField, setActiveField] = useState(0)
+  const [filledCount, setFilledCount] = useState(0)
+
+  // plays once on mount: cursor "fills out" the interview field by field, then the
+  // card crossfades into the real matches list below
+  useEffect(() => {
+    if (prefersReducedMotion()) {
+      setPhase('matches')
+      return
+    }
+    let cancelled = false
+    async function run() {
+      for (let i = 0; i < INTERVIEW_FIELDS.length; i++) {
+        if (cancelled) return
+        setActiveField(i)
+        await wait(550)
+        if (cancelled) return
+        setFilledCount(i + 1)
+        await wait(600)
+      }
+      if (cancelled) return
+      await wait(850)
+      if (cancelled) return
+      setPhase('matches')
+    }
+    run()
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   useEffect(() => {
     const card = cardRef.current
@@ -59,11 +102,37 @@ export default function RoadmapPreview() {
               <svg viewBox="0 0 60 60"><use href="#mascot-tiny" /></svg>
               <div>
                 <div className="card-title">Your Research Path</div>
-                <div className="card-sub">Personalized matches based on your goals and interests.</div>
+                <div className="card-sub">
+                  {phase === 'interview'
+                    ? 'Tell us about you — takes 30 seconds.'
+                    : 'Personalized matches based on your goals and interests.'}
+                </div>
               </div>
             </div>
             <div className="card-avatar"><svg viewBox="0 0 24 24"><use href="#icon-avatar" /></svg></div>
           </div>
+
+          {phase === 'interview' ? (
+            <div className="card-interview">
+              <div className="card-label">Quick interview</div>
+              <div className="card-irows">
+                {INTERVIEW_FIELDS.map((f, i) => (
+                  <div
+                    key={f.label}
+                    className={`card-irow${i < filledCount ? ' is-done' : i === activeField ? ' is-active' : ''}`}
+                  >
+                    <span className="card-irow-label">{f.label}</span>
+                    {i < filledCount && <span className="card-irow-value">{f.value}</span>}
+                  </div>
+                ))}
+                <span className="card-cursor" style={{ '--row': activeField }} aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="16" height="16">
+                    <path d="M5 3l14 8-6 2-2 6z" fill="var(--navy)" stroke="#fff" strokeWidth="1.2" strokeLinejoin="round" />
+                  </svg>
+                </span>
+              </div>
+            </div>
+          ) : (
           <div className="card-body">
             <div className="card-rail">
               <span className="is-active"><svg viewBox="0 0 24 24"><use href="#icon-home" /></svg></span>
@@ -94,7 +163,8 @@ export default function RoadmapPreview() {
               ))}
             </div>
           </div>
-          <div className="card-foot">View full roadmap →</div>
+          )}
+          {phase === 'matches' && <div className="card-foot">View full roadmap →</div>}
         </div>
       </div>
       <div className="hero-mascot" aria-hidden="true">
