@@ -490,9 +490,9 @@ h1{
   color: var(--navy);
 }
 
-.faq-mascot-wrap{ position:relative; width:270px; margin-top:34px; padding-bottom:14px; }
+.faq-mascot-wrap{ position:relative; width:270px; margin-top:34px; margin-left:8%; padding-bottom:14px; }
 .faq-mascot-backdrop{
-  position:absolute; z-index:0; left:50%; top:4%; width:80%; aspect-ratio:1/1;
+  position:absolute; z-index:0; left:50%; top:-4%; width:100%; aspect-ratio:1/1;
   transform:translateX(-50%); border-radius:50%; pointer-events:none;
   background: radial-gradient(circle at 42% 38%, var(--pages) 0%, var(--pill-amber-bg) 52%, rgba(241,228,198,0) 76%);
 }
