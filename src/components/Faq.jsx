@@ -150,16 +150,6 @@ export default function FAQ() {
         <span className="faq-heading-underline" aria-hidden="true" />
         <p className="faq-sub">Quick answers to the most common questions about Researchly.</p>
 
-        <div className="faq-tip">
-          <span className="faq-tip-pin" aria-hidden="true" />
-          <p className="faq-tip-label">✳ Tip</p>
-          <p className="faq-tip-text">
-            Most students don't know where to start.
-            <br />
-            Start with <strong>Question 1</strong>.
-          </p>
-        </div>
-
         <img className="faq-mascot" src="/assets/mascot-logo.png" alt="Researchly mascot" />
       </div>
 
