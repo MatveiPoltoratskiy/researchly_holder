@@ -101,10 +101,17 @@ function HowLandscape() {
         <polygon points="0,340 0,220 140,182 280,212 420,165 560,202 700,155 840,198 980,160 1120,205 1260,175 1400,212 1400,340" fill="var(--sage-mid)" />
         <polygon points="0,340 0,268 160,250 320,272 480,242 640,270 800,238 960,268 1120,242 1280,272 1400,250 1400,340" fill="var(--sage-front)" />
 
+        <use href="#scene-trees" x="30" y="130" width="52" height="72" />
         <use href="#scene-trees" x="80" y="150" width="46" height="64" />
         <use href="#scene-trees" x="250" y="178" width="40" height="56" />
+        <use href="#scene-trees" x="552" y="200" width="34" height="48" />
+        <use href="#scene-trees" x="792" y="196" width="32" height="46" />
         <use href="#scene-trees" x="1110" y="168" width="44" height="60" />
         <use href="#scene-trees" x="1290" y="192" width="38" height="52" />
+        <use href="#scene-trees" x="1340" y="140" width="50" height="70" />
+
+        {/* hilltop mound the castle sits on, distinct from the mountain bands behind it */}
+        <ellipse cx="698" cy="248" rx="92" ry="20" fill="var(--sage-front)" />
 
         <g transform="translate(658,148)">
           <rect x="10" y="42" width="60" height="58" fill="#EDE0C2" />
@@ -112,18 +119,26 @@ function HowLandscape() {
           <rect x="56" y="24" width="24" height="76" fill="#EDE0C2" />
           <polygon points="0,24 12,4 24,24" fill="var(--cover-dark)" />
           <polygon points="56,24 68,4 80,24" fill="var(--cover-dark)" />
-          <rect x="34" y="56" width="12" height="44" fill="var(--spine)" />
-          <polygon points="30,56 40,36 50,56" fill="var(--cover-dark)" />
+          <rect x="7" y="40" width="6" height="9" fill="var(--face)" />
+          <rect x="67" y="40" width="6" height="9" fill="var(--face)" />
+          {/* tall center keep — rises above both side towers, unlike the small door-gable this replaced */}
+          <rect x="30" y="6" width="20" height="94" fill="#EDE0C2" />
+          <polygon points="30,6 40,-18 50,6" fill="var(--cover-dark)" />
+          <rect x="36" y="26" width="8" height="11" fill="var(--face)" />
+          <rect x="34" y="76" width="12" height="24" fill="var(--spine)" />
         </g>
 
-        <path d="M690,340 C682,300 692,262 678,232" fill="none" stroke="var(--road-line)" strokeWidth="3" strokeDasharray="8 8" />
-        <use href="#scene-pin" x="666" y="200" width="15" height="20" />
-        <use href="#scene-pin" x="636" y="288" width="19" height="25" />
+        <path d="M698,248 C693,258 688,264 682,271" fill="none" stroke="var(--road-line)" strokeWidth="3" strokeDasharray="8 8" />
+        <path d="M682,271 C666,268 652,260 645,255" fill="none" stroke="var(--road-line)" strokeWidth="3" strokeDasharray="8 8" />
+        <path d="M682,271 C698,268 710,260 716,254" fill="none" stroke="var(--road-line)" strokeWidth="3" strokeDasharray="8 8" />
+        <use href="#scene-pin" x="636" y="240" width="15" height="20" />
+        <use href="#scene-pin" x="672" y="266" width="18" height="24" />
+        <use href="#scene-pin" x="708" y="240" width="15" height="20" />
 
         {/* foreground cutoff: a wide, shallow curve in the page's cream color standing in
             for a near hillside — dips lowest at center so the castle/path stay visible,
             rises at the edges to cover more of the tree line, instead of a straight cut */}
-        <path d="M0,205 C350,300 1050,300 1400,205 L1400,340 L0,340Z" fill="var(--cream)" />
+        <path d="M0,205 C350,305 1050,305 1400,205 L1400,340 L0,340Z" fill="var(--cream)" />
       </svg>
     </div>
   )
