@@ -975,6 +975,9 @@ h1{
 }
 @media (max-width:520px){
   .waitlist-form{ flex-direction:column; }
+  /* .waitlist-input's flex-basis:260px means width in row layout, but becomes height once
+     the form stacks into a column here — reset it so the input doesn't balloon to 260px tall */
+  .waitlist-input{ flex:none; width:100%; }
   .waitlist-submit{ width:100%; justify-content:center; }
   .waitlist-success{ text-align:left; }
 }
