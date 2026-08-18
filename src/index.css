@@ -844,8 +844,11 @@ h1{
 }
 .how-landscape-svg{
   position:absolute; inset:0; width:100%; height:100%; display:block;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%);
+  /* short fade at the very top only (blends into the CTA above) — the bottom no longer
+     needs a soft fade since the cream curve path gives it a crisp, explicit cutoff, and
+     a longer fade there was washing out the mountains/trees near the top of the frame */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 9%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 9%);
 }
 
 /* CTA sits right below the last step and above the hills, on plain cream — clear of the
