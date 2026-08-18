@@ -844,6 +844,11 @@ h1{
 }
 .how-landscape-svg{
   position:absolute; inset:0; width:100%; height:100%; display:block;
+  /* just enough fade to soften the very top edge into the CTA above — short enough that
+     anything tall (peaks, trees, the castle flag) still reads fully opaque and can poke
+     through it, rather than the whole top band washing out like the old 9% fade did */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 4%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 4%);
 }
 
 /* CTA sits right below the last step and above the hills, on plain cream — clear of the
