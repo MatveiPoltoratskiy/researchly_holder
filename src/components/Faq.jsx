@@ -141,11 +141,15 @@ export default function FAQ() {
         <p className="faq-sub">The questions we get asked the most, answered.</p>
 
         <div className="faq-mascot-wrap" aria-hidden="true">
-          <img className="faq-mascot" src="/assets/mascot-logo.png" alt="" />
-          <svg className="faq-mascot-glass" viewBox="0 0 40 40">
-            <circle cx="16" cy="16" r="11" fill="var(--glass-lens)" stroke="var(--glass-rim)" strokeWidth="2.5" />
-            <path d="M24.5,24.5 L35,35" stroke="var(--glass-rim-dark)" strokeWidth="4" strokeLinecap="round" />
-          </svg>
+          <span className="faq-mascot-backdrop" />
+          <div className="faq-mascot-figure">
+            <img className="faq-mascot" src="/assets/mascot-logo.png" alt="" />
+            <svg className="faq-mascot-glass" viewBox="0 0 40 40">
+              <circle cx="16" cy="16" r="11" fill="var(--glass-lens)" stroke="var(--glass-rim)" strokeWidth="2.5" />
+              <path d="M24.5,24.5 L35,35" stroke="var(--glass-rim-dark)" strokeWidth="4" strokeLinecap="round" />
+            </svg>
+          </div>
+          <span className="faq-mascot-shadow" />
         </div>
       </div>
 
