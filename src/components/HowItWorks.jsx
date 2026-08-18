@@ -119,6 +119,11 @@ function HowLandscape() {
         <path d="M690,340 C682,300 692,262 678,232" fill="none" stroke="var(--road-line)" strokeWidth="3" strokeDasharray="8 8" />
         <use href="#scene-pin" x="666" y="200" width="15" height="20" />
         <use href="#scene-pin" x="636" y="288" width="19" height="25" />
+
+        {/* foreground cutoff: a wide, shallow curve in the page's cream color standing in
+            for a near hillside — dips lowest at center so the castle/path stay visible,
+            rises at the edges to cover more of the tree line, instead of a straight cut */}
+        <path d="M0,205 C350,300 1050,300 1400,205 L1400,340 L0,340Z" fill="var(--cream)" />
       </svg>
     </div>
   )

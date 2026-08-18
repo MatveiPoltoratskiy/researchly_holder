@@ -65,7 +65,7 @@ export default function Footer() {
   const isSubmitting = status === 'submitting'
 
   return (
-    <footer className="site-footer container">
+    <footer className="site-footer">
       <div className="footer-card">
         <div className="footer-top">
           <div className="footer-brand">

@@ -158,7 +158,12 @@ export default function FAQ() {
       </svg>
 
       <div className="faq-intro faq-reveal">
-        <p className="kicker">Questions, answered</p>
+        <p className="kicker faq-kicker">
+          Questions, answered
+          <svg className="faq-kicker-mark" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+            <path d="M7 0 L8.4 5.6 14 7 8.4 8.4 7 14 5.6 8.4 0 7 5.6 5.6Z" fill="currentColor" />
+          </svg>
+        </p>
         <h2 className="faq-heading">Everything you need to know before you start.</h2>
         <span className="faq-heading-underline" aria-hidden="true" />
         <p className="faq-sub">The questions we get asked the most, answered.</p>

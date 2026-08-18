@@ -483,6 +483,9 @@ h1{
 .faq-sketch-arrow{ width:200px; left:32%; top:38%; color: var(--navy-faint); }
 @media (max-width: 900px){ .faq-sketch{ display:none; } }
 
+.faq-kicker{ display:flex; align-items:center; gap:6px; }
+.faq-kicker-mark{ color: var(--cover); transform: translateY(-2px); }
+
 .faq-intro{
   position:relative; z-index:2;
   flex:0 1 540px; position:sticky; top:110px;
@@ -1148,10 +1151,12 @@ h1{
 }
 
 /* ---------- footer ---------- */
-.site-footer{ padding: 36px 0 64px; }
+/* full-bleed, edge to edge — no container/margins, unlike every other section */
+.site-footer{ width:100%; }
 .footer-card{
-  background: var(--card-bg); border: 1.5px solid var(--card-border); border-radius: 28px;
-  padding: 48px 52px 30px;
+  width:100%;
+  background: var(--card-bg); border-top: 1.5px solid var(--card-border);
+  padding: 48px var(--container-pad) 30px;
 }
 .footer-top{ display:flex; flex-wrap:wrap; gap:40px; padding-bottom:38px; }
 
@@ -1257,7 +1262,7 @@ a.footer-link:hover{ color: var(--cover-dark); }
   .hero-card-wrap{ max-width:400px; margin-top:8px; }
   .landscape-wrap{ margin-top:-10px; }
 
-  .footer-card{ padding:36px 24px 24px; border-radius:22px; }
+  .footer-card{ padding:36px var(--container-pad) 24px; }
   .footer-top{ gap:28px; }
   .footer-brand{ flex-basis:100%; }
   .footer-newsletter{ padding-left:0; border-left:none; max-width:none; flex-basis:100%; }
