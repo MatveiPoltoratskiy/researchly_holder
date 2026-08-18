@@ -376,7 +376,11 @@ h1{
 
 /* ---------- illustrated low-poly scene ---------- */
 .landscape-wrap{ position:relative; z-index:2; margin-top:-56px; }
-.scene-svg{ display:block; width:100%; height:auto; }
+.scene-svg{
+  display:block; width:100%; height:auto;
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 90%, transparent 100%);
+}
 .tree-group{ transform-box: fill-box; transform-origin:50% 100%; animation: tree-sway 5s ease-in-out infinite; }
 .tree-group:nth-child(odd){ animation-duration:6.2s; animation-delay:-1.4s; }
 .plant-leaves{ transform-box: fill-box; transform-origin:50% 100%; animation: tree-sway 4.6s ease-in-out infinite; }
@@ -492,9 +496,9 @@ h1{
 
 .faq-mascot-wrap{ position:relative; width:300px; margin-top:34px; margin-left:8%; padding-bottom:14px; }
 .faq-mascot-backdrop{
-  position:absolute; z-index:0; left:50%; top:59%; width:100%; aspect-ratio:1/1;
+  position:absolute; z-index:0; left:50%; top:59%; width:122%; aspect-ratio:1/1;
   transform:translate(-50%,-50%); border-radius:50%; pointer-events:none;
-  background: radial-gradient(circle at 42% 38%, var(--pages) 0%, var(--pill-amber-bg) 52%, rgba(241,228,198,0) 76%);
+  background: radial-gradient(circle at 42% 38%, var(--pages) 0%, var(--pill-amber-bg) 30%, rgba(241,228,198,0) 100%);
 }
 .faq-mascot-figure{
   position:relative; z-index:2;
