@@ -126,7 +126,7 @@ svg{ display:block; }
 }
 
 /* copy */
-.hero-text{ max-width: 540px; flex: 0 1 540px; padding-top: 12px; animation: content-in .8s ease-out .15s both; }
+.hero-text{ max-width: 610px; flex: 0 1 610px; padding-top: 12px; animation: content-in .8s ease-out .15s both; }
 .kicker{
   font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; letter-spacing:.14em;
   text-transform:uppercase; margin:0 0 16px; font-weight:700;
@@ -179,15 +179,13 @@ h1{
 }
 .sub{
   font-family:"Segoe UI",system-ui,sans-serif;
-  font-size: 21.5px; line-height:1.6; color: var(--navy);
-  max-width: 540px; margin: 20px 0 0;
+  font-size: 19px; line-height:1.55; color: var(--navy);
+  max-width: 610px; margin: 20px 0 0;
 }
 .sub-lead{ font-weight:700; }
 .sub-accent{
   font-weight:700; color: var(--navy);
-  text-decoration: underline; text-decoration-color: var(--cover-dark);
-  text-decoration-thickness: 2px; text-underline-offset: 3px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 60' preserveAspectRatio='none'%3E%3Cpath d='M1,21 C30,10 70,27 110,15 C150,5 190,25 230,13 C260,6 285,19 299,11 L299,45 C270,55 235,39 200,51 C165,60 125,41 90,53 C55,61 25,45 1,49 Z' fill='%23D9A441' fill-opacity='0.55'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 60' preserveAspectRatio='none'%3E%3Cpath d='M1,21 C30,10 70,27 110,15 C150,5 190,25 230,13 C260,6 285,19 299,11 L299,45 C270,55 235,39 200,51 C165,60 125,41 90,53 C55,61 25,45 1,49 Z' fill='%23DD6B2E' fill-opacity='0.32'/%3E%3C/svg%3E");
   background-repeat: no-repeat; background-size: 100% 84%; background-position: 0 92%;
   -webkit-box-decoration-break: clone; box-decoration-break: clone;
   padding: 1px 4px;
@@ -562,8 +560,8 @@ h1{
 }
 .faq-q{
   flex:1;
-  font-family: "Fraunces", "Iowan Old Style",Palatino,Georgia,serif;
-  font-weight:800; font-size:21px; line-height:1.25;
+  font-family: "Poppins","Segoe UI",system-ui,sans-serif;
+  font-weight:650; font-size:18px; line-height:1.35;
   color: var(--navy);
 }
 .faq-toggle{

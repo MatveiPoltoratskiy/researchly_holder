@@ -152,9 +152,8 @@ export default function Hero() {
             Leave with research opportunities.
           </h1>
           <p className="sub">
-            <span className="sub-lead">Tell us your interests.</span> We&rsquo;ll match you with{' '}
-            <span className="sub-accent">research opportunities, internships, and summer programs</span>, then build a{' '}
-            <span className="sub-accent">personalized roadmap</span> to help you get there.
+            Get a personalized roadmap of research opportunities, internships, and summer programs
+            based on your interest, in just a <span className="sub-accent">few minutes</span>.
           </p>
           <Waitlist />
         </div>
