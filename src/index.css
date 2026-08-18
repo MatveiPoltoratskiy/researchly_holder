@@ -33,6 +33,11 @@ body{
 svg{ display:block; }
 .visually-hidden{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
 
+/* set by usePauseAnimationsOffscreen (src/lib/motion.js) — freezes every continuous CSS
+   animation within a section once it's scrolled out of view, so only what's actually
+   visible keeps animating instead of everything running forever in the background */
+.is-offscreen, .is-offscreen *{ animation-play-state: paused !important; }
+
 .container{
   width:100%;
   max-width: var(--container-max-width);
@@ -668,10 +673,11 @@ h1{
   letter-spacing:.1em; color:var(--cover-dark);
 }
 .how-title{
-  margin:0 0 16px; font-family:"Fraunces","Iowan Old Style",Palatino,Georgia,serif;
-  font-weight:800; font-size:clamp(26px,2.9vw,34px); line-height:1.3; color:var(--navy);
+  margin:0 0 16px; font-family:"Poppins","Segoe UI",system-ui,sans-serif;
+  font-weight:700; letter-spacing:-.01em;
+  font-size:clamp(28px,3.2vw,38px); line-height:1.28; color:var(--navy);
 }
-.how-desc{ margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:17.5px; line-height:1.7; color:rgba(30,37,64,.82); }
+.how-desc{ margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:18.5px; line-height:1.75; color:rgba(30,37,64,.85); }
 .how-meta{
   margin:18px 0 0; font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; font-weight:700;
   color:var(--navy-soft);
@@ -701,7 +707,7 @@ h1{
 .how-progress-label{
   flex:none; font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:700; color:var(--cover-dark);
 }
-.how-progress-track{ width:100%; height:5px; border-radius:999px; background:var(--pill-bg); margin-bottom:16px; overflow:hidden; }
+.how-progress-track{ width:100%; height:7px; border-radius:999px; background:var(--pill-bg); margin-bottom:16px; overflow:hidden; }
 .how-progress-fill{ display:block; height:100%; background:var(--cover); border-radius:999px; transition:width .5s ease; }
 
 /* small buttons used to make each mockup read as a real, clickable interface */
@@ -726,7 +732,7 @@ h1{
   padding:18px 20px 20px; display:flex; flex-direction:column; gap:11px;
 }
 .how-qrow{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:6px 0; }
-.how-qrow-label{ font-family:"Segoe UI",system-ui,sans-serif; font-size:16px; font-weight:700; color:var(--navy); }
+.how-qrow-label{ font-family:"Segoe UI",system-ui,sans-serif; font-size:18px; font-weight:700; color:var(--navy); }
 .how-qrow-chip{
   font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:700; color:var(--cover-dark);
   background:var(--pill-amber-bg); padding:4px 11px; border-radius:999px;
@@ -767,7 +773,7 @@ h1{
 .how-chip--ribbon{ background:var(--ribbon); }
 .how-chip--navy{ background:var(--navy); }
 .how-match-info{ flex:1; min-width:0; }
-.how-match-name{ margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:15px; font-weight:700; color:var(--navy); }
+.how-match-name{ margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:17px; font-weight:700; color:var(--navy); }
 .how-match-uni{ margin:2px 0 0; font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; color:var(--navy-faint); }
 .how-match-tags{ margin:2px 0 0; font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; color:var(--navy-soft); }
 .how-match-go{ flex:none; color:var(--navy-faint); }
@@ -779,8 +785,8 @@ h1{
   border-left:2px dashed var(--road-line);
 }
 .how-timeline-item{
-  position:relative; display:flex; align-items:center; gap:12px; padding:12px 0;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:16px; font-weight:600; color:var(--navy-faint);
+  position:relative; display:flex; align-items:center; gap:12px; padding:13px 0;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:18px; font-weight:600; color:var(--navy-faint);
 }
 .how-timeline-item.is-done{ color:var(--navy); font-weight:700; }
 .how-timeline-item svg:first-child{ position:absolute; left:-30px; color:var(--cover-dark); flex:none; }
@@ -796,7 +802,7 @@ h1{
   position:absolute; top:-9px; left:50%; transform:translateX(-50%);
   width:42px; height:16px; border-radius:7px; background:var(--spine);
 }
-.how-check-row{ display:flex; align-items:center; gap:10px; font-family:"Segoe UI",system-ui,sans-serif; font-size:15px; font-weight:600; color:var(--navy-faint); }
+.how-check-row{ display:flex; align-items:center; gap:10px; font-family:"Segoe UI",system-ui,sans-serif; font-size:17px; font-weight:600; color:var(--navy-faint); }
 .how-check-row.is-done{ color:var(--navy); }
 .how-check-box{
   flex:none; width:18px; height:18px; border-radius:6px; border:1.5px solid var(--card-border);
@@ -843,7 +849,7 @@ h1{
   .how-step:nth-child(even){ transform:translateX(28px); }
   .how-step.is-in{ transform:none; }
   .how-copy{ flex:1 1 0; max-width:480px; }
-  .how-spine-mascot{ margin:0 36px; }
+  .how-spine-mascot{ margin:0 42px; }
   .how-visual{ flex:1 1 0; max-width:780px; overflow:visible; }
   /* let the panel push past the trail's own edge toward the page margin — whichever
      side is "outer" for that row, given even rows flip via row-reverse above */

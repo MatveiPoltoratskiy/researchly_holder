@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { prefersReducedMotion } from '../lib/motion'
+import { prefersReducedMotion, usePauseAnimationsOffscreen } from '../lib/motion'
 import { useRouter } from '../lib/router'
 import { goToWaitlist } from '../lib/waitlist'
 import SymbolField from './SymbolField'
@@ -9,7 +9,7 @@ const STEPS = [
   {
     kicker: 'THE INTERVIEW',
     title: "Five questions. That's the whole setup.",
-    desc: "We ask what you're into, what year you're in, where you are, when you're free, and whether pay matters. Each answer narrows the field — no long forms, no essays.",
+    desc: "We ask what you're into, what year you're in, where you are, when you're free, and whether pay matters. Each answer narrows the field. No long forms, no essays.",
     meta: 'Interest → Level → Location → Timing → Pay',
     mascot: 'mascot-ask',
     Visual: InterviewVisual,
@@ -17,7 +17,7 @@ const STEPS = [
   {
     kicker: 'THE MATCH',
     title: "We do the searching, so you don't open 40 tabs.",
-    desc: "Instead of thousands of links, you get a short list of research programs, labs, and internships you're actually eligible for — filtered by your grade, your area, and your schedule.",
+    desc: "Instead of thousands of links, you get a short list of research programs, labs, and internships you're actually eligible for. It's filtered by your grade, your area, and your schedule.",
     meta: 'Summer · Year-round · Paid · Remote',
     mascot: 'mascot-scout',
     Visual: MatchVisual,
@@ -25,7 +25,7 @@ const STEPS = [
   {
     kicker: 'YOUR ROADMAP',
     title: 'A plan, not just a list.',
-    desc: 'Every match comes with the order to do things in: what to prepare, when applications open, and which deadline is coming next. You always know your next step.',
+    desc: "Every match comes with an order to follow: what to prep, when applications open, and which deadline hits next. You always know your next step.",
     meta: 'Deadlines and next steps, in order',
     mascot: 'mascot-map',
     Visual: RoadmapVisual,
@@ -33,7 +33,7 @@ const STEPS = [
   {
     kicker: 'THE APPLY',
     title: 'Then the part that actually counts.',
-    desc: "Work down the roadmap with deadlines, links, and guidance in one place. We can't get you accepted — but you'll never miss an opportunity because you didn't know it existed.",
+    desc: "Work down the roadmap with deadlines, links, and guidance in one place. We can't get you accepted, but you'll never miss an opportunity because you didn't know it existed.",
     meta: 'Links, dates, and guidance in one place',
     mascot: 'mascot-cheer',
     Visual: ApplyVisual,
@@ -80,7 +80,7 @@ function StepRow({ step, index }) {
       <div className="how-spine-mascot">
         <svg
           className="how-mascot"
-          width="60" height="60" viewBox="0 0 72 72" aria-hidden="true"
+          width="88" height="88" viewBox="0 0 72 72" aria-hidden="true"
           style={{ '--bob-delay': `${index * 0.4}s` }}
         >
           <use href={`#${step.mascot}`} />
@@ -137,8 +137,11 @@ function HowLandscape() {
 }
 
 export default function HowItWorks() {
+  const sectionRef = useRef(null)
+  usePauseAnimationsOffscreen(sectionRef)
+
   return (
-    <section className="how-section container" id="how-it-works">
+    <section className="how-section container" id="how-it-works" ref={sectionRef}>
       <div className="how-symbol-field" aria-hidden="true">
         <SymbolField
           rows={3} cols={8}
@@ -154,8 +157,8 @@ export default function HowItWorks() {
           Four steps, and you'll know exactly <span className="squiggle-underline">where to start</span>.
         </h2>
         <p className="sub how-sub">
-          Researchly asks a handful of questions, then does the digging for you — matching you to real research
-          opportunities and laying out what to do next. Here's the whole thing, start to finish.
+          Researchly asks a handful of questions, then does the digging for you. It matches you to real research
+          opportunities and lays out what to do next. Here's the whole thing, start to finish.
         </p>
       </div>
 

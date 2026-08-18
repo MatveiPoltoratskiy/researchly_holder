@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { prefersReducedMotion } from '../lib/motion'
+import { prefersReducedMotion, usePauseAnimationsOffscreen } from '../lib/motion'
 
 const SYMBOL_POOL = [
   'α', 'β', 'γ', 'δ', 'λ', 'μ', 'π', 'Ω', 'Σ', 'Δ', 'θ', 'φ', 'Ψ', 'Ξ', 'ε', 'ρ', 'τ', 'ω',
@@ -18,11 +18,22 @@ export default function SymbolField({ rows = 2, cols = 12, opacityRange = [0.22,
   const elsRef = useRef([])
   const cycleTimerRef = useRef(null)
   const resizeTimerRef = useRef(null)
+  const visibleRef = useRef(true)
+
+  usePauseAnimationsOffscreen(fieldRef)
 
   useEffect(() => {
     const field = fieldRef.current
     if (!field) return
     const reduceMotion = prefersReducedMotion()
+
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        visibleRef.current = entry.isIntersecting
+      },
+      { rootMargin: '200px 0px' }
+    )
+    visibilityObserver.observe(field)
 
     function buildField() {
       field.innerHTML = ''
@@ -62,6 +73,7 @@ export default function SymbolField({ rows = 2, cols = 12, opacityRange = [0.22,
     }
 
     function cycleSymbols() {
+      if (!visibleRef.current) return // skip work while scrolled out of view
       const els = elsRef.current
       const n = els.length
       if (!n) return
@@ -110,6 +122,7 @@ export default function SymbolField({ rows = 2, cols = 12, opacityRange = [0.22,
       window.removeEventListener('resize', handleResize)
       clearTimeout(cycleTimerRef.current)
       clearTimeout(resizeTimerRef.current)
+      visibilityObserver.disconnect()
     }
   }, [rows, cols])
 

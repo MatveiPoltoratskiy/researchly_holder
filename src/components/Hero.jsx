@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { prefersReducedMotion } from '../lib/motion'
+import { prefersReducedMotion, usePauseAnimationsOffscreen } from '../lib/motion'
 import RoadmapPreview from './RoadmapPreview'
 import Waitlist from './Waitlist'
 
@@ -22,6 +22,8 @@ export default function Hero() {
   const symbolElsRef = useRef([])
   const cycleTimerRef = useRef(null)
   const resizeTimerRef = useRef(null)
+
+  usePauseAnimationsOffscreen(heroRef)
 
   useEffect(() => {
     const symbolField = symbolFieldRef.current
@@ -80,6 +82,7 @@ export default function Hero() {
     }
 
     function cycleSymbols() {
+      if (heroEl.classList.contains('is-offscreen')) return // skip work while scrolled away
       const els = symbolElsRef.current
       const n = els.length
       if (!n) return

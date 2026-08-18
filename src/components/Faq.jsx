@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { prefersReducedMotion } from '../lib/motion'
+import { prefersReducedMotion, usePauseAnimationsOffscreen } from '../lib/motion'
 import SymbolField from './SymbolField'
 
 const HOW_IT_WORKS_STEPS = [
@@ -110,6 +110,8 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(0)
   const [revealed, setRevealed] = useState(false)
   const sectionRef = useRef(null)
+
+  usePauseAnimationsOffscreen(sectionRef)
 
   useEffect(() => {
     const el = sectionRef.current
