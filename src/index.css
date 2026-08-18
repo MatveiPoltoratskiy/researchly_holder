@@ -490,7 +490,12 @@ h1{
   color: var(--navy);
 }
 
-.faq-mascot{ width:260px; height:auto; display:block; filter: drop-shadow(0 16px 22px rgba(30,37,64,.28)); }
+.faq-mascot-wrap{ position:relative; width:260px; }
+.faq-mascot{ width:100%; height:auto; display:block; filter: drop-shadow(0 16px 22px rgba(30,37,64,.28)); }
+.faq-mascot-glass{
+  position:absolute; width:32%; height:auto; right:-4%; top:44%;
+  transform: rotate(-18deg); filter: drop-shadow(0 4px 6px rgba(30,37,64,.3));
+}
 
 .faq-list-col{ position:relative; z-index:2; flex:1 1 800px; max-width: 900px; display:flex; flex-direction:column; gap:18px; }
 .faq-item{
@@ -591,7 +596,7 @@ h1{
   .faq-list-col{ max-width:100%; width:100%; }
   .faq-row{ padding: 16px 16px; gap:12px; }
   .faq-panel{ padding-left: 16px; padding-right:16px; }
-  .faq-mascot{ width:180px; }
+  .faq-mascot-wrap{ width:180px; }
   .faq-steps{ flex-wrap:wrap; row-gap:22px; }
   .faq-step{ flex:0 1 42%; }
   .faq-step-connector{ display:none; }
