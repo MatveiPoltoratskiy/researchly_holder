@@ -94,8 +94,6 @@ function StepRow({ step, index }) {
 }
 
 function HowLandscape() {
-  const { navigate } = useRouter()
-
   return (
     <div className="how-landscape">
       <svg className="how-landscape-svg" viewBox="0 0 1400 340" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
@@ -122,16 +120,24 @@ function HowLandscape() {
         <use href="#scene-pin" x="666" y="200" width="15" height="20" />
         <use href="#scene-pin" x="636" y="288" width="19" height="25" />
       </svg>
+    </div>
+  )
+}
 
-      <div className="how-landscape-cta">
-        <p>Ready to find your path?</p>
+function HowCta() {
+  const { navigate } = useRouter()
+
+  return (
+    <div className="how-landscape-cta">
+      <p>Ready to find your path?</p>
+      <span className="cta-btn-shake">
         <button type="button" className="cta-btn" onClick={() => goToWaitlist(navigate)}>
           Join the waitlist
           <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
             <use href="#icon-arrow" />
           </svg>
         </button>
-      </div>
+      </span>
     </div>
   )
 }
@@ -169,6 +175,7 @@ export default function HowItWorks() {
       </ol>
 
       <HowLandscape />
+      <HowCta />
     </section>
   )
 }
