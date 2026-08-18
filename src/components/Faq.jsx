@@ -11,13 +11,11 @@ const HOW_IT_WORKS_STEPS = [
 const FAQS = [
   {
     q: 'How does it work?',
-    icon: 'book',
     a: "We start with a quick interview about your interests and goals. Researchly then matches you with the best research opportunities, internships, and programs. Finally, we build a personalized roadmap so you know exactly what to do next.",
     steps: HOW_IT_WORKS_STEPS,
   },
   {
     q: 'What kinds of opportunities will I find?',
-    icon: 'grad-cap',
     a: 'Research opportunities may include:',
     list: [
       'University research labs',
@@ -31,32 +29,27 @@ const FAQS = [
   },
   {
     q: 'Is Researchly free?',
-    icon: 'dollar',
     a: "The waitlist is completely free. Pricing for the full platform hasn't been announced yet.",
   },
   {
     q: 'When can I start?',
-    icon: 'rocket',
     a: "Researchly is in early access. Join the waitlist and we'll reach out as spots open. We're building it for students, and we'll share the details on access as we get closer.",
   },
   {
     q: "Does Researchly guarantee I'll get accepted?",
-    icon: 'badge-check',
     a: 'No. Researchly helps you discover and prioritize opportunities that fit your profile, but admissions and hiring decisions are made by each organization.',
   },
   {
     q: "Can I use Researchly if I don't want to go into medicine?",
-    icon: 'stethoscope',
     a: 'Absolutely. Researchly supports opportunities across STEM, social sciences, humanities, business, engineering, psychology, AI, law, public policy, and more.',
   },
   {
     q: 'How is Researchly different from Google?',
-    icon: 'search',
     a: 'Google gives you thousands of links. Researchly does those searches for you, then simplifies and boils down the most optimal options for you.',
   },
 ]
 
-function FaqItem({ index, q, a, list, icon, steps, isOpen, onToggle, revealDelay }) {
+function FaqItem({ index, q, a, list, steps, isOpen, onToggle, revealDelay }) {
   const panelId = `faq-panel-${index}`
 
   return (
@@ -70,7 +63,6 @@ function FaqItem({ index, q, a, list, icon, steps, isOpen, onToggle, revealDelay
           onClick={onToggle}
         >
           <span className="faq-tag">{String(index + 1).padStart(2, '0')}</span>
-          <svg className="faq-topic-icon" width="20" height="20" aria-hidden="true"><use href={`#icon-${icon}`} /></svg>
           <span className="faq-q">{q}</span>
           <svg className="faq-toggle" width="16" height="16" aria-hidden="true"><use href="#icon-chevron-down" /></svg>
         </button>
@@ -155,7 +147,16 @@ export default function FAQ() {
   }, [])
 
   return (
-    <section className={`faq-section container${revealed ? ' is-revealed' : ''}`} ref={sectionRef}>
+    <section className={`faq-section container${revealed ? ' is-revealed' : ''}`} id="faq" ref={sectionRef}>
+      <div className="faq-sketch faq-sketch-magnifier" aria-hidden="true"><svg viewBox="0 0 80 80"><use href="#deco-magnifier" /></svg></div>
+      <div className="faq-sketch faq-sketch-notebook" aria-hidden="true"><svg viewBox="0 0 130 100"><use href="#deco-notebook" /></svg></div>
+      <div className="faq-sketch faq-sketch-sparkle-a" aria-hidden="true"><svg viewBox="0 0 32 32"><use href="#deco-sparkle" /></svg></div>
+      <div className="faq-sketch faq-sketch-sparkle-b" aria-hidden="true"><svg viewBox="0 0 32 32"><use href="#deco-sparkle" /></svg></div>
+      <svg className="faq-sketch faq-sketch-arrow" aria-hidden="true" viewBox="0 0 220 160">
+        <path d="M6 6 C60 30 120 60 200 96" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeDasharray="1 11" />
+        <path d="M186 84 L202 98 L184 104" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+
       <div className="faq-intro faq-reveal">
         <p className="kicker">Questions, answered</p>
         <h2 className="faq-heading">Everything you need to know before you start.</h2>

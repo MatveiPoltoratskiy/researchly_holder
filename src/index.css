@@ -472,6 +472,17 @@ h1{
   display:flex; align-items:flex-start; justify-content:space-between; gap:50px;
 }
 
+/* faint decorative sketches, same "hero-sketch" language used above the fold —
+   magnifier/notebook/sparkles echo the FAQ mascot's own research-y props */
+.faq-sketch{ position:absolute; z-index:1; color: var(--navy-faint); pointer-events:none; }
+.faq-sketch svg{ display:block; overflow:visible; }
+.faq-sketch-magnifier{ left:-40px; top:56px; width:70px; opacity:.5; }
+.faq-sketch-notebook{ left:-4%; bottom:2%; width:130px; color: rgba(30,37,64,.12); }
+.faq-sketch-sparkle-a{ width:20px; left:40%; top:8%; color: var(--cover-light); opacity:.8; }
+.faq-sketch-sparkle-b{ width:15px; left:35%; top:62%; color: var(--pine); opacity:.55; }
+.faq-sketch-arrow{ width:200px; left:32%; top:38%; color: var(--navy-faint); }
+@media (max-width: 900px){ .faq-sketch{ display:none; } }
+
 .faq-intro{
   position:relative; z-index:2;
   flex:0 1 540px; position:sticky; top:110px;
@@ -546,7 +557,6 @@ h1{
   background: var(--pill-amber-bg);
   font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:14px; color: var(--cover-dark);
 }
-.faq-topic-icon{ flex:none; width:23px; height:23px; color: var(--navy-soft); }
 .faq-q{
   flex:1;
   font-family: "Fraunces", "Iowan Old Style",Palatino,Georgia,serif;
@@ -1137,6 +1147,100 @@ h1{
   .symbol-field span{ animation:none; }
 }
 
+/* ---------- footer ---------- */
+.site-footer{ padding: 36px 0 64px; }
+.footer-card{
+  background: var(--card-bg); border: 1.5px solid var(--card-border); border-radius: 28px;
+  padding: 48px 52px 30px;
+}
+.footer-top{ display:flex; flex-wrap:wrap; gap:40px; padding-bottom:38px; }
+
+.footer-brand{ flex:1 1 220px; }
+.footer-brand-mark{ display:flex; align-items:center; gap:9px; text-decoration:none; }
+.footer-brand-mark img{ height:44px; width:auto; display:block; }
+.footer-brand-mark span{
+  font-family:"Poppins","Segoe UI",system-ui,sans-serif; font-weight:700; font-size:22px;
+  letter-spacing:-.01em; color: var(--navy);
+}
+.footer-tagline{
+  margin:12px 0 0; max-width:220px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; line-height:1.5; color: var(--navy-soft);
+}
+
+.footer-col{ flex:0 0 auto; display:flex; flex-direction:column; gap:13px; min-width:130px; }
+.footer-col-title{
+  margin:0 0 3px; font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:12.5px;
+  letter-spacing:.08em; text-transform:uppercase; color: var(--cover-dark);
+}
+.footer-link{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:15px; font-weight:600;
+  color: var(--navy); text-decoration:none; width:fit-content;
+  transition: color .18s ease;
+}
+a.footer-link:hover{ color: var(--cover-dark); }
+.footer-link--static{ cursor:default; }
+
+.footer-newsletter{
+  flex:1 1 260px; max-width:340px;
+  padding-left:40px; border-left:1px solid var(--card-border);
+}
+.footer-col-title--accent{ display:flex; align-items:center; gap:6px; }
+.footer-newsletter-copy{
+  margin:0 0 16px; font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; line-height:1.5;
+  color: var(--navy-soft);
+}
+.footer-email-form{
+  display:flex; align-items:center; gap:8px;
+  background: var(--cream); border:1.5px solid var(--card-border); border-radius:14px;
+  padding: 6px 6px 6px 16px;
+}
+.footer-email-icon{ flex:none; color: var(--navy-soft); }
+.footer-email-form input{
+  flex:1; min-width:0; border:none; outline:none; background:none;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; color: var(--navy);
+  padding:10px 0;
+}
+.footer-email-form input::placeholder{ color: var(--navy-soft); }
+.footer-email-form input:disabled{ opacity:.7; }
+.footer-email-submit{
+  flex:none; width:38px; height:38px; border-radius:10px; border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  background: var(--cover); color:#FFF6EC;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.footer-email-submit:hover:not(:disabled){ transform: translateY(-1px); }
+.footer-email-submit:disabled{ cursor:default; opacity:.85; }
+.footer-email-submit .btn-spinner{ width:16px; height:16px; }
+.footer-newsletter-error{
+  margin:8px 0 0; font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:700;
+  color: var(--cover-dark);
+}
+.footer-newsletter-success{
+  margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; font-weight:700;
+  color: var(--match-green);
+}
+.footer-newsletter-note{
+  display:flex; align-items:center; gap:6px; margin:10px 0 0;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; color: var(--navy-soft);
+}
+.footer-newsletter-note svg{ flex:none; color: var(--navy-soft); }
+
+.footer-divider{ margin:0; border:none; border-top:1px solid var(--card-border); }
+.footer-bottom{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;
+  padding-top:24px;
+}
+.footer-copyright{
+  margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:14px; color: var(--navy-soft);
+}
+.footer-legal{ display:flex; align-items:center; gap:22px; }
+.footer-legal-divider{ width:1px; height:18px; background: var(--card-border); }
+.footer-social{
+  display:flex; align-items:center; justify-content:center;
+  width:34px; height:34px; border-radius:9px; border:1.5px solid var(--card-border);
+  color: var(--navy);
+}
+
 @media (max-width:640px){
   .contact-grid{ grid-template-columns:1fr; }
   .contact-card{ padding:26px 22px 24px; }
@@ -1152,4 +1256,10 @@ h1{
   .sub{ margin-left:auto; margin-right:auto; }
   .hero-card-wrap{ max-width:400px; margin-top:8px; }
   .landscape-wrap{ margin-top:-10px; }
+
+  .footer-card{ padding:36px 24px 24px; border-radius:22px; }
+  .footer-top{ gap:28px; }
+  .footer-brand{ flex-basis:100%; }
+  .footer-newsletter{ padding-left:0; border-left:none; max-width:none; flex-basis:100%; }
+  .footer-bottom{ flex-direction:column; align-items:flex-start; }
 }
