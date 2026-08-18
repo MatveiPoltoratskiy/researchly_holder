@@ -106,6 +106,15 @@ function HowLandscape() {
         <use href="#scene-trees" x="250" y="178" width="40" height="56" />
         <use href="#scene-trees" x="552" y="200" width="34" height="48" />
         <use href="#scene-trees" x="792" y="196" width="32" height="46" />
+
+        {/* rounded bush cluster — a different silhouette from the pointed pine trees, breaking
+            up the tree-only rhythm on the right side of the castle */}
+        <g>
+          <ellipse cx="962" cy="212" rx="24" ry="17" fill="var(--sage-front)" />
+          <ellipse cx="990" cy="206" rx="28" ry="19" fill="var(--pine)" />
+          <ellipse cx="1022" cy="214" rx="21" ry="15" fill="var(--sage-front)" />
+        </g>
+
         <use href="#scene-trees" x="1110" y="168" width="44" height="60" />
         <use href="#scene-trees" x="1290" y="192" width="38" height="52" />
         <use href="#scene-trees" x="1340" y="155" width="50" height="70" />
