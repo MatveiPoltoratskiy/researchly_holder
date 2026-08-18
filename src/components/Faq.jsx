@@ -139,7 +139,6 @@ export default function FAQ() {
         <h2 className="faq-heading">Everything you need to know before you start.</h2>
         <span className="faq-heading-underline" aria-hidden="true" />
         <p className="faq-sub">The questions we get asked the most, answered.</p>
-        <span className="faq-sub-accent" aria-hidden="true" />
 
         <div className="faq-mascot-wrap" aria-hidden="true">
           <span className="faq-mascot-backdrop" />
