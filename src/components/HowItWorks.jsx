@@ -174,8 +174,8 @@ export default function HowItWorks() {
         ))}
       </ol>
 
-      <HowLandscape />
       <HowCta />
+      <HowLandscape />
     </section>
   )
 }
