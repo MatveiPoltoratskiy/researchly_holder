@@ -198,7 +198,10 @@ export default function HowItWorks() {
       </div>
 
       <div className="how-head">
-        <h2 className="how-statement">Researchly asks a handful of questions, then does the digging for you...</h2>
+        <h2 className="how-statement">
+          Researchly asks a handful of questions, then does<br />
+          <span className="how-statement-underline">the digging for you...</span>
+        </h2>
       </div>
 
       <ol className="how-trail">
