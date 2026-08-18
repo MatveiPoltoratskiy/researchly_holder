@@ -38,6 +38,12 @@ svg{ display:block; }
    visible keeps animating instead of everything running forever in the background */
 .is-offscreen, .is-offscreen *{ animation-play-state: paused !important; }
 
+/* Contact and the standalone How It Works page render a little smaller than the landing
+   page — `zoom` (not transform:scale) actually reflows layout at the smaller size, so it
+   reads as a slightly zoomed-out page rather than a shrunk screenshot of a bigger one. */
+.compact-page{ zoom: 0.88; }
+@media (max-width: 900px){ .compact-page{ zoom: 1; } }
+
 .container{
   width:100%;
   max-width: var(--container-max-width);
@@ -185,7 +191,7 @@ h1{
 .sub-lead{ font-weight:700; }
 .sub-accent{
   font-weight:700; color: var(--navy);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 60' preserveAspectRatio='none'%3E%3Cpath d='M1,21 C30,10 70,27 110,15 C150,5 190,25 230,13 C260,6 285,19 299,11 L299,45 C270,55 235,39 200,51 C165,60 125,41 90,53 C55,61 25,45 1,49 Z' fill='%23DD6B2E' fill-opacity='0.32'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 60' preserveAspectRatio='none'%3E%3Cpath d='M1,21 C30,10 70,27 110,15 C150,5 190,25 230,13 C260,6 285,19 299,11 L299,45 C270,55 235,39 200,51 C165,60 125,41 90,53 C55,61 25,45 1,49 Z' fill='%23DD6B2E' fill-opacity='0.26'/%3E%3C/svg%3E");
   background-repeat: no-repeat; background-size: 100% 84%; background-position: 0 92%;
   -webkit-box-decoration-break: clone; box-decoration-break: clone;
   padding: 1px 4px;
@@ -653,10 +659,10 @@ h1{
   mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 92%, transparent 100%);
 }
 
-.how-head{ position:relative; z-index:2; max-width:980px; margin:0 auto 64px; text-align:center; }
+.how-head{ position:relative; z-index:2; max-width:1140px; margin:0 auto 64px; text-align:center; }
 .how-statement{
   margin:0; font-family:"Poppins","Segoe UI",system-ui,sans-serif;
-  font-weight:650; font-size: clamp(26px, 3.2vw, 38px); line-height:1.4;
+  font-weight:550; font-size: clamp(28px, 3.5vw, 42px); line-height:1.4;
   color: var(--navy);
 }
 .how-statement-underline{

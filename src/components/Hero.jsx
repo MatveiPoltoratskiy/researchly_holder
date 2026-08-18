@@ -153,7 +153,7 @@ export default function Hero() {
           </h1>
           <p className="sub">
             Get a personalized roadmap of research opportunities, internships, and summer programs
-            based on your interest, in just a <span className="sub-accent">few minutes</span>.
+            based on your interest, <span className="sub-accent">in just a few minutes</span>.
           </p>
           <Waitlist />
         </div>

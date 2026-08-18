@@ -10,10 +10,10 @@ import { RouterProvider, useRouter } from './lib/router'
 
 function Page() {
   const { path } = useRouter()
+  const isLanding = path !== '/contact' && path !== '/how-it-works'
 
-  return (
+  const content = (
     <>
-      <IconSprite />
       <Navbar />
       {path === '/contact' ? (
         <Contact />
@@ -28,6 +28,15 @@ function Page() {
         </>
       )}
       <Footer />
+    </>
+  )
+
+  return (
+    <>
+      <IconSprite />
+      {/* every page but the landing page renders a touch smaller, so a reader at a standard
+          100% browser zoom sees more of the page at once instead of feeling zoomed-in */}
+      {isLanding ? content : <div className="compact-page">{content}</div>}
     </>
   )
 }
