@@ -463,15 +463,9 @@ h1{
 .faq-section{
   position:relative; z-index:5; overflow:hidden;
   max-width: 1500px;
-  margin-top: -50px;
-  padding: 40px 0 110px;
+  margin-top: -90px;
+  padding: 20px 0 110px;
   display:flex; align-items:flex-start; justify-content:space-between; gap:50px;
-}
-.faq-symbol-field{
-  position:absolute; top:0; bottom:0; left:50%; width:100vw; transform:translateX(-50%);
-  z-index:0; pointer-events:none; overflow:hidden;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
 }
 
 .faq-intro{
@@ -491,12 +485,12 @@ h1{
   background-repeat:no-repeat; background-size:100% 100%;
 }
 .faq-sub{
-  margin: 0 0 22px; max-width: 420px;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:17.5px; line-height:1.55;
-  color: var(--navy-soft);
+  margin: 0 0 22px; max-width: 440px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:19px; line-height:1.5;
+  color: var(--navy);
 }
 
-.faq-mascot{ width:185px; height:auto; display:block; filter: drop-shadow(0 16px 22px rgba(30,37,64,.28)); }
+.faq-mascot{ width:260px; height:auto; display:block; filter: drop-shadow(0 16px 22px rgba(30,37,64,.28)); }
 
 .faq-list-col{ position:relative; z-index:2; flex:1 1 800px; max-width: 900px; display:flex; flex-direction:column; gap:18px; }
 .faq-item{
@@ -591,13 +585,13 @@ h1{
   /* the desktop clamp's 46px floor doesn't shrink further on narrow viewports, which was
      forcing the heading down to 1-2 words per line on phones — give mobile its own,
      properly-scaling clamp instead */
-  .faq-heading{ font-size: clamp(30px, 9vw, 44px); }
+  .faq-heading{ font-size: clamp(28px, 7.5vw, 36px); }
   .faq-heading-underline{ width:160px; height:16px; margin-bottom:18px; }
   .faq-sub{ max-width:none; }
   .faq-list-col{ max-width:100%; width:100%; }
   .faq-row{ padding: 16px 16px; gap:12px; }
   .faq-panel{ padding-left: 16px; padding-right:16px; }
-  .faq-mascot{ width:120px; }
+  .faq-mascot{ width:180px; }
   .faq-steps{ flex-wrap:wrap; row-gap:22px; }
   .faq-step{ flex:0 1 42%; }
   .faq-step-connector{ display:none; }

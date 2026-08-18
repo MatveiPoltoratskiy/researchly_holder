@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { prefersReducedMotion, usePauseAnimationsOffscreen } from '../lib/motion'
-import SymbolField from './SymbolField'
 
 const HOW_IT_WORKS_STEPS = [
   { icon: 'chat', title: '1. Interview', sub: 'Tell us about you' },
@@ -135,22 +134,15 @@ export default function FAQ() {
 
   return (
     <section className={`faq-section container${revealed ? ' is-revealed' : ''}`} ref={sectionRef}>
-      <div className="faq-symbol-field" aria-hidden="true">
-        <SymbolField
-          rows={3} cols={12}
-          opacityRange={[0.22, 0.32]}
-          fontSizeRange={[18, 27]}
-          colors={['var(--symbol-tan)', 'var(--cover-dark)', 'var(--ribbon)', 'var(--navy)', '#5C3A1E', 'var(--gold)']}
-        />
-      </div>
-
       <div className="faq-intro faq-reveal">
         <p className="kicker">Questions, answered</p>
         <h2 className="faq-heading">Everything you need to know before you start.</h2>
         <span className="faq-heading-underline" aria-hidden="true" />
-        <p className="faq-sub">Quick answers to the most common questions about Researchly.</p>
+        <p className="faq-sub">The questions we get asked the most, answered.</p>
 
-        <img className="faq-mascot" src="/assets/mascot-logo.png" alt="Researchly mascot" />
+        <svg className="faq-mascot" viewBox="0 0 72 72" aria-hidden="true">
+          <use href="#mascot-scout" />
+        </svg>
       </div>
 
       <div className="faq-list-col">
