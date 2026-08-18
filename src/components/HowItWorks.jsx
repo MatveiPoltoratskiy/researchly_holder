@@ -97,9 +97,13 @@ function HowLandscape() {
   return (
     <div className="how-landscape">
       <svg className="how-landscape-svg" viewBox="0 0 1400 340" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-        <polygon points="0,340 0,170 120,115 240,155 360,90 480,145 600,80 720,135 840,75 960,130 1080,90 1200,145 1320,110 1400,135 1400,340" fill="var(--sage-back)" />
-        <polygon points="0,340 0,220 140,182 280,212 420,165 560,202 700,155 840,198 980,160 1120,205 1260,175 1400,212 1400,340" fill="var(--sage-mid)" />
-        <polygon points="0,340 0,268 160,250 320,272 480,242 640,270 800,238 960,268 1120,242 1280,272 1400,250 1400,340" fill="var(--sage-front)" />
+        {/* four irregular ridgelines, deliberately off-phase from each other so a tall back peak
+            can rise through a gap in a nearer layer instead of every layer reading as a scaled
+            copy of the last — that repetition is what made it look like a flat 2D wall */}
+        <polygon points="0,340 0,180 30,186 60,150 80,162 140,90 200,130 250,181 330,100 400,70 480,120 552,206 620,60 700,110 792,202 870,90 950,65 1030,115 1110,170 1180,95 1290,196 1340,154 1400,175 1400,340" fill="var(--sage-back)" />
+        <polygon points="0,340 0,210 90,175 170,205 260,150 340,190 430,145 510,185 600,150 680,195 760,155 840,200 920,160 1000,195 1080,150 1160,190 1240,155 1320,185 1400,205 1400,340" fill="var(--sage-mid)" />
+        <polygon points="0,340 0,260 100,225 200,250 300,205 400,240 500,200 600,235 700,195 800,230 900,200 1000,238 1100,205 1200,232 1300,208 1400,240 1400,340" fill="var(--sage-front)" />
+        <polygon points="0,340 0,270 150,248 300,268 450,242 600,265 750,240 900,262 1050,244 1200,264 1400,250 1400,340" fill="var(--pine)" />
 
         {/* dashed thread continuing the step-trail's connector line down from the top of the
             frame into the castle flag, so the trail reads as running all the way to it */}
@@ -124,7 +128,7 @@ function HowLandscape() {
         <use href="#scene-trees" x="1340" y="134" width="65" height="91" />
 
         {/* hilltop mound the castle sits on, distinct from the mountain bands behind it */}
-        <ellipse cx="698" cy="248" rx="92" ry="20" fill="var(--sage-front)" />
+        <ellipse cx="698" cy="248" rx="92" ry="20" fill="var(--pine)" />
 
         <g transform="translate(658,148)">
           <rect x="10" y="42" width="60" height="58" fill="#EDE0C2" />
