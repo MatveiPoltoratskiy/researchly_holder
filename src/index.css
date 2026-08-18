@@ -1275,10 +1275,10 @@ a.footer-link:hover{ color: var(--cover-dark); }
 /* ---------- mobile ---------- */
 @media (max-width: 900px){
   .hero-top{ flex-direction:column; align-items:center; text-align:center; padding-top:12px; }
-  .hero-text{ max-width:100%; padding-top:8px; align-items:center; }
+  .hero-text{ max-width:100%; min-width:0; padding-top:8px; align-items:center; }
   .cta-wrap{ align-items:center; }
   .sub{ margin-left:auto; margin-right:auto; }
-  .hero-card-wrap{ max-width:400px; margin-top:8px; }
+  .hero-card-wrap{ max-width:400px; min-width:0; margin-top:8px; }
   .landscape-wrap{ margin-top:-10px; }
 
   .footer-card{ padding:36px var(--container-pad) 24px; }
