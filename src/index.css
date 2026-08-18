@@ -490,15 +490,15 @@ h1{
   color: var(--navy);
 }
 
-.faq-mascot-wrap{ position:relative; width:270px; margin-top:34px; margin-left:8%; padding-bottom:14px; }
+.faq-mascot-wrap{ position:relative; width:300px; margin-top:34px; margin-left:8%; padding-bottom:14px; }
 .faq-mascot-backdrop{
-  position:absolute; z-index:0; left:50%; top:-4%; width:100%; aspect-ratio:1/1;
-  transform:translateX(-50%); border-radius:50%; pointer-events:none;
+  position:absolute; z-index:0; left:50%; top:59%; width:100%; aspect-ratio:1/1;
+  transform:translate(-50%,-50%); border-radius:50%; pointer-events:none;
   background: radial-gradient(circle at 42% 38%, var(--pages) 0%, var(--pill-amber-bg) 52%, rgba(241,228,198,0) 76%);
 }
 .faq-mascot-figure{
   position:relative; z-index:2;
-  transform: rotate(-6deg);
+  transform: rotate(-9deg);
   animation: faq-mascot-bob 4.6s ease-in-out infinite;
 }
 .faq-mascot{ width:100%; height:auto; display:block; filter: drop-shadow(0 16px 22px rgba(30,37,64,.24)); }
@@ -513,8 +513,8 @@ h1{
   animation: faq-mascot-shadow-pulse 4.6s ease-in-out infinite;
 }
 @keyframes faq-mascot-bob{
-  0%,100%{ transform: rotate(-6deg) translateY(0); }
-  50%{ transform: rotate(-6deg) translateY(-10px); }
+  0%,100%{ transform: rotate(-9deg) translateY(0); }
+  50%{ transform: rotate(-9deg) translateY(-10px); }
 }
 @keyframes faq-mascot-shadow-pulse{
   0%,100%{ transform: translateX(-50%) scale(1); opacity:.85; }
