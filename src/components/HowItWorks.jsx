@@ -158,14 +158,7 @@ export default function HowItWorks() {
       </div>
 
       <div className="how-head">
-        <p className="kicker">How it works</p>
-        <h2 className="how-heading">
-          Four steps, and you'll know exactly <span className="squiggle-underline">where to start</span>.
-        </h2>
-        <p className="sub how-sub">
-          Researchly asks a handful of questions, then does the digging for you. It matches you to real research
-          opportunities and lays out what to do next. Here's the whole thing, start to finish.
-        </p>
+        <h2 className="how-statement">Researchly asks a handful of questions, then does the digging for you...</h2>
       </div>
 
       <ol className="how-trail">
