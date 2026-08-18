@@ -467,7 +467,7 @@ h1{
 .faq-section{
   position:relative; z-index:5; overflow:hidden;
   max-width: 1500px;
-  margin-top: -90px;
+  margin-top: -205px;
   padding: 20px 0 110px;
   display:flex; align-items:flex-start; justify-content:space-between; gap:50px;
 }
@@ -616,7 +616,7 @@ h1{
 }
 
 @media (max-width: 900px){
-  .faq-section{ flex-direction:column; gap:36px; }
+  .faq-section{ flex-direction:column; gap:36px; margin-top:-90px; }
   .faq-intro{ position:static; flex:none; width:100%; max-width:none; align-items:flex-start; }
   /* the desktop clamp's 46px floor doesn't shrink further on narrow viewports, which was
      forcing the heading down to 1-2 words per line on phones — give mobile its own,
