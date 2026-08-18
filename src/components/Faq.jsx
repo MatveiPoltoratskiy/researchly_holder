@@ -109,8 +109,30 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(0)
   const [revealed, setRevealed] = useState(false)
   const sectionRef = useRef(null)
+  const maxSectionHeightRef = useRef(0)
 
   usePauseAnimationsOffscreen(sectionRef)
+
+  // .faq-intro is sticky within .faq-section, so when an open accordion item collapses and
+  // .faq-list-col shrinks, the section (and the sticky intro's travel range) would shrink
+  // with it — pushing the intro column up and, via the browser's scroll-anchoring, making
+  // the list column appear to jump down. Floor the section's own height at the tallest it's
+  // ever been so it only grows, never shrinks, and closing an item can't trigger that jump.
+  // Watches the section itself (not just the list column) since min-height needs to cover
+  // whichever column — intro or list — is actually tallest, padding included.
+  useEffect(() => {
+    const sectionEl = sectionRef.current
+    if (!sectionEl || typeof ResizeObserver === 'undefined') return
+    const observer = new ResizeObserver(([entry]) => {
+      const height = entry.borderBoxSize?.[0]?.blockSize ?? entry.contentRect.height
+      if (height > maxSectionHeightRef.current) {
+        maxSectionHeightRef.current = height
+        sectionEl.style.minHeight = `${height}px`
+      }
+    })
+    observer.observe(sectionEl)
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     const el = sectionRef.current
