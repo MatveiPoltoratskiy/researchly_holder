@@ -23,8 +23,13 @@ function Page() {
         <>
           <Hero />
           <ReviewCarousel />
-          <HowItWorks />
-          <Faq />
+          {/* these two run noticeably larger than the rest of the page at a normal browser
+              zoom — scale them down independently of .compact-page (which only wraps the
+              other routes, so it never interacts with this) */}
+          <div className="landing-compact">
+            <HowItWorks />
+            <Faq />
+          </div>
         </>
       )}
       <Footer />

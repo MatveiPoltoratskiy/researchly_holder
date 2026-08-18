@@ -44,6 +44,11 @@ svg{ display:block; }
 .compact-page{ zoom: 0.88; }
 @media (max-width: 900px){ .compact-page{ zoom: 1; } }
 
+/* the embedded How It Works + FAQ sections run noticeably larger than the rest of the
+   landing page at a normal browser zoom — pull them in so more fits on screen at once */
+.landing-compact{ zoom: 0.82; }
+@media (max-width: 900px){ .landing-compact{ zoom: 1; } }
+
 .container{
   width:100%;
   max-width: var(--container-max-width);
