@@ -23,6 +23,9 @@ const FIELD_ORDER = ['pre-med', 'biology', 'chemistry', 'physics']
 const LIVE_FIELD_SET = new Set(FIELD_ORDER)
 
 const CONFIDENCE_LABEL = { high: 'Verified', medium: 'Needs check', low: 'Unconfirmed' }
+const MODE_LABEL = { 'in-person': 'In person', remote: 'Remote', hybrid: 'Hybrid' }
+const AVAILABILITY_LABEL = { summer: 'Summer', 'year-round': 'Year-round', 'academic-year': 'Academic year' }
+const SELECTIVITY_LABEL = { 'very-high': 'Very high', high: 'High', medium: 'Medium', open: 'Open' }
 
 function levelRangeLabel(levels) {
   const hs = levels.filter((l) => l.startsWith('hs')).map((l) => l.split('-')[1])
@@ -107,14 +110,16 @@ function OrgLogo({ org, url, iconId }) {
   )
 }
 
-function OpportunityCard({ o, selected, onSelect, cardRef }) {
+function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef }) {
   const primary = FIELD_ORDER.find((f) => o.focus.includes(f)) || o.focus[0]
 
-  // clicking anywhere on the card selects it (highlights it + pans the map to its pin),
-  // except the actual "View program" link, which should just follow through as normal
+  // clicking anywhere on the card selects it (highlights it + pans the map to its pin) and
+  // opens the full detail modal, except the actual "View program" link, which should just
+  // follow through as normal
   function handleCardClick(e) {
     if (e.target.closest('a')) return
     onSelect(o.id)
+    onOpenDetail(o.id)
   }
 
   return (
@@ -237,12 +242,121 @@ function MajorsFilter({ activeFields, toggleField, counts }) {
   )
 }
 
+function OpportunityDetailModal({ o, onClose }) {
+  // Escape-to-close, and lock page scroll while open so the backdrop reads as modal, not
+  // just an overlapping card
+  useEffect(() => {
+    function onKeyDown(e) {
+      if (e.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', onKeyDown)
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKeyDown)
+      document.body.style.overflow = prevOverflow
+    }
+  }, [onClose])
+
+  const details = [
+    ['Application deadline', o.deadline || 'Not confirmed'],
+    ['Program dates', AVAILABILITY_LABEL[o.availability] || o.availability],
+    ['Eligibility', levelRangeLabel(o.levels) || 'Not confirmed'],
+    ['Cost to attend', costLabel(o) || 'Not confirmed'],
+    ['Stipend / pay', payLabel(o)],
+    ['Selectivity', SELECTIVITY_LABEL[o.selectivity] || 'Not confirmed'],
+  ]
+
+  return (
+    <div className="opp-modal-backdrop" onClick={onClose}>
+      <div className="opp-modal" onClick={(e) => e.stopPropagation()}>
+        <button type="button" className="opp-modal-close" onClick={onClose} aria-label="Close">
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M6 6l12 12M18 6L6 18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
+        </button>
+
+        <div className="opp-modal-header">
+          <div className="opp-modal-eyebrow">
+            {o.focus.map((f) => FIELD_META[f]?.label).filter(Boolean).join(' · ')}
+          </div>
+          <div className="opp-modal-title-row">
+            <div className="opp-modal-logo">
+              <OrgLogo org={o.org} url={o.url} iconId={iconForOrg(o.org)} />
+            </div>
+            <div>
+              <h2 className="opp-modal-title">{o.name}</h2>
+              <div className="opp-modal-org">{o.org}</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="opp-modal-status-row">
+          <span className={`opp-confidence opp-confidence--${o.confidence}`}>
+            {CONFIDENCE_LABEL[o.confidence] || o.confidence}
+          </span>
+          {o.locationLabel && <span className="opp-modal-status-item">{o.locationLabel}</span>}
+          <span className="opp-modal-status-item">{MODE_LABEL[o.mode] || o.mode}</span>
+        </div>
+
+        <p className="opp-modal-blurb">{o.blurb}</p>
+
+        <div className="opp-modal-grid">
+          {details.map(([label, value]) => (
+            <div key={label} className="opp-modal-cell">
+              <div className="opp-modal-cell-label">{label}</div>
+              <div className="opp-modal-cell-value">{value}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="opp-tags opp-modal-tags">
+          {o.focus.map((f) =>
+            FIELD_META[f] ? (
+              <span key={f} className={`opp-tag ${FIELD_META[f].cls}`}>
+                {FIELD_META[f].label}
+              </span>
+            ) : null
+          )}
+          {o.equityNote && <span className="opp-tag opp-tag--equity">{o.equityNote}</span>}
+          {o.isGrant && <span className="opp-tag opp-tag--grant">Financial Grant/Award</span>}
+        </div>
+
+        {o.url ? (
+          <a className="opp-modal-cta" href={o.url} target="_blank" rel="noreferrer">
+            View program
+            <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M7 17 17 7M9 7h8v8"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </a>
+        ) : (
+          <div className="opp-modal-cta opp-modal-cta--disabled">No official link yet</div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 export default function OpportunityExplorer() {
   const [activeFields, setActiveFields] = useState(() => new Set(FIELD_ORDER))
   const [level, setLevel] = useState('all')
   const [costFilters, setCostFilters] = useState(() => new Set())
   const [sortKey, setSortKey] = useState('best-match')
   const [selectedId, setSelectedId] = useState(null)
+  const [detailId, setDetailId] = useState(null)
   const [shownCount, setShownCount] = useState(() => CANADA_OPPORTUNITIES.length)
   const [countShimmer, setCountShimmer] = useState(false)
   const listScrollRef = useRef(null)
@@ -359,6 +473,7 @@ export default function OpportunityExplorer() {
   useEffect(() => () => clearTimeout(shimmerTimeoutRef.current), [])
 
   const activeFieldLabels = FIELD_ORDER.filter((f) => activeFields.has(f)).map((f) => FIELD_META[f].label)
+  const detailOpportunity = detailId ? CANADA_OPPORTUNITIES.find((o) => o.id === detailId) : null
 
   return (
     <section className="opp-explorer">
@@ -466,6 +581,7 @@ export default function OpportunityExplorer() {
                     o={o}
                     selected={o.id === selectedId}
                     onSelect={selectOpportunity}
+                    onOpenDetail={setDetailId}
                     cardRef={(el) => {
                       if (el) cardRefs.current.set(o.id, el)
                       else cardRefs.current.delete(o.id)
@@ -488,6 +604,8 @@ export default function OpportunityExplorer() {
           </div>
         </div>
       </div>
+
+      {detailOpportunity && <OpportunityDetailModal o={detailOpportunity} onClose={() => setDetailId(null)} />}
     </section>
   )
 }

@@ -1452,6 +1452,29 @@ html{ scroll-behavior:smooth; }
 }
 .opp-map-pin{ background:none; border:none; }
 
+/* logo pin: a white circular badge holding the org's real favicon (fallback chain runs via
+   the window-level handler in OpportunityMap.jsx, raw divIcon HTML has no React state to
+   hold it), a field-colored ring, and a small tail pointing at the exact coordinate */
+.opp-map-pin-stack{ display:flex; flex-direction:column; align-items:center; }
+.opp-map-pin-badge{
+  position:relative; border-radius:999px; background:#fff; border-style:solid;
+  box-shadow:0 2px 6px rgba(30,37,64,.25); display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+}
+.opp-map-pin-halo{
+  position:absolute; inset:-9px; border-radius:999px; background:#DD6B2E; opacity:.22;
+}
+.opp-map-pin-img{ width:70%; height:70%; object-fit:contain; }
+.opp-map-pin-fallback{
+  width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+  font-family:"Iowan Old Style",Palatino,Georgia,serif; font-weight:700; font-size:15px; color:var(--navy);
+  background:var(--pages-shadow);
+}
+.opp-map-pin-tail{
+  width:0; height:0; margin-top:-1px; border-left:6px solid transparent; border-right:6px solid transparent;
+  border-top:9px solid; filter:drop-shadow(0 2px 1px rgba(30,37,64,.2));
+}
+
 /* "bubbly" popup matching the opportunity-card art style (warm card bg, serif heading,
    generous rounding, soft shadow) instead of Leaflet's plain default box. Leaflet's own
    CSS is imported after index.css, so several rules here need !important to actually win —
@@ -1608,4 +1631,90 @@ html{ scroll-behavior:smooth; }
   .opp-card{ flex-direction:column; }
   .opp-confidence{ margin-top:0; }
   .opp-link{ margin-left:0; width:100%; }
+}
+
+/* ---- opportunity detail modal ---- */
+.opp-modal-backdrop{
+  position:fixed; inset:0; z-index:2000; background:rgba(30,37,64,.5);
+  display:flex; align-items:flex-start; justify-content:center; padding:64px 20px;
+  overflow-y:auto; backdrop-filter:blur(2px);
+}
+.opp-modal{
+  position:relative; width:100%; max-width:640px; background:var(--cream);
+  border-radius:24px; padding:32px 32px 28px; box-shadow:0 24px 60px rgba(30,37,64,.35);
+  animation:opp-modal-in .18s ease-out;
+}
+@keyframes opp-modal-in{ from{ opacity:0; transform:translateY(10px) scale(.98); } to{ opacity:1; transform:none; } }
+@media (prefers-reduced-motion: reduce){ .opp-modal{ animation:none; } }
+
+.opp-modal-close{
+  position:absolute; top:18px; right:18px; width:36px; height:36px; border-radius:999px;
+  background:var(--card-bg); border:1px solid var(--card-border); color:var(--navy-soft);
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+}
+.opp-modal-close:hover{ color:var(--navy); border-color:rgba(30,37,64,.3); }
+
+.opp-modal-eyebrow{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:800; letter-spacing:.04em;
+  text-transform:uppercase; color:var(--match-green); margin-bottom:10px;
+}
+.opp-modal-title-row{ display:flex; gap:16px; align-items:flex-start; }
+.opp-modal-logo{
+  flex:none; width:56px; height:56px; border-radius:14px; background:#fff;
+  border:1px solid var(--card-border); display:flex; align-items:center; justify-content:center; overflow:hidden;
+}
+.opp-modal-logo svg{ width:26px; height:26px; color:var(--cover); }
+.opp-modal-title{
+  font-family:"Iowan Old Style",Palatino,Georgia,serif; font-weight:700; font-size:26px;
+  line-height:1.2; color:var(--navy); margin:0; text-wrap:balance;
+}
+.opp-modal-org{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:14px; font-weight:600;
+  color:var(--opp-text-soft, var(--navy-soft)); margin-top:4px;
+}
+
+.opp-modal-status-row{
+  display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin:18px 0 0;
+  padding-bottom:18px; border-bottom:1px solid var(--card-border);
+}
+.opp-modal-status-item{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:600; color:var(--opp-text-soft, var(--navy-soft));
+}
+
+.opp-modal-blurb{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; line-height:1.55; color:var(--navy);
+  margin:18px 0 0;
+}
+
+.opp-modal-grid{
+  display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--card-border);
+  border:1px solid var(--card-border); border-radius:14px; overflow:hidden; margin:20px 0 0;
+}
+.opp-modal-cell{ background:var(--card-bg); padding:14px 16px; }
+.opp-modal-cell-label{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:11px; font-weight:800; letter-spacing:.03em;
+  text-transform:uppercase; color:var(--match-green); margin-bottom:4px;
+}
+.opp-modal-cell-value{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; font-weight:700; color:var(--navy);
+}
+
+.opp-modal-tags{ margin:18px 0 0; }
+
+.opp-modal-cta{
+  display:flex; align-items:center; justify-content:center; gap:8px; margin-top:22px;
+  background:var(--cover); color:#fff; font-family:"Segoe UI",system-ui,sans-serif; font-weight:700;
+  font-size:15px; text-decoration:none; padding:13px 20px; border-radius:12px; text-align:center;
+  transition:background .15s ease, transform .1s ease;
+}
+.opp-modal-cta:hover{ background:var(--cover-dark); transform:translateY(-1px); }
+.opp-modal-cta--disabled{ background:var(--pill-bg); color:var(--navy-faint); cursor:default; }
+.opp-modal-cta--disabled:hover{ transform:none; }
+
+@media (max-width: 600px){
+  .opp-modal{ padding:26px 20px 22px; border-radius:18px; }
+  .opp-modal-backdrop{ padding:0; align-items:stretch; }
+  .opp-modal{ max-width:none; min-height:100%; border-radius:0; }
+  .opp-modal-grid{ grid-template-columns:1fr; }
+  .opp-modal-title{ font-size:22px; }
 }

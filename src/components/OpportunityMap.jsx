@@ -15,28 +15,52 @@ const PIN_COLOR = {
 const FIELD_ORDER = ['pre-med', 'biology', 'chemistry', 'physics']
 const FIELD_LABEL = { 'pre-med': 'Pre-Med', biology: 'Biology', chemistry: 'Chemistry', physics: 'Physics' }
 
-// selected pins get an orange halo + a size bump so it's obvious on the map which card is
-// selected, mirroring the orange outline the card itself gets in the list
-function pinIcon(color, selected) {
-  const svg = selected
-    ? `<svg width="34" height="42" viewBox="0 0 30 38" xmlns="http://www.w3.org/2000/svg">
-         <circle cx="15" cy="14.2" r="15" fill="#DD6B2E" opacity=".22" />
-         <path d="M15 3c6.6 0 11 5 11 11.2C26 21.6 15 35 15 35S4 21.6 4 14.2C4 5 8.4 3 15 3Z"
-               fill="${color}" stroke="#DD6B2E" stroke-width="2.4" />
-         <circle cx="15" cy="14.2" r="4.4" fill="#FCF6EA" />
-       </svg>`
-    : `<svg width="26" height="34" viewBox="0 0 24 32" xmlns="http://www.w3.org/2000/svg">
-         <path d="M12 1c6 0 10 4.6 10 10.2C22 18.6 12 31 12 31S2 18.6 2 11.2C2 5.6 6 1 12 1Z"
-               fill="${color}" stroke="#FCF6EA" stroke-width="1.6" />
-         <circle cx="12" cy="11.5" r="4" fill="#FCF6EA" />
-       </svg>`
-  const size = selected ? [34, 42] : [26, 34]
+function domainFromUrl(url) {
+  if (!url) return null
+  try {
+    return new URL(url).hostname.replace(/^www\./, '')
+  } catch {
+    return null
+  }
+}
+
+// pins show the org's actual logo (same favicon-chain approach as the card badges) inside
+// a small circular marker with a field-colored ring, instead of a plain colored teardrop.
+// Leaflet's divIcon is raw HTML with no React event system, so the fallback chain runs via
+// a single shared window-level handler (set up once on mount below) rather than component
+// state — there's no per-marker React tree to hold that state in.
+function logoPinIcon({ org, url, color, selected }) {
+  const domain = domainFromUrl(url)
+  const badgeSize = selected ? 46 : 38
+  const tailHeight = 9
+  const totalHeight = badgeSize + tailHeight
+  const ring = selected ? '#DD6B2E' : color
+  const ringWidth = selected ? 3 : 2
+  const letter = (org.trim()[0] || '?').toUpperCase()
+
+  const googleUrl = domain ? `https://www.google.com/s2/favicons?sz=128&domain=${domain}` : null
+  const duckUrl = domain ? `https://icons.duckduckgo.com/ip3/${domain}.ico` : null
+
+  const contentHtml = googleUrl
+    ? `<img class="opp-map-pin-img" src="${googleUrl}" onerror="window.__oppPinFallback(this,'${duckUrl}')" />
+       <span class="opp-map-pin-fallback" style="display:none;">${letter}</span>`
+    : `<span class="opp-map-pin-fallback">${letter}</span>`
+
+  const html = `
+    <div class="opp-map-pin-stack">
+      <div class="opp-map-pin-badge" style="width:${badgeSize}px;height:${badgeSize}px;border-color:${ring};border-width:${ringWidth}px;">
+        ${selected ? '<span class="opp-map-pin-halo"></span>' : ''}
+        ${contentHtml}
+      </div>
+      <div class="opp-map-pin-tail" style="border-top-color:${ring};"></div>
+    </div>`
+
   return L.divIcon({
     className: 'opp-map-pin',
-    html: svg,
-    iconSize: size,
-    iconAnchor: [size[0] / 2, size[1] - 2],
-    popupAnchor: [0, -size[1] + 4],
+    html,
+    iconSize: [badgeSize, totalHeight],
+    iconAnchor: [badgeSize / 2, totalHeight],
+    popupAnchor: [0, -totalHeight + 6],
   })
 }
 
@@ -76,6 +100,24 @@ export default function OpportunityMap({ opportunities, selectedId, onSelect }) 
   const mapRef = useRef(null)
   const markersRef = useRef(null)
   const markerByIdRef = useRef(new Map())
+
+  // shared fallback handler for every pin's logo <img> — tries DuckDuckGo's favicon
+  // service once, then reveals the letter-initial fallback span if that fails too
+  useEffect(() => {
+    window.__oppPinFallback = function (img, duckUrl) {
+      if (duckUrl && !img.dataset.triedDuck) {
+        img.dataset.triedDuck = '1'
+        img.src = duckUrl
+        return
+      }
+      img.style.display = 'none'
+      const fallback = img.nextElementSibling
+      if (fallback) fallback.style.display = 'flex'
+    }
+    return () => {
+      delete window.__oppPinFallback
+    }
+  }, [])
 
   // mount the map once, centered on Canada — filtering only ever updates markers below,
   // never recenters, so "start in Canada" stays the resting view no matter what's filtered
@@ -135,7 +177,8 @@ export default function OpportunityMap({ opportunities, selectedId, onSelect }) 
         continue
       }
       const selected = o.id === selectedId
-      const marker = L.marker([o.lat, o.lon], { icon: pinIcon(PIN_COLOR[primary], selected) })
+      const icon = logoPinIcon({ org: o.org, url: o.url, color: PIN_COLOR[primary], selected })
+      const marker = L.marker([o.lat, o.lon], { icon })
       marker.bindPopup(popupHtml(o, primary), { className: 'opp-map-popup-wrap', maxWidth: 260 })
       marker.on('click', () => onSelect?.(o.id))
       marker.addTo(layer)
