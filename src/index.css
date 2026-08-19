@@ -29,6 +29,10 @@ body{
   color: var(--navy);
   font-family: Georgia, "Iowan Old Style", serif;
   overflow-x:hidden;
+  /* .site-nav is position:fixed (floats over the page, transparent, follows scroll) and so
+     is out of normal flow — this replaces the space it used to reserve, plus extra room so
+     the header doesn't crowd the content directly beneath it. */
+  padding-top: 148px;
 }
 svg{ display:block; }
 .visually-hidden{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
@@ -61,7 +65,8 @@ svg{ display:block; }
 .site-nav{
   display:flex; align-items:center; justify-content:space-between;
   padding-top: 24px; padding-bottom: 24px;
-  position:relative; z-index:20;
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  background:transparent;
 }
 .brand{ display:flex; align-items:center; gap:9px; text-decoration:none; cursor:pointer; }
 .brand img{ height:40px; width:auto; display:block; }
