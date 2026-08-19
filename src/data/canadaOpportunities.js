@@ -287,7 +287,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "high",
-    "blurb": "A summer research project with a UBC Faculty of Medicine researcher \u2014 students apply as a team with their own supervisor already lined up."
+    "blurb": "A summer research project with a UBC Faculty of Medicine researcher — students apply as a team with their own supervisor already lined up."
   },
   {
     "id": "calgary-chi-summer-studentship",
@@ -502,7 +502,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "high",
-    "blurb": "A paid summer placement in a real focused-ultrasound engineering lab \u2014 one of the few Canadian high school programs offering actual bench research."
+    "blurb": "A paid summer placement in a real focused-ultrasound engineering lab — one of the few Canadian high school programs offering actual bench research."
   },
   {
     "id": "unity-health-krss",
@@ -594,7 +594,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "medium",
-    "blurb": "One of several department-specific summer research programs at Princess Margaret Cancer Centre \u2014 browse by department rather than a single application."
+    "blurb": "One of several department-specific summer research programs at Princess Margaret Cancer Centre — browse by department rather than a single application."
   },
   {
     "id": "womens-college-summer-program",
@@ -718,7 +718,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": true,
     "confidence": "high",
-    "blurb": "A 12-week diabetes-research studentship at U of T's Banting and Best Diabetes Centre \u2014 14 awarded each year."
+    "blurb": "A 12-week diabetes-research studentship at U of T's Banting and Best Diabetes Centre — 14 awarded each year."
   },
   {
     "id": "cfid-summer-research-award",
@@ -778,7 +778,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": true,
     "confidence": "medium",
-    "blurb": "A studentship for undergraduate liver-disease research \u2014 students secure their own CASL-member supervisor before applying."
+    "blurb": "A studentship for undergraduate liver-disease research — students secure their own CASL-member supervisor before applying."
   },
   {
     "id": "canheart-spor-studentship",
@@ -902,7 +902,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "high",
-    "blurb": "U of T's Immunology Summer Student Research Program (ISSRP) \u2014 hands-on immunology research plus a limited number of UROP scholarships."
+    "blurb": "U of T's Immunology Summer Student Research Program (ISSRP) — hands-on immunology research plus a limited number of UROP scholarships."
   },
   {
     "id": "lmp-sure-utoronto",
@@ -1116,7 +1116,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "medium",
-    "blurb": "A part-time (4 hrs/week) biomedical engineering lab-skills bootcamp for 1st/2nd-year Engineering Science students at U of T \u2014 coursework-based, not independent research."
+    "blurb": "A part-time (4 hrs/week) biomedical engineering lab-skills bootcamp for 1st/2nd-year Engineering Science students at U of T — coursework-based, not independent research."
   },
   {
     "id": "xavier-pelletier-bccancer",
@@ -1263,7 +1263,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": true,
     "confidence": "high",
-    "blurb": "A federally funded undergraduate research award for health-sciences research \u2014 this stream is restricted to students who self-identify as Black.",
+    "blurb": "A federally funded undergraduate research award for health-sciences research — this stream is restricted to students who self-identify as Black.",
     "equityNote": "Black students only"
   },
   {
@@ -1330,7 +1330,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "high",
-    "blurb": "About 30 paid studentships a year at BC Children's Hospital \u2014 students must line up their own investigator supervisor before applying."
+    "blurb": "About 30 paid studentships a year at BC Children's Hospital — students must line up their own investigator supervisor before applying."
   },
   {
     "id": "seed2stem-icord-ubc",
@@ -1393,7 +1393,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "medium",
-    "blurb": "A co-op position at Canada's particle accelerator centre \u2014 physics, engineering, and computing work for students enrolled in a partner university's co-op program."
+    "blurb": "A co-op position at Canada's particle accelerator centre — physics, engineering, and computing work for students enrolled in a partner university's co-op program."
   },
   {
     "id": "ipp-summer-fellowship-cern",
@@ -1422,7 +1422,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": true,
     "isGrant": true,
     "confidence": "high",
-    "blurb": "A two-phase fellowship: research in Canada, then August at CERN in Geneva \u2014 but you're expected to already hold an NSERC USRA or TRIUMF position first."
+    "blurb": "A two-phase fellowship: research in Canada, then August at CERN in Geneva — but you're expected to already hold an NSERC USRA or TRIUMF position first."
   },
   {
     "id": "cco-chemistry-olympiad-camp",
@@ -1574,7 +1574,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": true,
     "confidence": "high",
-    "blurb": "$8,960 over 16 weeks of paid research in a University of Manitoba Faculty of Science lab \u2014 several sub-award streams exist with different eligibility."
+    "blurb": "$8,960 over 16 weeks of paid research in a University of Manitoba Faculty of Science lab — several sub-award streams exist with different eligibility."
   },
   {
     "id": "usask-jwt-spinks-chemistry",
@@ -1700,7 +1700,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": true,
     "confidence": "high",
-    "blurb": "16 weeks of paid research at Memorial University \u2014 split between citizens-only NSERC awards and a separate pool open to international students too."
+    "blurb": "16 weeks of paid research at Memorial University — split between citizens-only NSERC awards and a separate pool open to international students too."
   },
   {
     "id": "reu-chem-tamu",
@@ -3277,16 +3277,14 @@ export const CANADA_OPPORTUNITIES = [
   },
   {
     "id": "jhu-sip",
-    "name": "Summer Internship Program (SIP)",
+    "name": "Diversity Summer Internship Program (DSIP)",
     "org": "Johns Hopkins Bloomberg School of Public Health",
-    "url": "https://www.jhsph.edu/",
+    "url": "https://publichealth.jhu.edu/about/inclusion-diversity-anti-racism-and-equity-idare/diversity-summer-internship-program-for-undergraduates",
     "focus": [
       "pre-med",
       "biology"
     ],
     "levels": [
-      "hs-11",
-      "hs-12",
       "ugrad-1",
       "ugrad-2",
       "ugrad-3",
@@ -3305,7 +3303,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "low",
+    "confidence": "high",
     "blurb": "A Johns Hopkins summer program for students exploring medicine or public health research."
   },
   {
@@ -3457,7 +3455,7 @@ export const CANADA_OPPORTUNITIES = [
     "id": "stjude-hs-intern",
     "name": "High School Summer Internship Program",
     "org": "St. Jude Children's Research Hospital",
-    "url": "https://www.stjude.org/",
+    "url": "https://www.stjude.org/education-training/predoctoral-training/k-12/high-school-research-immersion-program.html",
     "focus": [
       "biology",
       "pre-med"
@@ -3466,19 +3464,19 @@ export const CANADA_OPPORTUNITIES = [
       "hs-12"
     ],
     "mode": "in-person",
-    "locationLabel": null,
-    "lat": null,
-    "lon": null,
+    "locationLabel": "Memphis, TN (residency-restricted)",
+    "lat": 35.1495,
+    "lon": -90.049,
     "availability": "summer",
     "paid": true,
     "cost": null,
-    "stipend": null,
+    "stipend": 4800,
     "deadline": null,
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "low",
+    "confidence": "high",
     "blurb": "An 8-week pediatric biomedical research internship for HS seniors at St. Jude Children's Research Hospital."
   },
   {
@@ -3688,27 +3686,23 @@ export const CANADA_OPPORTUNITIES = [
   },
   {
     "id": "uchicago-datasci",
-    "name": "Data Science Research Program",
+    "name": "Research in the Biological Sciences: Summer Program (RIBS)",
     "org": "University of Chicago",
-    "url": "https://ccrf.uchicago.edu/",
+    "url": "https://ccrf.uchicago.edu/content/uchicago-research-biological-sciences-summer-program-ribs",
     "focus": [
-      "biology",
-      "pre-med"
+      "biology"
     ],
     "levels": [
-      "hs-11",
-      "hs-12",
       "ugrad-1",
       "ugrad-2",
-      "ugrad-3",
-      "ugrad-4"
+      "ugrad-3"
     ],
     "mode": "in-person",
     "locationLabel": "Chicago, IL",
     "lat": 41.7886,
     "lon": -87.5987,
     "availability": "summer",
-    "paid": true,
+    "paid": false,
     "cost": null,
     "stipend": null,
     "deadline": null,
@@ -3716,7 +3710,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "low",
+    "confidence": "high",
     "blurb": "A paid 10-week data science research program at UChicago spanning biomedical and other domains."
   },
   {
@@ -4545,7 +4539,7 @@ export const CANADA_OPPORTUNITIES = [
     "id": "umass-med-surp",
     "name": "Summer Undergraduate Research Program",
     "org": "UMass Chan Medical School",
-    "url": "https://www.umass.edu/gateway/research/student-research",
+    "url": "https://www.umassmed.edu/gsbs/outreach-programs/summer-undergraduate-research-program/",
     "focus": [
       "biology",
       "pre-med"
@@ -4557,19 +4551,19 @@ export const CANADA_OPPORTUNITIES = [
       "ugrad-4"
     ],
     "mode": "in-person",
-    "locationLabel": "Amherst, MA",
-    "lat": 42.3868,
-    "lon": -72.5301,
+    "locationLabel": "Worcester, MA",
+    "lat": 42.2626,
+    "lon": -71.8023,
     "availability": "summer",
     "paid": true,
     "cost": null,
-    "stipend": null,
+    "stipend": 6000,
     "deadline": null,
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "low",
+    "confidence": "high",
     "blurb": "A hands-on lab research program with a faculty mentor at UMass Chan Medical School."
   },
   {
@@ -4667,7 +4661,7 @@ export const CANADA_OPPORTUNITIES = [
     "id": "brock-usra",
     "name": "NSERC Undergraduate Student Research Award (USRA)",
     "org": "Brock University",
-    "url": "https://brocku.ca/brock-news/2023/02/applications-open-for-undergraduate-student-research-awards/",
+    "url": "https://brocku.ca/brock-news/2026/02/funding-available-for-undergraduate-research-employment/",
     "focus": [
       "biology",
       "chemistry",
@@ -4687,12 +4681,12 @@ export const CANADA_OPPORTUNITIES = [
     "paid": true,
     "cost": null,
     "stipend": null,
-    "deadline": null,
+    "deadline": "2026-03-09",
     "selectivity": "medium",
     "isDirectory": true,
     "multiSite": false,
     "isGrant": true,
-    "confidence": "medium",
+    "confidence": "high",
     "blurb": "Brock University's NSERC Undergraduate Student Research Award."
   },
   {
@@ -4899,7 +4893,7 @@ export const CANADA_OPPORTUNITIES = [
     "lon": -74.006,
     "availability": "summer",
     "paid": false,
-    "cost": 50,
+    "cost": 900,
     "stipend": null,
     "deadline": "2026-04-15",
     "selectivity": "very-high",
@@ -5540,5 +5534,1400 @@ export const CANADA_OPPORTUNITIES = [
     "isGrant": false,
     "confidence": "high",
     "blurb": "A 10-week Dartmouth research internship specifically for students entering their sophomore year."
+  },
+  {
+    "id": "uottawa-nserc-usra",
+    "name": "NSERC Undergraduate Student Research Award (USRA)",
+    "org": "University of Ottawa",
+    "url": "https://research.uottawa.ca/centre-research-opportunities/usra-nserc",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Ottawa, ON",
+    "lat": 45.4215,
+    "lon": -75.6972,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 8750,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 16-week NSERC-funded summer research placement with a University of Ottawa science supervisor."
+  },
+  {
+    "id": "tmu-uro",
+    "name": "Undergraduate Research Opportunities (URO) Program",
+    "org": "Toronto Metropolitan University",
+    "url": "https://www.torontomu.ca/research/students/uro-guidelines/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Toronto, ON",
+    "lat": 43.6577,
+    "lon": -79.3788,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "TMU's university-wide program pairing undergrads with a faculty mentor for a paid 14-week research placement."
+  },
+  {
+    "id": "york-nserc-usra",
+    "name": "NSERC Undergraduate Student Research Award (USRA)",
+    "org": "York University",
+    "url": "https://www.yorku.ca/science/research/undergraduate-research/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Toronto, ON",
+    "lat": 43.7735,
+    "lon": -79.5019,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 6000,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "York's Faculty of Science runs 30-40 NSERC-funded undergrad research placements each summer."
+  },
+  {
+    "id": "york-science-scholars-award",
+    "name": "York Science Scholars Award (YSSA)",
+    "org": "York University",
+    "url": "https://www.yorku.ca/science/students/future-students/york-science-scholarships-and-awards/york-science-scholars-award-yssa/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "hs-12",
+      "ugrad-1"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Toronto, ON",
+    "lat": 43.7735,
+    "lon": -79.5019,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "An entrance scholarship that guarantees incoming York Science students a paid 12-week research placement after 1st year."
+  },
+  {
+    "id": "guelph-usra",
+    "name": "Undergraduate Research Assistantships / USRA",
+    "org": "University of Guelph",
+    "url": "https://www.uoguelph.ca/registrar/finances-fees/ug-summer-research",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Guelph, ON",
+    "lat": 43.5448,
+    "lon": -80.2482,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Guelph's four-stream summer research program funding 16 weeks in a faculty lab, including dedicated Indigenous and international tracks."
+  },
+  {
+    "id": "laurier-nserc-usra",
+    "name": "NSERC Undergraduate Student Research Award (USRA)",
+    "org": "Wilfrid Laurier University",
+    "url": "https://students.wlu.ca/programs/science/biology/research/nserc-undergraduate-student-research-awards-usra.html",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Waterloo, ON",
+    "lat": 43.4643,
+    "lon": -80.5204,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 6000,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 14-16 week paid NSERC research placement in a Laurier science lab."
+  },
+  {
+    "id": "trent-nserc-usra",
+    "name": "NSERC Undergraduate Student Research Award (USRA)",
+    "org": "Trent University",
+    "url": "https://www.trentu.ca/ori/funding/undergraduate-graduate-postdoctoral-fellow-funding-opportunities/undergraduate-student",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Peterborough, ON",
+    "lat": 44.3091,
+    "lon": -78.3197,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 7500,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 14-16 week NSERC-funded summer research placement at Trent, worth up to $7,500."
+  },
+  {
+    "id": "ontariotech-ura",
+    "name": "Undergraduate Research Award (URA) / SUSRA / STAR",
+    "org": "Ontario Tech University",
+    "url": "https://research.ontariotechu.ca/students/ura/index.php",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Oshawa, ON",
+    "lat": 43.8971,
+    "lon": -78.8658,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Ontario Tech stacks NSERC, SUSRA and STAR funding into a 14-16 week paid faculty-supervised research term."
+  },
+  {
+    "id": "lakehead-nserc-usra",
+    "name": "NSERC Undergraduate Research Awards Program",
+    "org": "Lakehead University",
+    "url": "https://www.lakeheadu.ca/studentcentral/financing-budgeting/nserc-undergraduate-research-awards-program",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Thunder Bay, ON",
+    "lat": 48.3809,
+    "lon": -89.2477,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 16-week NSERC-funded summer research placement at Lakehead, with a separate Black-student-only CIHR/SSHRC stream."
+  },
+  {
+    "id": "windsor-nserc-usra",
+    "name": "NSERC Undergraduate Student Research Award (USRA)",
+    "org": "University of Windsor",
+    "url": "https://www.uwindsor.ca/science/chemistry/500/research-opportunities-undergraduates",
+    "focus": [
+      "chemistry",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Windsor, ON",
+    "lat": 42.3149,
+    "lon": -83.0364,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A paid NSERC summer research placement in Windsor's Chemistry & Biochemistry department."
+  },
+  {
+    "id": "cheo-support-ambassador",
+    "name": "SUPPORT Ambassador Program",
+    "org": "Children's Hospital of Eastern Ontario (CHEO)",
+    "url": "https://www.cheoresearch.ca/for-researchers-and-partners/support-volunteer-program/",
+    "focus": [
+      "pre-med",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Ottawa, ON",
+    "lat": 45.3908,
+    "lon": -75.6866,
+    "availability": "year-round",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": true,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 4-month clinical-research volunteer role screening patients and collecting data for CHEO's Emergency Department studies."
+  },
+  {
+    "id": "oicr-student-programs",
+    "name": "Student & Summer Studentship Programs",
+    "org": "Ontario Institute for Cancer Research (OICR)",
+    "url": "https://oicr.on.ca/community/student/",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Toronto, ON",
+    "lat": 43.6596,
+    "lon": -79.3877,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "low",
+    "isDirectory": true,
+    "multiSite": true,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A directory of Ontario cancer-research co-op, internship and studentship placements, including an Indigenous-specific stream."
+  },
+  {
+    "id": "hhs-hs-research-bursary",
+    "name": "Secondary School Research Bursary Program",
+    "org": "Hamilton Health Sciences",
+    "url": "https://www.hamiltonhealthsciences.ca/share/secondary-school-research-bursary-program/",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Hamilton, ON",
+    "lat": 43.2557,
+    "lon": -79.8711,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 1500,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A rare high-school-level research shadowing program at Hamilton Health Sciences, ending with a $1,500 bursary."
+  },
+  {
+    "id": "umontreal-chem-stages",
+    "name": "Stages de recherche - Chemistry Department",
+    "org": "Universite de Montreal",
+    "url": "https://chimie.umontreal.ca/ressources-services/stages/",
+    "focus": [
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Montreal, QC",
+    "lat": 45.5017,
+    "lon": -73.5673,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 4500,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "Paid summer chemistry lab internships at UdeM, funded partly by a $4,500 NSERC scholarship."
+  },
+  {
+    "id": "usherbrooke-stage-1ercycle",
+    "name": "Stage d'initiation a la recherche au 1er cycle",
+    "org": "Universite de Sherbrooke",
+    "url": "https://www.usherbrooke.ca/recherche/fr/etudier/pourquoi-choisir-udes/developpement-competences/stage-initiation-recherche",
+    "focus": [
+      "biology",
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Sherbrooke, QC",
+    "lat": 45.4042,
+    "lon": -71.8929,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 6000,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A paid 10-14 week research placement for Quebec-resident Sherbrooke undergrads, worth $6,000."
+  },
+  {
+    "id": "inrs-stages-ete",
+    "name": "Stages d'ete de 1er cycle en recherche",
+    "org": "INRS (Institut national de la recherche scientifique)",
+    "url": "https://inrs.ca/les-etudes/stages-et-postdoctorats/stages-d-ete-de-premier-cycle-en-recherche/",
+    "focus": [
+      "biology",
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Quebec (multiple campuses)",
+    "lat": null,
+    "lon": null,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": true,
+    "multiSite": true,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Summer research internships across INRS's Quebec-wide campuses, open to undergrads from any Canadian university."
+  },
+  {
+    "id": "chusj-stages-ete",
+    "name": "Programme de stages d'ete en recherche",
+    "org": "CHU Sainte-Justine",
+    "url": "https://recherche.chusj.org/fr/stages-ete",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Montreal, QC",
+    "lat": 45.5088,
+    "lon": -73.6198,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 6615,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A paid 8-16 week pediatric research placement across 210+ labs at Montreal's Sainte-Justine hospital."
+  },
+  {
+    "id": "bishops-paid-summer-research",
+    "name": "Paid Summer Research Training",
+    "org": "Bishop's University",
+    "url": "https://www.ubishops.ca/academic-programs/faculty-of-natural-sciences-and-mathematics/interuniversity-partnership-for-undergraduate-science-programs/paid-summer-research-training/",
+    "focus": [
+      "pre-med",
+      "biology",
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Sherbrooke, QC",
+    "lat": 45.3306,
+    "lon": -71.8925,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 6000,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Bishop's Science and Pre-Med students placed in Sherbrooke-funded labs spanning biochemistry to bioinformatics."
+  },
+  {
+    "id": "stfx-nserc-usra",
+    "name": "NSERC Undergraduate Student Research Award (USRA)",
+    "org": "St. Francis Xavier University",
+    "url": "https://www.stfx.ca/research/about-research-stfx/student-research/undergraduate-research",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Antigonish, NS",
+    "lat": 45.6199,
+    "lon": -61.9975,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 9000,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A $9,000 NSERC-funded summer research term with a StFX faculty supervisor."
+  },
+  {
+    "id": "mta-physics-summer-research",
+    "name": "Physics Summer Research Assistantships",
+    "org": "Mount Allison University",
+    "url": "https://mta.ca/current-students/department-physics/opportunities-physics-students",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Sackville, NB",
+    "lat": 45.8994,
+    "lon": -64.3673,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "low",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Mount Allison's small physics department funds 10-15 undergrad summer research assistants most years."
+  },
+  {
+    "id": "mta-independent-research-grants",
+    "name": "Independent Student Research Grants",
+    "org": "Mount Allison University",
+    "url": "https://mta.ca/current-students/experiences-and-career/student-research/independent-student-research-grants",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Sackville, NB",
+    "lat": 45.8994,
+    "lon": -64.3673,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "low",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Funding for a student's own self-directed research project the summer before their final year at Mount Allison."
+  },
+  {
+    "id": "unb-nserc-usra",
+    "name": "NSERC Undergraduate Student Research Award (USRA)",
+    "org": "University of New Brunswick",
+    "url": "https://www.unb.ca/gradstudies/current/financial/scholarships/tri-council/nserc-usra.html",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Fredericton, NB",
+    "lat": 45.9636,
+    "lon": -66.6431,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 6000,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 16-week NSERC-funded summer research placement with a UNB faculty supervisor."
+  },
+  {
+    "id": "nbhrf-summer-studentship",
+    "name": "Undergraduate/Medical School Summer Studentships",
+    "org": "New Brunswick Health Research Foundation (NBHRF)",
+    "url": "https://nbhrf.com/en/nbhrf-funding-opportunities",
+    "focus": [
+      "pre-med",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "New Brunswick",
+    "lat": null,
+    "lon": null,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": true,
+    "multiSite": true,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A provincial salary stipend for New Brunswick undergrads doing medical or health research anywhere in the province."
+  },
+  {
+    "id": "iwk-summer-studentship",
+    "name": "Summer Studentship",
+    "org": "IWK Health",
+    "url": "https://www.iwk.nshealth.ca/research/iwk-research-funding-opportunities",
+    "focus": [
+      "pre-med",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Halifax, NS",
+    "lat": 44.6488,
+    "lon": -63.5752,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 5000,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A $5,000 summer research stipend under an IWK Health researcher, focused on child, youth and maternal health."
+  },
+  {
+    "id": "iwk-summer-volunteer-teens",
+    "name": "Summer Volunteer Program (Ages 16-18)",
+    "org": "IWK Health",
+    "url": "https://iwkhealth.ca/get-involved/volunteer-opportunities/summer-volunteer-program-ages-16-18",
+    "focus": [
+      "pre-med",
+      "biology"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Halifax, NS",
+    "lat": 44.6488,
+    "lon": -63.5752,
+    "availability": "summer",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A hospital-floor volunteer role at IWK Health open specifically to 16-18 year olds."
+  },
+  {
+    "id": "upei-sura",
+    "name": "Science Undergraduate Research Award (SURA)",
+    "org": "University of Prince Edward Island",
+    "url": "https://www.upei.ca/science/science-undergraduate-research-award",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Charlottetown, PE",
+    "lat": 46.2382,
+    "lon": -63.1311,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "low",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A UPEI pilot research award that deliberately covers supervisors and international students the federal NSERC USRA leaves out."
+  },
+  {
+    "id": "ubco-ura",
+    "name": "Undergraduate Research Awards (URA)",
+    "org": "University of British Columbia - Okanagan",
+    "url": "https://science.ok.ubc.ca/awards/undergraduate/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-3"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Kelowna, BC",
+    "lat": 49.888,
+    "lon": -119.496,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 10500,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A $10,500 Irving K. Barber-endowed research award for UBC Okanagan undergrads, mainly 3rd-years."
+  },
+  {
+    "id": "tru-nserc-usra",
+    "name": "NSERC Undergraduate Student Research Award (USRA)",
+    "org": "Thompson Rivers University",
+    "url": "https://www.tru.ca/research/undergraduate-research/undergraduate-research-opportunities/usra-award.html",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Kamloops, BC",
+    "lat": 50.6745,
+    "lon": -120.3273,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 7500,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 16-week NSERC-funded research placement at Thompson Rivers, with unlimited awards reserved for Indigenous students."
+  },
+  {
+    "id": "vchri-sparks",
+    "name": "SPARKS (Summer Program Advancing Research Knowledge and Skills)",
+    "org": "Vancouver Coastal Health Research Institute",
+    "url": "https://www.vchri.ca/services/starting-your-project/awards-and-funding/vchri-sparks",
+    "focus": [
+      "pre-med",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Vancouver, BC",
+    "lat": 49.2632,
+    "lon": -123.1207,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Vancouver Coastal Health's SPARKS program pairs undergrad and med students with a hospital-based principal investigator for a summer."
+  },
+  {
+    "id": "achri-summer-studentship",
+    "name": "Summer Studentship / Undergraduate Student Research Experience",
+    "org": "Alberta Children's Hospital Research Institute",
+    "url": "https://research4kids.ucalgary.ca/summer_student_registration",
+    "focus": [
+      "pre-med",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Calgary, AB",
+    "lat": 51.0654,
+    "lon": -114.1317,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A pediatric-focused summer research studentship at the University of Calgary's Alberta Children's Hospital Research Institute."
+  },
+  {
+    "id": "wchri-stollery-summer-studentship",
+    "name": "Summer Studentship Award Program",
+    "org": "Women and Children's Health Research Institute (WCHRI) / Stollery Children's Hospital",
+    "url": "https://www.wchri.org/members-and-trainees/grants-and-awards/summer-studentship-award-program/",
+    "focus": [
+      "pre-med",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Edmonton, AB",
+    "lat": 53.5222,
+    "lon": -113.5254,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A pediatric and women's-health summer studentship through the University of Alberta and Stollery Children's Hospital."
+  },
+  {
+    "id": "terryfoxlab-undergrad",
+    "name": "Undergraduate & Exchange Studies",
+    "org": "Terry Fox Laboratory (BC Cancer)",
+    "url": "https://www.bccrc.ca/dept/tfl/training/undergraduate-exchange-studies",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Vancouver, BC",
+    "lat": 49.2632,
+    "lon": -123.1207,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A limited number of cancer-research summer positions at BC Cancer's Terry Fox Laboratory, usually tied to winning a separate studentship."
+  },
+  {
+    "id": "bcgsc-student-trainees",
+    "name": "Students & Trainees Program",
+    "org": "BC Cancer Genome Sciences Centre",
+    "url": "https://www.bcgsc.ca/students-trainees",
+    "focus": [
+      "biology",
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Vancouver, BC",
+    "lat": 49.2632,
+    "lon": -123.1207,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "low",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Genomics and bioinformatics research placements at BC Cancer's Genome Sciences Centre, open to UBC/UVic/SFU co-op students."
+  },
+  {
+    "id": "usask-physics-nserc-usra",
+    "name": "NSERC Undergraduate Summer Research Award",
+    "org": "University of Saskatchewan",
+    "url": "https://artsandscience.usask.ca/physics/students/undergraduates/current-students.php",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Saskatoon, SK",
+    "lat": 52.1332,
+    "lon": -106.67,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 6000,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 14-16 week paid NSERC summer research job in Saskatchewan's Physics & Engineering Physics department."
+  },
+  {
+    "id": "calgary-usra",
+    "name": "Undergraduate Research Summer Studentship (USRA)",
+    "org": "University of Calgary",
+    "url": "https://research.ucalgary.ca/students/usra-undergrad",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Calgary, AB",
+    "lat": 51.0447,
+    "lon": -114.0719,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 7500,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "Up to $7,500 for an 8-16 week Calgary research placement, drawing from four combined funding streams in one application."
+  },
+  {
+    "id": "snolab-summer-research",
+    "name": "Undergraduate Summer Student Research",
+    "org": "SNOLAB",
+    "url": "https://www.snolab.ca/employment/student-opportunities/",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Sudbury, ON (underground lab)",
+    "lat": 46.4719,
+    "lon": -81.0116,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": true,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "Paid summer research 6,800 feet underground near Sudbury, on dark-matter and neutrino experiments at SNOLAB."
+  },
+  {
+    "id": "iqc-waterloo-useqip",
+    "name": "USEQIP + Undergraduate Research Award (URA)",
+    "org": "Institute for Quantum Computing - University of Waterloo",
+    "url": "https://uwaterloo.ca/institute-for-quantum-computing/outreach/useqip",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Waterloo, ON",
+    "lat": 43.4723,
+    "lon": -80.5449,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A two-week quantum computing school at Waterloo's IQC, with eligible students able to stay on for a paid summer research term."
+  },
+  {
+    "id": "nrc-student-employment",
+    "name": "Student Employment Program",
+    "org": "National Research Council Canada",
+    "url": "https://nrc.canada.ca/en/corporate/careers/nrc-student-employment-program",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "hs-12",
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Canada (multiple NRC sites)",
+    "lat": null,
+    "lon": null,
+    "availability": "both",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "low",
+    "isDirectory": true,
+    "multiSite": true,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Paid federal R&D student positions across National Research Council institutes nationwide, from a high-school diploma up."
+  },
+  {
+    "id": "youthscience-cwsf",
+    "name": "Canada-Wide Science Fair (via regional STEM fairs)",
+    "org": "Youth Science Canada",
+    "url": "https://youthscience.ca/cwsf/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "hs-9",
+      "hs-10",
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Canada (100+ regional fairs)",
+    "lat": null,
+    "lon": null,
+    "availability": "academic-year",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": true,
+    "multiSite": true,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "Canada's largest youth STEM competition - build a project through the school year, present at a regional fair, and the best go national."
+  },
+  {
+    "id": "actua-national-programs",
+    "name": "National STEM Outreach Programs",
+    "org": "Actua",
+    "url": "https://actua.ca/programs",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "hs-9",
+      "hs-10",
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Canada (nationwide network)",
+    "lat": null,
+    "lon": null,
+    "availability": "both",
+    "paid": false,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": true,
+    "multiSite": true,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Canada's largest youth STEM outreach network, running camps, workshops and mentorship through campus chapters nationwide."
+  },
+  {
+    "id": "cls-students-beamline",
+    "name": "Students on the Beamline / Student Research Program",
+    "org": "Canadian Light Source",
+    "url": "https://www.lightsource.ca/public/ed/programs/student-research.php",
+    "focus": [
+      "physics",
+      "chemistry"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12",
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Saskatoon, SK",
+    "lat": 52.146,
+    "lon": -106.6304,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Hands-on access to Canada's only synchrotron light source in Saskatoon, plus separate paid summer-student lab positions."
+  },
+  {
+    "id": "cnl-coop-student",
+    "name": "Co-op and Summer Student Opportunities",
+    "org": "Canadian Nuclear Laboratories",
+    "url": "https://www.cnl.ca/en/home/work/student-opportunities/coop.aspx",
+    "focus": [
+      "physics",
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Chalk River, ON",
+    "lat": 46.0334,
+    "lon": -77.4361,
+    "availability": "both",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": true,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Paid co-op and summer terms in nuclear science and technology at Canada's largest nuclear research lab."
+  },
+  {
+    "id": "c3g-mcgill-summer-intern",
+    "name": "C3G Summer Internships",
+    "org": "Canadian Centre for Computational Genomics (McGill)",
+    "url": "https://computationalgenomics.ca/careers-internships/",
+    "focus": [
+      "biology",
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Montreal, QC",
+    "lat": 45.5048,
+    "lon": -73.5772,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A bioinformatics and computational-genomics summer internship at McGill's C3G core facility."
+  },
+  {
+    "id": "letstalkscience-volunteer",
+    "name": "Volunteer / Outreach Program",
+    "org": "Let's Talk Science",
+    "url": "https://letstalkscience.ca/volunteer",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12",
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Canada (campus-based chapters nationwide)",
+    "lat": null,
+    "lon": null,
+    "availability": "both",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": true,
+    "multiSite": true,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Train to deliver hands-on STEM workshops to K-12 classrooms through a campus-based Let's Talk Science chapter."
+  },
+  {
+    "id": "queens-qhsosp",
+    "name": "Queen's Health Sciences Outreach & Summer Program (QHSOSP)",
+    "org": "Queen's University",
+    "url": "https://healthsci.queensu.ca/academics/edi/outreach-summer-program",
+    "focus": [
+      "pre-med",
+      "biology"
+    ],
+    "levels": [
+      "hs-9",
+      "hs-10",
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Kingston, ON",
+    "lat": 44.2312,
+    "lon": -76.486,
+    "availability": "summer",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A week-long immersive health-sciences introduction at Queen's, built specifically for equity-deserving Kingston-area high schoolers.",
+    "equityNote": "Kingston-area equity-deserving students prioritized"
   }
 ]
