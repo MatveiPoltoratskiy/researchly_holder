@@ -3,6 +3,16 @@ import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
 import { FIELDS } from '../data/fields'
 import OpportunityMap from './OpportunityMap'
 
+const SORTS = {
+  'best-match': { label: 'Best match', fn: null },
+  name: { label: 'Name (A–Z)', fn: (a, b) => a.name.localeCompare(b.name) },
+  verified: {
+    label: 'Verified first',
+    fn: (a, b) => (CONFIDENCE_RANK[b.confidence] ?? 0) - (CONFIDENCE_RANK[a.confidence] ?? 0),
+  },
+}
+const CONFIDENCE_RANK = { high: 2, medium: 1, low: 0 }
+
 const FIELD_META = {
   'pre-med': { label: 'Pre-Med', cls: 'opp-tag--premed' },
   biology: { label: 'Biology', cls: 'opp-tag--bio' },
@@ -31,6 +41,15 @@ function payLabel(o) {
   return 'Paid'
 }
 
+// distinct from payLabel above: this is what the STUDENT pays to attend (tuition/fee),
+// not what they receive — the two are unrelated (a program can pay a stipend AND still
+// have no attendance cost, or vice versa), so they get their own line.
+function costLabel(o) {
+  if (o.cost === 0) return 'Free to attend'
+  if (o.cost != null && o.cost > 0) return `Costs $${o.cost.toLocaleString()} to attend`
+  return null
+}
+
 // Real category icons instead of a plain letter — matched off the org name, since we
 // don't have actual company/hospital logo assets for these records yet.
 function iconForOrg(org = '') {
@@ -43,15 +62,58 @@ function iconForOrg(org = '') {
   return 'icon-flask'
 }
 
+// Real org logos, sourced live off each record's own domain via free favicon services —
+// no per-record manual sourcing needed. (Clearbit's Logo API, the usual first choice for
+// this, was discontinued and its domain no longer even resolves — checked directly before
+// wiring this up.) Google's favicon service goes first since it's the most complete; DuckDuckGo
+// is the second try; the category icon glyph is the final fallback if a domain has neither.
+function domainFromUrl(url) {
+  if (!url) return null
+  try {
+    return new URL(url).hostname.replace(/^www\./, '')
+  } catch {
+    return null
+  }
+}
+
+function OrgLogo({ org, url, iconId }) {
+  const domain = domainFromUrl(url)
+  const [stage, setStage] = useState(domain ? 'google' : 'icon')
+
+  if (stage === 'google') {
+    return (
+      <img
+        className="opp-logo-img"
+        src={`https://www.google.com/s2/favicons?sz=128&domain=${domain}`}
+        alt={`${org} logo`}
+        onError={() => setStage('duckduckgo')}
+      />
+    )
+  }
+  if (stage === 'duckduckgo') {
+    return (
+      <img
+        className="opp-logo-img opp-logo-img--favicon"
+        src={`https://icons.duckduckgo.com/ip3/${domain}.ico`}
+        alt={`${org} logo`}
+        onError={() => setStage('icon')}
+      />
+    )
+  }
+  return (
+    <svg width="20" height="20" aria-hidden="true">
+      <use href={`#${iconId}`} />
+    </svg>
+  )
+}
+
 function OpportunityCard({ o }) {
   const primary = FIELD_ORDER.find((f) => o.focus.includes(f)) || o.focus[0]
 
   return (
     <article className="opp-card">
       <div className={`opp-badge ${FIELD_META[primary]?.cls || ''}`}>
-        <svg width="20" height="20" aria-hidden="true">
-          <use href={`#${iconForOrg(o.org)}`} />
-        </svg>
+        <OrgLogo org={o.org} url={o.url} iconId={iconForOrg(o.org)} />
       </div>
       <div className="opp-card-body">
         <div className="opp-card-top">
@@ -75,9 +137,16 @@ function OpportunityCard({ o }) {
           <span className="opp-tag opp-tag--muted">{levelRangeLabel(o.levels)}</span>
           {o.locationLabel && <span className="opp-tag opp-tag--muted">{o.locationLabel}</span>}
           {o.equityNote && <span className="opp-tag opp-tag--equity">{o.equityNote}</span>}
+          {o.isGrant && <span className="opp-tag opp-tag--grant">Financial Grant/Award</span>}
         </div>
         <div className="opp-foot">
           <span className="opp-pay">{payLabel(o)}</span>
+          {costLabel(o) && (
+            <>
+              <span className="opp-dot">·</span>
+              <span className={`opp-cost ${o.cost > 0 ? 'opp-cost--paid' : ''}`}>{costLabel(o)}</span>
+            </>
+          )}
           <span className="opp-dot">·</span>
           <span className="opp-deadline">
             {o.deadline ? `Deadline ${o.deadline}` : 'Deadline not confirmed'}
@@ -159,6 +228,8 @@ function MajorsFilter({ activeFields, toggleField, counts }) {
 export default function OpportunityExplorer() {
   const [activeFields, setActiveFields] = useState(() => new Set(FIELD_ORDER))
   const [level, setLevel] = useState('all')
+  const [costFilters, setCostFilters] = useState(() => new Set())
+  const [sortKey, setSortKey] = useState('best-match')
   const listTopRef = useRef(null)
 
   // triggered directly from filter clicks (not a state-watching effect) so it only ever
@@ -185,6 +256,18 @@ export default function OpportunityExplorer() {
     scrollToResults()
   }
 
+  // "free" and "costs money" are independent on/off toggles rather than a single
+  // free<->paid switch: both off shows everything (incl. unconfirmed cost), turning one
+  // on isolates it, turning both on shows either (excludes only unknown-cost records)
+  function toggleCostFilter(key) {
+    setCostFilters((prev) => {
+      const next = new Set(prev)
+      next.has(key) ? next.delete(key) : next.add(key)
+      return next
+    })
+    scrollToResults()
+  }
+
   const counts = useMemo(() => {
     const c = { 'pre-med': 0, biology: 0, chemistry: 0, physics: 0 }
     for (const o of CANADA_OPPORTUNITIES) {
@@ -194,14 +277,30 @@ export default function OpportunityExplorer() {
   }, [])
 
   const filtered = useMemo(() => {
-    return CANADA_OPPORTUNITIES.filter((o) => {
+    const list = CANADA_OPPORTUNITIES.filter((o) => {
       const fieldMatch = o.focus.some((f) => activeFields.has(f))
       if (!fieldMatch) return false
-      if (level === 'all') return true
-      if (level === 'hs') return o.levels.some((l) => l.startsWith('hs'))
-      return o.levels.some((l) => l.startsWith('ugrad'))
+
+      if (level !== 'all') {
+        const levelMatch =
+          level === 'hs' ? o.levels.some((l) => l.startsWith('hs')) : o.levels.some((l) => l.startsWith('ugrad'))
+        if (!levelMatch) return false
+      }
+
+      if (costFilters.size > 0) {
+        const isFree = o.cost === 0
+        const isPaidToAttend = o.cost != null && o.cost > 0
+        const matchesFree = costFilters.has('free') && isFree
+        const matchesPaid = costFilters.has('paid') && isPaidToAttend
+        if (!matchesFree && !matchesPaid) return false
+      }
+
+      return true
     })
-  }, [activeFields, level])
+
+    const sortFn = SORTS[sortKey]?.fn
+    return sortFn ? [...list].sort(sortFn) : list
+  }, [activeFields, level, costFilters, sortKey])
 
   const activeFieldLabels = FIELD_ORDER.filter((f) => activeFields.has(f)).map((f) => FIELD_META[f].label)
 
@@ -252,10 +351,58 @@ export default function OpportunityExplorer() {
                 ))}
               </div>
             </div>
+
+            <div className="opp-side-section">
+              <div className="opp-side-heading opp-side-heading--static">Cost to attend</div>
+              <div className="opp-major-list">
+                {[
+                  ['free', 'Free'],
+                  ['paid', 'Costs money'],
+                ].map(([key, label]) => {
+                  const checked = costFilters.has(key)
+                  return (
+                    <button
+                      key={key}
+                      type="button"
+                      className={`opp-major-row is-live ${checked ? 'is-checked' : ''}`}
+                      onClick={() => toggleCostFilter(key)}
+                    >
+                      <span className="opp-major-check" aria-hidden="true">
+                        {checked && (
+                          <svg width="10" height="8" viewBox="0 0 10 8">
+                            <path
+                              d="M1 4.2 3.6 6.8 9 1.2"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="1.8"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        )}
+                      </span>
+                      <span className="opp-major-label">{label}</span>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
           </aside>
 
           <div className="opp-results">
             <div ref={listTopRef} className="opp-scroll-anchor" />
+            <div className="opp-list-toolbar">
+              <label className="opp-sort">
+                Sort by
+                <select value={sortKey} onChange={(e) => setSortKey(e.target.value)}>
+                  {Object.entries(SORTS).map(([key, { label }]) => (
+                    <option key={key} value={key}>
+                      {label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
             <div className="opp-list">
               {filtered.map((o) => (
                 <OpportunityCard key={o.id} o={o} />

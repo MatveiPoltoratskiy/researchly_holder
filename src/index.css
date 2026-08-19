@@ -1308,7 +1308,12 @@ a.footer-link:hover{ color: var(--cover-dark); }
 html{ scroll-behavior:smooth; }
 @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
 
-.opp-explorer{ background:var(--cream); padding:40px 0 96px; min-height:70vh; }
+.opp-explorer{
+  background:var(--cream); padding:40px 0 96px; min-height:70vh;
+  /* darker than the site-wide --navy-soft, scoped to this page only, per feedback that the
+     secondary text (org names, dates, muted tags) was reading too light against the cream */
+  --opp-text-soft: rgba(30,37,64,.82);
+}
 .opp-container{ max-width:1520px; }
 
 .opp-private-note{
@@ -1430,15 +1435,19 @@ html{ scroll-behavior:smooth; }
   display:flex; gap:16px; background:var(--card-bg); border:1px solid var(--card-border);
   border-radius:16px; padding:18px 20px; box-shadow:0 1px 2px rgba(30,37,64,.04);
 }
+/* neutral card so a real (often white-background) logo image sits cleanly; the SVG
+   fallback icon is tinted via `color` instead of relying on a colored tile behind it */
 .opp-badge{
   flex:none; width:40px; height:40px; border-radius:11px; display:flex; align-items:center;
-  justify-content:center; color:#fff; background:var(--navy);
+  justify-content:center; background:#fff; border:1px solid var(--card-border); overflow:hidden;
 }
 .opp-badge svg{ stroke:currentColor; }
-.opp-badge.opp-tag--premed{ background:var(--cover); }
-.opp-badge.opp-tag--bio{ background:var(--pine); }
-.opp-badge.opp-tag--chem{ background:var(--gold); }
-.opp-badge.opp-tag--physics{ background:var(--navy); }
+.opp-badge.opp-tag--premed{ color:var(--cover); }
+.opp-badge.opp-tag--bio{ color:var(--pine); }
+.opp-badge.opp-tag--chem{ color:#A8801F; }
+.opp-badge.opp-tag--physics{ color:var(--navy); }
+.opp-logo-img{ width:100%; height:100%; object-fit:contain; padding:5px; }
+.opp-logo-img--favicon{ padding:10px; }
 
 .opp-card-body{ flex:1; min-width:0; }
 .opp-card-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
@@ -1446,7 +1455,7 @@ html{ scroll-behavior:smooth; }
   font-family:"Iowan Old Style",Palatino,Georgia,serif; font-weight:700; font-size:17px;
   color:var(--navy); margin:0;
 }
-.opp-org{ font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; color:var(--navy-soft); margin-top:2px; }
+.opp-org{ font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; color:var(--opp-text-soft); margin-top:2px; font-weight:600; }
 
 .opp-confidence{
   flex:none; font-family:"Segoe UI",system-ui,sans-serif; font-size:10.5px; font-weight:700;
@@ -1470,19 +1479,33 @@ html{ scroll-behavior:smooth; }
 .opp-tag--bio{ background:var(--pill-green-bg); color:var(--pill-green-text); }
 .opp-tag--chem{ background:#F4E3B8; color:#7A5A12; }
 .opp-tag--physics{ background:rgba(30,37,64,.09); color:var(--navy); }
-.opp-tag--muted{ background:var(--pill-bg); color:var(--pill-text); font-weight:600; }
+.opp-tag--muted{ background:var(--pill-bg); color:var(--pill-text); font-weight:700; }
 .opp-tag--equity{ background:rgba(169,79,30,.14); color:var(--cover-dark); font-weight:700; }
+.opp-tag--grant{ background:rgba(217,164,65,.3); color:#6B4A0E; font-weight:800; }
 
 .opp-foot{
   display:flex; align-items:center; flex-wrap:wrap; gap:7px;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; color:var(--navy-soft);
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; color:var(--opp-text-soft); font-weight:600;
   padding-top:10px; border-top:1px dashed var(--card-border);
 }
 .opp-pay{ font-weight:700; color:var(--match-green); }
+.opp-cost{ font-weight:700; color:var(--opp-text-soft); }
+.opp-cost--paid{ color:var(--cover-dark); }
 .opp-dot{ opacity:.5; }
 .opp-link{ margin-left:auto; font-weight:700; color:var(--cover); text-decoration:none; }
 .opp-link:hover{ text-decoration:underline; }
 .opp-link--disabled{ color:var(--navy-faint); font-weight:600; }
+
+.opp-list-toolbar{ display:flex; justify-content:flex-end; margin-bottom:12px; }
+.opp-sort{
+  display:flex; align-items:center; gap:8px; font-family:"Segoe UI",system-ui,sans-serif;
+  font-size:13px; font-weight:700; color:var(--opp-text-soft);
+}
+.opp-sort select{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:700; color:var(--navy);
+  background:var(--card-bg); border:1px solid var(--card-border); border-radius:8px; padding:6px 10px;
+  cursor:pointer;
+}
 
 .opp-empty{
   font-family:"Segoe UI",system-ui,sans-serif; color:var(--navy-soft); text-align:center; padding:40px 0;
