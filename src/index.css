@@ -492,17 +492,6 @@ h1{
   display:flex; align-items:flex-start; justify-content:space-between; gap:50px;
 }
 
-/* faint decorative sketches, same "hero-sketch" language used above the fold —
-   magnifier/notebook/sparkles echo the FAQ mascot's own research-y props */
-.faq-sketch{ position:absolute; z-index:1; color: var(--navy-faint); pointer-events:none; }
-.faq-sketch svg{ display:block; overflow:visible; }
-.faq-sketch-magnifier{ left:-40px; top:56px; width:70px; opacity:.5; }
-.faq-sketch-notebook{ left:-4%; bottom:2%; width:130px; color: rgba(30,37,64,.12); }
-.faq-sketch-sparkle-a{ width:20px; left:40%; top:8%; color: var(--cover-light); opacity:.8; }
-.faq-sketch-sparkle-b{ width:15px; left:35%; top:62%; color: var(--pine); opacity:.55; }
-.faq-sketch-arrow{ width:200px; left:32%; top:38%; color: var(--navy-faint); }
-@media (max-width: 900px){ .faq-sketch{ display:none; } }
-
 .faq-kicker{ display:flex; align-items:center; gap:6px; }
 .faq-kicker-mark{ color: var(--cover); transform: translateY(-2px); }
 

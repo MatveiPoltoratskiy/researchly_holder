@@ -122,20 +122,6 @@ export default function IconSprite() {
             <circle cx="120" cy="65" r="4" /><circle cx="60" cy="75" r="4" /><circle cx="95" cy="90" r="4" />
           </g>
         </symbol>
-        <symbol id="deco-magnifier" viewBox="0 0 80 80">
-          <circle cx="33" cy="33" r="24" fill="none" stroke="currentColor" strokeWidth="2.4" />
-          <line x1="50" y1="50" x2="72" y2="72" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" />
-        </symbol>
-        <symbol id="deco-sparkle" viewBox="0 0 32 32">
-          <path d="M16 2 L19 13 30 16 19 19 16 30 13 19 2 16 13 13Z" fill="currentColor" />
-        </symbol>
-        <symbol id="deco-notebook" viewBox="0 0 130 100">
-          <path d="M65 12 L14 20 20 88 65 82Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
-          <path d="M65 12 L116 20 110 88 65 82Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
-          <path d="M65 12 L65 82" stroke="currentColor" strokeWidth="1.6" />
-          <path d="M26 34 L57 30M27 46 L58 42M28 58 L56 54" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-          <path d="M73 30 L104 34M72 42 L103 46M74 54 L102 58" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-        </symbol>
         {/* scene pieces */}
         <symbol id="scene-pin" viewBox="0 0 24 32">
           <path d="M12 1c6 0 10 4.6 10 10.2C22 18.6 12 31 12 31S2 18.6 2 11.2C2 5.6 6 1 12 1Z" fill="var(--pin-fill,#fff)" stroke="var(--pin-stroke,#A94F1E)" strokeWidth="1.8" />

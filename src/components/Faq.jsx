@@ -148,15 +148,6 @@ export default function FAQ() {
 
   return (
     <section className={`faq-section container${revealed ? ' is-revealed' : ''}`} id="faq" ref={sectionRef}>
-      <div className="faq-sketch faq-sketch-magnifier" aria-hidden="true"><svg viewBox="0 0 80 80"><use href="#deco-magnifier" /></svg></div>
-      <div className="faq-sketch faq-sketch-notebook" aria-hidden="true"><svg viewBox="0 0 130 100"><use href="#deco-notebook" /></svg></div>
-      <div className="faq-sketch faq-sketch-sparkle-a" aria-hidden="true"><svg viewBox="0 0 32 32"><use href="#deco-sparkle" /></svg></div>
-      <div className="faq-sketch faq-sketch-sparkle-b" aria-hidden="true"><svg viewBox="0 0 32 32"><use href="#deco-sparkle" /></svg></div>
-      <svg className="faq-sketch faq-sketch-arrow" aria-hidden="true" viewBox="0 0 220 160">
-        <path d="M6 6 C60 30 120 60 200 96" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeDasharray="1 11" />
-        <path d="M186 84 L202 98 L184 104" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-
       <div className="faq-intro faq-reveal">
         <p className="kicker faq-kicker">
           Questions, answered
