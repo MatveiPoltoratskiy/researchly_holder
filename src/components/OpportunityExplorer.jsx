@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
 import { FIELDS } from '../data/fields'
 import OpportunityMap from './OpportunityMap'
@@ -243,8 +243,11 @@ export default function OpportunityExplorer() {
   const [costFilters, setCostFilters] = useState(() => new Set())
   const [sortKey, setSortKey] = useState('best-match')
   const [selectedId, setSelectedId] = useState(null)
-  const listTopRef = useRef(null)
+  const [shownCount, setShownCount] = useState(() => CANADA_OPPORTUNITIES.length)
+  const [countShimmer, setCountShimmer] = useState(false)
+  const listScrollRef = useRef(null)
   const cardRefs = useRef(new Map())
+  const shimmerTimeoutRef = useRef(null)
 
   // selecting from the map (a pin the list hasn't scrolled to) should bring the matching
   // card into view; selecting from the list itself already has it in view, so this is a
@@ -255,9 +258,23 @@ export default function OpportunityExplorer() {
   }
 
   // triggered directly from filter clicks (not a state-watching effect) so it only ever
-  // fires from a real user interaction, never on mount or on an unrelated re-render
+  // fires from a real user interaction, never on mount or on an unrelated re-render. The
+  // results panel scrolls internally now, so this scrolls THAT panel back to top rather
+  // than the page
   function scrollToResults() {
-    listTopRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    listScrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  // major changes get a deliberate ~200ms "recalculating" beat on the count instead of an
+  // instant swap: shownCount holds the OLD value until the shimmer finishes, then jumps to
+  // whatever filtered.length is at that moment (read via the ref below, never stale)
+  function triggerCountShimmer() {
+    setCountShimmer(true)
+    clearTimeout(shimmerTimeoutRef.current)
+    shimmerTimeoutRef.current = setTimeout(() => {
+      setShownCount(filteredLenRef.current)
+      setCountShimmer(false)
+    }, 200)
   }
 
   function toggleField(f) {
@@ -270,6 +287,7 @@ export default function OpportunityExplorer() {
       }
       return next
     })
+    triggerCountShimmer()
     scrollToResults()
   }
 
@@ -324,6 +342,17 @@ export default function OpportunityExplorer() {
     return sortFn ? [...list].sort(sortFn) : list
   }, [activeFields, level, costFilters, sortKey])
 
+  const filteredLenRef = useRef(filtered.length)
+  filteredLenRef.current = filtered.length
+
+  // level/cost/sort changes update the displayed count immediately as before. Only a
+  // major toggle (via triggerCountShimmer above) intentionally holds it back
+  useEffect(() => {
+    if (!countShimmer) setShownCount(filtered.length)
+  }, [filtered.length])
+
+  useEffect(() => () => clearTimeout(shimmerTimeoutRef.current), [])
+
   const activeFieldLabels = FIELD_ORDER.filter((f) => activeFields.has(f)).map((f) => FIELD_META[f].label)
 
   return (
@@ -337,8 +366,8 @@ export default function OpportunityExplorer() {
         <div className="opp-header">
           <p className="opp-eyebrow">We found</p>
           <h1 className="opp-heading">
-            <span className="opp-heading-count">{filtered.length}</span> opportunit
-            {filtered.length === 1 ? 'y' : 'ies'}
+            <span className={`opp-heading-count ${countShimmer ? 'is-shimmer' : ''}`}>{shownCount}</span> opportunit
+            {shownCount === 1 ? 'y' : 'ies'}
           </h1>
           <div className="opp-prioritized">
             <span>Prioritized for</span>
@@ -412,7 +441,6 @@ export default function OpportunityExplorer() {
           </aside>
 
           <div className="opp-results">
-            <div ref={listTopRef} className="opp-scroll-anchor" />
             <div className="opp-list-toolbar">
               <label className="opp-sort">
                 Sort by
@@ -425,22 +453,24 @@ export default function OpportunityExplorer() {
                 </select>
               </label>
             </div>
-            <div className="opp-list">
-              {filtered.map((o) => (
-                <OpportunityCard
-                  key={o.id}
-                  o={o}
-                  selected={o.id === selectedId}
-                  onSelect={selectOpportunity}
-                  cardRef={(el) => {
-                    if (el) cardRefs.current.set(o.id, el)
-                    else cardRefs.current.delete(o.id)
-                  }}
-                />
-              ))}
-              {filtered.length === 0 && (
-                <div className="opp-empty">No opportunities match this combination yet.</div>
-              )}
+            <div ref={listScrollRef} className="opp-list-scroll">
+              <div className="opp-list">
+                {filtered.map((o) => (
+                  <OpportunityCard
+                    key={o.id}
+                    o={o}
+                    selected={o.id === selectedId}
+                    onSelect={selectOpportunity}
+                    cardRef={(el) => {
+                      if (el) cardRefs.current.set(o.id, el)
+                      else cardRefs.current.delete(o.id)
+                    }}
+                  />
+                ))}
+                {filtered.length === 0 && (
+                  <div className="opp-empty">No opportunities match this combination yet.</div>
+                )}
+              </div>
             </div>
           </div>
 

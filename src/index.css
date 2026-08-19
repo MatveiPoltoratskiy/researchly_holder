@@ -1331,7 +1331,24 @@ html{ scroll-behavior:smooth; }
   font-family:"Iowan Old Style",Palatino,Georgia,serif; font-weight:700;
   font-size:clamp(28px,3.4vw,40px); color:var(--navy); margin:0 0 12px;
 }
-.opp-heading-count{ color:var(--cover); }
+.opp-heading-count{ color:var(--cover); display:inline-block; }
+
+/* brief "recalculating" beat when a major is toggled: the old count holds for ~200ms
+   under a shimmering gradient sweep before the new number lands */
+.opp-heading-count.is-shimmer{
+  font-weight:900;
+  background:linear-gradient(90deg, var(--cover) 30%, #F7CBA0 50%, var(--cover) 70%);
+  background-size:220% 100%;
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  animation:opp-count-shimmer .5s linear infinite;
+}
+@keyframes opp-count-shimmer{
+  0%{ background-position:160% 0; }
+  100%{ background-position:-60% 0; }
+}
+@media (prefers-reduced-motion: reduce){
+  .opp-heading-count.is-shimmer{ animation:none; background:none; color:var(--cover); }
+}
 .opp-prioritized{
   display:flex; align-items:center; flex-wrap:wrap; gap:8px;
   font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; color:var(--navy-soft);
@@ -1396,9 +1413,19 @@ html{ scroll-behavior:smooth; }
 .opp-level-btn:hover{ background:var(--pages-shadow); }
 .opp-level-btn.is-active{ background:var(--navy); color:#fff; border-color:var(--navy); }
 
-.opp-results{ min-width:0; }
-.opp-scroll-anchor{ scroll-margin-top:88px; }
+/* the results panel scrolls on its own, independent of the page, matching the sidebar
+   and map which are already sticky/fixed-height beside it */
+.opp-results{
+  position:sticky; top:96px; height:calc(100vh - 130px); min-width:0;
+  display:flex; flex-direction:column;
+}
+.opp-list-scroll{ flex:1; overflow-y:auto; padding-right:6px; margin-right:-6px; }
 .opp-list{ display:flex; flex-direction:column; gap:14px; }
+
+@media (max-width: 860px){
+  .opp-results{ position:static; height:auto; }
+  .opp-list-scroll{ overflow:visible; padding-right:0; margin-right:0; }
+}
 
 /* ---- map pane ---- */
 .opp-map-col{ position:sticky; top:96px; min-width:0; }
