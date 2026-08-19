@@ -113,7 +113,6 @@ export default function OpportunityMap({ opportunities, selectedId, onSelect, us
   const markersRef = useRef(null)
   const markerByIdRef = useRef(new Map())
   const userMarkerRef = useRef(null)
-  const hasFlownToUserRef = useRef(false)
 
   // shared fallback handler for every pin's logo <img> — tries DuckDuckGo's favicon
   // service once, then reveals the letter-initial fallback span if that fails too
@@ -245,16 +244,17 @@ export default function OpportunityMap({ opportunities, selectedId, onSelect, us
   }, [selectedId])
 
   // the "you are here" dot: placed/moved whenever userLocation changes, removed when it's
-  // cleared. The very first time it appears we fly the map to it — unlike every other
-  // recenter in this file, this one IS wanted, since granting location is itself a
-  // deliberate "show me where I am" action, not an incidental filter/select side effect
+  // cleared. Unlike every other recenter in this file, flying the map here IS wanted, since
+  // granting location is itself a deliberate "show me where I am" action, not an incidental
+  // filter/select side effect — and it flies in every time this fires (first grant AND every
+  // later press of the locate button below), not just once, since re-pressing "recalibrate"
+  // is the user explicitly asking to be zoomed back in on their spot
   useEffect(() => {
     const map = mapRef.current
     if (!map) return
     if (!userLocation) {
       userMarkerRef.current?.remove()
       userMarkerRef.current = null
-      hasFlownToUserRef.current = false
       return
     }
     const latlng = [userLocation.lat, userLocation.lon]
@@ -268,10 +268,7 @@ export default function OpportunityMap({ opportunities, selectedId, onSelect, us
     } else {
       userMarkerRef.current.setLatLng(latlng)
     }
-    if (!hasFlownToUserRef.current) {
-      hasFlownToUserRef.current = true
-      map.flyTo(latlng, 10, { animate: true, duration: 1.2 })
-    }
+    map.flyTo(latlng, 14, { animate: true, duration: 1.2 })
   }, [userLocation])
 
   return (
@@ -287,12 +284,12 @@ export default function OpportunityMap({ opportunities, selectedId, onSelect, us
           title="Show my location"
           aria-label="Show my location on the map"
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" strokeWidth="2" />
+          <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="3.4" fill="none" stroke="currentColor" strokeWidth="2.4" />
             <path
-              d="M12 2v3M12 19v3M2 12h3M19 12h3"
+              d="M12 1.5v3.4M12 19.1v3.4M1.5 12h3.4M19.1 12h3.4"
               stroke="currentColor"
-              strokeWidth="2"
+              strokeWidth="2.4"
               strokeLinecap="round"
             />
           </svg>

@@ -1436,18 +1436,31 @@ html{ scroll-behavior:smooth; }
 }
 
 /* "locate me" control, positioned like a native Leaflet control (bottom-right, clear of
-   the zoom buttons at top-left and the count badge at top-right) */
+   the zoom buttons at top-left and the count badge at top-right) — sized and shadowed like
+   a floating bubble button rather than a flat map-chrome icon, since it's the trigger for
+   a fun "find me" moment rather than a routine map tool */
 .opp-map-locate{
-  position:absolute; bottom:24px; right:12px; z-index:500; width:38px; height:38px;
+  position:absolute; bottom:26px; right:16px; z-index:500; width:58px; height:58px;
   border-radius:999px; background:var(--card-bg); border:1px solid var(--card-border);
   color:var(--navy-soft); display:flex; align-items:center; justify-content:center;
-  cursor:pointer; box-shadow:0 2px 6px rgba(30,37,64,.15);
+  cursor:pointer; box-shadow:0 6px 16px rgba(30,37,64,.22), 0 1px 3px rgba(30,37,64,.15),
+    inset 0 1px 0 rgba(255,255,255,.6);
+  transition:transform .18s cubic-bezier(.34,1.56,.64,1), box-shadow .18s ease, background .18s ease, color .18s ease;
 }
-.opp-map-locate:hover{ color:var(--navy); }
+.opp-map-locate:hover{ color:var(--navy); transform:scale(1.08); }
+.opp-map-locate:active{ transform:scale(.94); }
 .opp-map-locate:disabled{ cursor:default; }
-.opp-map-locate.is-active{ color:#fff; background:#4285F4; border-color:#4285F4; }
+.opp-map-locate.is-active{
+  color:#fff; background:#4285F4; border-color:#4285F4;
+  box-shadow:0 8px 20px rgba(66,133,244,.45), 0 1px 3px rgba(30,37,64,.2),
+    inset 0 1px 0 rgba(255,255,255,.35);
+}
 .opp-map-locate.is-loading svg{ animation:opp-locate-spin 1s linear infinite; }
 @keyframes opp-locate-spin{ to{ transform:rotate(360deg); } }
+@media (prefers-reduced-motion: reduce){
+  .opp-map-locate{ transition:box-shadow .18s ease, background .18s ease, color .18s ease; }
+  .opp-map-locate:hover, .opp-map-locate:active{ transform:none; }
+}
 
 /* "you are here": a Google Maps-style blue dot, solid core + a soft ring that pulses
    outward and fades, looping continuously */

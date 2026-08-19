@@ -600,6 +600,14 @@ export default function OpportunityExplorer() {
 
   useEffect(() => () => clearTimeout(shimmerTimeoutRef.current), [])
 
+  // ask for location as soon as the page loads, rather than waiting on a click — this is
+  // the default sort mode's whole reason for existing, so the permission prompt should
+  // show up immediately instead of behind a button the visitor may never press
+  useEffect(() => {
+    requestLocation()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const activeFieldLabels = FIELD_ORDER.filter((f) => activeFields.has(f)).map((f) => FIELD_META[f].label)
   const detailOpportunity = detailId ? CANADA_OPPORTUNITIES.find((o) => o.id === detailId) : null
 
