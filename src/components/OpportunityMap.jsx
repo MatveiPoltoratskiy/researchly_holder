@@ -136,9 +136,14 @@ export default function OpportunityMap({ opportunities, selectedId, onSelect }) 
       maxBoundsViscosity: 1,
       worldCopyJump: false,
     })
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      maxZoom: 18,
+    // CartoDB's Positron style instead of stock OSM tiles: a flat grey/light basemap
+    // showing streets, labels and buildings without terrain shading, landcover colour, or
+    // other prominent physical-geography features cluttering the view
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution:
+        '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19,
       minZoom: 2,
       noWrap: true,
     }).addTo(map)

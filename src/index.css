@@ -1435,9 +1435,9 @@ html{ scroll-behavior:smooth; }
   box-shadow:0 2px 6px rgba(30,37,64,.1);
 }
 
-/* keep the map's own palette from clashing with the rest of the warm/orange UI: a light
-   sepia tilt plus a real brightness lift so it doesn't read dim next to the cream page */
-.opp-map-canvas .leaflet-tile-pane{ filter:sepia(12%) saturate(92%) brightness(1.14); }
+/* CartoDB Positron tiles are already light grey, unlike stock OSM — just a light warm
+   tilt to tie into the page's palette, no brightness lift needed this time */
+.opp-map-canvas .leaflet-tile-pane{ filter:sepia(8%) saturate(90%); }
 .opp-map-canvas .leaflet-control-attribution{
   font-family:"Segoe UI",system-ui,sans-serif; font-size:10.5px; background:rgba(252,246,234,.85);
 }
