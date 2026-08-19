@@ -12,6 +12,7 @@ const PIN_COLOR = {
   physics: '#1E2540',
 }
 const FIELD_ORDER = ['pre-med', 'biology', 'chemistry', 'physics']
+const FIELD_LABEL = { 'pre-med': 'Pre-Med', biology: 'Biology', chemistry: 'Chemistry', physics: 'Physics' }
 
 function pinIcon(color) {
   const svg = `
@@ -43,10 +44,21 @@ export default function OpportunityMap({ opportunities }) {
       center: CANADA_CENTER,
       zoom: CANADA_ZOOM,
       scrollWheelZoom: true,
+      // whole-world is as far out as this ever goes — worldCopyJump off + tile noWrap
+      // below stop duplicate side-by-side world copies from appearing at that cap
+      minZoom: 2,
+      maxBounds: [
+        [-90, -180],
+        [90, 180],
+      ],
+      maxBoundsViscosity: 1,
+      worldCopyJump: false,
     })
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 18,
+      minZoom: 2,
+      noWrap: true,
     }).addTo(map)
     markersRef.current = L.layerGroup().addTo(map)
     mapRef.current = map
@@ -80,10 +92,12 @@ export default function OpportunityMap({ opportunities }) {
       const marker = L.marker([o.lat, o.lon], { icon: PIN_ICONS[primary] })
       marker.bindPopup(
         `<div class="opp-map-popup">
+           <span class="opp-map-popup-field opp-map-popup-field--${primary}">${FIELD_LABEL[primary]}</span>
            <strong>${escapeHtml(o.name)}</strong>
-           <span>${escapeHtml(o.org)}</span>
+           <span class="opp-map-popup-org">${escapeHtml(o.org)}</span>
            ${o.url ? `<a href="${escapeHtml(o.url)}" target="_blank" rel="noreferrer">View program →</a>` : ''}
-         </div>`
+         </div>`,
+        { className: 'opp-map-popup-wrap', maxWidth: 260 }
       )
       marker.addTo(layer)
     }

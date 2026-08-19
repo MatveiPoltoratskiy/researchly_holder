@@ -1414,9 +1414,9 @@ html{ scroll-behavior:smooth; }
   box-shadow:0 2px 6px rgba(30,37,64,.1);
 }
 
-/* keep the map's own palette from clashing with the rest of the warm/orange UI: a soft
-   sepia tilt on the tiles reads calmer than stock OSM blue-and-white cartography */
-.opp-map-canvas .leaflet-tile-pane{ filter:sepia(18%) saturate(85%) brightness(1.03); }
+/* keep the map's own palette from clashing with the rest of the warm/orange UI: a light
+   sepia tilt plus a real brightness lift so it doesn't read dim next to the cream page */
+.opp-map-canvas .leaflet-tile-pane{ filter:sepia(12%) saturate(92%) brightness(1.14); }
 .opp-map-canvas .leaflet-control-attribution{
   font-family:"Segoe UI",system-ui,sans-serif; font-size:10.5px; background:rgba(252,246,234,.85);
 }
@@ -1424,12 +1424,38 @@ html{ scroll-behavior:smooth; }
   color:var(--navy); font-family:"Segoe UI",system-ui,sans-serif;
 }
 .opp-map-pin{ background:none; border:none; }
-.opp-map-popup{ display:flex; flex-direction:column; gap:3px; font-family:"Segoe UI",system-ui,sans-serif; }
-.opp-map-popup strong{ font-size:13px; color:var(--navy); font-family:"Iowan Old Style",Palatino,Georgia,serif; }
-.opp-map-popup span{ font-size:11.5px; color:var(--navy-soft); }
-.opp-map-popup a{ font-size:12px; font-weight:700; color:var(--cover); text-decoration:none; margin-top:2px; }
+
+/* "bubbly" popup matching the opportunity-card art style (warm card bg, serif heading,
+   generous rounding, soft shadow) instead of Leaflet's plain default box. Leaflet's own
+   CSS is imported after index.css, so several rules here need !important to actually win —
+   otherwise its stock white/square/blue-link styling silently wins the cascade. */
+.leaflet-popup-content-wrapper{
+  background:var(--card-bg) !important; border-radius:20px !important;
+  box-shadow:0 10px 28px rgba(30,37,64,.18), 0 2px 6px rgba(30,37,64,.08) !important;
+  border:1px solid var(--card-border) !important;
+}
+.leaflet-popup-content{ margin:16px 18px !important; }
+.leaflet-popup-tip{ background:var(--card-bg) !important; box-shadow:0 3px 8px rgba(30,37,64,.1) !important; }
+.leaflet-popup-close-button{
+  color:var(--navy-soft) !important; font-size:20px !important; top:10px !important; right:10px !important;
+}
+.leaflet-popup-close-button:hover{ color:var(--navy) !important; }
+
+.opp-map-popup{ display:flex; flex-direction:column; gap:5px; font-family:"Segoe UI",system-ui,sans-serif; }
+.opp-map-popup-field{
+  align-self:flex-start; font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:.03em;
+  padding:2.5px 9px; border-radius:999px; margin-bottom:2px;
+}
+.opp-map-popup-field--pre-med{ background:var(--pill-amber-bg); color:var(--cover-dark); }
+.opp-map-popup-field--biology{ background:var(--pill-green-bg); color:var(--pill-green-text); }
+.opp-map-popup-field--chemistry{ background:#F4E3B8; color:#7A5A12; }
+.opp-map-popup-field--physics{ background:rgba(30,37,64,.09); color:var(--navy); }
+.opp-map-popup strong{
+  font-size:14.5px; line-height:1.3; color:var(--navy); font-family:"Iowan Old Style",Palatino,Georgia,serif;
+}
+.opp-map-popup-org{ font-size:12px; font-weight:600; color:var(--opp-text-soft, var(--navy-soft)); }
+.opp-map-popup a{ font-size:12.5px; font-weight:700; color:var(--cover) !important; text-decoration:none; margin-top:3px; }
 .opp-map-popup a:hover{ text-decoration:underline; }
-.leaflet-popup-content-wrapper{ border-radius:10px; }
 
 .opp-card{
   display:flex; gap:16px; background:var(--card-bg); border:1px solid var(--card-border);
