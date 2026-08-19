@@ -4,6 +4,7 @@ import { FIELDS } from '../data/fields'
 import OpportunityMap from './OpportunityMap'
 
 const SORTS = {
+  recommended: { label: 'Recommended for you', fn: null },
   'best-match': { label: 'Best match', fn: null },
   name: { label: 'Name (A–Z)', fn: (a, b) => a.name.localeCompare(b.name) },
   verified: {
@@ -55,9 +56,6 @@ const BIG_NAME_SCHOOLS = [
 function bigNameSchool(org = '') {
   return BIG_NAME_SCHOOLS.find(([, pattern]) => pattern.test(org))?.[0] || null
 }
-function isBigName(org = '') {
-  return bigNameSchool(org) !== null
-}
 
 // hand-picked for being small, unusual, or otherwise not-the-obvious-choice, rather than
 // derived from any field in the data. A deliberate curation, not an algorithm.
@@ -75,6 +73,8 @@ const NICHE_IDS = [
   'magee-womens-hs',
   'ila-dalhousie-scholarship',
 ]
+const NICHE_RANK = new Map(NICHE_IDS.map((id, i) => [id, i]))
+const BIG_NAME_RANK = new Map(BIG_NAME_SCHOOLS.map(([school], i) => [school, i]))
 
 function distanceKm(lat1, lon1, lat2, lon2) {
   const R = 6371
@@ -86,10 +86,14 @@ function distanceKm(lat1, lon1, lat2, lon2) {
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
 }
 
-function distanceLabel(km) {
-  if (km < 50) return 'Nearby'
-  if (km < 1000) return `~${Math.round(km)} km away`
-  return `~${Math.round(km / 100) * 100} km away`
+// the small badge shown directly on a card in the main list — reuses the same big-name/
+// niche categorization that drives the "Recommended for you" sort, so a card's badge and
+// its position in that sort always agree
+function recommendTagFor(o) {
+  const school = bigNameSchool(o.org)
+  if (school) return school
+  if (NICHE_RANK.has(o.id)) return 'Niche pick'
+  return null
 }
 
 function levelRangeLabel(levels) {
@@ -186,134 +190,7 @@ function OrgLogo({ org, url, iconId }) {
   )
 }
 
-function RecommendationCard({ o, tag, onOpen }) {
-  const primary = FIELD_ORDER.find((f) => o.focus.includes(f)) || o.focus[0]
-  return (
-    <button type="button" className="opp-rec-card" onClick={() => onOpen(o.id)}>
-      <div className={`opp-badge opp-rec-badge ${FIELD_META[primary]?.cls || ''}`}>
-        <OrgLogo org={o.org} url={o.url} iconId={iconForOrg(o.org)} />
-      </div>
-      <div className="opp-rec-name">{o.name}</div>
-      <div className="opp-rec-org">{o.org}</div>
-      {tag && <span className="opp-rec-tag">{tag}</span>}
-    </button>
-  )
-}
-
-function RecommendationRow({ title, subtitle, items, onOpen, emptyText }) {
-  if (!items.length && !emptyText) return null
-  return (
-    <div className="opp-rec-row">
-      <div className="opp-rec-row-head">
-        <h3>{title}</h3>
-        {subtitle && <span>{subtitle}</span>}
-      </div>
-      {items.length ? (
-        <div className="opp-rec-scroll">
-          {items.map(({ o, tag }) => (
-            <RecommendationCard key={o.id} o={o} tag={tag} onOpen={onOpen} />
-          ))}
-        </div>
-      ) : (
-        <p className="opp-rec-empty">{emptyText}</p>
-      )}
-    </div>
-  )
-}
-
-function RecommendedForYou({ onOpenDetail }) {
-  const [userLocation, setUserLocation] = useState(null)
-  const [locationStatus, setLocationStatus] = useState('idle')
-
-  function requestLocation() {
-    if (!navigator.geolocation) {
-      setLocationStatus('unsupported')
-      return
-    }
-    setLocationStatus('loading')
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        setUserLocation({ lat: pos.coords.latitude, lon: pos.coords.longitude })
-        setLocationStatus('granted')
-      },
-      () => setLocationStatus('denied'),
-      { timeout: 8000 }
-    )
-  }
-
-  const bigNames = useMemo(() => {
-    const bySchool = new Map()
-    for (const o of CANADA_OPPORTUNITIES) {
-      const school = bigNameSchool(o.org)
-      if (!school) continue
-      if (!bySchool.has(school)) bySchool.set(school, [])
-      bySchool.get(school).push(o)
-    }
-    // one card per school, in BIG_NAME_SCHOOLS priority order — when a school has more
-    // than one row (e.g. several U of T departments), location picks the closest one;
-    // without location, just the first row for that school in the dataset
-    return BIG_NAME_SCHOOLS.map(([school]) => bySchool.get(school))
-      .filter(Boolean)
-      .map((options) => {
-        if (!userLocation) return { o: options[0], tag: null }
-        const withDist = options.map((o) => ({
-          o,
-          dist: o.lat != null ? distanceKm(userLocation.lat, userLocation.lon, o.lat, o.lon) : Infinity,
-        }))
-        withDist.sort((a, b) => a.dist - b.dist)
-        const best = withDist[0]
-        return { o: best.o, tag: Number.isFinite(best.dist) ? distanceLabel(best.dist) : null }
-      })
-  }, [userLocation])
-
-  const nearYou = useMemo(() => {
-    if (!userLocation) return []
-    return CANADA_OPPORTUNITIES.filter((o) => o.lat != null && !isBigName(o.org))
-      .map((o) => ({ o, dist: distanceKm(userLocation.lat, userLocation.lon, o.lat, o.lon) }))
-      .sort((a, b) => a.dist - b.dist)
-      .slice(0, 8)
-      .map(({ o, dist }) => ({ o, tag: distanceLabel(dist) }))
-  }, [userLocation])
-
-  const niche = useMemo(
-    () =>
-      NICHE_IDS.map((id) => CANADA_OPPORTUNITIES.find((o) => o.id === id))
-        .filter(Boolean)
-        .map((o) => ({ o, tag: 'Niche pick' })),
-    []
-  )
-
-  return (
-    <div className="opp-recommend">
-      <div className="opp-recommend-head">
-        <div>
-          <h2>Recommended for you</h2>
-          <p>Big-name schools, tailored to where you are, plus a few less-obvious picks.</p>
-        </div>
-        {locationStatus !== 'granted' && (
-          <button type="button" className="opp-rec-locate" onClick={requestLocation} disabled={locationStatus === 'loading'}>
-            {locationStatus === 'loading' ? 'Locating…' : '📍 Use my location'}
-          </button>
-        )}
-        {locationStatus === 'denied' && <span className="opp-rec-locate-note">Location access denied — showing general picks.</span>}
-        {locationStatus === 'unsupported' && <span className="opp-rec-locate-note">Location isn't supported on this device.</span>}
-      </div>
-
-      <RecommendationRow
-        title="Big names"
-        subtitle="Ivy League, Johns Hopkins, MIT/Caltech/Stanford, U of T, McGill, UBC"
-        items={bigNames}
-        onOpen={onOpenDetail}
-      />
-      {userLocation && (
-        <RecommendationRow title="Near you" items={nearYou} onOpen={onOpenDetail} emptyText="Nothing geocoded nearby yet." />
-      )}
-      <RecommendationRow title="Niche picks" subtitle="Small, unusual, or easy to overlook" items={niche} onOpen={onOpenDetail} />
-    </div>
-  )
-}
-
-function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef }) {
+function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, recommendTag }) {
   const primary = FIELD_ORDER.find((f) => o.focus.includes(f)) || o.focus[0]
 
   // clicking anywhere on the card selects it (highlights it + pans the map to its pin) and
@@ -358,6 +235,7 @@ function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef }) {
           {o.locationLabel && <span className="opp-tag opp-tag--muted">{o.locationLabel}</span>}
           {o.equityNote && <span className="opp-tag opp-tag--equity">{o.equityNote}</span>}
           {o.isGrant && <span className="opp-tag opp-tag--grant">Financial Grant/Award</span>}
+          {recommendTag && <span className="opp-tag opp-tag--recommend">{recommendTag}</span>}
         </div>
         <div className="opp-foot">
           <span className="opp-pay">{payLabel(o)}</span>
@@ -558,7 +436,9 @@ export default function OpportunityExplorer() {
   const [activeFields, setActiveFields] = useState(() => new Set(FIELD_ORDER))
   const [level, setLevel] = useState('all')
   const [costFilters, setCostFilters] = useState(() => new Set())
-  const [sortKey, setSortKey] = useState('best-match')
+  const [sortKey, setSortKey] = useState('recommended')
+  const [userLocation, setUserLocation] = useState(null)
+  const [locationStatus, setLocationStatus] = useState('idle')
   const [selectedId, setSelectedId] = useState(null)
   const [detailId, setDetailId] = useState(null)
   const [shownCount, setShownCount] = useState(() => CANADA_OPPORTUNITIES.length)
@@ -631,6 +511,25 @@ export default function OpportunityExplorer() {
     scrollToResults()
   }
 
+  // powers the "Recommended for you" sort: big-name/near-you ranking needs real
+  // coordinates, which only the browser's own Geolocation API can give us here (no
+  // geocoding service or API key wired up for this prototype)
+  function requestLocation() {
+    if (!navigator.geolocation) {
+      setLocationStatus('unsupported')
+      return
+    }
+    setLocationStatus('loading')
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setUserLocation({ lat: pos.coords.latitude, lon: pos.coords.longitude })
+        setLocationStatus('granted')
+      },
+      () => setLocationStatus('denied'),
+      { timeout: 8000 }
+    )
+  }
+
   const counts = useMemo(() => {
     const c = { 'pre-med': 0, biology: 0, chemistry: 0, physics: 0 }
     for (const o of CANADA_OPPORTUNITIES) {
@@ -661,9 +560,34 @@ export default function OpportunityExplorer() {
       return true
     })
 
+    if (sortKey === 'recommended') {
+      // three tiers: big names first, then the hand-picked niche list, then everything
+      // else — within the big-name and "everything else" tiers, distance breaks ties once
+      // location is known; the niche tier keeps its own hand-picked order regardless,
+      // since that curation IS the point of that tier
+      return [...list].sort((a, b) => {
+        const tierOf = (o) => (bigNameSchool(o.org) ? 0 : NICHE_RANK.has(o.id) ? 1 : 2)
+        const tierA = tierOf(a)
+        const tierB = tierOf(b)
+        if (tierA !== tierB) return tierA - tierB
+
+        if (tierA === 1) return (NICHE_RANK.get(a.id) ?? 99) - (NICHE_RANK.get(b.id) ?? 99)
+
+        if (userLocation) {
+          const da = a.lat != null ? distanceKm(userLocation.lat, userLocation.lon, a.lat, a.lon) : Infinity
+          const db = b.lat != null ? distanceKm(userLocation.lat, userLocation.lon, b.lat, b.lon) : Infinity
+          if (da !== db) return da - db
+        }
+        if (tierA === 0) {
+          return (BIG_NAME_RANK.get(bigNameSchool(a.org)) ?? 99) - (BIG_NAME_RANK.get(bigNameSchool(b.org)) ?? 99)
+        }
+        return 0
+      })
+    }
+
     const sortFn = SORTS[sortKey]?.fn
     return sortFn ? [...list].sort(sortFn) : list
-  }, [activeFields, level, costFilters, sortKey])
+  }, [activeFields, level, costFilters, sortKey, userLocation])
 
   const filteredLenRef = useRef(filtered.length)
   filteredLenRef.current = filtered.length
@@ -697,8 +621,6 @@ export default function OpportunityExplorer() {
             ))}
           </div>
         </div>
-
-        <RecommendedForYou onOpenDetail={setDetailId} />
 
         <div className="opp-layout">
           <aside className="opp-sidebar">
@@ -773,6 +695,22 @@ export default function OpportunityExplorer() {
                   ))}
                 </select>
               </label>
+              {sortKey === 'recommended' && locationStatus !== 'granted' && (
+                <button
+                  type="button"
+                  className="opp-locate-btn"
+                  onClick={requestLocation}
+                  disabled={locationStatus === 'loading'}
+                >
+                  {locationStatus === 'loading' ? 'Locating…' : '📍 Use my location'}
+                </button>
+              )}
+              {sortKey === 'recommended' && locationStatus === 'denied' && (
+                <span className="opp-locate-note">Location denied, showing general picks.</span>
+              )}
+              {sortKey === 'recommended' && locationStatus === 'unsupported' && (
+                <span className="opp-locate-note">Location isn't supported here.</span>
+              )}
             </div>
             <div ref={listScrollRef} className="opp-list-scroll">
               <div className="opp-list">
@@ -783,6 +721,7 @@ export default function OpportunityExplorer() {
                     selected={o.id === selectedId}
                     onSelect={selectOpportunity}
                     onOpenDetail={setDetailId}
+                    recommendTag={recommendTagFor(o)}
                     cardRef={(el) => {
                       if (el) cardRefs.current.set(o.id, el)
                       else cardRefs.current.delete(o.id)
