@@ -6929,5 +6929,188 @@ export const CANADA_OPPORTUNITIES = [
     "confidence": "medium",
     "blurb": "A week-long immersive health-sciences introduction at Queen's, built specifically for equity-deserving Kingston-area high schoolers.",
     "equityNote": "Kingston-area equity-deserving students prioritized"
+  },
+  {
+    "id": "laval-nserc-brpc",
+    "name": "Bourse de recherche de 1er cycle (BRPC) du CRSNG",
+    "org": "Universite Laval",
+    "url": "https://repertoire.bbaf.ulaval.ca/bourse/104314/bourse-de-recherche-de-1er-cycle-brpc-du-crsng-stages-a-lete-2026-hiver-2026",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Quebec City, QC",
+    "lat": 46.781,
+    "lon": -71.274,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 6000,
+    "deadline": "2026-08-01",
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "Laval's listing for the standard federal NSERC undergraduate research award (BRPC), 16 weeks with a Quebec faculty supervisor."
+  },
+  {
+    "id": "umanitoba-gesser-chem-prize",
+    "name": "H.D. Gesser Undergraduate Summer Research Prize in Chemistry",
+    "org": "University of Manitoba",
+    "url": "https://umanitoba.ca/science/student-experience/financial-aid-awards/chemistry",
+    "focus": [
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Winnipeg, MB",
+    "lat": 49.8075,
+    "lon": -97.1385,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "low",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A chemistry-specific summer research prize at the University of Manitoba, stacked on top of the general Faculty of Science USRA."
+  },
+  {
+    "id": "mun-medicine-sura",
+    "name": "Summer Undergraduate Research Award (SURA) - Faculty of Medicine",
+    "org": "Memorial University of Newfoundland",
+    "url": "https://www.mun.ca/medicine/research/research-and-graduate-studies/sura/",
+    "focus": [
+      "pre-med",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2"
+    ],
+    "mode": "in-person",
+    "locationLabel": "St. John's, NL",
+    "lat": 47.5735,
+    "lon": -52.7327,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 4-week clinical or non-clinical research placement for 1st/2nd-year MUN medical students."
+  },
+  {
+    "id": "viu-usra",
+    "name": "Undergraduate Student Research Award (USRA)",
+    "org": "Vancouver Island University",
+    "url": "https://research.viu.ca/undergraduate-student-research-awards",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Nanaimo, BC",
+    "lat": 49.1659,
+    "lon": -123.9401,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 16-week paid NSERC research placement at Vancouver Island University, with a separate funded stream for Black scholars."
+  },
+  {
+    "id": "ulethbridge-nserc-usra",
+    "name": "NSERC Undergraduate Student Research Award (USRA) - Summer Term",
+    "org": "University of Lethbridge",
+    "url": "https://www.ulethbridge.ca/research/nserc-undergraduate-student-research-awards-usra-summer-term",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Lethbridge, AB",
+    "lat": 49.6935,
+    "lon": -112.8418,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 8730,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 16-week NSERC-funded summer research placement at Lethbridge, worth roughly $8,730 total."
+  },
+  {
+    "id": "yukonu-student-research",
+    "name": "Student Research Opportunities",
+    "org": "Yukon University",
+    "url": "https://www.yukonu.ca/research/student-opportunities",
+    "focus": [
+      "biology",
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Whitehorse, YT",
+    "lat": 60.7212,
+    "lon": -135.0568,
+    "availability": "both",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "low",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Paid research work with Yukon University faculty or the YukonU Research Centre - the only entry in this dataset based in the territories."
   }
 ]
