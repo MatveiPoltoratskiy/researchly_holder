@@ -82,7 +82,7 @@ export function validateOpportunity(o, seenIds = new Set()) {
   // in-person programs need coordinates for distance matching, unless they legitimately
   // have no single location (a directory of sites, or one application placed across campuses)
   if (o.mode === 'in-person' && !o.isDirectory && !o.multiSite && o.location && o.location.lat == null) {
-    errs.push(at('in-person program has no coordinates — add lat/lon, or set multiSite/isDirectory if it genuinely has no single location'))
+    errs.push(at('in-person program has no coordinates: add lat/lon, or set multiSite/isDirectory if it genuinely has no single location'))
   }
   return errs
 }

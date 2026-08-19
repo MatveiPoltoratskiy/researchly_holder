@@ -44,12 +44,13 @@ function pinIcon(color, selected) {
 // awards) still need to show up somewhere per "list all opportunities on the map" — they
 // get bundled into one badge-shaped marker at the Canada centroid rather than each
 // claiming a fake precise location
-function clusterIcon(count, selected) {
+function clusterIcon(selected) {
   const svg = `
     <svg width="${selected ? 46 : 40}" height="${selected ? 46 : 40}" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
       ${selected ? '<circle cx="20" cy="20" r="20" fill="#DD6B2E" opacity=".22" />' : ''}
       <rect x="4" y="4" width="32" height="32" rx="10" fill="#1E2540" stroke="${selected ? '#DD6B2E' : '#FCF6EA'}" stroke-width="${selected ? 2.6 : 1.8}" />
-      <text x="20" y="25" text-anchor="middle" font-family="Segoe UI, sans-serif" font-weight="700" font-size="15" fill="#FCF6EA">${count}</text>
+      <path d="M15 12v16" stroke="#FCF6EA" stroke-width="1.7" stroke-linecap="round" />
+      <path d="M15 13c3-1.6 6-1.6 9 0v7c-3-1.6-6-1.6-9 0Z" fill="#FCF6EA" />
     </svg>`
   const size = selected ? 46 : 40
   return L.divIcon({
@@ -145,7 +146,7 @@ export default function OpportunityMap({ opportunities, selectedId, onSelect }) 
     // one badge marker represents every no-coordinate record at once, listing all of them
     if (unplaced.length) {
       const selected = selectedId === NATIONAL_CLUSTER_ID
-      const marker = L.marker(CANADA_CENTER, { icon: clusterIcon(unplaced.length, selected) })
+      const marker = L.marker(CANADA_CENTER, { icon: clusterIcon(selected) })
       const rows = unplaced
         .map(
           ({ o, primary }) => `

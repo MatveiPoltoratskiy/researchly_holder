@@ -287,7 +287,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "high",
-    "blurb": "A summer research project with a UBC Faculty of Medicine researcher \u2014 students apply as a team with their own supervisor already lined up."
+    "blurb": "A summer research project with a UBC Faculty of Medicine researcher, applying as a team with their own supervisor already lined up."
   },
   {
     "id": "calgary-chi-summer-studentship",
@@ -502,7 +502,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "high",
-    "blurb": "A paid summer placement in a real focused-ultrasound engineering lab \u2014 one of the few Canadian high school programs offering actual bench research."
+    "blurb": "A paid summer placement in a real focused-ultrasound engineering lab, one of the few Canadian high school programs offering actual bench research."
   },
   {
     "id": "unity-health-krss",
@@ -594,7 +594,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "medium",
-    "blurb": "One of several department-specific summer research programs at Princess Margaret Cancer Centre \u2014 browse by department rather than a single application."
+    "blurb": "One of several department-specific summer research programs at Princess Margaret Cancer Centre; browse by department rather than a single application."
   },
   {
     "id": "womens-college-summer-program",
@@ -718,7 +718,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": true,
     "confidence": "high",
-    "blurb": "A 12-week diabetes-research studentship at U of T's Banting and Best Diabetes Centre \u2014 14 awarded each year."
+    "blurb": "A 12-week diabetes-research studentship at U of T's Banting and Best Diabetes Centre, with 14 awarded each year."
   },
   {
     "id": "cfid-summer-research-award",
@@ -778,7 +778,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": true,
     "confidence": "medium",
-    "blurb": "A studentship for undergraduate liver-disease research \u2014 students secure their own CASL-member supervisor before applying."
+    "blurb": "A studentship for undergraduate liver-disease research; students secure their own CASL-member supervisor before applying."
   },
   {
     "id": "canheart-spor-studentship",
@@ -902,7 +902,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "high",
-    "blurb": "U of T's Immunology Summer Student Research Program (ISSRP) \u2014 hands-on immunology research plus a limited number of UROP scholarships."
+    "blurb": "U of T's Immunology Summer Student Research Program (ISSRP): hands-on immunology research plus a limited number of UROP scholarships."
   },
   {
     "id": "lmp-sure-utoronto",
@@ -1116,7 +1116,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "medium",
-    "blurb": "A part-time (4 hrs/week) biomedical engineering lab-skills bootcamp for 1st/2nd-year Engineering Science students at U of T \u2014 coursework-based, not independent research."
+    "blurb": "A part-time (4 hrs/week) biomedical engineering lab-skills bootcamp for 1st/2nd-year Engineering Science students at U of T. Coursework-based, not independent research."
   },
   {
     "id": "xavier-pelletier-bccancer",
@@ -1263,7 +1263,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": true,
     "confidence": "high",
-    "blurb": "A federally funded undergraduate research award for health-sciences research \u2014 this stream is restricted to students who self-identify as Black.",
+    "blurb": "A federally funded undergraduate research award for health-sciences research. This stream is restricted to students who self-identify as Black.",
     "equityNote": "Black students only"
   },
   {
@@ -1330,7 +1330,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "high",
-    "blurb": "About 30 paid studentships a year at BC Children's Hospital \u2014 students must line up their own investigator supervisor before applying."
+    "blurb": "About 30 paid studentships a year at BC Children's Hospital; students must line up their own investigator supervisor before applying."
   },
   {
     "id": "seed2stem-icord-ubc",
@@ -1393,7 +1393,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "medium",
-    "blurb": "A co-op position at Canada's particle accelerator centre \u2014 physics, engineering, and computing work for students enrolled in a partner university's co-op program."
+    "blurb": "A co-op position at Canada's particle accelerator centre: physics, engineering, and computing work for students enrolled in a partner university's co-op program."
   },
   {
     "id": "ipp-summer-fellowship-cern",
@@ -1422,7 +1422,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": true,
     "isGrant": true,
     "confidence": "high",
-    "blurb": "A two-phase fellowship: research in Canada, then August at CERN in Geneva \u2014 but you're expected to already hold an NSERC USRA or TRIUMF position first."
+    "blurb": "A two-phase fellowship: research in Canada, then August at CERN in Geneva. But you're expected to already hold an NSERC USRA or TRIUMF position first."
   },
   {
     "id": "cco-chemistry-olympiad-camp",
@@ -1574,7 +1574,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": true,
     "confidence": "high",
-    "blurb": "$8,960 over 16 weeks of paid research in a University of Manitoba Faculty of Science lab \u2014 several sub-award streams exist with different eligibility."
+    "blurb": "$8,960 over 16 weeks of paid research in a University of Manitoba Faculty of Science lab. Several sub-award streams exist with different eligibility."
   },
   {
     "id": "usask-jwt-spinks-chemistry",
@@ -1700,6 +1700,6 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": true,
     "confidence": "high",
-    "blurb": "16 weeks of paid research at Memorial University \u2014 split between citizens-only NSERC awards and a separate pool open to international students too."
+    "blurb": "16 weeks of paid research at Memorial University, split between citizens-only NSERC awards and a separate pool open to international students too."
   }
 ]

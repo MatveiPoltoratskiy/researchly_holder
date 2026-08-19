@@ -123,7 +123,7 @@ function OpportunityCard({ o, selected, onSelect, cardRef }) {
       className={`opp-card ${selected ? 'is-selected' : ''}`}
       onClick={handleCardClick}
     >
-      <span className="opp-card-select-hint">{selected ? 'Selected — shown on map' : 'Click to locate on map'}</span>
+      <span className="opp-card-select-hint">{selected ? 'Selected, shown on map' : 'Click to locate on map'}</span>
       <div className={`opp-badge ${FIELD_META[primary]?.cls || ''}`}>
         <OrgLogo org={o.org} url={o.url} iconId={iconForOrg(o.org)} />
       </div>
@@ -330,7 +330,7 @@ export default function OpportunityExplorer() {
     <section className="opp-explorer">
       <div className="container opp-container">
         <div className="opp-private-note">
-          Private prototype — hand-curated Canada dataset, still mid-verification. Not linked
+          Private prototype: hand-curated Canada dataset, still mid-verification. Not linked
           from the live site.
         </div>
 

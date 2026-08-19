@@ -138,7 +138,7 @@ export default function RoadmapPreview() {
                 <div>
                   <div className="card-title">Your Research Path</div>
                   <div className="card-sub">
-                    {phase === 'interview' && 'Tell us about you — takes 30 seconds.'}
+                    {phase === 'interview' && 'Tell us about you, takes 30 seconds.'}
                     {phase === 'loading' && 'Finding your matches…'}
                     {phase === 'matches' && 'Personalized matches based on your goals and interests.'}
                   </div>
