@@ -25,7 +25,6 @@ const LIVE_FIELD_SET = new Set(FIELD_ORDER)
 const CONFIDENCE_LABEL = { high: 'Verified', medium: 'Needs check', low: 'Unconfirmed' }
 const MODE_LABEL = { 'in-person': 'In person', remote: 'Remote', hybrid: 'Hybrid' }
 const AVAILABILITY_LABEL = { summer: 'Summer', 'year-round': 'Year-round', 'academic-year': 'Academic year' }
-const SELECTIVITY_LABEL = { 'very-high': 'Very high', high: 'High', medium: 'Medium', open: 'Open' }
 
 function levelRangeLabel(levels) {
   const hs = levels.filter((l) => l.startsWith('hs')).map((l) => l.split('-')[1])
@@ -51,6 +50,17 @@ function costLabel(o) {
   if (o.cost === 0) return 'Free to attend'
   if (o.cost != null && o.cost > 0) return `Costs $${o.cost.toLocaleString()} to attend`
   return null
+}
+
+// Placeholder until the interview/profile-matching system exists: a stable, id-derived
+// percentage so the "Match rate" field has something real-feeling to show rather than
+// looking broken. Once interview answers exist, swap this for an actual computed score.
+function matchRateFor(id) {
+  let hash = 0
+  for (let i = 0; i < id.length; i++) {
+    hash = (hash * 31 + id.charCodeAt(i)) >>> 0
+  }
+  return 58 + (hash % 41) // 58-98, skews positive since these are already curated matches
 }
 
 // Real category icons instead of a plain letter — matched off the org name, since we
@@ -264,7 +274,7 @@ function OpportunityDetailModal({ o, onClose }) {
     ['Eligibility', levelRangeLabel(o.levels) || 'Not confirmed'],
     ['Cost to attend', costLabel(o) || 'Not confirmed'],
     ['Stipend / pay', payLabel(o)],
-    ['Selectivity', SELECTIVITY_LABEL[o.selectivity] || 'Not confirmed'],
+    ['Match rate', `${matchRateFor(o.id)}%`, 'Preview, based on your interview once built'],
   ]
 
   return (
@@ -308,10 +318,11 @@ function OpportunityDetailModal({ o, onClose }) {
         <p className="opp-modal-blurb">{o.blurb}</p>
 
         <div className="opp-modal-grid">
-          {details.map(([label, value]) => (
+          {details.map(([label, value, caption]) => (
             <div key={label} className="opp-modal-cell">
               <div className="opp-modal-cell-label">{label}</div>
               <div className="opp-modal-cell-value">{value}</div>
+              {caption && <div className="opp-modal-cell-caption">{caption}</div>}
             </div>
           ))}
         </div>

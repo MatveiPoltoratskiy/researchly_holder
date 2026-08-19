@@ -1452,8 +1452,10 @@ html{ scroll-behavior:smooth; }
 .opp-map-pin-stack{ display:flex; flex-direction:column; align-items:center; }
 .opp-map-pin-badge{
   position:relative; border-radius:999px; background:#fff; border-style:solid;
-  box-shadow:0 2px 6px rgba(30,37,64,.25); display:flex; align-items:center; justify-content:center;
-  overflow:hidden;
+  /* layered, low-opacity shadow reads as natural ambient elevation rather than a hard
+     dark blob under the pin */
+  box-shadow:0 1px 2px rgba(30,37,64,.1), 0 4px 10px rgba(30,37,64,.13);
+  display:flex; align-items:center; justify-content:center; overflow:hidden;
 }
 .opp-map-pin-halo{
   position:absolute; inset:-9px; border-radius:999px; background:#DD6B2E; opacity:.22;
@@ -1466,7 +1468,7 @@ html{ scroll-behavior:smooth; }
 }
 .opp-map-pin-tail{
   width:0; height:0; margin-top:-1px; border-left:6px solid transparent; border-right:6px solid transparent;
-  border-top:9px solid; filter:drop-shadow(0 2px 1px rgba(30,37,64,.2));
+  border-top:9px solid; filter:drop-shadow(0 2px 2px rgba(30,37,64,.12));
 }
 
 /* "bubbly" popup matching the opportunity-card art style (warm card bg, serif heading,
@@ -1634,8 +1636,8 @@ html{ scroll-behavior:smooth; }
   overflow-y:auto; backdrop-filter:blur(2px);
 }
 .opp-modal{
-  position:relative; width:100%; max-width:640px; background:var(--cream);
-  border-radius:24px; padding:32px 32px 28px; box-shadow:0 24px 60px rgba(30,37,64,.35);
+  position:relative; width:100%; max-width:960px; background:var(--cream);
+  border-radius:24px; padding:40px 44px 36px; box-shadow:0 24px 60px rgba(30,37,64,.35);
   animation:opp-modal-in .18s ease-out;
 }
 @keyframes opp-modal-in{ from{ opacity:0; transform:translateY(10px) scale(.98); } to{ opacity:1; transform:none; } }
@@ -1681,9 +1683,10 @@ html{ scroll-behavior:smooth; }
 }
 
 .opp-modal-grid{
-  display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--card-border);
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:1px; background:var(--card-border);
   border:1px solid var(--card-border); border-radius:14px; overflow:hidden; margin:20px 0 0;
 }
+@media (max-width: 700px){ .opp-modal-grid{ grid-template-columns:1fr 1fr; } }
 .opp-modal-cell{ background:var(--card-bg); padding:14px 16px; }
 .opp-modal-cell-label{
   font-family:"Segoe UI",system-ui,sans-serif; font-size:11px; font-weight:800; letter-spacing:.03em;
@@ -1691,6 +1694,10 @@ html{ scroll-behavior:smooth; }
 }
 .opp-modal-cell-value{
   font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; font-weight:700; color:var(--navy);
+}
+.opp-modal-cell-caption{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:10.5px; font-weight:600;
+  color:var(--opp-text-soft, var(--navy-soft)); margin-top:3px; line-height:1.3;
 }
 
 .opp-modal-tags{ margin:18px 0 0; }
