@@ -950,12 +950,12 @@ h1{
   border:none; cursor:pointer; white-space:nowrap;
   display:inline-flex; align-items:center; justify-content:center; gap:9px;
   min-width:200px;
-  background: var(--spine); color:#FFF7EC;
+  background: var(--cover); color:#FFF7EC;
   padding: 16px 30px; border-radius:14px;
-  box-shadow: 0 22px 38px -14px rgba(140,74,34,.65), 0 6px 14px -6px rgba(140,74,34,.4);
+  box-shadow: 0 22px 38px -14px rgba(169,79,30,.65), 0 6px 14px -6px rgba(169,79,30,.4);
   transition: transform .18s ease, box-shadow .18s ease;
 }
-.waitlist-submit:hover:not(:disabled){ transform: translateY(-3px); box-shadow: 0 26px 44px -14px rgba(140,74,34,.7), 0 8px 18px -6px rgba(140,74,34,.45); }
+.waitlist-submit:hover:not(:disabled){ transform: translateY(-3px); box-shadow: 0 26px 44px -14px rgba(169,79,30,.7), 0 8px 18px -6px rgba(169,79,30,.45); }
 .waitlist-submit:disabled{ cursor:default; transform:none; }
 .btn-spinner{ width:20px; height:20px; animation: btn-spin .8s linear infinite; }
 @keyframes btn-spin{ to{ transform: rotate(360deg); } }
