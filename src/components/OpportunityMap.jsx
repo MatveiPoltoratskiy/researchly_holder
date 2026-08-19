@@ -86,6 +86,18 @@ function clusterIcon(selected) {
   })
 }
 
+// Google Maps-style "you are here": a small solid blue dot with a white ring, sitting on
+// top of a larger soft pulse that animates outward — CSS keyframes (below, in index.css)
+// do the actual pulsing, this just lays out the two nested elements Leaflet renders as-is.
+function userLocationIcon() {
+  const html = `
+    <div class="opp-user-dot">
+      <span class="opp-user-dot-pulse"></span>
+      <span class="opp-user-dot-core"></span>
+    </div>`
+  return L.divIcon({ className: 'opp-user-dot-wrap', html, iconSize: [22, 22], iconAnchor: [11, 11] })
+}
+
 function popupHtml(o, primary) {
   return `<div class="opp-map-popup">
       <span class="opp-map-popup-field opp-map-popup-field--${primary}">${FIELD_LABEL[primary]}</span>
@@ -95,11 +107,13 @@ function popupHtml(o, primary) {
     </div>`
 }
 
-export default function OpportunityMap({ opportunities, selectedId, onSelect }) {
+export default function OpportunityMap({ opportunities, selectedId, onSelect, userLocation, locationStatus, onRequestLocation }) {
   const containerRef = useRef(null)
   const mapRef = useRef(null)
   const markersRef = useRef(null)
   const markerByIdRef = useRef(new Map())
+  const userMarkerRef = useRef(null)
+  const hasFlownToUserRef = useRef(false)
 
   // shared fallback handler for every pin's logo <img> — tries DuckDuckGo's favicon
   // service once, then reveals the letter-initial fallback span if that fails too
@@ -230,10 +244,60 @@ export default function OpportunityMap({ opportunities, selectedId, onSelect }) 
     map.panTo(marker.getLatLng(), { animate: true })
   }, [selectedId])
 
+  // the "you are here" dot: placed/moved whenever userLocation changes, removed when it's
+  // cleared. The very first time it appears we fly the map to it — unlike every other
+  // recenter in this file, this one IS wanted, since granting location is itself a
+  // deliberate "show me where I am" action, not an incidental filter/select side effect
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map) return
+    if (!userLocation) {
+      userMarkerRef.current?.remove()
+      userMarkerRef.current = null
+      hasFlownToUserRef.current = false
+      return
+    }
+    const latlng = [userLocation.lat, userLocation.lon]
+    if (!userMarkerRef.current) {
+      userMarkerRef.current = L.marker(latlng, {
+        icon: userLocationIcon(),
+        zIndexOffset: 1000,
+        interactive: false,
+        keyboard: false,
+      }).addTo(map)
+    } else {
+      userMarkerRef.current.setLatLng(latlng)
+    }
+    if (!hasFlownToUserRef.current) {
+      hasFlownToUserRef.current = true
+      map.flyTo(latlng, 10, { animate: true, duration: 1.2 })
+    }
+  }, [userLocation])
+
   return (
     <div className="opp-map-pane">
       <div className="opp-map-badge">All {opportunities.length} shown on map</div>
       <div ref={containerRef} className="opp-map-canvas" />
+      {onRequestLocation && (
+        <button
+          type="button"
+          className={`opp-map-locate ${locationStatus === 'loading' ? 'is-loading' : ''} ${userLocation ? 'is-active' : ''}`}
+          onClick={onRequestLocation}
+          disabled={locationStatus === 'loading'}
+          title="Show my location"
+          aria-label="Show my location on the map"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" strokeWidth="2" />
+            <path
+              d="M12 2v3M12 19v3M2 12h3M19 12h3"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
+        </button>
+      )}
     </div>
   )
 }

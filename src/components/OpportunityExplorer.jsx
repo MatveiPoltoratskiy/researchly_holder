@@ -740,6 +740,9 @@ export default function OpportunityExplorer() {
               opportunities={filtered}
               selectedId={selectedId}
               onSelect={(id) => selectOpportunity(id, { scrollCardIntoView: true })}
+              userLocation={userLocation}
+              locationStatus={locationStatus}
+              onRequestLocation={requestLocation}
             />
           </div>
         </div>
