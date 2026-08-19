@@ -4848,5 +4848,697 @@ export const CANADA_OPPORTUNITIES = [
     "isGrant": false,
     "confidence": "high",
     "blurb": "A legendary 10-week residential research program at Cold Spring Harbor Laboratory, running since 1959."
+  },
+  {
+    "id": "brown-precollege-stem",
+    "name": "Pre-College STEM Program",
+    "org": "Brown University",
+    "url": "https://precollege.brown.edu/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "hs-9",
+      "hs-10"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Providence, RI",
+    "lat": 41.8268,
+    "lon": -71.4025,
+    "availability": "summer",
+    "paid": false,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 2-week residential Brown University program for rising 9th/10th graders, spanning genetics, biomedical engineering, chemistry, and physics."
+  },
+  {
+    "id": "columbia-cushp",
+    "name": "Columbia University Science Honors Program (CUSHP)",
+    "org": "Columbia University",
+    "url": "https://www.columbia.edu/cu/shp/",
+    "focus": [
+      "biology",
+      "physics"
+    ],
+    "levels": [
+      "hs-10",
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "New York, NY",
+    "lat": 40.7128,
+    "lon": -74.006,
+    "availability": "summer",
+    "paid": false,
+    "cost": 50,
+    "stipend": null,
+    "deadline": "2026-04-15",
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A highly selective, year-long Saturday program at Columbia in physics, biology, and computer science for HS students."
+  },
+  {
+    "id": "columbia-dbmi-summer",
+    "name": "DBMI Summer Research Program",
+    "org": "Columbia University (Dept. of Biomedical Informatics)",
+    "url": "https://www.dbmi.columbia.edu/summer/",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-12",
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "New York, NY",
+    "lat": 40.7128,
+    "lon": -74.006,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 7-week biomedical informatics and health data science research program at Columbia, for rising HS seniors through undergrads."
+  },
+  {
+    "id": "upenn-biomed-research-academy",
+    "name": "Biomedical Research Academy",
+    "org": "University of Pennsylvania",
+    "url": "https://hs.sas.upenn.edu/summer-programs",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Philadelphia, PA",
+    "lat": 39.9522,
+    "lon": -75.1932,
+    "availability": "summer",
+    "paid": false,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 3-week residential UPenn academy in disease biology, including a peer-reviewed research Journal Club."
+  },
+  {
+    "id": "upenn-chem-research-academy",
+    "name": "Chemistry Research Academy",
+    "org": "University of Pennsylvania",
+    "url": "https://hs.sas.upenn.edu/summer-programs",
+    "focus": [
+      "chemistry"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Philadelphia, PA",
+    "lat": 39.9522,
+    "lon": -75.1932,
+    "availability": "summer",
+    "paid": false,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 3-week residential UPenn chemistry academy covering spectroscopy, gas chromatography, and rare earth metals."
+  },
+  {
+    "id": "upenn-experimental-physics",
+    "name": "Experimental Physics",
+    "org": "University of Pennsylvania",
+    "url": "https://hs.sas.upenn.edu/summer-programs",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Philadelphia, PA",
+    "lat": 39.9522,
+    "lon": -75.1932,
+    "availability": "summer",
+    "paid": false,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 3-week UPenn program where teams research a physics topic from primary sources and present findings."
+  },
+  {
+    "id": "rice-physics-reu",
+    "name": "Summer Research Program (Physics/Materials Science)",
+    "org": "Rice University",
+    "url": "https://reu.rice.edu/research-experiences",
+    "focus": [
+      "physics",
+      "chemistry"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12",
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Houston, TX",
+    "lat": 29.7079,
+    "lon": -95.3971,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": "2026-03-01",
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A tiny, highly selective Rice University program (2 HS + 2 undergrad spots) building acoustic metamaterials research."
+  },
+  {
+    "id": "rice-bio-academies",
+    "name": "Rice Bio Academies",
+    "org": "Rice University (Center for STEM Engagement)",
+    "url": "https://research.rice.edu/rstem/bioacademies",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-9",
+      "hs-10",
+      "hs-11"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Houston, TX",
+    "lat": 29.7079,
+    "lon": -95.3971,
+    "availability": "summer",
+    "paid": false,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 1-week Rice University program across BioEng, BioTech, and BioMed tracks for grades 7-11."
+  },
+  {
+    "id": "nyu-simons-science-explorations",
+    "name": "Simons-NYU Science Explorations Program",
+    "org": "New York University",
+    "url": "https://as.nyu.edu/departments/science/summer-program/simons-nyu-science-explorations-program.html",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "New York, NY",
+    "lat": 40.7128,
+    "lon": -74.006,
+    "availability": "summer",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": "2026-03-13",
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A free, 3-week residential NYU program in biology, chemistry, physics, and psychology for HS juniors/seniors."
+  },
+  {
+    "id": "nyu-arise",
+    "name": "ARISE Program",
+    "org": "New York University",
+    "url": "https://engineering.nyu.edu/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "hs-10",
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "New York, NY",
+    "lat": 40.7128,
+    "lon": -74.006,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "An NYU program pairing HS students with faculty/grad mentors for ~120 hours of hands-on lab research."
+  },
+  {
+    "id": "georgetown-lombardi-hs-volunteer",
+    "name": "High School Summer Research Volunteer Program",
+    "org": "Georgetown University (Lombardi Comprehensive Cancer Center)",
+    "url": "https://lombardi.georgetown.edu/education/summer_volunteer/",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Washington, DC",
+    "lat": 38.9218,
+    "lon": -77.0195,
+    "availability": "summer",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": "2026-03-31",
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "An 8-week unpaid research volunteer program in cancer biology at Georgetown's Lombardi Cancer Center."
+  },
+  {
+    "id": "umich-aspirnaut",
+    "name": "Aspirnaut Summer Research Internship",
+    "org": "University of Michigan (Life Sciences Institute)",
+    "url": "https://aspirnaut.lsi.umich.edu/",
+    "focus": [
+      "biology"
+    ],
+    "levels": [
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Ann Arbor, MI",
+    "lat": 42.2808,
+    "lon": -83.743,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 6-week residential research program at Michigan's Life Sciences Institute for Michigan HS seniors."
+  },
+  {
+    "id": "northwestern-nurph",
+    "name": "Northwestern University Research Program for High Schoolers (NURPH)",
+    "org": "Northwestern University",
+    "url": "https://sites.northwestern.edu/nurph",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "hs-10",
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Evanston, IL",
+    "lat": 42.0565,
+    "lon": -87.6753,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 7-week paid research program for Chicago/Evanston-area high schoolers at Northwestern.",
+    "equityNote": "Chicago/Evanston-area residents only"
+  },
+  {
+    "id": "northwestern-rem",
+    "name": "Research Experience and Mentoring (REM) Program",
+    "org": "Northwestern University (Center for Advanced Regenerative Engineering)",
+    "url": "https://regenerative-engineering.northwestern.edu/programs/research-experience-and-mentoring-rem-summer-research-program/index.html",
+    "focus": [
+      "biology",
+      "chemistry"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12",
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Evanston, IL",
+    "lat": 42.0565,
+    "lon": -87.6753,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "Northwestern's entry point into regenerative engineering research, open from high school through college."
+  },
+  {
+    "id": "usc-young-researchers",
+    "name": "USC Young Researchers Program",
+    "org": "University of Southern California",
+    "url": "https://www.usc.edu/",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Los Angeles, CA",
+    "lat": 34.0224,
+    "lon": -118.2851,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 6-week USC program pairing LA-area rising seniors with a grad mentor on biomedical research.",
+    "equityNote": "LA-area residents only"
+  },
+  {
+    "id": "usc-bugs",
+    "name": "Bridge UnderGraduate Science (BUGS)",
+    "org": "USC Bridge Institute",
+    "url": "https://www.usc.edu/",
+    "focus": [
+      "biology",
+      "chemistry"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12",
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Los Angeles, CA",
+    "lat": 34.0224,
+    "lon": -118.2851,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A paid USC Bridge Institute research program serving both high school and undergraduate students."
+  },
+  {
+    "id": "uwmadison-arise",
+    "name": "ARISE Program",
+    "org": "University of Wisconsin-Madison (Carbone Cancer Center)",
+    "url": "https://cancer.wisc.edu/research/education/high-school-education/",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Madison, WI",
+    "lat": 43.0766,
+    "lon": -89.4125,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A cancer-research lab placement for Wisconsin high schoolers at UW's Carbone Cancer Center."
+  },
+  {
+    "id": "mmsd-uwmadison-hs-research",
+    "name": "High School Science Research Internship Program",
+    "org": "Madison Metropolitan School District + UW-Madison",
+    "url": "https://www.madison.k12.wi.us/curriculum-instruction/science/high-school-science-research-internship-program",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "hs-11"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Madison, WI",
+    "lat": 43.0766,
+    "lon": -89.4125,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": "2026-01-15",
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 9-week authentic science research internship for Madison-district 11th graders, with UW-Madison.",
+    "equityNote": "Madison school district students only"
+  },
+  {
+    "id": "mcgill-youth-biodiversity",
+    "name": "Youth Biodiversity Internships Program",
+    "org": "McGill University (Gault Nature Reserve)",
+    "url": "https://gault.mcgill.ca/en/research-and-education/",
+    "focus": [
+      "biology"
+    ],
+    "levels": [
+      "hs-10",
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Montreal, QC",
+    "lat": 45.4972,
+    "lon": -73.5789,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 5-week ecology fieldwork internship at McGill's Gault Nature Reserve, specifically for West Island Black Community Association youth.",
+    "equityNote": "WIBCA (West Island Black Community) youth only"
+  },
+  {
+    "id": "queens-summer-of-science",
+    "name": "Summer of Science",
+    "org": "Queen's University (McDonald Institute + C2MCI)",
+    "url": "https://mcdonaldinstitute.ca/summer-of-science/",
+    "focus": [
+      "physics",
+      "chemistry"
+    ],
+    "levels": [
+      "hs-9",
+      "hs-10",
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "hybrid",
+    "locationLabel": "Kingston, ON",
+    "lat": 44.2253,
+    "lon": -76.4951,
+    "availability": "summer",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": "2026-05-20",
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A free, part-time physical-sciences enrichment program at Queen's University, in-person or virtual."
+  },
+  {
+    "id": "uoft-science-unlimited",
+    "name": "Science Unlimited",
+    "org": "University of Toronto",
+    "url": "https://future.utoronto.ca/high-school-enrichment-programs",
+    "focus": [
+      "physics",
+      "chemistry"
+    ],
+    "levels": [
+      "hs-10",
+      "hs-11"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Toronto, ON",
+    "lat": 43.6629,
+    "lon": -79.3957,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": "2026-04-15",
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 1-week rotation through physics, chemistry, and other science workshops at U of T's St. George campus."
+  },
+  {
+    "id": "dartmouth-isurf",
+    "name": "iSURF Program",
+    "org": "Dartmouth College (Geisel School of Medicine / NH-INBRE)",
+    "url": "https://geiselmed.dartmouth.edu/nhinbre/about-us/isurf/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Hanover, NH",
+    "lat": 43.7022,
+    "lon": -72.2896,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 5000,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "Dartmouth's paid summer research fellowship spanning wet-lab, computational, and clinical research tracks."
+  },
+  {
+    "id": "dartmouth-eejust",
+    "name": "E.E. Just Summer Internship",
+    "org": "Dartmouth College",
+    "url": "https://students.dartmouth.edu/eejust/undergraduate/fellowships-internships/summer-internship-program",
+    "focus": [
+      "biology"
+    ],
+    "levels": [
+      "ugrad-1"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Hanover, NH",
+    "lat": 43.7022,
+    "lon": -72.2896,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 10-week Dartmouth research internship specifically for students entering their sophomore year."
   }
 ]
