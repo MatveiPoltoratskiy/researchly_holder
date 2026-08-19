@@ -38,6 +38,10 @@ export default function Navbar() {
           <Link className="nav-link" to="/contact">
             Contact us
           </Link>
+          {/* TEMPORARY — dev-only link to the private opportunities prototype, remove before merging to main */}
+          <Link className="nav-link" to="/opportunities" style={{ color: 'var(--cover)' }}>
+            Opportunities (dev)
+          </Link>
           <button className="nav-cta" type="button" onClick={handleJoinClick}>
             Join the waitlist
           </button>
