@@ -26,6 +26,47 @@ const CONFIDENCE_LABEL = { high: 'Verified', medium: 'Needs check', low: 'Unconf
 const MODE_LABEL = { 'in-person': 'In person', remote: 'Remote', hybrid: 'Hybrid' }
 const AVAILABILITY_LABEL = { summer: 'Summer', 'year-round': 'Year-round', 'academic-year': 'Academic year' }
 
+// "big name" recommendation matcher: Ivy League + peer-prestige US schools, plus the
+// specific Canadian names most students in this age group already recognize
+const BIG_NAME_PATTERN =
+  /harvard|johns hopkins|massachusetts institute of technology|(^|\W)mit(\W|$)|stanford university|yale university|princeton university|columbia university|university of pennsylvania|brown university|dartmouth|cornell university|california institute of technology|caltech|university of toronto|mcgill university|university of british columbia/i
+function isBigName(org = '') {
+  return BIG_NAME_PATTERN.test(org)
+}
+
+// hand-picked for being small, unusual, or otherwise not-the-obvious-choice, rather than
+// derived from any field in the data — a deliberate curation, not an algorithm
+const NICHE_IDS = [
+  'triumf-undergrad-coop',
+  'seed2stem-icord-ubc',
+  'rockefeller-ssrp',
+  'cshl-urp',
+  'perimeter-issyp',
+  'xavier-pelletier-bccancer',
+  'rice-physics-reu',
+  'broad-summer-scholars',
+  'mcgill-youth-biodiversity',
+  'carleton-dsri',
+  'magee-womens-hs',
+  'ila-dalhousie-scholarship',
+]
+
+function distanceKm(lat1, lon1, lat2, lon2) {
+  const R = 6371
+  const dLat = ((lat2 - lat1) * Math.PI) / 180
+  const dLon = ((lon2 - lon1) * Math.PI) / 180
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLon / 2) ** 2
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+}
+
+function distanceLabel(km) {
+  if (km < 50) return 'Nearby'
+  if (km < 1000) return `~${Math.round(km)} km away`
+  return `~${Math.round(km / 100) * 100} km away`
+}
+
 function levelRangeLabel(levels) {
   const hs = levels.filter((l) => l.startsWith('hs')).map((l) => l.split('-')[1])
   const ug = levels.filter((l) => l.startsWith('ugrad'))
@@ -117,6 +158,118 @@ function OrgLogo({ org, url, iconId }) {
     <svg width="20" height="20" aria-hidden="true">
       <use href={`#${iconId}`} />
     </svg>
+  )
+}
+
+function RecommendationCard({ o, tag, onOpen }) {
+  const primary = FIELD_ORDER.find((f) => o.focus.includes(f)) || o.focus[0]
+  return (
+    <button type="button" className="opp-rec-card" onClick={() => onOpen(o.id)}>
+      <div className={`opp-badge opp-rec-badge ${FIELD_META[primary]?.cls || ''}`}>
+        <OrgLogo org={o.org} url={o.url} iconId={iconForOrg(o.org)} />
+      </div>
+      <div className="opp-rec-name">{o.name}</div>
+      <div className="opp-rec-org">{o.org}</div>
+      {tag && <span className="opp-rec-tag">{tag}</span>}
+    </button>
+  )
+}
+
+function RecommendationRow({ title, subtitle, items, onOpen, emptyText }) {
+  if (!items.length && !emptyText) return null
+  return (
+    <div className="opp-rec-row">
+      <div className="opp-rec-row-head">
+        <h3>{title}</h3>
+        {subtitle && <span>{subtitle}</span>}
+      </div>
+      {items.length ? (
+        <div className="opp-rec-scroll">
+          {items.map(({ o, tag }) => (
+            <RecommendationCard key={o.id} o={o} tag={tag} onOpen={onOpen} />
+          ))}
+        </div>
+      ) : (
+        <p className="opp-rec-empty">{emptyText}</p>
+      )}
+    </div>
+  )
+}
+
+function RecommendedForYou({ onOpenDetail }) {
+  const [userLocation, setUserLocation] = useState(null)
+  const [locationStatus, setLocationStatus] = useState('idle')
+
+  function requestLocation() {
+    if (!navigator.geolocation) {
+      setLocationStatus('unsupported')
+      return
+    }
+    setLocationStatus('loading')
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setUserLocation({ lat: pos.coords.latitude, lon: pos.coords.longitude })
+        setLocationStatus('granted')
+      },
+      () => setLocationStatus('denied'),
+      { timeout: 8000 }
+    )
+  }
+
+  const bigNames = useMemo(() => {
+    const matches = CANADA_OPPORTUNITIES.filter((o) => isBigName(o.org))
+    if (!userLocation) return matches.slice(0, 8).map((o) => ({ o, tag: null }))
+    return matches
+      .map((o) => ({ o, dist: o.lat != null ? distanceKm(userLocation.lat, userLocation.lon, o.lat, o.lon) : Infinity }))
+      .sort((a, b) => a.dist - b.dist)
+      .slice(0, 8)
+      .map(({ o, dist }) => ({ o, tag: Number.isFinite(dist) ? distanceLabel(dist) : null }))
+  }, [userLocation])
+
+  const nearYou = useMemo(() => {
+    if (!userLocation) return []
+    return CANADA_OPPORTUNITIES.filter((o) => o.lat != null && !isBigName(o.org))
+      .map((o) => ({ o, dist: distanceKm(userLocation.lat, userLocation.lon, o.lat, o.lon) }))
+      .sort((a, b) => a.dist - b.dist)
+      .slice(0, 8)
+      .map(({ o, dist }) => ({ o, tag: distanceLabel(dist) }))
+  }, [userLocation])
+
+  const niche = useMemo(
+    () =>
+      NICHE_IDS.map((id) => CANADA_OPPORTUNITIES.find((o) => o.id === id))
+        .filter(Boolean)
+        .map((o) => ({ o, tag: 'Niche pick' })),
+    []
+  )
+
+  return (
+    <div className="opp-recommend">
+      <div className="opp-recommend-head">
+        <div>
+          <h2>Recommended for you</h2>
+          <p>Big-name schools, tailored to where you are, plus a few less-obvious picks.</p>
+        </div>
+        {locationStatus !== 'granted' && (
+          <button type="button" className="opp-rec-locate" onClick={requestLocation} disabled={locationStatus === 'loading'}>
+            {locationStatus === 'loading' ? 'Locating…' : '📍 Use my location'}
+          </button>
+        )}
+        {locationStatus === 'denied' && <span className="opp-rec-locate-note">Location access denied — showing general picks.</span>}
+        {locationStatus === 'unsupported' && <span className="opp-rec-locate-note">Location isn't supported on this device.</span>}
+      </div>
+
+      <RecommendationRow
+        title="Big names"
+        subtitle="Ivy League, Johns Hopkins, MIT/Caltech/Stanford, U of T, McGill, UBC"
+        items={bigNames}
+        onOpen={onOpenDetail}
+      />
+      {userLocation && (
+        <RecommendationRow title="Near you" items={nearYou} onOpen={onOpenDetail} emptyText="Nothing geocoded nearby yet." />
+      )}
+      <RecommendationRow title="Niche picks" subtitle="Small, unusual, or easy to overlook" items={niche} onOpen={onOpenDetail} />
+    </div>
   )
 }
 
@@ -504,6 +657,8 @@ export default function OpportunityExplorer() {
             ))}
           </div>
         </div>
+
+        <RecommendedForYou onOpenDetail={setDetailId} />
 
         <div className="opp-layout">
           <aside className="opp-sidebar">
