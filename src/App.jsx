@@ -6,11 +6,12 @@ import Faq from './components/Faq'
 import Contact from './components/Contact'
 import HowItWorks from './components/HowItWorks'
 import Footer from './components/Footer'
+import OpportunityExplorer from './components/OpportunityExplorer'
 import { RouterProvider, useRouter } from './lib/router'
 
 function Page() {
   const { path } = useRouter()
-  const isLanding = path !== '/contact' && path !== '/how-it-works'
+  const isLanding = path !== '/contact' && path !== '/how-it-works' && path !== '/opportunities'
 
   const content = (
     <>
@@ -19,6 +20,8 @@ function Page() {
         <Contact />
       ) : path === '/how-it-works' ? (
         <HowItWorks />
+      ) : path === '/opportunities' ? (
+        <OpportunityExplorer />
       ) : (
         <>
           <Hero />

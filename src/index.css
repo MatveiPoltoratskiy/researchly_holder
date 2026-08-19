@@ -1303,3 +1303,119 @@ a.footer-link:hover{ color: var(--cover-dark); }
   .footer-newsletter{ padding-left:0; border-left:none; max-width:none; flex-basis:100%; }
   .footer-bottom{ flex-direction:column; align-items:flex-start; }
 }
+
+/* ---------- opportunity explorer (private prototype, not linked from live nav) ---------- */
+.opp-explorer{ background:var(--cream); padding:40px 0 96px; min-height:70vh; }
+.opp-container{ max-width:920px; }
+
+.opp-private-note{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:600;
+  color:var(--cover-dark); background:var(--pill-amber-bg); border:1px solid rgba(140,90,36,.25);
+  border-radius:10px; padding:9px 14px; margin-bottom:28px; display:inline-block;
+}
+
+.opp-header{ margin-bottom:22px; }
+.opp-heading{
+  font-family:"Iowan Old Style",Palatino,Georgia,serif; font-weight:700;
+  font-size:clamp(26px,3.2vw,36px); color:var(--navy); margin:0 0 6px;
+}
+.opp-heading-count{ color:var(--cover); }
+.opp-subheading{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; color:var(--navy-soft); margin:0;
+}
+
+.opp-filters{ margin-bottom:28px; display:flex; flex-direction:column; gap:14px; }
+.opp-chip-row{ display:flex; flex-wrap:wrap; gap:10px; }
+.opp-chip{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; font-weight:700;
+  display:inline-flex; align-items:center; gap:7px; padding:8px 14px; border-radius:999px;
+  border:1.5px solid transparent; background:var(--pill-bg); color:var(--pill-text);
+  cursor:pointer; opacity:.55; transition:opacity .15s ease, transform .1s ease;
+}
+.opp-chip:hover{ transform:translateY(-1px); }
+.opp-chip.is-active{ opacity:1; }
+.opp-chip-count{
+  font-size:11.5px; font-weight:800; background:rgba(255,255,255,.6); border-radius:999px;
+  padding:1px 7px;
+}
+.opp-chip--premed.is-active{ background:var(--pill-amber-bg); color:var(--cover-dark); border-color:rgba(221,107,46,.35); }
+.opp-chip--bio.is-active{ background:var(--pill-green-bg); color:var(--pill-green-text); border-color:rgba(46,122,76,.3); }
+.opp-chip--chem.is-active{ background:#F4E3B8; color:#7A5A12; border-color:rgba(217,164,65,.4); }
+.opp-chip--physics.is-active{ background:rgba(30,37,64,.09); color:var(--navy); border-color:rgba(30,37,64,.25); }
+
+.opp-level-row{ display:flex; gap:8px; }
+.opp-level-btn{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:600;
+  padding:6px 13px; border-radius:8px; border:1px solid var(--card-border); background:var(--card-bg);
+  color:var(--navy-soft); cursor:pointer;
+}
+.opp-level-btn.is-active{ background:var(--navy); color:#fff; border-color:var(--navy); }
+
+.opp-list{ display:flex; flex-direction:column; gap:14px; }
+
+.opp-card{
+  display:flex; gap:16px; background:var(--card-bg); border:1px solid var(--card-border);
+  border-radius:16px; padding:18px 20px; box-shadow:0 1px 2px rgba(30,37,64,.04);
+}
+.opp-badge{
+  flex:none; width:40px; height:40px; border-radius:11px; display:flex; align-items:center;
+  justify-content:center; font-family:"Iowan Old Style",Palatino,Georgia,serif; font-weight:700;
+  font-size:17px; color:#fff; background:var(--navy);
+}
+.opp-badge.opp-tag--premed{ background:var(--cover); }
+.opp-badge.opp-tag--bio{ background:var(--pine); }
+.opp-badge.opp-tag--chem{ background:var(--gold); }
+.opp-badge.opp-tag--physics{ background:var(--navy); }
+
+.opp-card-body{ flex:1; min-width:0; }
+.opp-card-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+.opp-title{
+  font-family:"Iowan Old Style",Palatino,Georgia,serif; font-weight:700; font-size:17px;
+  color:var(--navy); margin:0;
+}
+.opp-org{ font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; color:var(--navy-soft); margin-top:2px; }
+
+.opp-confidence{
+  flex:none; font-family:"Segoe UI",system-ui,sans-serif; font-size:10.5px; font-weight:700;
+  padding:3px 9px; border-radius:999px; white-space:nowrap; margin-top:2px;
+}
+.opp-confidence--high{ background:var(--pill-green-bg); color:var(--pill-green-text); }
+.opp-confidence--medium{ background:var(--pill-amber-bg); color:var(--pill-amber-text); }
+.opp-confidence--low{ background:rgba(169,79,30,.14); color:var(--cover-dark); }
+
+.opp-blurb{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; line-height:1.5; color:var(--navy);
+  margin:9px 0 12px;
+}
+
+.opp-tags{ display:flex; flex-wrap:wrap; gap:7px; margin-bottom:12px; }
+.opp-tag{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:11px; font-weight:700; padding:3px 10px;
+  border-radius:999px; white-space:nowrap;
+}
+.opp-tag--premed{ background:var(--pill-amber-bg); color:var(--cover-dark); }
+.opp-tag--bio{ background:var(--pill-green-bg); color:var(--pill-green-text); }
+.opp-tag--chem{ background:#F4E3B8; color:#7A5A12; }
+.opp-tag--physics{ background:rgba(30,37,64,.09); color:var(--navy); }
+.opp-tag--muted{ background:var(--pill-bg); color:var(--pill-text); font-weight:600; }
+
+.opp-foot{
+  display:flex; align-items:center; flex-wrap:wrap; gap:7px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; color:var(--navy-soft);
+  padding-top:10px; border-top:1px dashed var(--card-border);
+}
+.opp-pay{ font-weight:700; color:var(--match-green); }
+.opp-dot{ opacity:.5; }
+.opp-link{ margin-left:auto; font-weight:700; color:var(--cover); text-decoration:none; }
+.opp-link:hover{ text-decoration:underline; }
+.opp-link--disabled{ color:var(--navy-faint); font-weight:600; }
+
+.opp-empty{
+  font-family:"Segoe UI",system-ui,sans-serif; color:var(--navy-soft); text-align:center; padding:40px 0;
+}
+
+@media (max-width: 600px){
+  .opp-card{ flex-direction:column; }
+  .opp-confidence{ margin-top:0; }
+  .opp-link{ margin-left:0; width:100%; }
+}
