@@ -96,6 +96,11 @@ function HowLandscape() {
   return (
     <div className="how-landscape">
       <svg className="how-landscape-svg" viewBox="0 0 1400 340" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        {/* hazy, low-opacity distant ridge behind everything else — its own gentle, soft-peaked
+            silhouette shows through wherever the sage-back layer dips into a valley, reading as
+            hills fading into the far distance rather than an empty gap of flat sky */}
+        <polygon points="0,340 0,150 100,110 220,145 350,95 480,140 620,100 750,150 900,105 1050,145 1200,110 1340,150 1400,130 1400,340" fill="var(--sage-back)" fillOpacity="0.45" />
+
         {/* four irregular ridgelines, deliberately off-phase from each other so a tall back peak
             can rise through a gap in a nearer layer instead of every layer reading as a scaled
             copy of the last — that repetition is what made it look like a flat 2D wall */}
