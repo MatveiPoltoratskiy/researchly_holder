@@ -7,32 +7,32 @@ import { InterviewVisual, MatchVisual, RoadmapVisual, ApplyVisual } from './HowI
 const STEPS = [
   {
     kicker: 'THE INTERVIEW',
-    title: "Five questions. That's the whole setup.",
-    desc: "We ask what you're into, what year you're in, where you are, when you're free, and whether pay matters. Each answer narrows the field. No long forms, no essays.",
+    title: "Five questions, then you're done.",
+    desc: "We ask what you want to study, what year you're in, where you are, when you're free, and whether the position has to pay. Each answer cuts the list down. There's no long form and nothing to write.",
     meta: 'Interest → Level → Location → Timing → Pay',
     mascot: 'mascot-ask',
     Visual: InterviewVisual,
   },
   {
     kicker: 'THE MATCH',
-    title: "We do the searching, so you don't open 40 tabs.",
-    desc: "Instead of thousands of links, you get a short list of research programs, labs, and internships you're actually eligible for. It's filtered by your grade, your area, and your schedule.",
+    title: "We search so you don't open 40 tabs.",
+    desc: "Instead of thousands of links, you get a short list of programs, labs, and internships that take students at your year, in your field, on your schedule.",
     meta: 'Summer · Year-round · Paid · Remote',
     mascot: 'mascot-scout',
     Visual: MatchVisual,
   },
   {
     kicker: 'YOUR ROADMAP',
-    title: 'A plan, not just a list.',
-    desc: "Every match comes with an order to follow: what to prep, when applications open, and which deadline hits next. You always know your next step.",
+    title: 'Every match arrives in order.',
+    desc: "What to prepare first, when applications open, and which deadline is closest.",
     meta: 'Deadlines and next steps, in order',
     mascot: 'mascot-map',
     Visual: RoadmapVisual,
   },
   {
-    kicker: 'THE APPLY',
-    title: 'Then the part that actually counts.',
-    desc: "Work down the roadmap with deadlines, links, and guidance in one place. We can't get you accepted, but you'll never miss an opportunity because you didn't know it existed.",
+    kicker: 'THE APPLICATION',
+    title: 'Then you apply.',
+    desc: "Work down the roadmap. Dates, links, and what each program asks for sit in one place. We can't get you accepted, but you won't miss something because you never heard of it.",
     meta: 'Links, dates, and guidance in one place',
     mascot: 'mascot-cheer',
     Visual: ApplyVisual,
@@ -106,9 +106,12 @@ function HowLandscape() {
 
         {/* dashed thread continuing the step-trail's connector line down from the top of the
             frame into the castle flag, so the trail reads as running all the way to it */}
-        <line x1="698" y1="0" x2="698" y2="112" stroke="var(--cover-light)" strokeWidth="2" strokeDasharray="6 6" />
+        <line x1="698" y1="0" x2="698" y2="88" stroke="var(--cover-light)" strokeWidth="2" strokeDasharray="6 6" />
 
-        <use href="#scene-trees" x="30" y="166" width="68" height="94" />
+        {/* the two edge trees run taller than the rest, tips reaching up into the top fade —
+            a couple of elements breaking that boundary is what reads as real depth instead
+            of a flat, evenly-capped band */}
+        <use href="#scene-trees" x="30" y="126" width="95" height="134" />
         <use href="#scene-trees" x="80" y="142" width="60" height="83" />
         <use href="#scene-trees" x="250" y="161" width="52" height="73" />
         <use href="#scene-trees" x="552" y="186" width="44" height="62" />
@@ -124,7 +127,7 @@ function HowLandscape() {
 
         <use href="#scene-trees" x="1110" y="150" width="57" height="78" />
         <use href="#scene-trees" x="1290" y="176" width="49" height="68" />
-        <use href="#scene-trees" x="1340" y="134" width="65" height="91" />
+        <use href="#scene-trees" x="1340" y="94" width="93" height="131" />
 
         {/* hilltop mound the castle sits on, distinct from the mountain bands behind it */}
         <ellipse cx="698" cy="248" rx="92" ry="20" fill="var(--pine)" />
@@ -142,9 +145,10 @@ function HowLandscape() {
           <polygon points="30,6 40,-18 50,6" fill="var(--cover-dark)" />
           <rect x="38" y="30" width="4" height="4" fill="var(--face)" transform="rotate(45 40 32)" />
           <path d="M34,100 L34,84 A6,6 0 0 1 46,84 L46,100Z" fill="var(--spine)" />
-          {/* flag at the peak, picking up the dashed thread that runs down from the top of the frame */}
-          <line x1="40" y1="-18" x2="40" y2="-38" stroke="var(--spine)" strokeWidth="2" />
-          <polygon points="40,-38 40,-29 53,-33.5" fill="var(--cover)" />
+          {/* flag at the peak, picking up the dashed thread that runs down from the top of the frame —
+              pole extended so the tip reaches up into the top fade too, not just the trees */}
+          <line x1="40" y1="-18" x2="40" y2="-60" stroke="var(--spine)" strokeWidth="2" />
+          <polygon points="40,-60 40,-51 53,-55.5" fill="var(--cover)" />
         </g>
 
         <path d="M698,248 C693,258 688,264 682,271" fill="none" stroke="var(--road-line)" strokeWidth="3" strokeDasharray="8 8" />
