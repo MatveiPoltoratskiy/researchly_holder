@@ -1,6 +1,6 @@
-// Auto-generated from docs/canada-opportunities-draft.csv — draft/unverified prototype data.
-// See opportunitySchema.js for field meanings. confidence is prototype-only metadata,
-// not part of the shipped schema — drop it once records are hand-verified.
+// Auto-generated from docs/canada-opportunities-draft.csv — draft/verification-in-progress prototype data.
+// See opportunitySchema.js for field meanings. confidence/equityNote are prototype-only metadata,
+// not part of the shipped schema — fold into the real schema once records are hand-verified.
 export const CANADA_OPPORTUNITIES = [
   {
     "id": "perimeter-issyp",
@@ -14,8 +14,8 @@ export const CANADA_OPPORTUNITIES = [
       "hs-11",
       "hs-12"
     ],
-    "mode": "in-person",
-    "locationLabel": "Waterloo, ON",
+    "mode": "remote",
+    "locationLabel": "Online (Perimeter Institute, Waterloo, ON)",
     "availability": "summer",
     "paid": true,
     "stipend": null,
@@ -24,13 +24,13 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "confidence": "high",
-    "blurb": "Two weeks of theoretical physics with Perimeter Institute researchers, built for students who want to think like physicists, not just study them."
+    "blurb": "Two weeks of online theoretical physics with Perimeter Institute researchers, for Grade 11-12 students who haven't started post-secondary yet."
   },
   {
     "id": "sanofi-biogenius-canada",
     "name": "Sanofi Biogenius Canada",
     "org": "Sanofi Biogenius Canada",
-    "url": null,
+    "url": "https://biogenius.ca/biogenius-programs/",
     "focus": [
       "biology",
       "chemistry"
@@ -49,14 +49,14 @@ export const CANADA_OPPORTUNITIES = [
     "selectivity": "high",
     "isDirectory": false,
     "multiSite": true,
-    "confidence": "medium",
+    "confidence": "high",
     "blurb": "A national biotech competition where students run their own ~4-month mentored research project, then present it regionally and nationally."
   },
   {
     "id": "nserc-usra",
     "name": "NSERC Undergraduate Student Research Awards (USRA)",
     "org": "Natural Sciences and Engineering Research Council of Canada",
-    "url": "https://www.nserc-crsng.gc.ca/students-etudiants/ug-pc/usra-brpc_eng.asp",
+    "url": "https://nserc-crsng.canada.ca/en/funding-opportunity/undergraduate-student-research-awards",
     "focus": [
       "biology",
       "chemistry",
@@ -202,7 +202,7 @@ export const CANADA_OPPORTUNITIES = [
     "id": "ims-surp",
     "name": "Summer Undergraduate Research Program (SURP)",
     "org": "University of Toronto - Institute of Medical Science",
-    "url": "https://ims.utoronto.ca/programs/summer-undergraduate/",
+    "url": "https://ims.utoronto.ca/surp",
     "focus": [
       "pre-med",
       "biology"
@@ -218,7 +218,7 @@ export const CANADA_OPPORTUNITIES = [
     "availability": "summer",
     "paid": true,
     "stipend": null,
-    "deadline": null,
+    "deadline": "2026-02-25",
     "selectivity": "high",
     "isDirectory": false,
     "multiSite": false,
@@ -257,7 +257,7 @@ export const CANADA_OPPORTUNITIES = [
     "id": "calgary-chi-summer-studentship",
     "name": "Centre for Health Informatics (CHI) Summer Studentship Program",
     "org": "University of Calgary",
-    "url": null,
+    "url": "https://cumming.ucalgary.ca/centres/centre-health-informatics/opportunities-programs/summer-studentship-program",
     "focus": [
       "pre-med"
     ],
@@ -278,8 +278,8 @@ export const CANADA_OPPORTUNITIES = [
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
-    "confidence": "medium",
-    "blurb": "Applied healthcare research at the University of Calgary's Centre for Health Informatics, open to students from high school through grad school."
+    "confidence": "high",
+    "blurb": "Health data research at the University of Calgary's Centre for Health Informatics, open to any discipline from high school through grad school."
   },
   {
     "id": "sickkids-ssure",
@@ -310,7 +310,7 @@ export const CANADA_OPPORTUNITIES = [
     "id": "sickkids-star",
     "name": "Students Advancing Research (StAR) Program",
     "org": "Hospital for Sick Children (SickKids)",
-    "url": "https://www.sickkids.ca/en/research/research-training-centre/",
+    "url": "https://www.sickkids.ca/en/learning/patient-family-education/kids-science/",
     "focus": [
       "pre-med",
       "biology"
@@ -324,18 +324,19 @@ export const CANADA_OPPORTUNITIES = [
     "availability": "summer",
     "paid": true,
     "stipend": null,
-    "deadline": null,
+    "deadline": "2026-01-12",
     "selectivity": "high",
     "isDirectory": false,
     "multiSite": false,
-    "confidence": "medium",
-    "blurb": "A paid 6-week SickKids lab placement built specifically for Indigenous, Black, and Filipino high schoolers, ending in a research symposium."
+    "confidence": "high",
+    "blurb": "A paid 6-week SickKids lab placement built specifically for Indigenous, Black, and Filipino high schoolers, ending in a research symposium.",
+    "equityNote": "Indigenous, Black & Filipino students only"
   },
   {
     "id": "sickkids-genetics-studentship",
     "name": "Clinical Genetics/Genomics Research Studentship",
     "org": "Hospital for Sick Children (SickKids)",
-    "url": "http://www.sickkids.ca/CGenetics/index.html",
+    "url": "https://www.sickkids.ca/en/research/research-training-centre/scholarships-fellowships-awards/",
     "focus": [
       "pre-med",
       "biology"
@@ -356,7 +357,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "confidence": "medium",
-    "blurb": "A 12-week studentship in clinical genetics and genomics research at SickKids, open to undergrads in any year."
+    "blurb": "A studentship in clinical genetics and genomics research at SickKids, open to Canadian undergrads in any year."
   },
   {
     "id": "sunnybrook-sri-summer",
@@ -494,9 +495,9 @@ export const CANADA_OPPORTUNITIES = [
   },
   {
     "id": "princess-margaret-summer",
-    "name": "Summer Student Research Programs",
+    "name": "Summer Student Research Programs (multiple, via Office of Research Trainees)",
     "org": "Princess Margaret Cancer Centre (University Health Network)",
-    "url": null,
+    "url": "https://www.uhn.ca/PrincessMargaret/Education/Trainee_Programs/Pages/research-students.aspx",
     "focus": [
       "pre-med",
       "biology"
@@ -514,16 +515,16 @@ export const CANADA_OPPORTUNITIES = [
     "stipend": null,
     "deadline": null,
     "selectivity": "high",
-    "isDirectory": false,
+    "isDirectory": true,
     "multiSite": false,
-    "confidence": "low",
-    "blurb": "A summer placement at one of Canada's leading cancer research centres, part of the University Health Network."
+    "confidence": "medium",
+    "blurb": "One of several department-specific summer research programs at Princess Margaret Cancer Centre \u2014 browse by department rather than a single application."
   },
   {
     "id": "womens-college-summer-program",
-    "name": "Health Student Experience Summer Program",
+    "name": "Summer Student Research Program (SSRP) - Emily Stowe Scholars Program",
     "org": "Women's College Hospital",
-    "url": null,
+    "url": "https://www.womensacademics.ca/learning/summer-student-research-opportunities/",
     "focus": [
       "pre-med"
     ],
@@ -542,34 +543,9 @@ export const CANADA_OPPORTUNITIES = [
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
-    "confidence": "low",
-    "blurb": "A summer health-sciences research placement at Women's College Hospital in Toronto."
-  },
-  {
-    "id": "toronto-rehab-placements",
-    "name": "Student Placements",
-    "org": "Toronto Rehabilitation Institute (University Health Network)",
-    "url": null,
-    "focus": [
-      "pre-med"
-    ],
-    "levels": [
-      "ugrad-1",
-      "ugrad-2",
-      "ugrad-3",
-      "ugrad-4"
-    ],
-    "mode": "in-person",
-    "locationLabel": "Toronto, ON",
-    "availability": "summer",
-    "paid": false,
-    "stipend": null,
-    "deadline": null,
-    "selectivity": "medium",
-    "isDirectory": false,
-    "multiSite": false,
-    "confidence": "low",
-    "blurb": "A student placement within UHN's Toronto Rehabilitation Institute, focused on rehabilitation science."
+    "confidence": "high",
+    "blurb": "A 12-16 week research placement at Women's College Hospital, part of the Emily Stowe Scholars Program's undergrad/grad track.",
+    "equityNote": "Underrepresented groups only"
   },
   {
     "id": "baycrest-summer-student",
@@ -600,9 +576,9 @@ export const CANADA_OPPORTUNITIES = [
   },
   {
     "id": "bloorview-summer-placement",
-    "name": "Undergraduate Summer Work Placement",
+    "name": "Ward Family Summer Student Research Program",
     "org": "Holland Bloorview Kids Rehabilitation Hospital (Bloorview Research Institute)",
-    "url": "https://hollandbloorview.ca/undergraduate-summer-work-placement",
+    "url": "https://hollandbloorview.ca/research-education/bloorview-research-institute/train-us/ward-family-summer-student-research",
     "focus": [
       "pre-med",
       "biology"
@@ -622,8 +598,8 @@ export const CANADA_OPPORTUNITIES = [
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
-    "confidence": "medium",
-    "blurb": "A paid summer work placement in pediatric rehabilitation research at Holland Bloorview Kids Rehabilitation Hospital."
+    "confidence": "high",
+    "blurb": "A 12-week paid research placement in pediatric rehabilitation at Holland Bloorview's Ward Family Summer Student Research Program, with an equity-focused SOAR track."
   },
   {
     "id": "banting-best-hollenberg-studentship",
@@ -656,13 +632,12 @@ export const CANADA_OPPORTUNITIES = [
     "id": "cfid-summer-research-award",
     "name": "Undergraduate Summer Research Award",
     "org": "Canadian Foundation for Infectious Diseases",
-    "url": null,
+    "url": "https://www.researchid.com/topics/grants-and-studentships/cfid-undergraduate-summer-research-award/",
     "focus": [
       "pre-med",
       "biology"
     ],
     "levels": [
-      "ugrad-1",
       "ugrad-2",
       "ugrad-3",
       "ugrad-4"
@@ -672,24 +647,23 @@ export const CANADA_OPPORTUNITIES = [
     "availability": "summer",
     "paid": true,
     "stipend": 5000,
-    "deadline": null,
+    "deadline": "2026-01-30",
     "selectivity": "medium",
     "isDirectory": true,
     "multiSite": false,
-    "confidence": "medium",
-    "blurb": "A $5,000, 12-13 week award for undergraduate infectious disease research, funded through the student's own supervisor and lab."
+    "confidence": "high",
+    "blurb": "A $5,000, 10-12 week award for 2nd-year-and-up undergraduate infectious disease research, funded through the student's own supervisor and lab."
   },
   {
     "id": "liver-foundation-studentship",
     "name": "Summer Studentship Program",
     "org": "Canadian Liver Foundation",
-    "url": "https://www.liver.ca/professionals/researchers/",
+    "url": "https://liver.ca/investments-impact/",
     "focus": [
       "pre-med",
       "biology"
     ],
     "levels": [
-      "ugrad-1",
       "ugrad-2",
       "ugrad-3",
       "ugrad-4"
@@ -704,7 +678,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": false,
     "confidence": "medium",
-    "blurb": "A $3,500 studentship (plus a $500 supply allowance) for undergraduate liver-disease research, with up to six awarded per year."
+    "blurb": "A studentship for undergraduate liver-disease research \u2014 students secure their own CASL-member supervisor before applying."
   },
   {
     "id": "canheart-spor-studentship",
@@ -737,7 +711,7 @@ export const CANADA_OPPORTUNITIES = [
     "id": "donnelly-centre-surp",
     "name": "Donnelly Centre Summer Undergraduate Research Program",
     "org": "Donnelly Centre for Cellular and Biomolecular Research (University of Toronto)",
-    "url": "http://www.thedonnellycentre.utoronto.ca/donnelly-centre-summer-undergraduate-research-program",
+    "url": "https://thedonnellycentre.utoronto.ca/summer-undergraduate-research-program",
     "focus": [
       "pre-med",
       "biology"
@@ -757,14 +731,14 @@ export const CANADA_OPPORTUNITIES = [
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
-    "confidence": "medium",
+    "confidence": "high",
     "blurb": "Summer research in cellular and biomolecular science at U of T's Donnelly Centre."
   },
   {
     "id": "biochemistry-summer-utoronto",
     "name": "Biochemistry Summer Student Program",
     "org": "Department of Biochemistry - University of Toronto",
-    "url": "http://biochemistry.utoronto.ca/undergraduate-program/summer-students/",
+    "url": "https://biochemistry.utoronto.ca/summer-student-research-program-biochemistry",
     "focus": [
       "pre-med",
       "biology"
@@ -784,14 +758,14 @@ export const CANADA_OPPORTUNITIES = [
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
-    "confidence": "medium",
-    "blurb": "A summer research placement in U of T's Department of Biochemistry."
+    "confidence": "high",
+    "blurb": "A summer research placement in U of T's Department of Biochemistry, for students with at least one completed year and a completed or in-progress biochem course."
   },
   {
     "id": "immunology-summer-utoronto",
-    "name": "Immunology Summer Research Program",
+    "name": "Immunology Summer Student Research Program (ISSRP)",
     "org": "Department of Immunology - University of Toronto",
-    "url": "http://www.immunology.utoronto.ca/immunology-summer-research-opportunity",
+    "url": "https://immunology.utoronto.ca/issrp",
     "focus": [
       "pre-med",
       "biology"
@@ -811,14 +785,14 @@ export const CANADA_OPPORTUNITIES = [
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
-    "confidence": "medium",
-    "blurb": "A summer research placement in U of T's Department of Immunology."
+    "confidence": "high",
+    "blurb": "U of T's Immunology Summer Student Research Program (ISSRP) \u2014 hands-on immunology research plus a limited number of UROP scholarships."
   },
   {
     "id": "lmp-sure-utoronto",
     "name": "LMP Summer Undergraduate Research Experience (SURE) Program",
     "org": "Department of Laboratory Medicine & Pathobiology - University of Toronto",
-    "url": "http://www.lmp.utoronto.ca/undergraduate/lmp-summer-undergraduate-research-experience-program-sure",
+    "url": "https://lmp.utoronto.ca/lmp-summer-undergraduate-research-experience-program-sure",
     "focus": [
       "pre-med",
       "biology"
@@ -833,19 +807,19 @@ export const CANADA_OPPORTUNITIES = [
     "locationLabel": "Toronto, ON",
     "availability": "summer",
     "paid": true,
-    "stipend": null,
+    "stipend": 7140,
     "deadline": null,
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
-    "confidence": "medium",
-    "blurb": "U of T's Laboratory Medicine & Pathobiology department's summer undergraduate research experience."
+    "confidence": "high",
+    "blurb": "A 12-week research placement in U of T's Laboratory Medicine & Pathobiology department, with a $7,140 minimum combined stipend."
   },
   {
     "id": "medbio-summer-utoronto",
     "name": "Medical Biophysics Summer Student Program",
     "org": "Department of Medical Biophysics - University of Toronto",
-    "url": "http://medbio.utoronto.ca/content/summer-student-program-overview-and-faq",
+    "url": "https://summerstudent.medbio.utoronto.ca/",
     "focus": [
       "pre-med",
       "biology"
@@ -864,14 +838,14 @@ export const CANADA_OPPORTUNITIES = [
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
-    "confidence": "medium",
-    "blurb": "A 12-week summer research placement in U of T's Department of Medical Biophysics, for students in their first three years."
+    "confidence": "high",
+    "blurb": "A summer research placement in U of T's Department of Medical Biophysics, for students in their first three years."
   },
   {
     "id": "molgen-summer-utoronto",
     "name": "Molecular Genetics Summer Research Program",
     "org": "Department of Molecular Genetics - University of Toronto",
-    "url": "http://www.moleculargenetics.utoronto.ca/summer-research-program",
+    "url": "https://moleculargenetics.utoronto.ca/undergraduate-summer-research-program",
     "focus": [
       "pre-med",
       "biology"
@@ -891,7 +865,7 @@ export const CANADA_OPPORTUNITIES = [
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
-    "confidence": "medium",
+    "confidence": "high",
     "blurb": "A summer research placement in U of T's Department of Molecular Genetics."
   },
   {
@@ -925,7 +899,7 @@ export const CANADA_OPPORTUNITIES = [
     "id": "pharmtox-summer-utoronto",
     "name": "Pharmacology & Toxicology Summer Program",
     "org": "Department of Pharmacology & Toxicology - University of Toronto",
-    "url": "http://www.pharmtox.utoronto.ca/undergraduate-awards-and-student-research-opportunities",
+    "url": "https://pharmtox.utoronto.ca/about-student-research-opportunities",
     "focus": [
       "pre-med",
       "biology"
@@ -945,14 +919,14 @@ export const CANADA_OPPORTUNITIES = [
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
-    "confidence": "medium",
+    "confidence": "high",
     "blurb": "A summer research placement in U of T's Department of Pharmacology & Toxicology."
   },
   {
     "id": "physiology-summer-utoronto",
     "name": "Physiology Undergraduate Research Awards",
     "org": "Department of Physiology - University of Toronto",
-    "url": "http://www.physiology.utoronto.ca/undergraduate-awards",
+    "url": "https://physiology.utoronto.ca/student-research-opportunities",
     "focus": [
       "pre-med",
       "biology"
@@ -972,35 +946,8 @@ export const CANADA_OPPORTUNITIES = [
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
-    "confidence": "medium",
+    "confidence": "high",
     "blurb": "A summer research award in U of T's Department of Physiology."
-  },
-  {
-    "id": "obgyn-summer-utoronto",
-    "name": "Chair's Summer Student Program",
-    "org": "Department of Obstetrics & Gynaecology - University of Toronto",
-    "url": "http://www.obgyn.utoronto.ca/department-obstetrics-and-gynaecology-chairs-summer-student-program",
-    "focus": [
-      "pre-med",
-      "biology"
-    ],
-    "levels": [
-      "ugrad-1",
-      "ugrad-2",
-      "ugrad-3",
-      "ugrad-4"
-    ],
-    "mode": "in-person",
-    "locationLabel": "Toronto, ON",
-    "availability": "summer",
-    "paid": true,
-    "stipend": null,
-    "deadline": null,
-    "selectivity": "medium",
-    "isDirectory": false,
-    "multiSite": false,
-    "confidence": "medium",
-    "blurb": "A summer research placement in U of T's Department of Obstetrics & Gynaecology."
   },
   {
     "id": "ibbme-bootcamp-utoronto",
@@ -1013,27 +960,25 @@ export const CANADA_OPPORTUNITIES = [
     ],
     "levels": [
       "ugrad-1",
-      "ugrad-2",
-      "ugrad-3",
-      "ugrad-4"
+      "ugrad-2"
     ],
     "mode": "in-person",
     "locationLabel": "Toronto, ON",
     "availability": "summer",
     "paid": false,
-    "stipend": null,
+    "stipend": 500,
     "deadline": null,
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
     "confidence": "medium",
-    "blurb": "A biomedical engineering summer bootcamp at U of T's Institute of Biomaterials & Biomedical Engineering \u2014 coursework-based, not an independent research placement."
+    "blurb": "A part-time (4 hrs/week) biomedical engineering lab-skills bootcamp for 1st/2nd-year Engineering Science students at U of T \u2014 coursework-based, not independent research."
   },
   {
     "id": "xavier-pelletier-bccancer",
     "name": "Xavier Pelletier High School Internship Program",
     "org": "BC Cancer Research Centre",
-    "url": null,
+    "url": "https://www.bccrc.ca/dept/drc/programs/xavier-pelletier-high-school-internship-program",
     "focus": [
       "pre-med",
       "biology"
@@ -1042,22 +987,22 @@ export const CANADA_OPPORTUNITIES = [
       "hs-11"
     ],
     "mode": "in-person",
-    "locationLabel": "Vancouver, BC",
+    "locationLabel": "Victoria, BC",
     "availability": "summer",
     "paid": true,
     "stipend": 3000,
-    "deadline": null,
+    "deadline": "2026-03-16",
     "selectivity": "high",
     "isDirectory": false,
     "multiSite": false,
-    "confidence": "medium",
-    "blurb": "An 8-week internship at BC Cancer Research Centre for Grade 11 students nominated from Vancouver Island schools, with a $3,000 completion bursary."
+    "confidence": "high",
+    "blurb": "An 8-week internship at BC Cancer's Victoria Centre for Grade 11 students nominated by their Vancouver Island school."
   },
   {
     "id": "hyrs-ualberta",
     "name": "High School Youth Researcher Summer (HYRS) Program",
     "org": "University of Alberta",
-    "url": null,
+    "url": "https://www.ualberta.ca/en/current-students/undergraduate-research-initiative/opportunities-for-high-school-students/high-school-youth-researcher-summer-program/index.html",
     "focus": [
       "pre-med",
       "biology"
@@ -1074,14 +1019,14 @@ export const CANADA_OPPORTUNITIES = [
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
-    "confidence": "medium",
-    "blurb": "A paid 4-6 week research placement for Grade 11 students at the University of Alberta."
+    "confidence": "high",
+    "blurb": "A paid 6-week research placement for Grade 11 students living in central or northern Alberta (Red Deer and north)."
   },
   {
     "id": "emily-stowe-scholars",
     "name": "Emily Stowe Scholars Program",
     "org": "Women's College Hospital",
-    "url": null,
+    "url": "https://www.womensacademics.ca/learning/emily-stowe-scholars-program/",
     "focus": [
       "pre-med"
     ],
@@ -1098,8 +1043,9 @@ export const CANADA_OPPORTUNITIES = [
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
-    "confidence": "medium",
-    "blurb": "A paid health-sciences research program at Women's College Hospital for Grade 11-12 students from underrepresented groups."
+    "confidence": "high",
+    "blurb": "The high-school track of Women's College Hospital's Emily Stowe Scholars Program, for students from specific underrepresented groups.",
+    "equityNote": "Underrepresented groups only"
   },
   {
     "id": "dlsph-outreach-access",
@@ -1129,9 +1075,9 @@ export const CANADA_OPPORTUNITIES = [
   },
   {
     "id": "cihr-usra",
-    "name": "CIHR Undergraduate Student Research Award (USRA)",
+    "name": "CIHR Undergraduate Student Research Award (USRA) - Black Student Researcher stream",
     "org": "Canadian Institutes of Health Research",
-    "url": "https://undergraduateresearch.utoronto.ca/research_opps/canadian-institutes-of-health-research-cihr-undergraduate-student-research-award/",
+    "url": "https://research.carleton.ca/cihr-undergraduate-student-research-award-usra/",
     "focus": [
       "pre-med",
       "biology",
@@ -1147,13 +1093,14 @@ export const CANADA_OPPORTUNITIES = [
     "locationLabel": null,
     "availability": "summer",
     "paid": true,
-    "stipend": 5000,
+    "stipend": 11200,
     "deadline": null,
     "selectivity": "medium",
     "isDirectory": true,
     "multiSite": false,
     "confidence": "high",
-    "blurb": "A federally funded undergraduate research award for health-sciences research, applied for through your own university."
+    "blurb": "A federally funded undergraduate research award for health-sciences research \u2014 this stream is restricted to students who self-identify as Black.",
+    "equityNote": "Black students only"
   },
   {
     "id": "ohri-training",
@@ -1185,33 +1132,6 @@ export const CANADA_OPPORTUNITIES = [
     "blurb": "An informal, apply-directly-to-a-researcher summer research program at the Ottawa Hospital Research Institute, open from high school through medical school."
   },
   {
-    "id": "bcchr-rising-scholars",
-    "name": "Rising Scholars Undergraduate Summer Studentship",
-    "org": "BC Children's Hospital Research Institute",
-    "url": "https://www.bcchr.ca/rising-scholars",
-    "focus": [
-      "pre-med",
-      "biology"
-    ],
-    "levels": [
-      "ugrad-1",
-      "ugrad-2",
-      "ugrad-3",
-      "ugrad-4"
-    ],
-    "mode": "in-person",
-    "locationLabel": "Vancouver, BC",
-    "availability": "summer",
-    "paid": true,
-    "stipend": null,
-    "deadline": null,
-    "selectivity": "high",
-    "isDirectory": false,
-    "multiSite": false,
-    "confidence": "high",
-    "blurb": "An 8-week paid pediatric-health research studentship at BC Children's Hospital, with travel and living support included."
-  },
-  {
     "id": "bcchr-summer-studentship",
     "name": "Summer Studentship (general)",
     "org": "BC Children's Hospital Research Institute",
@@ -1237,8 +1157,8 @@ export const CANADA_OPPORTUNITIES = [
     "selectivity": "high",
     "isDirectory": false,
     "multiSite": false,
-    "confidence": "medium",
-    "blurb": "A summer research studentship at BC Children's Hospital Research Institute."
+    "confidence": "high",
+    "blurb": "About 30 paid studentships a year at BC Children's Hospital \u2014 students must line up their own investigator supervisor before applying."
   },
   {
     "id": "seed2stem-icord-ubc",
@@ -1266,6 +1186,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": true,
     "confidence": "high",
-    "blurb": "A paid 6-week STEM research internship for Indigenous high schoolers in Metro Vancouver and Kelowna, with transit passes, a laptop, and meals covered."
+    "blurb": "A paid 6-week STEM research internship for Indigenous high schoolers in Metro Vancouver and Kelowna, with transit passes, a laptop, and meals covered.",
+    "equityNote": "Indigenous students only"
   }
 ]

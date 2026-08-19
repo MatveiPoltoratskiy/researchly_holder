@@ -56,6 +56,7 @@ function OpportunityCard({ o }) {
           )}
           <span className="opp-tag opp-tag--muted">{levelRangeLabel(o.levels)}</span>
           {o.locationLabel && <span className="opp-tag opp-tag--muted">{o.locationLabel}</span>}
+          {o.equityNote && <span className="opp-tag opp-tag--equity">{o.equityNote}</span>}
         </div>
         <div className="opp-foot">
           <span className="opp-pay">{payLabel(o)}</span>

@@ -1398,6 +1398,7 @@ a.footer-link:hover{ color: var(--cover-dark); }
 .opp-tag--chem{ background:#F4E3B8; color:#7A5A12; }
 .opp-tag--physics{ background:rgba(30,37,64,.09); color:var(--navy); }
 .opp-tag--muted{ background:var(--pill-bg); color:var(--pill-text); font-weight:600; }
+.opp-tag--equity{ background:rgba(169,79,30,.14); color:var(--cover-dark); font-weight:700; }
 
 .opp-foot{
   display:flex; align-items:center; flex-wrap:wrap; gap:7px;
