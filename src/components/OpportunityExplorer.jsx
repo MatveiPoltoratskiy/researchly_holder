@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState } from 'react'
 import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
 import { FIELDS } from '../data/fields'
+import OpportunityMap from './OpportunityMap'
 
 const FIELD_META = {
   'pre-med': { label: 'Pre-Med', cls: 'opp-tag--premed' },
@@ -263,6 +264,10 @@ export default function OpportunityExplorer() {
                 <div className="opp-empty">No opportunities match this combination yet.</div>
               )}
             </div>
+          </div>
+
+          <div className="opp-map-col">
+            <OpportunityMap opportunities={filtered} />
           </div>
         </div>
       </div>

@@ -1309,7 +1309,7 @@ html{ scroll-behavior:smooth; }
 @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
 
 .opp-explorer{ background:var(--cream); padding:40px 0 96px; min-height:70vh; }
-.opp-container{ max-width:1120px; }
+.opp-container{ max-width:1520px; }
 
 .opp-private-note{
   font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:600;
@@ -1338,7 +1338,10 @@ html{ scroll-behavior:smooth; }
 
 /* two-pane layout: sticky filter sidebar + scrolling results, mirrors the reference's
    filters-rail-beside-scrolling-list structure without needing the map pane */
-.opp-layout{ display:grid; grid-template-columns:240px minmax(0,1fr); gap:28px; align-items:start; }
+.opp-layout{
+  display:grid; grid-template-columns:240px minmax(360px,480px) minmax(320px,1fr);
+  gap:24px; align-items:start;
+}
 .opp-sidebar{
   position:sticky; top:96px; display:flex; flex-direction:column; gap:18px;
   background:var(--card-bg); border:1px solid var(--card-border); border-radius:16px; padding:18px;
@@ -1391,6 +1394,37 @@ html{ scroll-behavior:smooth; }
 .opp-results{ min-width:0; }
 .opp-scroll-anchor{ scroll-margin-top:88px; }
 .opp-list{ display:flex; flex-direction:column; gap:14px; }
+
+/* ---- map pane ---- */
+.opp-map-col{ position:sticky; top:96px; min-width:0; }
+.opp-map-pane{
+  position:relative; height:calc(100vh - 130px); min-height:420px; border-radius:16px;
+  overflow:hidden; border:1px solid var(--card-border); box-shadow:0 1px 2px rgba(30,37,64,.04);
+}
+.opp-map-canvas{ width:100%; height:100%; background:var(--pages-shadow); }
+.opp-map-badge{
+  position:absolute; top:12px; right:12px; z-index:500; font-family:"Segoe UI",system-ui,sans-serif;
+  font-size:12px; font-weight:700; color:var(--navy); background:var(--card-bg);
+  border:1px solid var(--card-border); border-radius:999px; padding:5px 12px;
+  box-shadow:0 2px 6px rgba(30,37,64,.1);
+}
+
+/* keep the map's own palette from clashing with the rest of the warm/orange UI: a soft
+   sepia tilt on the tiles reads calmer than stock OSM blue-and-white cartography */
+.opp-map-canvas .leaflet-tile-pane{ filter:sepia(18%) saturate(85%) brightness(1.03); }
+.opp-map-canvas .leaflet-control-attribution{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:10.5px; background:rgba(252,246,234,.85);
+}
+.opp-map-canvas .leaflet-control-zoom a{
+  color:var(--navy); font-family:"Segoe UI",system-ui,sans-serif;
+}
+.opp-map-pin{ background:none; border:none; }
+.opp-map-popup{ display:flex; flex-direction:column; gap:3px; font-family:"Segoe UI",system-ui,sans-serif; }
+.opp-map-popup strong{ font-size:13px; color:var(--navy); font-family:"Iowan Old Style",Palatino,Georgia,serif; }
+.opp-map-popup span{ font-size:11.5px; color:var(--navy-soft); }
+.opp-map-popup a{ font-size:12px; font-weight:700; color:var(--cover); text-decoration:none; margin-top:2px; }
+.opp-map-popup a:hover{ text-decoration:underline; }
+.leaflet-popup-content-wrapper{ border-radius:10px; }
 
 .opp-card{
   display:flex; gap:16px; background:var(--card-bg); border:1px solid var(--card-border);
@@ -1452,6 +1486,11 @@ html{ scroll-behavior:smooth; }
 
 .opp-empty{
   font-family:"Segoe UI",system-ui,sans-serif; color:var(--navy-soft); text-align:center; padding:40px 0;
+}
+
+@media (max-width: 1280px){
+  .opp-layout{ grid-template-columns:240px minmax(0,1fr); }
+  .opp-map-col{ display:none; }
 }
 
 @media (max-width: 860px){
