@@ -1,5 +1,6 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
+import { FIELDS } from '../data/fields'
 
 const FIELD_META = {
   'pre-med': { label: 'Pre-Med', cls: 'opp-tag--premed' },
@@ -8,6 +9,7 @@ const FIELD_META = {
   physics: { label: 'Physics', cls: 'opp-tag--physics' },
 }
 const FIELD_ORDER = ['pre-med', 'biology', 'chemistry', 'physics']
+const LIVE_FIELD_SET = new Set(FIELD_ORDER)
 
 const CONFIDENCE_LABEL = { high: 'Verified', medium: 'Needs check', low: 'Unconfirmed' }
 
@@ -28,13 +30,28 @@ function payLabel(o) {
   return 'Paid'
 }
 
+// Real category icons instead of a plain letter — matched off the org name, since we
+// don't have actual company/hospital logo assets for these records yet.
+function iconForOrg(org = '') {
+  const s = org.toLowerCase()
+  if (/hospital|health(?!.*(institutes|research council))|sunnybrook|sickkids|baycrest|bloorview|sinai|clinic|centre for addiction/.test(s)) {
+    return 'icon-building'
+  }
+  if (/university|college|department of|school of|cheriton/.test(s)) return 'icon-grad-cap'
+  if (/nserc|cihr|mitacs|council|foundation|innovates|institutes of health/.test(s)) return 'icon-badge-check'
+  return 'icon-flask'
+}
+
 function OpportunityCard({ o }) {
   const primary = FIELD_ORDER.find((f) => o.focus.includes(f)) || o.focus[0]
-  const initial = (o.org || o.name).trim()[0]?.toUpperCase() || '?'
 
   return (
     <article className="opp-card">
-      <div className={`opp-badge ${FIELD_META[primary]?.cls || ''}`}>{initial}</div>
+      <div className={`opp-badge ${FIELD_META[primary]?.cls || ''}`}>
+        <svg width="20" height="20" aria-hidden="true">
+          <use href={`#${iconForOrg(o.org)}`} />
+        </svg>
+      </div>
       <div className="opp-card-body">
         <div className="opp-card-top">
           <div>
@@ -77,9 +94,77 @@ function OpportunityCard({ o }) {
   )
 }
 
+function MajorsFilter({ activeFields, toggleField, counts }) {
+  const [open, setOpen] = useState(true)
+
+  return (
+    <div className="opp-side-section">
+      <button
+        type="button"
+        className="opp-side-heading"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+      >
+        Majors
+        <svg width="16" height="16" className={`opp-chevron ${open ? 'is-open' : ''}`} aria-hidden="true">
+          <use href="#icon-chevron-down" />
+        </svg>
+      </button>
+      <div className={`opp-collapse ${open ? '' : 'is-closed'}`}>
+        <div className="opp-collapse-inner">
+          <div className="opp-major-list">
+            {FIELDS.map((f) => {
+              const live = LIVE_FIELD_SET.has(f.id)
+              const count = live ? counts[f.id] : 0
+              const checked = live && activeFields.has(f.id)
+              return (
+                <button
+                  key={f.id}
+                  type="button"
+                  className={`opp-major-row ${live ? '' : 'is-soon'} ${checked ? 'is-checked' : ''}`}
+                  onClick={() => live && toggleField(f.id)}
+                  disabled={!live}
+                >
+                  <span className="opp-major-check" aria-hidden="true">
+                    {checked && (
+                      <svg width="10" height="8" viewBox="0 0 10 8">
+                        <path
+                          d="M1 4.2 3.6 6.8 9 1.2"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    )}
+                  </span>
+                  <span className="opp-major-label">{f.label}</span>
+                  {live ? (
+                    <span className="opp-major-count">{count}</span>
+                  ) : (
+                    <span className="opp-major-soon">Soon</span>
+                  )}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function OpportunityExplorer() {
   const [activeFields, setActiveFields] = useState(() => new Set(FIELD_ORDER))
   const [level, setLevel] = useState('all')
+  const listTopRef = useRef(null)
+
+  // triggered directly from filter clicks (not a state-watching effect) so it only ever
+  // fires from a real user interaction, never on mount or on an unrelated re-render
+  function scrollToResults() {
+    listTopRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   function toggleField(f) {
     setActiveFields((prev) => {
@@ -91,6 +176,12 @@ export default function OpportunityExplorer() {
       }
       return next
     })
+    scrollToResults()
+  }
+
+  function selectLevel(key) {
+    setLevel(key)
+    scrollToResults()
   }
 
   const counts = useMemo(() => {
@@ -111,6 +202,8 @@ export default function OpportunityExplorer() {
     })
   }, [activeFields, level])
 
+  const activeFieldLabels = FIELD_ORDER.filter((f) => activeFields.has(f)).map((f) => FIELD_META[f].label)
+
   return (
     <section className="opp-explorer">
       <div className="container opp-container">
@@ -120,52 +213,57 @@ export default function OpportunityExplorer() {
         </div>
 
         <div className="opp-header">
+          <p className="opp-eyebrow">We found</p>
           <h1 className="opp-heading">
-            We found <span className="opp-heading-count">{filtered.length}</span> opportunit
+            <span className="opp-heading-count">{filtered.length}</span> opportunit
             {filtered.length === 1 ? 'y' : 'ies'}
           </h1>
-          <p className="opp-subheading">Canada · pre-med, biology, chemistry &amp; physics</p>
-        </div>
-
-        <div className="opp-filters">
-          <div className="opp-chip-row">
-            {FIELD_ORDER.map((f) => (
-              <button
-                key={f}
-                type="button"
-                className={`opp-chip ${FIELD_META[f].cls} ${activeFields.has(f) ? 'is-active' : ''}`}
-                onClick={() => toggleField(f)}
-              >
-                {FIELD_META[f].label}
-                <span className="opp-chip-count">{counts[f]}</span>
-              </button>
-            ))}
-          </div>
-          <div className="opp-level-row">
-            {[
-              ['all', 'All levels'],
-              ['hs', 'High school'],
-              ['undergrad', 'Undergrad'],
-            ].map(([key, label]) => (
-              <button
-                key={key}
-                type="button"
-                className={`opp-level-btn ${level === key ? 'is-active' : ''}`}
-                onClick={() => setLevel(key)}
-              >
+          <div className="opp-prioritized">
+            <span>Prioritized for</span>
+            {activeFieldLabels.map((label) => (
+              <span key={label} className="opp-priority-pill">
                 {label}
-              </button>
+              </span>
             ))}
           </div>
         </div>
 
-        <div className="opp-list">
-          {filtered.map((o) => (
-            <OpportunityCard key={o.id} o={o} />
-          ))}
-          {filtered.length === 0 && (
-            <div className="opp-empty">No opportunities match this combination yet.</div>
-          )}
+        <div className="opp-layout">
+          <aside className="opp-sidebar">
+            <MajorsFilter activeFields={activeFields} toggleField={toggleField} counts={counts} />
+
+            <div className="opp-side-section">
+              <div className="opp-side-heading opp-side-heading--static">Level</div>
+              <div className="opp-level-col">
+                {[
+                  ['all', 'All levels'],
+                  ['hs', 'High school'],
+                  ['undergrad', 'Undergrad'],
+                ].map(([key, label]) => (
+                  <button
+                    key={key}
+                    type="button"
+                    className={`opp-level-btn ${level === key ? 'is-active' : ''}`}
+                    onClick={() => selectLevel(key)}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </aside>
+
+          <div className="opp-results">
+            <div ref={listTopRef} className="opp-scroll-anchor" />
+            <div className="opp-list">
+              {filtered.map((o) => (
+                <OpportunityCard key={o.id} o={o} />
+              ))}
+              {filtered.length === 0 && (
+                <div className="opp-empty">No opportunities match this combination yet.</div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </section>
