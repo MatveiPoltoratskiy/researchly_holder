@@ -7,11 +7,13 @@ import Contact from './components/Contact'
 import HowItWorks from './components/HowItWorks'
 import Footer from './components/Footer'
 import OpportunityExplorer from './components/OpportunityExplorer'
+import Interview from './components/Interview'
 import { RouterProvider, useRouter } from './lib/router'
 
 function Page() {
   const { path } = useRouter()
-  const isLanding = path !== '/contact' && path !== '/how-it-works' && path !== '/opportunities'
+  const isLanding =
+    path !== '/contact' && path !== '/how-it-works' && path !== '/opportunities' && path !== '/interview'
 
   const content = (
     <>
@@ -22,6 +24,8 @@ function Page() {
         <HowItWorks />
       ) : path === '/opportunities' ? (
         <OpportunityExplorer />
+      ) : path === '/interview' ? (
+        <Interview />
       ) : (
         <>
           <Hero />

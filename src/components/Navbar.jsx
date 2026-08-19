@@ -42,6 +42,10 @@ export default function Navbar() {
           <Link className="nav-link" to="/opportunities" style={{ color: 'var(--cover)' }}>
             Opportunities (dev)
           </Link>
+          {/* TEMPORARY — dev-only link to the private interview prototype, remove before merging to main */}
+          <Link className="nav-link" to="/interview" style={{ color: 'var(--cover)' }}>
+            Interview (dev)
+          </Link>
           <button className="nav-cta" type="button" onClick={handleJoinClick}>
             Join the waitlist
           </button>
