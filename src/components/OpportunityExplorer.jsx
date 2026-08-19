@@ -27,15 +27,40 @@ const MODE_LABEL = { 'in-person': 'In person', remote: 'Remote', hybrid: 'Hybrid
 const AVAILABILITY_LABEL = { summer: 'Summer', 'year-round': 'Year-round', 'academic-year': 'Academic year' }
 
 // "big name" recommendation matcher: Ivy League + peer-prestige US schools, plus the
-// specific Canadian names most students in this age group already recognize
-const BIG_NAME_PATTERN =
-  /harvard|johns hopkins|massachusetts institute of technology|(^|\W)mit(\W|$)|stanford university|yale university|princeton university|columbia university|university of pennsylvania|brown university|dartmouth|cornell university|california institute of technology|caltech|university of toronto|mcgill university|university of british columbia/i
+// specific Canadian names most students in this age group already recognize. Maps to a
+// canonical short name, AND doubles as the fixed display-priority order for the "Big names"
+// row below (earlier in this list = shown first). This exists because several of these
+// schools have many rows each (U of T alone has ~9 department-level pages), so naively
+// taking "the first 8 matches in dataset order" silently fills the whole row with whichever
+// school happens to have the most entries in the underlying CSV, never even reaching
+// Harvard/Stanford/Yale/MIT — picking one card per named school here guarantees every big
+// name on this list gets a slot, regardless of how many rows it happens to have.
+const BIG_NAME_SCHOOLS = [
+  ['Harvard', /harvard/i],
+  ['Stanford', /stanford university/i],
+  ['MIT', /massachusetts institute of technology|(^|\W)mit(\W|$)/i],
+  ['Yale', /yale university/i],
+  ['Princeton', /princeton university/i],
+  ['Columbia', /columbia university/i],
+  ['UPenn', /university of pennsylvania/i],
+  ['Johns Hopkins', /johns hopkins/i],
+  ['Caltech', /california institute of technology|caltech/i],
+  ['Cornell', /cornell university/i],
+  ['Brown', /brown university/i],
+  ['Dartmouth', /dartmouth/i],
+  ['U of T', /university of toronto/i],
+  ['McGill', /mcgill university/i],
+  ['UBC', /university of british columbia/i],
+]
+function bigNameSchool(org = '') {
+  return BIG_NAME_SCHOOLS.find(([, pattern]) => pattern.test(org))?.[0] || null
+}
 function isBigName(org = '') {
-  return BIG_NAME_PATTERN.test(org)
+  return bigNameSchool(org) !== null
 }
 
 // hand-picked for being small, unusual, or otherwise not-the-obvious-choice, rather than
-// derived from any field in the data — a deliberate curation, not an algorithm
+// derived from any field in the data. A deliberate curation, not an algorithm.
 const NICHE_IDS = [
   'triumf-undergrad-coop',
   'seed2stem-icord-ubc',
@@ -217,13 +242,28 @@ function RecommendedForYou({ onOpenDetail }) {
   }
 
   const bigNames = useMemo(() => {
-    const matches = CANADA_OPPORTUNITIES.filter((o) => isBigName(o.org))
-    if (!userLocation) return matches.slice(0, 8).map((o) => ({ o, tag: null }))
-    return matches
-      .map((o) => ({ o, dist: o.lat != null ? distanceKm(userLocation.lat, userLocation.lon, o.lat, o.lon) : Infinity }))
-      .sort((a, b) => a.dist - b.dist)
-      .slice(0, 8)
-      .map(({ o, dist }) => ({ o, tag: Number.isFinite(dist) ? distanceLabel(dist) : null }))
+    const bySchool = new Map()
+    for (const o of CANADA_OPPORTUNITIES) {
+      const school = bigNameSchool(o.org)
+      if (!school) continue
+      if (!bySchool.has(school)) bySchool.set(school, [])
+      bySchool.get(school).push(o)
+    }
+    // one card per school, in BIG_NAME_SCHOOLS priority order — when a school has more
+    // than one row (e.g. several U of T departments), location picks the closest one;
+    // without location, just the first row for that school in the dataset
+    return BIG_NAME_SCHOOLS.map(([school]) => bySchool.get(school))
+      .filter(Boolean)
+      .map((options) => {
+        if (!userLocation) return { o: options[0], tag: null }
+        const withDist = options.map((o) => ({
+          o,
+          dist: o.lat != null ? distanceKm(userLocation.lat, userLocation.lon, o.lat, o.lon) : Infinity,
+        }))
+        withDist.sort((a, b) => a.dist - b.dist)
+        const best = withDist[0]
+        return { o: best.o, tag: Number.isFinite(best.dist) ? distanceLabel(best.dist) : null }
+      })
   }, [userLocation])
 
   const nearYou = useMemo(() => {
