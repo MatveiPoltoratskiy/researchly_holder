@@ -1,6 +1,6 @@
-// Auto-generated from docs/canada-opportunities-draft.csv — draft/verification-in-progress prototype data.
-// See opportunitySchema.js for field meanings. confidence/equityNote/isGrant are prototype-only
-// metadata, not part of the shipped schema — fold into the real schema once records are verified.
+// Auto-generated from docs/canada-opportunities-draft.csv (now spans Canada + USA despite the
+// filename). Draft/verification-in-progress prototype data. See opportunitySchema.js for field
+// meanings. confidence/equityNote/isGrant are prototype-only metadata, not part of the shipped schema.
 export const CANADA_OPPORTUNITIES = [
   {
     "id": "perimeter-issyp",
@@ -287,7 +287,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "high",
-    "blurb": "A summer research project with a UBC Faculty of Medicine researcher, applying as a team with their own supervisor already lined up."
+    "blurb": "A summer research project with a UBC Faculty of Medicine researcher \u2014 students apply as a team with their own supervisor already lined up."
   },
   {
     "id": "calgary-chi-summer-studentship",
@@ -502,7 +502,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "high",
-    "blurb": "A paid summer placement in a real focused-ultrasound engineering lab, one of the few Canadian high school programs offering actual bench research."
+    "blurb": "A paid summer placement in a real focused-ultrasound engineering lab \u2014 one of the few Canadian high school programs offering actual bench research."
   },
   {
     "id": "unity-health-krss",
@@ -594,7 +594,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "medium",
-    "blurb": "One of several department-specific summer research programs at Princess Margaret Cancer Centre; browse by department rather than a single application."
+    "blurb": "One of several department-specific summer research programs at Princess Margaret Cancer Centre \u2014 browse by department rather than a single application."
   },
   {
     "id": "womens-college-summer-program",
@@ -718,7 +718,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": true,
     "confidence": "high",
-    "blurb": "A 12-week diabetes-research studentship at U of T's Banting and Best Diabetes Centre, with 14 awarded each year."
+    "blurb": "A 12-week diabetes-research studentship at U of T's Banting and Best Diabetes Centre \u2014 14 awarded each year."
   },
   {
     "id": "cfid-summer-research-award",
@@ -778,7 +778,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": true,
     "confidence": "medium",
-    "blurb": "A studentship for undergraduate liver-disease research; students secure their own CASL-member supervisor before applying."
+    "blurb": "A studentship for undergraduate liver-disease research \u2014 students secure their own CASL-member supervisor before applying."
   },
   {
     "id": "canheart-spor-studentship",
@@ -902,7 +902,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "high",
-    "blurb": "U of T's Immunology Summer Student Research Program (ISSRP): hands-on immunology research plus a limited number of UROP scholarships."
+    "blurb": "U of T's Immunology Summer Student Research Program (ISSRP) \u2014 hands-on immunology research plus a limited number of UROP scholarships."
   },
   {
     "id": "lmp-sure-utoronto",
@@ -1116,7 +1116,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "medium",
-    "blurb": "A part-time (4 hrs/week) biomedical engineering lab-skills bootcamp for 1st/2nd-year Engineering Science students at U of T. Coursework-based, not independent research."
+    "blurb": "A part-time (4 hrs/week) biomedical engineering lab-skills bootcamp for 1st/2nd-year Engineering Science students at U of T \u2014 coursework-based, not independent research."
   },
   {
     "id": "xavier-pelletier-bccancer",
@@ -1263,7 +1263,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": true,
     "confidence": "high",
-    "blurb": "A federally funded undergraduate research award for health-sciences research. This stream is restricted to students who self-identify as Black.",
+    "blurb": "A federally funded undergraduate research award for health-sciences research \u2014 this stream is restricted to students who self-identify as Black.",
     "equityNote": "Black students only"
   },
   {
@@ -1330,7 +1330,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "high",
-    "blurb": "About 30 paid studentships a year at BC Children's Hospital; students must line up their own investigator supervisor before applying."
+    "blurb": "About 30 paid studentships a year at BC Children's Hospital \u2014 students must line up their own investigator supervisor before applying."
   },
   {
     "id": "seed2stem-icord-ubc",
@@ -1393,7 +1393,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "medium",
-    "blurb": "A co-op position at Canada's particle accelerator centre: physics, engineering, and computing work for students enrolled in a partner university's co-op program."
+    "blurb": "A co-op position at Canada's particle accelerator centre \u2014 physics, engineering, and computing work for students enrolled in a partner university's co-op program."
   },
   {
     "id": "ipp-summer-fellowship-cern",
@@ -1422,7 +1422,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": true,
     "isGrant": true,
     "confidence": "high",
-    "blurb": "A two-phase fellowship: research in Canada, then August at CERN in Geneva. But you're expected to already hold an NSERC USRA or TRIUMF position first."
+    "blurb": "A two-phase fellowship: research in Canada, then August at CERN in Geneva \u2014 but you're expected to already hold an NSERC USRA or TRIUMF position first."
   },
   {
     "id": "cco-chemistry-olympiad-camp",
@@ -1574,7 +1574,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": true,
     "confidence": "high",
-    "blurb": "$8,960 over 16 weeks of paid research in a University of Manitoba Faculty of Science lab. Several sub-award streams exist with different eligibility."
+    "blurb": "$8,960 over 16 weeks of paid research in a University of Manitoba Faculty of Science lab \u2014 several sub-award streams exist with different eligibility."
   },
   {
     "id": "usask-jwt-spinks-chemistry",
@@ -1700,6 +1700,3153 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": true,
     "confidence": "high",
-    "blurb": "16 weeks of paid research at Memorial University, split between citizens-only NSERC awards and a separate pool open to international students too."
+    "blurb": "16 weeks of paid research at Memorial University \u2014 split between citizens-only NSERC awards and a separate pool open to international students too."
+  },
+  {
+    "id": "reu-chem-tamu",
+    "name": "NSF REU in Chemistry",
+    "org": "Texas A&M University",
+    "url": "https://www.chem.tamu.edu/",
+    "focus": [
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "College Station, TX",
+    "lat": 30.628,
+    "lon": -96.3344,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 7000,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "An NSF-funded summer chemistry research program at Texas A&M, centered on Gulf Coast environmental chemistry."
+  },
+  {
+    "id": "reu-chem-umich",
+    "name": "Chemistry REU Program",
+    "org": "University of Michigan",
+    "url": "https://sites.lsa.umich.edu/reuchem/",
+    "focus": [
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Ann Arbor, MI",
+    "lat": 42.2808,
+    "lon": -83.743,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 10-week NSF chemistry research program at Michigan running since 1989, with 300+ alumni."
+  },
+  {
+    "id": "reu-chem-arkansas",
+    "name": "NSF-REU in Sustainable Chemistry",
+    "org": "University of Arkansas",
+    "url": "https://chemistry.uark.edu/academics/undergraduate/nsf-reu/",
+    "focus": [
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Fayetteville, AR",
+    "lat": 36.0822,
+    "lon": -94.1719,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": "2026-03-15",
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "10 weeks of NSF-funded sustainable chemistry research at the University of Arkansas."
+  },
+  {
+    "id": "reu-chem-msstate",
+    "name": "NSF-REU: Food, Energy, and Water Security",
+    "org": "Mississippi State University",
+    "url": "https://www.chemistry.msstate.edu/academics/undergraduate/reu",
+    "focus": [
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Starkville, MS",
+    "lat": 33.4504,
+    "lon": -88.8184,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": "2026-02-15",
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "An NSF REU on food, energy, and water security chemistry at Mississippi State."
+  },
+  {
+    "id": "reu-chem-syracuse",
+    "name": "Chemistry REU",
+    "org": "Syracuse University",
+    "url": "https://artsandsciences.syracuse.edu/chemistry/research/reu/",
+    "focus": [
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Syracuse, NY",
+    "lat": 43.0481,
+    "lon": -76.1474,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 7000,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A $7,000, 10-week NSF chemistry REU at Syracuse University."
+  },
+  {
+    "id": "reu-bio-uga",
+    "name": "Genomics and Computational Biology REU",
+    "org": "University of Georgia",
+    "url": "https://bcmb.franklin.uga.edu/",
+    "focus": [
+      "biology"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Athens, GA",
+    "lat": 33.948,
+    "lon": -83.3773,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": "2026-03-16",
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "An NSF-funded genomics and computational biology REU at the University of Georgia."
+  },
+  {
+    "id": "reu-bio-ucsd-versa",
+    "name": "VERSA Summer REU (hybrid)",
+    "org": "University of California, San Diego",
+    "url": "https://undergradresearch.ucsc.edu/ugr/national-science-foundation-research-experience-for-undergraduates-nsf-reu/",
+    "focus": [
+      "biology"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "hybrid",
+    "locationLabel": "La Jolla, CA",
+    "lat": 32.8801,
+    "lon": -117.234,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": "2026-04-05",
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A 9-week hybrid NSF biology REU (VERSA) at UC San Diego."
+  },
+  {
+    "id": "reu-physics-rochester",
+    "name": "Physics & Astronomy REU",
+    "org": "University of Rochester",
+    "url": "https://www.sas.rochester.edu/pas/undergraduate/reu/index.html",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Rochester, NY",
+    "lat": 43.1305,
+    "lon": -77.6244,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 10-student NSF physics and astronomy REU at the University of Rochester."
+  },
+  {
+    "id": "reu-physics-uiuc",
+    "name": "Physics REU",
+    "org": "University of Illinois Urbana-Champaign",
+    "url": "https://physics.illinois.edu/research/reu",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Urbana, IL",
+    "lat": 40.1106,
+    "lon": -88.2073,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 10-week NSF-sponsored physics REU at UIUC."
+  },
+  {
+    "id": "reu-physics-qcc-cuny",
+    "name": "NSF REU (Physics/Biophysics/Astronomy)",
+    "org": "Queensborough Community College (CUNY)",
+    "url": "https://www.qcc.cuny.edu/physics/reu.html",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Queens, NY",
+    "lat": 40.7282,
+    "lon": -73.7949,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "An NSF REU spanning physics, biophysics, and astronomy at CUNY Queensborough."
+  },
+  {
+    "id": "reu-physics-oklahoma",
+    "name": "Physics REU",
+    "org": "University of Oklahoma",
+    "url": "https://ou.edu/cas/physics-astronomy/students/undergraduate/research/reu",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Norman, OK",
+    "lat": 35.2226,
+    "lon": -97.4395,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "An 8-student NSF physics REU at the University of Oklahoma."
+  },
+  {
+    "id": "reu-bio-cornell-mbg",
+    "name": "Molecular Biology and Genetics of Cell Signaling (REU)",
+    "org": "Cornell University",
+    "url": "https://cals.cornell.edu/molecular-biology-genetics/academics/undergraduate/summer-research-experience-undergraduates-reu-program",
+    "focus": [
+      "biology"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Ithaca, NY",
+    "lat": 42.4534,
+    "lon": -76.4735,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "An NSF-funded 10-week molecular biology and genetics REU at Cornell."
+  },
+  {
+    "id": "reu-physics-gatech",
+    "name": "Broadening Participation Summer Undergraduate Research Program in Physics",
+    "org": "Georgia Institute of Technology",
+    "url": "https://sciences.gatech.edu/gtcosreuprograms",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Atlanta, GA",
+    "lat": 33.7756,
+    "lon": -84.3963,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 10-week NSF physics REU at Georgia Tech, with stipend, travel, and housing."
+  },
+  {
+    "id": "reu-chem-gatech-fast",
+    "name": "Chemistry FAST (Function, Application, Structure, Theory)",
+    "org": "Georgia Institute of Technology",
+    "url": "https://sciences.gatech.edu/gtcosreuprograms",
+    "focus": [
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Atlanta, GA",
+    "lat": 33.7756,
+    "lon": -84.3963,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Georgia Tech's Chemistry FAST REU, 10 weeks of NSF-funded research."
+  },
+  {
+    "id": "reu-materials-utaustin",
+    "name": "REU: Center for Dynamics and Control of Materials",
+    "org": "University of Texas at Austin",
+    "url": "https://mrsec.utexas.edu/education-outreach/research-experience-undergraduates",
+    "focus": [
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Austin, TX",
+    "lat": 30.2849,
+    "lon": -97.7341,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "An NSF materials-research REU at UT Austin spanning chemistry, physics, and engineering."
+  },
+  {
+    "id": "reu-bio-yale-pebio",
+    "name": "Physical & Engineering Biology Summer Undergraduate Research Program",
+    "org": "Yale University",
+    "url": "https://qbio.yale.edu/undergraduate",
+    "focus": [
+      "biology",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "New Haven, CT",
+    "lat": 41.3163,
+    "lon": -72.9223,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 9-week NSF REU at Yale researching physical and engineering biology."
+  },
+  {
+    "id": "reu-physics-caltech-surf",
+    "name": "LIGO SURF (Summer Undergraduate Research Fellowships)",
+    "org": "California Institute of Technology",
+    "url": "https://labcit.ligo.caltech.edu/LIGO_web/students/SURF/",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Pasadena, CA",
+    "lat": 34.1377,
+    "lon": -118.1253,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 8110,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "Caltech's LIGO SURF: a 10-week NSF-funded physics research fellowship, ~$8,110 award."
+  },
+  {
+    "id": "reu-physics-ucsb",
+    "name": "Physics REU",
+    "org": "University of California, Santa Barbara",
+    "url": "https://reu.physics.ucsb.edu/",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Santa Barbara, CA",
+    "lat": 34.414,
+    "lon": -119.8489,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": "2026-03-09",
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 9-week NSF physics REU at UC Santa Barbara, fully in-person for 2026."
+  },
+  {
+    "id": "reu-chem-penn",
+    "name": "Chemistry REU",
+    "org": "University of Pennsylvania",
+    "url": "https://web.sas.upenn.edu/reu-pennchemistry/",
+    "focus": [
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Philadelphia, PA",
+    "lat": 39.9522,
+    "lon": -75.1932,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 7000,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 10-week, $7,000 NSF chemistry REU at the University of Pennsylvania."
+  },
+  {
+    "id": "reu-physics-pennstate",
+    "name": "Physics REU",
+    "org": "Pennsylvania State University",
+    "url": "https://www.pathwaystoscience.org/programhub.aspx?sort=SUM-PennState-Physics",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "University Park, PA",
+    "lat": 40.7982,
+    "lon": -77.8599,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 7000,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A 10-week, $7,000 NSF physics REU at Penn State with housing and travel support."
+  },
+  {
+    "id": "reu-chem-wisconsin",
+    "name": "REU in Chemistry and Chemical/Biological Engineering",
+    "org": "University of Wisconsin-Madison",
+    "url": "https://nsec.wisc.edu/?p=103",
+    "focus": [
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Madison, WI",
+    "lat": 43.0766,
+    "lon": -89.4125,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 10-week NSF chemistry/chemical engineering REU at UW-Madison."
+  },
+  {
+    "id": "reu-physics-minnesota",
+    "name": "Physics REU",
+    "org": "University of Minnesota",
+    "url": "https://cse.umn.edu/physics/reu-program",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Minneapolis, MN",
+    "lat": 44.974,
+    "lon": -93.2277,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 7000,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 10-week, $7,000 NSF physics REU at the University of Minnesota."
+  },
+  {
+    "id": "reu-chembio-vanderbilt",
+    "name": "Chemical Biology REU",
+    "org": "Vanderbilt University",
+    "url": "https://www.vanderbilt.edu/reu/",
+    "focus": [
+      "chemistry",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Nashville, TN",
+    "lat": 36.1447,
+    "lon": -86.8027,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 7000,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 10-week, $7,000 NSF chemical biology REU at Vanderbilt, min 3.0 science GPA."
+  },
+  {
+    "id": "reu-chem-notredame",
+    "name": "Analytical Chemistry REU",
+    "org": "University of Notre Dame",
+    "url": "https://achemreu.nd.edu/",
+    "focus": [
+      "chemistry",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Notre Dame, IN",
+    "lat": 41.7002,
+    "lon": -86.2379,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "An NSF analytical chemistry REU at Notre Dame, open to chem/bio/biochem/engineering majors."
+  },
+  {
+    "id": "reu-physics-notredame",
+    "name": "Physics REU",
+    "org": "University of Notre Dame",
+    "url": "https://physics.nd.edu/research/reu-program/",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Notre Dame, IN",
+    "lat": 41.7002,
+    "lon": -86.2379,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 35+ year running NSF physics REU at Notre Dame with grad-school prep built in."
+  },
+  {
+    "id": "amgen-caltech",
+    "name": "Amgen Scholars Program",
+    "org": "California Institute of Technology",
+    "url": "https://amgenscholars.com/university/caltech/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Pasadena, CA",
+    "lat": 34.1377,
+    "lon": -118.1253,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "One of 14 official US Amgen Scholars sites: a funded summer research program in science and biotechnology."
+  },
+  {
+    "id": "amgen-columbia",
+    "name": "Amgen Scholars Program",
+    "org": "Columbia University",
+    "url": "https://amgenscholars.com/university/columbia-university/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "New York, NY",
+    "lat": 40.7622,
+    "lon": -73.954,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at Columbia."
+  },
+  {
+    "id": "amgen-duke",
+    "name": "Amgen Scholars Program",
+    "org": "Duke University",
+    "url": "https://amgenscholars.com/university/duke-university/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Durham, NC",
+    "lat": 36.0014,
+    "lon": -78.9382,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at Duke."
+  },
+  {
+    "id": "amgen-harvard",
+    "name": "Amgen Scholars Program",
+    "org": "Harvard University",
+    "url": "https://amgenscholars.com/university/harvard-university/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Cambridge, MA",
+    "lat": 42.3736,
+    "lon": -71.1097,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at Harvard."
+  },
+  {
+    "id": "amgen-howard",
+    "name": "Amgen Scholars Program",
+    "org": "Howard University",
+    "url": "https://amgenscholars.com/university/howard-university/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Washington, DC",
+    "lat": 38.9218,
+    "lon": -77.0195,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at Howard."
+  },
+  {
+    "id": "amgen-jhu",
+    "name": "Amgen Scholars Program",
+    "org": "Johns Hopkins University",
+    "url": "https://amgenscholars.com/university/johns-hopkins-university/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Baltimore, MD",
+    "lat": 39.3299,
+    "lon": -76.6205,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at Johns Hopkins."
+  },
+  {
+    "id": "amgen-stanford",
+    "name": "Amgen Scholars Program",
+    "org": "Stanford University",
+    "url": "https://amgenscholars.com/university/stanford-university/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Stanford, CA",
+    "lat": 37.4275,
+    "lon": -122.1697,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at Stanford."
+  },
+  {
+    "id": "amgen-berkeley",
+    "name": "Amgen Scholars Program",
+    "org": "University of California, Berkeley",
+    "url": "https://amgenscholars.com/university/university-of-california-berkeley/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Berkeley, CA",
+    "lat": 37.8719,
+    "lon": -122.2585,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at UC Berkeley."
+  },
+  {
+    "id": "amgen-ucla",
+    "name": "Amgen Scholars Program",
+    "org": "University of California, Los Angeles",
+    "url": "https://amgenscholars.com/university/university-of-california-los-angeles/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Los Angeles, CA",
+    "lat": 34.0689,
+    "lon": -118.4452,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at UCLA."
+  },
+  {
+    "id": "amgen-ucsf",
+    "name": "Amgen Scholars Program",
+    "org": "University of California, San Francisco",
+    "url": "https://amgenscholars.com/university/university-of-california-san-francisco/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "San Francisco, CA",
+    "lat": 37.7627,
+    "lon": -122.4581,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at UCSF."
+  },
+  {
+    "id": "amgen-unc",
+    "name": "Amgen Scholars Program",
+    "org": "University of North Carolina at Chapel Hill",
+    "url": "https://amgenscholars.com/university/university-of-north-carolina-at-chapel-hill/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Chapel Hill, NC",
+    "lat": 35.9049,
+    "lon": -79.0469,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at UNC Chapel Hill."
+  },
+  {
+    "id": "amgen-utsw",
+    "name": "Amgen Scholars Program",
+    "org": "UT Southwestern Medical Center",
+    "url": "https://amgenscholars.com/university/ut-southwestern-medical-center/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Dallas, TX",
+    "lat": 32.8074,
+    "lon": -96.8409,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at UT Southwestern."
+  },
+  {
+    "id": "amgen-washu",
+    "name": "Amgen Scholars Program",
+    "org": "Washington University in St. Louis",
+    "url": "https://amgenscholars.com/university/washington-university-in-st-louis/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "St. Louis, MO",
+    "lat": 38.6488,
+    "lon": -90.3108,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at WashU St. Louis."
+  },
+  {
+    "id": "amgen-yale",
+    "name": "Amgen Scholars Program",
+    "org": "Yale University",
+    "url": "https://amgenscholars.com/university/yale-university/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "New Haven, CT",
+    "lat": 41.3163,
+    "lon": -72.9223,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at Yale."
+  },
+  {
+    "id": "amgen-toronto",
+    "name": "Amgen Scholars Program",
+    "org": "University of Toronto",
+    "url": "https://amgenscholars.com/university/university-of-toronto/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Toronto, ON",
+    "lat": 43.6629,
+    "lon": -79.3957,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "The Amgen Scholars Canada program, hosted at the University of Toronto."
+  },
+  {
+    "id": "srop-ohiostate",
+    "name": "Summer Research Opportunities Program (SROP)",
+    "org": "Ohio State University",
+    "url": "https://gradsch.osu.edu/faculty-and-staff/graduate-student-access-and-fairness/summer-research-opportunities-program-srop",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Columbus, OH",
+    "lat": 40.0067,
+    "lon": -83.0305,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A Big Ten Academic Alliance research program for underrepresented students, hosted at Ohio State."
+  },
+  {
+    "id": "srop-umich",
+    "name": "Summer Research Opportunities Program (SROP)",
+    "org": "University of Michigan",
+    "url": "https://rackham.umich.edu/prospective-students/srop/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Ann Arbor, MI",
+    "lat": 42.2808,
+    "lon": -83.743,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A Big Ten Academic Alliance research program for underrepresented students, hosted at Michigan."
+  },
+  {
+    "id": "srop-purdue",
+    "name": "Summer Research Opportunities Program (SROP)",
+    "org": "Purdue University",
+    "url": "https://www.purdue.edu/academics/ogsps/ogrs/summer-research-opportunity-program/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "West Lafayette, IN",
+    "lat": 40.4237,
+    "lon": -86.9212,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A Big Ten Academic Alliance research program for underrepresented students, hosted at Purdue."
+  },
+  {
+    "id": "srop-msu",
+    "name": "Summer Research Opportunities Program (SROP)",
+    "org": "Michigan State University",
+    "url": "https://grad.msu.edu/diversity-and-community/community-programs/summer-research-opportunities-program",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "East Lansing, MI",
+    "lat": 42.7018,
+    "lon": -84.4822,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A Big Ten Academic Alliance research program for underrepresented students, hosted at Michigan State."
+  },
+  {
+    "id": "srop-northwestern",
+    "name": "Summer Research Opportunities Program (SROP)",
+    "org": "Northwestern University",
+    "url": "https://www.tgs.northwestern.edu/success/thoughtful-recruitment/summer-research-opportunity-program/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Evanston, IL",
+    "lat": 42.0565,
+    "lon": -87.6753,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 6500,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "An 8-week, $6,500 research program at Northwestern for sophomores/juniors eyeing a PhD."
+  },
+  {
+    "id": "duke-srop",
+    "name": "Summer Research Opportunity Program (SROP)",
+    "org": "Duke University",
+    "url": "https://www.pathwaystoscience.org/programhub.aspx?sort=SUM-Duke-BioMed",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Durham, NC",
+    "lat": 36.0014,
+    "lon": -78.9382,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "Duke's own 10-week Summer Research Opportunity Program in biomedical research."
+  },
+  {
+    "id": "duke-cellbio-hs",
+    "name": "Summer Research Experience (Cell Biology & Biochemistry)",
+    "org": "Duke University",
+    "url": "https://www.cellbio.duke.edu/",
+    "focus": [
+      "biology",
+      "chemistry"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Durham, NC",
+    "lat": 36.0014,
+    "lon": -78.9382,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 2400,
+    "deadline": "2026-03-20",
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A paid 6-week cell biology/biochemistry research program at Duke for HS juniors and seniors."
+  },
+  {
+    "id": "duke-star",
+    "name": "Summer Training in Academic Research (STAR) Program",
+    "org": "Duke Clinical Research Institute",
+    "url": "https://dcri.org/education/dukes-star-program",
+    "focus": [
+      "pre-med",
+      "biology"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12",
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Durham, NC",
+    "lat": 36.0014,
+    "lon": -78.9382,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 5-week hands-on research and writing program at Duke, open from high school through med school."
+  },
+  {
+    "id": "duke-chemsurf",
+    "name": "Chemistry Undergraduate Summer Research Fellows (Chem-SURF)",
+    "org": "Duke University",
+    "url": "https://chem.duke.edu/undergraduate/independent-study/summer-research",
+    "focus": [
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Durham, NC",
+    "lat": 36.0014,
+    "lon": -78.9382,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "Duke's Chem-SURF program for undergrads entering chemistry research for the first time."
+  },
+  {
+    "id": "duke-bsurf",
+    "name": "Biological Sciences Undergraduate Research Fellowship (BSURF)",
+    "org": "Duke University",
+    "url": "https://undergraduateresearch.duke.edu/opportunity/biological-sciences-undergraduate-research-fellowship-bsurf",
+    "focus": [
+      "biology"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Durham, NC",
+    "lat": 36.0014,
+    "lon": -78.9382,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "An 8-week biology research fellowship at Duke for rising sophomores."
+  },
+  {
+    "id": "jhu-sare",
+    "name": "Summer Academic Research Experience (SARE)",
+    "org": "Johns Hopkins School of Medicine",
+    "url": "https://sare.cellbio.jhmi.edu/",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Baltimore, MD",
+    "lat": 39.3299,
+    "lon": -76.6205,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "An 8-week biomedical research program at Johns Hopkins for HS students from under-resourced backgrounds.",
+    "equityNote": "Low-income/under-resourced background focus"
+  },
+  {
+    "id": "jhu-sip",
+    "name": "Summer Internship Program (SIP)",
+    "org": "Johns Hopkins Bloomberg School of Public Health",
+    "url": "https://www.jhsph.edu/",
+    "focus": [
+      "pre-med",
+      "biology"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12",
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Baltimore, MD",
+    "lat": 39.3299,
+    "lon": -76.6205,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A Johns Hopkins summer program for students exploring medicine or public health research."
+  },
+  {
+    "id": "ucsf-hs-intern",
+    "name": "High School Intern Program",
+    "org": "UCSF Science & Health Education Partnership",
+    "url": "https://sep.ucsf.edu/programs/high-school-students/intern-program/",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "San Francisco, CA",
+    "lat": 37.7627,
+    "lon": -122.4581,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 4500,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "An 8-week, $4,500 paid biomedical research internship for HS students at UCSF."
+  },
+  {
+    "id": "cincinnati-childrens-hs",
+    "name": "High School Summer Internship Program",
+    "org": "Cincinnati Children's Hospital",
+    "url": "https://www.cincinnatichildrens.org/",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": null,
+    "lat": null,
+    "lon": null,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "An 8-week paid biomedical internship at Cincinnati Children's Hospital for graduating HS seniors."
+  },
+  {
+    "id": "harvard-med-hs",
+    "name": "High School Summer Internship",
+    "org": "Harvard Medical School",
+    "url": "https://hms.harvard.edu/",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Boston, MA",
+    "lat": 42.3505,
+    "lon": -71.1054,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A 6-week paid lab internship at Harvard Medical School for Boston/Cambridge high schoolers.",
+    "equityNote": "Boston/Cambridge residents only"
+  },
+  {
+    "id": "biomed-focus-umich",
+    "name": "BioMed Focus",
+    "org": "University of Michigan Medical School",
+    "url": "https://biomed-focus.medicine.umich.edu/about",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Ann Arbor, MI",
+    "lat": 42.2808,
+    "lon": -83.743,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 4000,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "An 8-week, $4,000 paid biomedical research internship for HS students at Michigan Medical School."
+  },
+  {
+    "id": "magee-womens-hs",
+    "name": "High School Summer Internship Program",
+    "org": "Magee-Womens Research Institute",
+    "url": "https://mageewomens.org/for-researchers/education/high-school-summer-internship-program",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-10",
+      "hs-11"
+    ],
+    "mode": "in-person",
+    "locationLabel": null,
+    "lat": null,
+    "lon": null,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A free, ultra-selective 6-week research internship for HS sophomores/juniors at Magee-Womens Research Institute."
+  },
+  {
+    "id": "stjude-hs-intern",
+    "name": "High School Summer Internship Program",
+    "org": "St. Jude Children's Research Hospital",
+    "url": "https://www.stjude.org/",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": null,
+    "lat": null,
+    "lon": null,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "An 8-week pediatric biomedical research internship for HS seniors at St. Jude Children's Research Hospital."
+  },
+  {
+    "id": "fredhutch-ship",
+    "name": "Summer High School Internship Program (SHIP)",
+    "org": "Fred Hutchinson Cancer Center",
+    "url": "https://www.fredhutch.org/en/education-training/high-school-students/summer-high-school-internship-program.html",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Seattle, WA",
+    "lat": 47.6262,
+    "lon": -122.3387,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "An 8-week paid cancer-research internship for HS juniors/seniors at Fred Hutchinson Cancer Center.",
+    "equityNote": "Underrepresented-background priority"
+  },
+  {
+    "id": "seattle-childrens-research-training",
+    "name": "Research Training Program",
+    "org": "Seattle Children's Research Institute",
+    "url": "https://www.seattlechildrens.org/",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-9",
+      "hs-10"
+    ],
+    "mode": "year-round",
+    "locationLabel": "Seattle, WA",
+    "lat": 47.6262,
+    "lon": -122.3387,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A 2-year lab-research training program starting in 10th grade at Seattle Children's."
+  },
+  {
+    "id": "broad-summer-scholars",
+    "name": "Broad Summer Scholars Program (BSSP)",
+    "org": "Broad Institute of MIT and Harvard",
+    "url": "https://www.broadinstitute.org/partnerships/education/k-12-outreach/broad-summer-scholars-program",
+    "focus": [
+      "biology",
+      "chemistry"
+    ],
+    "levels": [
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Cambridge, MA",
+    "lat": 42.3736,
+    "lon": -71.1097,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 3600,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A free, $3,600, 6-week research program at the Broad Institute for Massachusetts HS seniors.",
+    "equityNote": "Massachusetts residents only"
+  },
+  {
+    "id": "broad-bsrp",
+    "name": "Broad Summer Research Program (BSRP)",
+    "org": "Broad Institute of MIT and Harvard",
+    "url": "https://www.broadinstitute.org/bsrp/broad-summer-research-program-bsrp",
+    "focus": [
+      "biology"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Cambridge, MA",
+    "lat": 42.3736,
+    "lon": -71.1097,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 9-week genomics-focused undergraduate research program at the Broad Institute."
+  },
+  {
+    "id": "mount-sinai-ltri-hs",
+    "name": "Student Internship Program (High School)",
+    "org": "Lunenfeld-Tanenbaum Research Institute (Mount Sinai Hospital)",
+    "url": "http://research.lunenfeld.ca/rtc/?page=Summer%20Research%20Program",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Toronto, ON",
+    "lat": 43.6629,
+    "lon": -79.3957,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A paid summer research internship for Grade 11-12 students at Mount Sinai's Lunenfeld-Tanenbaum Institute."
+  },
+  {
+    "id": "mit-mites",
+    "name": "MITES (Minority Introduction to Engineering and Science)",
+    "org": "Massachusetts Institute of Technology",
+    "url": "https://oeop.mit.edu/programs/mites",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Cambridge, MA",
+    "lat": 42.3736,
+    "lon": -71.1097,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A free, 6-week residential MIT science program for HS seniors underrepresented in STEM.",
+    "equityNote": "Underrepresented-in-STEM focus"
+  },
+  {
+    "id": "uchicago-ribs",
+    "name": "Research in the Biological Sciences (RIBS)",
+    "org": "University of Chicago",
+    "url": "https://summer.uchicago.edu/courses/research-in-the-biological-sciences/",
+    "focus": [
+      "biology"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Chicago, IL",
+    "lat": 41.7886,
+    "lon": -87.5987,
+    "availability": "summer",
+    "paid": false,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 4-week hands-on biology lab course for HS students at the University of Chicago."
+  },
+  {
+    "id": "uchicago-datasci",
+    "name": "Data Science Research Program",
+    "org": "University of Chicago",
+    "url": "https://ccrf.uchicago.edu/",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12",
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Chicago, IL",
+    "lat": 41.7886,
+    "lon": -87.5987,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A paid 10-week data science research program at UChicago spanning biomedical and other domains."
+  },
+  {
+    "id": "cornell-rabs",
+    "name": "RABS Program",
+    "org": "Cornell University",
+    "url": "https://www.cornell.edu/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Ithaca, NY",
+    "lat": 42.4534,
+    "lon": -76.4735,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A research collaboration program pairing motivated HS students with Cornell faculty and doctoral fellows."
+  },
+  {
+    "id": "cornell-bowers-ure",
+    "name": "Bowers Undergraduate Research Experience",
+    "org": "Cornell University",
+    "url": "https://www.cornell.edu/",
+    "focus": [
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Ithaca, NY",
+    "lat": 42.4534,
+    "lon": -76.4735,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A 10-week Cornell undergraduate research program pairing students with faculty mentors."
+  },
+  {
+    "id": "princeton-surfc",
+    "name": "Summer Undergraduate Research Fellowship in Chemistry (SURF-C)",
+    "org": "Princeton University",
+    "url": "https://undergraduateresearch.princeton.edu/programs/summer-programs",
+    "focus": [
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Princeton, NJ",
+    "lat": 40.3431,
+    "lon": -74.6551,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "Princeton's Summer Undergraduate Research Fellowship in Chemistry, for rising sophomores through seniors."
+  },
+  {
+    "id": "princeton-mqcb",
+    "name": "Summer Undergraduate Research Program (Molecular & Quantitative/Computational Biology)",
+    "org": "Princeton University",
+    "url": "https://undergraduateresearch.princeton.edu/programs/summer-programs/summer-undergraduate-research-program-molecular-and-quantitative",
+    "focus": [
+      "biology"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Princeton, NJ",
+    "lat": 40.3431,
+    "lon": -74.6551,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A Princeton summer research program in molecular and quantitative/computational biology."
+  },
+  {
+    "id": "tufts-summer-research",
+    "name": "Tufts Summer Research Experience",
+    "org": "Tufts University",
+    "url": "https://universitycollege.tufts.edu/pre-college/browse/tufts-summer-research-experience",
+    "focus": [
+      "biology",
+      "chemistry"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Medford, MA",
+    "lat": 42.4085,
+    "lon": -71.118,
+    "availability": "summer",
+    "paid": false,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 6-week pre-college research program at Tufts for HS juniors/seniors with prior research experience."
+  },
+  {
+    "id": "bu-rise",
+    "name": "RISE (Research in Science & Engineering)",
+    "org": "Boston University",
+    "url": "https://www.bu.edu/summer/high-school-programs/rise-internship-practicum/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "hs-11"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Boston, MA",
+    "lat": 42.3505,
+    "lon": -71.1054,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 6-week Boston University research program for HS juniors across bio, chem, physics, and more."
+  },
+  {
+    "id": "rockefeller-ssrp",
+    "name": "Summer Science Research Program (SSRP)",
+    "org": "The Rockefeller University",
+    "url": "https://www.rockefeller.edu/outreach/ssrp/",
+    "focus": [
+      "biology",
+      "chemistry"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "New York, NY",
+    "lat": 40.7622,
+    "lon": -73.954,
+    "availability": "summer",
+    "paid": false,
+    "cost": null,
+    "stipend": null,
+    "deadline": "2026-01-02",
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "One of the most selective HS research programs anywhere: 7 weeks, free, 3-4% acceptance, at Rockefeller University."
+  },
+  {
+    "id": "rockefeller-surf",
+    "name": "Chemers Neustein Summer Undergraduate Research Fellowship (SURF)",
+    "org": "The Rockefeller University",
+    "url": "https://www.rockefeller.edu/education-and-training/surf/",
+    "focus": [
+      "biology",
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3"
+    ],
+    "mode": "in-person",
+    "locationLabel": "New York, NY",
+    "lat": 40.7622,
+    "lon": -73.954,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 10-week undergraduate research fellowship at Rockefeller University, sophomores/juniors only."
+  },
+  {
+    "id": "baylor-hs-research",
+    "name": "High School Research Program",
+    "org": "Baylor College of Medicine",
+    "url": "https://www.bcm.edu/",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Houston, TX",
+    "lat": 29.7079,
+    "lon": -95.3971,
+    "availability": "summer",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A free, lab-based high school research program at Baylor College of Medicine."
+  },
+  {
+    "id": "baylor-sms-summer-research",
+    "name": "SMS Summer Research Program",
+    "org": "Baylor College of Medicine",
+    "url": "https://www.bcm.edu/",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Houston, TX",
+    "lat": 29.7079,
+    "lon": -95.3971,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "An 8-week biomedical research program with a Baylor faculty mentor."
+  },
+  {
+    "id": "mdanderson-king-hs",
+    "name": "Carl B. & Florence E. King Foundation High School Summer Program",
+    "org": "MD Anderson Cancer Center",
+    "url": "https://www.mdanderson.org/education-training/research-training/early-career-pathway-programs/summer-research-programs/programs/high-school-summer-program.html",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Houston, TX",
+    "lat": 29.7079,
+    "lon": -95.3971,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 6800,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A $6,800, 10-week cancer-research program at MD Anderson for Texas HS seniors 18+.",
+    "equityNote": "Texas residents only, age 18+"
+  },
+  {
+    "id": "western-usra",
+    "name": "NSERC, CIHR & SSHRC Undergraduate Summer Research Award (USRA)",
+    "org": "Western University",
+    "url": "https://www.edu.uwo.ca/research/undergrad/usra.html",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "London, ON",
+    "lat": 42.9849,
+    "lon": -81.2453,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 9268,
+    "deadline": "2026-02-10",
+    "selectivity": "medium",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": true,
+    "confidence": "high",
+    "blurb": "Western University's Tri-Agency Undergraduate Summer Research Award, min $9,268 for 16 weeks."
+  },
+  {
+    "id": "western-durop",
+    "name": "Dean's Undergraduate Research Opportunities Program (DUROP)",
+    "org": "Western University (Schulich School of Medicine & Dentistry)",
+    "url": "https://www.schulich.uwo.ca/bmsc/research/summer_opportunities.html",
+    "focus": [
+      "pre-med",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "London, ON",
+    "lat": 42.9849,
+    "lon": -81.2453,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A Schulich Medicine & Dentistry research program at Western for science and basic-medical-science undergrads."
+  },
+  {
+    "id": "mcmaster-usra",
+    "name": "NSERC Undergraduate Student Research Award (USRA)",
+    "org": "McMaster University",
+    "url": "https://our.science.mcmaster.ca/opportunities-2/spring-summer-research-opportunities/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Hamilton, ON",
+    "lat": 43.2609,
+    "lon": -79.9192,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": true,
+    "confidence": "high",
+    "blurb": "McMaster's NSERC Undergraduate Student Research Award, 16 weeks with a funded faculty supervisor."
+  },
+  {
+    "id": "mcmaster-cnl-nuclear",
+    "name": "CNL Undergraduate Nuclear Research Experience",
+    "org": "McMaster University",
+    "url": "https://our.science.mcmaster.ca/research-opportunities/external-research/",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Hamilton, ON",
+    "lat": 43.2609,
+    "lon": -79.9192,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A nuclear-research program at McMaster with Canadian Nuclear Laboratories mentorship, Level 2+ only."
+  },
+  {
+    "id": "mcmaster-biology-awards",
+    "name": "Biology Department Research Awards",
+    "org": "McMaster University",
+    "url": "https://biology.mcmaster.ca/undergraduate/scholarships-awards/",
+    "focus": [
+      "biology"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Hamilton, ON",
+    "lat": 43.2609,
+    "lon": -79.9192,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": true,
+    "confidence": "high",
+    "blurb": "McMaster's Biology Department research awards, 14-16 weeks with an NSERC-funded supervisor."
+  },
+  {
+    "id": "waterloo-chem-usra",
+    "name": "NSERC Undergraduate Student Research Awards",
+    "org": "University of Waterloo (Department of Chemistry)",
+    "url": "https://uwaterloo.ca/chemistry/undergraduate-studies/nserc-undergraduate-student-research-awards",
+    "focus": [
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Waterloo, ON",
+    "lat": 43.4723,
+    "lon": -80.5449,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": "2026-01-15",
+    "selectivity": "medium",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": true,
+    "confidence": "high",
+    "blurb": "Waterloo Chemistry's NSERC Undergraduate Student Research Award, 4-month terms."
+  },
+  {
+    "id": "concordia-cusra",
+    "name": "Concordia Undergraduate Student Research Award (CUSRA)",
+    "org": "Concordia University",
+    "url": "https://www.concordia.ca/research/funding/cusra.html",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Montreal, QC",
+    "lat": 45.4972,
+    "lon": -73.5789,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": true,
+    "confidence": "high",
+    "blurb": "Concordia's Undergraduate Student Research Award, spanning natural and health sciences."
+  },
+  {
+    "id": "sfu-usra",
+    "name": "Science & Applied Science Undergraduate Student Research Awards",
+    "org": "Simon Fraser University",
+    "url": "https://www.sfu.ca/research/for-students/ugrad-research-awards/ugrad-research-awards2.html",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Burnaby, BC",
+    "lat": 49.2781,
+    "lon": -122.9199,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": true,
+    "confidence": "high",
+    "blurb": "SFU's Undergraduate Student Research Awards, with a stream open to international students too."
+  },
+  {
+    "id": "ualberta-usra",
+    "name": "Tri-Agency Undergraduate Student Research Award (USRA)",
+    "org": "University of Alberta",
+    "url": "https://www.ualberta.ca/en/current-students/undergraduate-research-initiative/funding/usra.html",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Edmonton, AB",
+    "lat": 53.5232,
+    "lon": -113.5263,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 8400,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": true,
+    "confidence": "high",
+    "blurb": "University of Alberta's Tri-Agency USRA, minimum $8,400 for 16 weeks."
+  },
+  {
+    "id": "uvic-sura",
+    "name": "Science Undergraduate Research Award (SURA)",
+    "org": "University of Victoria",
+    "url": "https://www.uvic.ca/science/students/awards-funding/index.php",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Victoria, BC",
+    "lat": 48.4643,
+    "lon": -123.3117,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 8000,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": true,
+    "confidence": "high",
+    "blurb": "UVic's Science Undergraduate Research Award, minimum $8,000 for 14-16 weeks."
+  },
+  {
+    "id": "uvic-nserc-usra",
+    "name": "NSERC Undergraduate Student Research Award (USRA)",
+    "org": "University of Victoria",
+    "url": "https://www.uvic.ca/science/physics/current/undergraduate/awards/NSERC%20USRA/index.php",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Victoria, BC",
+    "lat": 48.4643,
+    "lon": -123.3117,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 8500,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": true,
+    "confidence": "high",
+    "blurb": "UVic's NSERC Undergraduate Student Research Award, minimum $8,500."
+  },
+  {
+    "id": "reu-physics-cuboulder-solar",
+    "name": "Boulder Solar Alliance REU",
+    "org": "University of Colorado Boulder",
+    "url": "https://lasp.colorado.edu/reu/",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Boulder, CO",
+    "lat": 40.015,
+    "lon": -105.2705,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 10-week NSF solar/space physics REU at CU Boulder's atmospheric and space physics lab."
+  },
+  {
+    "id": "reu-chemphys-arizona-imod",
+    "name": "IMOD Summer Research Experience for Undergraduates",
+    "org": "University of Arizona",
+    "url": "https://ur.arizona.edu/events/257824-imod-summer-research-experience-undergraduates-reus-application-deadline",
+    "focus": [
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Tucson, AZ",
+    "lat": 32.2319,
+    "lon": -110.9501,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 9-10 week NSF REU at the University of Arizona spanning chemistry, physics, and materials science."
+  },
+  {
+    "id": "reu-physics-vt-neutrino",
+    "name": "Neutrino Physics REU",
+    "org": "Virginia Tech",
+    "url": "https://www.research.undergraduate.vt.edu/research-and-engagement/student-research-and-engagement/summer-research/summer-undergraduate-research.html",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Blacksburg, VA",
+    "lat": 37.2296,
+    "lon": -80.4139,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 10-week NSF neutrino physics REU at Virginia Tech."
+  },
+  {
+    "id": "casewestern-surp-pharm",
+    "name": "Summer Undergraduate Research Program (SURP)",
+    "org": "Case Western Reserve University (Department of Pharmacology)",
+    "url": "https://case.edu/medicine/pharmacology/education-training/summer-undergraduate-research-program",
+    "focus": [
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Cleveland, OH",
+    "lat": 41.5044,
+    "lon": -81.6089,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 10-week ASPET-sponsored pharmacology research program at Case Western, running almost 40 years."
+  },
+  {
+    "id": "casewestern-ssrp",
+    "name": "Sponsored Summer Research Program (SSRP)",
+    "org": "Case Western Reserve University",
+    "url": "https://case.edu/studentlife/ugresearch/programs-and-funding/ssrp",
+    "focus": [
+      "biology",
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Cleveland, OH",
+    "lat": 41.5044,
+    "lon": -81.6089,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 4500,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": true,
+    "confidence": "high",
+    "blurb": "A $4,500 sponsored summer research award at Case Western for biology/chemistry research."
+  },
+  {
+    "id": "umass-med-surp",
+    "name": "Summer Undergraduate Research Program",
+    "org": "UMass Chan Medical School",
+    "url": "https://www.umass.edu/gateway/research/student-research",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Amherst, MA",
+    "lat": 42.3868,
+    "lon": -72.5301,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A hands-on lab research program with a faculty mentor at UMass Chan Medical School."
+  },
+  {
+    "id": "carleton-nserc-usra",
+    "name": "NSERC Undergraduate Student Research Awards",
+    "org": "Carleton University",
+    "url": "https://sssc.carleton.ca/resources/undergraduate-research",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Ottawa, ON",
+    "lat": 45.3876,
+    "lon": -75.696,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": true,
+    "confidence": "high",
+    "blurb": "Carleton's NSERC Undergraduate Student Research Award, for Science and Engineering students."
+  },
+  {
+    "id": "carleton-dsri",
+    "name": "Dean's Summer Research Internship (DSRI)",
+    "org": "Carleton University",
+    "url": "https://sssc.carleton.ca/resources/undergraduate-research",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Ottawa, ON",
+    "lat": 45.3876,
+    "lon": -75.696,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": true,
+    "confidence": "medium",
+    "blurb": "Carleton's Dean's Summer Research Internship, unusually open to first-year Science students."
+  },
+  {
+    "id": "carleton-walker-award",
+    "name": "Walker Summer Research Award",
+    "org": "Carleton University",
+    "url": "https://sssc.carleton.ca/resources/undergraduate-research",
+    "focus": [
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Ottawa, ON",
+    "lat": 45.3876,
+    "lon": -75.696,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": true,
+    "confidence": "medium",
+    "blurb": "A chemistry- and biochemistry-specific summer research award at Carleton University."
+  },
+  {
+    "id": "brock-usra",
+    "name": "NSERC Undergraduate Student Research Award (USRA)",
+    "org": "Brock University",
+    "url": "https://brocku.ca/brock-news/2023/02/applications-open-for-undergraduate-student-research-awards/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "St. Catharines, ON",
+    "lat": 43.1155,
+    "lon": -79.2469,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": true,
+    "confidence": "medium",
+    "blurb": "Brock University's NSERC Undergraduate Student Research Award."
+  },
+  {
+    "id": "uregina-usra",
+    "name": "NSERC Undergraduate Student Research Award (USRA)",
+    "org": "University of Regina",
+    "url": "https://www.uregina.ca/graduate-studies-research/scholarships/external/nserc-undergraduate-student-research-award-usra-tri-council.html",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Regina, SK",
+    "lat": 50.4452,
+    "lon": -104.6189,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": true,
+    "confidence": "high",
+    "blurb": "The University of Regina's NSERC Undergraduate Student Research Award, open across biology, chemistry, and physics."
+  },
+  {
+    "id": "reu-physics-uflorida",
+    "name": "Physics REU",
+    "org": "University of Florida",
+    "url": "https://phys.ufl.edu/undergraduate/reu-research-experiences-for-undergraduates/",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Gainesville, FL",
+    "lat": 29.6516,
+    "lon": -82.3248,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "An NSF-funded physics REU at the University of Florida."
+  },
+  {
+    "id": "reu-ucf-hub",
+    "name": "Research Experiences for Undergraduates (REU)",
+    "org": "University of Central Florida",
+    "url": "https://www.research.ucf.edu/reu/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Orlando, FL",
+    "lat": 28.6024,
+    "lon": -81.2001,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A directory of NSF-funded REU sites across departments at the University of Central Florida."
+  },
+  {
+    "id": "iastate-summer-research",
+    "name": "Summer Research Opportunities (EUReCA)",
+    "org": "Iowa State University",
+    "url": "https://www.undergradresearch.iastate.edu/summer-programming",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Ames, IA",
+    "lat": 42.0308,
+    "lon": -93.6319,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "Iowa State's hub for its summer undergraduate research programs (EUReCA)."
+  },
+  {
+    "id": "cshl-urp",
+    "name": "Undergraduate Research Program (URP)",
+    "org": "Cold Spring Harbor Laboratory",
+    "url": "https://www.cshl.edu/education/undergraduate-research-program/",
+    "focus": [
+      "biology"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3"
+    ],
+    "mode": "in-person",
+    "locationLabel": null,
+    "lat": null,
+    "lon": null,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A legendary 10-week residential research program at Cold Spring Harbor Laboratory, running since 1959."
   }
 ]
