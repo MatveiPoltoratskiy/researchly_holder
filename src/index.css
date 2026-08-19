@@ -487,7 +487,7 @@ h1{
 .faq-section{
   position:relative; z-index:5; overflow:hidden;
   max-width: 1500px;
-  margin-top: -205px;
+  margin-top: -60px;
   padding: 20px 0 110px;
   display:flex; align-items:flex-start; justify-content:space-between; gap:50px;
 }
@@ -668,12 +668,6 @@ h1{
 
 /* ---------- how it works ---------- */
 .how-section{ position:relative; z-index:5; max-width:1560px; padding: 170px 0 120px; }
-.how-symbol-field{
-  position:absolute; top:0; bottom:0; left:50%; width:100vw; transform:translateX(-50%);
-  z-index:0; pointer-events:none; overflow:hidden;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 92%, transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 92%, transparent 100%);
-}
 
 .how-head{ position:relative; z-index:2; max-width:1140px; margin:0 auto 64px; text-align:center; }
 .how-statement{
@@ -868,7 +862,12 @@ h1{
 /* closing landscape — purely decorative (the CTA sits above it, on plain cream), fading
    in/out so it hands off smoothly into whatever's above and below it */
 .how-landscape{
-  position:relative; z-index:2; margin-top:24px; left:50%; width:100vw; transform:translateX(-50%);
+  /* full width of .how-section's own content box (which has zero side padding — see its
+     padding shorthand) rather than a 100vw/negative-margin breakout: that technique reads
+     `vw` against the true viewport but this section can sit inside a `zoom`-scaled
+     ancestor (.landing-compact), where percentages resolve against a larger logical
+     width than the real viewport — the mismatch left visible gaps on both sides. */
+  position:relative; z-index:2; margin-top:24px; width:100%;
   min-height:300px; overflow:hidden;
 }
 .how-landscape-svg{

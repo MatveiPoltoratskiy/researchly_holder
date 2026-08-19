@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { prefersReducedMotion, usePauseAnimationsOffscreen } from '../lib/motion'
 import { useRouter } from '../lib/router'
 import { goToWaitlist } from '../lib/waitlist'
-import SymbolField from './SymbolField'
 import { InterviewVisual, MatchVisual, RoadmapVisual, ApplyVisual } from './HowItWorksVisuals'
 
 const STEPS = [
@@ -188,15 +187,6 @@ export default function HowItWorks() {
 
   return (
     <section className="how-section container" id="how-it-works" ref={sectionRef}>
-      <div className="how-symbol-field" aria-hidden="true">
-        <SymbolField
-          rows={3} cols={8}
-          opacityRange={[0.22, 0.32]}
-          fontSizeRange={[16, 24]}
-          colors={['var(--symbol-tan)', 'var(--cover-dark)', 'var(--ribbon)', 'var(--navy)', '#5C3A1E', 'var(--gold)']}
-        />
-      </div>
-
       <div className="how-head">
         <h2 className="how-statement">
           Researchly asks a handful of questions, then does<br />
