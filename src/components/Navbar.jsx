@@ -36,7 +36,7 @@ export default function Navbar() {
             How it works
           </a>
           <Link className="nav-link" to="/contact">
-            Contact
+            Contact us
           </Link>
           <button className="nav-cta" type="button" onClick={handleJoinClick}>
             Join the waitlist
