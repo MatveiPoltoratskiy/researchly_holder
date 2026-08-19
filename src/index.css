@@ -603,13 +603,13 @@ h1{
 }
 .faq-a{
   margin:0;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:16.5px; line-height:1.6;
-  color: rgba(30,37,64,.78);
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:17.5px; line-height:1.6;
+  color: rgba(30,37,64,.92);
 }
 .faq-list{
   margin: 10px 0 0; padding-left: 18px;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:16.5px; line-height:1.7;
-  color: rgba(30,37,64,.78);
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:17.5px; line-height:1.7;
+  color: rgba(30,37,64,.92);
 }
 
 .faq-steps{ display:flex; gap:22px; margin-top:26px; }
