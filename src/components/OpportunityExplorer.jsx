@@ -249,12 +249,17 @@ export default function OpportunityExplorer() {
   const cardRefs = useRef(new Map())
   const shimmerTimeoutRef = useRef(null)
 
-  // selecting from the map (a pin the list hasn't scrolled to) should bring the matching
-  // card into view; selecting from the list itself already has it in view, so this is a
-  // no-op there — safe to call from both directions
-  function selectOpportunity(id) {
+  // clicking a card should only pan the MAP to that location, never move the page/list
+  // itself (the card is already right there under the cursor). Selecting from the map is
+  // different: that pin's card might be scrolled out of view in the list, so that path
+  // still brings it into view. scrollIntoView({block:'center'}) was previously called
+  // unconditionally here and re-centered the card even when it didn't need to move,
+  // which is exactly the unwanted "whole page repositions" jump.
+  function selectOpportunity(id, { scrollCardIntoView = false } = {}) {
     setSelectedId((prev) => (prev === id ? null : id))
-    cardRefs.current.get(id)?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    if (scrollCardIntoView) {
+      cardRefs.current.get(id)?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
   }
 
   // triggered directly from filter clicks (not a state-watching effect) so it only ever
@@ -475,7 +480,11 @@ export default function OpportunityExplorer() {
           </div>
 
           <div className="opp-map-col">
-            <OpportunityMap opportunities={filtered} selectedId={selectedId} onSelect={selectOpportunity} />
+            <OpportunityMap
+              opportunities={filtered}
+              selectedId={selectedId}
+              onSelect={(id) => selectOpportunity(id, { scrollCardIntoView: true })}
+            />
           </div>
         </div>
       </div>
