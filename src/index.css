@@ -45,13 +45,13 @@ svg{ display:block; }
 /* Contact and the standalone How It Works page render a little smaller than the landing
    page — `zoom` (not transform:scale) actually reflows layout at the smaller size, so it
    reads as a slightly zoomed-out page rather than a shrunk screenshot of a bigger one. */
-.compact-page{ zoom: 0.88; }
-@media (max-width: 900px){ .compact-page{ zoom: 1; } }
+.compact-page{ zoom: 0.88; --zoom: 0.88; }
+@media (max-width: 900px){ .compact-page{ zoom: 1; --zoom: 1; } }
 
 /* the embedded How It Works + FAQ sections run noticeably larger than the rest of the
    landing page at a normal browser zoom — pull them in so more fits on screen at once */
-.landing-compact{ zoom: 0.82; }
-@media (max-width: 900px){ .landing-compact{ zoom: 1; } }
+.landing-compact{ zoom: 0.82; --zoom: 0.82; }
+@media (max-width: 900px){ .landing-compact{ zoom: 1; --zoom: 1; } }
 
 .container{
   width:100%;
@@ -862,12 +862,16 @@ h1{
 /* closing landscape — purely decorative (the CTA sits above it, on plain cream), fading
    in/out so it hands off smoothly into whatever's above and below it */
 .how-landscape{
-  /* full width of .how-section's own content box (which has zero side padding — see its
-     padding shorthand) rather than a 100vw/negative-margin breakout: that technique reads
-     `vw` against the true viewport but this section can sit inside a `zoom`-scaled
-     ancestor (.landing-compact), where percentages resolve against a larger logical
-     width than the real viewport — the mismatch left visible gaps on both sides. */
-  position:relative; z-index:2; margin-top:24px; width:100%;
+  /* true edge-to-edge breakout, compensated for sitting inside a `zoom`-scaled ancestor
+     (.landing-compact / .compact-page, which also set --zoom to match). `vw` always reads
+     the real viewport, but content inside a zoomed element gets more *logical* CSS-px room
+     than that (real-viewport / zoom) — so both the width and the centering offset need to
+     be divided by --zoom to actually land on the true screen edges instead of just
+     .how-section's own (narrower, un-compensated) content edges. */
+  position:relative; z-index:2; margin-top:24px;
+  width: calc(100vw / var(--zoom, 1));
+  margin-left: calc(50% - (50vw / var(--zoom, 1)));
+  margin-right: calc(50% - (50vw / var(--zoom, 1)));
   min-height:300px; overflow:hidden;
 }
 .how-landscape-svg{
