@@ -25,21 +25,23 @@ export default function Navbar() {
   }
 
   return (
-    <div className="site-nav container">
-      <Link className="brand" to="/" aria-label="Researchly home">
-        <img src="/assets/mascot-logo.png" alt="Researchly" />
-        <span>Researchly</span>
-      </Link>
-      <div className="nav-right">
-        <a className="nav-link" href="/how-it-works" onClick={handleHowItWorksClick}>
-          How it works
-        </a>
-        <Link className="nav-link" to="/contact">
-          Contact
+    <div className="site-nav-bar">
+      <div className="site-nav container">
+        <Link className="brand" to="/" aria-label="Researchly home">
+          <img src="/assets/mascot-logo.png" alt="Researchly" />
+          <span>Researchly</span>
         </Link>
-        <button className="nav-cta" type="button" onClick={handleJoinClick}>
-          Join the waitlist
-        </button>
+        <div className="nav-right">
+          <a className="nav-link" href="/how-it-works" onClick={handleHowItWorksClick}>
+            How it works
+          </a>
+          <Link className="nav-link" to="/contact">
+            Contact
+          </Link>
+          <button className="nav-cta" type="button" onClick={handleJoinClick}>
+            Join the waitlist
+          </button>
+        </div>
       </div>
     </div>
   )
