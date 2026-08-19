@@ -478,11 +478,6 @@ export default function OpportunityExplorer() {
   return (
     <section className="opp-explorer">
       <div className="container opp-container">
-        <div className="opp-private-note">
-          Private prototype: hand-curated Canada dataset, still mid-verification. Not linked
-          from the live site.
-        </div>
-
         <div className="opp-header">
           <p className="opp-eyebrow">We found</p>
           <h1 className="opp-heading">

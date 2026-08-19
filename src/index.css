@@ -1309,27 +1309,21 @@ html{ scroll-behavior:smooth; }
 @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
 
 .opp-explorer{
-  background:var(--cream); padding:40px 0 96px; min-height:70vh;
+  background:var(--cream); padding:16px 0 24px; min-height:70vh;
   /* darker than the site-wide --navy-soft, scoped to this page only, per feedback that the
      secondary text (org names, dates, muted tags) was reading too light against the cream */
   --opp-text-soft: rgba(30,37,64,.82);
 }
-.opp-container{ max-width:1520px; }
+.opp-container{ max-width:1800px; padding-left:24px; padding-right:24px; }
 
-.opp-private-note{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:600;
-  color:var(--cover-dark); background:var(--pill-amber-bg); border:1px solid rgba(140,90,36,.25);
-  border-radius:10px; padding:9px 14px; margin-bottom:28px; display:inline-block;
-}
-
-.opp-header{ margin-bottom:26px; }
+.opp-header{ margin-bottom:22px; }
 .opp-eyebrow{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:700; letter-spacing:.04em;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:14px; font-weight:700; letter-spacing:.04em;
   color:var(--cover); margin:0 0 2px; text-transform:uppercase;
 }
 .opp-heading{
   font-family:"Iowan Old Style",Palatino,Georgia,serif; font-weight:700;
-  font-size:clamp(28px,3.4vw,40px); color:var(--navy); margin:0 0 12px;
+  font-size:clamp(32px,3.8vw,46px); color:var(--navy); margin:0 0 12px;
 }
 .opp-heading-count{ color:var(--cover); display:inline-block; }
 
@@ -1361,12 +1355,12 @@ html{ scroll-behavior:smooth; }
 /* two-pane layout: sticky filter sidebar + scrolling results, mirrors the reference's
    filters-rail-beside-scrolling-list structure without needing the map pane */
 .opp-layout{
-  display:grid; grid-template-columns:240px minmax(360px,480px) minmax(320px,1fr);
+  display:grid; grid-template-columns:270px minmax(400px,560px) minmax(360px,1fr);
   gap:24px; align-items:start;
 }
 .opp-sidebar{
-  position:sticky; top:96px; display:flex; flex-direction:column; gap:18px;
-  background:var(--card-bg); border:1px solid var(--card-border); border-radius:16px; padding:18px;
+  position:sticky; top:84px; display:flex; flex-direction:column; gap:18px;
+  background:var(--card-bg); border:1px solid var(--card-border); border-radius:16px; padding:20px;
 }
 .opp-side-section + .opp-side-section{ border-top:1px solid var(--card-border); padding-top:16px; }
 .opp-side-heading{
@@ -1396,7 +1390,7 @@ html{ scroll-behavior:smooth; }
 }
 .opp-major-row.is-checked .opp-major-check{ background:var(--cover); border-color:var(--cover); }
 .opp-major-check svg{ transform:rotate(90deg) scaleX(-1); }
-.opp-major-label{ flex:1; font-size:13.5px; font-weight:600; color:var(--navy); }
+.opp-major-label{ flex:1; font-size:14.5px; font-weight:600; color:var(--navy); }
 .opp-major-row.is-soon .opp-major-label{ color:var(--navy-faint); }
 .opp-major-count{ font-size:12px; font-weight:700; color:var(--navy-soft); }
 .opp-major-soon{
@@ -1416,7 +1410,7 @@ html{ scroll-behavior:smooth; }
 /* the results panel scrolls on its own, independent of the page, matching the sidebar
    and map which are already sticky/fixed-height beside it */
 .opp-results{
-  position:sticky; top:96px; height:calc(100vh - 130px); min-width:0;
+  position:sticky; top:84px; height:calc(100vh - 100px); min-width:0;
   display:flex; flex-direction:column;
 }
 .opp-list-scroll{ flex:1; overflow-y:auto; padding-right:6px; margin-right:-6px; }
@@ -1428,9 +1422,9 @@ html{ scroll-behavior:smooth; }
 }
 
 /* ---- map pane ---- */
-.opp-map-col{ position:sticky; top:96px; min-width:0; }
+.opp-map-col{ position:sticky; top:84px; min-width:0; }
 .opp-map-pane{
-  position:relative; height:calc(100vh - 130px); min-height:420px; border-radius:16px;
+  position:relative; height:calc(100vh - 100px); min-height:420px; border-radius:16px;
   overflow:hidden; border:1px solid var(--card-border); box-shadow:0 1px 2px rgba(30,37,64,.04);
 }
 .opp-map-canvas{ width:100%; height:100%; background:var(--pages-shadow); }
@@ -1524,8 +1518,8 @@ html{ scroll-behavior:smooth; }
 }
 
 .opp-card{
-  position:relative; display:flex; gap:16px; background:var(--card-bg);
-  border:2px solid var(--card-border); border-radius:16px; padding:18px 20px;
+  position:relative; display:flex; gap:18px; background:var(--card-bg);
+  border:2px solid var(--card-border); border-radius:18px; padding:22px 24px;
   box-shadow:0 1px 2px rgba(30,37,64,.04); cursor:pointer; transition:border-color .15s ease, box-shadow .15s ease;
 }
 .opp-card:hover{ border-color:rgba(221,107,46,.4); }
@@ -1544,7 +1538,7 @@ html{ scroll-behavior:smooth; }
 /* neutral card so a real (often white-background) logo image sits cleanly; the SVG
    fallback icon is tinted via `color` instead of relying on a colored tile behind it */
 .opp-badge{
-  flex:none; width:40px; height:40px; border-radius:11px; display:flex; align-items:center;
+  flex:none; width:48px; height:48px; border-radius:13px; display:flex; align-items:center;
   justify-content:center; background:#fff; border:1px solid var(--card-border); overflow:hidden;
 }
 .opp-badge svg{ stroke:currentColor; }
@@ -1558,10 +1552,10 @@ html{ scroll-behavior:smooth; }
 .opp-card-body{ flex:1; min-width:0; }
 .opp-card-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
 .opp-title{
-  font-family:"Iowan Old Style",Palatino,Georgia,serif; font-weight:700; font-size:17px;
+  font-family:"Iowan Old Style",Palatino,Georgia,serif; font-weight:700; font-size:19px;
   color:var(--navy); margin:0;
 }
-.opp-org{ font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; color:var(--opp-text-soft); margin-top:2px; font-weight:600; }
+.opp-org{ font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; color:var(--opp-text-soft); margin-top:2px; font-weight:600; }
 
 .opp-confidence{
   flex:none; font-family:"Segoe UI",system-ui,sans-serif; font-size:10.5px; font-weight:700;
@@ -1572,8 +1566,8 @@ html{ scroll-behavior:smooth; }
 .opp-confidence--low{ background:rgba(169,79,30,.14); color:var(--cover-dark); }
 
 .opp-blurb{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; line-height:1.5; color:var(--navy);
-  margin:9px 0 12px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; line-height:1.55; color:var(--navy);
+  margin:10px 0 13px;
 }
 
 .opp-tags{ display:flex; flex-wrap:wrap; gap:7px; margin-bottom:12px; }
