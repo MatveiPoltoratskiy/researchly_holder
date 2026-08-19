@@ -15,9 +15,11 @@ function Page() {
   const isLanding =
     path !== '/contact' && path !== '/how-it-works' && path !== '/opportunities' && path !== '/interview'
 
+  const isInterview = path === '/interview'
+
   const content = (
     <>
-      <Navbar />
+      {!isInterview && <Navbar />}
       {path === '/contact' ? (
         <Contact />
       ) : path === '/how-it-works' ? (

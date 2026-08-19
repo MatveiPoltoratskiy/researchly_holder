@@ -12,6 +12,10 @@ import Glyph from './InterviewIcons'
 // quiz, not a form."
 const TOTAL_STEPS = 7
 
+// steps where more than one answer legitimately applies — these render checkboxes and a
+// bottom Continue button instead of auto-advancing on the first click
+const MULTI_SELECT_STEPS = new Set([2, 3])
+
 // every field in the taxonomy is offered here, not just the tier-1 ones the dataset can
 // currently back — a thin/empty result for e.g. "Law" is an acceptable gap for now,
 // showing students a narrower field list they can't pick from is not.
@@ -99,8 +103,8 @@ function hasSubfocus(fieldId) {
   return (FIELD_BY_ID[fieldId]?.subfocus?.length || 0) > 0
 }
 
-// shared row used by steps 2/3/6/7 — a colored glyph badge, label + description, and a
-// checkmark that lights up once selected
+// shared tile used by steps 2/3/6/7 — a glyph badge (dark by default, inverts to white
+// on a solid color fill once selected), a label + description, and a checkmark
 function OptionRow({ glyph, color, label, desc, selected, onClick }) {
   return (
     <button type="button" className={`interview-option-row ${selected ? 'is-selected' : ''}`} onClick={onClick}>
@@ -123,8 +127,8 @@ export default function Interview() {
   const [step, setStep] = useState(1)
   const [answers, setAnswers] = useState({
     field: null,
-    subfocus: null,
-    oppType: null,
+    subfocus: [],
+    oppType: [],
     level: null,
     location: '',
     remoteOnly: false,
@@ -161,11 +165,21 @@ export default function Interview() {
     advanceTimerRef.current = setTimeout(() => goTo(step + 1), 320)
   }
 
+  // multi-select steps (Focus, Format) toggle in place — no auto-advance, since the
+  // whole point is picking more than one before continuing
+  function toggleMulti(key, value) {
+    setAnswers((a) => {
+      const current = a[key] || []
+      const next = current.includes(value) ? current.filter((v) => v !== value) : [...current, value]
+      return { ...a, [key]: next }
+    })
+  }
+
   function handleFieldPick(fieldId) {
     // changing field invalidates whatever sub-focus was picked for the OLD field, and
     // fields without a sub-focus list skip straight to step 3
     clearTimeout(advanceTimerRef.current)
-    setAnswers((a) => ({ ...a, field: fieldId, subfocus: null }))
+    setAnswers((a) => ({ ...a, field: fieldId, subfocus: [] }))
     advanceTimerRef.current = setTimeout(() => goTo(hasSubfocus(fieldId) ? 2 : 3), 320)
   }
 
@@ -182,8 +196,8 @@ export default function Interview() {
     clearTimeout(advanceTimerRef.current)
     setAnswers({
       field: null,
-      subfocus: null,
-      oppType: null,
+      subfocus: [],
+      oppType: [],
       level: null,
       location: '',
       remoteOnly: false,
@@ -196,6 +210,7 @@ export default function Interview() {
   const field = answers.field ? FIELD_BY_ID[answers.field] : null
   const subfocusOptions = field?.subfocus || []
   const isDone = step > TOTAL_STEPS
+  const isMultiStep = MULTI_SELECT_STEPS.has(step)
 
   return (
     <section className="interview-page">
@@ -253,7 +268,7 @@ export default function Interview() {
               {step === 2 && field && (
                 <>
                   <h1 className="interview-question">What part of {field.label.toLowerCase()} pulls you in?</h1>
-                  <p className="interview-subtext">This is the difference between a wet-lab placement and a hospital shadowing program.</p>
+                  <p className="interview-subtext">Pick every focus that fits — you can choose more than one.</p>
                   <div className="interview-option-list">
                     {subfocusOptions.map((sf) => (
                       <OptionRow
@@ -262,8 +277,8 @@ export default function Interview() {
                         color={FIELD_META[field.id]?.color}
                         label={sf.label}
                         desc={sf.desc}
-                        selected={answers.subfocus === sf.id}
-                        onClick={() => selectAndAdvance('subfocus', sf.id)}
+                        selected={answers.subfocus.includes(sf.id)}
+                        onClick={() => toggleMulti('subfocus', sf.id)}
                       />
                     ))}
                   </div>
@@ -273,7 +288,7 @@ export default function Interview() {
               {step === 3 && (
                 <>
                   <h1 className="interview-question">What kind of opportunity?</h1>
-                  <p className="interview-subtext">You can always widen this later — this just sets the starting point.</p>
+                  <p className="interview-subtext">Pick as many as you'd take — this just sets the starting point.</p>
                   <div className="interview-option-list">
                     {OPP_TYPES.map((t) => (
                       <OptionRow
@@ -281,8 +296,8 @@ export default function Interview() {
                         glyph={t.glyph}
                         label={t.label}
                         desc={t.desc}
-                        selected={answers.oppType === t.id}
-                        onClick={() => selectAndAdvance('oppType', t.id)}
+                        selected={answers.oppType.includes(t.id)}
+                        onClick={() => toggleMulti('oppType', t.id)}
                       />
                     ))}
                   </div>
@@ -399,6 +414,20 @@ export default function Interview() {
                   </div>
                 </>
               )}
+
+              {isMultiStep && (
+                <div className="interview-step-actions">
+                  <button
+                    type="button"
+                    className="interview-continue-btn"
+                    disabled={(step === 2 ? answers.subfocus : answers.oppType).length === 0}
+                    onClick={() => goTo(step + 1)}
+                  >
+                    Continue
+                    <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow" /></svg>
+                  </button>
+                </div>
+              )}
             </div>
           </>
         ) : (
@@ -414,18 +443,24 @@ export default function Interview() {
                   <Glyph name={FIELD_META[field.id]?.glyph} size={15} /> {field.label}
                 </span>
               )}
-              {subfocusOptions.find((s) => s.id === answers.subfocus) && (
-                <span className="interview-summary-chip">
-                  <Glyph name={SUBFOCUS_GLYPH[answers.subfocus] || 'magnifier'} size={15} />{' '}
-                  {subfocusOptions.find((s) => s.id === answers.subfocus).label}
-                </span>
-              )}
-              {OPP_TYPES.find((t) => t.id === answers.oppType) && (
-                <span className="interview-summary-chip">
-                  <Glyph name={OPP_TYPES.find((t) => t.id === answers.oppType).glyph} size={15} />{' '}
-                  {OPP_TYPES.find((t) => t.id === answers.oppType).label}
-                </span>
-              )}
+              {answers.subfocus.map((sfId) => {
+                const sf = subfocusOptions.find((s) => s.id === sfId)
+                if (!sf) return null
+                return (
+                  <span className="interview-summary-chip" key={sfId}>
+                    <Glyph name={SUBFOCUS_GLYPH[sfId] || 'magnifier'} size={15} /> {sf.label}
+                  </span>
+                )
+              })}
+              {answers.oppType.map((tId) => {
+                const t = OPP_TYPES.find((o) => o.id === tId)
+                if (!t) return null
+                return (
+                  <span className="interview-summary-chip" key={tId}>
+                    <Glyph name={t.glyph} size={15} /> {t.label}
+                  </span>
+                )
+              })}
               {answers.level && (
                 <span className="interview-summary-chip">
                   <Glyph name="gradCap" size={15} /> {levelLabel(answers.level)}
