@@ -107,11 +107,23 @@ function OrgLogo({ org, url, iconId }) {
   )
 }
 
-function OpportunityCard({ o }) {
+function OpportunityCard({ o, selected, onSelect, cardRef }) {
   const primary = FIELD_ORDER.find((f) => o.focus.includes(f)) || o.focus[0]
 
+  // clicking anywhere on the card selects it (highlights it + pans the map to its pin),
+  // except the actual "View program" link, which should just follow through as normal
+  function handleCardClick(e) {
+    if (e.target.closest('a')) return
+    onSelect(o.id)
+  }
+
   return (
-    <article className="opp-card">
+    <article
+      ref={cardRef}
+      className={`opp-card ${selected ? 'is-selected' : ''}`}
+      onClick={handleCardClick}
+    >
+      <span className="opp-card-select-hint">{selected ? 'Selected — shown on map' : 'Click to locate on map'}</span>
       <div className={`opp-badge ${FIELD_META[primary]?.cls || ''}`}>
         <OrgLogo org={o.org} url={o.url} iconId={iconForOrg(o.org)} />
       </div>
@@ -230,7 +242,17 @@ export default function OpportunityExplorer() {
   const [level, setLevel] = useState('all')
   const [costFilters, setCostFilters] = useState(() => new Set())
   const [sortKey, setSortKey] = useState('best-match')
+  const [selectedId, setSelectedId] = useState(null)
   const listTopRef = useRef(null)
+  const cardRefs = useRef(new Map())
+
+  // selecting from the map (a pin the list hasn't scrolled to) should bring the matching
+  // card into view; selecting from the list itself already has it in view, so this is a
+  // no-op there — safe to call from both directions
+  function selectOpportunity(id) {
+    setSelectedId((prev) => (prev === id ? null : id))
+    cardRefs.current.get(id)?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }
 
   // triggered directly from filter clicks (not a state-watching effect) so it only ever
   // fires from a real user interaction, never on mount or on an unrelated re-render
@@ -405,7 +427,16 @@ export default function OpportunityExplorer() {
             </div>
             <div className="opp-list">
               {filtered.map((o) => (
-                <OpportunityCard key={o.id} o={o} />
+                <OpportunityCard
+                  key={o.id}
+                  o={o}
+                  selected={o.id === selectedId}
+                  onSelect={selectOpportunity}
+                  cardRef={(el) => {
+                    if (el) cardRefs.current.set(o.id, el)
+                    else cardRefs.current.delete(o.id)
+                  }}
+                />
               ))}
               {filtered.length === 0 && (
                 <div className="opp-empty">No opportunities match this combination yet.</div>
@@ -414,7 +445,7 @@ export default function OpportunityExplorer() {
           </div>
 
           <div className="opp-map-col">
-            <OpportunityMap opportunities={filtered} />
+            <OpportunityMap opportunities={filtered} selectedId={selectedId} onSelect={selectOpportunity} />
           </div>
         </div>
       </div>
