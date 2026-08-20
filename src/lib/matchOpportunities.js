@@ -48,7 +48,10 @@ function levelWord(levels) {
   return 'students at your level'
 }
 
-function scoreOpportunity(o, answers) {
+// exported so the opportunity explorer's detail modal can show the exact same score for
+// a single listing (real match %, not the old id-hash placeholder) once interview answers
+// have arrived via the handoff, instead of only being usable through getTopMatches below
+export function scoreOpportunity(o, answers) {
   let score = 0
   const reasons = []
   const maxScore = 100

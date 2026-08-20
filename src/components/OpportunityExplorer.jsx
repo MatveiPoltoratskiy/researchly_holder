@@ -3,6 +3,7 @@ import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
 import { FIELDS } from '../data/fields'
 import OpportunityMap from './OpportunityMap'
 import { peekInterviewFilters, clearInterviewFilters } from '../lib/interviewHandoff'
+import { scoreOpportunity } from '../lib/matchOpportunities'
 
 const SORTS = {
   recommended: { label: 'Recommended for you', fn: null },
@@ -324,7 +325,7 @@ function MajorsFilter({ activeFields, toggleField, counts }) {
   )
 }
 
-function OpportunityDetailModal({ o, onClose }) {
+function OpportunityDetailModal({ o, onClose, interviewAnswers }) {
   // Escape-to-close, and lock page scroll while open so the backdrop reads as modal, not
   // just an overlapping card
   useEffect(() => {
@@ -340,13 +341,21 @@ function OpportunityDetailModal({ o, onClose }) {
     }
   }, [onClose])
 
+  // real computed score once the student's actual answers are available (arrived via the
+  // interview handoff) — same scoreOpportunity function that ranked their matches screen,
+  // not the old id-hash placeholder. Falls back to that placeholder, clearly labeled as
+  // one, for a visitor who opened the explorer without taking the interview first.
+  const matchRate = interviewAnswers
+    ? { value: scoreOpportunity(o, interviewAnswers).pct, caption: 'Based on your interview answers' }
+    : { value: matchRateFor(o.id), caption: 'Preview — take the interview for your real match rate' }
+
   const details = [
     ['Application deadline', o.deadline || 'Not confirmed'],
     ['Program dates', AVAILABILITY_LABEL[o.availability] || o.availability],
     ['Eligibility', levelRangeLabel(o.levels) || 'Not confirmed'],
     ['Cost to attend', costLabel(o) || 'Not confirmed'],
     ['Stipend / pay', payLabel(o)],
-    ['Match rate', `${matchRateFor(o.id)}%`, 'Preview, based on your interview once built'],
+    ['Match rate', `${matchRate.value}%`, matchRate.caption],
   ]
 
   return (
@@ -438,14 +447,17 @@ export default function OpportunityExplorer() {
   // session — after the handoff below has cleared it — correctly falls back to
   // defaults instead of replaying a stale first-visit snapshot forever)
   const [interviewHandoff] = useState(() => peekInterviewFilters())
+  const interviewAnswers = interviewHandoff?.answers || null
   const [activeFields, setActiveFields] = useState(() =>
-    interviewHandoff?.focus?.length ? new Set(interviewHandoff.focus) : new Set(FIELD_ORDER)
+    interviewHandoff?.filters?.focus?.length ? new Set(interviewHandoff.filters.focus) : new Set(FIELD_ORDER)
   )
-  const [level, setLevel] = useState(() => interviewHandoff?.level || 'all')
-  const [costFilters, setCostFilters] = useState(() => new Set(interviewHandoff?.cost || []))
+  const [level, setLevel] = useState(() => interviewHandoff?.filters?.level || 'all')
+  const [costFilters, setCostFilters] = useState(() => new Set(interviewHandoff?.filters?.cost || []))
   const [sortKey, setSortKey] = useState('recommended')
-  const [userLocation, setUserLocation] = useState(() => interviewHandoff?.locationCoords || null)
-  const [locationStatus, setLocationStatus] = useState(() => (interviewHandoff?.locationCoords ? 'granted' : 'idle'))
+  const [userLocation, setUserLocation] = useState(() => interviewHandoff?.filters?.locationCoords || null)
+  const [locationStatus, setLocationStatus] = useState(() =>
+    interviewHandoff?.filters?.locationCoords ? 'granted' : 'idle'
+  )
   const [selectedId, setSelectedId] = useState(null)
   const [detailId, setDetailId] = useState(null)
   const [shownCount, setShownCount] = useState(() => CANADA_OPPORTUNITIES.length)
@@ -613,7 +625,7 @@ export default function OpportunityExplorer() {
   // when the interview already handed off real coordinates above — no need to re-prompt
   // for permission the student effectively already gave a few seconds ago.
   useEffect(() => {
-    if (!interviewHandoff?.locationCoords) requestLocation()
+    if (!interviewHandoff?.filters?.locationCoords) requestLocation()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -771,7 +783,13 @@ export default function OpportunityExplorer() {
         </div>
       </div>
 
-      {detailOpportunity && <OpportunityDetailModal o={detailOpportunity} onClose={() => setDetailId(null)} />}
+      {detailOpportunity && (
+        <OpportunityDetailModal
+          o={detailOpportunity}
+          onClose={() => setDetailId(null)}
+          interviewAnswers={interviewAnswers}
+        />
+      )}
     </section>
   )
 }

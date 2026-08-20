@@ -268,7 +268,11 @@ export default function OpportunityMap({ opportunities, selectedId, onSelect, us
     } else {
       userMarkerRef.current.setLatLng(latlng)
     }
-    map.flyTo(latlng, 14, { animate: true, duration: 1.2 })
+    // 11, not the street-level 14 this used to fly to — comfortable enough to show
+    // several nearby pins around the user at once instead of zooming in tight on their
+    // exact address before they've even seen what's nearby (especially now that the
+    // interview handoff can land here with an already-narrow, few-pin filtered set)
+    map.flyTo(latlng, 11, { animate: true, duration: 1.2 })
   }, [userLocation])
 
   return (

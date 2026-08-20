@@ -118,6 +118,14 @@ function explorerFiltersFromAnswers(answers) {
   }
 }
 
+// wraps explorerFiltersFromAnswers plus the raw answers themselves — the explorer needs
+// the derived filters for its initial checkbox/level/cost state, but needs the full
+// answers object (field/oppType/paidPref/etc, not just the trimmed-down filter shape) to
+// compute a real per-card match % via scoreOpportunity when a listing is opened
+function explorerHandoffFromAnswers(answers) {
+  return { filters: explorerFiltersFromAnswers(answers), answers }
+}
+
 // shared tile used by steps 2/3 (grid) and 7 (vertical) — a glyph badge tinted by
 // whatever color it's given, inverting to a solid fill + white glyph once selected
 function OptionRow({ glyph, color, label, desc, selected, onClick }) {
@@ -224,14 +232,20 @@ export default function Interview() {
     advanceTimerRef.current = setTimeout(() => goTo(hasSubfocus(fieldId) ? 2 : 3), 320)
   }
 
-  // fires the confetti + green check moment, then auto-advances shortly after, whether
-  // the location came from geolocation, an autocomplete pick, or "remote only"
-  function confirmLocation() {
+  // fires the confetti + green check moment, and — for the explicit picks (an
+  // autocomplete suggestion, "remote only") — auto-advances shortly after, since those
+  // are already a deliberate click. Geolocation is different: it lands passively the
+  // instant permission is granted, before the student has actually looked at what it
+  // found, so that path (see requestLocation below) opts out of the auto-advance and
+  // waits for a real Continue click instead.
+  function confirmLocation(autoAdvance = true) {
     setLocationConfirmed(true)
     setShowSuggestions(false)
     if (locationCheckRef.current) burstConfetti(locationCheckRef.current, 14)
     clearTimeout(locationAdvanceTimerRef.current)
-    locationAdvanceTimerRef.current = setTimeout(() => goTo(step + 1), 900)
+    if (autoAdvance) {
+      locationAdvanceTimerRef.current = setTimeout(() => goTo(step + 1), 900)
+    }
   }
 
   function requestLocation() {
@@ -258,7 +272,7 @@ export default function Interview() {
           setAnswers((a) => ({ ...a, location: 'Current location', locationCoords: { lat: latitude, lon: longitude } }))
         }
         setLocationStatus('granted')
-        confirmLocation()
+        confirmLocation(false)
       },
       () => setLocationStatus('denied'),
       { timeout: 8000 }
@@ -335,7 +349,7 @@ export default function Interview() {
         onContinue={() => {
           // hands the same answers that scored these matches over to the explorer, so
           // "see all your matches" actually opens pre-filtered instead of the full list
-          setInterviewFilters(explorerFiltersFromAnswers(answers))
+          setInterviewFilters(explorerHandoffFromAnswers(answers))
           navigate('/opportunities')
         }}
       />
