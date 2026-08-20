@@ -2,9 +2,12 @@ import { useEffect, useRef, useState } from 'react'
 import { useRouter } from '../lib/router'
 import { FIELDS, FIELD_BY_ID } from '../data/fields'
 import { searchCities } from '../data/worldCities'
+import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
+import { getTopMatches } from '../lib/matchOpportunities'
 import { burstConfetti } from '../lib/confetti'
 import Glyph from './InterviewIcons'
 import InterviewLoading from './InterviewLoading'
+import InterviewMatches from './InterviewMatches'
 
 // Order follows the "hook them, then narrow" logic: interest questions first (field,
 // sub-focus, opportunity type) while curiosity is highest, then the harder eligibility
@@ -144,6 +147,7 @@ export default function Interview() {
     oppType: [],
     level: null,
     location: '',
+    locationCoords: null, // {lat, lon} when known (real geolocation), null for a typed city
     remoteOnly: false,
     experience: null,
     paidPref: null,
@@ -152,7 +156,10 @@ export default function Interview() {
   const [locationConfirmed, setLocationConfirmed] = useState(false)
   const [suggestions, setSuggestions] = useState([])
   const [showSuggestions, setShowSuggestions] = useState(false)
-  const [showLoading, setShowLoading] = useState(false)
+  // a single enum instead of two booleans — 'loading' and 'matches' being separate
+  // flags meant nothing prevented both being true (or "loading" staying stuck true
+  // forever once set, since nothing ever reset it back to false) at once
+  const [phase, setPhase] = useState('quiz') // quiz | loading | matches
 
   const locationCheckRef = useRef(null)
   const advanceTimerRef = useRef(null)
@@ -230,9 +237,9 @@ export default function Interview() {
           const city = a.city || a.town || a.village || a.municipality || a.county
           const region = a.state || a.region || a.country
           const label = [city, region].filter(Boolean).join(', ')
-          set('location', label || 'Current location')
+          setAnswers((a) => ({ ...a, location: label || 'Current location', locationCoords: { lat: latitude, lon: longitude } }))
         } catch {
-          set('location', 'Current location')
+          setAnswers((a) => ({ ...a, location: 'Current location', locationCoords: { lat: latitude, lon: longitude } }))
         }
         setLocationStatus('granted')
         confirmLocation()
@@ -252,7 +259,10 @@ export default function Interview() {
   }, [step])
 
   function handleLocationInputChange(value) {
-    set('location', value)
+    // typing manually invalidates any coordinates a prior geolocation grant had set —
+    // otherwise a stale lat/lon would keep scoring distance against a city the student
+    // no longer typed
+    setAnswers((a) => ({ ...a, location: value, locationCoords: null }))
     setLocationConfirmed(false)
     const matches = searchCities(value)
     setSuggestions(matches)
@@ -260,7 +270,7 @@ export default function Interview() {
   }
 
   function pickSuggestion(city) {
-    set('location', city)
+    setAnswers((a) => ({ ...a, location: city, locationCoords: null }))
     setSuggestions([])
     confirmLocation()
   }
@@ -275,9 +285,8 @@ export default function Interview() {
   }
 
   function handleRemoteToggle(checked) {
-    set('remoteOnly', checked)
+    setAnswers((a) => ({ ...a, remoteOnly: checked, ...(checked ? { location: '', locationCoords: null } : {}) }))
     if (checked) {
-      set('location', '')
       confirmLocation()
     } else {
       setLocationConfirmed(false)
@@ -289,15 +298,22 @@ export default function Interview() {
   function finishInterview(value) {
     clearTimeout(advanceTimerRef.current)
     setAnswers((a) => ({ ...a, paidPref: value }))
-    advanceTimerRef.current = setTimeout(() => setShowLoading(true), 320)
+    advanceTimerRef.current = setTimeout(() => setPhase('loading'), 320)
   }
 
   const field = answers.field ? FIELD_BY_ID[answers.field] : null
   const subfocusOptions = field?.subfocus || []
   const isMultiStep = MULTI_SELECT_STEPS.has(step)
 
-  if (showLoading) {
-    return <InterviewLoading onDone={() => navigate('/opportunities')} />
+  if (phase === 'loading') {
+    return <InterviewLoading onDone={() => setPhase('matches')} />
+  }
+
+  if (phase === 'matches') {
+    // computed once, right when this phase is entered — answers are settled by now, no
+    // need to re-score on every keystroke earlier in the flow
+    const matches = getTopMatches(CANADA_OPPORTUNITIES, answers, 3)
+    return <InterviewMatches matches={matches} onContinue={() => navigate('/opportunities')} />
   }
 
   return (

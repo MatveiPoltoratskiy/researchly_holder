@@ -11,18 +11,26 @@ const CARD_COLORS = ['var(--cover)', 'var(--pine)', 'var(--gold)']
 export default function InterviewLoading({ onDone }) {
   const [burst, setBurst] = useState(false)
   const iconRef = useRef(null)
+  // the parent passes a fresh inline arrow function on every one of its own re-renders —
+  // keeping the latest one in a ref (rather than the effect's dependency array) means the
+  // timers below only ever get set up once, on mount, instead of being cleared and
+  // restarted by every unrelated parent re-render (which was silently preventing onDone
+  // from ever firing before this fix)
+  const onDoneRef = useRef(onDone)
+  onDoneRef.current = onDone
 
   useEffect(() => {
     if (iconRef.current) burstConfetti(iconRef.current, 18)
     // plays the shuffle for a beat, then "speeds up" (burst class shortens the cycle +
     // scales the stack up) right before handing off to the results page
     const burstTimer = setTimeout(() => setBurst(true), 950)
-    const doneTimer = setTimeout(() => onDone?.(), 1450)
+    const doneTimer = setTimeout(() => onDoneRef.current?.(), 1450)
     return () => {
       clearTimeout(burstTimer)
       clearTimeout(doneTimer)
     }
-  }, [onDone])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div className={`interview-loading ${burst ? 'is-bursting' : ''}`}>
