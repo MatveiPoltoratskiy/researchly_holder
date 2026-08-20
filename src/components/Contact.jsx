@@ -11,6 +11,7 @@ export default function Contact() {
   const [form, setForm] = useState(initialForm)
   const [status, setStatus] = useState('idle') // idle | submitting | success | error
   const [errorMsg, setErrorMsg] = useState('')
+  const [hp, setHp] = useState('') // honeypot — see Waitlist.jsx for the full explanation
   const badgeRef = useRef(null)
 
   useEffect(() => {
@@ -43,6 +44,12 @@ export default function Contact() {
     if (!EMAIL_RE.test(email)) {
       setStatus('error')
       setErrorMsg('Enter a valid email address.')
+      return
+    }
+
+    if (hp.trim()) {
+      setStatus('success')
+      setForm(initialForm)
       return
     }
 
@@ -109,6 +116,16 @@ export default function Contact() {
       ) : (
       <div className="contact-card">
         <form className="contact-form" onSubmit={handleSubmit} noValidate>
+          <input
+            type="text"
+            name="company"
+            className="hp-field"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            value={hp}
+            onChange={(e) => setHp(e.target.value)}
+          />
           <div className="contact-grid">
             <div className="contact-field">
               <label htmlFor="contact-name">Name</label>

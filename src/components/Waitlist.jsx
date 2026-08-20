@@ -8,6 +8,11 @@ export default function Waitlist() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState('idle') // idle | submitting | success | error
   const [message, setMessage] = useState('')
+  // honeypot: real visitors never see or fill this field (off-screen, aria-hidden,
+  // excluded from tab order); a bot that blindly fills every input does. A non-empty
+  // value means "skip the insert, but pretend it worked" so the bot doesn't learn to
+  // adapt.
+  const [hp, setHp] = useState('')
   const buttonRef = useRef(null)
 
   async function handleSubmit(e) {
@@ -18,6 +23,13 @@ export default function Waitlist() {
     if (!EMAIL_RE.test(trimmed)) {
       setStatus('error')
       setMessage('Enter a valid email address.')
+      return
+    }
+
+    if (hp.trim()) {
+      setStatus('success')
+      setMessage("You're on the list. We'll reach out as spots open.")
+      setEmail('')
       return
     }
 
@@ -69,6 +81,16 @@ export default function Waitlist() {
   return (
     <div className="cta-wrap">
       <form className="waitlist-form" onSubmit={handleSubmit} noValidate>
+        <input
+          type="text"
+          name="company"
+          className="hp-field"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          value={hp}
+          onChange={(e) => setHp(e.target.value)}
+        />
         <label htmlFor="waitlist-email" className="visually-hidden">Email address</label>
         <input
           id="waitlist-email"

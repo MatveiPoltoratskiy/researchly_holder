@@ -25,6 +25,7 @@ export default function Footer() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState('idle') // idle | submitting | success | error
   const [message, setMessage] = useState('')
+  const [hp, setHp] = useState('') // honeypot — see Waitlist.jsx for the full explanation
 
   // real server-verified access (see lib/devAccess.js) — keeps the in-progress
   // prototype routes off the public internet before launch, so a cofounder can test
@@ -69,6 +70,12 @@ export default function Footer() {
     if (!EMAIL_RE.test(trimmed)) {
       setStatus('error')
       setMessage('Enter a valid email address.')
+      return
+    }
+    if (hp.trim()) {
+      setStatus('success')
+      setMessage("You're on the list.")
+      setEmail('')
       return
     }
     if (!supabase) {
@@ -140,6 +147,16 @@ export default function Footer() {
               <p className="footer-newsletter-success">{message}</p>
             ) : (
               <form className="footer-email-form" onSubmit={handleSubmit} noValidate>
+                <input
+                  type="text"
+                  name="company"
+                  className="hp-field"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  value={hp}
+                  onChange={(e) => setHp(e.target.value)}
+                />
                 <svg className="footer-email-icon" width="18" height="18" aria-hidden="true"><use href="#icon-mail" /></svg>
                 <label htmlFor="footer-email" className="visually-hidden">Email address</label>
                 <input

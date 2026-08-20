@@ -41,6 +41,11 @@ body{
 svg{ display:block; }
 .visually-hidden{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
 
+/* honeypot fields on the public write forms (Waitlist, Footer newsletter, Contact) — off
+   screen rather than display:none/visibility:hidden, since some bots specifically skip
+   filling fields hidden that way but miss ones just positioned off-canvas */
+.hp-field{ position:absolute; left:-9999px; top:-9999px; width:1px; height:1px; opacity:0; pointer-events:none; }
+
 /* set by usePauseAnimationsOffscreen (src/lib/motion.js) — freezes every continuous CSS
    animation within a section once it's scrolled out of view, so only what's actually
    visible keeps animating instead of everything running forever in the background */
