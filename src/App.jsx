@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import IconSprite from './components/IconSprite'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -9,13 +10,13 @@ import Footer from './components/Footer'
 import OpportunityExplorer from './components/OpportunityExplorer'
 import Interview from './components/Interview'
 import { RouterProvider, useRouter } from './lib/router'
-import { isDevUnlocked } from './lib/devAccess'
+import { verifyDevAccess } from './lib/devAccess'
 
 const DEV_ROUTES = new Set(['/interview', '/opportunities'])
 
-// deliberately plain and uninteresting — this is casual-visitor deterrence (see
-// lib/devAccess.js), not a real security boundary, so the page shouldn't invite
-// curiosity by looking like it's hiding something
+// deliberately plain and uninteresting — this is a real server-verified gate (see
+// lib/devAccess.js + api/dev-verify.js), but the page still shouldn't invite curiosity
+// by looking like it's hiding something worth finding
 function RouteUnavailable() {
   return (
     <div className="route-unavailable">
@@ -27,12 +28,28 @@ function RouteUnavailable() {
 
 function Page() {
   const { path } = useRouter()
+  const isDevRoute = DEV_ROUTES.has(path)
+  // checking | granted | denied — starts at "checking" so a legitimately unlocked
+  // visitor never flashes the "unavailable" page while the server round-trip resolves
+  const [devAccess, setDevAccess] = useState('checking')
 
-  if (DEV_ROUTES.has(path) && !isDevUnlocked()) {
+  useEffect(() => {
+    if (!isDevRoute) return
+    let cancelled = false
+    setDevAccess('checking')
+    verifyDevAccess().then((ok) => {
+      if (!cancelled) setDevAccess(ok ? 'granted' : 'denied')
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [path, isDevRoute])
+
+  if (isDevRoute && devAccess !== 'granted') {
     return (
       <>
         <IconSprite />
-        <RouteUnavailable />
+        {devAccess === 'denied' && <RouteUnavailable />}
       </>
     )
   }

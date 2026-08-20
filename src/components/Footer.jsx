@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useRouter } from '../lib/router'
 import { supabase } from '../lib/supabase'
-import { isDevUnlocked, tryUnlock } from '../lib/devAccess'
+import { verifyDevAccess, unlockDevAccess } from '../lib/devAccess'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -26,17 +26,32 @@ export default function Footer() {
   const [status, setStatus] = useState('idle') // idle | submitting | success | error
   const [message, setMessage] = useState('')
 
-  // not a real security gate (see lib/devAccess.js) — just keeps the in-progress
-  // prototype routes from being stumbled on before launch, so a cofounder can test
-  // without it being publicly linked yet
+  // real server-verified access (see lib/devAccess.js) — keeps the in-progress
+  // prototype routes off the public internet before launch, so a cofounder can test
+  // without them being publicly linked yet
   const [devPromptOpen, setDevPromptOpen] = useState(false)
   const [devPassInput, setDevPassInput] = useState('')
-  const [devUnlocked, setDevUnlocked] = useState(() => isDevUnlocked())
+  const [devUnlocked, setDevUnlocked] = useState(false)
+  const [devSubmitting, setDevSubmitting] = useState(false)
   const [devError, setDevError] = useState(false)
 
-  function handleDevSubmit(e) {
+  useEffect(() => {
+    let cancelled = false
+    verifyDevAccess().then((ok) => {
+      if (!cancelled) setDevUnlocked(ok)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  async function handleDevSubmit(e) {
     e.preventDefault()
-    if (tryUnlock(devPassInput)) {
+    if (devSubmitting) return
+    setDevSubmitting(true)
+    const ok = await unlockDevAccess(devPassInput)
+    setDevSubmitting(false)
+    if (ok) {
       setDevUnlocked(true)
       setDevPromptOpen(false)
       setDevPassInput('')
@@ -204,7 +219,9 @@ export default function Footer() {
               autoFocus
               aria-invalid={devError}
             />
-            <button type="submit" className="footer-dev-submit">Unlock</button>
+            <button type="submit" className="footer-dev-submit" disabled={devSubmitting}>
+              {devSubmitting ? '...' : 'Unlock'}
+            </button>
             {devError && <span className="footer-dev-error">Not it.</span>}
           </form>
         )}
