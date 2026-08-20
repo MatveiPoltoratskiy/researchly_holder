@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { supabase } from '../lib/supabase'
+import { submitContact } from '../lib/formSubmit'
 import { burstConfetti } from '../lib/confetti'
 import SymbolField from './SymbolField'
 
@@ -53,26 +53,19 @@ export default function Contact() {
       return
     }
 
-    if (!supabase) {
-      setStatus('error')
-      setErrorMsg('Something went wrong. Please try again later.')
-      return
-    }
-
     setStatus('submitting')
     setErrorMsg('')
 
-    const { error } = await supabase.from('contact_messages').insert({ name, email, subject, message })
+    const { ok, data } = await submitContact({ name, email, subject, message, hp })
 
-    if (!error) {
+    if (ok && data.ok) {
       setStatus('success')
       setForm(initialForm)
       return
     }
 
-    console.error('contact_messages insert error:', error)
     setStatus('error')
-    setErrorMsg('Something went wrong. Please try again.')
+    setErrorMsg(data.error || 'Something went wrong. Please try again.')
   }
 
   const isSubmitting = status === 'submitting'

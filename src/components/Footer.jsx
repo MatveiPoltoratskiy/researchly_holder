@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useRouter } from '../lib/router'
-import { supabase } from '../lib/supabase'
+import { submitWaitlist } from '../lib/formSubmit'
 import { verifyDevAccess, unlockDevAccess } from '../lib/devAccess'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -78,31 +78,19 @@ export default function Footer() {
       setEmail('')
       return
     }
-    if (!supabase) {
-      setStatus('error')
-      setMessage('Something went wrong. Please try again later.')
-      return
-    }
-
     setStatus('submitting')
     setMessage('')
 
-    const { error } = await supabase.from('waitlist').insert({ email: trimmed })
+    const { ok, data } = await submitWaitlist({ email: trimmed, hp })
 
-    if (!error) {
+    if (ok && data.ok) {
       setStatus('success')
-      setMessage("You're on the list.")
-      setEmail('')
-      return
-    }
-    if (error.code === '23505') {
-      setStatus('success')
-      setMessage("You're already on the list.")
+      setMessage(data.alreadyRegistered ? "You're already on the list." : "You're on the list.")
       setEmail('')
       return
     }
     setStatus('error')
-    setMessage('Something went wrong. Please try again.')
+    setMessage(data.error || 'Something went wrong. Please try again.')
   }
 
   const isSubmitting = status === 'submitting'

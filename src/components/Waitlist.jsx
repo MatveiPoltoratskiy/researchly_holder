@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { supabase } from '../lib/supabase'
+import { submitWaitlist } from '../lib/formSubmit'
 import { burstConfetti } from '../lib/confetti'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -33,34 +33,25 @@ export default function Waitlist() {
       return
     }
 
-    if (!supabase) {
-      setStatus('error')
-      setMessage('Something went wrong. Please try again later.')
-      return
-    }
-
     setStatus('submitting')
     setMessage('')
 
-    const { error } = await supabase.from('waitlist').insert({ email: trimmed })
+    const { ok, data } = await submitWaitlist({ email: trimmed, hp })
 
-    if (!error) {
+    if (ok && data.ok) {
       setStatus('success')
-      setMessage("You're on the list. We'll reach out as spots open.")
+      setMessage(
+        data.alreadyRegistered
+          ? "You're already on the list. We'll reach out as spots open."
+          : "You're on the list. We'll reach out as spots open."
+      )
       setEmail('')
-      if (buttonRef.current) burstConfetti(buttonRef.current, 16)
-      return
-    }
-
-    if (error.code === '23505') {
-      setStatus('success')
-      setMessage("You're already on the list. We'll reach out as spots open.")
-      setEmail('')
+      if (!data.alreadyRegistered && buttonRef.current) burstConfetti(buttonRef.current, 16)
       return
     }
 
     setStatus('error')
-    setMessage('Something went wrong. Please try again.')
+    setMessage(data.error || 'Something went wrong. Please try again.')
   }
 
   const isSubmitting = status === 'submitting'
