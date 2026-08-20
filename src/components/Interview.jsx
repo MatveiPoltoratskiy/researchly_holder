@@ -9,6 +9,7 @@ import { burstConfetti } from '../lib/confetti'
 import Glyph from './InterviewIcons'
 import InterviewLoading from './InterviewLoading'
 import InterviewMatches from './InterviewMatches'
+import SymbolField from './SymbolField'
 
 // Order follows the "hook them, then narrow" logic: interest questions first (field,
 // sub-focus, opportunity type) while curiosity is highest, then the harder eligibility
@@ -394,6 +395,20 @@ export default function Interview() {
 
   return (
     <section className="interview-page">
+      {/* rendered once, outside the key={step}-remounted card below, so it's the exact
+          same SymbolField instance (same DOM node, same running timers) across every
+          step change — the ask was specifically "no cuts" as the quiz advances, and a
+          component that unmounts/remounts per step would reset its symbol positions and
+          cycle timing right when the card itself changes, reading as a visible jump */}
+      <div className="interview-symbol-field" aria-hidden="true">
+        <SymbolField
+          rows={7}
+          cols={16}
+          opacityRange={[0.14, 0.22]}
+          fontSizeRange={[16, 26]}
+          colors={['var(--symbol-tan)', 'var(--cover-dark)', 'var(--ribbon)', 'var(--navy)', 'var(--gold)']}
+        />
+      </div>
       <div className="container interview-container">
         <div className="interview-progress-row">
               <button type="button" className="interview-back" onClick={goBack} disabled={step === 1}>

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
 import { FIELDS } from '../data/fields'
 import OpportunityMap from './OpportunityMap'
+import SymbolField from './SymbolField'
 import { peekInterviewFilters, clearInterviewFilters } from '../lib/interviewHandoff'
 import { scoreOpportunity } from '../lib/matchOpportunities'
 
@@ -642,10 +643,25 @@ export default function OpportunityExplorer() {
     <section className="opp-explorer">
       <div className="container opp-container">
         <div className="opp-header">
-          <p className="opp-eyebrow">We found</p>
+          {/* a light version of the interview's ambient symbol field — scoped to just
+              this header band, not the whole page, since the filters/list/map below are
+              dense working UI where floating background text would fight for attention
+              rather than just set a mood */}
+          <div className="opp-header-symbol-field" aria-hidden="true">
+            <SymbolField
+              rows={3}
+              cols={16}
+              opacityRange={[0.1, 0.16]}
+              fontSizeRange={[15, 24]}
+              colors={['var(--symbol-tan)', 'var(--cover-dark)', 'var(--ribbon)', 'var(--gold)']}
+            />
+          </div>
           <h1 className="opp-heading">
-            <span className={`opp-heading-count ${countShimmer ? 'is-shimmer' : ''}`}>{shownCount}</span> opportunit
-            {shownCount === 1 ? 'y' : 'ies'}
+            We <em className="opp-heading-found">found</em>{' '}
+            <span className={`opp-heading-count ${countShimmer ? 'is-shimmer' : ''}`}>{shownCount}</span>{' '}
+            <span className="opp-heading-word">
+              opportunit{shownCount === 1 ? 'y' : 'ies'}
+            </span>
           </h1>
           <div className="opp-prioritized">
             <span>Prioritized for</span>
