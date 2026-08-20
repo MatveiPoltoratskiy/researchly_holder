@@ -14,7 +14,7 @@
 // interview's 15-field taxonomy. Fields with a natural adjacency map to the closest real
 // tag; fields with no honest match (computer-science) get no forced tag rather than a
 // misleading one — they're just scored on level/format/paid/location instead.
-const FIELD_TO_FOCUS = {
+export const FIELD_TO_FOCUS = {
   biology: 'biology',
   'pre-med': 'pre-med',
   chemistry: 'chemistry',
@@ -35,6 +35,17 @@ function distanceKm(lat1, lon1, lat2, lon2) {
     Math.sin(dLat / 2) ** 2 +
     Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLon / 2) ** 2
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+}
+
+// last-resort fallback text for scoreOpportunity's reasons list below — still a real
+// fact about the listing (its actual eligibility range), not a generic filler phrase
+function levelWord(levels) {
+  const hs = levels.some((l) => l.startsWith('hs'))
+  const ug = levels.some((l) => l.startsWith('ugrad'))
+  if (hs && ug) return 'both high schoolers and undergrads'
+  if (hs) return 'high schoolers'
+  if (ug) return 'undergrads'
+  return 'students at your level'
 }
 
 function scoreOpportunity(o, answers) {
@@ -89,6 +100,12 @@ function scoreOpportunity(o, answers) {
       reasons.push({ weight: 10, text: o.stipend ? `it pays $${o.stipend.toLocaleString()}` : "it's paid" })
     }
     // no credit if unpaid and they required paid — real mismatch
+  } else if (answers.paidPref === 'free-to-attend') {
+    if (o.cost === 0) {
+      score += 10
+      reasons.push({ weight: 10, text: "it's free to attend" })
+    }
+    // no credit if it costs money and they need it free — real mismatch
   } else {
     score += 10
   }
@@ -130,6 +147,17 @@ function scoreOpportunity(o, answers) {
     else score += 2
   } else {
     score += 3
+  }
+
+  // every card needs at least one concrete, real-data-backed reason to show — if none of
+  // the scored criteria above actually matched (a lower-ranked card in a thin result set),
+  // fall back to whichever true, specific fact about the listing itself is strongest,
+  // rather than showing no reason at all
+  if (!reasons.length) {
+    if (o.paid) reasons.push({ weight: 0, text: o.stipend ? `it pays $${o.stipend.toLocaleString()}` : "it's paid" })
+    else if (o.cost === 0) reasons.push({ weight: 0, text: "it's free to attend" })
+    else if (o.confidence === 'high') reasons.push({ weight: 0, text: "it's a verified listing" })
+    else reasons.push({ weight: 0, text: `it's open to ${levelWord(o.levels)}` })
   }
 
   const pct = Math.round(55 + Math.min(1, score / maxScore) * 43)

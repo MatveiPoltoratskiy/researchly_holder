@@ -3,7 +3,8 @@ import { useRouter } from '../lib/router'
 import { FIELDS, FIELD_BY_ID } from '../data/fields'
 import { searchCities } from '../data/worldCities'
 import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
-import { getTopMatches } from '../lib/matchOpportunities'
+import { getTopMatches, FIELD_TO_FOCUS } from '../lib/matchOpportunities'
+import { setInterviewFilters } from '../lib/interviewHandoff'
 import { burstConfetti } from '../lib/confetti'
 import Glyph from './InterviewIcons'
 import InterviewLoading from './InterviewLoading'
@@ -92,14 +93,29 @@ const EXPERIENCE_LEVELS = [
 
 const PAID_PREFS = [
   { id: 'paid-only', glyph: 'dollarCoin', label: 'Paid only', desc: 'I need this to come with a stipend or salary' },
-  { id: 'open-to-unpaid', glyph: 'target', label: 'Open to unpaid too', desc: 'The experience matters more than the pay' },
-  { id: 'doesnt-matter', glyph: 'either', label: "Doesn't matter", desc: 'Show me everything, paid or not' },
+  { id: 'free-to-attend', glyph: 'priceTag', label: 'Free to attend', desc: 'It just needs to cost nothing to join' },
+  { id: 'doesnt-matter', glyph: 'either', label: "Doesn't matter", desc: 'Show me everything' },
 ]
 
 const STEP_LABELS = ['Field', 'Focus', 'Format', 'Level', 'Location', 'Experience', 'Pay']
 
 function hasSubfocus(fieldId) {
   return (FIELD_BY_ID[fieldId]?.subfocus?.length || 0) > 0
+}
+
+// translates interview answers into the explorer's own filter shape (a subset of its
+// four live focus tags, a level bucket, a cost bucket, and known coordinates) — reuses
+// the same field mapping matchOpportunities.js scores against, so the pre-filtered list
+// and the ranked matches the student just saw agree with each other
+function explorerFiltersFromAnswers(answers) {
+  const mappedFocus = answers.field ? FIELD_TO_FOCUS[answers.field] : null
+  const level = answers.level?.startsWith('hs') ? 'hs' : answers.level?.startsWith('ugrad') ? 'undergrad' : 'all'
+  return {
+    focus: mappedFocus ? [mappedFocus] : null,
+    level,
+    cost: answers.paidPref === 'free-to-attend' ? ['free'] : [],
+    locationCoords: answers.remoteOnly ? null : answers.locationCoords || null,
+  }
 }
 
 // shared tile used by steps 2/3 (grid) and 7 (vertical) — a glyph badge tinted by
@@ -312,8 +328,18 @@ export default function Interview() {
   if (phase === 'matches') {
     // computed once, right when this phase is entered — answers are settled by now, no
     // need to re-score on every keystroke earlier in the flow
-    const matches = getTopMatches(CANADA_OPPORTUNITIES, answers, 3)
-    return <InterviewMatches matches={matches} onContinue={() => navigate('/opportunities')} />
+    const matches = getTopMatches(CANADA_OPPORTUNITIES, answers, 4)
+    return (
+      <InterviewMatches
+        matches={matches}
+        onContinue={() => {
+          // hands the same answers that scored these matches over to the explorer, so
+          // "see all your matches" actually opens pre-filtered instead of the full list
+          setInterviewFilters(explorerFiltersFromAnswers(answers))
+          navigate('/opportunities')
+        }}
+      />
+    )
   }
 
   return (
@@ -378,7 +404,7 @@ export default function Interview() {
                 )}
                 {step === 7 && (
                   <>
-                    <h1 className="interview-question">Paid or unpaid?</h1>
+                    <h1 className="interview-question">Paid, or free to attend?</h1>
                     <p className="interview-subtext">Last question. Most students take either if the opportunity is strong enough.</p>
                   </>
                 )}

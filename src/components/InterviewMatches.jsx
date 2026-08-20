@@ -75,7 +75,7 @@ function stableHash(str) {
 function pitchFor(o) {
   if (!o.matchReasons.length) return null
   const hook = PITCH_HOOKS[stableHash(String(o.id)) % PITCH_HOOKS.length]
-  return `${hook} — ${o.matchReasons.join(', plus ')}.`
+  return `${hook}: ${o.matchReasons.join(', plus ')}.`
 }
 
 // A results-preview screen, not a copy of any particular reference: our own card shell

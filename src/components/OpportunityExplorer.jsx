@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
 import { FIELDS } from '../data/fields'
 import OpportunityMap from './OpportunityMap'
+import { peekInterviewFilters, clearInterviewFilters } from '../lib/interviewHandoff'
 
 const SORTS = {
   recommended: { label: 'Recommended for you', fn: null },
@@ -433,12 +434,18 @@ function OpportunityDetailModal({ o, onClose }) {
 }
 
 export default function OpportunityExplorer() {
-  const [activeFields, setActiveFields] = useState(() => new Set(FIELD_ORDER))
-  const [level, setLevel] = useState('all')
-  const [costFilters, setCostFilters] = useState(() => new Set())
+  // read once per mount (not per module load, so a second visit within the same SPA
+  // session — after the handoff below has cleared it — correctly falls back to
+  // defaults instead of replaying a stale first-visit snapshot forever)
+  const [interviewHandoff] = useState(() => peekInterviewFilters())
+  const [activeFields, setActiveFields] = useState(() =>
+    interviewHandoff?.focus?.length ? new Set(interviewHandoff.focus) : new Set(FIELD_ORDER)
+  )
+  const [level, setLevel] = useState(() => interviewHandoff?.level || 'all')
+  const [costFilters, setCostFilters] = useState(() => new Set(interviewHandoff?.cost || []))
   const [sortKey, setSortKey] = useState('recommended')
-  const [userLocation, setUserLocation] = useState(null)
-  const [locationStatus, setLocationStatus] = useState('idle')
+  const [userLocation, setUserLocation] = useState(() => interviewHandoff?.locationCoords || null)
+  const [locationStatus, setLocationStatus] = useState(() => (interviewHandoff?.locationCoords ? 'granted' : 'idle'))
   const [selectedId, setSelectedId] = useState(null)
   const [detailId, setDetailId] = useState(null)
   const [shownCount, setShownCount] = useState(() => CANADA_OPPORTUNITIES.length)
@@ -602,10 +609,18 @@ export default function OpportunityExplorer() {
 
   // ask for location as soon as the page loads, rather than waiting on a click — this is
   // the default sort mode's whole reason for existing, so the permission prompt should
-  // show up immediately instead of behind a button the visitor may never press
+  // show up immediately instead of behind a button the visitor may never press. Skipped
+  // when the interview already handed off real coordinates above — no need to re-prompt
+  // for permission the student effectively already gave a few seconds ago.
   useEffect(() => {
-    requestLocation()
+    if (!interviewHandoff?.locationCoords) requestLocation()
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // one-shot: the filters above were already read into state on mount, so the handoff
+  // itself is consumed here and won't leak into a later, unrelated visit to this page
+  useEffect(() => {
+    clearInterviewFilters()
   }, [])
 
   const activeFieldLabels = FIELD_ORDER.filter((f) => activeFields.has(f)).map((f) => FIELD_META[f].label)

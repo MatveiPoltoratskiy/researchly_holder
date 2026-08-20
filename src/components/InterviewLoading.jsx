@@ -23,8 +23,8 @@ export default function InterviewLoading({ onDone }) {
     if (iconRef.current) burstConfetti(iconRef.current, 18)
     // plays the shuffle for a beat, then "speeds up" (burst class shortens the cycle +
     // scales the stack up) right before handing off to the results page
-    const burstTimer = setTimeout(() => setBurst(true), 950)
-    const doneTimer = setTimeout(() => onDoneRef.current?.(), 1450)
+    const burstTimer = setTimeout(() => setBurst(true), 1950)
+    const doneTimer = setTimeout(() => onDoneRef.current?.(), 2450)
     return () => {
       clearTimeout(burstTimer)
       clearTimeout(doneTimer)

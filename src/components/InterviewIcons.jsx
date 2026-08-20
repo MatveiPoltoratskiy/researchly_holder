@@ -197,6 +197,15 @@ const GLYPHS = {
       fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"
     />
   ),
+  priceTag: (
+    <>
+      <path
+        d="M20.5 12.3 12.7 20a2 2 0 0 1-2.8 0l-6-6a2 2 0 0 1 0-2.8L11.7 3.5H18a2.5 2.5 0 0 1 2.5 2.5v6.3Z"
+        fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"
+      />
+      <circle cx="15.7" cy="8.3" r="1.3" fill="currentColor" />
+    </>
+  ),
 }
 
 export default function Glyph({ name, size = 26 }) {
