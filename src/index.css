@@ -2213,12 +2213,45 @@ html{ scroll-behavior:smooth; }
 /* "zoomed out" relative to the quiz steps on purpose — this screen shows 4 full cards at
    once and the goal is all of them comfortably in view on a typical viewport, not a
    scroll to see the last one. overflow-y:auto stays as a safety net for genuinely short
-   viewports, not as the expected default experience. */
-.interview-matches-page{ overflow-y:auto; align-items:flex-start; padding-top:22px; padding-bottom:22px; }
+   viewports, not as the expected default experience — centered rather than pinned to
+   the top now that it reliably fits, so it reads as the arrival moment it is. */
+.interview-matches-page{ overflow-y:auto; align-items:center; padding-top:22px; padding-bottom:22px; }
+
+/* a fixed, full-viewport layer of the same science-symbol field used on the Contact
+   page (see SymbolField.jsx) — not new iconography, the site's own existing "ambient
+   research symbols" language, just applied as a surrounding aura instead of a section
+   backdrop. Fixed (not the component's own default absolute-in-flow behavior) so it
+   never scrolls away from the card even if overflow-y kicks in on a short viewport. */
+.im-matches-symbol-field{ position:fixed; inset:0; z-index:0; pointer-events:none; }
+.im-matches-symbol-field .symbol-field{ position:absolute; }
+@media (max-width:900px){ .im-matches-symbol-field{ display:none; } }
+
+.im-matches-card-wrap{ position:relative; z-index:1; width:100%; }
+/* the glowing aura: three softly blurred, warm-palette color pools breathing slowly
+   behind the card — visible past its edges so the card reads as lifted out of the
+   symbol field, not just another opaque box sitting on top of it */
+.im-matches-glow{
+  position:absolute; inset:-70px; z-index:-1; border-radius:48px; pointer-events:none;
+  background:
+    radial-gradient(ellipse 55% 50% at 18% 15%, color-mix(in srgb, var(--cover) 40%, transparent) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 50% at 85% 25%, color-mix(in srgb, var(--pine) 32%, transparent) 0%, transparent 70%),
+    radial-gradient(ellipse 65% 55% at 50% 95%, color-mix(in srgb, var(--gold) 36%, transparent) 0%, transparent 70%);
+  filter:blur(38px);
+  animation:im-glow-breathe 4.5s ease-in-out infinite;
+}
+@keyframes im-glow-breathe{
+  0%,100%{ opacity:.7; transform:scale(1); }
+  50%{ opacity:1; transform:scale(1.035); }
+}
+
 .im-matches-card{
-  background:var(--card-bg); border:1.5px solid rgba(30,37,64,.16); border-radius:26px;
-  padding:30px 40px; box-shadow:0 2px 6px rgba(30,37,64,.08), 0 28px 56px rgba(30,37,64,.18);
-  animation:content-in .4s ease-out both; width:100%;
+  background:var(--card-bg); border:1.5px solid rgba(30,37,64,.18); border-radius:26px;
+  padding:30px 40px; box-shadow:0 4px 10px rgba(30,37,64,.1), 0 34px 72px rgba(30,37,64,.26);
+  animation:im-matches-pop-in .5s cubic-bezier(.2,.7,.3,1) both; width:100%;
+}
+@keyframes im-matches-pop-in{
+  0%{ opacity:0; transform:translateY(14px) scale(.96); }
+  100%{ opacity:1; transform:translateY(0) scale(1); }
 }
 @media (max-width:760px){ .im-matches-card{ padding:24px 20px; border-radius:22px; } }
 
@@ -2294,4 +2327,5 @@ html{ scroll-behavior:smooth; }
 @media (prefers-reduced-motion: reduce){
   .im-matches-card{ animation:none; }
   .im-match-card:hover{ transform:none; }
+  .im-matches-glow{ animation:none; opacity:.85; }
 }

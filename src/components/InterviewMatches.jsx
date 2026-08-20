@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import SymbolField from './SymbolField'
 
 // Small standalone favicon-fallback logo, deliberately not imported from
 // OpportunityExplorer.jsx — keeps this component's chunk lean instead of pulling in the
@@ -85,56 +86,72 @@ function pitchFor(o) {
 export default function InterviewMatches({ matches, onContinue }) {
   return (
     <section className="interview-page interview-matches-page">
+      {/* an ambient field of the same chemistry/physics/math/biology symbols used
+          elsewhere on the site (Contact page), not new iconography invented for this
+          screen — fixed to the viewport so it reads as one surrounding aura rather than
+          scrolling away with the card */}
+      <div className="im-matches-symbol-field" aria-hidden="true">
+        <SymbolField
+          rows={7}
+          cols={16}
+          opacityRange={[0.16, 0.26]}
+          fontSizeRange={[16, 28]}
+          colors={['var(--symbol-tan)', 'var(--cover-dark)', 'var(--ribbon)', 'var(--navy)', 'var(--gold)']}
+        />
+      </div>
       <div className="container interview-container">
-        <div className="im-matches-card">
-          <p className="im-matches-eyebrow">Based on your answers</p>
-          <h1 className="interview-question">
-            We found <span className="im-matches-count">{matches.length}</span> strong matches
-          </h1>
-          <p className="interview-subtext">
-            Ranked by field, eligibility, format, pay, and location, closest fit first.
-          </p>
+        <div className="im-matches-card-wrap">
+          <span className="im-matches-glow" aria-hidden="true" />
+          <div className="im-matches-card">
+            <p className="im-matches-eyebrow">Based on your answers</p>
+            <h1 className="interview-question">
+              We found <span className="im-matches-count">{matches.length}</span> strong matches
+            </h1>
+            <p className="interview-subtext">
+              Ranked by field, eligibility, format, pay, and location, closest fit first.
+            </p>
 
-          <div className="im-match-list">
-            {matches.map((o) => {
-              const primary = o.focus.find((f) => FOCUS_COLOR[f]) || o.focus[0]
-              const color = FOCUS_COLOR[primary] || 'var(--cover)'
-              const hint = levelHint(o.levels)
-              return (
-                <a
-                  key={o.id}
-                  className="im-match-card"
-                  href={o.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{ '--focus-color': color }}
-                >
-                  <span className="im-match-logo">
-                    <OrgLogo org={o.org} url={o.url} />
-                  </span>
-                  <span className="im-match-main">
-                    <span className="im-match-top-row">
-                      {FOCUS_LABEL[primary] && <span className="im-match-field-tag">{FOCUS_LABEL[primary]}</span>}
-                      {hint && <span className="im-match-meta">{hint}</span>}
-                      {o.paid && <span className="im-match-meta">Paid</span>}
+            <div className="im-match-list">
+              {matches.map((o) => {
+                const primary = o.focus.find((f) => FOCUS_COLOR[f]) || o.focus[0]
+                const color = FOCUS_COLOR[primary] || 'var(--cover)'
+                const hint = levelHint(o.levels)
+                return (
+                  <a
+                    key={o.id}
+                    className="im-match-card"
+                    href={o.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{ '--focus-color': color }}
+                  >
+                    <span className="im-match-logo">
+                      <OrgLogo org={o.org} url={o.url} />
                     </span>
-                    <span className="im-match-name">{o.name}</span>
-                    <span className="im-match-org">{o.org}</span>
-                    {pitchFor(o) && <span className="im-match-pitch">{pitchFor(o)}</span>}
-                  </span>
-                  <span className="im-match-pct">
-                    <span className="im-match-pct-num">{o.matchPct}%</span>
-                    <span className="im-match-pct-label">match</span>
-                  </span>
-                </a>
-              )
-            })}
-          </div>
+                    <span className="im-match-main">
+                      <span className="im-match-top-row">
+                        {FOCUS_LABEL[primary] && <span className="im-match-field-tag">{FOCUS_LABEL[primary]}</span>}
+                        {hint && <span className="im-match-meta">{hint}</span>}
+                        {o.paid && <span className="im-match-meta">Paid</span>}
+                      </span>
+                      <span className="im-match-name">{o.name}</span>
+                      <span className="im-match-org">{o.org}</span>
+                      {pitchFor(o) && <span className="im-match-pitch">{pitchFor(o)}</span>}
+                    </span>
+                    <span className="im-match-pct">
+                      <span className="im-match-pct-num">{o.matchPct}%</span>
+                      <span className="im-match-pct-label">match</span>
+                    </span>
+                  </a>
+                )
+              })}
+            </div>
 
-          <button type="button" className="interview-continue-btn im-matches-cta" onClick={onContinue}>
-            See all your matches
-            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow" /></svg>
-          </button>
+            <button type="button" className="interview-continue-btn im-matches-cta" onClick={onContinue}>
+              See all your matches
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow" /></svg>
+            </button>
+          </div>
         </div>
       </div>
     </section>
