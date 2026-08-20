@@ -53,6 +53,31 @@ function levelHint(levels) {
   return null
 }
 
+// A small pool of hooks, not one canned phrase — a stable per-card hash picks one so the
+// same opportunity always reads the same way instead of reshuffling on every re-render.
+const PITCH_HOOKS = [
+  'Straight-up good fit',
+  "This one's calling your name",
+  'Hard to ignore',
+  'Low-key ideal',
+  'Rare combo',
+  'Worth a serious look',
+  'Stands out fast',
+  "Don't sleep on this one",
+]
+
+function stableHash(str) {
+  let h = 0
+  for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) | 0
+  return Math.abs(h)
+}
+
+function pitchFor(o) {
+  if (!o.matchReasons.length) return null
+  const hook = PITCH_HOOKS[stableHash(String(o.id)) % PITCH_HOOKS.length]
+  return `${hook} — ${o.matchReasons.join(', plus ')}.`
+}
+
 // A results-preview screen, not a copy of any particular reference: our own card shell
 // (the interview's cream/navy/orange language, org favicons, field-color coding already
 // used throughout this feature), and a real computed match score instead of a
@@ -95,11 +120,7 @@ export default function InterviewMatches({ matches, onContinue }) {
                     </span>
                     <span className="im-match-name">{o.name}</span>
                     <span className="im-match-org">{o.org}</span>
-                    {o.matchReasons.length > 0 && (
-                      <span className="im-match-why">
-                        <strong>Why this:</strong> It matched because {o.matchReasons.join(' and ')}.
-                      </span>
-                    )}
+                    {pitchFor(o) && <span className="im-match-pitch">{pitchFor(o)}</span>}
                   </span>
                   <span className="im-match-pct">
                     <span className="im-match-pct-num">{o.matchPct}%</span>

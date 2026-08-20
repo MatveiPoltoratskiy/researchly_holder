@@ -46,7 +46,7 @@ function scoreOpportunity(o, answers) {
   const mappedFocus = answers.field ? FIELD_TO_FOCUS[answers.field] : null
   if (mappedFocus && o.focus.includes(mappedFocus)) {
     score += 30
-    reasons.push({ weight: 30, text: `it matches your interest in ${mappedFocus === 'pre-med' ? 'Pre-Med' : mappedFocus}` })
+    reasons.push({ weight: 30, text: `it's ${mappedFocus === 'pre-med' ? 'Pre-Med' : mappedFocus[0].toUpperCase() + mappedFocus.slice(1)}` })
   } else {
     score += 14 // neutral credit, not a penalty — an unmapped or unset field shouldn't tank everything
   }
@@ -55,7 +55,7 @@ function scoreOpportunity(o, answers) {
   if (answers.level) {
     if (o.levels.includes(answers.level)) {
       score += 25
-      reasons.push({ weight: 25, text: 'you are eligible for it at your grade level' })
+      reasons.push({ weight: 25, text: 'you already qualify' })
     }
     // no credit at all if the student's level isn't listed — this is closer to a hard
     // eligibility filter than a soft preference
@@ -74,7 +74,7 @@ function scoreOpportunity(o, answers) {
       (wantsInternship && !o.isDirectory)
     if (formatHit) {
       score += 15
-      reasons.push({ weight: 15, text: 'it is the format you are looking for' })
+      reasons.push({ weight: 15, text: "it's exactly the format you want" })
     } else {
       score += 6
     }
@@ -86,7 +86,7 @@ function scoreOpportunity(o, answers) {
   if (answers.paidPref === 'paid-only') {
     if (o.paid) {
       score += 10
-      reasons.push({ weight: 10, text: o.stipend ? `it pays a stipend ($${o.stipend.toLocaleString()})` : 'it is paid' })
+      reasons.push({ weight: 10, text: o.stipend ? `it pays $${o.stipend.toLocaleString()}` : "it's paid" })
     }
     // no credit if unpaid and they required paid — real mismatch
   } else {
@@ -97,7 +97,7 @@ function scoreOpportunity(o, answers) {
   if (answers.remoteOnly) {
     if (o.mode === 'remote') {
       score += 12
-      reasons.push({ weight: 12, text: 'it is fully remote' })
+      reasons.push({ weight: 12, text: "it's fully remote" })
     } else if (o.mode === 'hybrid') {
       score += 6
     }
@@ -105,7 +105,7 @@ function scoreOpportunity(o, answers) {
     const km = distanceKm(answers.locationCoords.lat, answers.locationCoords.lon, o.lat, o.lon)
     if (km < 60) {
       score += 12
-      reasons.push({ weight: 13, text: `it is close to ${answers.location || 'you'}` })
+      reasons.push({ weight: 13, text: `it's close to ${answers.location || 'you'}` })
     } else if (km < 250) {
       score += 8
     } else if (km < 800) {
