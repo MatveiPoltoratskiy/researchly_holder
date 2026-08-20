@@ -34,10 +34,20 @@ export default function InterviewLoading({ onDone }) {
 
   return (
     <div className={`interview-loading ${burst ? 'is-bursting' : ''}`}>
-      <div className="interview-loading-stack" ref={iconRef} aria-hidden="true">
-        {CARD_COLORS.map((color, i) => (
-          <span key={i} className="interview-loading-card" style={{ '--card-color': color, '--card-i': i }} />
-        ))}
+      <div className="interview-loading-visual">
+        <span className="interview-loading-glow" aria-hidden="true" />
+        {/* three dots orbiting the stack, one per card color — a second, distinct motion
+            layered on top of the shuffle itself rather than just scaling the same effect up */}
+        <div className="interview-loading-orbit" aria-hidden="true">
+          {CARD_COLORS.map((color, i) => (
+            <span key={i} className="interview-loading-orbit-dot" style={{ '--dot-color': color, '--dot-i': i }} />
+          ))}
+        </div>
+        <div className="interview-loading-stack" ref={iconRef} aria-hidden="true">
+          {CARD_COLORS.map((color, i) => (
+            <span key={i} className="interview-loading-card" style={{ '--card-color': color, '--card-i': i }} />
+          ))}
+        </div>
       </div>
       <h1 className="interview-loading-title">Finding your best matches</h1>
       <p className="interview-loading-subtext">Ranking by fit, timing, and location</p>

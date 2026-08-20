@@ -13,10 +13,15 @@ const GLYPHS = {
     />
   ),
   stethoscope: (
-    <path
-      d="M7 4v5.2a3.8 3.8 0 0 0 7.6 0V4M14.6 9.2v2a4.4 4.4 0 0 0 8.8 0v-.7"
-      fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"
-    />
+    <>
+      <path
+        d="M6.5 3v5a2.9 2.9 0 0 0 5.8 0V3M9.4 10.8v2.6c0 3.1 2.3 5.4 5.2 5.4s5.1-2.3 5.1-5.3v-2.2"
+        fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"
+      />
+      <circle cx="6.5" cy="2.3" r="1.15" fill="currentColor" />
+      <circle cx="12.3" cy="2.3" r="1.15" fill="currentColor" />
+      <circle cx="19.7" cy="11.3" r="2.5" fill="none" stroke="currentColor" strokeWidth="1.7" />
+    </>
   ),
   brain: (
     <>

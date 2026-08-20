@@ -1933,6 +1933,11 @@ html{ scroll-behavior:smooth; }
 /* steps 2/3 — a wide grid of tiles (multi-select: pick as many as fit) */
 .interview-option-list{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
 @media (max-width:680px){ .interview-option-list{ grid-template-columns:1fr; } }
+/* the grade grid stays 2-up even at phone width — each row is short (a number + "Grade
+   9"), so two columns still fit comfortably and keeping it compact matters more here
+   than on steps 2/3, where the fuller option-row content genuinely needs the room */
+@media (max-width:680px){ .interview-grade-grid{ grid-template-columns:repeat(2,1fr); gap:8px; } }
+@media (max-width:360px){ .interview-grade-grid{ grid-template-columns:1fr; } }
 /* steps 4/6/7 — single column, full-width rows: bigger, simpler, one clean scan down */
 .interview-option-list--vertical{ display:flex; flex-direction:column; gap:12px; }
 
@@ -1958,34 +1963,54 @@ html{ scroll-behavior:smooth; }
 .interview-option-main{ display:flex; flex-direction:column; gap:4px; flex:1; min-width:0; }
 .interview-option-label{ font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:18px; color:var(--navy); }
 .interview-option-desc{ font-family:"Segoe UI",system-ui,sans-serif; font-size:14px; color:var(--navy); opacity:.65; line-height:1.4; }
+/* ring (always visible, faint) + fill + checkmark (both hidden until selected) — see
+   OptionCheck in Interview.jsx for why this replaced a single always-drawn icon */
 .interview-option-check{
-  flex-shrink:0; color:rgba(30,37,64,.22); transition:color .15s ease, transform .15s ease;
+  flex-shrink:0; color:rgba(30,37,64,.24); transition:color .15s ease, transform .15s ease;
 }
-.interview-option-row.is-selected .interview-option-check{ color:var(--field-color, var(--cover)); transform:scale(1.1); }
+.interview-option-check-fill{ opacity:0; transform:scale(.5); transform-origin:center; transition:opacity .15s ease, transform .2s cubic-bezier(.4,0,.2,1); }
+.interview-option-check-mark{ opacity:0; transition:opacity .12s ease .06s; }
+.interview-option-row.is-selected .interview-option-check{ color:var(--field-color, var(--cover)); transform:scale(1.08); }
+.interview-option-row.is-selected .interview-option-check-fill{ opacity:1; transform:scale(1); }
+.interview-option-row.is-selected .interview-option-check-mark{ opacity:1; }
 
 /* number-badge variant (grade + experience): same row shell, a big number instead of a
-   glyph, tinted orange by default and inverting to solid orange + white on selection */
+   glyph. Tinted by --field-color when the row supplies one (step 4's grade groups),
+   plain orange otherwise (step 6, which doesn't) — same fallback pattern as the emoji
+   badge above, inverting to a solid fill + white number on selection */
 .interview-num-badge{
   flex-shrink:0; width:50px; height:50px; border-radius:14px; display:flex; align-items:center; justify-content:center;
-  background:rgba(221,107,46,.12); color:var(--cover);
+  background:color-mix(in srgb, var(--field-color, var(--cover)) 14%, var(--cream)); color:var(--field-color, var(--cover));
   font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:19px;
   transition:background .15s ease, color .15s ease;
 }
-.interview-option-row--num.is-selected .interview-num-badge{ background:var(--cover); color:#fff; }
-.interview-option-row--num.is-selected{ border-color:var(--cover); }
-.interview-option-row--num.is-selected .interview-option-check{ color:var(--cover); }
+.interview-option-row--num.is-selected .interview-num-badge{ background:var(--field-color, var(--cover)); color:#fff; }
+.interview-option-row--num.is-selected{ border-color:var(--field-color, var(--cover)); }
 
 /* bottom Continue button for the multi-select steps (Focus, Format) — single-select
    steps don't need this, they auto-advance on pick */
 .interview-step-actions{ display:flex; justify-content:flex-end; margin-top:20px; flex-shrink:0; }
 
-/* step 4 — grade groups */
-.interview-level-group{ margin-bottom:20px; }
+/* step 4 — grade groups. A 2-column grid (not the single-file vertical stack the other
+   number-row steps use) so all 8 grade options — 4 per group — read as two compact
+   blocks instead of one long list a short viewport has to scroll to finish; the group
+   label carries its own icon + color (see LEVEL_GROUPS in Interview.jsx) so "high school"
+   vs "undergrad" is a real visual distinction, not just two text labels. */
+.interview-level-group{ margin-bottom:16px; }
 .interview-level-group:last-child{ margin-bottom:0; }
 .interview-level-group-label{
-  display:block; font-family:"Segoe UI",system-ui,sans-serif; font-size:14px; font-weight:800;
-  letter-spacing:.04em; text-transform:uppercase; color:var(--navy); opacity:.6; margin-bottom:10px;
+  display:flex; align-items:center; gap:7px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; font-weight:800;
+  letter-spacing:.04em; text-transform:uppercase; color:var(--field-color, var(--navy)); margin-bottom:9px;
 }
+.interview-level-group-icon{
+  display:flex; align-items:center; justify-content:center;
+  width:22px; height:22px; border-radius:7px;
+  background:color-mix(in srgb, var(--field-color, var(--navy)) 16%, var(--cream)); color:var(--field-color, var(--navy));
+}
+.interview-grade-grid{ gap:10px; }
+.interview-grade-grid .interview-option-row{ padding:13px 16px; }
+.interview-grade-grid .interview-num-badge{ width:42px; height:42px; font-size:17px; }
 
 /* step 5 — location: geolocation auto-requested on arrival, autocomplete while typing,
    a green check + confetti once a location lands, "update location" once one is set */
@@ -2085,36 +2110,67 @@ html{ scroll-behavior:smooth; }
    before handing off to the results page */
 .interview-loading{
   position:fixed; inset:0; z-index:1000; background:var(--cream-deep);
-  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:26px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:32px;
   animation:content-in .3s ease-out both;
 }
-.interview-loading-stack{
-  position:relative; width:84px; height:84px;
-  background:var(--card-bg); border:1.5px solid rgba(30,37,64,.14); border-radius:22px;
+.interview-loading-visual{
+  position:relative; width:190px; height:190px;
   display:flex; align-items:center; justify-content:center;
-  box-shadow:0 20px 44px rgba(30,37,64,.16);
+}
+/* a soft breathing halo behind the stack — depth + a second, slower rhythm underneath
+   the faster card-shuffle, so the whole thing reads as more than one thing happening */
+.interview-loading-glow{
+  position:absolute; inset:0; border-radius:50%; pointer-events:none;
+  background:radial-gradient(circle, color-mix(in srgb, var(--cover) 35%, transparent) 0%, transparent 68%);
+  animation:interview-glow-pulse 2.2s ease-in-out infinite;
+}
+@keyframes interview-glow-pulse{
+  0%,100%{ transform:scale(.82); opacity:.55; }
+  50%{ transform:scale(1.08); opacity:1; }
+}
+/* three dots (one per card color) slowly circling the stack — a distinct second motion,
+   not just the same shuffle scaled up, that speeds into a blur alongside the shuffle
+   once "is-bursting" hits right before handoff to the matches screen */
+.interview-loading-orbit{
+  position:absolute; inset:0;
+  animation:interview-orbit-spin 6s linear infinite;
+}
+.interview-loading-orbit-dot{
+  position:absolute; top:50%; left:50%; width:10px; height:10px; margin:-5px 0 0 -5px;
+  border-radius:50%; background:var(--dot-color); box-shadow:0 2px 7px rgba(30,37,64,.28);
+  transform:rotate(calc(var(--dot-i) * 120deg)) translateX(88px);
+}
+@keyframes interview-orbit-spin{ to{ transform:rotate(360deg); } }
+.interview-loading.is-bursting .interview-loading-orbit{ animation-duration:1s; }
+.interview-loading.is-bursting .interview-loading-glow{ animation-duration:.5s; }
+
+.interview-loading-stack{
+  position:relative; width:130px; height:130px;
+  background:var(--card-bg); border:1.5px solid rgba(30,37,64,.14); border-radius:30px;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 24px 52px rgba(30,37,64,.2);
   transition:transform .5s cubic-bezier(.4,0,.2,1);
 }
 .interview-loading-card{
-  position:absolute; width:34px; height:46px; border-radius:8px; background:var(--card-color);
-  box-shadow:0 3px 8px rgba(30,37,64,.18);
+  position:absolute; width:50px; height:68px; border-radius:12px; background:var(--card-color);
+  box-shadow:0 5px 12px rgba(30,37,64,.22);
   animation:interview-card-shuffle 1.35s ease-in-out infinite;
   animation-delay:calc(var(--card-i) * -0.45s);
 }
 .interview-loading.is-bursting .interview-loading-stack{ transform:scale(1.18); }
 .interview-loading.is-bursting .interview-loading-card{ animation-duration:.42s; }
 @keyframes interview-card-shuffle{
-  0%{ transform:translateY(7px) rotate(-9deg) scale(.86); opacity:.55; z-index:1; }
-  33%{ transform:translateY(-5px) rotate(0deg) scale(1); opacity:1; z-index:3; }
-  66%{ transform:translateY(5px) rotate(9deg) scale(.86); opacity:.55; z-index:1; }
-  100%{ transform:translateY(7px) rotate(-9deg) scale(.86); opacity:.55; z-index:1; }
+  0%{ transform:translateY(10px) rotate(-9deg) scale(.86); opacity:.55; z-index:1; }
+  33%{ transform:translateY(-8px) rotate(0deg) scale(1); opacity:1; z-index:3; }
+  66%{ transform:translateY(8px) rotate(9deg) scale(.86); opacity:.55; z-index:1; }
+  100%{ transform:translateY(10px) rotate(-9deg) scale(.86); opacity:.55; z-index:1; }
 }
 .interview-loading-title{
-  font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:clamp(22px,3vw,28px);
+  font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:clamp(24px,3.2vw,30px);
   color:var(--cover); margin:0; text-align:center;
 }
 .interview-loading-subtext{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:16px; color:var(--navy); opacity:.65; margin:0;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:16.5px; color:var(--navy); opacity:.65; margin:0;
 }
 
 @media (max-width:600px){
@@ -2149,83 +2205,90 @@ html{ scroll-behavior:smooth; }
   .interview-option-row:hover{ transform:none; }
   .interview-loading-card{ animation:none; opacity:.85; }
   .interview-loading.is-bursting .interview-loading-stack{ transform:none; }
+  .interview-loading-orbit, .interview-loading-glow{ animation:none; }
+  .interview-loading-glow{ opacity:.6; }
 }
 
 /* ---------- interview match results (post-loading, pre-/opportunities) ---------- */
-/* a review screen, not a quiz step — unlike the quiz cards, letting this one scroll on
-   a short viewport is fine, it's meant to be read rather than answered in one glance */
-.interview-matches-page{ overflow-y:auto; align-items:flex-start; padding-top:40px; padding-bottom:40px; }
+/* "zoomed out" relative to the quiz steps on purpose — this screen shows 4 full cards at
+   once and the goal is all of them comfortably in view on a typical viewport, not a
+   scroll to see the last one. overflow-y:auto stays as a safety net for genuinely short
+   viewports, not as the expected default experience. */
+.interview-matches-page{ overflow-y:auto; align-items:flex-start; padding-top:22px; padding-bottom:22px; }
 .im-matches-card{
-  background:var(--card-bg); border:1.5px solid rgba(30,37,64,.16); border-radius:28px;
-  padding:44px 52px; box-shadow:0 2px 6px rgba(30,37,64,.08), 0 28px 56px rgba(30,37,64,.18);
+  background:var(--card-bg); border:1.5px solid rgba(30,37,64,.16); border-radius:26px;
+  padding:30px 40px; box-shadow:0 2px 6px rgba(30,37,64,.08), 0 28px 56px rgba(30,37,64,.18);
   animation:content-in .4s ease-out both; width:100%;
 }
-@media (max-width:760px){ .im-matches-card{ padding:28px 22px; border-radius:22px; } }
+@media (max-width:760px){ .im-matches-card{ padding:24px 20px; border-radius:22px; } }
+
+.im-matches-card .interview-question{ font-size:clamp(22px,2.8vw,29px); margin-bottom:6px; }
+.im-matches-card .interview-subtext{ font-size:15.5px; margin-bottom:0; }
 
 .im-matches-eyebrow{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:14px; font-weight:800; letter-spacing:.04em;
-  text-transform:uppercase; color:var(--cover); margin:0 0 8px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:800; letter-spacing:.04em;
+  text-transform:uppercase; color:var(--cover); margin:0 0 6px;
 }
 .im-matches-count{ color:var(--cover); }
 
-.im-match-list{ display:flex; flex-direction:column; gap:14px; margin:28px 0 32px; }
+.im-match-list{ display:flex; flex-direction:column; gap:10px; margin:18px 0 22px; }
 .im-match-card{
-  display:flex; align-items:flex-start; gap:18px; text-align:left; text-decoration:none;
-  background:var(--cream); border:1.5px solid rgba(30,37,64,.14); border-radius:20px;
-  padding:22px 24px; transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  display:flex; align-items:flex-start; gap:15px; text-align:left; text-decoration:none;
+  background:var(--cream); border:1.5px solid rgba(30,37,64,.14); border-radius:18px;
+  padding:14px 18px; transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
 }
 .im-match-card:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(30,37,64,.12); border-color:var(--focus-color, var(--cover)); }
 
 .im-match-logo{
-  flex-shrink:0; width:52px; height:52px; border-radius:14px; overflow:hidden;
+  flex-shrink:0; width:42px; height:42px; border-radius:12px; overflow:hidden;
   display:flex; align-items:center; justify-content:center;
   background:color-mix(in srgb, var(--focus-color, var(--cover)) 16%, var(--card-bg));
   border:1.5px solid rgba(30,37,64,.1);
 }
-.im-match-logo-img{ width:100%; height:100%; object-fit:contain; padding:8px; }
+.im-match-logo-img{ width:100%; height:100%; object-fit:contain; padding:7px; }
 .im-match-logo-letter{
-  font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:20px; color:var(--focus-color, var(--cover));
+  font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:17px; color:var(--focus-color, var(--cover));
 }
 
-.im-match-main{ display:flex; flex-direction:column; gap:5px; flex:1; min-width:0; }
-.im-match-top-row{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+.im-match-main{ display:flex; flex-direction:column; gap:3px; flex:1; min-width:0; }
+.im-match-top-row{ display:flex; flex-wrap:wrap; align-items:center; gap:7px; }
 .im-match-field-tag{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:800; letter-spacing:.03em;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:11px; font-weight:800; letter-spacing:.03em;
   text-transform:uppercase; color:#fff; background:var(--focus-color, var(--cover));
-  border-radius:999px; padding:3px 10px;
+  border-radius:999px; padding:2.5px 9px;
 }
 .im-match-meta{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; font-weight:700; color:var(--navy); opacity:.6;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:700; color:var(--navy); opacity:.6;
 }
-.im-match-name{ font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:18px; color:var(--navy); line-height:1.3; }
-.im-match-org{ font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; color:var(--navy); opacity:.65; }
+.im-match-name{ font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:16px; color:var(--navy); line-height:1.25; }
+.im-match-org{ font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; color:var(--navy); opacity:.65; }
 .im-match-pitch{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:600; font-style:italic;
-  color:var(--focus-color, var(--cover)); line-height:1.4; margin-top:4px;
-  padding-left:10px; border-left:2.5px solid var(--focus-color, var(--cover));
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; font-weight:600; font-style:italic;
+  color:var(--focus-color, var(--cover)); line-height:1.35; margin-top:2px;
+  padding-left:9px; border-left:2.5px solid var(--focus-color, var(--cover));
 }
 
 /* the headline ask: a real computed percentage, bold, orange, impossible to miss */
 .im-match-pct{
   flex-shrink:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
-  min-width:64px; padding:6px 4px;
+  min-width:54px; padding:4px;
 }
-.im-match-pct-num{ font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:26px; color:var(--cover); line-height:1; }
+.im-match-pct-num{ font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:22px; color:var(--cover); line-height:1; }
 .im-match-pct-label{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:10.5px; font-weight:700; letter-spacing:.03em;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:9.5px; font-weight:700; letter-spacing:.03em;
   text-transform:uppercase; color:var(--cover); opacity:.75; margin-top:2px;
 }
 
 .im-matches-cta{ width:100%; justify-content:center; }
 
 @media (max-width:600px){
-  .im-matches-card{ padding:22px 18px; }
+  .im-matches-card{ padding:20px 16px; }
   /* stack instead of wrap — flex-wrap alone left .im-match-main squeezed into whatever
      narrow space remained next to the logo, wrapping the org name one word per line */
-  .im-match-card{ flex-direction:column; gap:12px; }
-  .im-match-logo{ width:44px; height:44px; }
+  .im-match-card{ flex-direction:column; gap:10px; }
+  .im-match-logo{ width:38px; height:38px; }
   .im-match-pct{ flex-direction:row; gap:6px; align-self:flex-start; }
-  .im-match-name{ font-size:16.5px; }
+  .im-match-name{ font-size:15px; }
 }
 
 @media (prefers-reduced-motion: reduce){

@@ -45,11 +45,11 @@ export const FIELDS = [
     // to be selectable, and it maps onto a largely shared program pool with biology.
     blurb: 'Clinical exposure, medical research, and public health.',
     subfocus: [
-      { id: 'clinical', label: 'Clinical & patient-facing', desc: 'Hospital programs and shadowing with a research component' },
-      { id: 'bench-medical', label: 'Medical research', desc: 'Bench work in a lab attached to a medical school or hospital' },
-      { id: 'public-health', label: 'Public & global health', desc: 'Epidemiology, health equity, and population studies' },
-      { id: 'health-policy', label: 'Health policy', desc: 'How care gets funded, regulated, and delivered' },
-      { id: 'biomed-eng', label: 'Biomedical devices', desc: 'Instruments, imaging, and medical hardware' },
+      { id: 'clinical', label: 'Clinical & patient-facing', desc: 'Shadowing doctors and working directly with patients, sometimes with a research piece attached' },
+      { id: 'bench-medical', label: 'Medical research', desc: 'Lab work tied to a hospital or medical school. Running experiments, not seeing patients' },
+      { id: 'public-health', label: 'Public & global health', desc: 'Studying how disease and health spread across whole populations, not just one patient' },
+      { id: 'health-policy', label: 'Health policy', desc: 'How medical care gets paid for, regulated, and delivered to people' },
+      { id: 'biomed-eng', label: 'Biomedical devices', desc: 'Building the tools doctors use: imaging machines, instruments, medical hardware' },
     ],
   },
   {

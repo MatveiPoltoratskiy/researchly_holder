@@ -63,9 +63,16 @@ const OPP_TYPES = [
   { id: 'year-round-program', glyph: 'refresh', label: 'Year-round program', desc: 'An ongoing commitment during the school year' },
 ]
 
+// glyph + color give each group its own identity at a glance (a school building for
+// high school, a grad cap for undergrad) instead of the two groups reading as one
+// undifferentiated list of eight numbered rows — teal for HS keeps it distinct from the
+// orange already used everywhere else for grade/experience, while undergrad keeps that
+// existing orange rather than inventing a third color with nothing to anchor it to
 const LEVEL_GROUPS = [
   {
     label: 'High school',
+    glyph: 'schoolBuilding',
+    color: 'var(--teal-deep)',
     items: [
       { id: 'hs-9', num: '9', label: 'Grade 9' },
       { id: 'hs-10', num: '10', label: 'Grade 10' },
@@ -75,6 +82,8 @@ const LEVEL_GROUPS = [
   },
   {
     label: 'Undergrad',
+    glyph: 'gradCap',
+    color: 'var(--cover)',
     items: [
       { id: 'ugrad-1', num: '1', label: '1st year' },
       { id: 'ugrad-2', num: '2', label: '2nd year' },
@@ -126,38 +135,65 @@ function explorerHandoffFromAnswers(answers) {
   return { filters: explorerFiltersFromAnswers(answers), answers }
 }
 
+// the trailing selection indicator for both row types below — a plain ring when
+// unchecked, a solid filled circle + white checkmark when selected. Previously this was
+// a single <use href="#icon-check"> that always drew the same ring+checkmark outline
+// regardless of state (only its color shifted subtly), which read as "the same circle
+// either way" at a glance — the whole point of these rows is scanning selection state
+// fast, so the two states now look structurally different, not just tinted differently.
+function OptionCheck() {
+  return (
+    <svg className="interview-option-check" width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+      <circle className="interview-option-check-ring" cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.7" />
+      <circle className="interview-option-check-fill" cx="12" cy="12" r="9" fill="currentColor" />
+      <path className="interview-option-check-mark" d="M8 12.5l2.6 2.6L16 9.5" fill="none" stroke="var(--cream)" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
 // shared tile used by steps 2/3 (grid) and 7 (vertical) — a glyph badge tinted by
-// whatever color it's given, inverting to a solid fill + white glyph once selected
+// whatever color it's given, inverting to a solid fill + white glyph once selected.
+// --field-color lives on the row itself (not just the inner emoji span) so every
+// descendant that references it — the emoji fill, the border, the check indicator —
+// resolves the same real color instead of some of them silently falling back to plain
+// orange (CSS custom properties only cascade downward, not up to a sibling/ancestor).
 function OptionRow({ glyph, color, label, desc, selected, onClick }) {
   return (
-    <button type="button" className={`interview-option-row ${selected ? 'is-selected' : ''}`} onClick={onClick}>
-      <span className="interview-option-emoji" style={color ? { '--field-color': color } : undefined}>
+    <button
+      type="button"
+      className={`interview-option-row ${selected ? 'is-selected' : ''}`}
+      style={color ? { '--field-color': color } : undefined}
+      onClick={onClick}
+    >
+      <span className="interview-option-emoji">
         <Glyph name={glyph} size={26} />
       </span>
       <span className="interview-option-main">
         <span className="interview-option-label">{label}</span>
         <span className="interview-option-desc">{desc}</span>
       </span>
-      <svg className="interview-option-check" width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
-        <use href="#icon-check" />
-      </svg>
+      <OptionCheck />
     </button>
   )
 }
 
 // shared tile used by step 4 (grade) and step 6 (experience) — a big number badge
-// instead of a glyph, always in a single vertical column
-function NumberRow({ num, label, desc, selected, onClick }) {
+// instead of a glyph, always in a single vertical column. `color` is optional (defaults
+// to the standard orange via CSS) — step 4 uses it to tint each grade group distinctly.
+function NumberRow({ num, label, desc, color, selected, onClick }) {
   return (
-    <button type="button" className={`interview-option-row interview-option-row--num ${selected ? 'is-selected' : ''}`} onClick={onClick}>
+    <button
+      type="button"
+      className={`interview-option-row interview-option-row--num ${selected ? 'is-selected' : ''}`}
+      style={color ? { '--field-color': color } : undefined}
+      onClick={onClick}
+    >
       <span className="interview-num-badge">{num}</span>
       <span className="interview-option-main">
         <span className="interview-option-label">{label}</span>
         {desc && <span className="interview-option-desc">{desc}</span>}
       </span>
-      <svg className="interview-option-check" width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
-        <use href="#icon-check" />
-      </svg>
+      <OptionCheck />
     </button>
   )
 }
@@ -378,14 +414,14 @@ export default function Interview() {
               <div className="interview-card-head">
                 {step === 1 && (
                   <>
-                    <h1 className="interview-question">What pulls you in?</h1>
+                    <h1 className="interview-question">What field are <em>you</em> drawn to?</h1>
                     <p className="interview-subtext">Pick the field you would want to spend a summer doing research in.</p>
                   </>
                 )}
                 {step === 2 && field && (
                   <>
-                    <h1 className="interview-question">What part of {field.label.toLowerCase()} pulls you in?</h1>
-                    <p className="interview-subtext">Pick every focus that fits. You can choose more than one.</p>
+                    <h1 className="interview-question">What part of {field.label.toLowerCase()} actually excites you?</h1>
+                    <p className="interview-subtext">Pick everything that fits, the more we know, the better your matches.</p>
                   </>
                 )}
                 {step === 3 && (
@@ -483,13 +519,22 @@ export default function Interview() {
                   <>
                     {LEVEL_GROUPS.map((group) => (
                       <div className="interview-level-group" key={group.label}>
-                        <span className="interview-level-group-label">{group.label}</span>
-                        <div className="interview-option-list interview-option-list--vertical">
+                        <span
+                          className="interview-level-group-label"
+                          style={{ '--field-color': group.color }}
+                        >
+                          <span className="interview-level-group-icon">
+                            <Glyph name={group.glyph} size={15} />
+                          </span>
+                          {group.label}
+                        </span>
+                        <div className="interview-option-list interview-grade-grid">
                           {group.items.map((item) => (
                             <NumberRow
                               key={item.id}
                               num={item.num}
                               label={item.label}
+                              color={group.color}
                               selected={answers.level === item.id}
                               onClick={() => selectAndAdvance('level', item.id)}
                             />
