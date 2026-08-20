@@ -1285,12 +1285,15 @@ a.footer-link:hover{ color: var(--cover-dark); }
   color: var(--navy);
 }
 
-/* deliberately near-invisible — a period-sized hit target, not a labeled control */
+/* subtle, not invisible — findable if you know to look right after the copyright line,
+   easy to overlook if you don't. opacity:0 (the previous version) was a mistake: that
+   made it un-clickable-by-sight for the intended user too, not just easy to miss. */
 .footer-dev-dot{
-  display:inline-block; width:14px; height:14px; margin-left:2px; vertical-align:middle;
-  background:none; border:none; border-radius:999px; padding:0; cursor:default;
-  opacity:0;
+  display:inline-block; width:6px; height:6px; margin-left:6px; vertical-align:middle;
+  background:var(--card-border); border:none; border-radius:999px; padding:0; cursor:pointer;
+  opacity:1; transition:background .15s ease;
 }
+.footer-dev-dot:hover{ background:var(--navy-soft); }
 .footer-dev-prompt{
   display:flex; align-items:center; gap:8px; margin-top:12px;
   font-family:"Segoe UI",system-ui,sans-serif; font-size:13px;
