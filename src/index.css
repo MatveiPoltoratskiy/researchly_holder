@@ -1285,6 +1285,42 @@ a.footer-link:hover{ color: var(--cover-dark); }
   color: var(--navy);
 }
 
+/* deliberately near-invisible — a period-sized hit target, not a labeled control */
+.footer-dev-dot{
+  display:inline-block; width:14px; height:14px; margin-left:2px; vertical-align:middle;
+  background:none; border:none; border-radius:999px; padding:0; cursor:default;
+  opacity:0;
+}
+.footer-dev-prompt{
+  display:flex; align-items:center; gap:8px; margin-top:12px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13px;
+}
+.footer-dev-input{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; color:var(--navy);
+  background:var(--cream); border:1px solid var(--card-border); border-radius:8px;
+  padding:6px 10px; width:180px; outline:none;
+}
+.footer-dev-input:focus{ border-color:var(--cover); }
+.footer-dev-submit{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:700; color:var(--navy);
+  background:none; border:1px solid var(--card-border); border-radius:8px; padding:6px 12px; cursor:pointer;
+}
+.footer-dev-submit:hover{ border-color:var(--navy); }
+.footer-dev-error{ font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; color:var(--navy-soft); }
+.footer-dev-links{
+  display:flex; gap:14px; margin:10px 0 0;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px;
+}
+.footer-dev-links a{ color:var(--navy-soft); text-decoration:underline; }
+.footer-dev-links a:hover{ color:var(--navy); }
+
+.route-unavailable{
+  min-height:60vh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
+  font-family:"Segoe UI",system-ui,sans-serif; color:var(--navy-soft); text-align:center; padding:40px 20px;
+}
+.route-unavailable a{ color:var(--cover); font-weight:700; text-decoration:none; }
+.route-unavailable a:hover{ text-decoration:underline; }
+
 @media (max-width:640px){
   .contact-grid{ grid-template-columns:1fr; }
   .contact-card{ padding:26px 22px 24px; }
@@ -1855,14 +1891,17 @@ html{ scroll-behavior:smooth; }
 }
 
 /* step 1 — field grid: 15 fields now (every field in the taxonomy, not just the tier-1
-   ones the dataset can back yet), so 3 columns keeps the grid from running too tall.
-   Tinted by the field's own color by default (small detail: law reads brown, biology
-   reads green, etc), inverting to a solid fill once picked. */
+   ones the dataset can back yet, minus the four weakest/least-popular for actual student
+   research: economics, political science, business, law), so 4 columns keeps the grid to
+   3 short rows instead of running tall enough to need scrolling.
+   Tinted by the field's own color by default (small detail: biology reads green,
+   physics reads navy, etc), inverting to a solid fill once picked. */
 .interview-grid--field{
-  display:grid; grid-template-columns:repeat(3,1fr); gap:14px;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:12px;
 }
-@media (max-width:900px){ .interview-grid--field{ grid-template-columns:repeat(2,1fr); } }
-@media (max-width:520px){ .interview-grid--field{ grid-template-columns:1fr; } }
+@media (max-width:980px){ .interview-grid--field{ grid-template-columns:repeat(3,1fr); } }
+@media (max-width:680px){ .interview-grid--field{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:420px){ .interview-grid--field{ grid-template-columns:1fr; } }
 .interview-field-card{
   display:flex; flex-direction:column; align-items:flex-start; gap:9px; text-align:left;
   background:var(--cream); border:1.5px solid rgba(30,37,64,.14); border-radius:20px;
@@ -2041,22 +2080,26 @@ html{ scroll-behavior:smooth; }
   display:flex; flex-direction:column; align-items:center; justify-content:center; gap:26px;
   animation:content-in .3s ease-out both;
 }
-.interview-loading-grid{
-  display:grid; grid-template-columns:repeat(3,1fr); gap:9px;
+.interview-loading-stack{
+  position:relative; width:84px; height:84px;
   background:var(--card-bg); border:1.5px solid rgba(30,37,64,.14); border-radius:22px;
-  padding:20px; box-shadow:0 20px 44px rgba(30,37,64,.16);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 20px 44px rgba(30,37,64,.16);
   transition:transform .5s cubic-bezier(.4,0,.2,1);
 }
-.interview-loading-cell{
-  width:26px; height:26px; border-radius:8px; background:var(--cell-color);
-  animation:interview-cell-wave 1.1s ease-in-out infinite;
-  animation-delay:calc(var(--cell-i) * 70ms);
+.interview-loading-card{
+  position:absolute; width:34px; height:46px; border-radius:8px; background:var(--card-color);
+  box-shadow:0 3px 8px rgba(30,37,64,.18);
+  animation:interview-card-shuffle 1.35s ease-in-out infinite;
+  animation-delay:calc(var(--card-i) * -0.45s);
 }
-.interview-loading.is-bursting .interview-loading-grid{ transform:scale(1.15); }
-.interview-loading.is-bursting .interview-loading-cell{ animation-duration:.4s; }
-@keyframes interview-cell-wave{
-  0%,100%{ transform:scale(1); opacity:.55; }
-  50%{ transform:scale(1.18); opacity:1; }
+.interview-loading.is-bursting .interview-loading-stack{ transform:scale(1.18); }
+.interview-loading.is-bursting .interview-loading-card{ animation-duration:.42s; }
+@keyframes interview-card-shuffle{
+  0%{ transform:translateY(7px) rotate(-9deg) scale(.86); opacity:.55; z-index:1; }
+  33%{ transform:translateY(-5px) rotate(0deg) scale(1); opacity:1; z-index:3; }
+  66%{ transform:translateY(5px) rotate(9deg) scale(.86); opacity:.55; z-index:1; }
+  100%{ transform:translateY(7px) rotate(-9deg) scale(.86); opacity:.55; z-index:1; }
 }
 .interview-loading-title{
   font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:clamp(22px,3vw,28px);
@@ -2096,6 +2139,6 @@ html{ scroll-behavior:smooth; }
   .interview-card, .interview-done-card, .interview-loading{ animation:none; }
   .interview-field-card:hover, .interview-continue-btn:hover:not(:disabled){ transform:none; }
   .interview-option-row:hover{ transform:none; }
-  .interview-loading-cell{ animation:none; opacity:.85; }
-  .interview-loading.is-bursting .interview-loading-grid{ transform:none; }
+  .interview-loading-card{ animation:none; opacity:.85; }
+  .interview-loading.is-bursting .interview-loading-stack{ transform:none; }
 }

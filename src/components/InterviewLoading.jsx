@@ -1,21 +1,23 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { burstConfetti } from '../lib/confetti'
 
-// 3x3 grid, brand colors instead of a single accent, each cell staggered on a diagonal
-// so the wave reads as moving from top-left to bottom-right
-const CELL_COLORS = [
-  'var(--cover)', 'var(--gold)', 'var(--pine)',
-  'var(--gold)', 'var(--cover)', 'var(--spine)',
-  'var(--pine)', 'var(--spine)', 'var(--cover)',
-]
+// A card-shuffle, not a color grid: three small cards (the "matches" being sorted) cycle
+// through the stack in a loop, each one landing on top in turn — reads as "searching
+// through options," not a generic spinner, and reuses the card-stack motif already
+// established elsewhere on the site (see .how-cardstack) instead of borrowing someone
+// else's loading pattern wholesale.
+const CARD_COLORS = ['var(--cover)', 'var(--pine)', 'var(--gold)']
 
 export default function InterviewLoading({ onDone }) {
   const [burst, setBurst] = useState(false)
+  const iconRef = useRef(null)
 
   useEffect(() => {
-    // plays the wave for a beat, then "speeds up" (burst class shortens the animation
-    // duration + scales the grid up) right before handing off to the results page
-    const burstTimer = setTimeout(() => setBurst(true), 1000)
-    const doneTimer = setTimeout(() => onDone?.(), 1550)
+    if (iconRef.current) burstConfetti(iconRef.current, 18)
+    // plays the shuffle for a beat, then "speeds up" (burst class shortens the cycle +
+    // scales the stack up) right before handing off to the results page
+    const burstTimer = setTimeout(() => setBurst(true), 950)
+    const doneTimer = setTimeout(() => onDone?.(), 1450)
     return () => {
       clearTimeout(burstTimer)
       clearTimeout(doneTimer)
@@ -24,9 +26,9 @@ export default function InterviewLoading({ onDone }) {
 
   return (
     <div className={`interview-loading ${burst ? 'is-bursting' : ''}`}>
-      <div className="interview-loading-grid" aria-hidden="true">
-        {CELL_COLORS.map((color, i) => (
-          <span key={i} className="interview-loading-cell" style={{ '--cell-color': color, '--cell-i': i }} />
+      <div className="interview-loading-stack" ref={iconRef} aria-hidden="true">
+        {CARD_COLORS.map((color, i) => (
+          <span key={i} className="interview-loading-card" style={{ '--card-color': color, '--card-i': i }} />
         ))}
       </div>
       <h1 className="interview-loading-title">Finding your best matches</h1>

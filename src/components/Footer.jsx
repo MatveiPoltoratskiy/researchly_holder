@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useRouter } from '../lib/router'
 import { supabase } from '../lib/supabase'
+import { isDevUnlocked, tryUnlock } from '../lib/devAccess'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -24,6 +25,26 @@ export default function Footer() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState('idle') // idle | submitting | success | error
   const [message, setMessage] = useState('')
+
+  // not a real security gate (see lib/devAccess.js) — just keeps the in-progress
+  // prototype routes from being stumbled on before launch, so a cofounder can test
+  // without it being publicly linked yet
+  const [devPromptOpen, setDevPromptOpen] = useState(false)
+  const [devPassInput, setDevPassInput] = useState('')
+  const [devUnlocked, setDevUnlocked] = useState(() => isDevUnlocked())
+  const [devError, setDevError] = useState(false)
+
+  function handleDevSubmit(e) {
+    e.preventDefault()
+    if (tryUnlock(devPassInput)) {
+      setDevUnlocked(true)
+      setDevPromptOpen(false)
+      setDevPassInput('')
+      setDevError(false)
+    } else {
+      setDevError(true)
+    }
+  }
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -148,7 +169,17 @@ export default function Footer() {
         <hr className="footer-divider" />
 
         <div className="footer-bottom">
-          <p className="footer-copyright">&copy; {new Date().getFullYear()} Researchly. All rights reserved.</p>
+          <p className="footer-copyright">
+            &copy; {new Date().getFullYear()} Researchly. All rights reserved.
+            {' '}
+            <button
+              type="button"
+              className="footer-dev-dot"
+              aria-label="."
+              tabIndex={-1}
+              onClick={() => setDevPromptOpen((v) => !v)}
+            />
+          </p>
           <div className="footer-legal">
             <span className="footer-link footer-link--static">Privacy Policy</span>
             <span className="footer-link footer-link--static">Terms of Service</span>
@@ -161,6 +192,28 @@ export default function Footer() {
             </span>
           </div>
         </div>
+
+        {devPromptOpen && !devUnlocked && (
+          <form className="footer-dev-prompt" onSubmit={handleDevSubmit}>
+            <input
+              type="password"
+              className="footer-dev-input"
+              placeholder="Passphrase"
+              value={devPassInput}
+              onChange={(e) => { setDevPassInput(e.target.value); setDevError(false) }}
+              autoFocus
+              aria-invalid={devError}
+            />
+            <button type="submit" className="footer-dev-submit">Unlock</button>
+            {devError && <span className="footer-dev-error">Not it.</span>}
+          </form>
+        )}
+        {devUnlocked && (
+          <p className="footer-dev-links">
+            <Link to="/interview">Interview</Link>
+            <Link to="/opportunities">Opportunities</Link>
+          </p>
+        )}
       </div>
     </footer>
   )

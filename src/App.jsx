@@ -9,9 +9,33 @@ import Footer from './components/Footer'
 import OpportunityExplorer from './components/OpportunityExplorer'
 import Interview from './components/Interview'
 import { RouterProvider, useRouter } from './lib/router'
+import { isDevUnlocked } from './lib/devAccess'
+
+const DEV_ROUTES = new Set(['/interview', '/opportunities'])
+
+// deliberately plain and uninteresting — this is casual-visitor deterrence (see
+// lib/devAccess.js), not a real security boundary, so the page shouldn't invite
+// curiosity by looking like it's hiding something
+function RouteUnavailable() {
+  return (
+    <div className="route-unavailable">
+      <p>This page isn't available right now.</p>
+      <a href="/">Back home</a>
+    </div>
+  )
+}
 
 function Page() {
   const { path } = useRouter()
+
+  if (DEV_ROUTES.has(path) && !isDevUnlocked()) {
+    return (
+      <>
+        <IconSprite />
+        <RouteUnavailable />
+      </>
+    )
+  }
 
   // the interview is a fully standalone, distraction-free screen: no nav, no footer, no
   // zoom-out wrapper (its own layout math already targets the real viewport height so it

@@ -17,9 +17,14 @@ const TOTAL_STEPS = 7
 // bottom Continue button instead of auto-advancing on the first click
 const MULTI_SELECT_STEPS = new Set([2, 3])
 
-// every field in the taxonomy is offered here, not just the tier-1 ones the dataset can
-// currently back. a thin or empty result for something like Law is an acceptable gap for
-// now; hiding the option entirely is not.
+// trimmed from the full taxonomy: economics, political science, business, and law are
+// real fields but have the thinnest, least popular research-opportunity pools of the
+// bunch for this age group (mostly internships/shadowing, not bench or lab research) —
+// cut to keep the list from padding itself with options that will mostly disappoint.
+// Humanitarian stays: it's named explicitly in the brand brief as a core focal type.
+const HIDDEN_FIELD_IDS = new Set(['economics', 'political-science', 'business', 'law'])
+const DISPLAYED_FIELDS = FIELDS.filter((f) => !HIDDEN_FIELD_IDS.has(f.id))
+
 const FIELD_META = {
   biology: { glyph: 'dna', color: 'var(--pine)' },
   'pre-med': { glyph: 'stethoscope', color: 'var(--cover)' },
@@ -90,14 +95,6 @@ const PAID_PREFS = [
 
 const STEP_LABELS = ['Field', 'Focus', 'Format', 'Level', 'Location', 'Experience', 'Pay']
 
-function levelLabel(id) {
-  for (const group of LEVEL_GROUPS) {
-    const hit = group.items.find((i) => i.id === id)
-    if (hit) return hit.label
-  }
-  return id
-}
-
 function hasSubfocus(fieldId) {
   return (FIELD_BY_ID[fieldId]?.subfocus?.length || 0) > 0
 }
@@ -157,7 +154,6 @@ export default function Interview() {
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [showLoading, setShowLoading] = useState(false)
 
-  const doneCardRef = useRef(null)
   const locationCheckRef = useRef(null)
   const advanceTimerRef = useRef(null)
   const locationAdvanceTimerRef = useRef(null)
@@ -288,39 +284,16 @@ export default function Interview() {
     }
   }
 
-  function handleFinish() {
-    setShowLoading(true)
-  }
-
-  // celebrate the moment the summary card appears, not the loading transition
-  useEffect(() => {
-    if (step > TOTAL_STEPS && doneCardRef.current) {
-      burstConfetti(doneCardRef.current, 20)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [step])
-
-  function restart() {
+  // the last question hands off straight to the loading transition — no "see your
+  // matches" click required, no summary screen to stop at first
+  function finishInterview(value) {
     clearTimeout(advanceTimerRef.current)
-    clearTimeout(locationAdvanceTimerRef.current)
-    setAnswers({
-      field: null,
-      subfocus: [],
-      oppType: [],
-      level: null,
-      location: '',
-      remoteOnly: false,
-      experience: null,
-      paidPref: null,
-    })
-    setLocationStatus('idle')
-    setLocationConfirmed(false)
-    goTo(1)
+    setAnswers((a) => ({ ...a, paidPref: value }))
+    advanceTimerRef.current = setTimeout(() => setShowLoading(true), 320)
   }
 
   const field = answers.field ? FIELD_BY_ID[answers.field] : null
   const subfocusOptions = field?.subfocus || []
-  const isDone = step > TOTAL_STEPS
   const isMultiStep = MULTI_SELECT_STEPS.has(step)
 
   if (showLoading) {
@@ -330,9 +303,7 @@ export default function Interview() {
   return (
     <section className="interview-page">
       <div className="container interview-container">
-        {!isDone ? (
-          <>
-            <div className="interview-progress-row">
+        <div className="interview-progress-row">
               <button type="button" className="interview-back" onClick={goBack} disabled={step === 1}>
                 <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
                   <use href="#icon-arrow" transform="rotate(180 12 12)" />
@@ -400,7 +371,7 @@ export default function Interview() {
               <div className="interview-card-scroll">
                 {step === 1 && (
                   <div className="interview-grid interview-grid--field">
-                    {FIELDS.map((f) => {
+                    {DISPLAYED_FIELDS.map((f) => {
                       const meta = FIELD_META[f.id] || { glyph: 'magnifier', color: 'var(--cover)' }
                       return (
                         <button
@@ -571,7 +542,7 @@ export default function Interview() {
                         label={p.label}
                         desc={p.desc}
                         selected={answers.paidPref === p.id}
-                        onClick={() => selectAndAdvance('paidPref', p.id)}
+                        onClick={() => finishInterview(p.id)}
                       />
                     ))}
                   </div>
@@ -592,70 +563,6 @@ export default function Interview() {
                 </div>
               )}
             </div>
-          </>
-        ) : (
-          <div className="interview-done-card" ref={doneCardRef}>
-            <span className="interview-done-badge">
-              <Glyph name="party" size={40} />
-            </span>
-            <h1 className="interview-question">That is everything we need.</h1>
-            <p className="interview-subtext">Here is what you told us. Matching against it now.</p>
-            <div className="interview-summary-chips">
-              {field && (
-                <span className="interview-summary-chip">
-                  <Glyph name={FIELD_META[field.id]?.glyph} size={15} /> {field.label}
-                </span>
-              )}
-              {answers.subfocus.map((sfId) => {
-                const sf = subfocusOptions.find((s) => s.id === sfId)
-                if (!sf) return null
-                return (
-                  <span className="interview-summary-chip" key={sfId}>
-                    <Glyph name={SUBFOCUS_GLYPH[sfId] || 'magnifier'} size={15} /> {sf.label}
-                  </span>
-                )
-              })}
-              {answers.oppType.map((tId) => {
-                const t = OPP_TYPES.find((o) => o.id === tId)
-                if (!t) return null
-                return (
-                  <span className="interview-summary-chip" key={tId}>
-                    <Glyph name={t.glyph} size={15} /> {t.label}
-                  </span>
-                )
-              })}
-              {answers.level && (
-                <span className="interview-summary-chip">
-                  <Glyph name="gradCap" size={15} /> {levelLabel(answers.level)}
-                </span>
-              )}
-              <span className="interview-summary-chip">
-                <Glyph name="pin" size={15} /> {answers.remoteOnly ? 'Remote only' : answers.location || 'Anywhere'}
-              </span>
-              {EXPERIENCE_LEVELS.find((l) => l.id === answers.experience) && (
-                <span className="interview-summary-chip">
-                  {EXPERIENCE_LEVELS.find((l) => l.id === answers.experience).label}
-                </span>
-              )}
-              {PAID_PREFS.find((p) => p.id === answers.paidPref) && (
-                <span className="interview-summary-chip">
-                  <Glyph name={PAID_PREFS.find((p) => p.id === answers.paidPref).glyph} size={15} />{' '}
-                  {PAID_PREFS.find((p) => p.id === answers.paidPref).label}
-                </span>
-              )}
-            </div>
-            <div className="interview-done-actions">
-              <button type="button" className="interview-continue-btn" onClick={handleFinish}>
-                See my matches
-                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow" /></svg>
-              </button>
-              <button type="button" className="interview-restart-btn" onClick={restart}>
-                <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-replay" /></svg>
-                Start over
-              </button>
-            </div>
-          </div>
-        )}
       </div>
     </section>
   )
