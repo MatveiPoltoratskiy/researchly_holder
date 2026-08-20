@@ -1,6 +1,5 @@
 import crypto from 'node:crypto'
 import { checkRateLimit, getClientIp, sweepExpired } from './_rateLimit.js'
-import { consumeOneTimeCode, sweepExpiredCodes } from './_oneTimeCodes.js'
 
 // Vercel Node.js Serverless Function (zero-config: any file under /api gets deployed as
 // one automatically). This is the piece that makes the /interview and /opportunities
@@ -26,7 +25,6 @@ export default function handler(req, res) {
     }
 
     sweepExpired()
-    sweepExpiredCodes()
     const ip = getClientIp(req)
     const { limited, retryAfterSeconds } = checkRateLimit(`unlock:${ip}`)
     if (limited) {
@@ -52,14 +50,9 @@ export default function handler(req, res) {
     // via response timing, which matters for a passphrase check like this
     const a = Buffer.from(submitted)
     const b = Buffer.from(passphrase)
-    const isPassphraseMatch = a.length === b.length && crypto.timingSafeEqual(a, b)
+    const isMatch = a.length === b.length && crypto.timingSafeEqual(a, b)
 
-    // falls back to a minted one-time code (see dev-mint-code.js) only once the real
-    // passphrase has already failed to match — consumeOneTimeCode deletes whatever it
-    // looked up regardless of outcome, so there's no reason to call it on the success path
-    const isOneTimeMatch = !isPassphraseMatch && consumeOneTimeCode(submitted)
-
-    if (!isPassphraseMatch && !isOneTimeMatch) {
+    if (!isMatch) {
       return res.status(401).json({ error: 'Incorrect passphrase' })
     }
 
