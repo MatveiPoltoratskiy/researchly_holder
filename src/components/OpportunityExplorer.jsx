@@ -7,7 +7,7 @@ import SymbolField from './SymbolField'
 import RoadmapBar from './RoadmapBar'
 import { peekInterviewFilters, clearInterviewFilters } from '../lib/interviewHandoff'
 import { scoreOpportunity } from '../lib/matchOpportunities'
-import { computeMatchScore } from '../lib/matchScore'
+import { computeMatchScore, resolveMatchScore } from '../lib/matchScore'
 import { markBrowsedOpportunities, markOpportunityViewed } from '../lib/activityTracking'
 import { useSavedOpportunities, SAVE_STATUSES } from '../lib/savedOpportunities'
 import { useUserInterests, MAX_INTERESTS } from '../lib/userInterests'
@@ -120,6 +120,17 @@ function levelRangeLabel(levels) {
   return parts.join(' · ')
 }
 
+const MONTH_ABBR = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'Jun.', 'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.']
+
+// "2026-04-15" -> "Apr. 15, 2026" — parsed manually rather than via `new Date(iso)` since
+// that parses as UTC midnight and can print the wrong day in negative-offset timezones
+function formatDeadline(iso) {
+  if (!iso) return null
+  const [y, m, d] = iso.split('-').map(Number)
+  if (!y || !m || !d) return iso
+  return `${MONTH_ABBR[m - 1]} ${d}, ${y}`
+}
+
 function payLabel(o) {
   if (!o.paid) return 'Unpaid'
   if (o.stipend) return `Paid · $${o.stipend.toLocaleString()}`
@@ -133,17 +144,6 @@ function costLabel(o) {
   if (o.cost === 0) return 'Free to attend'
   if (o.cost != null && o.cost > 0) return `Costs $${o.cost.toLocaleString()} to attend`
   return null
-}
-
-// Placeholder until the interview/profile-matching system exists: a stable, id-derived
-// percentage so the "Match rate" field has something real-feeling to show rather than
-// looking broken. Once interview answers exist, swap this for an actual computed score.
-function matchRateFor(id) {
-  let hash = 0
-  for (let i = 0; i < id.length; i++) {
-    hash = (hash * 31 + id.charCodeAt(i)) >>> 0
-  }
-  return 58 + (hash % 41) // 58-98, skews positive since these are already curated matches
 }
 
 // Real category icons instead of a plain letter — matched off the org name, since we
@@ -264,10 +264,13 @@ function MatchBadge({ score, open, onToggle }) {
 
 // exported so the My Opportunities page can render visually identical cards (same
 // component, not a re-implementation) instead of drifting out of sync over time
-export function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, recommendTag, saved, matchProfile, mapContext = true }) {
+export function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, recommendTag, saved, matchProfile, interviewAnswers, mapContext = true }) {
   const primary = FIELD_ORDER.find((f) => o.focus.includes(f)) || o.focus[0]
   const [whyOpen, setWhyOpen] = useState(false)
-  const score = useMemo(() => computeMatchScore(o, matchProfile || {}), [o, matchProfile])
+  const score = useMemo(
+    () => resolveMatchScore(o, { interviewAnswers, matchProfile }),
+    [o, matchProfile, interviewAnswers]
+  )
 
   // clicking anywhere on the card selects it (highlights it + pans the map to its pin) and
   // opens the full detail modal, except the actual "View program" link, which should just
@@ -320,29 +323,25 @@ export function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, 
           {recommendTag && <span className="opp-tag opp-tag--recommend">{recommendTag}</span>}
         </div>
         <div className="opp-foot">
-          <span className="opp-pay">
-            <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true">
+          <span className={`opp-foot-tag opp-foot-tag--pay ${o.paid ? 'is-paid' : ''}`}>
+            <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
               <use href="#icon-dollar" />
             </svg>
             {payLabel(o)}
           </span>
           {costLabel(o) && (
-            <>
-              <span className="opp-dot">·</span>
-              <span className={`opp-cost ${o.cost > 0 ? 'opp-cost--paid' : ''}`}>
-                <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true">
-                  <use href={o.cost === 0 ? '#icon-people' : '#icon-dollar'} />
-                </svg>
-                {costLabel(o)}
-              </span>
-            </>
+            <span className={`opp-foot-tag opp-foot-tag--cost ${o.cost > 0 ? 'is-paid' : ''}`}>
+              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+                <use href={o.cost === 0 ? '#icon-people' : '#icon-dollar'} />
+              </svg>
+              {costLabel(o)}
+            </span>
           )}
-          <span className="opp-dot">·</span>
-          <span className="opp-deadline">
-            <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true">
+          <span className="opp-foot-tag opp-foot-tag--deadline">
+            <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
               <use href="#icon-calendar" />
             </svg>
-            {o.deadline ? `Deadline ${o.deadline}` : 'Deadline not confirmed'}
+            {o.deadline ? `Deadline ${formatDeadline(o.deadline)}` : 'Deadline not confirmed'}
           </span>
           {o.url ? (
             <a className="opp-link" href={o.url} target="_blank" rel="noreferrer">
@@ -565,7 +564,7 @@ function PersonalizePanel({ interests, goalId, setGoalId }) {
   )
 }
 
-export function OpportunityDetailModal({ o, onClose, interviewAnswers, saved }) {
+export function OpportunityDetailModal({ o, onClose, interviewAnswers, matchProfile, saved }) {
   // Escape-to-close, and lock page scroll while open so the backdrop reads as modal, not
   // just an overlapping card
   useEffect(() => {
@@ -581,16 +580,18 @@ export function OpportunityDetailModal({ o, onClose, interviewAnswers, saved }) 
     }
   }, [onClose])
 
-  // real computed score once the student's actual answers are available (arrived via the
-  // interview handoff) — same scoreOpportunity function that ranked their matches screen,
-  // not the old id-hash placeholder. Falls back to that placeholder, clearly labeled as
-  // one, for a visitor who opened the explorer without taking the interview first.
-  const matchRate = interviewAnswers
-    ? { value: scoreOpportunity(o, interviewAnswers).pct, caption: 'Based on your interview answers' }
-    : { value: matchRateFor(o.id), caption: 'Preview — take the interview for your real match rate' }
+  // same resolveMatchScore call the card uses, so a listing never shows one % in the list
+  // and a different one once its modal opens — real interview signal always wins; the
+  // profile-based score (interests/goal picked on this page) is the fallback for a
+  // visitor who hasn't taken the interview yet, same as the card shows.
+  const score = resolveMatchScore(o, { interviewAnswers, matchProfile })
+  const matchRate = {
+    value: score.pct,
+    caption: interviewAnswers ? 'Based on your interview answers' : 'Preview — take the interview for your real match rate',
+  }
 
   const details = [
-    ['Application deadline', o.deadline || 'Not confirmed'],
+    ['Application deadline', o.deadline ? formatDeadline(o.deadline) : 'Not confirmed'],
     ['Program dates', AVAILABILITY_LABEL[o.availability] || o.availability],
     ['Eligibility', levelRangeLabel(o.levels) || 'Not confirmed'],
     ['Cost to attend', costLabel(o) || 'Not confirmed'],
@@ -1129,6 +1130,7 @@ export default function OpportunityExplorer() {
                     recommendTag={recommendTagFor(o)}
                     saved={saved}
                     matchProfile={matchProfile}
+                    interviewAnswers={interviewAnswers}
                     cardRef={(el) => {
                       if (el) cardRefs.current.set(o.id, el)
                       else cardRefs.current.delete(o.id)
@@ -1160,6 +1162,7 @@ export default function OpportunityExplorer() {
           o={detailOpportunity}
           onClose={() => setDetailId(null)}
           interviewAnswers={interviewAnswers}
+          matchProfile={matchProfile}
           saved={saved}
         />
       )}

@@ -111,7 +111,12 @@ export default function MyOpportunities() {
       </div>
 
       {detailOpportunity && (
-        <OpportunityDetailModal o={detailOpportunity} onClose={() => setDetailId(null)} saved={saved} />
+        <OpportunityDetailModal
+          o={detailOpportunity}
+          onClose={() => setDetailId(null)}
+          matchProfile={matchProfile}
+          saved={saved}
+        />
       )}
     </section>
   )

@@ -1,4 +1,4 @@
-import { distanceKm, FIELD_TO_FOCUS } from './matchOpportunities'
+import { distanceKm, FIELD_TO_FOCUS, scoreOpportunity } from './matchOpportunities'
 import { GOAL_BY_ID } from './userGoal'
 
 /**
@@ -164,4 +164,20 @@ export function computeMatchScore(o, profile = {}) {
     .map(([, v]) => v.detail)
 
   return { pct, reasons, parts }
+}
+
+/**
+ * The single source of truth for "what match % does this student see for this card" —
+ * used identically by the card in the list and by the detail modal it opens into, so the
+ * two never show different numbers for the same opportunity. Once the student has taken
+ * the interview, that's real signal and always wins; the profile-based score here is only
+ * ever a stand-in for a visitor who hasn't.
+ */
+export function resolveMatchScore(o, { interviewAnswers, matchProfile } = {}) {
+  if (interviewAnswers) {
+    const { pct, reasons } = scoreOpportunity(o, interviewAnswers)
+    return { pct, reasons, isInterviewBased: true }
+  }
+  const { pct, reasons } = computeMatchScore(o, matchProfile || {})
+  return { pct, reasons, isInterviewBased: false }
 }
