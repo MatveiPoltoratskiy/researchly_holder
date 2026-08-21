@@ -42,8 +42,15 @@ const FOCUS_COLOR = {
   biology: 'var(--pine)',
   chemistry: 'var(--gold)',
   physics: 'var(--navy)',
+  neuroscience: 'var(--rose)',
 }
-const FOCUS_LABEL = { 'pre-med': 'Pre-Med', biology: 'Biology', chemistry: 'Chemistry', physics: 'Physics' }
+const FOCUS_LABEL = {
+  'pre-med': 'Pre-Med',
+  biology: 'Biology',
+  chemistry: 'Chemistry',
+  physics: 'Physics',
+  neuroscience: 'Neuroscience',
+}
 
 function levelHint(levels) {
   const hs = levels.some((l) => l.startsWith('hs'))

@@ -11,9 +11,10 @@ const PIN_COLOR = {
   biology: '#415C39',
   chemistry: '#D9A441',
   physics: '#1E2540',
+  neuroscience: '#C1573B',
 }
-const FIELD_ORDER = ['pre-med', 'biology', 'chemistry', 'physics']
-const FIELD_LABEL = { 'pre-med': 'Pre-Med', biology: 'Biology', chemistry: 'Chemistry', physics: 'Physics' }
+const FIELD_ORDER = ['pre-med', 'biology', 'chemistry', 'physics', 'neuroscience']
+const FIELD_LABEL = { 'pre-med': 'Pre-Med', biology: 'Biology', chemistry: 'Chemistry', physics: 'Physics', neuroscience: 'Neuroscience' }
 
 function domainFromUrl(url) {
   if (!url) return null

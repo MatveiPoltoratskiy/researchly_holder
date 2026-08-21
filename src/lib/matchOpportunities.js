@@ -10,16 +10,18 @@
  * learned prediction, and says so in the UI copy rather than pretending otherwise.
  */
 
-// The dataset's focus taxonomy (pre-med/biology/chemistry/physics) is narrower than the
-// interview's 15-field taxonomy. Fields with a natural adjacency map to the closest real
-// tag; fields with no honest match (computer-science) get no forced tag rather than a
-// misleading one — they're just scored on level/format/paid/location instead.
+// The dataset's focus taxonomy (pre-med/biology/chemistry/physics/neuroscience) is
+// narrower than the interview's 15-field taxonomy. Fields with a natural adjacency map to
+// the closest real tag; fields with no honest match (computer-science) get no forced tag
+// rather than a misleading one — they're just scored on level/format/paid/location
+// instead. neuroscience mapped to biology here until the dataset had real
+// neuroscience-tagged entries to match against — now that it does, it maps to itself.
 export const FIELD_TO_FOCUS = {
   biology: 'biology',
   'pre-med': 'pre-med',
   chemistry: 'chemistry',
   physics: 'physics',
-  neuroscience: 'biology',
+  neuroscience: 'neuroscience',
   engineering: 'physics',
   mathematics: 'physics',
   psychology: 'biology',
