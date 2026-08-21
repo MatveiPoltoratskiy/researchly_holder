@@ -269,11 +269,38 @@ export default function OpportunityMap({ opportunities, selectedId, onSelect, us
     } else {
       userMarkerRef.current.setLatLng(latlng)
     }
-    // 11, not the street-level 14 this used to fly to — comfortable enough to show
-    // several nearby pins around the user at once instead of zooming in tight on their
-    // exact address before they've even seen what's nearby (especially now that the
-    // interview handoff can land here with an already-narrow, few-pin filtered set)
-    map.flyTo(latlng, 11, { animate: true, duration: 1.2 })
+
+    // when userLocation arrives from the interview handoff, it's present on the very
+    // first render — this effect fires in the same commit as the map's own creation,
+    // before Leaflet has necessarily measured a real (non-zero) container size yet.
+    // flyTo's animation math on a zero-size map throws "Invalid LatLng object: (NaN,
+    // NaN)" and keeps re-throwing on every subsequent animation frame. A live
+    // geolocation grant never hit this — it always resolves well after mount, once the
+    // container is already properly sized. invalidateSize() alone isn't enough (it can
+    // still measure 0×0 if the browser hasn't laid out the container yet at this exact
+    // point), so this polls via requestAnimationFrame until the map actually reports a
+    // real size before flying, capped so a genuinely-broken layout can't spin forever.
+    let attempts = 0
+    let cancelled = false
+    function flyOnceSized() {
+      if (cancelled) return
+      map.invalidateSize()
+      const { x, y } = map.getSize()
+      if (x > 0 && y > 0) {
+        map.flyTo(latlng, 11, { animate: true, duration: 1.2 })
+        return
+      }
+      // genuinely-broken layout safety valve: give up on the fly-in rather than call
+      // flyTo on a still-zero-size map and hit the same crash this whole guard exists
+      // to prevent. The marker is already placed above either way.
+      if (attempts >= 20) return
+      attempts += 1
+      requestAnimationFrame(flyOnceSized)
+    }
+    flyOnceSized()
+    return () => {
+      cancelled = true
+    }
   }, [userLocation])
 
   return (

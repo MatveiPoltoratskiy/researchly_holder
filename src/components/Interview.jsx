@@ -336,16 +336,43 @@ export default function Interview() {
     setShowSuggestions(matches.length > 0)
   }
 
+  // best-effort forward geocode via the same free, keyless Nominatim API already used for
+  // "use my location"'s reverse lookup — WORLD_CITIES itself is just plain city-name
+  // strings with no coordinates, so without this, a typed/picked city never carries a
+  // lat/lon into the interview→explorer handoff (map recentering, "closest fit first"
+  // sort, and the "it's close to you" match reason all silently no-op for anyone who
+  // types their city instead of granting GPS — which is likely most people). Guarded
+  // against a stale overwrite: only applies if the location field still matches what was
+  // geocoded, in case the student changed it again while the request was in flight.
+  async function geocodeLocation(cityText) {
+    try {
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(cityText)}&limit=1`,
+        { headers: { Accept: 'application/json' } }
+      )
+      const data = await res.json()
+      const hit = data?.[0]
+      if (!hit) return
+      setAnswers((a) =>
+        a.location === cityText ? { ...a, locationCoords: { lat: parseFloat(hit.lat), lon: parseFloat(hit.lon) } } : a
+      )
+    } catch {
+      // best-effort only — locationCoords just stays null, same as before this fix
+    }
+  }
+
   function pickSuggestion(city) {
     setAnswers((a) => ({ ...a, location: city, locationCoords: null }))
     setSuggestions([])
     confirmLocation()
+    geocodeLocation(city)
   }
 
   function handleLocationContinue(e) {
     e.preventDefault()
     if (answers.location.trim() && !locationConfirmed) {
       confirmLocation()
+      if (!answers.locationCoords) geocodeLocation(answers.location.trim())
       return
     }
     goTo(step + 1)
