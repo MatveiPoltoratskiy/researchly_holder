@@ -7,7 +7,7 @@ import { peekInterviewFilters, clearInterviewFilters } from '../lib/interviewHan
 import { scoreOpportunity } from '../lib/matchOpportunities'
 
 const SORTS = {
-  recommended: { label: 'Recommended for you', fn: null },
+  recommended: { label: 'Best for your interests & location', fn: null },
   'best-match': { label: 'Best match', fn: null },
   name: { label: 'Name (A–Z)', fn: (a, b) => a.name.localeCompare(b.name) },
   verified: {
@@ -582,10 +582,28 @@ export default function OpportunityExplorer() {
     })
 
     if (sortKey === 'recommended') {
-      // three tiers: big names first, then the hand-picked niche list, then everything
-      // else — within the big-name and "everything else" tiers, distance breaks ties once
-      // location is known; the niche tier keeps its own hand-picked order regardless,
-      // since that curation IS the point of that tier
+      // once real interview answers exist, "recommended" means actual personal fit —
+      // the same scoreOpportunity function that ranked the interview's own matches
+      // screen (field/interest match, eligibility, format, pay, and real distance to the
+      // student), not a school-prestige heuristic with no idea who's looking. Ties still
+      // fall back to the big-name/niche signal rather than dropping it — a mix of
+      // recognizable names and curated picks among equally-good matches, not just the
+      // single highest-scoring school repeated.
+      if (interviewAnswers) {
+        const scoreById = new Map(list.map((o) => [o.id, scoreOpportunity(o, interviewAnswers).pct]))
+        const tierOf = (o) => (bigNameSchool(o.org) ? 0 : NICHE_RANK.has(o.id) ? 1 : 2)
+        return [...list].sort((a, b) => {
+          const pctDiff = scoreById.get(b.id) - scoreById.get(a.id)
+          if (pctDiff !== 0) return pctDiff
+          return tierOf(a) - tierOf(b)
+        })
+      }
+
+      // fallback for a visitor who never took the interview: no personal fit signal to
+      // rank by, so lean on curation instead — three tiers: big names first, then the
+      // hand-picked niche list, then everything else — within the big-name and
+      // "everything else" tiers, distance breaks ties once location is known; the niche
+      // tier keeps its own hand-picked order regardless, since that curation IS the point
       return [...list].sort((a, b) => {
         const tierOf = (o) => (bigNameSchool(o.org) ? 0 : NICHE_RANK.has(o.id) ? 1 : 2)
         const tierA = tierOf(a)
@@ -608,7 +626,7 @@ export default function OpportunityExplorer() {
 
     const sortFn = SORTS[sortKey]?.fn
     return sortFn ? [...list].sort(sortFn) : list
-  }, [activeFields, level, costFilters, sortKey, userLocation])
+  }, [activeFields, level, costFilters, sortKey, userLocation, interviewAnswers])
 
   const filteredLenRef = useRef(filtered.length)
   filteredLenRef.current = filtered.length
