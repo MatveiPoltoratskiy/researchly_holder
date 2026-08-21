@@ -1375,6 +1375,14 @@ html{ scroll-behavior:smooth; }
   position:relative; z-index:1;
   font-family:"Iowan Old Style",Palatino,Georgia,serif; font-weight:700;
   font-size:clamp(32px,3.8vw,46px); color:var(--navy); margin:0 0 12px;
+  /* opts back out of the bare h1{} rule's hero shimmer-gradient-clip effect (same escape
+     hatch as .circle-mark below) — that rule sets -webkit-text-fill-color:transparent on
+     every h1 sitewide, which a child span/em without its own background-clip:text can
+     render as fully invisible text depending on the browser (reproduced as the italicized
+     "found" word vanishing entirely) rather than falling back to its own `color`. This
+     heading was never meant to shimmer in the first place, so it just opts all the way out. */
+  background:none; -webkit-background-clip:initial; background-clip:initial;
+  -webkit-text-fill-color:var(--navy); animation:none;
 }
 /* "found" reads as the softer, sentence-like part of the line; the count and the word
    "opportunities" are the actual payload, so both get the same emphasis treatment */
@@ -1900,12 +1908,18 @@ html{ scroll-behavior:smooth; }
 .interview-card-head{ flex-shrink:0; }
 .interview-card-scroll{ overflow-y:auto; min-height:0; flex:1; padding:4px 2px; margin:0 -2px; }
 
-/* headings use the site-wide sans stack instead of the serif Iowan/Palatino pairing used
-   elsewhere: bolder, squarer, less "old-style calligraphic," per feedback that the serif
-   was reading as slanted at this size */
+/* a Roman serif leads now (Times New Roman, not the old-style calligraphic Iowan/Palatino
+   pairing that previously read as slanted at this size — Times is far more upright/
+   mechanical), with Arial staying in the stack as the sans fallback rather than the
+   previous sans-only stack */
 .interview-question{
-  font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; letter-spacing:-.01em;
+  font-family:"Times New Roman",Times,Georgia,Arial,sans-serif; font-weight:800; letter-spacing:-.01em;
   font-size:clamp(26px,3.4vw,36px); color:var(--navy); margin:0 0 10px; text-wrap:balance;
+  /* same h1 shimmer-effect opt-out as .opp-heading above — this is also a reused h1 with a
+     differently-colored child span (.im-matches-count on the matches screen), the same
+     latent invisible-text risk even though it wasn't the one caught in a screenshot */
+  background:none; -webkit-background-clip:initial; background-clip:initial;
+  -webkit-text-fill-color:var(--navy); animation:none;
 }
 .interview-subtext{
   font-family:"Segoe UI",system-ui,sans-serif; font-size:18px; color:var(--navy);
@@ -2182,6 +2196,11 @@ html{ scroll-behavior:smooth; }
 .interview-loading-title{
   font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:clamp(24px,3.2vw,30px);
   color:var(--cover); margin:0; text-align:center;
+  /* same h1 shimmer-effect opt-out as .opp-heading/.interview-question — no colored child
+     span here today, so this one wasn't visibly broken, but it's the same reused-h1
+     fragility and cheap to close off */
+  background:none; -webkit-background-clip:initial; background-clip:initial;
+  -webkit-text-fill-color:var(--cover); animation:none;
 }
 .interview-loading-subtext{
   font-family:"Segoe UI",system-ui,sans-serif; font-size:16.5px; color:var(--navy); opacity:.65; margin:0;
