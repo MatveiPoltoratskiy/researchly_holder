@@ -22,8 +22,6 @@ export const ROADMAP_STAGES = [
     milestones: [
       { id: 'explore-interview', label: 'Take the matching interview', auto: 'interview-done' },
       { id: 'explore-browse', label: 'Browse the opportunities list', auto: 'browsed' },
-      { id: 'explore-interests', label: 'Choose your interests', auto: 'has-interests' },
-      { id: 'explore-goal', label: 'Set your research goal', auto: 'has-goal' },
     ],
   },
   {

@@ -2,8 +2,6 @@ import { useMemo, useState } from 'react'
 import { Link } from '../lib/router'
 import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
 import { useSavedOpportunities, SAVE_STATUSES } from '../lib/savedOpportunities'
-import { useUserInterests } from '../lib/userInterests'
-import { useUserGoal } from '../lib/userGoal'
 import { OpportunityCard, OpportunityDetailModal, recommendTagFor } from './OpportunityExplorer'
 
 const OPP_BY_ID = new Map(CANADA_OPPORTUNITIES.map((o) => [o.id, o]))
@@ -17,14 +15,8 @@ const STATUS_ORDER = SAVE_STATUSES.map((s) => s.id)
  */
 export default function MyOpportunities() {
   const saved = useSavedOpportunities()
-  const interests = useUserInterests()
-  const [goalId] = useUserGoal()
   const [statusFilter, setStatusFilter] = useState('all')
   const [detailId, setDetailId] = useState(null)
-
-  // no interview/geolocation context on this page, so the profile only carries the two
-  // signals this page itself can set — still keeps the score consistent with the main list
-  const matchProfile = useMemo(() => ({ interestIds: interests.interestIds, goalId }), [interests.interestIds, goalId])
 
   const savedEntries = useMemo(() => {
     const entries = Object.entries(saved.savedMap)
@@ -94,7 +86,6 @@ export default function MyOpportunities() {
                   onOpenDetail={setDetailId}
                   recommendTag={recommendTagFor(entry.o)}
                   saved={saved}
-                  matchProfile={matchProfile}
                   mapContext={false}
                 />
               ))}
@@ -111,12 +102,7 @@ export default function MyOpportunities() {
       </div>
 
       {detailOpportunity && (
-        <OpportunityDetailModal
-          o={detailOpportunity}
-          onClose={() => setDetailId(null)}
-          matchProfile={matchProfile}
-          saved={saved}
-        />
+        <OpportunityDetailModal o={detailOpportunity} onClose={() => setDetailId(null)} saved={saved} />
       )}
     </section>
   )

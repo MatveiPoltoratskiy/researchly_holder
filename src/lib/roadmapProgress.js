@@ -2,8 +2,6 @@ import { useCallback, useMemo } from 'react'
 import { ROADMAP_STAGES } from '../data/roadmap'
 import { useLocalStorageState } from './storage'
 import { useSavedOpportunities } from './savedOpportunities'
-import { useUserGoal } from './userGoal'
-import { useUserInterests } from './userInterests'
 import { hasCompletedInterview, hasBrowsedOpportunities, viewedOpportunityCount } from './activityTracking'
 
 const MANUAL_STORAGE_KEY = 'rsly_roadmap_manual_milestones'
@@ -12,12 +10,10 @@ const MANUAL_STORAGE_KEY = 'rsly_roadmap_manual_milestones'
 // fact elsewhere in the app — the single place that connects "the roadmap" to "what the
 // student actually did." Adding a new auto-milestone later means adding one line here,
 // not touching the roadmap UI.
-function evaluateAutoFlags({ totalSaved, appliedCount, interestIds, goalId }) {
+function evaluateAutoFlags({ totalSaved, appliedCount }) {
   return {
     'interview-done': hasCompletedInterview(),
     browsed: hasBrowsedOpportunities(),
-    'has-interests': interestIds.length > 0,
-    'has-goal': Boolean(goalId),
     'viewed-5': viewedOpportunityCount() >= 5,
     'saved-1': totalSaved >= 1,
     'saved-3': totalSaved >= 3,
@@ -37,12 +33,10 @@ function evaluateAutoFlags({ totalSaved, appliedCount, interestIds, goalId }) {
 export function useRoadmapProgress() {
   const [manualDone, setManualDone] = useLocalStorageState(MANUAL_STORAGE_KEY, {})
   const { totalSaved, countsByStatus } = useSavedOpportunities()
-  const [goalId] = useUserGoal()
-  const { interestIds } = useUserInterests()
 
   const autoFlags = useMemo(
-    () => evaluateAutoFlags({ totalSaved, appliedCount: countsByStatus.applied, interestIds, goalId }),
-    [totalSaved, countsByStatus.applied, interestIds, goalId]
+    () => evaluateAutoFlags({ totalSaved, appliedCount: countsByStatus.applied }),
+    [totalSaved, countsByStatus.applied]
   )
 
   const stages = useMemo(() => {

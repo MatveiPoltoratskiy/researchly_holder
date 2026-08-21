@@ -1811,32 +1811,6 @@ html{ scroll-behavior:smooth; }
 .opp-match-why-list li::before{ content:"•"; position:absolute; left:0; color:var(--cover); }
 .opp-match-why-empty{ font-size:13px; color:var(--navy-soft); margin:0; font-style:italic; }
 
-/* the up-to-3 interest picker in the sidebar */
-.opp-interests-disclaimer{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; line-height:1.5; color:var(--navy-faint);
-  margin:8px 2px 0;
-}
-
-/* single-select goal picker in the sidebar */
-.opp-goal-list{ display:flex; flex-direction:column; gap:3px; }
-.opp-goal-row{
-  display:flex; align-items:center; gap:10px; width:100%; text-align:left; cursor:pointer;
-  background:none; border:1.3px solid transparent; border-radius:9px; padding:7px 8px;
-  font-family:"Segoe UI",system-ui,sans-serif; color:var(--navy-soft);
-  transition:background .12s ease, border-color .12s ease, color .12s ease;
-}
-.opp-goal-row:hover{ background:var(--pages-shadow); }
-.opp-goal-row.is-checked{ background:color-mix(in srgb, var(--cover) 10%, var(--card-bg)); border-color:var(--cover); color:var(--navy); }
-.opp-goal-glyph{ flex:none; display:flex; color:var(--cover-dark); opacity:.75; }
-.opp-goal-row.is-checked .opp-goal-glyph{ opacity:1; }
-
-/* subtle "Your goal" note appended to the header's "Prioritized for" row */
-.opp-goal-note{
-  display:inline-flex; align-items:center; gap:5px;
-  font-weight:700; color:var(--cover-dark); margin-left:2px;
-}
-.opp-goal-note svg{ flex:none; }
-
 .opp-save-control{ display:flex; align-items:center; gap:7px; }
 .opp-save-btn{
   display:flex; align-items:center; gap:6px; flex:none;
@@ -1854,8 +1828,8 @@ html{ scroll-behavior:smooth; }
   padding:6px 24px 6px 12px; cursor:pointer;
 }
 
-/* top-right of the header band: Personalize trigger + link to /my-opportunities,
-   grouped so neither competes with the real site nav (there isn't one on this page) */
+/* top-right of the header band: link to /my-opportunities — its own group so it
+   doesn't compete with the real site nav (there isn't one on this page) */
 .opp-header-actions{
   position:absolute; top:0; right:0; z-index:3;
   display:flex; align-items:center; gap:10px;
@@ -1872,31 +1846,6 @@ html{ scroll-behavior:smooth; }
   padding:1px 7px; line-height:1.5;
 }
 @media (max-width:760px){ .opp-header-actions{ position:static; margin-bottom:10px; justify-content:flex-start; } }
-
-/* the "Personalize match" popover trigger + panel — replaces what used to be two
-   permanent sidebar sections (Your top interests / Your goal); moved off the sidebar
-   entirely so the page can stay a fixed one-viewport shell (see .opp-fixed-page) */
-.opp-personalize{ position:relative; }
-.opp-personalize-btn{
-  display:flex; align-items:center; gap:6px;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:700; color:var(--navy);
-  text-decoration:none; padding:8px 14px; border-radius:999px; border:1.3px solid rgba(30,37,64,.14);
-  background:var(--card-bg); cursor:pointer; transition:border-color .12s ease, transform .12s ease;
-}
-.opp-personalize-btn:hover{ border-color:rgba(30,37,64,.3); transform:translateY(-1px); }
-.opp-personalize-btn.is-open{ border-color:var(--cover); color:var(--cover-dark); }
-/* position (top/right) is set inline via JS, since this is portaled to <body> to escape
-   .opp-fixed-page's overflow:hidden clip — see the component comment for why */
-.opp-personalize-panel{
-  z-index:1500; width:320px; max-height:70vh; overflow-y:auto;
-  background:var(--card-bg); border:1px solid var(--card-border); border-radius:16px;
-  padding:18px; box-shadow:0 18px 40px -14px rgba(30,37,64,.35);
-}
-.opp-personalize-section + .opp-personalize-section{ margin-top:16px; padding-top:16px; border-top:1px solid var(--card-border); }
-.opp-personalize-heading{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:800; letter-spacing:.03em;
-  text-transform:uppercase; color:var(--navy); margin-bottom:8px;
-}
 
 /* ---------- My Opportunities / saved pipeline page ---------- */
 /* same fixed, one-viewport shell as the main explorer: no site nav/footer on this route
