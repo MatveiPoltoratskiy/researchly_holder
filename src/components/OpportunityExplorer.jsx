@@ -455,6 +455,7 @@ export default function OpportunityExplorer() {
   )
   const [level, setLevel] = useState(() => interviewHandoff?.filters?.level || 'all')
   const [costFilters, setCostFilters] = useState(() => new Set(interviewHandoff?.filters?.cost || []))
+  const [equityOnly, setEquityOnly] = useState(false)
   const [sortKey, setSortKey] = useState('recommended')
   const [userLocation, setUserLocation] = useState(() => interviewHandoff?.filters?.locationCoords || null)
   const [locationStatus, setLocationStatus] = useState(() =>
@@ -532,6 +533,15 @@ export default function OpportunityExplorer() {
     scrollToResults()
   }
 
+  // purely descriptive, not editorial: shows only listings whose own official
+  // eligibility rules restrict who may apply (e.g. "Black students only", "HBCU
+  // students only") — the same equityNote already surfaced as a card tag, just
+  // filterable now. No stance taken on the policy itself, just a way to find them.
+  function toggleEquityFilter() {
+    setEquityOnly((prev) => !prev)
+    scrollToResults()
+  }
+
   // powers the "Recommended for you" sort: big-name/near-you ranking needs real
   // coordinates, which only the browser's own Geolocation API can give us here (no
   // geocoding service or API key wired up for this prototype)
@@ -577,6 +587,8 @@ export default function OpportunityExplorer() {
         const matchesPaid = costFilters.has('paid') && isPaidToAttend
         if (!matchesFree && !matchesPaid) return false
       }
+
+      if (equityOnly && !o.equityNote) return false
 
       return true
     })
@@ -626,7 +638,7 @@ export default function OpportunityExplorer() {
 
     const sortFn = SORTS[sortKey]?.fn
     return sortFn ? [...list].sort(sortFn) : list
-  }, [activeFields, level, costFilters, sortKey, userLocation, interviewAnswers])
+  }, [activeFields, level, costFilters, equityOnly, sortKey, userLocation, interviewAnswers])
 
   const filteredLenRef = useRef(filtered.length)
   filteredLenRef.current = filtered.length
@@ -749,6 +761,37 @@ export default function OpportunityExplorer() {
                     </button>
                   )
                 })}
+              </div>
+            </div>
+
+            {/* purely descriptive filter, not an endorsement either way — some listings
+                restrict who's eligible to apply (their own official rules, not ours; see
+                the "equity" tag already shown on individual cards below), this just makes
+                that subset findable for a student checking what they specifically qualify for */}
+            <div className="opp-side-section">
+              <div className="opp-side-heading opp-side-heading--static">Eligibility</div>
+              <div className="opp-major-list">
+                <button
+                  type="button"
+                  className={`opp-major-row is-live ${equityOnly ? 'is-checked' : ''}`}
+                  onClick={toggleEquityFilter}
+                >
+                  <span className="opp-major-check" aria-hidden="true">
+                    {equityOnly && (
+                      <svg width="10" height="8" viewBox="0 0 10 8">
+                        <path
+                          d="M1 4.2 3.6 6.8 9 1.2"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    )}
+                  </span>
+                  <span className="opp-major-label">Diversity &amp; access programs</span>
+                </button>
               </div>
             </div>
           </aside>

@@ -7589,6 +7589,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "high",
+    "equityNote": "Underrepresented groups only",
     "blurb": "A 12-week paid placement researching mental health and substance use (including clinical neuroscience) with a CAMH scientist - reserved for Ontario undergrads from underrepresented groups."
   },
   {
@@ -7740,6 +7741,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "medium",
+    "equityNote": "Black students only",
     "blurb": "A 12-week, $6,000 neuroscience research studentship at the RI-MUHC, paired with a faculty mentor - specifically for Black undergraduate students."
   },
   {
@@ -8013,6 +8015,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "medium",
+    "equityNote": "Underrepresented Baltimore-area students only",
     "blurb": "An 8-week neuroscience research internship for Baltimore-area high schoolers from underrepresented backgrounds, paid hourly (in-person) or a flat honorarium (virtual)."
   },
   {
@@ -8581,6 +8584,7 @@ export const CANADA_OPPORTUNITIES = [
     "multiSite": false,
     "isGrant": false,
     "confidence": "medium",
+    "equityNote": "HBCU students only",
     "blurb": "An 8-week UCLA neuroscience research program specifically for undergrads at Historically Black Colleges and Universities."
   },
   {
