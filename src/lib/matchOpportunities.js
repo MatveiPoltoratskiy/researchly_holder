@@ -29,7 +29,9 @@ export const FIELD_TO_FOCUS = {
   humanitarian: 'pre-med',
 }
 
-function distanceKm(lat1, lon1, lat2, lon2) {
+// exported so matchScore.js (the separate, transparently-weighted card match score) can
+// reuse the exact same haversine math instead of a second copy that could drift
+export function distanceKm(lat1, lon1, lat2, lon2) {
   const R = 6371
   const dLat = ((lat2 - lat1) * Math.PI) / 180
   const dLon = ((lon2 - lon1) * Math.PI) / 180

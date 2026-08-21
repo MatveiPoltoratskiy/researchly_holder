@@ -5,6 +5,7 @@ import { searchCities } from '../data/worldCities'
 import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
 import { getTopMatches, FIELD_TO_FOCUS } from '../lib/matchOpportunities'
 import { setInterviewFilters } from '../lib/interviewHandoff'
+import { markInterviewDone } from '../lib/activityTracking'
 import { burstConfetti } from '../lib/confetti'
 import Glyph from './InterviewIcons'
 import InterviewLoading from './InterviewLoading'
@@ -400,7 +401,17 @@ export default function Interview() {
   const isMultiStep = MULTI_SELECT_STEPS.has(step)
 
   if (phase === 'loading') {
-    return <InterviewLoading onDone={() => setPhase('matches')} />
+    return (
+      <InterviewLoading
+        onDone={() => {
+          // one-time flag the roadmap's "Explore" stage reads to auto-check "Take the
+          // matching interview" — reaching real matches is the actual finish line, not
+          // just landing on the first question
+          markInterviewDone()
+          setPhase('matches')
+        }}
+      />
+    )
   }
 
   if (phase === 'matches') {

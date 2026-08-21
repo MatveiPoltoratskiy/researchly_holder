@@ -85,6 +85,7 @@ export default function IconSprite() {
         <symbol id="icon-list" viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></symbol>
         <symbol id="icon-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.7" /><path d="M15 9l-2 6-4 2 2-6z" fill="currentColor" /></symbol>
         <symbol id="icon-bookmark" viewBox="0 0 24 24"><path d="M7 4h10v16l-5-4-5 4Z" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" /></symbol>
+        <symbol id="icon-bookmark-filled" viewBox="0 0 24 24"><path d="M7 4h10v16l-5-4-5 4Z" fill="currentColor" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" /></symbol>
         <symbol id="icon-user" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.4" fill="none" stroke="currentColor" strokeWidth="1.7" /><path d="M5 20c1.2-3.6 4-5.4 7-5.4s5.8 1.8 7 5.4" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" /></symbol>
         <symbol id="icon-avatar" viewBox="0 0 24 24"><circle cx="12" cy="9" r="4" fill="#fff" /><path d="M4 21c1.4-4.4 4.6-6.6 8-6.6s6.6 2.2 8 6.6" fill="#fff" /></symbol>
         <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" /></symbol>

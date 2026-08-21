@@ -1364,6 +1364,74 @@ html{ scroll-behavior:smooth; }
 }
 .opp-container{ max-width:1800px; padding-left:24px; padding-right:24px; }
 
+/* ---------- research roadmap bar (persistent progress layer, opportunities page) ---------- */
+.roadmap-bar{
+  background:var(--card-bg); border:1.5px solid rgba(30,37,64,.12); border-radius:18px;
+  margin-bottom:18px; overflow:hidden;
+}
+.roadmap-bar-summary{
+  width:100%; display:flex; align-items:center; gap:20px; justify-content:space-between;
+  padding:13px 22px; background:none; border:none; cursor:pointer; text-align:left;
+  font-family:"Segoe UI",system-ui,sans-serif;
+}
+.roadmap-bar-title{ display:flex; flex-direction:column; gap:2px; flex-shrink:0; }
+.roadmap-bar-title{ font-weight:800; font-size:14.5px; color:var(--navy); }
+.roadmap-bar-current{ font-weight:600; font-size:12px; color:var(--cover); }
+
+.roadmap-track{ display:flex; align-items:flex-start; flex:1; justify-content:center; min-width:0; }
+.roadmap-track-item{ display:flex; align-items:flex-start; }
+.roadmap-track-line{ width:26px; height:2px; background:rgba(30,37,64,.15); margin:9px 3px 0; flex-shrink:0; }
+.roadmap-track-line.is-filled{ background:var(--match-green); }
+
+.roadmap-node{ display:flex; flex-direction:column; align-items:center; gap:5px; }
+.roadmap-node-dot{
+  width:19px; height:19px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  border:1.8px solid rgba(30,37,64,.22); color:#fff; flex-shrink:0;
+}
+.roadmap-node--done .roadmap-node-dot{ background:var(--match-green); border-color:var(--match-green); }
+.roadmap-node--current .roadmap-node-dot{ background:var(--cover); border-color:var(--cover); }
+.roadmap-node-dot-core{ width:6px; height:6px; border-radius:50%; background:#fff; }
+.roadmap-node-label{ font-size:11px; font-weight:700; color:var(--navy); opacity:.5; white-space:nowrap; }
+.roadmap-node--current .roadmap-node-label{ color:var(--cover); opacity:1; }
+.roadmap-node--done .roadmap-node-label{ opacity:.4; }
+
+.roadmap-bar-pct{
+  display:flex; align-items:center; gap:5px; flex-shrink:0;
+  font-weight:800; font-size:13px; color:var(--cover);
+}
+.roadmap-chevron{ color:var(--navy); opacity:.45; transition:transform .15s ease; }
+.roadmap-chevron.is-open{ transform:rotate(180deg); }
+
+.roadmap-milestones{ padding:0 22px 16px; border-top:1px solid rgba(30,37,64,.08); }
+.roadmap-milestones-head{
+  font-size:11px; font-weight:800; letter-spacing:.04em; text-transform:uppercase;
+  color:var(--navy); opacity:.5; margin:13px 0 6px;
+}
+.roadmap-milestone-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px; }
+.roadmap-milestone-row{
+  display:flex; align-items:center; gap:10px; width:100%; text-align:left;
+  background:none; border:none; padding:6px 4px; border-radius:8px; cursor:pointer;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; color:var(--navy);
+  transition:background .12s ease;
+}
+.roadmap-milestone-row:hover:not(:disabled){ background:rgba(30,37,64,.04); }
+.roadmap-milestone-row:disabled{ cursor:default; }
+.roadmap-milestone-row.is-done{ opacity:.6; }
+.roadmap-milestone-check{
+  flex-shrink:0; width:17px; height:17px; border-radius:5px; display:flex; align-items:center; justify-content:center;
+  border:1.6px solid rgba(30,37,64,.25); color:#fff;
+}
+.roadmap-milestone-row.is-done .roadmap-milestone-check{ background:var(--match-green); border-color:var(--match-green); }
+
+@media (max-width:900px){
+  .roadmap-bar-summary{ flex-wrap:wrap; gap:10px; }
+  .roadmap-track{ order:3; width:100%; justify-content:flex-start; overflow-x:auto; padding-top:4px; }
+}
+@media (max-width:600px){
+  .roadmap-node-label{ display:none; }
+  .roadmap-bar-current{ display:none; }
+}
+
 .opp-header{ position:relative; margin-bottom:22px; }
 /* light ambient field behind just the header band — see the JSX comment for why this
    doesn't extend to the whole page */
@@ -1681,6 +1749,125 @@ html{ scroll-behavior:smooth; }
 .opp-confidence--high{ background:var(--pill-green-bg); color:var(--pill-green-text); }
 .opp-confidence--medium{ background:var(--pill-amber-bg); color:var(--pill-amber-text); }
 .opp-confidence--low{ background:rgba(169,79,30,.14); color:var(--cover-dark); }
+
+/* right column of a card's top row — confidence badge, match score, save control,
+   stacked so none of them ever crowd the title/org on the left */
+.opp-card-actions{ display:flex; flex-direction:column; align-items:flex-end; gap:6px; flex:none; }
+
+/* ---- card-level match score ("94% match") + "why this matches you" panel ---- */
+.opp-match-badge{
+  display:flex; align-items:center; gap:4px; flex:none;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:700; color:var(--navy-soft);
+  background:none; border:1.3px solid rgba(30,37,64,.18); border-radius:999px;
+  padding:4px 9px; white-space:nowrap; cursor:pointer;
+  transition:border-color .12s ease, color .12s ease;
+}
+.opp-match-badge:hover{ border-color:rgba(30,37,64,.32); color:var(--navy); }
+.opp-match-badge.is-open{ border-color:var(--cover); color:var(--cover-dark); }
+.opp-match-pct{ font-weight:800; color:var(--match-green); }
+.opp-match-chevron{ opacity:.55; transition:transform .15s ease; }
+.opp-match-chevron.is-open{ transform:rotate(180deg); }
+
+.opp-match-why{
+  margin-top:12px; padding-top:12px; border-top:1px dashed var(--card-border);
+  font-family:"Segoe UI",system-ui,sans-serif;
+}
+.opp-match-why-head{ font-size:12px; font-weight:800; color:var(--navy); opacity:.6; text-transform:uppercase; letter-spacing:.03em; margin-bottom:6px; }
+.opp-match-why-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:5px; }
+.opp-match-why-list li{
+  font-size:13.5px; line-height:1.5; color:var(--navy); padding-left:14px; position:relative;
+}
+.opp-match-why-list li::before{ content:"•"; position:absolute; left:0; color:var(--cover); }
+.opp-match-why-empty{ font-size:13px; color:var(--navy-soft); margin:0; font-style:italic; }
+
+/* the up-to-3 interest picker in the sidebar */
+.opp-interests-disclaimer{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; line-height:1.5; color:var(--navy-faint);
+  margin:8px 2px 0;
+}
+
+/* single-select goal picker in the sidebar */
+.opp-goal-list{ display:flex; flex-direction:column; gap:3px; }
+.opp-goal-row{
+  display:flex; align-items:center; gap:10px; width:100%; text-align:left; cursor:pointer;
+  background:none; border:1.3px solid transparent; border-radius:9px; padding:7px 8px;
+  font-family:"Segoe UI",system-ui,sans-serif; color:var(--navy-soft);
+  transition:background .12s ease, border-color .12s ease, color .12s ease;
+}
+.opp-goal-row:hover{ background:var(--pages-shadow); }
+.opp-goal-row.is-checked{ background:color-mix(in srgb, var(--cover) 10%, var(--card-bg)); border-color:var(--cover); color:var(--navy); }
+.opp-goal-glyph{ flex:none; display:flex; color:var(--cover-dark); opacity:.75; }
+.opp-goal-row.is-checked .opp-goal-glyph{ opacity:1; }
+
+/* subtle "Your goal" note appended to the header's "Prioritized for" row */
+.opp-goal-note{
+  display:inline-flex; align-items:center; gap:5px;
+  font-weight:700; color:var(--cover-dark); margin-left:2px;
+}
+.opp-goal-note svg{ flex:none; }
+
+.opp-save-control{ display:flex; flex-direction:column; align-items:flex-end; gap:4px; }
+.opp-save-btn{
+  display:flex; align-items:center; gap:5px; flex:none;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:700;
+  padding:4px 9px 4px 7px; border-radius:999px; white-space:nowrap; cursor:pointer;
+  background:none; border:1.3px solid rgba(30,37,64,.18); color:var(--navy-soft);
+  transition:border-color .12s ease, color .12s ease, background .12s ease;
+}
+.opp-save-btn:hover{ border-color:rgba(30,37,64,.32); color:var(--navy); }
+.opp-save-btn.is-saved{ background:color-mix(in srgb, var(--cover) 12%, var(--card-bg)); border-color:var(--cover); color:var(--cover-dark); }
+.opp-save-btn svg{ flex-shrink:0; }
+.opp-save-status{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:11px; font-weight:700; color:var(--navy-soft);
+  background:var(--cream); border:1.3px solid rgba(30,37,64,.14); border-radius:999px;
+  padding:3px 20px 3px 9px; cursor:pointer;
+}
+
+/* header link to /my-opportunities — small and out of the way, top-right of the
+   header band, not a whole new nav item competing with the real site nav */
+.opp-my-opportunities-link{
+  position:absolute; top:0; right:0; z-index:2;
+  display:flex; align-items:center; gap:6px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:700; color:var(--navy);
+  text-decoration:none; padding:8px 14px; border-radius:999px; border:1.3px solid rgba(30,37,64,.14);
+  background:var(--card-bg); transition:border-color .12s ease, transform .12s ease;
+}
+.opp-my-opportunities-link:hover{ border-color:var(--cover); transform:translateY(-1px); }
+.opp-my-opportunities-count{
+  background:var(--cover); color:#fff; border-radius:999px; font-size:11px; font-weight:800;
+  padding:1px 7px; line-height:1.5;
+}
+@media (max-width:760px){ .opp-my-opportunities-link{ position:static; margin-bottom:10px; align-self:flex-start; } }
+
+/* ---------- My Opportunities / saved pipeline page ---------- */
+.myopp-container{ max-width:1000px; }
+.myopp-back-link{
+  display:inline-flex; align-items:center; gap:6px; margin-bottom:16px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; font-weight:700; color:var(--navy-soft);
+  text-decoration:none;
+}
+.myopp-back-link:hover{ color:var(--cover); }
+.myopp-back-arrow{ transform:rotate(180deg); }
+.myopp-header{ margin-bottom:18px; }
+.myopp-heading{ margin-bottom:6px; }
+.myopp-subtext{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:15px; color:var(--navy-soft); margin:0;
+}
+.myopp-status-row{ display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+.myopp-status-btn{
+  display:flex; align-items:center; gap:7px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; font-weight:700; color:var(--navy-soft);
+  background:var(--card-bg); border:1.3px solid rgba(30,37,64,.14); border-radius:999px;
+  padding:7px 14px; cursor:pointer; transition:border-color .12s ease, color .12s ease, background .12s ease;
+}
+.myopp-status-btn:hover{ border-color:rgba(30,37,64,.3); color:var(--navy); }
+.myopp-status-btn.is-active{ background:var(--navy); border-color:var(--navy); color:#fff; }
+.myopp-status-count{
+  font-size:11.5px; font-weight:800; opacity:.7; background:rgba(30,37,64,.08);
+  border-radius:999px; padding:1px 7px; line-height:1.5;
+}
+.myopp-status-btn.is-active .myopp-status-count{ background:rgba(255,255,255,.22); opacity:1; }
+.myopp-list{ padding-bottom:12px; }
 
 .opp-blurb{
   font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; line-height:1.55; color:var(--navy);

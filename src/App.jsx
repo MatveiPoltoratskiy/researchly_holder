@@ -19,8 +19,9 @@ import { verifyDevAccess } from './lib/devAccess'
 // unauthenticated visitor's browser never fetches this code or data in the first place.
 const OpportunityExplorer = lazy(() => import('./components/OpportunityExplorer'))
 const Interview = lazy(() => import('./components/Interview'))
+const MyOpportunities = lazy(() => import('./components/MyOpportunities'))
 
-const DEV_ROUTES = new Set(['/interview', '/opportunities'])
+const DEV_ROUTES = new Set(['/interview', '/opportunities', '/my-opportunities'])
 
 // deliberately plain and uninteresting — this is a real server-verified gate (see
 // lib/devAccess.js + api/dev-verify.js), but the page still shouldn't invite curiosity
@@ -77,7 +78,8 @@ function Page() {
     )
   }
 
-  const isLanding = path !== '/contact' && path !== '/how-it-works' && path !== '/opportunities'
+  const isLanding =
+    path !== '/contact' && path !== '/how-it-works' && path !== '/opportunities' && path !== '/my-opportunities'
 
   const content = (
     <>
@@ -89,6 +91,10 @@ function Page() {
       ) : path === '/opportunities' ? (
         <Suspense fallback={null}>
           <OpportunityExplorer />
+        </Suspense>
+      ) : path === '/my-opportunities' ? (
+        <Suspense fallback={null}>
+          <MyOpportunities />
         </Suspense>
       ) : (
         <>

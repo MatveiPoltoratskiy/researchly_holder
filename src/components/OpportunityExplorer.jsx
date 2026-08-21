@@ -3,8 +3,16 @@ import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
 import { FIELDS } from '../data/fields'
 import OpportunityMap from './OpportunityMap'
 import SymbolField from './SymbolField'
+import RoadmapBar from './RoadmapBar'
 import { peekInterviewFilters, clearInterviewFilters } from '../lib/interviewHandoff'
 import { scoreOpportunity } from '../lib/matchOpportunities'
+import { computeMatchScore } from '../lib/matchScore'
+import { markBrowsedOpportunities, markOpportunityViewed } from '../lib/activityTracking'
+import { useSavedOpportunities, SAVE_STATUSES } from '../lib/savedOpportunities'
+import { useUserInterests, MAX_INTERESTS } from '../lib/userInterests'
+import { useUserGoal, GOALS, GOAL_BY_ID } from '../lib/userGoal'
+import { Link } from '../lib/router'
+import Glyph from './InterviewIcons'
 
 const SORTS = {
   recommended: { label: 'Best for your interests & location', fn: null },
@@ -93,7 +101,7 @@ function distanceKm(lat1, lon1, lat2, lon2) {
 // the small badge shown directly on a card in the main list — reuses the same big-name/
 // niche categorization that drives the "Recommended for you" sort, so a card's badge and
 // its position in that sort always agree
-function recommendTagFor(o) {
+export function recommendTagFor(o) {
   const school = bigNameSchool(o.org)
   if (school) return school
   if (NICHE_RANK.has(o.id)) return 'Niche pick'
@@ -194,8 +202,71 @@ function OrgLogo({ org, url, iconId }) {
   )
 }
 
-function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, recommendTag }) {
+// bookmark toggle + (once saved) a status picker — the one control that turns a plain
+// card into a pipeline entry. Its own click handler stops propagation so using it never
+// also triggers the card's "select + open detail" click behavior.
+function SaveControl({ id, saved }) {
+  const status = saved.statusOf(id)
+
+  return (
+    <div className="opp-save-control" onClick={(e) => e.stopPropagation()}>
+      <button
+        type="button"
+        className={`opp-save-btn ${status ? 'is-saved' : ''}`}
+        onClick={() => saved.toggle(id)}
+        aria-pressed={Boolean(status)}
+        aria-label={status ? 'Remove from My Opportunities' : 'Save to My Opportunities'}
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+          <use href={status ? '#icon-bookmark-filled' : '#icon-bookmark'} />
+        </svg>
+        {status ? 'Saved' : 'Save'}
+      </button>
+      {status && (
+        <select
+          className="opp-save-status"
+          value={status}
+          onChange={(e) => saved.setStatus(id, e.target.value)}
+          aria-label="Pipeline status"
+        >
+          {SAVE_STATUSES.map((s) => (
+            <option key={s.id} value={s.id}>
+              {s.label}
+            </option>
+          ))}
+        </select>
+      )}
+    </div>
+  )
+}
+
+// small "94% match" pill + an expandable, specific "why this matches you" panel — kept
+// deliberately worded as a probability-free "match", never "chance of acceptance"
+function MatchBadge({ score, open, onToggle }) {
+  return (
+    <button
+      type="button"
+      className={`opp-match-badge ${open ? 'is-open' : ''}`}
+      onClick={(e) => {
+        e.stopPropagation()
+        onToggle()
+      }}
+      aria-expanded={open}
+    >
+      <span className="opp-match-pct">{score.pct}%</span> match
+      <svg className={`opp-match-chevron ${open ? 'is-open' : ''}`} width="11" height="11" viewBox="0 0 24 24" aria-hidden="true">
+        <use href="#icon-chevron-down" />
+      </svg>
+    </button>
+  )
+}
+
+// exported so the My Opportunities page can render visually identical cards (same
+// component, not a re-implementation) instead of drifting out of sync over time
+export function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, recommendTag, saved, matchProfile, mapContext = true }) {
   const primary = FIELD_ORDER.find((f) => o.focus.includes(f)) || o.focus[0]
+  const [whyOpen, setWhyOpen] = useState(false)
+  const score = useMemo(() => computeMatchScore(o, matchProfile || {}), [o, matchProfile])
 
   // clicking anywhere on the card selects it (highlights it + pans the map to its pin) and
   // opens the full detail modal, except the actual "View program" link, which should just
@@ -212,7 +283,9 @@ function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, recomme
       className={`opp-card ${selected ? 'is-selected' : ''}`}
       onClick={handleCardClick}
     >
-      <span className="opp-card-select-hint">{selected ? 'Selected, shown on map' : 'Click to locate on map'}</span>
+      <span className="opp-card-select-hint">
+        {mapContext ? (selected ? 'Selected, shown on map' : 'Click to locate on map') : 'Click for full details'}
+      </span>
       <div className={`opp-badge ${FIELD_META[primary]?.cls || ''}`}>
         <OrgLogo org={o.org} url={o.url} iconId={iconForOrg(o.org)} />
       </div>
@@ -222,9 +295,13 @@ function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, recomme
             <h3 className="opp-title">{o.name}</h3>
             <div className="opp-org">{o.org}</div>
           </div>
-          <span className={`opp-confidence opp-confidence--${o.confidence}`}>
-            {CONFIDENCE_LABEL[o.confidence] || o.confidence}
-          </span>
+          <div className="opp-card-actions">
+            <span className={`opp-confidence opp-confidence--${o.confidence}`}>
+              {CONFIDENCE_LABEL[o.confidence] || o.confidence}
+            </span>
+            <MatchBadge score={score} open={whyOpen} onToggle={() => setWhyOpen((v) => !v)} />
+            <SaveControl id={o.id} saved={saved} />
+          </div>
         </div>
         <p className="opp-blurb">{o.blurb}</p>
         <div className="opp-tags">
@@ -261,6 +338,22 @@ function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, recomme
             <span className="opp-link opp-link--disabled">No official link yet</span>
           )}
         </div>
+        {whyOpen && (
+          <div className="opp-match-why" onClick={(e) => e.stopPropagation()}>
+            <div className="opp-match-why-head">Why this matches you</div>
+            {score.reasons.length ? (
+              <ul className="opp-match-why-list">
+                {score.reasons.map((reason, i) => (
+                  <li key={i}>{reason}</li>
+                ))}
+              </ul>
+            ) : (
+              <p className="opp-match-why-empty">
+                Pick your top interests in the sidebar for a more specific breakdown of why an opportunity fits you.
+              </p>
+            )}
+          </div>
+        )}
       </div>
     </article>
   )
@@ -327,7 +420,105 @@ function MajorsFilter({ activeFields, toggleField, counts }) {
   )
 }
 
-function OpportunityDetailModal({ o, onClose, interviewAnswers }) {
+// distinct from the Majors filter above: this doesn't change which cards are shown, it
+// personalizes the match score and "why this matches you" text. Capped at 3 on purpose —
+// see the disclaimer copy for why.
+function InterestsPicker({ interests }) {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <div className="opp-side-section">
+      <button type="button" className="opp-side-heading" onClick={() => setOpen((v) => !v)} aria-expanded={open}>
+        Your top interests
+        <svg width="16" height="16" className={`opp-chevron ${open ? 'is-open' : ''}`} aria-hidden="true">
+          <use href="#icon-chevron-down" />
+        </svg>
+      </button>
+      <div className={`opp-collapse ${open ? '' : 'is-closed'}`}>
+        <div className="opp-collapse-inner">
+          <div className="opp-major-list">
+            {FIELD_ORDER.map((id) => {
+              const checked = interests.interestIds.includes(id)
+              const disabled = !checked && interests.atLimit
+              return (
+                <button
+                  key={id}
+                  type="button"
+                  className={`opp-major-row ${checked ? 'is-checked' : ''}`}
+                  onClick={() => interests.toggle(id)}
+                  disabled={disabled}
+                >
+                  <span className="opp-major-check" aria-hidden="true">
+                    {checked && (
+                      <svg width="10" height="8" viewBox="0 0 10 8">
+                        <path
+                          d="M1 4.2 3.6 6.8 9 1.2"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    )}
+                  </span>
+                  <span className="opp-major-label">{FIELD_META[id].label}</span>
+                </button>
+              )
+            })}
+          </div>
+          <p className="opp-interests-disclaimer">
+            Pick up to {MAX_INTERESTS} — these fine-tune your match score and "why this matches" notes below. They
+            don't filter which opportunities are shown; use Majors above for that.
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// single-select goal, feeds the match score's goal-alignment factor and the "Best match"
+// sort — deliberately just one small sidebar section plus a subtle header note rather
+// than a whole new page, per "do not overdo this"
+function GoalPicker({ goalId, setGoalId }) {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <div className="opp-side-section">
+      <button type="button" className="opp-side-heading" onClick={() => setOpen((v) => !v)} aria-expanded={open}>
+        Your goal
+        <svg width="16" height="16" className={`opp-chevron ${open ? 'is-open' : ''}`} aria-hidden="true">
+          <use href="#icon-chevron-down" />
+        </svg>
+      </button>
+      <div className={`opp-collapse ${open ? '' : 'is-closed'}`}>
+        <div className="opp-collapse-inner">
+          <div className="opp-goal-list">
+            {GOALS.map((g) => {
+              const checked = goalId === g.id
+              return (
+                <button
+                  key={g.id}
+                  type="button"
+                  className={`opp-goal-row ${checked ? 'is-checked' : ''}`}
+                  onClick={() => setGoalId(checked ? null : g.id)}
+                  aria-pressed={checked}
+                >
+                  <span className="opp-goal-glyph" aria-hidden="true">
+                    <Glyph name={g.glyph} size={18} />
+                  </span>
+                  <span className="opp-major-label">{g.label}</span>
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export function OpportunityDetailModal({ o, onClose, interviewAnswers, saved }) {
   // Escape-to-close, and lock page scroll while open so the backdrop reads as modal, not
   // just an overlapping card
   useEffect(() => {
@@ -396,6 +587,7 @@ function OpportunityDetailModal({ o, onClose, interviewAnswers }) {
           </span>
           {o.locationLabel && <span className="opp-modal-status-item">{o.locationLabel}</span>}
           <span className="opp-modal-status-item">{MODE_LABEL[o.mode] || o.mode}</span>
+          <SaveControl id={o.id} saved={saved} />
         </div>
 
         <p className="opp-modal-blurb">{o.blurb}</p>
@@ -449,6 +641,11 @@ export default function OpportunityExplorer() {
   // session — after the handoff below has cleared it — correctly falls back to
   // defaults instead of replaying a stale first-visit snapshot forever)
   const [interviewHandoff] = useState(() => peekInterviewFilters())
+  // written synchronously during the initial render (a lazy useState initializer runs
+  // before children render), not in a useEffect (which fires after paint) — RoadmapBar
+  // is a child rendered in this same pass and reads this exact flag on its own first
+  // render, so a useEffect here would be one render too late to show it checked yet
+  useState(() => markBrowsedOpportunities())
   const interviewAnswers = interviewHandoff?.answers || null
   const [activeFields, setActiveFields] = useState(() =>
     interviewHandoff?.filters?.focus?.length ? new Set(interviewHandoff.filters.focus) : new Set(FIELD_ORDER)
@@ -456,6 +653,9 @@ export default function OpportunityExplorer() {
   const [level, setLevel] = useState(() => interviewHandoff?.filters?.level || 'all')
   const [costFilters, setCostFilters] = useState(() => new Set(interviewHandoff?.filters?.cost || []))
   const [equityOnly, setEquityOnly] = useState(false)
+  const saved = useSavedOpportunities()
+  const interests = useUserInterests()
+  const [goalId, setGoalId] = useUserGoal()
   const [sortKey, setSortKey] = useState('recommended')
   const [userLocation, setUserLocation] = useState(() => interviewHandoff?.filters?.locationCoords || null)
   const [locationStatus, setLocationStatus] = useState(() =>
@@ -569,6 +769,23 @@ export default function OpportunityExplorer() {
     return c
   }, [])
 
+  // everything the new card-level match score can draw on: up to 3 chosen interests and
+  // a goal live on this page directly, while level/location/format/remote-only fall back
+  // to whatever the interview already told us (or real geolocation for location)
+  const matchProfile = useMemo(
+    () => ({
+      interestIds: interests.interestIds,
+      field: interviewAnswers?.field || null,
+      level: interviewAnswers?.level || null,
+      locationCoords: interviewAnswers?.locationCoords || userLocation || null,
+      locationLabel: interviewAnswers?.location || null,
+      remoteOnly: Boolean(interviewAnswers?.remoteOnly),
+      oppType: interviewAnswers?.oppType || null,
+      goalId,
+    }),
+    [interests.interestIds, interviewAnswers, userLocation, goalId]
+  )
+
   const filtered = useMemo(() => {
     const list = CANADA_OPPORTUNITIES.filter((o) => {
       const fieldMatch = o.focus.some((f) => activeFields.has(f))
@@ -636,9 +853,14 @@ export default function OpportunityExplorer() {
       })
     }
 
+    if (sortKey === 'best-match') {
+      const scoreById = new Map(list.map((o) => [o.id, computeMatchScore(o, matchProfile).pct]))
+      return [...list].sort((a, b) => scoreById.get(b.id) - scoreById.get(a.id))
+    }
+
     const sortFn = SORTS[sortKey]?.fn
     return sortFn ? [...list].sort(sortFn) : list
-  }, [activeFields, level, costFilters, equityOnly, sortKey, userLocation, interviewAnswers])
+  }, [activeFields, level, costFilters, equityOnly, sortKey, userLocation, interviewAnswers, matchProfile])
 
   const filteredLenRef = useRef(filtered.length)
   filteredLenRef.current = filtered.length
@@ -667,12 +889,19 @@ export default function OpportunityExplorer() {
     clearInterviewFilters()
   }, [])
 
+  function openDetail(id) {
+    setDetailId(id)
+    markOpportunityViewed(id) // feeds the roadmap's "Learn" stage ("looked closely at 5 opportunities")
+  }
+
   const activeFieldLabels = FIELD_ORDER.filter((f) => activeFields.has(f)).map((f) => FIELD_META[f].label)
   const detailOpportunity = detailId ? CANADA_OPPORTUNITIES.find((o) => o.id === detailId) : null
 
   return (
     <section className="opp-explorer">
       <div className="container opp-container">
+        <RoadmapBar />
+
         <div className="opp-header">
           {/* a light version of the interview's ambient symbol field — scoped to just
               this header band, not the whole page, since the filters/list/map below are
@@ -687,6 +916,13 @@ export default function OpportunityExplorer() {
               colors={['var(--symbol-tan)', 'var(--cover-dark)', 'var(--ribbon)', 'var(--gold)']}
             />
           </div>
+          <Link className="opp-my-opportunities-link" to="/my-opportunities">
+            <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+              <use href="#icon-bookmark" />
+            </svg>
+            My Opportunities
+            {saved.totalSaved > 0 && <span className="opp-my-opportunities-count">{saved.totalSaved}</span>}
+          </Link>
           <h1 className="opp-heading">
             We <em className="opp-heading-found">found</em>{' '}
             <span className={`opp-heading-count ${countShimmer ? 'is-shimmer' : ''}`}>{shownCount}</span>{' '}
@@ -701,12 +937,20 @@ export default function OpportunityExplorer() {
                 {label}
               </span>
             ))}
+            {goalId && GOAL_BY_ID[goalId] && (
+              <span className="opp-goal-note">
+                <Glyph name={GOAL_BY_ID[goalId].glyph} size={13} />
+                Your goal: {GOAL_BY_ID[goalId].label}
+              </span>
+            )}
           </div>
         </div>
 
         <div className="opp-layout">
           <aside className="opp-sidebar">
             <MajorsFilter activeFields={activeFields} toggleField={toggleField} counts={counts} />
+            <InterestsPicker interests={interests} />
+            <GoalPicker goalId={goalId} setGoalId={setGoalId} />
 
             <div className="opp-side-section">
               <div className="opp-side-heading opp-side-heading--static">Level</div>
@@ -833,8 +1077,10 @@ export default function OpportunityExplorer() {
                     o={o}
                     selected={o.id === selectedId}
                     onSelect={selectOpportunity}
-                    onOpenDetail={setDetailId}
+                    onOpenDetail={openDetail}
                     recommendTag={recommendTagFor(o)}
+                    saved={saved}
+                    matchProfile={matchProfile}
                     cardRef={(el) => {
                       if (el) cardRefs.current.set(o.id, el)
                       else cardRefs.current.delete(o.id)
@@ -866,6 +1112,7 @@ export default function OpportunityExplorer() {
           o={detailOpportunity}
           onClose={() => setDetailId(null)}
           interviewAnswers={interviewAnswers}
+          saved={saved}
         />
       )}
     </section>
