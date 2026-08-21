@@ -1511,7 +1511,21 @@ html{ scroll-behavior:smooth; }
 .opp-sidebar{
   flex:0 0 270px;
   overflow-y:auto; display:flex; flex-direction:column; gap:18px;
-  background:var(--card-bg); border:1px solid var(--card-border); border-radius:16px; padding:20px;
+  border:1px solid var(--card-border); border-radius:16px; padding:20px;
+  background-color:var(--card-bg);
+  /* pure-CSS "scroll shadow": a faint top/bottom cue that only shows where there's
+     actually more to scroll toward, and fades itself out once you reach that edge —
+     the two `local` layers scroll with the content and paint over the two `scroll`
+     shadow layers behind them except right at the container's visible top/bottom edge,
+     where the shadow peeks through. No JS/scroll-listener needed. */
+  background-image:
+    linear-gradient(var(--card-bg) 40%, transparent),
+    linear-gradient(transparent, var(--card-bg) 60%) 0 100%,
+    linear-gradient(rgba(30,37,64,.14), transparent),
+    linear-gradient(transparent, rgba(30,37,64,.14)) 0 100%;
+  background-repeat:no-repeat;
+  background-size:100% 28px, 100% 28px, 100% 10px, 100% 10px;
+  background-attachment:local, local, scroll, scroll;
 }
 .opp-side-section + .opp-side-section{ border-top:1px solid var(--card-border); padding-top:16px; }
 .opp-side-heading{
