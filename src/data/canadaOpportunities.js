@@ -7679,5 +7679,997 @@ export const CANADA_OPPORTUNITIES = [
     "isGrant": false,
     "confidence": "high",
     "blurb": "Advanced engineering/CS coursework taught by U of T grad students over a summer week (or up to four) - enrichment, not independent research."
+  },
+  {
+    "id": "mcgill-hbhl-usri",
+    "name": "HBHL Undergraduate Summer Research Internship",
+    "org": "McGill University (Healthy Brains, Healthy Lives)",
+    "url": "https://www.mcgill.ca/hbhl/funded-projects/undergraduate-summer-research-internship",
+    "focus": [
+      "neuroscience",
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Montreal, QC",
+    "lat": 45.5048,
+    "lon": -73.5772,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 10000,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A $10,000, 16-week research internship in brain and mental health at McGill, for McGill undergrads who haven't done paid research before."
+  },
+  {
+    "id": "rimuhc-brain-program",
+    "name": "BRaIN Program Summer Studentship for Black Undergraduate Students",
+    "org": "Research Institute of the McGill University Health Centre (RI-MUHC)",
+    "url": "https://rimuhc.ca/-/summer-studentship-program-for-black-undergraduate-students",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Montreal, QC",
+    "lat": 45.5048,
+    "lon": -73.5772,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 6000,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 12-week, $6,000 neuroscience research studentship at the RI-MUHC, paired with a faculty mentor - specifically for Black undergraduate students."
+  },
+  {
+    "id": "alleninstitute-summer-internship",
+    "name": "Summer Internship Program",
+    "org": "Allen Institute for Brain Science",
+    "url": "https://alleninstitute.org/careers/internships-and-postbac/",
+    "focus": [
+      "neuroscience",
+      "biology",
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Seattle, WA",
+    "lat": 47.6262,
+    "lon": -122.3387,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 10-week, $21.50/hour internship in one of the Allen Institute's life-science divisions, including neuroscience - open to current or recently graduated undergrad/master's students."
+  },
+  {
+    "id": "mit-bsg-msrp-bio",
+    "name": "MIT Summer Research Program in Biology/Neuroscience (BSG-MSRP-Bio)",
+    "org": "Massachusetts Institute of Technology (Brain and Cognitive Sciences + Biology)",
+    "url": "https://bcs.mit.edu/msrp",
+    "focus": [
+      "neuroscience",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Cambridge, MA",
+    "lat": 42.3736,
+    "lon": -71.1097,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": "2026-01-30",
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 10-week, paid neuroscience/biology research program at MIT for non-MIT undergrads with prior research experience, working across 60+ affiliated labs."
+  },
+  {
+    "id": "mgh-youth-neurology",
+    "name": "Youth Neurology Education and Research Program",
+    "org": "Massachusetts General Hospital (Department of Neurology)",
+    "url": "https://research.massgeneralbrigham.org/en/education-and-training/graduate-medical-education/neurology/mgh-youth-research-and-education",
+    "focus": [
+      "neuroscience",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12",
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Boston, MA",
+    "lat": 42.3601,
+    "lon": -71.0589,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A paid, full-time summer internship doing mentored neurology research at Mass General - for Massachusetts high school and undergrad students."
+  },
+  {
+    "id": "cbmm-mit-neuro-internship",
+    "name": "Undergraduate Summer Research Internships in Neuroscience",
+    "org": "MIT Center for Brains, Minds & Machines (CBMM)",
+    "url": "https://cbmm.mit.edu/diversity/undergraduate-summer-research-internships-neuroscience",
+    "focus": [
+      "neuroscience",
+      "computer-science"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Cambridge, MA",
+    "lat": 42.3736,
+    "lon": -71.1097,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 10-week, paid computational/cognitive neuroscience internship at MIT, aimed at undergrads from institutions with limited research access."
+  },
+  {
+    "id": "hbi-mathison-summer-studentship",
+    "name": "Mathison Centre Summer Studentships",
+    "org": "Hotchkiss Brain Institute, University of Calgary (Mathison Centre for Mental Health Research & Education)",
+    "url": "https://hbi.ucalgary.ca/education/funding-support/undergraduate",
+    "focus": [
+      "neuroscience",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Calgary, AB",
+    "lat": 51.0447,
+    "lon": -114.0719,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 6000,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A $1,500/month mental-health-research studentship at the Hotchkiss Brain Institute, open to undergrads at any university worldwide."
+  },
+  {
+    "id": "columbia-brainyac",
+    "name": "BRAINYAC (Brain Research Apprenticeships in New York at Columbia)",
+    "org": "Columbia University (Zuckerman Institute)",
+    "url": "https://zuckermaninstitute.columbia.edu/brainyac",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "hs-10",
+      "hs-11"
+    ],
+    "mode": "in-person",
+    "locationLabel": "New York, NY",
+    "lat": 40.7128,
+    "lon": -74.006,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A paid, 7-week neuroscience research apprenticeship pairing NYC high schoolers 1:1 with a Columbia neuroscientist - reachable only through specific partner schools."
+  },
+  {
+    "id": "jhu-kavli-ndi-sip",
+    "name": "Kavli NDI Undergraduate Summer Internship Program (SIP)",
+    "org": "Johns Hopkins University (Kavli Neuroscience Discovery Institute)",
+    "url": "https://kavlijhu.org/funding/3",
+    "focus": [
+      "neuroscience",
+      "physics",
+      "computer-science"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Baltimore, MD",
+    "lat": 39.3299,
+    "lon": -76.6205,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": "2026-03-07",
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 10-week paid summer internship in neuroscience/physics/data-science labs at Johns Hopkins' Kavli Neuroscience Discovery Institute."
+  },
+  {
+    "id": "bp-endure",
+    "name": "BP-ENDURE (Blueprint Program for Enhancing Neuroscience Diversity through Undergraduate Research Education)",
+    "org": "NIH Blueprint consortium (Hunter College/NYU, Vanderbilt, Emory/Spelman/Agnes Scott/Georgia State, UT Health Science Center)",
+    "url": "http://www.bpendure.org/",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3"
+    ],
+    "mode": "in-person",
+    "locationLabel": null,
+    "lat": null,
+    "lon": null,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "An NIH-funded neuroscience diversity research program with paid 10-week placements across several partner universities - apply through your home institution's site."
+  },
+  {
+    "id": "jhibs",
+    "name": "Johns Hopkins Internship in Brain Sciences (JHIBS)",
+    "org": "Johns Hopkins University (Department of Neuroscience)",
+    "url": "https://neuroscience.jhu.edu/diversity/28",
+    "focus": [
+      "neuroscience",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Baltimore, MD",
+    "lat": 39.3299,
+    "lon": -76.6205,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": "2026-03-01",
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "An 8-week neuroscience research internship for Baltimore-area high schoolers from underrepresented backgrounds, paid hourly (in-person) or a flat honorarium (virtual)."
+  },
+  {
+    "id": "stanford-simr",
+    "name": "Stanford Institutes of Medicine Summer Research Program (SIMR)",
+    "org": "Stanford University School of Medicine",
+    "url": "https://med.stanford.edu/simr.html",
+    "focus": [
+      "neuroscience",
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Stanford, CA",
+    "lat": 37.4275,
+    "lon": -122.1697,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "An 8-week Stanford Medicine research program spanning 8 tracks including neuroscience, for US high school juniors/seniors."
+  },
+  {
+    "id": "umn-go4brains",
+    "name": "Go4Brains",
+    "org": "University of Minnesota (Department of Neuroscience / Medical School)",
+    "url": "https://sites.google.com/umn.edu/go4brains/home",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "hs-9",
+      "hs-10",
+      "hs-11"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Minneapolis, MN",
+    "lat": 44.974,
+    "lon": -93.2277,
+    "availability": "summer",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "open",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A free, one-week neuroscience exposure program for 9th-11th graders who've faced barriers to accessing STEM opportunities."
+  },
+  {
+    "id": "upenn-neuroscience-research-academy",
+    "name": "Neuroscience Research Academy",
+    "org": "University of Pennsylvania (Penn Arts & Sciences Pre-College Programs)",
+    "url": "https://hs.sas.upenn.edu/summer-programs/academies/3-week/neuroscience",
+    "focus": [
+      "neuroscience",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-9",
+      "hs-10",
+      "hs-11"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Philadelphia, PA",
+    "lat": 39.9522,
+    "lon": -75.1932,
+    "availability": "summer",
+    "paid": false,
+    "cost": 10050,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 3-week residential neuroscience coursework program at Penn, from cellular basics to higher cognition - free for Philadelphia public/charter school students."
+  },
+  {
+    "id": "cmu-pitt-cnbc-upnc",
+    "name": "Summer Undergraduate Research Program in Neural Computation (uPNC)",
+    "org": "Carnegie Mellon University / University of Pittsburgh (Center for the Neural Basis of Cognition)",
+    "url": "https://www.cmu.edu/ni/academics/undergraduate-training/summer-ugrad-comp-neuro.html",
+    "focus": [
+      "neuroscience",
+      "computer-science",
+      "mathematics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Pittsburgh, PA",
+    "lat": 40.4443,
+    "lon": -79.9608,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 4500,
+    "deadline": "2026-02-15",
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 10-week, $4,500 computational neuroscience research program run jointly by Carnegie Mellon and Pitt, for sophomore/junior undergrads."
+  },
+  {
+    "id": "nyu-cns-surp",
+    "name": "Center for Neural Science Summer Undergraduate Research Program (SURP)",
+    "org": "New York University (Center for Neural Science)",
+    "url": "https://as.nyu.edu/departments/cns/UndergraduateProgram/summer-research-program.html",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3"
+    ],
+    "mode": "in-person",
+    "locationLabel": "New York, NY",
+    "lat": 40.7128,
+    "lon": -74.006,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "An NSF-funded summer research program in NYU's Center for Neural Science, for non-NYU undergrads who've taken at least one neuroscience course."
+  },
+  {
+    "id": "umn-neuroimaging-reu",
+    "name": "NSF REU Site: Neuroimaging for Cognitive Neuroscience",
+    "org": "University of Minnesota",
+    "url": "https://neuroimagingreu.umn.edu/",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Minneapolis, MN",
+    "lat": 44.974,
+    "lon": -93.2277,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 10-week, NSF-funded residential program using neuroimaging tools to answer questions in cognitive neuroscience at the University of Minnesota."
+  },
+  {
+    "id": "missouri-neuroreu",
+    "name": "Computational Neuroscience REU (NeuroREU)",
+    "org": "University of Missouri",
+    "url": "https://nairs.mufaculty.umsystem.edu/research/nsf-neural-reu-project",
+    "focus": [
+      "neuroscience",
+      "computer-science",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Columbia, MO",
+    "lat": 38.9517,
+    "lon": -92.3341,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 6000,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 10-week, $6,000 computational neuroscience REU at Mizzou, open to non-Missouri undergrads from a wide range of STEM majors."
+  },
+  {
+    "id": "umanitoba-enrrich-studentship",
+    "name": "ENRRICH Summer Studentship",
+    "org": "Children's Hospital Research Institute of Manitoba (CHRIM) / University of Manitoba",
+    "url": "https://www.enrrichresearch.ca/",
+    "focus": [
+      "neuroscience",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Winnipeg, MB",
+    "lat": 49.8075,
+    "lon": -97.1385,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "open",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A summer studentship in pediatric neurodevelopment and rehabilitation research at CHRIM, deliberately designed with low application barriers - no transcript or GPA cutoff."
+  },
+  {
+    "id": "ucsf-sren",
+    "name": "Summer Research Experiences in Neuroscience (SREN)",
+    "org": "UCSF (Science & Health Education Partnership / Weill Institute for Neurosciences)",
+    "url": "https://summerstudents.ucsf.edu/",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "San Francisco, CA",
+    "lat": 37.7627,
+    "lon": -122.4581,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": 3000,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A $3,000-stipended neuroscience research internship for San Francisco public high schoolers, run through UCSF's Science & Health Education Partnership."
+  },
+  {
+    "id": "bcm-neuroscience-and-society",
+    "name": "Neuroscience and Society Internship Program",
+    "org": "Baylor College of Medicine (Center for Medical Ethics and Health Policy)",
+    "url": "https://www.bcm.edu/academic-centers/medical-ethics-and-health-policy/education/bioethics-research-clinical-ethics-internship",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "hybrid",
+    "locationLabel": "Houston, TX",
+    "lat": 29.7079,
+    "lon": -95.3971,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A paid, Dana Foundation-funded internship on the ethical and social implications of emerging neurotechnology, not bench research - remote or in-person."
+  },
+  {
+    "id": "rutgers-neurosurp",
+    "name": "Summer Undergraduate Research Program in Neuroscience (NeuroSURP)",
+    "org": "Rutgers University (Robert Wood Johnson Medical School, Dept. of Neuroscience and Cell Biology)",
+    "url": "https://rwjms.rutgers.edu/departments/neuroscience-and-cell-biology/education/summer-undergraduate-research-program-in-neuroscience-(neurosurp)",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "New Brunswick, NJ",
+    "lat": 40.4862,
+    "lon": -74.4518,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 4000,
+    "deadline": "2026-02-16",
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A $4,000-stipended, housing-included summer research placement in an active Rutgers neuroscience lab, no prior research experience required."
+  },
+  {
+    "id": "umich-siren",
+    "name": "Summer Intensive Research Experience in Neuroscience (SIREN)",
+    "org": "University of Michigan Medical School (Neuroscience Graduate Program)",
+    "url": "https://medschool.umich.edu/interdisciplinary-programs/neuroscience-graduate-program/summer-research-opportunities/siren-program",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Ann Arbor, MI",
+    "lat": 42.2808,
+    "lon": -83.743,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": "2027-02-05",
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 10-week, NSF-funded neuroscience research program at Michigan for undergrads from schools with limited research opportunities."
+  },
+  {
+    "id": "umich-nuro",
+    "name": "Neuroscience Undergraduate Research Opportunity (NURO)",
+    "org": "University of Michigan Medical School (Neuroscience Graduate Program)",
+    "url": "https://medschool.umich.edu/interdisciplinary-programs/neuroscience-graduate-program/summer-research-opportunities/nuro-program",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Ann Arbor, MI",
+    "lat": 42.2808,
+    "lon": -83.743,
+    "availability": "year-round",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": "2027-02-05",
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A year-round neuroscience research program at Michigan for students living near (but not enrolled at) Ann Arbor."
+  },
+  {
+    "id": "uw-neurosurgery-summer-scholars",
+    "name": "Neuroscience Summer Scholars Program (NSSSP)",
+    "org": "University of Washington (Department of Neurological Surgery)",
+    "url": "https://neurosurgery.uw.edu/education/summer-student-programs",
+    "focus": [
+      "neuroscience",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Seattle, WA",
+    "lat": 47.6262,
+    "lon": -122.3387,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 3200,
+    "deadline": "2025-12-15",
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "An 8-week, $3,200 \"bench to bedside\" neuroscience research program at UW, spanning basic and clinical neuroscience."
+  },
+  {
+    "id": "burke-summer-science-scholars",
+    "name": "Summer Science Scholars Program",
+    "org": "Burke Neurological Institute, Weill Cornell Medicine",
+    "url": "https://burke.weill.cornell.edu/future-talent/training-program/summer-science-scholars-program",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12",
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "White Plains, NY",
+    "lat": 41.034,
+    "lon": -73.7629,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 3000,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 10-week, $3,000 neuroscience research program at the Burke Neurological Institute, open to both high schoolers and undergrads."
+  },
+  {
+    "id": "brown-carney-summer-scholars",
+    "name": "Carney Summer Scholars",
+    "org": "Brown University (Carney Institute for Brain Science)",
+    "url": "https://carney.brown.edu/education-training/undergraduate/carney-summer-scholars",
+    "focus": [
+      "neuroscience",
+      "computer-science"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Providence, RI",
+    "lat": 41.8268,
+    "lon": -71.4025,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": "2026-02-03",
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A fully-funded, 9-week computational brain science research program at Brown for non-Brown students eyeing a PhD or MD-PhD."
+  },
+  {
+    "id": "ucla-bri-neurocamp",
+    "name": "NeuroCamp",
+    "org": "UCLA Brain Research Institute",
+    "url": "https://bri.ucla.edu/outreach/neurocamp-grades-9-12/",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "hs-9",
+      "hs-10",
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Los Angeles, CA",
+    "lat": 34.0689,
+    "lon": -118.4452,
+    "availability": "summer",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "open",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A free, hands-on intro to neuroscience for LA-area high schoolers - no research experience needed."
+  },
+  {
+    "id": "ucla-bri-sure",
+    "name": "Brain Research Institute Summer Undergraduate Research Experience (BRI-SURE)",
+    "org": "UCLA Brain Research Institute",
+    "url": "https://bri.ucla.edu/outreach/undergraduate-summer-research-programs/bri-sure",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "hybrid",
+    "locationLabel": "Los Angeles, CA",
+    "lat": 34.0689,
+    "lon": -118.4452,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": "2026-01-21",
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "An 8-week hybrid neuroscience/physiology research program at UCLA for rising juniors/seniors from other colleges and universities."
+  },
+  {
+    "id": "ucla-hbcu-neuroscience-pathways",
+    "name": "UCLA-HBCU Neuroscience Pathways Program",
+    "org": "UCLA Brain Research Institute",
+    "url": "https://bri.ucla.edu/outreach/ucla-hbcu-neuroscience-pathways-program/",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Los Angeles, CA",
+    "lat": 34.0689,
+    "lon": -118.4452,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "An 8-week UCLA neuroscience research program specifically for undergrads at Historically Black Colleges and Universities."
+  },
+  {
+    "id": "udemontreal-neurosciences-stage-ete",
+    "name": "Bourses de stage d'été (Summer Internship Scholarships)",
+    "org": "Université de Montréal (Département de neurosciences)",
+    "url": "https://neurosciences.umontreal.ca/bourses-de-stage-dete/",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Montreal, QC",
+    "lat": 45.5048,
+    "lon": -73.5772,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 8000,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 14-16 week, $8,000 NSERC-funded summer research internship in Université de Montréal's neuroscience department."
+  },
+  {
+    "id": "uchicago-darn",
+    "name": "UChicago-UPR Developing Access to Research in Neuroscience (DARN) Program",
+    "org": "University of Chicago (Neuroscience Institute)",
+    "url": "https://voices.uchicago.edu/uprdarn/",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Chicago, IL",
+    "lat": 41.7886,
+    "lon": -87.5987,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 5100,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A $5,100-stipended summer neurobiology research program at UChicago for undergrads from other US institutions, with housing and flights covered."
+  },
+  {
+    "id": "uchicago-neeto",
+    "name": "Neuroscience Early Enrichment and Training Opportunity (NEETO)",
+    "org": "University of Chicago",
+    "url": "https://voices.uchicago.edu/neeto",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "hs-9",
+      "hs-10",
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Chicago, IL",
+    "lat": 41.7886,
+    "lon": -87.5987,
+    "availability": "summer",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A small, free, 2-week hands-on neuroscience lab experience for Chicago-area high schoolers in a single UChicago lab."
   }
 ]
