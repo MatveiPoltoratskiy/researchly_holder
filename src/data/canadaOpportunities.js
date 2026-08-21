@@ -3870,7 +3870,8 @@ export const CANADA_OPPORTUNITIES = [
     "focus": [
       "biology",
       "chemistry",
-      "physics"
+      "physics",
+      "neuroscience"
     ],
     "levels": [
       "hs-11"
@@ -4821,7 +4822,8 @@ export const CANADA_OPPORTUNITIES = [
     "org": "Cold Spring Harbor Laboratory",
     "url": "https://www.cshl.edu/education/undergraduate-research-program/",
     "focus": [
-      "biology"
+      "biology",
+      "neuroscience"
     ],
     "levels": [
       "ugrad-2",
@@ -5091,7 +5093,8 @@ export const CANADA_OPPORTUNITIES = [
     "focus": [
       "biology",
       "chemistry",
-      "physics"
+      "physics",
+      "neuroscience"
     ],
     "levels": [
       "hs-11",
@@ -5272,7 +5275,8 @@ export const CANADA_OPPORTUNITIES = [
     "url": "https://www.usc.edu/",
     "focus": [
       "biology",
-      "pre-med"
+      "pre-med",
+      "neuroscience"
     ],
     "levels": [
       "hs-12"
@@ -7112,5 +7116,568 @@ export const CANADA_OPPORTUNITIES = [
     "isGrant": false,
     "confidence": "medium",
     "blurb": "Paid research work with Yukon University faculty or the YukonU Research Centre - the only entry in this dataset based in the territories."
+  },
+  {
+    "id": "barrow-neuro-hs-internship",
+    "name": "Summer High School Internship Program",
+    "org": "Barrow Neurological Institute",
+    "url": "https://www.barrowneuro.org/for-physicians-researchers/research/training-programs/high-school-research-program/",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "hs-10",
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Phoenix, AZ",
+    "lat": 33.4726,
+    "lon": -112.0771,
+    "availability": "summer",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": "2027-02-12",
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "Hands-on volunteer neuroscience lab work (or non-lab tracks like medical illustration and science communication) at a top neurological institute, open to any high schooler 16 or older."
+  },
+  {
+    "id": "osu-explorations-neuroscience",
+    "name": "Explorations in Neuroscience Research Internship Program",
+    "org": "Ohio State University (College of Medicine, Dept. of Neuroscience)",
+    "url": "https://medicine.osu.edu/departments/neuroscience/outreach-and-events/internship",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Columbus, OH",
+    "lat": 40.0067,
+    "lon": -83.0305,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "An NIH-funded, paid 8-week neuroscience lab internship for rising high school juniors and seniors nationwide - no prior research experience or specific GPA required."
+  },
+  {
+    "id": "princeton-pni-synapse",
+    "name": "SYNAPSE (Supporting Young Neuroscientists through Applied Programming, Science communication, and Exploration)",
+    "org": "Princeton Neuroscience Institute",
+    "url": "https://pni.princeton.edu/apply/undergraduate-summer-interns",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Princeton, NJ",
+    "lat": 40.3431,
+    "lon": -74.6551,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 6300,
+    "deadline": "2027-02-01",
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A funded summer in a real Princeton neuroscience lab, built specifically for undergrads from OTHER colleges who are just starting to explore research."
+  },
+  {
+    "id": "uci-cnlm-summer-institute-neuroscience",
+    "name": "Irvine Summer Institute in Neuroscience",
+    "org": "University of California, Irvine (Center for the Neurobiology of Learning and Memory)",
+    "url": "https://cnlm.uci.edu/summerinstitute/",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3"
+    ],
+    "mode": "hybrid",
+    "locationLabel": "Irvine, CA",
+    "lat": 33.6405,
+    "lon": -117.8443,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": 7000,
+    "deadline": "2026-01-20",
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "Ten weeks split between remote prep and hands-on neuroscience research at UC Irvine, with housing, meals, and a $700/week stipend covered."
+  },
+  {
+    "id": "iu-stark-medical-neuroscience-surp",
+    "name": "Medical Neuroscience Summer Undergraduate Research Program",
+    "org": "Indiana University School of Medicine (Stark Neurosciences Research Institute)",
+    "url": "https://medicine.iu.edu/research-centers/neurosciences/education/summer-research",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Indianapolis, IN",
+    "lat": 39.7684,
+    "lon": -86.1581,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "An 8-week, stipended deep-dive into neuroscience research at IU's Stark Neurosciences Research Institute, with housing covered for students from outside Indianapolis."
+  },
+  {
+    "id": "ucalgary-neuro-summer-scholarship",
+    "name": "Neuroscience Summer Research Scholarship (NSRS)",
+    "org": "University of Calgary (Neuroscience Program, Faculty of Science)",
+    "url": "https://science.ucalgary.ca/neuroscience/current-students/summer-scholarships",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Calgary, AB",
+    "lat": 51.0447,
+    "lon": -114.0719,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Funding to support a self-arranged summer research project with any University of Calgary faculty supervisor, channeled through the Neuroscience Summer Research Scholarship."
+  },
+  {
+    "id": "chop-neurology-hs-scholars",
+    "name": "Neurology High School Scholars Program",
+    "org": "Children's Hospital of Philadelphia (Division of Neurology)",
+    "url": "https://www.chop.edu/centers-programs/division-neurology/neurology-high-school-scholars-program",
+    "focus": [
+      "neuroscience",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-10",
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Philadelphia, PA",
+    "lat": 39.9522,
+    "lon": -75.1932,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 1000,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A paid, five-week neurology research internship at Children's Hospital of Philadelphia for high schoolers - currently paused for 2026, set to return in 2027."
+  },
+  {
+    "id": "mpfi-hs-internship",
+    "name": "High School Internship Program",
+    "org": "Max Planck Florida Institute for Neuroscience",
+    "url": "https://mpfi.org/training/high-school-internship/",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Jupiter, FL",
+    "lat": 26.8823,
+    "lon": -80.1023,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A paid six-week wet-lab neuroscience internship at the Max Planck Florida Institute - open only to rising juniors/seniors living in Palm Beach or Martin County, FL."
+  },
+  {
+    "id": "nih-summer-internship-program",
+    "name": "Summer Internship Program (SIP)",
+    "org": "National Institutes of Health (Office of Intramural Training & Education)",
+    "url": "https://www.training.nih.gov/research-training/pb/sip/",
+    "focus": [
+      "neuroscience",
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-12",
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Bethesda, MD (plus other NIH campuses)",
+    "lat": 38.9847,
+    "lon": -77.0947,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": true,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "NIH's flagship paid research internship, placing students in labs across all of its institutes (including the neuroscience- and mental-health-focused ones) at its Bethesda campus."
+  },
+  {
+    "id": "duke-dune",
+    "name": "Duke University Neuroscience Experience (DUNE)",
+    "org": "Duke Institute for Brain Sciences",
+    "url": "https://dibs.duke.edu/education/high-school/duke-university-neuroscience-experience-dune/",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "hs-10",
+      "hs-11"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Durham, NC",
+    "lat": 35.994,
+    "lon": -78.8986,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": "2026-02-08",
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A paid 8-week neuroscience lab internship built specifically for Durham, NC public and charter high schoolers."
+  },
+  {
+    "id": "duke-snp",
+    "name": "Summer Neuroscience Program (SNP)",
+    "org": "Duke University (Psychology & Neuroscience / Duke Institute for Brain Sciences)",
+    "url": "https://experiences.duke.edu/opportunities/summer-neuroscience-program/",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Durham, NC",
+    "lat": 35.994,
+    "lon": -78.8986,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": 5000,
+    "deadline": "2026-02-09",
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A stipended, 1-on-1 mentored summer research springboard for Duke's own declared neuroscience majors heading into their senior thesis."
+  },
+  {
+    "id": "salk-heithoff-brody-hs-scholars",
+    "name": "Heithoff-Brody High School Summer Scholars Program",
+    "org": "Salk Institute for Biological Studies",
+    "url": "https://www.salk.edu/about/education-outreach/programs/high-school-scholars/",
+    "focus": [
+      "neuroscience",
+      "biology"
+    ],
+    "levels": [
+      "hs-10",
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "La Jolla, CA",
+    "lat": 32.8801,
+    "lon": -117.234,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": "2026-03-01",
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "Over 40 years running: a paid 8-week neuroscience (and broader biomedical) lab internship at the Salk Institute, open to San Diego County high schoolers."
+  },
+  {
+    "id": "salk-surf",
+    "name": "Salk Summer Undergraduate Research Fellowship (Salk SURF)",
+    "org": "Salk Institute for Biological Studies",
+    "url": "https://www.salk.edu/about/our-community/research-and-training-opportunities/summer-research-opportunities/",
+    "focus": [
+      "neuroscience",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "La Jolla, CA",
+    "lat": 32.8801,
+    "lon": -117.234,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 9-week paid research fellowship in a Salk Institute lab - travel and housing covered, open to undergrads of any background or experience level."
+  },
+  {
+    "id": "janelia-undergrad-scholars",
+    "name": "Undergraduate Scholars Program",
+    "org": "Janelia Research Campus (HHMI)",
+    "url": "https://www.janelia.org/you-janelia/students-postdocs/undergraduate-scholars-program",
+    "focus": [
+      "neuroscience",
+      "computer-science",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Ashburn, VA",
+    "lat": 39.0623,
+    "lon": -77.4881,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": 6000,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "An elite, fully-funded 10-week research stint at HHMI's Janelia campus - built for undergrads who already have independent lab experience under their belt."
+  },
+  {
+    "id": "pitt-cnup-surp",
+    "name": "Summer Undergraduate Research Program (SURP)",
+    "org": "University of Pittsburgh (Center for Neuroscience, CNUP)",
+    "url": "https://www.cnup.pitt.edu/training-programs/summer-undergraduate-research-program",
+    "focus": [
+      "neuroscience"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Pittsburgh, PA",
+    "lat": 40.4443,
+    "lon": -79.9608,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": 4000,
+    "deadline": "2026-01-23",
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A $4,000-stipended, 10-week neuroscience research placement at Pitt's Center for Neuroscience, with campus housing included."
+  },
+  {
+    "id": "camh-undergraduate-award",
+    "name": "CAMH Undergraduate Award",
+    "org": "Centre for Addiction and Mental Health (CAMH)",
+    "url": "https://www.camh.ca/en/education/clinical-and-research-professionals-in-training",
+    "focus": [
+      "neuroscience",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Toronto, ON",
+    "lat": 43.6577,
+    "lon": -79.3947,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": 7656,
+    "deadline": "2026-02-13",
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "A 12-week paid placement researching mental health and substance use (including clinical neuroscience) with a CAMH scientist - reserved for Ontario undergrads from underrepresented groups."
+  },
+  {
+    "id": "bch-loddenkemper-epilepsy-internship",
+    "name": "Pediatric Epilepsy Research Internship (Loddenkemper Research Laboratory)",
+    "org": "Boston Children's Hospital",
+    "url": "https://research.childrenshospital.org/research-units/loddenkemper-research-laboratory-research/pediatric-epilepsy-research-internship",
+    "focus": [
+      "neuroscience",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "hybrid",
+    "locationLabel": "Boston, MA",
+    "lat": 42.3376,
+    "lon": -71.1061,
+    "availability": "year-round",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "An unpaid but flexible pediatric-epilepsy research role at Boston Children's Hospital, offered both in-person and fully remote."
+  },
+  {
+    "id": "waterloo-ura-cs",
+    "name": "Undergraduate Research Assistantship (URA) - Computer Science",
+    "org": "University of Waterloo (Cheriton School of CS)",
+    "url": "https://cs.uwaterloo.ca/current-undergraduate-students/research-opportunities/ura",
+    "focus": [
+      "computer-science"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Waterloo, ON",
+    "lat": 43.4723,
+    "lon": -80.5449,
+    "availability": "year-round",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A paid, part-time research assistantship in Waterloo's Cheriton School of Computer Science, done during a regular study term rather than over the summer."
+  },
+  {
+    "id": "deep-summer-academy-uoft",
+    "name": "DEEP Summer Academy",
+    "org": "University of Toronto (Engineering Outreach)",
+    "url": "https://outreach.engineering.utoronto.ca/pre-university-programs/high-school-program/deep/",
+    "focus": [
+      "engineering",
+      "computer-science"
+    ],
+    "levels": [
+      "hs-9",
+      "hs-10",
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Toronto, ON",
+    "lat": 43.6629,
+    "lon": -79.3957,
+    "availability": "summer",
+    "paid": false,
+    "cost": 732,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "blurb": "Advanced engineering/CS coursework taught by U of T grad students over a summer week (or up to four) - enrichment, not independent research."
   }
 ]
