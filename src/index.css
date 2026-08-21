@@ -1871,17 +1871,25 @@ html{ scroll-behavior:smooth; }
 @media (max-width:900px){ .interview-symbol-field{ display:none; } }
 
 .interview-progress-row{
-  display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:flex-end; margin-bottom:12px; flex-shrink:0;
 }
-.interview-back{
+
+/* floating step-back control, bottom-left of the viewport — fades out via opacity (not
+   unmounted) on step 1 so nothing shifts layout when it disappears/reappears */
+.interview-back-float{
+  position:fixed; left:24px; bottom:24px; z-index:20;
   display:flex; align-items:center; gap:7px; cursor:pointer;
   font-family:"Segoe UI",system-ui,sans-serif; font-size:16px; font-weight:800; color:var(--navy);
   background:var(--card-bg); border:1.5px solid rgba(30,37,64,.16); border-radius:999px;
-  padding:10px 20px 10px 16px; transition:transform .15s ease, box-shadow .15s ease;
+  padding:12px 22px 12px 17px; box-shadow:0 10px 24px rgba(30,37,64,.16);
+  transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
 }
-.interview-back:hover:not(:disabled){ transform:translateY(-1px); box-shadow:0 4px 12px rgba(30,37,64,.12); }
-.interview-back:disabled{ opacity:0; pointer-events:none; }
-.interview-back svg{ color:inherit; }
+.interview-back-float:hover:not(:disabled){ transform:translateY(-2px); box-shadow:0 14px 30px rgba(30,37,64,.2); }
+.interview-back-float:disabled{ opacity:0; pointer-events:none; }
+.interview-back-float svg{ color:inherit; }
+@media (max-width:600px){
+  .interview-back-float{ left:14px; bottom:14px; padding:11px 18px 11px 14px; font-size:15px; }
+}
 .interview-progress-label{
   font-family:"Segoe UI",system-ui,sans-serif; font-size:15px; font-weight:800; letter-spacing:.03em;
   color:var(--navy); opacity:.75; text-transform:uppercase;

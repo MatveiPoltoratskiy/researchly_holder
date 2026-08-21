@@ -409,14 +409,17 @@ export default function Interview() {
           colors={['var(--symbol-tan)', 'var(--cover-dark)', 'var(--ribbon)', 'var(--navy)', 'var(--gold)']}
         />
       </div>
+      {/* fixed to the bottom-left of the viewport rather than living inside the
+          key={step}-remounted card, same reasoning as the symbol field above — a step
+          navigation control shouldn't flicker/remount every time the step itself does */}
+      <button type="button" className="interview-back-float" onClick={goBack} disabled={step === 1}>
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+          <use href="#icon-arrow" transform="rotate(180 12 12)" />
+        </svg>
+        Back
+      </button>
       <div className="container interview-container">
         <div className="interview-progress-row">
-              <button type="button" className="interview-back" onClick={goBack} disabled={step === 1}>
-                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-                  <use href="#icon-arrow" transform="rotate(180 12 12)" />
-                </svg>
-                Back
-              </button>
               <span className="interview-progress-label">
                 {STEP_LABELS[step - 1]} · {step} of {TOTAL_STEPS}
               </span>
