@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
 import { FIELDS } from '../data/fields'
 import OpportunityMap from './OpportunityMap'
@@ -319,15 +320,28 @@ export function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, 
           {recommendTag && <span className="opp-tag opp-tag--recommend">{recommendTag}</span>}
         </div>
         <div className="opp-foot">
-          <span className="opp-pay">{payLabel(o)}</span>
+          <span className="opp-pay">
+            <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true">
+              <use href="#icon-dollar" />
+            </svg>
+            {payLabel(o)}
+          </span>
           {costLabel(o) && (
             <>
               <span className="opp-dot">·</span>
-              <span className={`opp-cost ${o.cost > 0 ? 'opp-cost--paid' : ''}`}>{costLabel(o)}</span>
+              <span className={`opp-cost ${o.cost > 0 ? 'opp-cost--paid' : ''}`}>
+                <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true">
+                  <use href={o.cost === 0 ? '#icon-people' : '#icon-dollar'} />
+                </svg>
+                {costLabel(o)}
+              </span>
             </>
           )}
           <span className="opp-dot">·</span>
           <span className="opp-deadline">
+            <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true">
+              <use href="#icon-calendar" />
+            </svg>
             {o.deadline ? `Deadline ${o.deadline}` : 'Deadline not confirmed'}
           </span>
           {o.url ? (
@@ -420,100 +434,133 @@ function MajorsFilter({ activeFields, toggleField, counts }) {
   )
 }
 
-// distinct from the Majors filter above: this doesn't change which cards are shown, it
-// personalizes the match score and "why this matches you" text. Capped at 3 on purpose —
-// see the disclaimer copy for why.
-function InterestsPicker({ interests }) {
+// Interests + goal used to live as two permanent sidebar sections, but together they made
+// the sidebar taller than the viewport — this page is a fixed, exactly-one-screen layout
+// now (see .opp-fixed-page), so anything that can't fit has to become an overlay instead
+// of permanent real estate. Same underlying data/behavior, just a popover off a small
+// header trigger rather than sidebar sections.
+function PersonalizePanel({ interests, goalId, setGoalId }) {
   const [open, setOpen] = useState(false)
+  const [coords, setCoords] = useState(null)
+  const btnRef = useRef(null)
+  const panelRef = useRef(null)
+
+  // the panel is portaled straight to <body> rather than rendered inline here, because
+  // this whole page is a position:fixed, overflow:hidden shell (see .opp-fixed-page) —
+  // an absolutely-positioned child of a clipped ancestor still gets clipped by it, so a
+  // dropdown anchored the normal way would get cut off after ~40px. Portaling escapes
+  // that clip; the trade-off is manually tracking the trigger button's screen position.
+  function measureAndToggle() {
+    if (!open && btnRef.current) {
+      const rect = btnRef.current.getBoundingClientRect()
+      setCoords({ top: rect.bottom + 8, right: window.innerWidth - rect.right })
+    }
+    setOpen((v) => !v)
+  }
+
+  useEffect(() => {
+    if (!open) return
+    function onClickOutside(e) {
+      const insideBtn = btnRef.current && btnRef.current.contains(e.target)
+      const insidePanel = panelRef.current && panelRef.current.contains(e.target)
+      if (!insideBtn && !insidePanel) setOpen(false)
+    }
+    function onKeyDown(e) {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('mousedown', onClickOutside)
+    document.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.removeEventListener('mousedown', onClickOutside)
+      document.removeEventListener('keydown', onKeyDown)
+    }
+  }, [open])
 
   return (
-    <div className="opp-side-section">
-      <button type="button" className="opp-side-heading" onClick={() => setOpen((v) => !v)} aria-expanded={open}>
-        Your top interests
-        <svg width="16" height="16" className={`opp-chevron ${open ? 'is-open' : ''}`} aria-hidden="true">
-          <use href="#icon-chevron-down" />
+    <div className="opp-personalize">
+      <button
+        ref={btnRef}
+        type="button"
+        className={`opp-personalize-btn ${open ? 'is-open' : ''}`}
+        onClick={measureAndToggle}
+        aria-expanded={open}
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+          <use href="#icon-plusminus" />
         </svg>
+        Personalize match
       </button>
-      <div className={`opp-collapse ${open ? '' : 'is-closed'}`}>
-        <div className="opp-collapse-inner">
-          <div className="opp-major-list">
-            {FIELD_ORDER.map((id) => {
-              const checked = interests.interestIds.includes(id)
-              const disabled = !checked && interests.atLimit
-              return (
-                <button
-                  key={id}
-                  type="button"
-                  className={`opp-major-row ${checked ? 'is-checked' : ''}`}
-                  onClick={() => interests.toggle(id)}
-                  disabled={disabled}
-                >
-                  <span className="opp-major-check" aria-hidden="true">
-                    {checked && (
-                      <svg width="10" height="8" viewBox="0 0 10 8">
-                        <path
-                          d="M1 4.2 3.6 6.8 9 1.2"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="1.8"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    )}
-                  </span>
-                  <span className="opp-major-label">{FIELD_META[id].label}</span>
-                </button>
-              )
-            })}
+      {open &&
+        coords &&
+        createPortal(
+          <div
+            className="opp-personalize-panel"
+            ref={panelRef}
+            style={{ position: 'fixed', top: coords.top, right: coords.right }}
+          >
+          <div className="opp-personalize-section">
+            <div className="opp-personalize-heading">Your top interests</div>
+            <div className="opp-major-list">
+              {FIELD_ORDER.map((id) => {
+                const checked = interests.interestIds.includes(id)
+                const disabled = !checked && interests.atLimit
+                return (
+                  <button
+                    key={id}
+                    type="button"
+                    className={`opp-major-row ${checked ? 'is-checked' : ''}`}
+                    onClick={() => interests.toggle(id)}
+                    disabled={disabled}
+                  >
+                    <span className="opp-major-check" aria-hidden="true">
+                      {checked && (
+                        <svg width="10" height="8" viewBox="0 0 10 8">
+                          <path
+                            d="M1 4.2 3.6 6.8 9 1.2"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.8"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      )}
+                    </span>
+                    <span className="opp-major-label">{FIELD_META[id].label}</span>
+                  </button>
+                )
+              })}
+            </div>
+            <p className="opp-interests-disclaimer">
+              Pick up to {MAX_INTERESTS} — these fine-tune your match score and "why this matches" notes. They don't
+              filter which opportunities are shown; use Majors in the sidebar for that.
+            </p>
           </div>
-          <p className="opp-interests-disclaimer">
-            Pick up to {MAX_INTERESTS} — these fine-tune your match score and "why this matches" notes below. They
-            don't filter which opportunities are shown; use Majors above for that.
-          </p>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-// single-select goal, feeds the match score's goal-alignment factor and the "Best match"
-// sort — deliberately just one small sidebar section plus a subtle header note rather
-// than a whole new page, per "do not overdo this"
-function GoalPicker({ goalId, setGoalId }) {
-  const [open, setOpen] = useState(false)
-
-  return (
-    <div className="opp-side-section">
-      <button type="button" className="opp-side-heading" onClick={() => setOpen((v) => !v)} aria-expanded={open}>
-        Your goal
-        <svg width="16" height="16" className={`opp-chevron ${open ? 'is-open' : ''}`} aria-hidden="true">
-          <use href="#icon-chevron-down" />
-        </svg>
-      </button>
-      <div className={`opp-collapse ${open ? '' : 'is-closed'}`}>
-        <div className="opp-collapse-inner">
-          <div className="opp-goal-list">
-            {GOALS.map((g) => {
-              const checked = goalId === g.id
-              return (
-                <button
-                  key={g.id}
-                  type="button"
-                  className={`opp-goal-row ${checked ? 'is-checked' : ''}`}
-                  onClick={() => setGoalId(checked ? null : g.id)}
-                  aria-pressed={checked}
-                >
-                  <span className="opp-goal-glyph" aria-hidden="true">
-                    <Glyph name={g.glyph} size={18} />
-                  </span>
-                  <span className="opp-major-label">{g.label}</span>
-                </button>
-              )
-            })}
+          <div className="opp-personalize-section">
+            <div className="opp-personalize-heading">Your goal</div>
+            <div className="opp-goal-list">
+              {GOALS.map((g) => {
+                const checked = goalId === g.id
+                return (
+                  <button
+                    key={g.id}
+                    type="button"
+                    className={`opp-goal-row ${checked ? 'is-checked' : ''}`}
+                    onClick={() => setGoalId(checked ? null : g.id)}
+                    aria-pressed={checked}
+                  >
+                    <span className="opp-goal-glyph" aria-hidden="true">
+                      <Glyph name={g.glyph} size={18} />
+                    </span>
+                    <span className="opp-major-label">{g.label}</span>
+                  </button>
+                )
+              })}
+            </div>
           </div>
-        </div>
-      </div>
+        </div>,
+          document.body
+        )}
     </div>
   )
 }
@@ -898,8 +945,8 @@ export default function OpportunityExplorer() {
   const detailOpportunity = detailId ? CANADA_OPPORTUNITIES.find((o) => o.id === detailId) : null
 
   return (
-    <section className="opp-explorer">
-      <div className="container opp-container">
+    <section className="opp-explorer opp-fixed-page">
+      <div className="container opp-container opp-container--fill">
         <RoadmapBar />
 
         <div className="opp-header">
@@ -916,13 +963,16 @@ export default function OpportunityExplorer() {
               colors={['var(--symbol-tan)', 'var(--cover-dark)', 'var(--ribbon)', 'var(--gold)']}
             />
           </div>
-          <Link className="opp-my-opportunities-link" to="/my-opportunities">
-            <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
-              <use href="#icon-bookmark" />
-            </svg>
-            My Opportunities
-            {saved.totalSaved > 0 && <span className="opp-my-opportunities-count">{saved.totalSaved}</span>}
-          </Link>
+          <div className="opp-header-actions">
+            <PersonalizePanel interests={interests} goalId={goalId} setGoalId={setGoalId} />
+            <Link className="opp-my-opportunities-link" to="/my-opportunities">
+              <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+                <use href="#icon-bookmark" />
+              </svg>
+              My Opportunities
+              {saved.totalSaved > 0 && <span className="opp-my-opportunities-count">{saved.totalSaved}</span>}
+            </Link>
+          </div>
           <h1 className="opp-heading">
             We <em className="opp-heading-found">found</em>{' '}
             <span className={`opp-heading-count ${countShimmer ? 'is-shimmer' : ''}`}>{shownCount}</span>{' '}
@@ -949,8 +999,6 @@ export default function OpportunityExplorer() {
         <div className="opp-layout">
           <aside className="opp-sidebar">
             <MajorsFilter activeFields={activeFields} toggleField={toggleField} counts={counts} />
-            <InterestsPicker interests={interests} />
-            <GoalPicker goalId={goalId} setGoalId={setGoalId} />
 
             <div className="opp-side-section">
               <div className="opp-side-heading opp-side-heading--static">Level</div>

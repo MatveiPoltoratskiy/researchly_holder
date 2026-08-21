@@ -1364,6 +1364,20 @@ html{ scroll-behavior:smooth; }
 }
 .opp-container{ max-width:1800px; padding-left:24px; padding-right:24px; }
 
+/* fixed, exactly-one-viewport shell — no site nav/footer render on this route (see
+   App.jsx), and this takes the page fully out of document flow the same way
+   .interview-page already does, so nothing here can ever cause the page itself to
+   scroll. Every column below (sidebar/results/map) manages its own internal scroll
+   instead of relying on page scroll to reveal overflow. */
+.opp-explorer.opp-fixed-page{
+  position:fixed; inset:0; z-index:5; overflow:hidden;
+  min-height:0; padding:0;
+}
+.opp-container--fill{
+  display:flex; flex-direction:column; height:100%; min-height:0;
+  padding-top:16px; padding-bottom:12px;
+}
+
 /* ---------- research roadmap bar (persistent progress layer, opportunities page) ---------- */
 .roadmap-bar{
   background:var(--card-bg); border:1.5px solid rgba(30,37,64,.12); border-radius:18px;
@@ -1484,14 +1498,19 @@ html{ scroll-behavior:smooth; }
   border-radius:999px; padding:3px 11px;
 }
 
-/* two-pane layout: sticky filter sidebar + scrolling results, mirrors the reference's
-   filters-rail-beside-scrolling-list structure without needing the map pane */
+/* three-pane layout: filter sidebar, scrolling results, map. Flexbox rather than grid on
+   purpose — a grid item's percentage height only resolves against a "definite" row
+   height, which got ambiguous nested this deep inside the fixed-page/flex-column shell
+   (the map column measured 80,000+px tall instead of filling the viewport). A flex row's
+   default align-items:stretch sizes every child to the row's own height unconditionally,
+   no percentage-resolution edge cases involved. */
 .opp-layout{
-  display:grid; grid-template-columns:270px minmax(400px,560px) minmax(360px,1fr);
-  gap:24px; align-items:start;
+  flex:1; min-height:0;
+  display:flex; gap:24px;
 }
 .opp-sidebar{
-  position:sticky; top:84px; display:flex; flex-direction:column; gap:18px;
+  flex:0 0 270px;
+  overflow-y:auto; display:flex; flex-direction:column; gap:18px;
   background:var(--card-bg); border:1px solid var(--card-border); border-radius:16px; padding:20px;
 }
 .opp-side-section + .opp-side-section{ border-top:1px solid var(--card-border); padding-top:16px; }
@@ -1539,24 +1558,21 @@ html{ scroll-behavior:smooth; }
 .opp-level-btn:hover{ background:var(--pages-shadow); }
 .opp-level-btn.is-active{ background:var(--navy); color:#fff; border-color:var(--navy); }
 
-/* the results panel scrolls on its own, independent of the page, matching the sidebar
-   and map which are already sticky/fixed-height beside it */
+/* the results panel scrolls on its own, independent of the page — this whole page is a
+   fixed one-viewport shell (see .opp-fixed-page), so every column fills the height the
+   flex row stretches it to and scrolls its own overflow rather than the page ever
+   scrolling */
 .opp-results{
-  position:sticky; top:84px; height:calc(100vh - 100px); min-width:0;
+  flex:1 1 480px; min-width:400px; max-width:560px;
   display:flex; flex-direction:column;
 }
 .opp-list-scroll{ flex:1; overflow-y:auto; padding-right:6px; margin-right:-6px; }
 .opp-list{ display:flex; flex-direction:column; gap:14px; }
 
-@media (max-width: 860px){
-  .opp-results{ position:static; height:auto; }
-  .opp-list-scroll{ overflow:visible; padding-right:0; margin-right:0; }
-}
-
 /* ---- map pane ---- */
-.opp-map-col{ position:sticky; top:84px; min-width:0; }
+.opp-map-col{ flex:1 1 600px; min-width:360px; }
 .opp-map-pane{
-  position:relative; height:calc(100vh - 100px); min-height:420px; border-radius:16px;
+  position:relative; height:100%; min-height:320px; border-radius:16px;
   overflow:hidden; border:1px solid var(--card-border); box-shadow:0 1px 2px rgba(30,37,64,.04);
 }
 .opp-map-canvas{ width:100%; height:100%; background:var(--pages-shadow); }
@@ -1823,10 +1839,13 @@ html{ scroll-behavior:smooth; }
   padding:3px 20px 3px 9px; cursor:pointer;
 }
 
-/* header link to /my-opportunities — small and out of the way, top-right of the
-   header band, not a whole new nav item competing with the real site nav */
+/* top-right of the header band: Personalize trigger + link to /my-opportunities,
+   grouped so neither competes with the real site nav (there isn't one on this page) */
+.opp-header-actions{
+  position:absolute; top:0; right:0; z-index:3;
+  display:flex; align-items:center; gap:10px;
+}
 .opp-my-opportunities-link{
-  position:absolute; top:0; right:0; z-index:2;
   display:flex; align-items:center; gap:6px;
   font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:700; color:var(--navy);
   text-decoration:none; padding:8px 14px; border-radius:999px; border:1.3px solid rgba(30,37,64,.14);
@@ -1837,37 +1856,93 @@ html{ scroll-behavior:smooth; }
   background:var(--cover); color:#fff; border-radius:999px; font-size:11px; font-weight:800;
   padding:1px 7px; line-height:1.5;
 }
-@media (max-width:760px){ .opp-my-opportunities-link{ position:static; margin-bottom:10px; align-self:flex-start; } }
+@media (max-width:760px){ .opp-header-actions{ position:static; margin-bottom:10px; justify-content:flex-start; } }
+
+/* the "Personalize match" popover trigger + panel — replaces what used to be two
+   permanent sidebar sections (Your top interests / Your goal); moved off the sidebar
+   entirely so the page can stay a fixed one-viewport shell (see .opp-fixed-page) */
+.opp-personalize{ position:relative; }
+.opp-personalize-btn{
+  display:flex; align-items:center; gap:6px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:700; color:var(--navy);
+  text-decoration:none; padding:8px 14px; border-radius:999px; border:1.3px solid rgba(30,37,64,.14);
+  background:var(--card-bg); cursor:pointer; transition:border-color .12s ease, transform .12s ease;
+}
+.opp-personalize-btn:hover{ border-color:rgba(30,37,64,.3); transform:translateY(-1px); }
+.opp-personalize-btn.is-open{ border-color:var(--cover); color:var(--cover-dark); }
+/* position (top/right) is set inline via JS, since this is portaled to <body> to escape
+   .opp-fixed-page's overflow:hidden clip — see the component comment for why */
+.opp-personalize-panel{
+  z-index:1500; width:320px; max-height:70vh; overflow-y:auto;
+  background:var(--card-bg); border:1px solid var(--card-border); border-radius:16px;
+  padding:18px; box-shadow:0 18px 40px -14px rgba(30,37,64,.35);
+}
+.opp-personalize-section + .opp-personalize-section{ margin-top:16px; padding-top:16px; border-top:1px solid var(--card-border); }
+.opp-personalize-heading{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:800; letter-spacing:.03em;
+  text-transform:uppercase; color:var(--navy); margin-bottom:8px;
+}
 
 /* ---------- My Opportunities / saved pipeline page ---------- */
-.myopp-container{ max-width:1000px; }
+/* same fixed, one-viewport shell as the main explorer: no site nav/footer on this route
+   (see App.jsx), and only .myopp-scroll below ever scrolls — the header, status row, and
+   privacy note stay put so the page never scrolls as a whole */
+.myopp-page{ display:flex; justify-content:center; }
+.myopp-container{
+  max-width:1100px; width:100%;
+  padding-top:22px; padding-bottom:16px;
+}
 .myopp-back-link{
-  display:inline-flex; align-items:center; gap:6px; margin-bottom:16px;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; font-weight:700; color:var(--navy-soft);
+  flex:none;
+  display:inline-flex; align-items:center; gap:6px; margin-bottom:18px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; font-weight:700; color:var(--navy-soft);
   text-decoration:none;
 }
 .myopp-back-link:hover{ color:var(--cover); }
 .myopp-back-arrow{ transform:rotate(180deg); }
-.myopp-header{ margin-bottom:18px; }
-.myopp-heading{ margin-bottom:6px; }
+.myopp-header{ flex:none; margin-bottom:20px; }
+.myopp-heading{ margin-bottom:8px; font-size:clamp(36px,4.2vw,50px); }
 .myopp-subtext{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:15px; color:var(--navy-soft); margin:0;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:17px; color:var(--navy-soft); margin:0;
 }
-.myopp-status-row{ display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+.myopp-status-row{ flex:none; display:flex; align-items:center; flex-wrap:wrap; gap:9px; margin-bottom:20px; }
 .myopp-status-btn{
-  display:flex; align-items:center; gap:7px;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; font-weight:700; color:var(--navy-soft);
+  display:flex; align-items:center; gap:8px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:15px; font-weight:700; color:var(--navy-soft);
   background:var(--card-bg); border:1.3px solid rgba(30,37,64,.14); border-radius:999px;
-  padding:7px 14px; cursor:pointer; transition:border-color .12s ease, color .12s ease, background .12s ease;
+  padding:9px 18px; cursor:pointer; transition:border-color .12s ease, color .12s ease, background .12s ease;
 }
 .myopp-status-btn:hover{ border-color:rgba(30,37,64,.3); color:var(--navy); }
 .myopp-status-btn.is-active{ background:var(--navy); border-color:var(--navy); color:#fff; }
 .myopp-status-count{
-  font-size:11.5px; font-weight:800; opacity:.7; background:rgba(30,37,64,.08);
-  border-radius:999px; padding:1px 7px; line-height:1.5;
+  font-size:12.5px; font-weight:800; opacity:.7; background:rgba(30,37,64,.08);
+  border-radius:999px; padding:2px 8px; line-height:1.5;
 }
 .myopp-status-btn.is-active .myopp-status-count{ background:rgba(255,255,255,.22); opacity:1; }
-.myopp-list{ padding-bottom:12px; }
+.myopp-scroll{ flex:1; min-height:0; overflow-y:auto; padding-right:8px; margin-right:-8px; }
+.myopp-list{ padding-bottom:12px; gap:16px; }
+.myopp-privacy-note{
+  flex:none; display:flex; align-items:center; justify-content:center; gap:7px; margin:14px 0 0;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; color:var(--navy-faint);
+}
+.myopp-privacy-note svg{ flex:none; }
+
+@media (max-width:860px){
+  .myopp-page.opp-fixed-page{ position:static; overflow:visible; height:auto; }
+  .myopp-container.opp-container--fill{ height:auto; }
+  .myopp-scroll{ overflow:visible; padding-right:0; margin-right:0; }
+}
+
+/* bigger, easier-to-read card text — scoped to this page only, since the main
+   discovery list wasn't asked to change and stays at its existing size */
+.myopp-list .opp-card{ padding:24px 26px; }
+.myopp-list .opp-badge{ width:54px; height:54px; }
+.myopp-list .opp-title{ font-size:21px; }
+.myopp-list .opp-org{ font-size:14.5px; }
+.myopp-list .opp-blurb{ font-size:15.5px; line-height:1.6; }
+.myopp-list .opp-tag{ font-size:12px; padding:4px 11px; }
+.myopp-list .opp-foot{ font-size:13.5px; }
+.myopp-list .opp-confidence{ font-size:11.5px; }
 
 .opp-blurb{
   font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; line-height:1.55; color:var(--navy);
@@ -1893,6 +1968,8 @@ html{ scroll-behavior:smooth; }
   font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; color:var(--opp-text-soft); font-weight:600;
   padding-top:10px; border-top:1px dashed var(--card-border);
 }
+.opp-pay, .opp-cost, .opp-deadline{ display:inline-flex; align-items:center; gap:4px; }
+.opp-pay svg, .opp-cost svg, .opp-deadline svg{ flex:none; opacity:.75; }
 .opp-pay{ font-weight:700; color:var(--match-green); }
 .opp-cost{ font-weight:700; color:var(--opp-text-soft); }
 .opp-cost--paid{ color:var(--cover-dark); }
@@ -1919,13 +1996,23 @@ html{ scroll-behavior:smooth; }
 }
 
 @media (max-width: 1280px){
-  .opp-layout{ grid-template-columns:240px minmax(0,1fr); }
+  .opp-sidebar{ flex-basis:240px; }
+  .opp-results{ max-width:none; }
   .opp-map-col{ display:none; }
 }
 
 @media (max-width: 860px){
-  .opp-layout{ grid-template-columns:1fr; }
-  .opp-sidebar{ position:static; }
+  .opp-layout{ flex-direction:column; height:auto; }
+  .opp-sidebar{ flex-basis:auto; }
+  .opp-results{ max-width:none; min-width:0; }
+  /* the fixed, zero-scroll shell only makes sense with room for a real sidebar+map
+     layout — on a narrow screen everything stacks in one column, so it reverts to a
+     normal scrolling page instead of trying to cram it all into one viewport */
+  .opp-explorer.opp-fixed-page{ position:static; overflow:visible; height:auto; }
+  .opp-container--fill{ height:auto; }
+  .opp-sidebar{ height:auto; overflow-y:visible; }
+  .opp-results{ height:auto; }
+  .opp-list-scroll{ overflow:visible; padding-right:0; margin-right:0; }
 }
 
 @media (max-width: 600px){

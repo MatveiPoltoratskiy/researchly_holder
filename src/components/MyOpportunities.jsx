@@ -40,8 +40,8 @@ export default function MyOpportunities() {
   const detailOpportunity = detailId ? OPP_BY_ID.get(detailId) : null
 
   return (
-    <section className="opp-explorer">
-      <div className="container opp-container myopp-container">
+    <section className="opp-explorer opp-fixed-page myopp-page">
+      <div className="container opp-container opp-container--fill myopp-container">
         <Link className="myopp-back-link" to="/opportunities">
           <svg className="myopp-back-arrow" width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
             <use href="#icon-arrow" />
@@ -76,29 +76,38 @@ export default function MyOpportunities() {
           ))}
         </div>
 
-        {visibleEntries.length === 0 ? (
-          <div className="opp-empty">
-            {saved.totalSaved === 0
-              ? "You haven't saved any opportunities yet. Browse the list and tap Save on anything worth a second look."
-              : 'Nothing in this status yet.'}
-          </div>
-        ) : (
-          <div className="opp-list myopp-list">
-            {visibleEntries.map((entry) => (
-              <OpportunityCard
-                key={entry.id}
-                o={entry.o}
-                selected={false}
-                onSelect={() => {}}
-                onOpenDetail={setDetailId}
-                recommendTag={recommendTagFor(entry.o)}
-                saved={saved}
-                matchProfile={matchProfile}
-                mapContext={false}
-              />
-            ))}
-          </div>
-        )}
+        <div className="myopp-scroll">
+          {visibleEntries.length === 0 ? (
+            <div className="opp-empty">
+              {saved.totalSaved === 0
+                ? "You haven't saved any opportunities yet. Browse the list and tap Save on anything worth a second look."
+                : 'Nothing in this status yet.'}
+            </div>
+          ) : (
+            <div className="opp-list myopp-list">
+              {visibleEntries.map((entry) => (
+                <OpportunityCard
+                  key={entry.id}
+                  o={entry.o}
+                  selected={false}
+                  onSelect={() => {}}
+                  onOpenDetail={setDetailId}
+                  recommendTag={recommendTagFor(entry.o)}
+                  saved={saved}
+                  matchProfile={matchProfile}
+                  mapContext={false}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+
+        <p className="myopp-privacy-note">
+          <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true">
+            <use href="#icon-lock" />
+          </svg>
+          Only you can see your saved opportunities.
+        </p>
       </div>
 
       {detailOpportunity && (

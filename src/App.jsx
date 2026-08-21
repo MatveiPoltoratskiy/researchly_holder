@@ -63,10 +63,11 @@ function Page() {
     )
   }
 
-  // the interview is a fully standalone, distraction-free screen: no nav, no footer, no
-  // zoom-out wrapper (its own layout math already targets the real viewport height so it
-  // never scrolls, which would be thrown off by the .compact-page zoom every other
-  // non-landing route gets)
+  // the interview, the opportunities explorer, and My Opportunities are all fully
+  // standalone, distraction-free screens: no nav, no footer, no zoom-out wrapper. Each
+  // manages its own fixed, exactly-one-viewport layout (no page-level scroll at all) —
+  // the site chrome above/below would either get clipped by that or force scroll back in,
+  // so it's left out entirely rather than fought with via CSS.
   if (path === '/interview') {
     return (
       <>
@@ -78,8 +79,18 @@ function Page() {
     )
   }
 
-  const isLanding =
-    path !== '/contact' && path !== '/how-it-works' && path !== '/opportunities' && path !== '/my-opportunities'
+  if (path === '/opportunities' || path === '/my-opportunities') {
+    return (
+      <>
+        <IconSprite />
+        <Suspense fallback={null}>
+          {path === '/opportunities' ? <OpportunityExplorer /> : <MyOpportunities />}
+        </Suspense>
+      </>
+    )
+  }
+
+  const isLanding = path !== '/contact' && path !== '/how-it-works'
 
   const content = (
     <>
@@ -88,14 +99,6 @@ function Page() {
         <Contact />
       ) : path === '/how-it-works' ? (
         <HowItWorks />
-      ) : path === '/opportunities' ? (
-        <Suspense fallback={null}>
-          <OpportunityExplorer />
-        </Suspense>
-      ) : path === '/my-opportunities' ? (
-        <Suspense fallback={null}>
-          <MyOpportunities />
-        </Suspense>
       ) : (
         <>
           <Hero />

@@ -6,10 +6,7 @@ const STORAGE_KEY = 'rsly_saved_opportunities'
 /** The pipeline a saved opportunity moves through — order matters, used for display. */
 export const SAVE_STATUSES = [
   { id: 'saved', label: 'Saved' },
-  { id: 'interested', label: 'Interested' },
-  { id: 'preparing', label: 'Preparing' },
   { id: 'applied', label: 'Applied' },
-  { id: 'completed', label: 'Completed' },
 ]
 export const DEFAULT_SAVE_STATUS = 'saved'
 const SAVE_STATUS_IDS = new Set(SAVE_STATUSES.map((s) => s.id))
