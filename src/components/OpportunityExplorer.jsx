@@ -358,7 +358,7 @@ export function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, 
               </ul>
             ) : (
               <p className="opp-match-why-empty">
-                Pick your top interests in the sidebar for a more specific breakdown of why an opportunity fits you.
+                Take the interview for a specific breakdown of why this opportunity fits you.
               </p>
             )}
           </div>
