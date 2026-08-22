@@ -7,7 +7,7 @@ import RoadmapBar from './RoadmapBar'
 import { peekInterviewFilters, clearInterviewFilters } from '../lib/interviewHandoff'
 import { scoreOpportunity } from '../lib/matchOpportunities'
 import { computeMatchScore, resolveMatchScore } from '../lib/matchScore'
-import { markBrowsedOpportunities, markOpportunityViewed } from '../lib/activityTracking'
+import { markBrowsedOpportunities } from '../lib/activityTracking'
 import { useSavedOpportunities, SAVE_STATUSES } from '../lib/savedOpportunities'
 import { Link } from '../lib/router'
 
@@ -800,7 +800,6 @@ export default function OpportunityExplorer() {
 
   function openDetail(id) {
     setDetailId(id)
-    markOpportunityViewed(id) // feeds the roadmap's "Learn" stage ("looked closely at 5 opportunities")
   }
 
   const activeFieldLabels = FIELD_ORDER.filter((f) => activeFields.has(f)).map((f) => FIELD_META[f].label)
