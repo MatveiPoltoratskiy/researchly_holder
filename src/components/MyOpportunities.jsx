@@ -35,14 +35,16 @@ export default function MyOpportunities() {
     <section className="opp-explorer opp-fixed-page myopp-page">
       <div className="container opp-container opp-container--fill myopp-container">
         <Link className="myopp-back-link" to="/opportunities">
-          <svg className="myopp-back-arrow" width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+          <svg className="myopp-back-arrow" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
             <use href="#icon-arrow" />
           </svg>
           All opportunities
         </Link>
 
         <div className="opp-header myopp-header">
-          <h1 className="opp-heading myopp-heading">My Opportunities</h1>
+          <h1 className="opp-heading myopp-heading">
+            My <span className="myopp-heading-accent">Opportunities</span>
+          </h1>
           <p className="myopp-subtext">Keep track of the opportunities you're considering and applying to.</p>
         </div>
 
