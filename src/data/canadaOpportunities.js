@@ -66,6 +66,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "Natural Sciences and Engineering Research Council of Canada",
     "url": "https://nserc-crsng.canada.ca/en/funding-opportunity/undergraduate-student-research-awards",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "computer-science",
@@ -133,6 +134,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "McGill University",
     "url": "https://www.mcgill.ca/science/research/undergraduate-research/sura",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "computer-science",
@@ -1551,6 +1553,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "University of Manitoba",
     "url": "https://umanitoba.ca/science/research/undergraduate-research/usra",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -1676,6 +1679,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "Memorial University of Newfoundland",
     "url": "https://www.mun.ca/science/undergraduates/apply-for-usra-and-sura-awards/",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -4045,6 +4049,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "Western University",
     "url": "https://www.edu.uwo.ca/research/undergrad/usra.html",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics",
@@ -4109,6 +4114,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "McMaster University",
     "url": "https://our.science.mcmaster.ca/opportunities-2/spring-summer-research-opportunities/",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -4230,6 +4236,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "Concordia University",
     "url": "https://www.concordia.ca/research/funding/cusra.html",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -4262,6 +4269,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "Simon Fraser University",
     "url": "https://www.sfu.ca/research/for-students/ugrad-research-awards/ugrad-research-awards2.html",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -4294,6 +4302,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "University of Alberta",
     "url": "https://www.ualberta.ca/en/current-students/undergraduate-research-initiative/funding/usra.html",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -4326,6 +4335,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "University of Victoria",
     "url": "https://www.uvic.ca/science/students/awards-funding/index.php",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -4358,6 +4368,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "University of Victoria",
     "url": "https://www.uvic.ca/science/physics/current/undergraduate/awards/NSERC%20USRA/index.php",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -4573,6 +4584,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "Carleton University",
     "url": "https://sssc.carleton.ca/resources/undergraduate-research",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -4664,6 +4676,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "Brock University",
     "url": "https://brocku.ca/brock-news/2026/02/funding-available-for-undergraduate-research-employment/",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -4696,6 +4709,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "University of Regina",
     "url": "https://www.uregina.ca/graduate-studies-research/scholarships/external/nserc-undergraduate-student-research-award-usra-tri-council.html",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -5545,6 +5559,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "University of Ottawa",
     "url": "https://research.uottawa.ca/centre-research-opportunities/usra-nserc",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -5608,6 +5623,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "York University",
     "url": "https://www.yorku.ca/science/research/undergraduate-research/",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -5669,6 +5685,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "University of Guelph",
     "url": "https://www.uoguelph.ca/registrar/finances-fees/ug-summer-research",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -5701,6 +5718,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "Wilfrid Laurier University",
     "url": "https://students.wlu.ca/programs/science/biology/research/nserc-undergraduate-student-research-awards-usra.html",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -5732,6 +5750,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "Trent University",
     "url": "https://www.trentu.ca/ori/funding/undergraduate-graduate-postdoctoral-fellow-funding-opportunities/undergraduate-student",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -5764,6 +5783,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "Ontario Tech University",
     "url": "https://research.ontariotechu.ca/students/ura/index.php",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -5796,6 +5816,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "Lakehead University",
     "url": "https://www.lakeheadu.ca/studentcentral/financing-budgeting/nserc-undergraduate-research-awards-program",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -5828,6 +5849,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "University of Windsor",
     "url": "https://www.uwindsor.ca/science/chemistry/500/research-opportunities-undergraduates",
     "focus": [
+      "mathematics",
       "chemistry",
       "biology"
     ],
@@ -6101,6 +6123,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "St. Francis Xavier University",
     "url": "https://www.stfx.ca/research/about-research-stfx/student-research/undergraduate-research",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -6192,6 +6215,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "University of New Brunswick",
     "url": "https://www.unb.ca/gradstudies/current/financial/scholarships/tri-council/nserc-usra.html",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -6314,6 +6338,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "University of Prince Edward Island",
     "url": "https://www.upei.ca/science/science-undergraduate-research-award",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -6346,6 +6371,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "University of British Columbia - Okanagan",
     "url": "https://science.ok.ubc.ca/awards/undergraduate/",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -6375,6 +6401,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "Thompson Rivers University",
     "url": "https://www.tru.ca/research/undergraduate-research/undergraduate-research-opportunities/usra-award.html",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -6940,6 +6967,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "Universite Laval",
     "url": "https://repertoire.bbaf.ulaval.ca/bourse/104314/bourse-de-recherche-de-1er-cycle-brpc-du-crsng-stages-a-lete-2026-hiver-2026",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -7029,6 +7057,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "Vancouver Island University",
     "url": "https://research.viu.ca/undergraduate-student-research-awards",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -7061,6 +7090,7 @@ export const CANADA_OPPORTUNITIES = [
     "org": "University of Lethbridge",
     "url": "https://www.ulethbridge.ca/research/nserc-undergraduate-student-research-awards-usra-summer-term",
     "focus": [
+      "mathematics",
       "biology",
       "chemistry",
       "physics"
@@ -8675,5 +8705,195 @@ export const CANADA_OPPORTUNITIES = [
     "isGrant": false,
     "confidence": "medium",
     "blurb": "A small, free, 2-week hands-on neuroscience lab experience for Chicago-area high schoolers in a single UChicago lab."
+  }
+,
+
+  // ---- dedicated mathematics programs, added so a "Mathematics" pick surfaces real
+  // math-specific programs instead of only the NSERC/tri-agency awards above (which are
+  // legitimately open to math students but not math-specific). Numeric fields left null
+  // where the current cycle's figures aren't confirmed - see opportunitySchema.js.
+  {
+    "id": "promys",
+    "name": "PROMYS (Program in Mathematics for Young Scientists)",
+    "org": "Boston University",
+    "url": "https://promys.org/",
+    "focus": ["mathematics"],
+    "levels": ["hs-10", "hs-11", "hs-12"],
+    "mode": "in-person",
+    "locationLabel": "Boston University, Boston, MA",
+    "lat": 42.3505,
+    "lon": -71.1054,
+    "availability": "summer",
+    "paid": false,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Six weeks of deep, problem-set-driven number theory and mathematical exploration, living on the BU campus with mentorship from research mathematicians. Need-based financial aid is available."
+  },
+  {
+    "id": "ross-mathematics-program",
+    "name": "Ross Mathematics Program",
+    "org": "The Ross Program",
+    "url": "https://rossprogram.org/",
+    "focus": ["mathematics"],
+    "levels": ["hs-10", "hs-11", "hs-12"],
+    "mode": "in-person",
+    "locationLabel": "Multiple campuses (historically Ohio State University and others)",
+    "lat": null,
+    "lon": null,
+    "availability": "summer",
+    "paid": false,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": true,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "An intensive number-theory-centered summer program built around students discovering results themselves rather than being lectured at. Need-based financial aid is available; site varies by year."
+  },
+  {
+    "id": "canada-usa-mathcamp",
+    "name": "Canada/USA Mathcamp",
+    "org": "Mathcamp",
+    "url": "https://www.mathcamp.org/",
+    "focus": ["mathematics"],
+    "levels": ["hs-9", "hs-10", "hs-11", "hs-12"],
+    "mode": "in-person",
+    "locationLabel": "Host campus varies by year (Canada or USA)",
+    "lat": null,
+    "lon": null,
+    "availability": "summer",
+    "paid": false,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": true,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Five weeks of wide-ranging, exploratory pure math taught by mathematicians and counselors, with a strong sliding-scale financial aid program - cost is not meant to be a barrier."
+  },
+  {
+    "id": "hcssim",
+    "name": "HCSSiM (Hampshire College Summer Studies in Mathematics)",
+    "org": "Hampshire College",
+    "url": "https://www.hcssim.org/",
+    "focus": ["mathematics"],
+    "levels": ["hs-10", "hs-11", "hs-12"],
+    "mode": "in-person",
+    "locationLabel": "Hampshire College, Amherst, MA",
+    "lat": 42.3236,
+    "lon": -72.5379,
+    "availability": "summer",
+    "paid": false,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "One of the longest-running pure-math summer programs for motivated high schoolers, six weeks of college-level math taught through discovery rather than lecture. Financial aid available."
+  },
+  {
+    "id": "mathily",
+    "name": "MathILy",
+    "org": "MathILy",
+    "url": "https://www.mathily.org/",
+    "focus": ["mathematics"],
+    "levels": ["hs-9", "hs-10", "hs-11", "hs-12"],
+    "mode": "in-person",
+    "locationLabel": "Host campus varies by year",
+    "lat": null,
+    "lon": null,
+    "availability": "summer",
+    "paid": false,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": true,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "An intensive, discovery-based pure math summer program in the same lineage as HCSSiM, with need-based financial aid available."
+  },
+  {
+    "id": "sumac-stanford",
+    "name": "SUMaC (Stanford University Mathematics Camp)",
+    "org": "Stanford University",
+    "url": "https://sumac.spcs.stanford.edu/",
+    "focus": ["mathematics"],
+    "levels": ["hs-10", "hs-11", "hs-12"],
+    "mode": "hybrid",
+    "locationLabel": "Stanford University, Stanford, CA (in-person and online sessions offered)",
+    "lat": 37.4275,
+    "lon": -122.1697,
+    "availability": "summer",
+    "paid": false,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Advanced number theory and abstract algebra for strong high school math students, with both an on-campus track and an online track. Financial aid available."
+  },
+  {
+    "id": "mit-primes",
+    "name": "MIT PRIMES",
+    "org": "Massachusetts Institute of Technology",
+    "url": "https://math.mit.edu/research/highschool/primes/",
+    "focus": ["mathematics"],
+    "levels": ["hs-11", "hs-12"],
+    "mode": "hybrid",
+    "locationLabel": "MIT, Cambridge, MA (in-person for the Boston area; PRIMES-USA is nationwide/remote)",
+    "lat": 42.3601,
+    "lon": -71.0942,
+    "availability": "year-round",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A year-long, free research mentorship program pairing high schoolers with MIT mathematicians on original research (often leading to a paper). PRIMES-USA extends the math track to students outside Boston via remote mentorship."
+  },
+  {
+    "id": "fields-usrp",
+    "name": "Fields Undergraduate Summer Research Program",
+    "org": "Fields Institute for Research in Mathematical Sciences",
+    "url": "https://www.fields.utoronto.ca/programs/students/summer-programs",
+    "focus": ["mathematics"],
+    "levels": ["ugrad-2", "ugrad-3", "ugrad-4"],
+    "mode": "in-person",
+    "locationLabel": "Fields Institute, Toronto, ON",
+    "lat": 43.6629,
+    "lon": -79.3957,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Undergraduate research projects in pure and applied math supervised by faculty affiliated with Canada's national math research institute, based in Toronto."
   }
 ]

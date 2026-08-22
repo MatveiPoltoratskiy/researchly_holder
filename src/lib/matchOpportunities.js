@@ -23,7 +23,7 @@ export const FIELD_TO_FOCUS = {
   physics: 'physics',
   neuroscience: 'neuroscience',
   engineering: 'physics',
-  mathematics: 'physics',
+  mathematics: 'mathematics',
   psychology: 'biology',
   'environmental-science': 'biology',
   humanitarian: 'pre-med',
