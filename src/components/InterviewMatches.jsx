@@ -44,6 +44,7 @@ const FOCUS_COLOR = {
   physics: 'var(--navy)',
   neuroscience: 'var(--rose)',
   mathematics: 'var(--ribbon)',
+  'computer-science': 'var(--spine)',
 }
 const FOCUS_LABEL = {
   'pre-med': 'Pre-Med',
@@ -52,6 +53,7 @@ const FOCUS_LABEL = {
   physics: 'Physics',
   neuroscience: 'Neuroscience',
   mathematics: 'Mathematics',
+  'computer-science': 'Computer Science',
 }
 
 function levelHint(levels) {
