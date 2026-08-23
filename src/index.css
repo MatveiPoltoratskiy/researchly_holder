@@ -1826,6 +1826,7 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 .opp-map-popup-field--mathematics{ background:rgba(63,125,92,.14); color:var(--ribbon); }
 .opp-map-popup-field--computer-science{ background:rgba(140,74,34,.14); color:var(--spine); }
 .opp-map-popup-field--psychology{ background:rgba(139,94,107,.14); color:var(--mauve); }
+.opp-map-popup-field--environmental-science{ background:rgba(104,134,86,.16); color:var(--sage-front); }
 .opp-map-popup strong{
   font-size:14.5px; line-height:1.3; color:var(--navy); font-family:"Iowan Old Style",Palatino,Georgia,serif;
 }
@@ -1882,6 +1883,7 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 .opp-badge.opp-tag--math{ color:var(--ribbon); }
 .opp-badge.opp-tag--cs{ color:var(--spine); }
 .opp-badge.opp-tag--psych{ color:var(--mauve); }
+.opp-badge.opp-tag--envsci{ color:var(--sage-front); }
 .opp-logo-img{ width:100%; height:100%; object-fit:contain; padding:5px; }
 .opp-logo-img--favicon{ padding:10px; }
 
@@ -2057,6 +2059,7 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 .opp-tag--math{ background:rgba(63,125,92,.14); color:var(--ribbon); }
 .opp-tag--cs{ background:rgba(140,74,34,.14); color:var(--spine); }
 .opp-tag--psych{ background:rgba(139,94,107,.14); color:var(--mauve); }
+.opp-tag--envsci{ background:rgba(104,134,86,.16); color:var(--sage-front); }
 .opp-tag--muted{ background:var(--pill-bg); color:var(--pill-text); font-weight:700; }
 .opp-tag--equity{ background:rgba(169,79,30,.14); color:var(--cover-dark); font-weight:700; }
 .opp-tag--grant{ background:rgba(217,164,65,.3); color:#6B4A0E; font-weight:800; }

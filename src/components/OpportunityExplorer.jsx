@@ -31,8 +31,9 @@ const FIELD_META = {
   mathematics: { label: 'Mathematics', cls: 'opp-tag--math' },
   'computer-science': { label: 'Computer Science', cls: 'opp-tag--cs' },
   psychology: { label: 'Psychology', cls: 'opp-tag--psych' },
+  'environmental-science': { label: 'Environmental Science', cls: 'opp-tag--envsci' },
 }
-const FIELD_ORDER = ['pre-med', 'biology', 'chemistry', 'physics', 'neuroscience', 'mathematics', 'computer-science', 'psychology']
+const FIELD_ORDER = ['pre-med', 'biology', 'chemistry', 'physics', 'neuroscience', 'mathematics', 'computer-science', 'psychology', 'environmental-science']
 const LIVE_FIELD_SET = new Set(FIELD_ORDER)
 
 const CONFIDENCE_LABEL = { high: 'Verified', medium: 'Needs check', low: 'Unconfirmed' }
@@ -676,7 +677,7 @@ export default function OpportunityExplorer() {
   }
 
   const counts = useMemo(() => {
-    const c = { 'pre-med': 0, biology: 0, chemistry: 0, physics: 0, neuroscience: 0, mathematics: 0, 'computer-science': 0, psychology: 0 }
+    const c = { 'pre-med': 0, biology: 0, chemistry: 0, physics: 0, neuroscience: 0, mathematics: 0, 'computer-science': 0, psychology: 0, 'environmental-science': 0 }
     for (const o of CANADA_OPPORTUNITIES) {
       for (const f of o.focus) if (f in c) c[f] += 1
     }

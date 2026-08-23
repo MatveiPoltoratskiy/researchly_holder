@@ -15,8 +15,9 @@ const PIN_COLOR = {
   mathematics: '#3F7D5C',
   'computer-science': '#8C4A22',
   psychology: '#8B5E6B',
+  'environmental-science': '#688656',
 }
-const FIELD_ORDER = ['pre-med', 'biology', 'chemistry', 'physics', 'neuroscience', 'mathematics', 'computer-science', 'psychology']
+const FIELD_ORDER = ['pre-med', 'biology', 'chemistry', 'physics', 'neuroscience', 'mathematics', 'computer-science', 'psychology', 'environmental-science']
 const FIELD_LABEL = {
   'pre-med': 'Pre-Med',
   biology: 'Biology',
@@ -26,6 +27,7 @@ const FIELD_LABEL = {
   mathematics: 'Mathematics',
   'computer-science': 'Computer Science',
   psychology: 'Psychology',
+  'environmental-science': 'Environmental Science',
 }
 
 function domainFromUrl(url) {
