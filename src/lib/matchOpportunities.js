@@ -27,7 +27,7 @@ export const FIELD_TO_FOCUS = {
   'computer-science': 'computer-science',
   psychology: 'psychology',
   'environmental-science': 'environmental-science',
-  humanitarian: 'pre-med',
+  humanitarian: 'humanitarian',
 }
 
 // exported so matchScore.js (the separate, transparently-weighted card match score) can

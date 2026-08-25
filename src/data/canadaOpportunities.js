@@ -9466,5 +9466,81 @@ export const CANADA_OPPORTUNITIES = [
     "isGrant": false,
     "confidence": "medium",
     "blurb": "A multi-year (not just single-summer) paid conservation research and mentorship program aimed at diversifying the conservation field, starting as early as freshman/sophomore year."
+  },
+
+  // ---- humanitarian & social impact programs. First batch for this tag - smaller than
+  // most others on purpose. A lot of "humanitarian" programs turned out on inspection to
+  // either not be real research (advocacy trips, Model UN, coursework-only pre-college
+  // programs) or to only be open to one host university's own students, not external
+  // applicants - neither fits this dataset's "you could actually apply to this" bar.
+  // Only kept programs confirmed to be both real research and open to outside students.
+  {
+    "id": "telluride-tass",
+    "name": "Telluride Association Summer Seminar (TASS)",
+    "org": "Telluride Association",
+    "url": "https://www.tellurideassociation.org/our-programs/high-school-students/summer-seminars-2/",
+    "focus": ["humanitarian"],
+    "levels": ["hs-11"],
+    "mode": "in-person",
+    "locationLabel": "Cornell University, Ithaca, NY",
+    "lat": 42.4534,
+    "lon": -76.4735,
+    "availability": "summer",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A fully funded (tuition, room, board, and travel) six-week seminar of college-level critical inquiry into topics like race, democracy, and social justice - open nationally, not restricted to Cornell's own students."
+  },
+  {
+    "id": "bard-bgia",
+    "name": "Bard Globalization and International Affairs Program (BGIA)",
+    "org": "Bard College",
+    "url": "https://bgia.bard.edu/",
+    "focus": ["humanitarian"],
+    "levels": ["ugrad-2", "ugrad-3", "ugrad-4"],
+    "mode": "in-person",
+    "locationLabel": "Bard Globalization Program, New York, NY",
+    "lat": 40.7484,
+    "lon": -73.9857,
+    "availability": "summer",
+    "paid": false,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A New York City-based program combining coursework with an original research project on an international affairs/development topic - explicitly open to students from any college, not just Bard's own."
+  },
+  {
+    "id": "gpi-oxford-summer-fellowship",
+    "name": "Global Priorities Institute Summer Research Fellowship",
+    "org": "University of Oxford (Global Priorities Institute)",
+    "url": "https://globalprioritiesinstitute.org/",
+    "focus": ["humanitarian"],
+    "levels": ["ugrad-3", "ugrad-4"],
+    "mode": "in-person",
+    "locationLabel": "University of Oxford, Oxford, UK",
+    "lat": 51.7548,
+    "lon": -1.2544,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A paid, highly selective international fellowship (economics/philosophy) researching how to do the most good with limited resources - global priorities, existential risk, effective altruism. Open worldwide, not Oxford-only."
   }
 ]
