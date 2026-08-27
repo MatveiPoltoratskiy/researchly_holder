@@ -1561,17 +1561,35 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
   .roadmap-milestone-row.is-done .roadmap-milestone-check svg{ animation:none; }
 }
 
-.opp-header{ position:relative; margin-bottom:22px; }
+/* soft peach "card" band, per the reference screenshot — a search-icon badge + heading
+   on one row, the "Prioritized for" pills below, all contained in one rounded surface
+   instead of loose text floating over the page background */
+.opp-header{
+  position:relative; margin-bottom:22px; overflow:hidden;
+  border-radius:20px; padding:20px 26px;
+  background:rgba(221,107,46,.055); border:1px solid rgba(221,107,46,.16);
+}
 /* light ambient field behind just the header band — see the JSX comment for why this
    doesn't extend to the whole page */
 .opp-header-symbol-field{ position:absolute; inset:-16px -24px; z-index:0; overflow:hidden; pointer-events:none; }
 .opp-header-symbol-field .symbol-field{ position:absolute; }
 @media (max-width:900px){ .opp-header-symbol-field{ display:none; } }
 
-.opp-heading{
+.opp-header-top{
   position:relative; z-index:1;
+  display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  margin-bottom:14px;
+}
+.opp-header-left{ display:flex; align-items:center; gap:16px; min-width:0; }
+.opp-header-icon{
+  flex:none; width:52px; height:52px; border-radius:14px;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--pill-amber-bg); color:var(--cover);
+}
+
+.opp-heading{
   font-family:"Iowan Old Style",Palatino,Georgia,serif; font-weight:700;
-  font-size:clamp(24px,2.8vw,34px); color:var(--navy); margin:0 0 10px;
+  font-size:clamp(22px,2.4vw,30px); color:var(--navy); margin:0;
   /* opts back out of the bare h1{} rule's hero shimmer-gradient-clip effect (same escape
      hatch as .circle-mark below) — that rule sets -webkit-text-fill-color:transparent on
      every h1 sitewide, which a child span/em without its own background-clip:text can
@@ -1642,40 +1660,43 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
   background-size:100% 28px, 100% 28px, 100% 10px, 100% 10px;
   background-attachment:local, local, scroll, scroll;
 }
-.opp-side-section + .opp-side-section{ border-top:1px solid var(--card-border); padding-top:16px; }
+.opp-side-section + .opp-side-section{ border-top:1px solid var(--card-border); padding-top:12px; }
 .opp-side-heading{
   width:100%; display:flex; align-items:center; justify-content:space-between;
   font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:800; letter-spacing:.03em;
   text-transform:uppercase; color:var(--navy); background:none; border:none; padding:0; cursor:pointer;
 }
-.opp-side-heading--static{ cursor:default; margin-bottom:10px; }
+.opp-side-heading--static{ cursor:default; margin-bottom:7px; }
 .opp-chevron{ color:var(--navy-soft); transition:transform .2s ease; }
 .opp-chevron.is-open{ transform:rotate(180deg); }
 
 /* CSS-grid accordion: animates height without JS measuring the content box */
-.opp-collapse{ display:grid; grid-template-rows:1fr; transition:grid-template-rows .25s ease; margin-top:12px; }
+.opp-collapse{ display:grid; grid-template-rows:1fr; transition:grid-template-rows .25s ease; margin-top:8px; }
 .opp-collapse.is-closed{ grid-template-rows:0fr; margin-top:0; }
 .opp-collapse-inner{ overflow:hidden; }
 
-.opp-major-list{ display:flex; flex-direction:column; gap:2px; }
+/* compact list: smaller checkbox/type/row padding than a normal filter control, since
+   this list runs to ~40 fields (10 live + many "soon" placeholders) and a roomier row
+   height made the sidebar dramatically taller than the results/map beside it */
+.opp-major-list{ display:flex; flex-direction:column; gap:0; }
 .opp-major-row{
-  display:flex; align-items:center; gap:9px; width:100%; text-align:left; background:none; border:none;
-  padding:7px 4px; border-radius:8px; cursor:pointer; font-family:"Segoe UI",system-ui,sans-serif;
+  display:flex; align-items:center; gap:8px; width:100%; text-align:left; background:none; border:none;
+  padding:4.5px 4px; border-radius:7px; cursor:pointer; font-family:"Segoe UI",system-ui,sans-serif;
 }
 .opp-major-row:hover:not(:disabled){ background:var(--pages-shadow); }
 .opp-major-row:disabled{ cursor:default; opacity:.5; }
 .opp-major-check{
-  flex:none; width:16px; height:16px; border-radius:5px; border:1.5px solid var(--card-border);
+  flex:none; width:14px; height:14px; border-radius:4px; border:1.5px solid var(--card-border);
   display:flex; align-items:center; justify-content:center; color:#fff;
 }
 .opp-major-row.is-checked .opp-major-check{ background:var(--cover); border-color:var(--cover); }
-.opp-major-check svg{ transform:rotate(90deg) scaleX(-1); }
-.opp-major-label{ flex:1; font-size:14.5px; font-weight:600; color:var(--navy); }
+.opp-major-check svg{ transform:rotate(90deg) scaleX(-1); width:8px; height:6.5px; }
+.opp-major-label{ flex:1; font-size:13px; font-weight:600; color:var(--navy); }
 .opp-major-row.is-soon .opp-major-label{ color:var(--navy-faint); }
-.opp-major-count{ font-size:12px; font-weight:700; color:var(--navy-soft); }
+.opp-major-count{ font-size:11px; font-weight:700; color:var(--navy-soft); }
 .opp-major-soon{
-  font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:var(--navy-faint);
-  background:var(--pages-shadow); border-radius:999px; padding:2px 7px;
+  font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:var(--navy-faint);
+  background:var(--pages-shadow); border-radius:999px; padding:1.5px 6px;
 }
 
 .opp-level-col{ display:flex; flex-direction:column; gap:6px; }
@@ -1948,10 +1969,7 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 
 /* top-right of the header band: link to /my-opportunities — its own group so it
    doesn't compete with the real site nav (there isn't one on this page) */
-.opp-header-actions{
-  position:absolute; top:0; right:0; z-index:3;
-  display:flex; align-items:center; gap:10px;
-}
+.opp-header-actions{ display:flex; align-items:center; gap:10px; flex:none; }
 .opp-my-opportunities-link{
   display:flex; align-items:center; gap:6px;
   font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:700; color:var(--navy);
@@ -1963,7 +1981,6 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
   background:var(--cover); color:#fff; border-radius:999px; font-size:11px; font-weight:800;
   padding:1px 7px; line-height:1.5;
 }
-@media (max-width:760px){ .opp-header-actions{ position:static; margin-bottom:10px; justify-content:flex-start; } }
 
 /* ---------- My Opportunities / saved pipeline page ---------- */
 /* same fixed, one-viewport shell as the main explorer: no site nav/footer on this route
