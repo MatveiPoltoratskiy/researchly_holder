@@ -2709,8 +2709,15 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 }
 @media (max-width:760px){ .im-matches-card{ padding:24px 20px; border-radius:22px; } }
 
-.im-matches-card .interview-question{ font-size:clamp(22px,2.8vw,29px); margin-bottom:6px; }
-.im-matches-card .interview-subtext{ font-size:15.5px; margin-bottom:0; }
+/* bolder/bigger than the shared .interview-question default and no lightweight subtext
+   underneath it anymore (removed per feedback that "Ranked by..." was redundant) — this
+   is the one payoff line on the whole screen, so it gets to be the loudest text here */
+.im-matches-card .interview-question{ font-size:clamp(24px,3.2vw,32px); font-weight:900; margin-bottom:18px; }
+@media (max-width:600px){
+  /* mobile gets an even bigger, more dramatic size than the desktop clamp ceiling —
+     "exaggerated" on purpose, not just scaled proportionally down like the rest of the card */
+  .im-matches-card .interview-question{ font-size:34px; line-height:1.15; margin-bottom:16px; }
+}
 
 .im-matches-eyebrow{
   font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:800; letter-spacing:.04em;

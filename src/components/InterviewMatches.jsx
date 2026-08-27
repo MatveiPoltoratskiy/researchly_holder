@@ -131,9 +131,6 @@ export default function InterviewMatches({ matches, onContinue }) {
             <h1 className="interview-question">
               We found <span className="im-matches-count">{matches.length}</span> strong matches
             </h1>
-            <p className="interview-subtext">
-              Ranked by field, eligibility, format, pay, and location, closest fit first.
-            </p>
 
             <div className="im-match-list">
               {matches.map((o) => {
