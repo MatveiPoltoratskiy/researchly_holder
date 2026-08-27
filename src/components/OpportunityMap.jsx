@@ -166,14 +166,22 @@ export default function OpportunityMap({ opportunities, selectedId, onSelect, us
       maxBoundsViscosity: 1,
       worldCopyJump: false,
     })
-    // CartoDB's Positron style instead of stock OSM tiles: a flat grey/light basemap
+    // Esri's Light Gray Canvas instead of stock OSM tiles: a flat grey/light basemap
     // showing streets, labels and buildings without terrain shading, landcover colour, or
-    // other prominent physical-geography features cluttering the view
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      attribution:
-        '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
+    // other prominent physical-geography features cluttering the view. (CartoDB's
+    // previously-used basemaps.cartocdn.com raster tiles now require a paid API key —
+    // Esri's canvas tiles are free with no key/signup and give the same flat grey look.)
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
       maxZoom: 19,
+      maxNativeZoom: 16,
+      minZoom: 2,
+      noWrap: true,
+    }).addTo(map)
+    // Esri splits labels/roads into a separate "reference" overlay on top of the canvas
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+      maxZoom: 19,
+      maxNativeZoom: 16,
       minZoom: 2,
       noWrap: true,
     }).addTo(map)
