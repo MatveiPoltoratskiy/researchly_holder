@@ -1951,10 +1951,9 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 
 .opp-save-control{ display:flex; align-items:center; gap:7px; }
 .opp-save-btn{
-  display:flex; align-items:center; justify-content:center; gap:6px; flex:none;
-  padding:9px 16px; border-radius:999px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; flex:none;
+  width:30px; height:30px; padding:0; border-radius:50%; cursor:pointer;
   background:#fff; border:1.3px solid rgba(30,37,64,.18); color:var(--navy-soft);
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:700; white-space:nowrap;
   transition:border-color .12s ease, color .12s ease, background .12s ease, transform .12s ease;
 }
 .opp-save-btn:active{ transform:scale(.96); }

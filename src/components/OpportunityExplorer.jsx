@@ -225,7 +225,6 @@ function SaveControl({ id, saved }) {
         <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
           <use href={status ? '#icon-bookmark-filled' : '#icon-bookmark'} />
         </svg>
-        <span className="opp-save-btn-label">{status ? 'Saved' : 'Save'}</span>
       </button>
       {status && (
         <select
