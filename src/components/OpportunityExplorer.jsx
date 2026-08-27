@@ -852,22 +852,31 @@ export default function OpportunityExplorer() {
               colors={['var(--symbol-tan)', 'var(--cover-dark)', 'var(--ribbon)', 'var(--gold)']}
             />
           </div>
-          <div className="opp-header-actions">
-            <Link className="opp-my-opportunities-link" to="/my-opportunities">
-              <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
-                <use href="#icon-bookmark" />
-              </svg>
-              My Opportunities
-              {saved.totalSaved > 0 && <span className="opp-my-opportunities-count">{saved.totalSaved}</span>}
-            </Link>
+          <div className="opp-header-top">
+            <div className="opp-header-left">
+              <div className="opp-header-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24">
+                  <use href="#icon-search" />
+                </svg>
+              </div>
+              <h1 className="opp-heading">
+                We <em className="opp-heading-found">found</em>{' '}
+                <span className={`opp-heading-count ${countShimmer ? 'is-shimmer' : ''}`}>{shownCount}</span>{' '}
+                <span className="opp-heading-word">
+                  opportunit{shownCount === 1 ? 'y' : 'ies'}
+                </span>
+              </h1>
+            </div>
+            <div className="opp-header-actions">
+              <Link className="opp-my-opportunities-link" to="/my-opportunities">
+                <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+                  <use href="#icon-bookmark" />
+                </svg>
+                My Opportunities
+                {saved.totalSaved > 0 && <span className="opp-my-opportunities-count">{saved.totalSaved}</span>}
+              </Link>
+            </div>
           </div>
-          <h1 className="opp-heading">
-            We <em className="opp-heading-found">found</em>{' '}
-            <span className={`opp-heading-count ${countShimmer ? 'is-shimmer' : ''}`}>{shownCount}</span>{' '}
-            <span className="opp-heading-word">
-              opportunit{shownCount === 1 ? 'y' : 'ies'}
-            </span>
-          </h1>
           <div className="opp-prioritized">
             <span>Prioritized for</span>
             {activeFieldLabels.map((label) => (
