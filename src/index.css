@@ -118,7 +118,7 @@ svg{ display:block; }
 /* faint decorative sketches scattered across the cream field */
 .hero-sketch{ position:absolute; color: var(--navy-faint); pointer-events:none; z-index:1; }
 .hero-sketch svg{ display:block; overflow:visible; }
-.sketch-hex-b{ right:6%; top:6%; width:150px; opacity:.55; }
+.sketch-hex-b{ right:6%; top:6%; width:150px; opacity:.16; }
 .sketch-hex-a{ left:3%; top:19%; width:120px; color: rgba(30,37,64,.12); }
 .sketch-note{
   font-family:"Bradley Hand","Segoe Print","Comic Sans MS",cursive;
