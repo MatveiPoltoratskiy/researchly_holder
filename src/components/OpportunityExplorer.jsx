@@ -3,11 +3,9 @@ import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
 import { FIELDS } from '../data/fields'
 import OpportunityMap from './OpportunityMap'
 import SymbolField from './SymbolField'
-import RoadmapBar from './RoadmapBar'
 import { peekInterviewFilters, clearInterviewFilters } from '../lib/interviewHandoff'
 import { scoreOpportunity } from '../lib/matchOpportunities'
 import { computeMatchScore, resolveMatchScore } from '../lib/matchScore'
-import { markBrowsedOpportunities } from '../lib/activityTracking'
 import { useSavedOpportunities, SAVE_STATUSES } from '../lib/savedOpportunities'
 import { Link } from '../lib/router'
 import { burstConfettiAtPoint } from '../lib/confetti'
@@ -564,11 +562,6 @@ export default function OpportunityExplorer() {
   // session — after the handoff below has cleared it — correctly falls back to
   // defaults instead of replaying a stale first-visit snapshot forever)
   const [interviewHandoff] = useState(() => peekInterviewFilters())
-  // written synchronously during the initial render (a lazy useState initializer runs
-  // before children render), not in a useEffect (which fires after paint) — RoadmapBar
-  // is a child rendered in this same pass and reads this exact flag on its own first
-  // render, so a useEffect here would be one render too late to show it checked yet
-  useState(() => markBrowsedOpportunities())
   const interviewAnswers = interviewHandoff?.answers || null
   const [activeFields, setActiveFields] = useState(() =>
     interviewHandoff?.filters?.focus?.length ? new Set(interviewHandoff.filters.focus) : new Set(FIELD_ORDER)
@@ -818,8 +811,6 @@ export default function OpportunityExplorer() {
   return (
     <section className="opp-explorer opp-fixed-page">
       <div className="container opp-container opp-container--fill">
-        <RoadmapBar />
-
         <div className="opp-header">
           {/* a light version of the interview's ambient symbol field — scoped to just
               this header band, not the whole page, since the filters/list/map below are
