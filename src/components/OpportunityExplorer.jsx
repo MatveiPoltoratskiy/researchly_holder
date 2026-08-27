@@ -227,6 +227,7 @@ function SaveControl({ id, saved }) {
         <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
           <use href={status ? '#icon-bookmark-filled' : '#icon-bookmark'} />
         </svg>
+        <span className="opp-save-btn-label">{status ? 'Saved' : 'Save'}</span>
       </button>
       {status && (
         <select
@@ -259,6 +260,9 @@ function MatchBadge({ score, open, onToggle }) {
       }}
       aria-expanded={open}
     >
+      <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+        <use href="#icon-trending-up" />
+      </svg>
       <span className="opp-match-pct">{score.pct}%</span> match
       <svg className={`opp-match-chevron ${open ? 'is-open' : ''}`} width="11" height="11" viewBox="0 0 24 24" aria-hidden="true">
         <use href="#icon-chevron-down" />
@@ -295,21 +299,70 @@ export function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, 
       <span className="opp-card-select-hint">
         {mapContext ? (selected ? 'Selected, shown on map' : 'Click to locate on map') : 'Click for full details'}
       </span>
-      <div className={`opp-badge ${FIELD_META[primary]?.cls || ''}`}>
-        <OrgLogo org={o.org} url={o.url} iconId={iconForOrg(o.org)} />
-      </div>
       <div className="opp-card-body">
-        <div className="opp-card-top">
-          <div>
+        <div className="opp-card-head">
+          <div className={`opp-badge ${FIELD_META[primary]?.cls || ''}`}>
+            <OrgLogo org={o.org} url={o.url} iconId={iconForOrg(o.org)} />
+          </div>
+          <div className="opp-card-heading">
             <h3 className="opp-title">{o.name}</h3>
             <div className="opp-org">{o.org}</div>
+            <MatchBadge score={score} open={whyOpen} onToggle={() => setWhyOpen((v) => !v)} />
           </div>
           <div className="opp-card-actions">
-            <MatchBadge score={score} open={whyOpen} onToggle={() => setWhyOpen((v) => !v)} />
             <SaveControl id={o.id} saved={saved} />
           </div>
         </div>
+
         <p className="opp-blurb">{o.blurb}</p>
+
+        <div className="opp-detail-row">
+          <span className="opp-detail-item">
+            <span className="opp-detail-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+                <use href="#icon-dollar" />
+              </svg>
+            </span>
+            {payLabel(o)}
+          </span>
+          {costLabel(o) && (
+            <span className="opp-detail-item">
+              <span className="opp-detail-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+                  <use href={o.cost === 0 ? '#icon-people' : '#icon-dollar'} />
+                </svg>
+              </span>
+              {costLabel(o)}
+            </span>
+          )}
+          <span className="opp-detail-item">
+            <span className="opp-detail-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+                <use href="#icon-calendar" />
+              </svg>
+            </span>
+            {o.deadline ? `Deadline ${formatDeadline(o.deadline)}` : 'Deadline not confirmed'}
+          </span>
+          {o.locationLabel && (
+            <span className="opp-detail-item">
+              <span className="opp-detail-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+                  <use href="#icon-pin" />
+                </svg>
+              </span>
+              {o.locationLabel}
+            </span>
+          )}
+          <span className="opp-detail-item">
+            <span className="opp-detail-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+                <use href="#icon-grad-cap" />
+              </svg>
+            </span>
+            {o.org}
+          </span>
+        </div>
+
         <div className="opp-tags">
           {o.focus.map((f) =>
             FIELD_META[f] ? (
@@ -319,32 +372,12 @@ export function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, 
             ) : null
           )}
           <span className="opp-tag opp-tag--muted">{levelRangeLabel(o.levels)}</span>
-          {o.locationLabel && <span className="opp-tag opp-tag--muted">{o.locationLabel}</span>}
           {o.equityNote && <span className="opp-tag opp-tag--equity">{o.equityNote}</span>}
           {o.isGrant && <span className="opp-tag opp-tag--grant">Financial Grant/Award</span>}
           {recommendTag && <span className="opp-tag opp-tag--recommend">{recommendTag}</span>}
         </div>
+
         <div className="opp-foot">
-          <span className={`opp-foot-tag opp-foot-tag--pay ${o.paid ? 'is-paid' : ''}`}>
-            <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
-              <use href="#icon-dollar" />
-            </svg>
-            {payLabel(o)}
-          </span>
-          {costLabel(o) && (
-            <span className={`opp-foot-tag opp-foot-tag--cost ${o.cost > 0 ? 'is-paid' : ''}`}>
-              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
-                <use href={o.cost === 0 ? '#icon-people' : '#icon-dollar'} />
-              </svg>
-              {costLabel(o)}
-            </span>
-          )}
-          <span className="opp-foot-tag opp-foot-tag--deadline">
-            <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
-              <use href="#icon-calendar" />
-            </svg>
-            {o.deadline ? `Deadline ${formatDeadline(o.deadline)}` : 'Deadline not confirmed'}
-          </span>
           {o.url ? (
             <a className="opp-link" href={o.url} target="_blank" rel="noreferrer">
               View program →
@@ -353,6 +386,7 @@ export function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, 
             <span className="opp-link opp-link--disabled">No official link yet</span>
           )}
         </div>
+
         {whyOpen && (
           <div className="opp-match-why" onClick={(e) => e.stopPropagation()}>
             <div className="opp-match-why-head">Why this matches you</div>
