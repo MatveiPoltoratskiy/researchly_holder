@@ -1357,7 +1357,7 @@ html{ scroll-behavior:smooth; }
 @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
 
 .opp-explorer{
-  background:var(--cream); padding:16px 0 24px; min-height:70vh;
+  background:color-mix(in srgb, var(--cream) 80%, white 20%); padding:16px 0 24px; min-height:70vh;
   /* darker than the site-wide --navy-soft, scoped to this page only, per feedback that the
      secondary text (org names, dates, muted tags) was reading too light against the cream */
   --opp-text-soft: rgba(30,37,64,.82);
