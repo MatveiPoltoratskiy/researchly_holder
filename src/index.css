@@ -1357,10 +1357,13 @@ html{ scroll-behavior:smooth; }
 @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
 
 .opp-explorer{
-  background:color-mix(in srgb, var(--cream) 65%, white 35%); padding:16px 0 24px; min-height:70vh;
+  background:color-mix(in srgb, var(--cream) 65%, white 35%); padding:30px 0 24px; min-height:70vh;
   /* darker than the site-wide --navy-soft, scoped to this page only, per feedback that the
      secondary text (org names, dates, muted tags) was reading too light against the cream */
   --opp-text-soft: rgba(30,37,64,.82);
+  /* lighter than the sitewide --card-border, scoped to this page only, per feedback that
+     the sidebar/card/divider borders were reading as harsh grey lines */
+  --card-border: rgba(30,37,64,.06);
 }
 .opp-container{ max-width:1800px; padding-left:24px; padding-right:24px; }
 
