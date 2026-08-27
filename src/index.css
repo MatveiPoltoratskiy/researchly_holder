@@ -448,6 +448,17 @@ h1{
   100%{ transform: translate(-50%,-50%) translate(var(--dx), var(--dy)) rotate(var(--rot)); opacity:0; }
 }
 
+/* whole-screen "rain" variant for celebrateMatches() — a quick outward pop right at
+   spawn (the "explosion" beat), then a steady fall the height of the viewport, fading
+   out over the last third so pieces disappear before they'd visibly hit the bottom edge */
+.confetti-piece--fall{ top:-16px; }
+@keyframes confetti-fall{
+  0%{ transform: translate(-50%,-50%) translate(0,0) rotate(0deg) scale(.5); opacity:0; }
+  8%{ transform: translate(-50%,-50%) translate(calc(var(--dx) * .1), calc(var(--dy) * .04)) rotate(calc(var(--rot) * .1)) scale(1.2); opacity:1; }
+  70%{ opacity:1; }
+  100%{ transform: translate(-50%,-50%) translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(.85); opacity:0; }
+}
+
 .after-hero{ height: 7vh; background: var(--cream); }
 
 /* ---------- testimonial carousel: floats over the plaza/prop level, like the mockup card floats over the mountains ---------- */

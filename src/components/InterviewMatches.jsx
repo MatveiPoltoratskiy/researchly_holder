@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import SymbolField from './SymbolField'
+import { celebrateMatches } from '../lib/confetti'
 
 // Small standalone favicon-fallback logo, deliberately not imported from
 // OpportunityExplorer.jsx — keeps this component's chunk lean instead of pulling in the
@@ -101,6 +102,12 @@ function pitchFor(o) {
 // used throughout this feature), and a real computed match score instead of a
 // decorative one, front and center in bold orange per the brief.
 export default function InterviewMatches({ matches, onContinue }) {
+  // fires once, right as this screen lands — the actual "you're done" payoff moment,
+  // not on every re-render (matches/onContinue don't change identity mid-screen anyway)
+  useEffect(() => {
+    celebrateMatches()
+  }, [])
+
   return (
     <section className="interview-page interview-matches-page">
       {/* an ambient field of the same chemistry/physics/math/biology symbols used
