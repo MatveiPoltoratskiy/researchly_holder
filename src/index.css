@@ -1938,12 +1938,12 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 
 .opp-save-control{ display:flex; align-items:center; gap:7px; }
 .opp-save-btn{
-  display:flex; align-items:center; gap:6px; flex:none;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:700;
-  padding:7px 15px 7px 12px; border-radius:999px; white-space:nowrap; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; flex:none;
+  width:30px; height:30px; padding:0; border-radius:50%; cursor:pointer;
   background:none; border:1.3px solid rgba(30,37,64,.18); color:var(--navy-soft);
-  transition:border-color .12s ease, color .12s ease, background .12s ease;
+  transition:border-color .12s ease, color .12s ease, background .12s ease, transform .12s ease;
 }
+.opp-save-btn:active{ transform:scale(.92); }
 .opp-save-btn:hover{ border-color:rgba(30,37,64,.32); color:var(--navy); }
 .opp-save-btn.is-saved{ background:color-mix(in srgb, var(--cover) 12%, var(--card-bg)); border-color:var(--cover); color:var(--cover-dark); }
 .opp-save-btn svg{ flex-shrink:0; }

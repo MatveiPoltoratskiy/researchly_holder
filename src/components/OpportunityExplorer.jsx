@@ -10,6 +10,7 @@ import { computeMatchScore, resolveMatchScore } from '../lib/matchScore'
 import { markBrowsedOpportunities } from '../lib/activityTracking'
 import { useSavedOpportunities, SAVE_STATUSES } from '../lib/savedOpportunities'
 import { Link } from '../lib/router'
+import { burstConfettiAtPoint } from '../lib/confetti'
 
 const SORTS = {
   recommended: { label: 'Best for your interests & location', fn: null },
@@ -215,14 +216,18 @@ function SaveControl({ id, saved }) {
       <button
         type="button"
         className={`opp-save-btn ${status ? 'is-saved' : ''}`}
-        onClick={() => saved.toggle(id)}
+        onClick={(e) => {
+          const wasSaved = Boolean(status)
+          saved.toggle(id)
+          if (!wasSaved) burstConfettiAtPoint(e.clientX, e.clientY, 22)
+        }}
         aria-pressed={Boolean(status)}
         aria-label={status ? 'Remove from My Opportunities' : 'Save to My Opportunities'}
+        title={status ? 'Remove from My Opportunities' : 'Save to My Opportunities'}
       >
         <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
           <use href={status ? '#icon-bookmark-filled' : '#icon-bookmark'} />
         </svg>
-        {status ? 'Saved' : 'Save'}
       </button>
       {status && (
         <select
