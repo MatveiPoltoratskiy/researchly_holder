@@ -1588,7 +1588,7 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 }
 
 .opp-heading{
-  font-family:"Iowan Old Style",Palatino,Georgia,serif; font-weight:700;
+  font-family:"Fraunces","Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif; font-weight:700;
   font-size:clamp(22px,2.4vw,30px); color:var(--navy); margin:0;
   /* opts back out of the bare h1{} rule's hero shimmer-gradient-clip effect (same escape
      hatch as .circle-mark below) — that rule sets -webkit-text-fill-color:transparent on
