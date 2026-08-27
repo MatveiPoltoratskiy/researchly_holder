@@ -38,7 +38,6 @@ const FIELD_META = {
 const FIELD_ORDER = ['pre-med', 'biology', 'chemistry', 'physics', 'neuroscience', 'mathematics', 'computer-science', 'psychology', 'environmental-science', 'humanitarian']
 const LIVE_FIELD_SET = new Set(FIELD_ORDER)
 
-const CONFIDENCE_LABEL = { high: 'Verified', medium: 'Needs check', low: 'Unconfirmed' }
 const MODE_LABEL = { 'in-person': 'In person', remote: 'Remote', hybrid: 'Hybrid' }
 const AVAILABILITY_LABEL = { summer: 'Summer', 'year-round': 'Year-round', 'academic-year': 'Academic year' }
 
@@ -306,9 +305,6 @@ export function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, 
             <div className="opp-org">{o.org}</div>
           </div>
           <div className="opp-card-actions">
-            <span className={`opp-confidence opp-confidence--${o.confidence}`}>
-              {CONFIDENCE_LABEL[o.confidence] || o.confidence}
-            </span>
             <MatchBadge score={score} open={whyOpen} onToggle={() => setWhyOpen((v) => !v)} />
             <SaveControl id={o.id} saved={saved} />
           </div>
@@ -505,9 +501,6 @@ export function OpportunityDetailModal({ o, onClose, interviewAnswers, matchProf
         </div>
 
         <div className="opp-modal-status-row">
-          <span className={`opp-confidence opp-confidence--${o.confidence}`}>
-            {CONFIDENCE_LABEL[o.confidence] || o.confidence}
-          </span>
           {o.locationLabel && <span className="opp-modal-status-item">{o.locationLabel}</span>}
           <span className="opp-modal-status-item">{MODE_LABEL[o.mode] || o.mode}</span>
           <SaveControl id={o.id} saved={saved} />

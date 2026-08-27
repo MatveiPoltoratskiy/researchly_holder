@@ -1897,14 +1897,6 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 }
 .opp-org{ font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; color:var(--opp-text-soft); margin-top:2px; font-weight:600; }
 
-.opp-confidence{
-  flex:none; font-family:"Segoe UI",system-ui,sans-serif; font-size:10.5px; font-weight:700;
-  padding:5px 10px; border-radius:999px; white-space:nowrap;
-}
-.opp-confidence--high{ background:var(--pill-green-bg); color:var(--pill-green-text); }
-.opp-confidence--medium{ background:var(--pill-amber-bg); color:var(--pill-amber-text); }
-.opp-confidence--low{ background:rgba(169,79,30,.14); color:var(--cover-dark); }
-
 /* right side of a card's top row — confidence badge, match score, save control, all in
    one wrapped row (not stacked in a tall column) so this side never ends up taller than
    the title/org on the left and leaving dead space above the blurb */
@@ -2041,7 +2033,6 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 .myopp-list .opp-blurb{ font-size:15.5px; line-height:1.6; }
 .myopp-list .opp-tag{ font-size:12px; padding:4px 11px; }
 .myopp-list .opp-foot{ font-size:13.5px; }
-.myopp-list .opp-confidence{ font-size:11.5px; }
 
 .opp-blurb{
   font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; line-height:1.55; color:var(--navy);
@@ -2125,7 +2116,6 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 
 @media (max-width: 600px){
   .opp-card{ flex-direction:column; }
-  .opp-confidence{ margin-top:0; }
   .opp-link{ margin-left:0; width:100%; }
 }
 
