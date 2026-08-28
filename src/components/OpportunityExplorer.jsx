@@ -405,7 +405,7 @@ export function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, 
   )
 }
 
-function MajorsFilter({ activeFields, toggleField, counts }) {
+function MajorsFilter({ activeFields, toggleField }) {
   const [open, setOpen] = useState(true)
 
   return (
@@ -426,7 +426,6 @@ function MajorsFilter({ activeFields, toggleField, counts }) {
           <div className="opp-major-list">
             {FIELDS.map((f) => {
               const live = LIVE_FIELD_SET.has(f.id)
-              const count = live ? counts[f.id] : 0
               const checked = live && activeFields.has(f.id)
               return (
                 <button
@@ -451,11 +450,7 @@ function MajorsFilter({ activeFields, toggleField, counts }) {
                     )}
                   </span>
                   <span className="opp-major-label">{f.label}</span>
-                  {live ? (
-                    <span className="opp-major-count">{count}</span>
-                  ) : (
-                    <span className="opp-major-soon">Soon</span>
-                  )}
+                  {!live && <span className="opp-major-soon">Soon</span>}
                 </button>
               )
             })}
@@ -701,14 +696,6 @@ export default function OpportunityExplorer() {
     )
   }
 
-  const counts = useMemo(() => {
-    const c = { 'pre-med': 0, biology: 0, chemistry: 0, physics: 0, neuroscience: 0, mathematics: 0, 'computer-science': 0, psychology: 0, 'environmental-science': 0, humanitarian: 0 }
-    for (const o of CANADA_OPPORTUNITIES) {
-      for (const f of o.focus) if (f in c) c[f] += 1
-    }
-    return c
-  }, [])
-
   // everything the card-level match score can draw on when there's no interview signal:
   // level/location/format/remote-only fall back to whatever the interview already told
   // us (or real geolocation for location)
@@ -888,7 +875,7 @@ export default function OpportunityExplorer() {
 
         <div className="opp-layout">
           <aside className="opp-sidebar">
-            <MajorsFilter activeFields={activeFields} toggleField={toggleField} counts={counts} />
+            <MajorsFilter activeFields={activeFields} toggleField={toggleField} />
 
             <div className="opp-side-section">
               <div className="opp-side-heading opp-side-heading--static">Level</div>

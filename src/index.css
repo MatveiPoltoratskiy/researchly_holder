@@ -1709,7 +1709,6 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 .opp-major-check svg{ transform:rotate(90deg) scaleX(-1); width:8px; height:6.5px; }
 .opp-major-label{ flex:1; font-size:13px; font-weight:600; color:var(--navy); }
 .opp-major-row.is-soon .opp-major-label{ color:var(--navy-faint); }
-.opp-major-count{ font-size:11px; font-weight:700; color:var(--navy-soft); }
 .opp-major-soon{
   font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:var(--navy-faint);
   background:var(--pages-shadow); border-radius:999px; padding:1.5px 6px;
