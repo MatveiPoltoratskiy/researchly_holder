@@ -112,6 +112,22 @@ export function scoreOpportunity(o, answers) {
     score += 8
   }
 
+  // application timeline fit — up to 8. Deliberately a soft signal, not a hard filter:
+  // most of the dataset's `deadline` values are still unconfirmed (null), and even a
+  // known deadline could be a stale prior-cycle date, so an opportunity never loses
+  // points just for lacking (or not matching) a deadline — it only gains a boost when
+  // there's a confirmed deadline that genuinely falls inside the student's own window.
+  if (answers.applyStart && answers.applyEnd && o.deadline) {
+    if (o.deadline >= answers.applyStart && o.deadline <= answers.applyEnd) {
+      score += 8
+      reasons.push({ weight: 8, text: 'its deadline fits your timeline' })
+    } else {
+      score += 3
+    }
+  } else {
+    score += 5
+  }
+
   // paid preference — up to 10
   if (answers.paidPref === 'paid-only') {
     if (o.paid) {

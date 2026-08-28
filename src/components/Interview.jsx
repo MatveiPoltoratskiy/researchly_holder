@@ -14,10 +14,12 @@ import SymbolField from './SymbolField'
 
 // Order follows the "hook them, then narrow" logic: interest questions first (field,
 // sub-focus, opportunity type) while curiosity is highest, then the harder eligibility
-// filters (level, location) once they're invested, then the two finishing preference
-// questions. This deliberately reverses the "hard filters first" instinct in favor of
-// engagement, since the product's whole pitch is "feels like a quiz, not a form."
-const TOTAL_STEPS = 7
+// filters (level, location) once they're invested, then the finishing preference
+// questions (timeline, pay). This deliberately reverses the "hard filters first" instinct
+// in favor of engagement, since the product's whole pitch is "feels like a quiz, not a
+// form." Pay stays the literal last question per the brand brief ("a refinement filter,
+// not an eligibility one") — Timeline sits right before it as the other refinement.
+const TOTAL_STEPS = 8
 
 // steps where more than one answer legitimately applies, rendered as checkboxes plus a
 // bottom Continue button instead of auto-advancing on the first click
@@ -108,10 +110,169 @@ const PAID_PREFS = [
   { id: 'doesnt-matter', glyph: 'either', label: "Doesn't matter", desc: 'Show me everything' },
 ]
 
-const STEP_LABELS = ['Field', 'Focus', 'Format', 'Level', 'Location', 'Experience', 'Pay']
+const STEP_LABELS = ['Field', 'Focus', 'Format', 'Level', 'Location', 'Experience', 'Timeline', 'Pay']
 
 function hasSubfocus(fieldId) {
   return (FIELD_BY_ID[fieldId]?.subfocus?.length || 0) > 0
+}
+
+// ---- small local date helpers for the Timeline step's calendar — no timezone library,
+// everything stays in the browser's local calendar day (a student picking "June 3" means
+// their own June 3rd, never a UTC-shifted neighbor) ----
+function toISODate(d) {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+}
+function fromISODate(s) {
+  if (!s) return null
+  const [y, m, day] = s.split('-').map(Number)
+  return new Date(y, m - 1, day)
+}
+function startOfMonth(d) {
+  return new Date(d.getFullYear(), d.getMonth(), 1)
+}
+function addMonths(d, n) {
+  return new Date(d.getFullYear(), d.getMonth() + n, 1)
+}
+function daysInMonth(d) {
+  return new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate()
+}
+function isSameDay(a, b) {
+  return !!a && !!b && a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate()
+}
+function startOfToday() {
+  const d = new Date()
+  d.setHours(0, 0, 0, 0)
+  return d
+}
+const MONTH_NAMES = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December',
+]
+const WEEKDAY_LABELS = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+function formatShortDate(d) {
+  return `${MONTH_NAMES[d.getMonth()].slice(0, 3)} ${d.getDate()}`
+}
+
+// Google-Calendar-style month grid: click a day to anchor a range, drag (or click a
+// second day) to extend it, release/second-click to commit. Supports both a real drag
+// gesture and two-separate-clicks, since a range this short doesn't strictly need
+// dragging and touch users may not drag cleanly across small day cells.
+function CalendarRangePicker({ startISO, endISO, onChange }) {
+  const [visibleMonth, setVisibleMonth] = useState(() => startOfMonth(fromISODate(startISO) || new Date()))
+  const [anchor, setAnchor] = useState(() => fromISODate(startISO))
+  const [dragEnd, setDragEnd] = useState(() => fromISODate(endISO))
+  const [isDragging, setIsDragging] = useState(false)
+  const today = startOfToday()
+
+  const committedStart = fromISODate(startISO)
+  const committedEnd = fromISODate(endISO)
+  // while actively picking, the live anchor/dragEnd pair previews the range; once
+  // committed (mouse/touch released), it falls back to the real answers.applyStart/End
+  const previewStart = anchor
+  const previewEnd = dragEnd || anchor
+  const rangeStart = previewStart && previewEnd ? (previewStart <= previewEnd ? previewStart : previewEnd) : committedStart
+  const rangeEnd = previewStart && previewEnd ? (previewStart <= previewEnd ? previewEnd : previewStart) : committedEnd
+
+  function commit(a, b) {
+    if (!a || !b) return
+    const [s, e] = a <= b ? [a, b] : [b, a]
+    onChange(toISODate(s), toISODate(e))
+  }
+
+  function handlePointerDown(day) {
+    if (day < today) return
+    setIsDragging(true)
+    setAnchor(day)
+    setDragEnd(day)
+  }
+  function handlePointerEnter(day) {
+    if (!isDragging || day < today) return
+    setDragEnd(day)
+  }
+  function handlePointerUp() {
+    if (!isDragging) return
+    setIsDragging(false)
+    if (anchor && dragEnd) commit(anchor, dragEnd)
+  }
+
+  const monthDays = daysInMonth(visibleMonth)
+  const leadingBlanks = visibleMonth.getDay()
+  const cells = []
+  for (let i = 0; i < leadingBlanks; i++) cells.push(null)
+  for (let d = 1; d <= monthDays; d++) cells.push(new Date(visibleMonth.getFullYear(), visibleMonth.getMonth(), d))
+
+  const maxMonth = addMonths(startOfMonth(new Date()), 18)
+  const canGoPrev = startOfMonth(visibleMonth) > startOfMonth(today)
+  const canGoNext = startOfMonth(visibleMonth) < maxMonth
+
+  return (
+    <div className="interview-calendar" onMouseUp={handlePointerUp} onMouseLeave={() => isDragging && handlePointerUp()}>
+      <div className="interview-calendar-head">
+        <button
+          type="button"
+          className="interview-calendar-nav"
+          disabled={!canGoPrev}
+          onClick={() => setVisibleMonth((m) => addMonths(m, -1))}
+          aria-label="Previous month"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24"><use href="#icon-arrow" transform="rotate(180 12 12)" /></svg>
+        </button>
+        <span className="interview-calendar-month">
+          {MONTH_NAMES[visibleMonth.getMonth()]} {visibleMonth.getFullYear()}
+        </span>
+        <button
+          type="button"
+          className="interview-calendar-nav"
+          disabled={!canGoNext}
+          onClick={() => setVisibleMonth((m) => addMonths(m, 1))}
+          aria-label="Next month"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24"><use href="#icon-arrow" /></svg>
+        </button>
+      </div>
+      <div className="interview-calendar-weekdays" aria-hidden="true">
+        {WEEKDAY_LABELS.map((w, i) => (
+          <span key={i}>{w}</span>
+        ))}
+      </div>
+      <div
+        className="interview-calendar-grid"
+        onTouchMove={(e) => {
+          if (!isDragging) return
+          e.preventDefault() // dragging a range shouldn't also scroll the page underneath it
+          const touch = e.touches[0]
+          const el = document.elementFromPoint(touch.clientX, touch.clientY)
+          const iso = el?.dataset?.date
+          if (iso) handlePointerEnter(fromISODate(iso))
+        }}
+        onTouchEnd={handlePointerUp}
+      >
+        {cells.map((day, i) => {
+          if (!day) return <span key={`b${i}`} className="interview-calendar-day is-blank" />
+          const past = day < today
+          const inRange = rangeStart && rangeEnd && day >= rangeStart && day <= rangeEnd
+          const isStart = rangeStart && isSameDay(day, rangeStart)
+          const isEnd = rangeEnd && isSameDay(day, rangeEnd)
+          return (
+            <button
+              type="button"
+              key={i}
+              data-date={toISODate(day)}
+              className={`interview-calendar-day ${past ? 'is-past' : ''} ${inRange ? 'is-in-range' : ''} ${
+                isStart ? 'is-range-start' : ''
+              } ${isEnd ? 'is-range-end' : ''} ${isSameDay(day, today) ? 'is-today' : ''}`}
+              disabled={past}
+              onMouseDown={() => handlePointerDown(day)}
+              onMouseEnter={() => handlePointerEnter(day)}
+              onTouchStart={() => handlePointerDown(day)}
+            >
+              {day.getDate()}
+            </button>
+          )
+        })}
+      </div>
+    </div>
+  )
 }
 
 // translates interview answers into the explorer's own filter shape (a subset of its
@@ -212,6 +373,8 @@ export default function Interview() {
     locationCoords: null, // {lat, lon} when known (real geolocation), null for a typed city
     remoteOnly: false,
     experience: null,
+    applyStart: null, // ISO date string, or null if skipped ("I'm flexible on timing")
+    applyEnd: null,
     paidPref: null,
   })
   const [locationStatus, setLocationStatus] = useState('idle') // idle | loading | granted | denied | unsupported
@@ -510,6 +673,15 @@ export default function Interview() {
                 )}
                 {step === 7 && (
                   <>
+                    <h1 className="interview-question">When are you free to apply?</h1>
+                    <p className="interview-subtext">
+                      Drag across the dates you can realistically work on applications. We'll prioritize matches whose
+                      deadlines actually fit.
+                    </p>
+                  </>
+                )}
+                {step === 8 && (
+                  <>
                     <h1 className="interview-question">Paid, or free to attend?</h1>
                     <p className="interview-subtext">Last question. Most students take either if the opportunity is strong enough.</p>
                   </>
@@ -691,6 +863,47 @@ export default function Interview() {
                 )}
 
                 {step === 7 && (
+                  <div className="interview-timeline">
+                    <CalendarRangePicker
+                      startISO={answers.applyStart}
+                      endISO={answers.applyEnd}
+                      onChange={(start, end) => setAnswers((a) => ({ ...a, applyStart: start, applyEnd: end }))}
+                    />
+                    <div className="interview-timeline-footer">
+                      {answers.applyStart && answers.applyEnd ? (
+                        <span className="interview-timeline-range">
+                          <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-calendar" /></svg>
+                          {formatShortDate(fromISODate(answers.applyStart))} – {formatShortDate(fromISODate(answers.applyEnd))}
+                          <button
+                            type="button"
+                            className="interview-timeline-clear"
+                            onClick={() => setAnswers((a) => ({ ...a, applyStart: null, applyEnd: null }))}
+                            aria-label="Clear dates"
+                          >
+                            <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+                            </svg>
+                          </button>
+                        </span>
+                      ) : (
+                        <button type="button" className="interview-timeline-skip" onClick={() => goTo(step + 1)}>
+                          I'm flexible — skip this
+                        </button>
+                      )}
+                      <button
+                        type="button"
+                        className="interview-continue-btn"
+                        disabled={!answers.applyStart || !answers.applyEnd}
+                        onClick={() => goTo(step + 1)}
+                      >
+                        Continue
+                        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow" /></svg>
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {step === 8 && (
                   <div className="interview-option-list interview-option-list--vertical">
                     {PAID_PREFS.map((p) => (
                       <OptionRow
