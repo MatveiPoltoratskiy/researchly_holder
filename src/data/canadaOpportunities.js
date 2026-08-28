@@ -27,7 +27,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "Two weeks of online theoretical physics with Perimeter Institute researchers, for Grade 11-12 students who haven't started post-secondary yet."
   },
   {
@@ -57,7 +57,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": true,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A national biotech competition where students run their own ~4-month mentored research project, then present it regionally and nationally."
   },
   {
@@ -92,7 +92,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": false,
     "isGrant": true,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "Sixteen paid weeks in a Canadian science or engineering lab, funded jointly by NSERC and the host university."
   },
   {
@@ -125,7 +125,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "An 8+ week paid research placement in a UBC science lab, open to both domestic and international students studying in BC."
   },
   {
@@ -160,7 +160,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "Fifteen weeks of full-time paid research in a McGill science lab, with one of the strongest stipends of any Canadian undergrad award."
   },
   {
@@ -288,7 +288,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "low",
     "blurb": "A summer research project with a UBC Faculty of Medicine researcher — students apply as a team with their own supervisor already lined up."
   },
   {
@@ -320,7 +320,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "Health data research at the University of Calgary's Centre for Health Informatics, open to any discipline from high school through grad school."
   },
   {
@@ -349,7 +349,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 15-week paid research placement at Canada's largest pediatric hospital, open to both final-year high schoolers and early undergrads."
   },
   {
@@ -410,7 +410,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "medium",
+    "confidence": "low",
     "blurb": "A studentship in clinical genetics and genomics research at SickKids, open to Canadian undergrads in any year."
   },
   {
@@ -441,7 +441,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A summer in a Sunnybrook Research Institute lab, capped by a student poster competition each August."
   },
   {
@@ -472,7 +472,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "At least 12 weeks of funded brain-sciences research at Sunnybrook's Hurvitz Brain Sciences program."
   },
   {
@@ -534,7 +534,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A summer research placement at St. Michael's Hospital through Unity Health Toronto's Keenan Research Centre."
   },
   {
@@ -595,7 +595,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "medium",
+    "confidence": "low",
     "blurb": "One of several department-specific summer research programs at Princess Margaret Cancer Centre — browse by department rather than a single application."
   },
   {
@@ -688,7 +688,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 12-week paid research placement in pediatric rehabilitation at Holland Bloorview's Ward Family Summer Student Research Program, with an equity-focused SOAR track."
   },
   {
@@ -719,7 +719,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": true,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 12-week diabetes-research studentship at U of T's Banting and Best Diabetes Centre — 14 awarded each year."
   },
   {
@@ -779,7 +779,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": false,
     "isGrant": true,
-    "confidence": "medium",
+    "confidence": "low",
     "blurb": "A studentship for undergraduate liver-disease research — students secure their own CASL-member supervisor before applying."
   },
   {
@@ -810,7 +810,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": true,
-    "confidence": "medium",
+    "confidence": "low",
     "blurb": "A summer studentship in cardiovascular health data research, open to health sciences, epidemiology, biostatistics, and public health students."
   },
   {
@@ -841,7 +841,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "Summer research in cellular and biomolecular science at U of T's Donnelly Centre."
   },
   {
@@ -872,7 +872,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A summer research placement in U of T's Department of Biochemistry, for students with at least one completed year and a completed or in-progress biochem course."
   },
   {
@@ -903,7 +903,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "U of T's Immunology Summer Student Research Program (ISSRP) — hands-on immunology research plus a limited number of UROP scholarships."
   },
   {
@@ -934,7 +934,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 12-week research placement in U of T's Laboratory Medicine & Pathobiology department, with a $7,140 minimum combined stipend."
   },
   {
@@ -964,7 +964,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A summer research placement in U of T's Department of Medical Biophysics, for students in their first three years."
   },
   {
@@ -995,7 +995,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A summer research placement in U of T's Department of Molecular Genetics."
   },
   {
@@ -1057,7 +1057,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A summer research placement in U of T's Department of Pharmacology & Toxicology."
   },
   {
@@ -1088,7 +1088,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A summer research award in U of T's Department of Physiology."
   },
   {
@@ -1117,7 +1117,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "medium",
+    "confidence": "low",
     "blurb": "A part-time (4 hrs/week) biomedical engineering lab-skills bootcamp for 1st/2nd-year Engineering Science students at U of T — coursework-based, not independent research."
   },
   {
@@ -1173,7 +1173,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A paid 6-week research placement for Grade 11 students living in central or northern Alberta (Red Deer and north)."
   },
   {
@@ -1201,7 +1201,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "The high-school track of Women's College Hospital's Emily Stowe Scholars Program, for students from specific underrepresented groups.",
     "equityNote": "Underrepresented groups only"
   },
@@ -1232,7 +1232,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "low",
     "blurb": "A multi-year mentorship pipeline into public health careers for underrepresented high schoolers, through U of T's Dalla Lana School of Public Health."
   },
   {
@@ -1264,7 +1264,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": false,
     "isGrant": true,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A federally funded undergraduate research award for health-sciences research — this stream is restricted to students who self-identify as Black.",
     "equityNote": "Black students only"
   },
@@ -1326,7 +1326,7 @@ export const CANADA_OPPORTUNITIES = [
     "paid": true,
     "cost": null,
     "stipend": null,
-    "deadline": null,
+    "deadline": "2027-01-22",
     "selectivity": "high",
     "isDirectory": false,
     "multiSite": false,
@@ -1363,7 +1363,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": true,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A paid 6-week STEM research internship for Indigenous high schoolers in Metro Vancouver and Kelowna, with transit passes, a laptop, and meals covered.",
     "equityNote": "Indigenous students only"
   },
@@ -1447,7 +1447,7 @@ export const CANADA_OPPORTUNITIES = [
     "paid": false,
     "cost": null,
     "stipend": null,
-    "deadline": "2026-03-31",
+    "deadline": null,
     "selectivity": "very-high",
     "isDirectory": false,
     "multiSite": false,
@@ -1480,7 +1480,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "medium",
+    "confidence": "low",
     "blurb": "A national physics exam for top HS students, written at your own school, with provincial and national prizes."
   },
   {
@@ -1512,7 +1512,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": true,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A $6,500 research scholarship at Dalhousie for African Canadian and African Nova Scotian undergrads across science, health, engineering, dentistry, and CS.",
     "equityNote": "African Canadian / NS only"
   },
@@ -1544,7 +1544,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": false,
     "isGrant": true,
-    "confidence": "medium",
+    "confidence": "low",
     "blurb": "A 16-week paid research position in a Dalhousie Faculty of Science lab, funded through NSERC USRA or department/faculty funds."
   },
   {
@@ -1576,7 +1576,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": false,
     "isGrant": true,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "$8,960 over 16 weeks of paid research in a University of Manitoba Faculty of Science lab — several sub-award streams exist with different eligibility."
   },
   {
@@ -1606,7 +1606,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": false,
     "isGrant": true,
-    "confidence": "high",
+    "confidence": "low",
     "blurb": "A $3,000 stipend for a full-time summer research position under a University of Saskatchewan Chemistry faculty member."
   },
   {
@@ -1703,7 +1703,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": false,
     "isGrant": true,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "16 weeks of paid research at Memorial University — split between citizens-only NSERC awards and a separate pool open to international students too."
   },
   {
@@ -1758,7 +1758,7 @@ export const CANADA_OPPORTUNITIES = [
     "paid": true,
     "cost": null,
     "stipend": null,
-    "deadline": null,
+    "deadline": "2027-02-05",
     "selectivity": "high",
     "isDirectory": false,
     "multiSite": false,
@@ -1853,7 +1853,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A $7,000, 10-week NSF chemistry REU at Syracuse University."
   },
   {
@@ -1878,12 +1878,12 @@ export const CANADA_OPPORTUNITIES = [
     "paid": true,
     "cost": null,
     "stipend": null,
-    "deadline": "2026-03-16",
+    "deadline": null,
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "medium",
+    "confidence": "low",
     "blurb": "An NSF-funded genomics and computational biology REU at the University of Georgia."
   },
   {
@@ -1908,12 +1908,12 @@ export const CANADA_OPPORTUNITIES = [
     "paid": true,
     "cost": null,
     "stipend": null,
-    "deadline": "2026-04-05",
+    "deadline": null,
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "low",
+    "confidence": "medium",
     "blurb": "A 9-week hybrid NSF biology REU (VERSA) at UC San Diego."
   },
   {
@@ -1943,7 +1943,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 10-student NSF physics and astronomy REU at the University of Rochester."
   },
   {
@@ -1973,7 +1973,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 10-week NSF-sponsored physics REU at UIUC."
   },
   {
@@ -2003,7 +2003,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "low",
     "blurb": "An NSF REU spanning physics, biophysics, and astronomy at CUNY Queensborough."
   },
   {
@@ -2033,7 +2033,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "low",
     "blurb": "An 8-student NSF physics REU at the University of Oklahoma."
   },
   {
@@ -2063,7 +2063,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "An NSF-funded 10-week molecular biology and genetics REU at Cornell."
   },
   {
@@ -2123,7 +2123,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "medium",
+    "confidence": "low",
     "blurb": "Georgia Tech's Chemistry FAST REU, 10 weeks of NSF-funded research."
   },
   {
@@ -2154,7 +2154,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "An NSF materials-research REU at UT Austin spanning chemistry, physics, and engineering."
   },
   {
@@ -2185,7 +2185,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "low",
     "blurb": "A 9-week NSF REU at Yale researching physical and engineering biology."
   },
   {
@@ -2215,7 +2215,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "Caltech's LIGO SURF: a 10-week NSF-funded physics research fellowship, ~$8,110 award."
   },
   {
@@ -2275,7 +2275,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 10-week, $7,000 NSF chemistry REU at the University of Pennsylvania."
   },
   {
@@ -2305,7 +2305,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "low",
+    "confidence": "medium",
     "blurb": "A 10-week, $7,000 NSF physics REU at Penn State with housing and travel support."
   },
   {
@@ -2365,7 +2365,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 10-week, $7,000 NSF physics REU at the University of Minnesota."
   },
   {
@@ -2396,7 +2396,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 10-week, $7,000 NSF chemical biology REU at Vanderbilt, min 3.0 science GPA."
   },
   {
@@ -2457,7 +2457,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 35+ year running NSF physics REU at Notre Dame with grad-school prep built in."
   },
   {
@@ -2489,7 +2489,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "One of 14 official US Amgen Scholars sites: a funded summer research program in science and biotechnology."
   },
   {
@@ -2521,7 +2521,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at Columbia."
   },
   {
@@ -2553,7 +2553,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at Duke."
   },
   {
@@ -2585,7 +2585,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at Harvard."
   },
   {
@@ -2617,7 +2617,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at Howard."
   },
   {
@@ -2649,7 +2649,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at Johns Hopkins."
   },
   {
@@ -2681,7 +2681,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at Stanford."
   },
   {
@@ -2713,7 +2713,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at UC Berkeley."
   },
   {
@@ -2745,7 +2745,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at UCLA."
   },
   {
@@ -2777,7 +2777,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at UCSF."
   },
   {
@@ -2809,7 +2809,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at UNC Chapel Hill."
   },
   {
@@ -2841,7 +2841,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at UT Southwestern."
   },
   {
@@ -2873,7 +2873,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at WashU St. Louis."
   },
   {
@@ -2905,7 +2905,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "One of 14 official US Amgen Scholars sites, funded summer biotech/science research at Yale."
   },
   {
@@ -2964,7 +2964,7 @@ export const CANADA_OPPORTUNITIES = [
     "paid": true,
     "cost": null,
     "stipend": null,
-    "deadline": null,
+    "deadline": "2027-02-10",
     "selectivity": "high",
     "isDirectory": false,
     "multiSite": false,
@@ -3001,7 +3001,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A Big Ten Academic Alliance research program for underrepresented students, hosted at Michigan."
   },
   {
@@ -3033,7 +3033,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A Big Ten Academic Alliance research program for underrepresented students, hosted at Purdue."
   },
   {
@@ -3065,7 +3065,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A Big Ten Academic Alliance research program for underrepresented students, hosted at Michigan State."
   },
   {
@@ -3095,7 +3095,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "An 8-week, $6,500 research program at Northwestern for sophomores/juniors eyeing a PhD."
   },
   {
@@ -3126,7 +3126,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "low",
+    "confidence": "medium",
     "blurb": "Duke's own 10-week Summer Research Opportunity Program in biomedical research."
   },
   {
@@ -3150,7 +3150,7 @@ export const CANADA_OPPORTUNITIES = [
     "paid": true,
     "cost": null,
     "stipend": 2400,
-    "deadline": "2026-03-20",
+    "deadline": null,
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
@@ -3188,7 +3188,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 5-week hands-on research and writing program at Duke, open from high school through med school."
   },
   {
@@ -3218,7 +3218,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "Duke's Chem-SURF program for undergrads entering chemistry research for the first time."
   },
   {
@@ -3246,7 +3246,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "low",
     "blurb": "An 8-week biology research fellowship at Duke for rising sophomores."
   },
   {
@@ -3275,7 +3275,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "An 8-week biomedical research program at Johns Hopkins for HS students from under-resourced backgrounds.",
     "equityNote": "Low-income/under-resourced background focus"
   },
@@ -3307,7 +3307,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A Johns Hopkins summer program for students exploring medicine or public health research."
   },
   {
@@ -3336,7 +3336,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "An 8-week, $4,500 paid biomedical research internship for HS students at UCSF."
   },
   {
@@ -3364,7 +3364,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "low",
+    "confidence": "medium",
     "blurb": "An 8-week paid biomedical internship at Cincinnati Children's Hospital for graduating HS seniors."
   },
   {
@@ -3423,7 +3423,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "An 8-week, $4,000 paid biomedical research internship for HS students at Michigan Medical School."
   },
   {
@@ -3452,7 +3452,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A free, ultra-selective 6-week research internship for HS sophomores/juniors at Magee-Womens Research Institute."
   },
   {
@@ -3475,7 +3475,7 @@ export const CANADA_OPPORTUNITIES = [
     "paid": true,
     "cost": null,
     "stipend": 4800,
-    "deadline": null,
+    "deadline": "2026-12-04",
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
@@ -3509,7 +3509,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "An 8-week paid cancer-research internship for HS juniors/seniors at Fred Hutchinson Cancer Center.",
     "equityNote": "Underrepresented-background priority"
   },
@@ -3539,7 +3539,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "low",
+    "confidence": "medium",
     "blurb": "A 2-year lab-research training program starting in 10th grade at Seattle Children's."
   },
   {
@@ -3567,7 +3567,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A free, $3,600, 6-week research program at the Broad Institute for Massachusetts HS seniors.",
     "equityNote": "Massachusetts residents only"
   },
@@ -3598,7 +3598,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 9-week genomics-focused undergraduate research program at the Broad Institute."
   },
   {
@@ -3627,7 +3627,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "medium",
+    "confidence": "low",
     "blurb": "A paid summer research internship for Grade 11-12 students at Mount Sinai's Lunenfeld-Tanenbaum Institute."
   },
   {
@@ -3685,7 +3685,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 4-week hands-on biology lab course for HS students at the University of Chicago."
   },
   {
@@ -3714,7 +3714,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A paid 10-week data science research program at UChicago spanning biomedical and other domains."
   },
   {
@@ -3775,7 +3775,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "low",
+    "confidence": "medium",
     "blurb": "A 10-week Cornell undergraduate research program pairing students with faculty mentors."
   },
   {
@@ -3804,7 +3804,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "Princeton's Summer Undergraduate Research Fellowship in Chemistry, for rising sophomores through seniors."
   },
   {
@@ -3834,7 +3834,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "low",
     "blurb": "A Princeton summer research program in molecular and quantitative/computational biology."
   },
   {
@@ -3863,7 +3863,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 6-week pre-college research program at Tufts for HS juniors/seniors with prior research experience."
   },
   {
@@ -3893,7 +3893,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 6-week Boston University research program for HS juniors across bio, chem, physics, and more."
   },
   {
@@ -3951,7 +3951,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 10-week undergraduate research fellowship at Rockefeller University, sophomores/juniors only."
   },
   {
@@ -4011,7 +4011,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "low",
+    "confidence": "medium",
     "blurb": "An 8-week biomedical research program with a Baylor faculty mentor."
   },
   {
@@ -4039,7 +4039,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A $6,800, 10-week cancer-research program at MD Anderson for Texas HS seniors 18+.",
     "equityNote": "Texas residents only, age 18+"
   },
@@ -4105,7 +4105,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A Schulich Medicine & Dentistry research program at Western for science and basic-medical-science undergrads."
   },
   {
@@ -4138,7 +4138,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": false,
     "isGrant": true,
-    "confidence": "high",
+    "confidence": "low",
     "blurb": "McMaster's NSERC Undergraduate Student Research Award, 16 weeks with a funded faculty supervisor."
   },
   {
@@ -4197,7 +4197,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": false,
     "isGrant": true,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "McMaster's Biology Department research awards, 14-16 weeks with an NSERC-funded supervisor."
   },
   {
@@ -4260,7 +4260,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": true,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "Concordia's Undergraduate Student Research Award, spanning natural and health sciences."
   },
   {
@@ -4293,7 +4293,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": false,
     "isGrant": true,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "SFU's Undergraduate Student Research Awards, with a stream open to international students too."
   },
   {
@@ -4326,7 +4326,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": false,
     "isGrant": true,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "University of Alberta's Tri-Agency USRA, minimum $8,400 for 16 weeks."
   },
   {
@@ -4359,7 +4359,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": false,
     "isGrant": true,
-    "confidence": "high",
+    "confidence": "low",
     "blurb": "UVic's Science Undergraduate Research Award, minimum $8,000 for 14-16 weeks."
   },
   {
@@ -4392,7 +4392,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": false,
     "isGrant": true,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "UVic's NSERC Undergraduate Student Research Award, minimum $8,500."
   },
   {
@@ -4422,7 +4422,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 10-week NSF solar/space physics REU at CU Boulder's atmospheric and space physics lab."
   },
   {
@@ -4453,7 +4453,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 9-10 week NSF REU at the University of Arizona spanning chemistry, physics, and materials science."
   },
   {
@@ -4513,7 +4513,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 10-week ASPET-sponsored pharmacology research program at Case Western, running almost 40 years."
   },
   {
@@ -4544,7 +4544,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": true,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A $4,500 sponsored summer research award at Case Western for biology/chemistry research."
   },
   {
@@ -4575,7 +4575,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A hands-on lab research program with a faculty mentor at UMass Chan Medical School."
   },
   {
@@ -4608,7 +4608,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": false,
     "isGrant": true,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "Carleton's NSERC Undergraduate Student Research Award, for Science and Engineering students."
   },
   {
@@ -4733,7 +4733,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": false,
     "isGrant": true,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "The University of Regina's NSERC Undergraduate Student Research Award, open across biology, chemistry, and physics."
   },
   {
@@ -4763,7 +4763,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "low",
     "blurb": "An NSF-funded physics REU at the University of Florida."
   },
   {
@@ -4795,7 +4795,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "medium",
+    "confidence": "low",
     "blurb": "A directory of NSF-funded REU sites across departments at the University of Central Florida."
   },
   {
@@ -4827,7 +4827,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "low",
     "blurb": "Iowa State's hub for its summer undergraduate research programs (EUReCA)."
   },
   {
@@ -4856,7 +4856,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A legendary 10-week residential research program at Cold Spring Harbor Laboratory, running since 1959."
   },
   {
@@ -4948,7 +4948,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 7-week biomedical informatics and health data science research program at Columbia, for rising HS seniors through undergrads."
   },
   {
@@ -4977,7 +4977,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 3-week residential UPenn academy in disease biology, including a peer-reviewed research Journal Club."
   },
   {
@@ -5005,7 +5005,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 3-week residential UPenn chemistry academy covering spectroscopy, gas chromatography, and rare earth metals."
   },
   {
@@ -5033,7 +5033,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 3-week UPenn program where teams research a physics topic from primary sources and present findings."
   },
   {
@@ -5096,7 +5096,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 1-week Rice University program across BioEng, BioTech, and BioMed tracks for grades 7-11."
   },
   {
@@ -5122,7 +5122,7 @@ export const CANADA_OPPORTUNITIES = [
     "paid": false,
     "cost": 0,
     "stipend": null,
-    "deadline": "2026-03-13",
+    "deadline": null,
     "selectivity": "high",
     "isDirectory": false,
     "multiSite": false,
@@ -5158,7 +5158,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "medium",
+    "confidence": "low",
     "blurb": "An NYU program pairing HS students with faculty/grad mentors for ~120 hours of hands-on lab research."
   },
   {
@@ -5214,7 +5214,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 6-week residential research program at Michigan's Life Sciences Institute for Michigan HS seniors."
   },
   {
@@ -5245,7 +5245,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 7-week paid research program for Chicago/Evanston-area high schoolers at Northwestern.",
     "equityNote": "Chicago/Evanston-area residents only"
   },
@@ -5279,7 +5279,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "Northwestern's entry point into regenerative engineering research, open from high school through college."
   },
   {
@@ -5342,7 +5342,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "low",
+    "confidence": "medium",
     "blurb": "A paid USC Bridge Institute research program serving both high school and undergraduate students."
   },
   {
@@ -5371,7 +5371,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A cancer-research lab placement for Wisconsin high schoolers at UW's Carbone Cancer Center."
   },
   {
@@ -5430,7 +5430,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "low",
     "blurb": "A 5-week ecology fieldwork internship at McGill's Gault Nature Reserve, specifically for West Island Black Community Association youth.",
     "equityNote": "WIBCA (West Island Black Community) youth only"
   },
@@ -5486,7 +5486,7 @@ export const CANADA_OPPORTUNITIES = [
     "paid": true,
     "cost": null,
     "stipend": null,
-    "deadline": "2026-04-15",
+    "deadline": null,
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
@@ -5523,7 +5523,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "Dartmouth's paid summer research fellowship spanning wet-lab, computational, and clinical research tracks."
   },
   {
@@ -5550,7 +5550,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 10-week Dartmouth research internship specifically for students entering their sophomore year."
   },
   {
@@ -5582,7 +5582,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "low",
     "blurb": "A 16-week NSERC-funded summer research placement with a University of Ottawa science supervisor."
   },
   {
@@ -5646,7 +5646,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "York's Faculty of Science runs 30-40 NSERC-funded undergrad research placements each summer."
   },
   {
@@ -5741,7 +5741,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 14-16 week paid NSERC research placement in a Laurier science lab."
   },
   {
@@ -5774,7 +5774,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 14-16 week NSERC-funded summer research placement at Trent, worth up to $7,500."
   },
   {
@@ -5802,12 +5802,12 @@ export const CANADA_OPPORTUNITIES = [
     "paid": true,
     "cost": null,
     "stipend": null,
-    "deadline": null,
+    "deadline": "2026-08-31",
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "medium",
+    "confidence": "high",
     "blurb": "Ontario Tech stacks NSERC, SUSRA and STAR funding into a 14-16 week paid faculty-supervised research term."
   },
   {
@@ -5871,7 +5871,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "medium",
+    "confidence": "low",
     "blurb": "A paid NSERC summer research placement in Windsor's Chemistry & Biochemistry department."
   },
   {
@@ -5933,7 +5933,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": true,
     "isGrant": false,
-    "confidence": "medium",
+    "confidence": "low",
     "blurb": "A directory of Ontario cancer-research co-op, internship and studentship placements, including an Indigenous-specific stream."
   },
   {
@@ -5992,7 +5992,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "low",
     "blurb": "Paid summer chemistry lab internships at UdeM, funded partly by a $4,500 NSERC scholarship."
   },
   {
@@ -6022,7 +6022,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "low",
     "blurb": "A paid 10-14 week research placement for Quebec-resident Sherbrooke undergrads, worth $6,000."
   },
   {
@@ -6048,12 +6048,12 @@ export const CANADA_OPPORTUNITIES = [
     "paid": true,
     "cost": null,
     "stipend": null,
-    "deadline": null,
+    "deadline": "2027-02-01",
     "selectivity": "medium",
     "isDirectory": true,
     "multiSite": true,
     "isGrant": false,
-    "confidence": "medium",
+    "confidence": "high",
     "blurb": "Summer research internships across INRS's Quebec-wide campuses, open to undergrads from any Canadian university."
   },
   {
@@ -6082,7 +6082,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "low",
     "blurb": "A paid 8-16 week pediatric research placement across 210+ labs at Montreal's Sainte-Justine hospital."
   },
   {
@@ -6114,7 +6114,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "medium",
+    "confidence": "low",
     "blurb": "Bishop's Science and Pre-Med students placed in Sherbrooke-funded labs spanning biochemistry to bioinformatics."
   },
   {
@@ -6146,7 +6146,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A $9,000 NSERC-funded summer research term with a StFX faculty supervisor."
   },
   {
@@ -6238,7 +6238,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "medium",
+    "confidence": "low",
     "blurb": "A 16-week NSERC-funded summer research placement with a UNB faculty supervisor."
   },
   {
@@ -6264,7 +6264,7 @@ export const CANADA_OPPORTUNITIES = [
     "paid": true,
     "cost": null,
     "stipend": null,
-    "deadline": null,
+    "deadline": "2027-02-15",
     "selectivity": "high",
     "isDirectory": true,
     "multiSite": true,
@@ -6300,7 +6300,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "low",
     "blurb": "A $5,000 summer research stipend under an IWK Health researcher, focused on child, youth and maternal health."
   },
   {
@@ -6387,7 +6387,7 @@ export const CANADA_OPPORTUNITIES = [
     "paid": true,
     "cost": null,
     "stipend": 10500,
-    "deadline": null,
+    "deadline": "2027-01-30",
     "selectivity": "medium",
     "isDirectory": false,
     "multiSite": false,
@@ -6424,7 +6424,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 16-week NSERC-funded research placement at Thompson Rivers, with unlimited awards reserved for Indigenous students."
   },
   {
@@ -6486,7 +6486,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "medium",
+    "confidence": "low",
     "blurb": "A pediatric-focused summer research studentship at the University of Calgary's Alberta Children's Hospital Research Institute."
   },
   {
@@ -6608,7 +6608,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 14-16 week paid NSERC summer research job in Saskatchewan's Physics & Engineering Physics department."
   },
   {
@@ -6640,7 +6640,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "Up to $7,500 for an 8-16 week Calgary research placement, drawing from four combined funding streams in one application."
   },
   {
@@ -6670,7 +6670,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": true,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "low",
     "blurb": "Paid summer research 6,800 feet underground near Sudbury, on dark-matter and neutrino experiments at SNOLAB."
   },
   {
@@ -6700,7 +6700,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A two-week quantum computing school at Waterloo's IQC, with eligible students able to stay on for a paid summer research term."
   },
   {
@@ -6733,7 +6733,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": true,
     "isGrant": false,
-    "confidence": "medium",
+    "confidence": "high",
     "blurb": "Paid federal R&D student positions across National Research Council institutes nationwide, from a high-school diploma up."
   },
   {
@@ -6765,7 +6765,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": true,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "low",
     "blurb": "Canada's largest youth STEM competition - build a project through the school year, present at a regional fair, and the best go national."
   },
   {
@@ -6797,7 +6797,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": true,
     "isGrant": false,
-    "confidence": "medium",
+    "confidence": "low",
     "blurb": "Canada's largest youth STEM outreach network, running camps, workshops and mentorship through campus chapters nationwide."
   },
   {
@@ -6861,7 +6861,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": true,
     "isGrant": false,
-    "confidence": "medium",
+    "confidence": "high",
     "blurb": "Paid co-op and summer terms in nuclear science and technology at Canada's largest nuclear research lab."
   },
   {
@@ -6892,7 +6892,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A bioinformatics and computational-genomics summer internship at McGill's C3G core facility."
   },
   {
@@ -6926,7 +6926,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": true,
     "multiSite": true,
     "isGrant": false,
-    "confidence": "medium",
+    "confidence": "high",
     "blurb": "Train to deliver hands-on STEM workshops to K-12 classrooms through a campus-based Let's Talk Science chapter."
   },
   {
@@ -6957,7 +6957,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "medium",
+    "confidence": "low",
     "blurb": "A week-long immersive health-sciences introduction at Queen's, built specifically for equity-deserving Kingston-area high schoolers.",
     "equityNote": "Kingston-area equity-deserving students prioritized"
   },
@@ -7048,7 +7048,7 @@ export const CANADA_OPPORTUNITIES = [
     "isDirectory": false,
     "multiSite": false,
     "isGrant": false,
-    "confidence": "high",
+    "confidence": "medium",
     "blurb": "A 4-week clinical or non-clinical research placement for 1st/2nd-year MUN medical students."
   },
   {
