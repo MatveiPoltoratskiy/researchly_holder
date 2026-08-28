@@ -1732,7 +1732,10 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
   flex:1 1 480px; min-width:400px; max-width:560px;
   display:flex; flex-direction:column;
 }
-.opp-list-scroll{ flex:1; overflow-y:auto; padding-right:6px; margin-right:-6px; }
+/* padding-top isn't decorative — .opp-card-select-hint pokes 9px above its own card's
+   top edge, and this container's overflow-y:auto clips anything above y:0 inside it. The
+   gap between cards covers every card but the first, which had its hint's top sliced off */
+.opp-list-scroll{ flex:1; overflow-y:auto; padding-top:12px; padding-right:6px; margin-right:-6px; }
 .opp-list{ display:flex; flex-direction:column; gap:14px; }
 
 /* ---- map pane ---- */
@@ -2049,7 +2052,9 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
   border-radius:999px; padding:2px 8px; line-height:1.5;
 }
 .myopp-status-btn.is-active .myopp-status-count{ background:rgba(255,255,255,.22); opacity:1; }
-.myopp-scroll{ flex:1; min-height:0; overflow-y:auto; padding-right:8px; margin-right:-8px; }
+/* same reason as .opp-list-scroll's padding-top: the first card's hover hint pokes above
+   its own card and was getting clipped by this container's own top edge */
+.myopp-scroll{ flex:1; min-height:0; overflow-y:auto; padding-top:12px; padding-right:8px; margin-right:-8px; }
 .myopp-list{ padding-bottom:12px; gap:16px; }
 .myopp-privacy-note{
   flex:none; display:flex; align-items:center; justify-content:center; gap:7px; margin:14px 0 0;
