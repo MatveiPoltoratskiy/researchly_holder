@@ -1618,7 +1618,17 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
    "opportunities" are the actual payload, so both get a touch more emphasis than "found" —
    but a lighter weight than before so the line reads as calm/inviting, not shouted */
 .opp-heading-found{ font-style:italic; font-weight:400; opacity:.65; }
-.opp-heading-count{ color:var(--cover-dark); font-weight:700; display:inline-block; }
+/* same heavier display face + drop shadow as .im-matches-count on the interview's match
+   screen, per feedback to make this page's big counter match that treatment */
+.opp-heading-count{
+  font-family:"Poppins",system-ui,sans-serif; font-weight:900; letter-spacing:-.01em;
+  color:var(--cover-dark); display:inline-block; text-shadow:0 2px 0 rgba(169,79,30,.18);
+  /* .opp-heading sets -webkit-text-fill-color (its own shimmer-opt-out — see the comment
+     above .opp-heading) and that inherits into children, silently overriding `color` in
+     WebKit/Blink regardless of what color says — without this the count rendered the
+     heading's muted navy, never its own orange. Same bug/fix as .im-matches-count. */
+  -webkit-text-fill-color:var(--cover-dark);
+}
 .opp-heading-word{ font-weight:700; }
 
 /* brief "recalculating" beat when a major is toggled: the old count holds for ~200ms
@@ -1627,7 +1637,7 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
   font-weight:900;
   background:linear-gradient(90deg, var(--cover) 30%, #F7CBA0 50%, var(--cover) 70%);
   background-size:220% 100%;
-  -webkit-background-clip:text; background-clip:text; color:transparent;
+  -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-fill-color:transparent;
   animation:opp-count-shimmer .5s linear infinite;
 }
 @keyframes opp-count-shimmer{
@@ -1635,7 +1645,16 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
   100%{ background-position:-60% 0; }
 }
 @media (prefers-reduced-motion: reduce){
-  .opp-heading-count.is-shimmer{ animation:none; background:none; color:var(--cover); }
+  .opp-heading-count.is-shimmer{ animation:none; background:none; color:var(--cover); -webkit-text-fill-color:var(--cover); }
+}
+
+/* one-time glitch reveal on first paint (see the countIntro effect in
+   OpportunityExplorer.jsx) — shares its morph keyframes with .im-matches-count on the
+   interview match screen (see count-glitch-morph/count-glitch-settle below) */
+.opp-heading-count.is-glitching{ animation:count-glitch-morph .16s cubic-bezier(.3,.85,.4,1) both; }
+.opp-heading-count.is-settled{ animation:count-glitch-settle .55s cubic-bezier(.16,.9,.24,1.15) both; }
+@media (prefers-reduced-motion: reduce){
+  .opp-heading-count.is-glitching, .opp-heading-count.is-settled{ animation:none; }
 }
 .opp-prioritized{
   position:relative; z-index:1;
@@ -2749,14 +2768,17 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
      this reset the count rendered navy, never actually orange. */
   -webkit-text-fill-color:var(--cover);
 }
-.im-matches-count.is-glitching{ animation:im-count-morph .16s cubic-bezier(.3,.85,.4,1) both; }
-.im-matches-count.is-settled{ animation:im-count-settle .55s cubic-bezier(.16,.9,.24,1.15) both; }
-@keyframes im-count-morph{
+.im-matches-count.is-glitching{ animation:count-glitch-morph .16s cubic-bezier(.3,.85,.4,1) both; }
+.im-matches-count.is-settled{ animation:count-glitch-settle .55s cubic-bezier(.16,.9,.24,1.15) both; }
+/* shared by any "glitching number" — also used by .opp-heading-count's first-paint
+   reveal on the main opportunities page (see the countIntro effect in
+   OpportunityExplorer.jsx) */
+@keyframes count-glitch-morph{
   0%{ opacity:0; transform:translateY(7px) scale(.82) rotateX(35deg); filter:blur(3px); }
   60%{ opacity:1; transform:translateY(-1px) scale(1.05) rotateX(0deg); filter:blur(0); }
   100%{ opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
 }
-@keyframes im-count-settle{
+@keyframes count-glitch-settle{
   0%{ opacity:0; transform:translateY(9px) scale(.78) rotateX(40deg); filter:blur(4px); }
   65%{ opacity:1; transform:translateY(-2px) scale(1.1) rotateX(0deg); filter:blur(0); }
   100%{ opacity:1; transform:translateY(0) scale(1); filter:blur(0); }

@@ -9,6 +9,7 @@ import { computeMatchScore, resolveMatchScore } from '../lib/matchScore'
 import { useSavedOpportunities, SAVE_STATUSES } from '../lib/savedOpportunities'
 import { Link } from '../lib/router'
 import { burstConfettiAtPoint } from '../lib/confetti'
+import { prefersReducedMotion } from '../lib/motion'
 
 const SORTS = {
   recommended: { label: 'Best for your interests & location', fn: null },
@@ -600,9 +601,64 @@ export default function OpportunityExplorer() {
   const [detailId, setDetailId] = useState(null)
   const [shownCount, setShownCount] = useState(() => CANADA_OPPORTUNITIES.length)
   const [countShimmer, setCountShimmer] = useState(false)
+  // one-time "glitch" reveal for the big header count on first paint — separate from the
+  // filter-driven shimmer above (that one re-triggers on every toggle; this one only ever
+  // plays once, landing on the true initial count before the shimmer logic takes over)
+  const [countIntro, setCountIntro] = useState(() => ({
+    active: !prefersReducedMotion(),
+    value: CANADA_OPPORTUNITIES.length,
+    phase: 'settled',
+    tick: 0,
+  }))
   const listScrollRef = useRef(null)
   const cardRefs = useRef(new Map())
   const shimmerTimeoutRef = useRef(null)
+
+  useEffect(() => {
+    if (!countIntro.active) return
+    const finalValue = CANADA_OPPORTUNITIES.length
+    function randomDecoy() {
+      let n
+      do {
+        n = Math.max(1, Math.round(finalValue * (0.45 + Math.random() * 1.1)))
+      } while (n === finalValue)
+      return n
+    }
+    let cancelled = false
+    const timeouts = []
+    const decoys = [randomDecoy(), randomDecoy(), randomDecoy()]
+    const STEP_MS = 150
+    decoys.forEach((n, i) => {
+      timeouts.push(
+        setTimeout(() => {
+          if (cancelled) return
+          setCountIntro((prev) => ({ ...prev, value: n, phase: 'glitching', tick: prev.tick + 1 }))
+        }, STEP_MS * (i + 1))
+      )
+    })
+    const settleAt = STEP_MS * (decoys.length + 1)
+    timeouts.push(
+      setTimeout(() => {
+        if (cancelled) return
+        setCountIntro((prev) => ({ ...prev, value: finalValue, phase: 'settled', tick: prev.tick + 1 }))
+      }, settleAt)
+    )
+    // hands off to the normal shownCount/countShimmer rendering only after the settle
+    // animation has actually finished playing (550ms, matching count-glitch-settle below)
+    // — flipping `active` any earlier would swap the render branch mid-animation and cut
+    // the landing bounce short
+    timeouts.push(
+      setTimeout(() => {
+        if (!cancelled) setCountIntro((prev) => ({ ...prev, active: false }))
+      }, settleAt + 560)
+    )
+    return () => {
+      cancelled = true
+      timeouts.forEach(clearTimeout)
+    }
+    // deliberately empty deps — this is a mount-once intro, not tied to filter state
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   // clicking a card should only pan the MAP to that location, never move the page/list
   // itself (the card is already right there under the cursor). Selecting from the map is
@@ -847,7 +903,20 @@ export default function OpportunityExplorer() {
               </div>
               <h1 className="opp-heading">
                 We <em className="opp-heading-found">found</em>{' '}
-                <span className={`opp-heading-count ${countShimmer ? 'is-shimmer' : ''}`}>{shownCount}</span>{' '}
+                <span
+                  key={countIntro.active ? `intro-${countIntro.tick}` : 'live'}
+                  className={`opp-heading-count ${
+                    countIntro.active
+                      ? countIntro.phase === 'glitching'
+                        ? 'is-glitching'
+                        : 'is-settled'
+                      : countShimmer
+                        ? 'is-shimmer'
+                        : ''
+                  }`}
+                >
+                  {countIntro.active ? countIntro.value : shownCount}
+                </span>{' '}
                 <span className="opp-heading-word">
                   opportunit{shownCount === 1 ? 'y' : 'ies'}
                 </span>
