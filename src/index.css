@@ -2725,64 +2725,69 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 }
 .im-matches-count{ color:var(--cover); }
 
-.im-match-list{ display:flex; flex-direction:column; gap:10px; margin:18px 0 22px; }
+/* wider than the shared .interview-container max-width (the multi-step quiz stays at its
+   original width) — this screen's cards were reading cramped at that width once the type
+   scale below grew, so this screen alone gets more horizontal room to spread into */
+.interview-container--matches{ max-width:1320px; }
+
+.im-match-list{ display:flex; flex-direction:column; gap:18px; margin:22px 0 26px; }
 .im-match-card{
-  display:flex; align-items:flex-start; gap:15px; text-align:left; text-decoration:none;
-  background:var(--cream); border:1.5px solid rgba(30,37,64,.14); border-radius:18px;
-  padding:14px 18px; transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  display:flex; align-items:flex-start; gap:20px; text-align:left; text-decoration:none;
+  background:var(--cream); border:1.5px solid rgba(30,37,64,.14); border-radius:20px;
+  padding:22px 26px; transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
 }
 .im-match-card:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(30,37,64,.12); border-color:var(--focus-color, var(--cover)); }
 
 .im-match-logo{
-  flex-shrink:0; width:42px; height:42px; border-radius:12px; overflow:hidden;
+  flex-shrink:0; width:52px; height:52px; border-radius:14px; overflow:hidden;
   display:flex; align-items:center; justify-content:center;
   background:color-mix(in srgb, var(--focus-color, var(--cover)) 16%, var(--card-bg));
   border:1.5px solid rgba(30,37,64,.1);
 }
-.im-match-logo-img{ width:100%; height:100%; object-fit:contain; padding:7px; }
+.im-match-logo-img{ width:100%; height:100%; object-fit:contain; padding:8px; }
 .im-match-logo-letter{
-  font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:17px; color:var(--focus-color, var(--cover));
+  font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:20px; color:var(--focus-color, var(--cover));
 }
 
-.im-match-main{ display:flex; flex-direction:column; gap:3px; flex:1; min-width:0; }
-.im-match-top-row{ display:flex; flex-wrap:wrap; align-items:center; gap:7px; }
+.im-match-main{ display:flex; flex-direction:column; gap:5px; flex:1; min-width:0; }
+.im-match-top-row{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
 .im-match-field-tag{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:11px; font-weight:800; letter-spacing:.03em;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; font-weight:800; letter-spacing:.03em;
   text-transform:uppercase; color:#fff; background:var(--focus-color, var(--cover));
-  border-radius:999px; padding:2.5px 9px;
+  border-radius:999px; padding:3px 10px;
 }
 .im-match-meta{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:700; color:var(--navy); opacity:.6;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:700; color:var(--navy); opacity:.6;
 }
-.im-match-name{ font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:16px; color:var(--navy); line-height:1.25; }
-.im-match-org{ font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; color:var(--navy); opacity:.65; }
+.im-match-name{ font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:19px; color:var(--navy); line-height:1.25; }
+.im-match-org{ font-family:"Segoe UI",system-ui,sans-serif; font-size:14px; color:var(--navy); opacity:.65; }
 .im-match-pitch{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; font-weight:600; font-style:italic;
-  color:var(--focus-color, var(--cover)); line-height:1.35; margin-top:2px;
-  padding-left:9px; border-left:2.5px solid var(--focus-color, var(--cover));
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; font-weight:800; font-style:italic;
+  color:var(--focus-color, var(--cover)); line-height:1.4; margin-top:4px;
+  padding-left:10px; border-left:2.5px solid var(--focus-color, var(--cover));
 }
 
 /* the headline ask: a real computed percentage, bold, orange, impossible to miss */
 .im-match-pct{
   flex-shrink:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
-  min-width:54px; padding:4px;
+  min-width:64px; padding:4px;
 }
-.im-match-pct-num{ font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:22px; color:var(--cover); line-height:1; }
+.im-match-pct-num{ font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:27px; color:var(--cover); line-height:1; }
 .im-match-pct-label{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:9.5px; font-weight:700; letter-spacing:.03em;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:10.5px; font-weight:700; letter-spacing:.03em;
   text-transform:uppercase; color:var(--cover); opacity:.75; margin-top:2px;
 }
 
 .im-matches-cta{ width:100%; justify-content:center; }
 
 @media (max-width:600px){
-  .im-matches-card{ padding:20px 16px; }
+  .im-matches-card{ padding:22px 18px; }
   /* stack instead of wrap — flex-wrap alone left .im-match-main squeezed into whatever
      narrow space remained next to the logo, wrapping the org name one word per line */
-  .im-match-card{ flex-direction:column; gap:10px; }
-  .im-match-logo{ width:38px; height:38px; }
+  .im-match-card{ flex-direction:column; gap:12px; padding:18px 20px; }
+  .im-match-logo{ width:44px; height:44px; }
   .im-match-pct{ flex-direction:row; gap:6px; align-self:flex-start; }
-  .im-match-name{ font-size:15px; }
+  .im-match-name{ font-size:17px; }
 }
 
 @media (prefers-reduced-motion: reduce){

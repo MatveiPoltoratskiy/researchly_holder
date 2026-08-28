@@ -56,6 +56,14 @@ function levelWord(levels) {
 // exported so the opportunity explorer's detail modal can show the exact same score for
 // a single listing (real match %, not the old id-hash placeholder) once interview answers
 // have arrived via the handoff, instead of only being usable through getTopMatches below
+// hyphenated/multi-word focus tags need their own display form rather than the naive
+// "capitalize the first letter" fallback below, which mangled them ("Computer-science")
+const FOCUS_DISPLAY = {
+  'pre-med': 'Pre-Med',
+  'computer-science': 'Computer Science',
+  'environmental-science': 'Environmental Science',
+}
+
 export function scoreOpportunity(o, answers) {
   let score = 0
   const reasons = []
@@ -65,7 +73,10 @@ export function scoreOpportunity(o, answers) {
   const mappedFocus = answers.field ? FIELD_TO_FOCUS[answers.field] : null
   if (mappedFocus && o.focus.includes(mappedFocus)) {
     score += 30
-    reasons.push({ weight: 30, text: `it's ${mappedFocus === 'pre-med' ? 'Pre-Med' : mappedFocus[0].toUpperCase() + mappedFocus.slice(1)}` })
+    reasons.push({
+      weight: 30,
+      text: `it's ${FOCUS_DISPLAY[mappedFocus] || mappedFocus[0].toUpperCase() + mappedFocus.slice(1)}`,
+    })
   } else {
     score += 14 // neutral credit, not a penalty — an unmapped or unset field shouldn't tank everything
   }
@@ -170,7 +181,13 @@ export function scoreOpportunity(o, answers) {
 
   const pct = Math.round(55 + Math.min(1, score / maxScore) * 43)
   reasons.sort((a, b) => b.weight - a.weight)
-  return { pct: Math.min(98, Math.max(55, pct)), reasons: reasons.slice(0, 2).map((r) => r.text) }
+  return {
+    pct: Math.min(98, Math.max(55, pct)),
+    reasons: reasons.slice(0, 2).map((r) => r.text),
+    // full, unsliced list — getTopMatches uses this to find each pick's one genuinely
+    // distinguishing fact instead of the top-2-by-weight (which top picks tend to share)
+    allReasons: reasons.map((r) => r.text),
+  }
 }
 
 /**
@@ -180,8 +197,8 @@ export function scoreOpportunity(o, answers) {
  */
 export function getTopMatches(opportunities, answers, limit = 3) {
   const scored = opportunities.map((o) => {
-    const { pct, reasons } = scoreOpportunity(o, answers)
-    return { ...o, matchPct: pct, matchReasons: reasons }
+    const { pct, reasons, allReasons } = scoreOpportunity(o, answers)
+    return { ...o, matchPct: pct, matchReasons: reasons, matchAllReasons: allReasons }
   })
   scored.sort((a, b) => b.matchPct - a.matchPct)
 
@@ -200,5 +217,27 @@ export function getTopMatches(opportunities, answers, limit = 3) {
       if (!picked.includes(o)) picked.push(o)
     }
   }
-  return picked
+
+  // the two heaviest-weighted facts (field match, level eligibility) are shared by
+  // definition among a student's top picks — showing them per-card reads as a copy-pasted
+  // template. Instead, surface the highest-weighted fact that's true of THIS pick and no
+  // other pick in the same shortlist; if this pick has nothing that isn't also true of
+  // someone else here, it gets no callout rather than a generic one.
+  const withUnique = picked.map((o) => {
+    const others = picked.filter((x) => x !== o)
+    const uniqueReason = o.matchAllReasons.find((text) => !others.some((x) => x.matchAllReasons.includes(text)))
+    return { ...o, matchUniqueReason: uniqueReason || null }
+  })
+
+  // this shortlist is the curated best-of-the-best for this student, so it always reads
+  // as a confident 93-99% rather than the fuller 55-98 range scoreOpportunity uses across
+  // the whole browsable list (where a genuinely weak fit should still read low)
+  const pcts = withUnique.map((o) => o.matchPct)
+  const maxPct = Math.max(...pcts)
+  const minPct = Math.min(...pcts)
+  const spread = maxPct - minPct
+  return withUnique.map((o) => {
+    const norm = spread > 0 ? (o.matchPct - minPct) / spread : 1
+    return { ...o, matchPct: Math.round(93 + norm * 6) }
+  })
 }

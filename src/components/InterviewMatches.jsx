@@ -92,9 +92,9 @@ function stableHash(str) {
 }
 
 function pitchFor(o) {
-  if (!o.matchReasons.length) return null
+  if (!o.matchUniqueReason) return null
   const hook = PITCH_HOOKS[stableHash(String(o.id)) % PITCH_HOOKS.length]
-  return `${hook}: ${o.matchReasons.join(', plus ')}.`
+  return `${hook}: ${o.matchUniqueReason}.`
 }
 
 // A results-preview screen, not a copy of any particular reference: our own card shell
@@ -123,7 +123,7 @@ export default function InterviewMatches({ matches, onContinue }) {
           colors={['var(--symbol-tan)', 'var(--cover-dark)', 'var(--ribbon)', 'var(--navy)', 'var(--gold)']}
         />
       </div>
-      <div className="container interview-container">
+      <div className="container interview-container interview-container--matches">
         <div className="im-matches-card-wrap">
           <span className="im-matches-glow" aria-hidden="true" />
           <div className="im-matches-card">
