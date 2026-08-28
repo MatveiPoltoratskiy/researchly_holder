@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import SymbolField from './SymbolField'
 import { celebrateMatches } from '../lib/confetti'
+import { prefersReducedMotion } from '../lib/motion'
 
 // Small standalone favicon-fallback logo, deliberately not imported from
 // OpportunityExplorer.jsx — keeps this component's chunk lean instead of pulling in the
@@ -101,12 +102,68 @@ function pitchFor(o) {
 // (the interview's cream/navy/orange language, org favicons, field-color coding already
 // used throughout this feature), and a real computed match score instead of a
 // decorative one, front and center in bold orange per the brief.
+// warm-palette decoy colors, cycled through during the glitch — kept inside the brand's
+// existing accent set (no neon/RGB-split) so the effect reads as dramatic, not gimmicky
+const GLITCH_COLORS = ['var(--rose)', 'var(--gold)', 'var(--ribbon)']
+
 export default function InterviewMatches({ matches, onContinue }) {
+  const finalCount = matches.length
+  const [displayCount, setDisplayCount] = useState(finalCount)
+  const [glitchColor, setGlitchColor] = useState(null)
+  // bumped on every swap so the digit span remounts instead of re-rendering in place —
+  // a remount is what makes the CSS entrance animation actually replay each time (a
+  // same-node text change alone wouldn't restart it), which is what makes each digit
+  // swap read as a smooth morph instead of a clunky instant cut
+  const [tick, setTick] = useState(0)
+
   // fires once, right as this screen lands — the actual "you're done" payoff moment,
   // not on every re-render (matches/onContinue don't change identity mid-screen anyway)
   useEffect(() => {
     celebrateMatches()
   }, [])
+
+  // the count morphs through a few decoy digits before landing on the real one — a
+  // slot-machine flicker rather than a plain fade-in, since this is the single payoff
+  // number on the whole screen and deserves more drama than a static digit
+  useEffect(() => {
+    if (prefersReducedMotion()) return
+    let cancelled = false
+    const timeouts = []
+
+    function randomDecoy() {
+      let n
+      do {
+        n = 1 + Math.floor(Math.random() * 9)
+      } while (n === finalCount)
+      return n
+    }
+
+    const decoys = [randomDecoy(), randomDecoy(), randomDecoy()]
+    const STEP_MS = 150
+    decoys.forEach((n, i) => {
+      timeouts.push(
+        setTimeout(() => {
+          if (cancelled) return
+          setDisplayCount(n)
+          setGlitchColor(GLITCH_COLORS[i % GLITCH_COLORS.length])
+          setTick((t) => t + 1)
+        }, STEP_MS * (i + 1))
+      )
+    })
+    timeouts.push(
+      setTimeout(() => {
+        if (cancelled) return
+        setDisplayCount(finalCount)
+        setGlitchColor(null)
+        setTick((t) => t + 1)
+      }, STEP_MS * (decoys.length + 1))
+    )
+
+    return () => {
+      cancelled = true
+      timeouts.forEach(clearTimeout)
+    }
+  }, [finalCount])
 
   return (
     <section className="interview-page interview-matches-page">
@@ -129,7 +186,19 @@ export default function InterviewMatches({ matches, onContinue }) {
           <div className="im-matches-card">
             <p className="im-matches-eyebrow">Based on your answers</p>
             <h1 className="interview-question">
-              We found <span className="im-matches-count">{matches.length}</span> strong matches
+              We found{' '}
+              <span className="im-matches-count-wrap">
+                <span
+                  key={tick}
+                  className={`im-matches-count ${glitchColor ? 'is-glitching' : 'is-settled'}`}
+                  // both properties needed — see the -webkit-text-fill-color comment on
+                  // .im-matches-count in index.css for why `color` alone isn't enough here
+                  style={glitchColor ? { color: glitchColor, WebkitTextFillColor: glitchColor } : undefined}
+                >
+                  {displayCount}
+                </span>
+              </span>{' '}
+              strong matches
             </h1>
 
             <div className="im-match-list">

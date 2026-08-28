@@ -1899,10 +1899,16 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
   border-color:var(--cover); box-shadow:0 0 0 3px rgba(221,107,46,.16), 0 4px 14px rgba(221,107,46,.14);
 }
 .opp-card-select-hint{
-  position:absolute; top:-9px; right:16px; font-family:"Segoe UI",system-ui,sans-serif;
-  font-size:10px; font-weight:800; letter-spacing:.02em; color:#fff; background:var(--navy);
-  border-radius:999px; padding:2.5px 9px; opacity:0; transform:translateY(2px);
+  position:absolute; top:-9px; left:16px; font-family:"Segoe UI",system-ui,sans-serif;
+  font-size:10.5px; font-weight:800; letter-spacing:.03em; color:#fff; background:var(--navy);
+  border-radius:999px; padding:4px 12px; opacity:0; transform:translateY(2px);
   transition:opacity .15s ease, transform .15s ease; pointer-events:none; white-space:nowrap;
+  box-shadow:0 3px 10px rgba(30,37,64,.22);
+  /* anchored from the left (was right-only before, letting long copy grow past the
+     card's left edge and get clipped by the list's scroll container) with an explicit
+     cap on how wide it can get relative to the card, plus an ellipsis safety net for the
+     rare narrow-card case where even that's tight */
+  max-width:calc(100% - 32px); overflow:hidden; text-overflow:ellipsis;
 }
 .opp-card:hover .opp-card-select-hint{ opacity:1; transform:translateY(0); }
 .opp-card.is-selected .opp-card-select-hint{ opacity:1; transform:translateY(0); background:var(--cover); }
@@ -2723,7 +2729,37 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
   font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:800; letter-spacing:.04em;
   text-transform:uppercase; color:var(--cover); margin:0 0 6px;
 }
-.im-matches-count{ color:var(--cover); }
+/* the payoff number: a different, heavier display face than the surrounding serif
+   headline (deliberate contrast, "different styles" per feedback), plus a quick morph-in
+   on every digit swap during the glitch — each swap is a fresh DOM node (see the `key` in
+   InterviewMatches.jsx) so this animation truly restarts and reads as a smooth roll
+   instead of the text just snapping to a new value */
+.im-matches-count-wrap{ display:inline-grid; vertical-align:bottom; }
+.im-matches-count{
+  grid-area:1/1; display:inline-block; font-family:"Poppins",system-ui,sans-serif;
+  font-weight:900; font-size:1.08em; letter-spacing:-.01em; color:var(--cover);
+  text-shadow:0 2px 0 rgba(169,79,30,.18);
+  /* .interview-question sets -webkit-text-fill-color:var(--navy) (its shimmer-opt-out —
+     see the comment above .interview-question) and that property inherits into children,
+     silently overriding `color` in WebKit/Blink regardless of what color says. Without
+     this reset the count rendered navy, never actually orange. */
+  -webkit-text-fill-color:var(--cover);
+}
+.im-matches-count.is-glitching{ animation:im-count-morph .16s cubic-bezier(.3,.85,.4,1) both; }
+.im-matches-count.is-settled{ animation:im-count-settle .55s cubic-bezier(.16,.9,.24,1.15) both; }
+@keyframes im-count-morph{
+  0%{ opacity:0; transform:translateY(7px) scale(.82) rotateX(35deg); filter:blur(3px); }
+  60%{ opacity:1; transform:translateY(-1px) scale(1.05) rotateX(0deg); filter:blur(0); }
+  100%{ opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
+}
+@keyframes im-count-settle{
+  0%{ opacity:0; transform:translateY(9px) scale(.78) rotateX(40deg); filter:blur(4px); }
+  65%{ opacity:1; transform:translateY(-2px) scale(1.1) rotateX(0deg); filter:blur(0); }
+  100%{ opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
+}
+@media (prefers-reduced-motion: reduce){
+  .im-matches-count.is-glitching, .im-matches-count.is-settled{ animation:none; }
+}
 
 /* wider than the shared .interview-container max-width (the multi-step quiz stays at its
    original width) — this screen's cards were reading cramped at that width once the type
