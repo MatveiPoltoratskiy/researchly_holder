@@ -40,7 +40,7 @@ function MockOptionCheck() {
 const HOW_LOGO = {
   'seed2STEM': { icon: 'icon-flask', color: 'var(--pine)' },
   'Amgen Scholars Program': { icon: 'icon-grad-cap', color: 'var(--cover)' },
-  'Simons-NYU Science Explorations': { icon: 'icon-building', color: 'var(--ribbon)' },
+  'MITES': { icon: 'icon-badge-check', color: 'var(--navy)' },
 }
 const HOW_LOGO_FALLBACK = { icon: 'icon-flask', color: 'var(--cover)' }
 
@@ -85,15 +85,17 @@ export function InterviewVisual() {
 }
 
 // real programs from the live dataset, real per-card language from InterviewMatches.jsx's
-// pitch/field-tag/match-% treatment — trimmed to 2 rows instead of 4 for a quicker read
+// pitch/field-tag/match-% treatment — trimmed to 2 rows instead of 4 for a quicker read.
+// Deliberately one big recognizable name + one small/niche one, so the pair itself makes
+// the point that matches range from Ivy-tier to hidden-gem, not just "here are 2 rows"
 const HOW_MATCHES = [
   {
-    org: 'University of British Columbia', name: 'seed2STEM', field: 'Pre-Med', color: 'var(--cover)',
-    pitch: "Rare combo: it's Neuroscience, plus you already qualify.", pct: 96,
+    org: 'Massachusetts Institute of Technology', name: 'MITES', field: 'Physics', color: 'var(--navy)',
+    pitch: "Hard to ignore: it's Physics, plus you already qualify.", pct: 96,
   },
   {
-    org: 'New York University', name: 'Simons-NYU Science Explorations', field: 'Biology', color: 'var(--pine)',
-    pitch: "Stands out fast: it's free to attend.", pct: 93,
+    org: 'ICORD – University of British Columbia', name: 'seed2STEM', field: 'Pre-Med', color: 'var(--pine)',
+    pitch: "Rare combo: it's Neuroscience, plus it's free to attend.", pct: 93,
   },
 ]
 

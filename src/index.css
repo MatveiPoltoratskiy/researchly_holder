@@ -783,9 +783,22 @@ h1{
    interactivity those classes normally carry (hover lift, cursor, text selection) —
    this is a static illustration, not a second copy of the real controls. */
 .how-mock-card{
-  width:100%; display:flex; flex-direction:column; gap:20px; align-items:stretch;
+  width:100%; display:flex; flex-direction:column; gap:13px; align-items:stretch;
   pointer-events:none; user-select:none;
 }
+/* real .im-match-list/.im-match-card carry their own generous margin/padding, tuned for
+   a full-width standalone screen — stacked inside .how-mock-card's own gap, that doubled
+   up into the large dead gaps between blocks feedback called out. Collapse the
+   component's own margin (the wrapper gap already spaces it) and tighten the card
+   padding, while bumping a few font-sizes so the panel reads bigger/bolder even though
+   it's denser, not just smaller-and-cramped. */
+.how-panel .im-match-list{ margin:0; gap:12px; }
+.how-panel .im-match-card{ padding:16px 20px; gap:16px; }
+.how-panel .im-match-name{ font-size:21px; }
+.how-panel .im-match-pct-num{ font-size:29px; }
+.how-panel .opp-card{ padding:16px 20px; }
+.how-panel .opp-title{ font-size:23px; }
+.how-panel .interview-option-row{ padding:14px 18px; }
 /* real .opp-badge is always a plain white box; here the icon's own inline `color` also
    tints a soft matching backdrop behind it, so each "demo logo" reads as a distinct
    colored badge instead of a same-white square with only the glyph differing */
@@ -2281,7 +2294,16 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 
 /* the same ambient symbol field used on the matches screen, persistent across all 7 quiz
    steps (see the comment in Interview.jsx next to where this renders for why) */
-.interview-symbol-field{ position:fixed; inset:0; z-index:0; pointer-events:none; }
+/* radial mask instead of a flat texture: symbols fade to fully invisible behind the
+   card itself (revealing plain page background there, not a visible ellipse edge —
+   the fade is gradual, not a hard-edged shape) and get gradually more present toward the
+   edges of the screen, so the calm reading area stays calm while the margins get some
+   personality instead of the same uniform density everywhere */
+.interview-symbol-field{
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  -webkit-mask-image: radial-gradient(ellipse 62% 58% at 50% 50%, transparent 0%, transparent 38%, black 85%);
+  mask-image: radial-gradient(ellipse 62% 58% at 50% 50%, transparent 0%, transparent 38%, black 85%);
+}
 .interview-symbol-field .symbol-field{ position:absolute; }
 @media (max-width:900px){ .interview-symbol-field{ display:none; } }
 
