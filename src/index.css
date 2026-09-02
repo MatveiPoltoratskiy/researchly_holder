@@ -681,6 +681,21 @@ h1{
 /* ---------- how it works ---------- */
 .how-section{ position:relative; z-index:5; max-width:1560px; padding: 170px 0 120px; }
 
+/* ambient background texture for the whole section — true edge-to-edge breakout (same
+   --zoom-compensated formula as .how-landscape below) so symbols can actually occupy the
+   real page margins outside this section's own ~1560px content width, not just repeat
+   within it. Faded via radial mask relative to the section's own (tall, multi-step)
+   height: invisible around the vertical middle where the alternating step content sits,
+   fading back in gradually toward the top/bottom — a soft ellipse, not a hard edge. */
+.how-ambient-symbol-field{
+  position:absolute; top:0; bottom:0; left:50%; z-index:0; pointer-events:none;
+  width: calc(100vw / var(--zoom, 1));
+  margin-left: calc(-50vw / var(--zoom, 1));
+  -webkit-mask-image: radial-gradient(ellipse 55% 32% at 50% 50%, transparent 0%, transparent 30%, black 82%);
+  mask-image: radial-gradient(ellipse 55% 32% at 50% 50%, transparent 0%, transparent 30%, black 82%);
+}
+@media (max-width:900px){ .how-ambient-symbol-field{ display:none; } }
+
 .how-head{ position:relative; z-index:2; max-width:1140px; margin:0 auto 64px; text-align:center; }
 .how-statement{
   margin:0; font-family:"Poppins","Segoe UI",system-ui,sans-serif;
@@ -2294,16 +2309,7 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 
 /* the same ambient symbol field used on the matches screen, persistent across all 7 quiz
    steps (see the comment in Interview.jsx next to where this renders for why) */
-/* radial mask instead of a flat texture: symbols fade to fully invisible behind the
-   card itself (revealing plain page background there, not a visible ellipse edge —
-   the fade is gradual, not a hard-edged shape) and get gradually more present toward the
-   edges of the screen, so the calm reading area stays calm while the margins get some
-   personality instead of the same uniform density everywhere */
-.interview-symbol-field{
-  position:fixed; inset:0; z-index:0; pointer-events:none;
-  -webkit-mask-image: radial-gradient(ellipse 62% 58% at 50% 50%, transparent 0%, transparent 38%, black 85%);
-  mask-image: radial-gradient(ellipse 62% 58% at 50% 50%, transparent 0%, transparent 38%, black 85%);
-}
+.interview-symbol-field{ position:fixed; inset:0; z-index:0; pointer-events:none; }
 .interview-symbol-field .symbol-field{ position:absolute; }
 @media (max-width:900px){ .interview-symbol-field{ display:none; } }
 

@@ -3,6 +3,7 @@ import { prefersReducedMotion, usePauseAnimationsOffscreen } from '../lib/motion
 import { useRouter } from '../lib/router'
 import { goToWaitlist } from '../lib/waitlist'
 import { InterviewVisual, MatchVisual, BrowseVisual, ApplyVisual } from './HowItWorksVisuals'
+import SymbolField from './SymbolField'
 
 const STEPS = [
   {
@@ -196,6 +197,19 @@ export default function HowItWorks() {
 
   return (
     <section className="how-section container" id="how-it-works" ref={sectionRef}>
+      {/* ambient background texture for the whole section (not just one step) — faded
+          out behind the actual step content via a radial mask (see CSS), more present
+          toward the edges/margins so it adds personality without competing for
+          attention with the panels themselves */}
+      <div className="how-ambient-symbol-field" aria-hidden="true">
+        <SymbolField
+          rows={10}
+          cols={12}
+          opacityRange={[0.12, 0.2]}
+          fontSizeRange={[14, 24]}
+          colors={['var(--symbol-tan)', 'var(--cover-dark)', 'var(--ribbon)', 'var(--gold)']}
+        />
+      </div>
       <div className="how-head">
         <h2 className="how-statement">
           Researchly asks a handful of questions, then does<br />
