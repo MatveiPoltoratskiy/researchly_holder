@@ -1603,7 +1603,7 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 
 .opp-heading{
   font-family:"Fraunces","Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif; font-weight:600;
-  font-size:clamp(22px,2.4vw,30px); color:rgba(30,37,64,.85); margin:0; letter-spacing:.005em;
+  font-size:clamp(27px,3vw,36px); color:rgba(30,37,64,.85); margin:0; letter-spacing:.005em;
   word-spacing:.1em;
   /* opts back out of the bare h1{} rule's hero shimmer-gradient-clip effect (same escape
      hatch as .circle-mark below) — that rule sets -webkit-text-fill-color:transparent on
@@ -1617,7 +1617,7 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 /* "found" reads as the softer, sentence-like part of the line; the count and the word
    "opportunities" are the actual payload, so both get a touch more emphasis than "found" —
    but a lighter weight than before so the line reads as calm/inviting, not shouted */
-.opp-heading-found{ font-style:italic; font-weight:400; opacity:.65; }
+.opp-heading-found{ font-style:italic; font-weight:400; opacity:.85; }
 /* same heavier display face + drop shadow as .im-matches-count on the interview's match
    screen, per feedback to make this page's big counter match that treatment */
 .opp-heading-count{

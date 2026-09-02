@@ -333,14 +333,16 @@ export function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, 
               {costLabel(o)}
             </span>
           )}
-          <span className="opp-detail-item">
-            <span className="opp-detail-icon">
-              <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
-                <use href="#icon-calendar" />
-              </svg>
+          {o.deadline && (
+            <span className="opp-detail-item">
+              <span className="opp-detail-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+                  <use href="#icon-calendar" />
+                </svg>
+              </span>
+              {`Deadline ${formatDeadline(o.deadline)}`}
             </span>
-            {o.deadline ? `Deadline ${formatDeadline(o.deadline)}` : 'Deadline not confirmed'}
-          </span>
+          )}
           {o.locationLabel && (
             <span className="opp-detail-item">
               <span className="opp-detail-icon">
