@@ -410,6 +410,12 @@ export function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, 
 
 function MajorsFilter({ activeFields, toggleField }) {
   const [open, setOpen] = useState(true)
+  // live majors first, "Soon" ones pushed to the bottom — sort is stable so within each
+  // group the original FIELDS order (tier-1 first, etc) is preserved
+  const orderedFields = useMemo(
+    () => [...FIELDS].sort((a, b) => (LIVE_FIELD_SET.has(b.id) ? 1 : 0) - (LIVE_FIELD_SET.has(a.id) ? 1 : 0)),
+    []
+  )
 
   return (
     <div className="opp-side-section">
@@ -427,7 +433,7 @@ function MajorsFilter({ activeFields, toggleField }) {
       <div className={`opp-collapse ${open ? '' : 'is-closed'}`}>
         <div className="opp-collapse-inner">
           <div className="opp-major-list">
-            {FIELDS.map((f) => {
+            {orderedFields.map((f) => {
               const live = LIVE_FIELD_SET.has(f.id)
               const checked = live && activeFields.has(f.id)
               return (
