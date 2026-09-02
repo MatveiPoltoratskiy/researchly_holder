@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { prefersReducedMotion, usePauseAnimationsOffscreen } from '../lib/motion'
 import { useRouter } from '../lib/router'
 import { goToWaitlist } from '../lib/waitlist'
-import { InterviewVisual, MatchVisual, BrowseVisual, TrackVisual } from './HowItWorksVisuals'
+import { InterviewVisual, MatchVisual, BrowseVisual, ApplyVisual } from './HowItWorksVisuals'
 
 const STEPS = [
   {
@@ -30,12 +30,12 @@ const STEPS = [
     Visual: BrowseVisual,
   },
   {
-    kicker: 'TRACK IT',
-    title: 'Your own shortlist, not a spreadsheet.',
-    desc: "Saved opportunities land on one page, sorted by status. Mark one Applied the moment you send it, so nothing you're serious about gets lost in the shuffle.",
-    meta: 'Saved · Applied, all in one place',
+    kicker: 'THE APPLICATION',
+    title: 'Then you apply.',
+    desc: "Work down the roadmap. Dates, links, and what each program asks for sit in one place. We can't get you accepted, but you won't miss something because you never heard of it.",
+    meta: 'Links, dates, and guidance in one place',
     mascot: 'mascot-cheer',
-    Visual: TrackVisual,
+    Visual: ApplyVisual,
   },
 ]
 

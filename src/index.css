@@ -774,22 +774,45 @@ h1{
 .how-mock-btn--ghost{ background:none; border:1.5px solid var(--card-border); color:var(--navy); }
 .how-mock-btn--muted{ background:var(--pill-bg); color:var(--pill-text); }
 
-/* the 4 how-it-works mockups are built from real production classnames (interview
-   option rows, the match card, an opportunity card, My Opportunities status pills) —
-   see the comment at the top of HowItWorksVisuals.jsx for why. These few rules are just
-   the embedding/sizing glue those real classes don't already provide on their own. */
-.how-mock-card{ width:100%; display:flex; flex-direction:column; gap:16px; align-items:stretch; }
-.how-mock-saved-list{ width:100%; display:flex; flex-direction:column; gap:12px; }
-.how-mock-opp-card{ cursor:default; }
-.how-mock-opp-card:hover{ border-color:var(--card-border); } /* real hover-highlight doesn't apply to a static mockup */
-.how-mock-opp-card--compact{ padding:16px 18px; }
-.how-mock-status-pill{
-  flex:none; align-self:flex-start; margin-left:auto;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; font-weight:800;
-  padding:5px 12px; border-radius:999px; white-space:nowrap;
+/* the first 3 how-it-works mockups are built from real production classnames (interview
+   option rows, the match card, an opportunity card) — see the comment at the top of
+   HowItWorksVisuals.jsx for why. These few rules are the embedding/sizing glue those
+   real classes don't already provide on their own, plus stripping every bit of real
+   interactivity those classes normally carry (hover lift, cursor, text selection) —
+   this is a static illustration, not a second copy of the real controls. */
+.how-mock-card{
+  width:100%; display:flex; flex-direction:column; gap:16px; align-items:stretch;
+  pointer-events:none; user-select:none;
 }
-.how-mock-status-pill--applied{ background:var(--pill-green-bg); color:var(--pill-green-text); }
-.how-mock-status-pill--saved{ background:var(--pill-amber-bg); color:var(--cover-dark); }
+/* real .opp-badge is always a plain white box; here the icon's own inline `color` also
+   tints a soft matching backdrop behind it, so each "demo logo" reads as a distinct
+   colored badge instead of a same-white square with only the glyph differing */
+.how-panel .opp-badge{ background:color-mix(in srgb, currentColor 14%, var(--card-bg)); }
+
+/* visual 04 — apply clipboard + calendar (the original hand-illustrated mockup, kept
+   as-is rather than rebuilt from real classnames like the first 3 — see ApplyVisual) */
+.how-clipboard{
+  position:relative; width:100%; background:var(--pages); border:1px solid var(--card-border);
+  border-radius:14px; padding:24px 20px 20px; display:flex; flex-direction:column; gap:11px;
+}
+.how-clipboard-clip{
+  position:absolute; top:-9px; left:50%; transform:translateX(-50%);
+  width:42px; height:16px; border-radius:7px; background:var(--spine);
+}
+.how-check-row{ display:flex; align-items:center; gap:10px; font-family:"Segoe UI",system-ui,sans-serif; font-size:17px; font-weight:600; color:var(--navy-faint); }
+.how-check-row.is-done{ color:var(--navy); }
+.how-check-box{
+  flex:none; width:18px; height:18px; border-radius:6px; border:1.5px solid var(--card-border);
+  display:flex; align-items:center; justify-content:center; background:#fff;
+}
+.how-check-row.is-done .how-check-box{ background:var(--pill-green-bg); border-color:var(--ribbon); }
+.how-cal-chip{
+  position:absolute; bottom:-16px; right:-12px; transform:rotate(5deg);
+  display:flex; align-items:center; gap:7px;
+  background:var(--card-bg); border:1px solid var(--card-border); border-radius:11px;
+  padding:9px 14px; box-shadow:0 14px 26px -12px rgba(30,37,64,.35);
+  color:var(--cover-dark); font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:700;
+}
 
 /* closing landscape — purely decorative (the CTA sits above it, on plain cream), fading
    in/out so it hands off smoothly into whatever's above and below it */

@@ -1,12 +1,13 @@
-// Every visual below is built from the SAME CSS classes the real, live screens use
-// (interview option rows, the match-results card, an opportunity card, the My
-// Opportunities status pills) — never imported directly from those components, since
-// Interview.jsx/InterviewMatches.jsx/OpportunityExplorer.jsx/MyOpportunities.jsx are all
-// lazy-loaded behind the dev passphrase gate (see App.jsx) specifically so an
-// unauthenticated visitor's browser never fetches that code or the opportunity dataset.
-// Reusing the classnames keeps these panels pixel-true to production without pulling any
-// of that gated code into the public landing-page bundle. Content is simplified/trimmed
-// (fewer rows, shorter copy) for a quick, clean read — not a dense literal screenshot.
+// The first three visuals are built from the SAME CSS classes the real, live screens use
+// (interview option rows, the match-results card, an opportunity card) — never imported
+// directly from those components, since Interview.jsx/InterviewMatches.jsx/
+// OpportunityExplorer.jsx are all lazy-loaded behind the dev passphrase gate (see
+// App.jsx) specifically so an unauthenticated visitor's browser never fetches that code
+// or the opportunity dataset. Reusing the classnames keeps these panels pixel-true to
+// production without pulling any of that gated code into the public landing-page
+// bundle. Content is simplified/trimmed (fewer rows, shorter copy) for a quick, clean
+// read — not a dense literal screenshot. ApplyVisual (the 4th, "checklist" panel) is
+// the original hand-illustrated mockup, kept as-is per explicit request.
 
 function PanelChrome({ label }) {
   return (
@@ -31,6 +32,17 @@ function MockOptionCheck() {
     </svg>
   )
 }
+
+// a "demo logo" per real program name reused across panels — same program always gets
+// the same icon+color wherever it reappears (seed2STEM shows up in both the matches and
+// the browse/track panels), instead of every badge being the same repeated flask, so the
+// set reads as real varied programs rather than one icon copy-pasted everywhere
+const HOW_LOGO = {
+  'seed2STEM': { icon: 'icon-flask', color: 'var(--pine)' },
+  'Amgen Scholars Program': { icon: 'icon-grad-cap', color: 'var(--cover)' },
+  'Simons-NYU Science Explorations': { icon: 'icon-building', color: 'var(--ribbon)' },
+}
+const HOW_LOGO_FALLBACK = { icon: 'icon-flask', color: 'var(--cover)' }
 
 // real step-3 options from Interview.jsx (OPP_TYPES) — trimmed to icons already in the
 // sitewide IconSprite (#icon-search/calendar/replay) instead of pulling InterviewIcons.jsx
@@ -94,10 +106,12 @@ export function MatchVisual() {
           We found <span className="im-matches-count is-settled">4</span> strong matches
         </h3>
         <div className="im-match-list">
-          {HOW_MATCHES.map((m) => (
+          {HOW_MATCHES.map((m) => {
+            const logo = HOW_LOGO[m.name] || HOW_LOGO_FALLBACK
+            return (
             <div className="im-match-card" key={m.name} style={{ '--focus-color': m.color }}>
-              <span className="im-match-logo">
-                <span className="im-match-logo-letter">{m.org[0]}</span>
+              <span className="im-match-logo" style={{ color: logo.color }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><use href={`#${logo.icon}`} /></svg>
               </span>
               <span className="im-match-main">
                 <span className="im-match-top-row">
@@ -112,7 +126,8 @@ export function MatchVisual() {
                 <span className="im-match-pct-label">match</span>
               </span>
             </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </div>
@@ -127,11 +142,11 @@ export function BrowseVisual() {
           <PanelChrome label="Opportunities" />
           <span className="how-progress-label">39 shown</span>
         </div>
-        <div className="opp-card how-mock-opp-card">
+        <div className="opp-card">
           <div className="opp-card-body">
             <div className="opp-card-head">
-              <span className="opp-badge" style={{ color: 'var(--cover)' }} aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24"><use href="#icon-flask" /></svg>
+              <span className="opp-badge" style={{ color: HOW_LOGO['Amgen Scholars Program'].color }} aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24"><use href={`#${HOW_LOGO['Amgen Scholars Program'].icon}`} /></svg>
               </span>
               <div className="opp-card-heading">
                 <h4 className="opp-title">Amgen Scholars Program</h4>
@@ -165,47 +180,40 @@ export function BrowseVisual() {
   )
 }
 
-const HOW_SAVED = [
-  { name: 'Amgen Scholars Program', org: 'University of Toronto', status: 'applied' },
-  { name: 'seed2STEM', org: 'ICORD – UBC', status: 'saved' },
+// kept exactly as it was before the real-screen rework — the user asked for the other
+// three panels to change, this one specifically not to
+const APPLY_ITEMS = [
+  { text: 'Submit transcript', done: true },
+  { text: 'Upload writing sample', done: true },
+  { text: 'Request recommendation', done: true },
+  { text: 'Final application', done: false },
 ]
 
-export function TrackVisual() {
+export function ApplyVisual() {
   return (
     <div className="how-panel how-panel--04">
-      <div className="how-mock-card">
-        <PanelChrome label="My Opportunities" />
-        <div className="myopp-status-row">
-          <button type="button" className="myopp-status-btn is-active" tabIndex={-1}>
-            All<span className="myopp-status-count">2</span>
-          </button>
-          <button type="button" className="myopp-status-btn" tabIndex={-1}>
-            Saved<span className="myopp-status-count">1</span>
-          </button>
-          <button type="button" className="myopp-status-btn" tabIndex={-1}>
-            Applied<span className="myopp-status-count">1</span>
-          </button>
-        </div>
-        <div className="how-mock-saved-list">
-          {HOW_SAVED.map((o) => (
-            <div className="opp-card how-mock-opp-card how-mock-opp-card--compact" key={o.name}>
-              <div className="opp-card-body">
-                <div className="opp-card-head">
-                  <span className="opp-badge" style={{ color: 'var(--cover)' }} aria-hidden="true">
-                    <svg width="18" height="18" viewBox="0 0 24 24"><use href="#icon-flask" /></svg>
-                  </span>
-                  <div className="opp-card-heading">
-                    <h4 className="opp-title">{o.name}</h4>
-                    <div className="opp-org">{o.org}</div>
-                  </div>
-                  <span className={`how-mock-status-pill how-mock-status-pill--${o.status}`}>
-                    {o.status === 'applied' ? 'Applied' : 'Saved'}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+      <div className="how-clipboard">
+        <span className="how-clipboard-clip" aria-hidden="true" />
+        <PanelChrome label="Your checklist" />
+        {APPLY_ITEMS.map((item, i) => (
+          <div className={`how-check-row${item.done ? ' is-done' : ''}`} key={item.text} style={{ '--d': `${i * 120}ms` }}>
+            <span className="how-check-box" aria-hidden="true">
+              {item.done && (
+                <svg width="12" height="10" viewBox="0 0 11 9">
+                  <path d="M1 4.5 4 7.5 10 1" fill="none" stroke="var(--ribbon)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              )}
+            </span>
+            <span>{item.text}</span>
+          </div>
+        ))}
+        <button type="button" className="how-mock-btn how-mock-btn--muted" tabIndex={-1}>
+          Submit application
+        </button>
+      </div>
+      <div className="how-cal-chip">
+        <svg width="18" height="18" aria-hidden="true"><use href="#icon-calendar" /></svg>
+        <span>Due Feb 1</span>
       </div>
     </div>
   )
