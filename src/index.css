@@ -1617,17 +1617,17 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 /* "found" reads as the softer, sentence-like part of the line; the count and the word
    "opportunities" are the actual payload, so both get a touch more emphasis than "found" —
    but a lighter weight than before so the line reads as calm/inviting, not shouted */
-.opp-heading-found{ font-style:italic; font-weight:400; opacity:.85; }
+.opp-heading-found{ font-style:normal; font-weight:400; }
 /* same heavier display face + drop shadow as .im-matches-count on the interview's match
    screen, per feedback to make this page's big counter match that treatment */
 .opp-heading-count{
   font-family:"Poppins",system-ui,sans-serif; font-weight:900; letter-spacing:-.01em;
-  color:var(--cover-dark); display:inline-block; text-shadow:0 2px 0 rgba(169,79,30,.18);
+  color:var(--cover); display:inline-block; text-shadow:0 2px 0 rgba(169,79,30,.18);
   /* .opp-heading sets -webkit-text-fill-color (its own shimmer-opt-out — see the comment
      above .opp-heading) and that inherits into children, silently overriding `color` in
      WebKit/Blink regardless of what color says — without this the count rendered the
      heading's muted navy, never its own orange. Same bug/fix as .im-matches-count. */
-  -webkit-text-fill-color:var(--cover-dark);
+  -webkit-text-fill-color:var(--cover);
 }
 .opp-heading-word{ font-weight:700; }
 
