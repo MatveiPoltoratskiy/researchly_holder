@@ -742,12 +742,14 @@ h1{
   position:relative; width:100%; max-width:760px; min-height:410px;
   background:var(--card-bg); border:1px solid var(--card-border); border-radius:24px;
   padding:32px 36px; display:flex; flex-direction:column; align-items:center; justify-content:center;
-  box-shadow: 0 24px 48px -26px rgba(30,37,64,.3);
+  /* two-layer shadow — a big soft ambient glow plus a tighter, darker contact shadow
+     close to the card — reads as properly lifted/"popped" instead of just faintly hazy */
+  box-shadow: 0 34px 64px -24px rgba(30,37,64,.4), 0 10px 24px -12px rgba(30,37,64,.28);
 }
-.how-panel--01{ box-shadow: 0 24px 48px -26px rgba(30,37,64,.3), 0 0 80px -20px rgba(221,107,46,.35); transform:rotate(0.7deg); }
-.how-panel--02{ box-shadow: 0 24px 48px -26px rgba(30,37,64,.3), 0 0 80px -20px rgba(63,125,92,.35); transform:rotate(-0.6deg); }
-.how-panel--03{ box-shadow: 0 24px 48px -26px rgba(30,37,64,.3), 0 0 80px -20px rgba(217,164,65,.4); transform:rotate(0.6deg); }
-.how-panel--04{ box-shadow: 0 24px 48px -26px rgba(30,37,64,.3), 0 0 80px -20px rgba(63,125,92,.35); transform:rotate(-0.7deg); }
+.how-panel--01{ box-shadow: 0 34px 64px -24px rgba(30,37,64,.4), 0 10px 24px -12px rgba(30,37,64,.28), 0 0 100px -16px rgba(221,107,46,.5); transform:rotate(0.7deg); }
+.how-panel--02{ box-shadow: 0 34px 64px -24px rgba(30,37,64,.4), 0 10px 24px -12px rgba(30,37,64,.28), 0 0 100px -16px rgba(63,125,92,.5); transform:rotate(-0.6deg); }
+.how-panel--03{ box-shadow: 0 34px 64px -24px rgba(30,37,64,.4), 0 10px 24px -12px rgba(30,37,64,.28), 0 0 100px -16px rgba(217,164,65,.55); transform:rotate(0.6deg); }
+.how-panel--04{ box-shadow: 0 34px 64px -24px rgba(30,37,64,.4), 0 10px 24px -12px rgba(30,37,64,.28), 0 0 100px -16px rgba(63,125,92,.5); transform:rotate(-0.7deg); }
 
 /* shared "real interface" header used across all 4 mockups */
 .how-panel-chrome{ display:flex; align-items:center; gap:6px; width:100%; margin-bottom:14px; }
@@ -781,13 +783,43 @@ h1{
    interactivity those classes normally carry (hover lift, cursor, text selection) —
    this is a static illustration, not a second copy of the real controls. */
 .how-mock-card{
-  width:100%; display:flex; flex-direction:column; gap:16px; align-items:stretch;
+  width:100%; display:flex; flex-direction:column; gap:20px; align-items:stretch;
   pointer-events:none; user-select:none;
 }
 /* real .opp-badge is always a plain white box; here the icon's own inline `color` also
    tints a soft matching backdrop behind it, so each "demo logo" reads as a distinct
    colored badge instead of a same-white square with only the glyph differing */
 .how-panel .opp-badge{ background:color-mix(in srgb, currentColor 14%, var(--card-bg)); }
+
+/* "pop" pass: real cards/rows/badges are deliberately near-flat at rest (their depth is
+   hover-driven — box-shadow only appears on :hover), but hover is disabled on a static
+   mockup, so scoped-under-.how-panel overrides bake real elevation + brighter accent
+   color in permanently instead of leaving these panels looking flat. Scoped so none of
+   this touches the real /opportunities, /interview, or My Opportunities pages. */
+.how-panel .opp-badge,
+.how-panel .im-match-logo{
+  box-shadow: 0 8px 18px -8px rgba(30,37,64,.28);
+  border-color: rgba(30,37,64,.06);
+}
+.how-panel .opp-card{
+  box-shadow: 0 16px 34px -16px rgba(30,37,64,.3), 0 3px 10px -2px rgba(30,37,64,.08);
+  border-color: rgba(30,37,64,.1);
+}
+.how-panel .interview-option-row{ box-shadow: 0 10px 22px -14px rgba(30,37,64,.2); }
+.how-panel .interview-option-row.is-selected{
+  box-shadow: 0 16px 34px -16px rgba(221,107,46,.45), 0 4px 14px -4px rgba(221,107,46,.22);
+}
+.how-panel .im-match-card{ box-shadow: 0 14px 30px -16px rgba(30,37,64,.24); }
+.how-panel .interview-continue-btn,
+.how-panel .opp-save-btn.is-saved{
+  box-shadow: 0 12px 26px -10px rgba(221,107,46,.55);
+}
+/* the amber/muted tag treatments read correctly on the real, denser opportunities list,
+   but next to everything else's brighter pop here they were the one flat, washed-out
+   note — solid brand-orange fill instead, matching how .im-match-field-tag already
+   looks in the matches panel right next to this one */
+.how-panel .opp-tag--premed{ background:var(--cover); color:#fff; }
+.how-panel .opp-detail-icon{ box-shadow: 0 3px 8px -3px rgba(221,107,46,.35); }
 
 /* visual 04 — apply clipboard + calendar (the original hand-illustrated mockup, kept
    as-is rather than rebuilt from real classnames like the first 3 — see ApplyVisual) */
