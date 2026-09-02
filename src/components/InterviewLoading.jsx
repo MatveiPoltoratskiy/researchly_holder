@@ -3,9 +3,8 @@ import { burstConfetti } from '../lib/confetti'
 
 // A card-shuffle, not a color grid: three small cards (the "matches" being sorted) cycle
 // through the stack in a loop, each one landing on top in turn — reads as "searching
-// through options," not a generic spinner, and reuses the card-stack motif already
-// established elsewhere on the site (see .how-cardstack) instead of borrowing someone
-// else's loading pattern wholesale.
+// through options," not a generic spinner, instead of borrowing someone else's loading
+// pattern wholesale.
 const CARD_COLORS = ['var(--cover)', 'var(--pine)', 'var(--gold)']
 
 export default function InterviewLoading({ onDone }) {

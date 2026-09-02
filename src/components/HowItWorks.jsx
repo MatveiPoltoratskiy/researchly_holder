@@ -2,14 +2,14 @@ import { useEffect, useRef, useState } from 'react'
 import { prefersReducedMotion, usePauseAnimationsOffscreen } from '../lib/motion'
 import { useRouter } from '../lib/router'
 import { goToWaitlist } from '../lib/waitlist'
-import { InterviewVisual, MatchVisual, RoadmapVisual, ApplyVisual } from './HowItWorksVisuals'
+import { InterviewVisual, MatchVisual, BrowseVisual, TrackVisual } from './HowItWorksVisuals'
 
 const STEPS = [
   {
     kicker: 'THE INTERVIEW',
-    title: "Five questions, then you're done.",
+    title: "A few questions, then you're done.",
     desc: "We ask what you want to study, what year you're in, where you are, when you're free, and whether the position has to pay. Each answer cuts the list down. There's no long form and nothing to write.",
-    meta: 'Interest → Level → Location → Timing → Pay',
+    meta: 'Field → Level → Location → Timeline → Pay',
     mascot: 'mascot-ask',
     Visual: InterviewVisual,
   },
@@ -22,20 +22,20 @@ const STEPS = [
     Visual: MatchVisual,
   },
   {
-    kicker: 'YOUR ROADMAP',
-    title: 'Every match arrives in order.',
-    desc: "What to prepare first, when applications open, and which deadline is closest.",
-    meta: 'Deadlines and next steps, in order',
+    kicker: 'BROWSE & SAVE',
+    title: 'See everything, keep what fits.',
+    desc: "Every match sits on a real list (and a map) with its deadline, pay, and location right on the card. One tap saves it instead of losing it in a browser tab you'll forget to go back to.",
+    meta: 'Filter by major, level, and cost',
     mascot: 'mascot-map',
-    Visual: RoadmapVisual,
+    Visual: BrowseVisual,
   },
   {
-    kicker: 'THE APPLICATION',
-    title: 'Then you apply.',
-    desc: "Work down the roadmap. Dates, links, and what each program asks for sit in one place. We can't get you accepted, but you won't miss something because you never heard of it.",
-    meta: 'Links, dates, and guidance in one place',
+    kicker: 'TRACK IT',
+    title: 'Your own shortlist, not a spreadsheet.',
+    desc: "Saved opportunities land on one page, sorted by status. Mark one Applied the moment you send it, so nothing you're serious about gets lost in the shuffle.",
+    meta: 'Saved · Applied, all in one place',
     mascot: 'mascot-cheer',
-    Visual: ApplyVisual,
+    Visual: TrackVisual,
   },
 ]
 

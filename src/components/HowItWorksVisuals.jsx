@@ -1,3 +1,13 @@
+// Every visual below is built from the SAME CSS classes the real, live screens use
+// (interview option rows, the match-results card, an opportunity card, the My
+// Opportunities status pills) — never imported directly from those components, since
+// Interview.jsx/InterviewMatches.jsx/OpportunityExplorer.jsx/MyOpportunities.jsx are all
+// lazy-loaded behind the dev passphrase gate (see App.jsx) specifically so an
+// unauthenticated visitor's browser never fetches that code or the opportunity dataset.
+// Reusing the classnames keeps these panels pixel-true to production without pulling any
+// of that gated code into the public landing-page bundle. Content is simplified/trimmed
+// (fewer rows, shorter copy) for a quick, clean read — not a dense literal screenshot.
+
 function PanelChrome({ label }) {
   return (
     <div className="how-panel-chrome">
@@ -9,158 +19,193 @@ function PanelChrome({ label }) {
   )
 }
 
-const INTERVIEW_ROWS = [
-  { label: 'Interest', value: 'Neuroscience', state: 'done' },
-  { label: 'Level', value: 'Junior', state: 'done' },
-  { label: 'Location', value: 'New York, NY', state: 'active' },
-  { label: 'Timing', value: 'Summer', state: 'pending' },
-  { label: 'Paid?', value: "Doesn't matter", state: 'pending' },
+// same ring/fill/checkmark markup as Interview.jsx's OptionCheck — visibility of the
+// fill+mark vs the empty ring is driven entirely by the shared .is-selected CSS, so
+// duplicating the (tiny, static) SVG here doesn't risk drifting from the real look
+function MockOptionCheck() {
+  return (
+    <svg className="interview-option-check" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+      <circle className="interview-option-check-ring" cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.7" />
+      <circle className="interview-option-check-fill" cx="12" cy="12" r="9" fill="currentColor" />
+      <path className="interview-option-check-mark" d="M8 12.5l2.6 2.6L16 9.5" fill="none" stroke="var(--cream)" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+// real step-3 options from Interview.jsx (OPP_TYPES) — trimmed to icons already in the
+// sitewide IconSprite (#icon-search/calendar/replay) instead of pulling InterviewIcons.jsx
+const HOW_OPP_TYPES = [
+  { id: 'research-internship', icon: 'icon-search', label: 'Research internship', desc: 'Hands-on work in a real lab' },
+  { id: 'summer-program', icon: 'icon-calendar', label: 'Summer program', desc: 'A structured multi-week program', selected: true },
+  { id: 'year-round-program', icon: 'icon-replay', label: 'Year-round program', desc: 'An ongoing school-year commitment' },
 ]
 
 export function InterviewVisual() {
   return (
     <div className="how-panel how-panel--01">
-      <div className="how-cardstack">
-        <span className="how-cardstack-back how-cardstack-back-2" aria-hidden="true" />
-        <span className="how-cardstack-back how-cardstack-back-1" aria-hidden="true" />
-        <div className="how-cardstack-front">
-          <div className="how-panel-chrome-row">
-            <PanelChrome label="Your interview" />
-            <span className="how-progress-label">3 of 5</span>
-          </div>
-          {INTERVIEW_ROWS.map((row) => (
-            <div className={`how-qrow is-${row.state}`} key={row.label}>
-              <span className="how-qrow-label">{row.label}</span>
-              {row.state === 'done' && <span className="how-qrow-chip">{row.value}</span>}
-              {row.state === 'active' && (
-                <span className="how-qrow-field">
-                  {row.value}
-                  <span className="how-qrow-cursor" aria-hidden="true" />
-                </span>
-              )}
-              {row.state === 'pending' && (
-                <span className="how-qrow-select">
-                  {row.value}
-                  <svg width="12" height="12" aria-hidden="true"><use href="#icon-chevron-down" /></svg>
-                </span>
-              )}
+      <div className="how-mock-card">
+        <div className="how-panel-chrome-row">
+          <PanelChrome label="Your interview" />
+          <span className="how-progress-label">Step 3 of 8</span>
+        </div>
+        <p className="interview-question">What kind of opportunity?</p>
+        <div className="interview-option-list">
+          {HOW_OPP_TYPES.map((t) => (
+            <div key={t.id} className={`interview-option-row ${t.selected ? 'is-selected' : ''}`} style={{ '--field-color': 'var(--cover)' }}>
+              <span className="interview-option-emoji">
+                <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><use href={`#${t.icon}`} /></svg>
+              </span>
+              <span className="interview-option-main">
+                <span className="interview-option-label">{t.label}</span>
+                <span className="interview-option-desc">{t.desc}</span>
+              </span>
+              <MockOptionCheck />
             </div>
           ))}
-          <button type="button" className="how-mock-btn" tabIndex={-1}>
-            Continue
-            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><use href="#icon-arrow" /></svg>
-          </button>
         </div>
+        <button type="button" className="interview-continue-btn" tabIndex={-1}>
+          Continue
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><use href="#icon-arrow" /></svg>
+        </button>
       </div>
     </div>
   )
 }
 
-const MATCHES = [
-  { pct: '96%', tone: 'cover', name: 'Summer Research Program', tags: 'Summer · In-person', uni: 'Stanford University' },
-  { pct: '91%', tone: 'ribbon', name: 'Undergrad Fellows Program', tags: 'Year-round · Paid', uni: 'The Jackson Laboratory' },
-  { pct: '88%', tone: 'navy', name: 'Remote Research Apprenticeship', tags: 'Remote · High school', uni: 'Simons Foundation' },
+// real programs from the live dataset, real per-card language from InterviewMatches.jsx's
+// pitch/field-tag/match-% treatment — trimmed to 2 rows instead of 4 for a quicker read
+const HOW_MATCHES = [
+  {
+    org: 'University of British Columbia', name: 'seed2STEM', field: 'Pre-Med', color: 'var(--cover)',
+    pitch: "Rare combo: it's Neuroscience, plus you already qualify.", pct: 96,
+  },
+  {
+    org: 'New York University', name: 'Simons-NYU Science Explorations', field: 'Biology', color: 'var(--pine)',
+    pitch: "Stands out fast: it's free to attend.", pct: 93,
+  },
 ]
 
 export function MatchVisual() {
   return (
     <div className="how-panel how-panel--02">
-      <PanelChrome label="Your matches" />
-      <div className="how-funnel">
-        <div className="how-funnel-noise" aria-hidden="true">
-          {Array.from({ length: 24 }).map((_, i) => (
-            <span key={i} style={{ '--d': `${(i % 8) * 40}ms` }} />
-          ))}
-        </div>
-        <svg className="how-funnel-chevron" width="22" height="22" aria-hidden="true"><use href="#icon-chevron-down" /></svg>
-        <div className="how-funnel-result">
-          {MATCHES.map((m) => (
-            <div className="how-match-row" key={m.name}>
-              <span className={`how-chip how-chip--${m.tone}`}>{m.pct}</span>
-              <div className="how-match-info">
-                <p className="how-match-name">{m.name}</p>
-                <p className="how-match-uni">{m.uni}</p>
-                <p className="how-match-tags">{m.tags}</p>
-              </div>
-              <svg className="how-match-go" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><use href="#icon-arrow" /></svg>
+      <div className="how-mock-card">
+        <p className="im-matches-eyebrow">Based on your answers</p>
+        <h3 className="interview-question">
+          We found <span className="im-matches-count is-settled">4</span> strong matches
+        </h3>
+        <div className="im-match-list">
+          {HOW_MATCHES.map((m) => (
+            <div className="im-match-card" key={m.name} style={{ '--focus-color': m.color }}>
+              <span className="im-match-logo">
+                <span className="im-match-logo-letter">{m.org[0]}</span>
+              </span>
+              <span className="im-match-main">
+                <span className="im-match-top-row">
+                  <span className="im-match-field-tag">{m.field}</span>
+                </span>
+                <span className="im-match-name">{m.name}</span>
+                <span className="im-match-org">{m.org}</span>
+                <span className="im-match-pitch">{m.pitch}</span>
+              </span>
+              <span className="im-match-pct">
+                <span className="im-match-pct-num">{m.pct}%</span>
+                <span className="im-match-pct-label">match</span>
+              </span>
             </div>
           ))}
         </div>
-        <button type="button" className="how-mock-btn how-mock-btn--ghost" tabIndex={-1}>
-          See all 12 matches
-        </button>
       </div>
     </div>
   )
 }
 
-const MILESTONES = [
-  { text: 'Shortlist ready', done: true },
-  { text: 'Deadline: Feb 1', done: true },
-  { text: 'Ask for a rec letter', done: false },
-  { text: 'Submit application', done: false },
-]
-
-export function RoadmapVisual() {
-  const doneCount = MILESTONES.filter((m) => m.done).length
+export function BrowseVisual() {
   return (
     <div className="how-panel how-panel--03">
-      <div className="how-panel-chrome-row">
-        <PanelChrome label="Your roadmap" />
-        <span className="how-progress-label">{doneCount} of {MILESTONES.length}</span>
-      </div>
-      <div className="how-progress-track" aria-hidden="true">
-        <span className="how-progress-fill" style={{ width: `${(doneCount / MILESTONES.length) * 100}%` }} />
-      </div>
-      <div className="how-timeline">
-        {MILESTONES.map((m, i) => (
-          <div className={`how-timeline-item${m.done ? ' is-done' : ''}`} key={m.text} style={{ '--d': `${i * 110}ms` }}>
-            <svg width="17" height="22" aria-hidden="true"><use href="#scene-pin" /></svg>
-            <span>{m.text}</span>
-            {m.done && (
-              <svg className="how-timeline-check" width="13" height="10" viewBox="0 0 13 10" aria-hidden="true">
-                <path d="M1 5 5 9 12 1" fill="none" stroke="var(--ribbon)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            )}
+      <div className="how-mock-card">
+        <div className="how-panel-chrome-row">
+          <PanelChrome label="Opportunities" />
+          <span className="how-progress-label">39 shown</span>
+        </div>
+        <div className="opp-card how-mock-opp-card">
+          <div className="opp-card-body">
+            <div className="opp-card-head">
+              <span className="opp-badge" style={{ color: 'var(--cover)' }} aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24"><use href="#icon-flask" /></svg>
+              </span>
+              <div className="opp-card-heading">
+                <h4 className="opp-title">Amgen Scholars Program</h4>
+                <div className="opp-org">University of Toronto</div>
+              </div>
+              <div className="opp-card-actions">
+                <button type="button" className="opp-save-btn is-saved" tabIndex={-1}>
+                  <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-bookmark-filled" /></svg>
+                  <span className="opp-save-btn-label">Saved</span>
+                </button>
+              </div>
+            </div>
+            <div className="opp-detail-row">
+              <span className="opp-detail-item">
+                <span className="opp-detail-icon"><svg width="14" height="14" viewBox="0 0 24 24"><use href="#icon-dollar" /></svg></span>
+                Paid
+              </span>
+              <span className="opp-detail-item">
+                <span className="opp-detail-icon"><svg width="14" height="14" viewBox="0 0 24 24"><use href="#icon-pin" /></svg></span>
+                Toronto, ON
+              </span>
+            </div>
+            <div className="opp-tags">
+              <span className="opp-tag opp-tag--premed">Pre-Med</span>
+              <span className="opp-tag opp-tag--muted">Undergrad</span>
+            </div>
           </div>
-        ))}
+        </div>
       </div>
     </div>
   )
 }
 
-const APPLY_ITEMS = [
-  { text: 'Submit transcript', done: true },
-  { text: 'Upload writing sample', done: true },
-  { text: 'Request recommendation', done: true },
-  { text: 'Final application', done: false },
+const HOW_SAVED = [
+  { name: 'Amgen Scholars Program', org: 'University of Toronto', status: 'applied' },
+  { name: 'seed2STEM', org: 'ICORD – UBC', status: 'saved' },
 ]
 
-export function ApplyVisual() {
+export function TrackVisual() {
   return (
     <div className="how-panel how-panel--04">
-      <div className="how-clipboard">
-        <span className="how-clipboard-clip" aria-hidden="true" />
-        <PanelChrome label="Your checklist" />
-        {APPLY_ITEMS.map((item, i) => (
-          <div className={`how-check-row${item.done ? ' is-done' : ''}`} key={item.text} style={{ '--d': `${i * 120}ms` }}>
-            <span className="how-check-box" aria-hidden="true">
-              {item.done && (
-                <svg width="12" height="10" viewBox="0 0 11 9">
-                  <path d="M1 4.5 4 7.5 10 1" fill="none" stroke="var(--ribbon)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              )}
-            </span>
-            <span>{item.text}</span>
-          </div>
-        ))}
-        <button type="button" className="how-mock-btn how-mock-btn--muted" tabIndex={-1}>
-          Submit application
-        </button>
-      </div>
-      <div className="how-cal-chip">
-        <svg width="18" height="18" aria-hidden="true"><use href="#icon-calendar" /></svg>
-        <span>Due Feb 1</span>
+      <div className="how-mock-card">
+        <PanelChrome label="My Opportunities" />
+        <div className="myopp-status-row">
+          <button type="button" className="myopp-status-btn is-active" tabIndex={-1}>
+            All<span className="myopp-status-count">2</span>
+          </button>
+          <button type="button" className="myopp-status-btn" tabIndex={-1}>
+            Saved<span className="myopp-status-count">1</span>
+          </button>
+          <button type="button" className="myopp-status-btn" tabIndex={-1}>
+            Applied<span className="myopp-status-count">1</span>
+          </button>
+        </div>
+        <div className="how-mock-saved-list">
+          {HOW_SAVED.map((o) => (
+            <div className="opp-card how-mock-opp-card how-mock-opp-card--compact" key={o.name}>
+              <div className="opp-card-body">
+                <div className="opp-card-head">
+                  <span className="opp-badge" style={{ color: 'var(--cover)' }} aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24"><use href="#icon-flask" /></svg>
+                  </span>
+                  <div className="opp-card-heading">
+                    <h4 className="opp-title">{o.name}</h4>
+                    <div className="opp-org">{o.org}</div>
+                  </div>
+                  <span className={`how-mock-status-pill how-mock-status-pill--${o.status}`}>
+                    {o.status === 'applied' ? 'Applied' : 'Saved'}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )

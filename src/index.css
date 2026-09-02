@@ -774,102 +774,22 @@ h1{
 .how-mock-btn--ghost{ background:none; border:1.5px solid var(--card-border); color:var(--navy); }
 .how-mock-btn--muted{ background:var(--pill-bg); color:var(--pill-text); }
 
-/* visual 01 — interview card stack */
-.how-cardstack{ position:relative; width:100%; }
-.how-cardstack-back{
-  position:absolute; inset:0; border-radius:16px;
+/* the 4 how-it-works mockups are built from real production classnames (interview
+   option rows, the match card, an opportunity card, My Opportunities status pills) —
+   see the comment at the top of HowItWorksVisuals.jsx for why. These few rules are just
+   the embedding/sizing glue those real classes don't already provide on their own. */
+.how-mock-card{ width:100%; display:flex; flex-direction:column; gap:16px; align-items:stretch; }
+.how-mock-saved-list{ width:100%; display:flex; flex-direction:column; gap:12px; }
+.how-mock-opp-card{ cursor:default; }
+.how-mock-opp-card:hover{ border-color:var(--card-border); } /* real hover-highlight doesn't apply to a static mockup */
+.how-mock-opp-card--compact{ padding:16px 18px; }
+.how-mock-status-pill{
+  flex:none; align-self:flex-start; margin-left:auto;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; font-weight:800;
+  padding:5px 12px; border-radius:999px; white-space:nowrap;
 }
-.how-cardstack-back-1{ background:var(--cream-deep); transform:rotate(-4deg) translateY(4px); }
-.how-cardstack-back-2{ background:var(--pages-shadow); transform:rotate(4deg) translateY(6px); }
-.how-cardstack-front{
-  position:relative; background:var(--pages); border:1px solid var(--card-border); border-radius:16px;
-  padding:18px 20px 20px; display:flex; flex-direction:column; gap:11px;
-}
-.how-qrow{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:6px 0; }
-.how-qrow-label{ font-family:"Segoe UI",system-ui,sans-serif; font-size:18px; font-weight:700; color:var(--navy); }
-.how-qrow-chip{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:700; color:var(--cover-dark);
-  background:var(--pill-amber-bg); padding:4px 11px; border-radius:999px;
-}
-.how-qrow-field{
-  display:flex; align-items:center; gap:6px;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:700; color:var(--cover-dark);
-  background:#fff; border:1.5px solid var(--cover); padding:5px 11px; border-radius:999px;
-}
-.how-qrow-cursor{
-  width:2px; height:12px; background:var(--cover); border-radius:2px;
-  animation: how-cursor-blink 1s ease-in-out infinite;
-}
-@keyframes how-cursor-blink{ 0%,100%{ opacity:1; } 50%{ opacity:.15; } }
-.how-qrow-select{
-  display:flex; align-items:center; gap:5px;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:600; color:var(--navy-faint);
-  background:var(--cream); border:1px solid var(--card-border); padding:5px 11px; border-radius:999px;
-}
-.how-qrow-select svg{ color:var(--navy-faint); }
-
-/* visual 02 — match funnel */
-.how-funnel{ width:100%; display:flex; flex-direction:column; align-items:center; gap:14px; }
-.how-funnel-noise{ display:flex; flex-wrap:wrap; gap:5px; justify-content:center; max-width:230px; }
-.how-funnel-noise span{
-  width:11px; height:11px; border-radius:4px; background:var(--pill-bg);
-  animation: how-noise-fade 2.6s ease-in-out infinite; animation-delay: var(--d, 0ms);
-}
-@keyframes how-noise-fade{ 0%,100%{ opacity:.9; } 50%{ opacity:.3; } }
-.how-funnel-chevron{ color:var(--cover-dark); }
-.how-funnel-result{ display:flex; flex-direction:column; gap:9px; width:100%; }
-.how-match-row{ display:flex; align-items:center; gap:12px; }
-.how-chip{
-  flex:none; font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; font-weight:700; color:#fff;
-  width:42px; height:28px; border-radius:999px; display:flex; align-items:center; justify-content:center;
-}
-.how-chip--cover{ background:var(--cover); }
-.how-chip--ribbon{ background:var(--ribbon); }
-.how-chip--navy{ background:var(--navy); }
-.how-match-info{ flex:1; min-width:0; }
-.how-match-name{ margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:17px; font-weight:700; color:var(--navy); }
-.how-match-uni{ margin:2px 0 0; font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; color:var(--navy-faint); }
-.how-match-tags{ margin:2px 0 0; font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; color:var(--navy-soft); }
-.how-match-go{ flex:none; color:var(--navy-faint); }
-
-/* visual 03 — roadmap timeline */
-.how-timeline{ position:relative; width:100%; padding-left:30px; }
-.how-timeline::before{
-  content:""; position:absolute; left:8px; top:6px; bottom:6px; width:0;
-  border-left:2px dashed var(--road-line);
-}
-.how-timeline-item{
-  position:relative; display:flex; align-items:center; gap:12px; padding:13px 0;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:18px; font-weight:600; color:var(--navy-faint);
-}
-.how-timeline-item.is-done{ color:var(--navy); font-weight:700; }
-.how-timeline-item svg:first-child{ position:absolute; left:-30px; color:var(--cover-dark); flex:none; }
-.how-timeline-item.is-done svg:first-child{ color:var(--ribbon); }
-.how-timeline-check{ margin-left:auto; flex:none; }
-
-/* visual 04 — apply clipboard + calendar */
-.how-clipboard{
-  position:relative; width:100%; background:var(--pages); border:1px solid var(--card-border);
-  border-radius:14px; padding:24px 20px 20px; display:flex; flex-direction:column; gap:11px;
-}
-.how-clipboard-clip{
-  position:absolute; top:-9px; left:50%; transform:translateX(-50%);
-  width:42px; height:16px; border-radius:7px; background:var(--spine);
-}
-.how-check-row{ display:flex; align-items:center; gap:10px; font-family:"Segoe UI",system-ui,sans-serif; font-size:17px; font-weight:600; color:var(--navy-faint); }
-.how-check-row.is-done{ color:var(--navy); }
-.how-check-box{
-  flex:none; width:18px; height:18px; border-radius:6px; border:1.5px solid var(--card-border);
-  display:flex; align-items:center; justify-content:center; background:#fff;
-}
-.how-check-row.is-done .how-check-box{ background:var(--pill-green-bg); border-color:var(--ribbon); }
-.how-cal-chip{
-  position:absolute; bottom:-16px; right:-12px; transform:rotate(5deg);
-  display:flex; align-items:center; gap:7px;
-  background:var(--card-bg); border:1px solid var(--card-border); border-radius:11px;
-  padding:9px 14px; box-shadow:0 14px 26px -12px rgba(30,37,64,.35);
-  color:var(--cover-dark); font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:700;
-}
+.how-mock-status-pill--applied{ background:var(--pill-green-bg); color:var(--pill-green-text); }
+.how-mock-status-pill--saved{ background:var(--pill-amber-bg); color:var(--cover-dark); }
 
 /* closing landscape — purely decorative (the CTA sits above it, on plain cream), fading
    in/out so it hands off smoothly into whatever's above and below it */
