@@ -7,6 +7,7 @@ import { peekInterviewFilters, clearInterviewFilters } from '../lib/interviewHan
 import { scoreOpportunity } from '../lib/matchOpportunities'
 import { computeMatchScore, resolveMatchScore } from '../lib/matchScore'
 import { useSavedOpportunities, SAVE_STATUSES } from '../lib/savedOpportunities'
+import { useSessionStorageState } from '../lib/storage'
 import { Link } from '../lib/router'
 import { burstConfettiAtPoint } from '../lib/confetti'
 import { prefersReducedMotion } from '../lib/motion'
@@ -593,14 +594,23 @@ export default function OpportunityExplorer() {
   // defaults instead of replaying a stale first-visit snapshot forever)
   const [interviewHandoff] = useState(() => peekInterviewFilters())
   const interviewAnswers = interviewHandoff?.answers || null
-  const [activeFields, setActiveFields] = useState(() =>
-    interviewHandoff?.filters?.focus?.length ? new Set(interviewHandoff.filters.focus) : new Set(FIELD_ORDER)
+  // filter state persists across a page refresh (sessionStorage) but not across the tab
+  // actually closing, so a reload never silently throws away what someone had picked —
+  // only ever falls back to the interview handoff / plain defaults on a genuinely new tab
+  const [activeFields, setActiveFields] = useSessionStorageState(
+    'rsly_opp_active_fields',
+    () => (interviewHandoff?.filters?.focus?.length ? new Set(interviewHandoff.filters.focus) : new Set(FIELD_ORDER)),
+    { serialize: (s) => JSON.stringify([...s]), deserialize: (raw) => new Set(JSON.parse(raw)) }
   )
-  const [level, setLevel] = useState(() => interviewHandoff?.filters?.level || 'all')
-  const [costFilters, setCostFilters] = useState(() => new Set(interviewHandoff?.filters?.cost || []))
-  const [equityOnly, setEquityOnly] = useState(false)
+  const [level, setLevel] = useSessionStorageState('rsly_opp_level', () => interviewHandoff?.filters?.level || 'all')
+  const [costFilters, setCostFilters] = useSessionStorageState(
+    'rsly_opp_cost_filters',
+    () => new Set(interviewHandoff?.filters?.cost || []),
+    { serialize: (s) => JSON.stringify([...s]), deserialize: (raw) => new Set(JSON.parse(raw)) }
+  )
+  const [equityOnly, setEquityOnly] = useSessionStorageState('rsly_opp_equity_only', false)
   const saved = useSavedOpportunities()
-  const [sortKey, setSortKey] = useState('recommended')
+  const [sortKey, setSortKey] = useSessionStorageState('rsly_opp_sort_key', 'recommended')
   const [userLocation, setUserLocation] = useState(() => interviewHandoff?.filters?.locationCoords || null)
   const [locationStatus, setLocationStatus] = useState(() =>
     interviewHandoff?.filters?.locationCoords ? 'granted' : 'idle'
