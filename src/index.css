@@ -681,6 +681,17 @@ h1{
 /* ---------- how it works ---------- */
 .how-section{ position:relative; z-index:5; max-width:1560px; padding: 170px 0 120px; }
 
+/* the warm color "ring": --cream-deep (the interview page's own background) glowing at
+   the vertical center, fading out to transparent (revealing the section's normal
+   --cream) — makes the fade zone read as a deliberate glow rather than an implied
+   absence of symbols. Same full-bleed formula as .how-ambient-symbol-field below, no
+   mask needed since the gradient itself already IS the fade. */
+.how-ambient-glow{
+  position:absolute; top:0; bottom:0; left:50%; z-index:0; pointer-events:none;
+  width: calc(100vw / var(--zoom, 1));
+  margin-left: calc(-50vw / var(--zoom, 1));
+  background: radial-gradient(ellipse 55% 32% at 50% 50%, var(--cream-deep) 0%, transparent 70%);
+}
 /* ambient background texture for the whole section — true edge-to-edge breakout (same
    --zoom-compensated formula as .how-landscape below) so symbols can actually occupy the
    real page margins outside this section's own ~1560px content width, not just repeat
@@ -798,15 +809,19 @@ h1{
    interactivity those classes normally carry (hover lift, cursor, text selection) —
    this is a static illustration, not a second copy of the real controls. */
 .how-mock-card{
-  width:100%; display:flex; flex-direction:column; gap:13px; align-items:stretch;
+  width:100%; display:flex; flex-direction:column; gap:16px; align-items:stretch;
   pointer-events:none; user-select:none;
 }
-/* real .im-match-list/.im-match-card carry their own generous margin/padding, tuned for
-   a full-width standalone screen — stacked inside .how-mock-card's own gap, that doubled
-   up into the large dead gaps between blocks feedback called out. Collapse the
-   component's own margin (the wrapper gap already spaces it) and tighten the card
-   padding, while bumping a few font-sizes so the panel reads bigger/bolder even though
-   it's denser, not just smaller-and-cramped. */
+/* real .im-match-list/.im-match-card/.how-panel-chrome-row/.interview-question all carry
+   their own top/bottom margin, tuned for a full-width standalone screen — stacked inside
+   .how-mock-card's own gap, every one of those margins was ADDING to the wrapper gap
+   instead of replacing it, so every section boundary in a panel had a different (and
+   mostly too-large) gap instead of one consistent rhythm. Zero every one of those own
+   margins so .how-mock-card's gap is the ONLY thing controlling spacing between major
+   sections — the actual fix, not just a smaller number. */
+.how-panel .how-panel-chrome-row{ margin-bottom:0; }
+.how-panel .interview-question{ margin:0; }
+.how-panel .im-matches-eyebrow{ margin:0; }
 .how-panel .im-match-list{ margin:0; gap:12px; }
 .how-panel .im-match-card{ padding:16px 20px; gap:16px; }
 .how-panel .im-match-name{ font-size:21px; }
