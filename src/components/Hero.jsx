@@ -238,7 +238,7 @@ export default function Hero() {
 
       <div className="th-frame">
         <div className="th-flank th-flank--left">
-          <div className="th-card-shell" style={{ '--rot': '-6deg' }}>
+          <div className="th-card-shell" style={{ '--rot': '-8deg' }}>
             <div className="th-phone" data-tilt>
               <div className="th-phone-notch" />
               <div className="th-phone-camera" />
@@ -309,7 +309,7 @@ export default function Hero() {
         </div>
 
         <div className="th-flank th-flank--right">
-          <div className="th-card-shell" style={{ '--rot': '6deg' }}>
+          <div className="th-card-shell" style={{ '--rot': '8deg', '--stagger': '-30px' }}>
             <div className="th-phone" data-tilt>
               <div className="th-mascot" aria-hidden="true">
                 <img src="/assets/mascot-logo.png" alt="" />

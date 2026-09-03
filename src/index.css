@@ -164,13 +164,13 @@ svg{ display:block; }
 /* ---------- headline ---------- */
 .th-center{ text-align:center; align-self:center; animation: content-in .8s ease-out .1s both; padding-bottom:24px; }
 .th-hero h1{
-  margin:0 0 14px; font-family: var(--font-title); font-weight:700;
+  margin:0 0 16px; font-family: var(--font-title); font-weight:700;
   -webkit-text-stroke: .5px currentColor;
-  font-size: clamp(24px, 2vw, 32px); line-height:1.2; color: var(--navy); text-wrap:balance;
+  font-size: clamp(28px, 2.8vw, 40px); line-height:1.2; color: var(--navy); text-wrap:balance;
 }
 .th-sub{
-  margin:0 auto 20px; max-width:420px;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; line-height:1.55; color: var(--navy-soft);
+  margin:0 auto 22px; max-width:460px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:18px; line-height:1.55; color: var(--navy-soft);
 }
 .th-word{
   position:relative; display:inline-block; overflow:hidden; height:1.28em; line-height:1.28;
@@ -188,10 +188,10 @@ svg{ display:block; }
 
 .th-cta-wrap{ display:flex; flex-direction:column; align-items:center; gap:10px; }
 .th-cta-btn{
-  display:inline-block; font-family: var(--font-title); font-weight:700; font-size:16px;
+  display:inline-block; font-family: var(--font-title); font-weight:700; font-size:18px;
   border:none; cursor:pointer; text-decoration:none;
   background: linear-gradient(180deg, #FFB258, #FF9A3D);
-  color:#3B2205; padding:15px 34px; border-radius:999px;
+  color:#3B2205; padding:17px 40px; border-radius:999px;
   box-shadow: 0 14px 30px -12px rgba(169,79,30,.5);
   transition: transform .18s ease, box-shadow .18s ease;
 }
@@ -206,11 +206,11 @@ svg{ display:block; }
    the screen the way the two flanking props (books/microscope, flasks/plant) do */
 /* inset from the true frame edge (not flush) — leaves a clear gap so the book stack /
    flask rack read as sitting beside the phone instead of disappearing behind it */
-.th-flank--left{ justify-content:flex-start; padding-left:64px; }
-.th-flank--right{ justify-content:flex-end; padding-right:64px; }
+.th-flank--left{ justify-content:flex-start; padding-left:40px; }
+.th-flank--right{ justify-content:flex-end; padding-right:40px; }
 .th-card-shell{
-  width:100%; max-width:340px; transform: rotate(var(--rot,0));
-  animation: content-in .8s ease-out .3s both, card-float 6.4s ease-in-out infinite;
+  width:100%; max-width:340px; transform: translateY(var(--stagger,0px)) rotate(var(--rot,0));
+  animation: content-in .8s ease-out .3s both, card-float-th 6.4s ease-in-out infinite;
 }
 .th-flank--right .th-card-shell{ animation-delay:.4s; }
 
@@ -314,7 +314,14 @@ svg{ display:block; }
 .th-opp-tag{ font-family:"Segoe UI",system-ui,sans-serif; font-size:10.5px; font-weight:700; padding:3px 9px; border-radius:999px; background: var(--pill-bg); color: var(--pill-text); }
 .th-opp-tag.th-tag-green{ background: var(--pill-green-bg); color: var(--pill-green-text); }
 
-@keyframes card-float{ 0%,100%{ transform:translateY(0) rotate(var(--rot,0)); } 50%{ transform:translateY(-9px) rotate(var(--rot,0)); } }
+/* renamed from the generic "card-float" — that name collides with an unrelated
+   @keyframes further down (leftover from the old single roadmap-card hero), and
+   duplicate-named keyframes fully override each other rather than merging, which
+   was silently at risk of dropping the rotation/stagger here */
+@keyframes card-float-th{
+  0%,100%{ transform: translateY(var(--stagger,0px)) rotate(var(--rot,0)); }
+  50%{ transform: translateY(calc(var(--stagger,0px) - 9px)) rotate(var(--rot,0)); }
+}
 
 @media (max-width: 1180px){
   .th-frame{ grid-template-columns:1fr; }
@@ -325,7 +332,7 @@ svg{ display:block; }
      card-float's 0% frame) — zeroing transform entirely here would flatten the phones
      back to perfectly upright whenever the OS "reduce motion" setting is on */
   .th-center{ animation:none; opacity:1; }
-  .th-card-shell{ animation:none; transform: rotate(var(--rot,0)); }
+  .th-card-shell{ animation:none; transform: translateY(var(--stagger,0px)) rotate(var(--rot,0)); }
   .th-mascot{ animation:none; opacity:1; }
 }
 
