@@ -1,7 +1,37 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { prefersReducedMotion, usePauseAnimationsOffscreen } from '../lib/motion'
 import RoadmapPreview from './RoadmapPreview'
 import Waitlist from './Waitlist'
+
+// synonyms for the "before" side of the roadmap's promise — cycled in place of "lost"
+// so the headline names the whole range of what students feel while they're searching,
+// not just one word of it
+const FLICKER_WORDS = ['lost', 'overwhelmed', 'afraid', 'behind', 'confused', 'stuck']
+
+function FlickerWord() {
+  const [index, setIndex] = useState(0)
+  const [fading, setFading] = useState(false)
+
+  useEffect(() => {
+    if (prefersReducedMotion()) return
+    const swapEvery = 2200
+    const fadeMs = 220
+    const timer = setInterval(() => {
+      setFading(true)
+      setTimeout(() => {
+        setIndex((i) => (i + 1) % FLICKER_WORDS.length)
+        setFading(false)
+      }, fadeMs)
+    }, swapEvery)
+    return () => clearInterval(timer)
+  }, [])
+
+  return (
+    <span className="circle-mark hero-flicker-word">
+      <em className={fading ? 'is-fading' : ''}>{FLICKER_WORDS[index]}</em>.
+    </span>
+  )
+}
 
 const SYMBOL_POOL = [
   'α', 'β', 'γ', 'δ', 'λ', 'μ', 'π', 'Ω', 'Σ', 'Δ', 'θ', 'φ', 'Ψ', 'Ξ', 'ε', 'ρ', 'τ', 'ω',
@@ -147,9 +177,9 @@ export default function Hero() {
         <div className="hero-text">
           <p className="kicker">Join the waitlist</p>
           <h1>
-            Come <span className="circle-mark">lost.</span>
+            Come <FlickerWord />
             <br />
-            Leave with research opportunities.
+            Leave knowing exactly where to start.
           </h1>
           <p className="sub">
             Get a personalized roadmap of research opportunities, internships, and summer programs
