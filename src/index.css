@@ -682,10 +682,9 @@ h1{
 .how-section{ position:relative; z-index:5; max-width:1560px; padding: 170px 0 120px; }
 
 /* white circle core (matches the panel cards' own near-white background) fading through
-   the page's normal cream and out into a comfortable, low-intensity orange wash — which
-   then holds as a solid fill for the rest of the section (a radial-gradient's last stop
-   fills everything past its own defined shape), so the "outside" of the circle reads as
-   a genuine orange surrounding field, not a ring that fades back to nothing. */
+   the page's normal cream, up to a soft orange peak, then back down to fully transparent
+   — a bounded glow/ring, not a wash that plateaus and fills the rest of the (very tall)
+   section with a flat, unbroken tan block. */
 .how-ambient-glow{
   position:absolute; top:0; bottom:0; left:50%; z-index:0; pointer-events:none;
   width: calc(100vw / var(--zoom, 1));
@@ -693,9 +692,10 @@ h1{
   background: radial-gradient(
     ellipse 55% 32% at 50% 50%,
     #fff 0%,
-    var(--cream) 32%,
-    rgba(221,107,46,.11) 58%,
-    rgba(221,107,46,.17) 85%
+    var(--cream) 28%,
+    rgba(221,107,46,.16) 48%,
+    rgba(221,107,46,.08) 70%,
+    transparent 92%
   );
 }
 /* ambient background texture for the whole section — true edge-to-edge breakout (same
