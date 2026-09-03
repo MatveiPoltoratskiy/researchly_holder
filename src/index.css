@@ -177,6 +177,8 @@ h1{
   margin:0;
   font-family: var(--font-title);
   font-weight: 700;
+  /* Space Grotesk tops out at 700 — the stroke fakes a bolder weight past that ceiling */
+  -webkit-text-stroke: .5px currentColor;
   font-size: clamp(36px, 4.8vw, 56px);
   line-height:1.15;
   color: var(--navy);
@@ -215,7 +217,10 @@ h1{
   /* taller than 1em (with matching row-height/translate below) — a true 1em row clipped
      the ascenders/descenders of the row above/below into a hard, ugly edge instead of
      the intended soft fade */
-  height:1.32em; line-height:1.32; vertical-align:top;
+  height:1.32em; line-height:1.32;
+  /* nudges the clipped window down so its visible middle lines up with the baseline of
+     "Come" next to it, instead of the box's natural top edge sitting too high */
+  vertical-align:-.29em;
   font-style:italic;
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%);
   mask-image: linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%);
@@ -227,6 +232,11 @@ h1{
 .hero-scroll-viewport em{
   display:block; height:1.32em; line-height:1.32;
   font-family: var(--font-title); font-weight:700;
+  /* Space Grotesk tops out at 700 on Google Fonts — the stroke fakes extra boldness
+     past that ceiling instead of relying on a heavier weight that doesn't exist */
+  -webkit-text-stroke: .6px currentColor;
+  color: var(--cover-dark); -webkit-text-fill-color: var(--cover-dark);
+  text-shadow: 0 0 22px rgba(221,107,46,.4);
 }
 @media (prefers-reduced-motion: reduce){
   .hero-scroll-viewport{ transition:none; }
@@ -571,7 +581,7 @@ h1{
 .faq-heading{
   margin: 0 0 12px;
   font-family: var(--font-title);
-  font-weight:700;
+  font-weight:700; -webkit-text-stroke: .5px currentColor;
   font-size: clamp(38px, 5vw, 60px); line-height:1.1;
   color: var(--navy); text-wrap: balance;
 }
@@ -762,7 +772,7 @@ h1{
 .how-head{ position:relative; z-index:2; max-width:1140px; margin:0 auto 64px; text-align:center; }
 .how-statement{
   margin:0; font-family: var(--font-title);
-  font-weight:700;
+  font-weight:700; -webkit-text-stroke: .5px currentColor;
   font-size: clamp(28px, 3.6vw, 44px); line-height:1.3;
   color: var(--navy);
 }
