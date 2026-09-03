@@ -216,6 +216,14 @@ export default function HowItWorks() {
           colors={['var(--symbol-tan)', 'var(--cover-dark)', 'var(--ribbon)', 'var(--gold)']}
         />
       </div>
+      {/* orange bands filling the true left/right page margins outside this section's own
+          content width, at any viewport size or browser zoom (see the CSS comment on
+          .how-side-bands for how) — with their own white floating symbols living inside
+          them, distinct from the tan ones in the center ambient field above */}
+      <div className="how-side-bands" aria-hidden="true" />
+      <div className="how-side-symbols" aria-hidden="true">
+        <SymbolField rows={16} cols={10} opacityRange={[0.5, 0.75]} fontSizeRange={[13, 20]} colors={['#fff']} />
+      </div>
       <div className="how-head">
         <h2 className="how-statement">
           Researchly asks a handful of questions, then does<br />
