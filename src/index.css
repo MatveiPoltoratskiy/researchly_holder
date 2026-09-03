@@ -692,10 +692,10 @@ h1{
   background: radial-gradient(
     ellipse 55% 32% at 50% 50%,
     #fff 0%,
-    var(--cream) 28%,
-    rgba(221,107,46,.16) 48%,
-    rgba(221,107,46,.08) 70%,
-    transparent 92%
+    var(--cream) 24%,
+    rgba(221,107,46,.34) 50%,
+    rgba(221,107,46,.16) 72%,
+    transparent 94%
   );
 }
 /* ambient background texture for the whole section — true edge-to-edge breakout (same
