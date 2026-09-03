@@ -681,16 +681,22 @@ h1{
 /* ---------- how it works ---------- */
 .how-section{ position:relative; z-index:5; max-width:1560px; padding: 170px 0 120px; }
 
-/* the warm color "ring": --cream-deep (the interview page's own background) glowing at
-   the vertical center, fading out to transparent (revealing the section's normal
-   --cream) — makes the fade zone read as a deliberate glow rather than an implied
-   absence of symbols. Same full-bleed formula as .how-ambient-symbol-field below, no
-   mask needed since the gradient itself already IS the fade. */
+/* white circle core (matches the panel cards' own near-white background) fading through
+   the page's normal cream and out into a comfortable, low-intensity orange wash — which
+   then holds as a solid fill for the rest of the section (a radial-gradient's last stop
+   fills everything past its own defined shape), so the "outside" of the circle reads as
+   a genuine orange surrounding field, not a ring that fades back to nothing. */
 .how-ambient-glow{
   position:absolute; top:0; bottom:0; left:50%; z-index:0; pointer-events:none;
   width: calc(100vw / var(--zoom, 1));
   margin-left: calc(-50vw / var(--zoom, 1));
-  background: radial-gradient(ellipse 55% 32% at 50% 50%, var(--cream-deep) 0%, transparent 70%);
+  background: radial-gradient(
+    ellipse 55% 32% at 50% 50%,
+    #fff 0%,
+    var(--cream) 32%,
+    rgba(221,107,46,.11) 58%,
+    rgba(221,107,46,.17) 85%
+  );
 }
 /* ambient background texture for the whole section — true edge-to-edge breakout (same
    --zoom-compensated formula as .how-landscape below) so symbols can actually occupy the
@@ -702,8 +708,8 @@ h1{
   position:absolute; top:0; bottom:0; left:50%; z-index:0; pointer-events:none;
   width: calc(100vw / var(--zoom, 1));
   margin-left: calc(-50vw / var(--zoom, 1));
-  -webkit-mask-image: radial-gradient(ellipse 55% 32% at 50% 50%, transparent 0%, transparent 30%, black 82%);
-  mask-image: radial-gradient(ellipse 55% 32% at 50% 50%, transparent 0%, transparent 30%, black 82%);
+  -webkit-mask-image: radial-gradient(ellipse 55% 32% at 50% 50%, transparent 0%, transparent 35%, black 85%);
+  mask-image: radial-gradient(ellipse 55% 32% at 50% 50%, transparent 0%, transparent 35%, black 85%);
 }
 @media (max-width:900px){ .how-ambient-symbol-field{ display:none; } }
 
@@ -772,10 +778,12 @@ h1{
      close to the card — reads as properly lifted/"popped" instead of just faintly hazy */
   box-shadow: 0 34px 64px -24px rgba(30,37,64,.4), 0 10px 24px -12px rgba(30,37,64,.28);
 }
+/* one comfortable orange glow across all 4 (was a different accent color per panel) —
+   matches the page's new orange ambient background instead of competing with it */
 .how-panel--01{ box-shadow: 0 34px 64px -24px rgba(30,37,64,.4), 0 10px 24px -12px rgba(30,37,64,.28), 0 0 100px -16px rgba(221,107,46,.5); transform:rotate(0.7deg); }
-.how-panel--02{ box-shadow: 0 34px 64px -24px rgba(30,37,64,.4), 0 10px 24px -12px rgba(30,37,64,.28), 0 0 100px -16px rgba(63,125,92,.5); transform:rotate(-0.6deg); }
-.how-panel--03{ box-shadow: 0 34px 64px -24px rgba(30,37,64,.4), 0 10px 24px -12px rgba(30,37,64,.28), 0 0 100px -16px rgba(217,164,65,.55); transform:rotate(0.6deg); }
-.how-panel--04{ box-shadow: 0 34px 64px -24px rgba(30,37,64,.4), 0 10px 24px -12px rgba(30,37,64,.28), 0 0 100px -16px rgba(63,125,92,.5); transform:rotate(-0.7deg); }
+.how-panel--02{ box-shadow: 0 34px 64px -24px rgba(30,37,64,.4), 0 10px 24px -12px rgba(30,37,64,.28), 0 0 100px -16px rgba(221,107,46,.5); transform:rotate(-0.6deg); }
+.how-panel--03{ box-shadow: 0 34px 64px -24px rgba(30,37,64,.4), 0 10px 24px -12px rgba(30,37,64,.28), 0 0 100px -16px rgba(221,107,46,.5); transform:rotate(0.6deg); }
+.how-panel--04{ box-shadow: 0 34px 64px -24px rgba(30,37,64,.4), 0 10px 24px -12px rgba(30,37,64,.28), 0 0 100px -16px rgba(221,107,46,.5); transform:rotate(-0.7deg); }
 
 /* shared "real interface" header used across all 4 mockups */
 .how-panel-chrome{ display:flex; align-items:center; gap:6px; width:100%; margin-bottom:14px; }
