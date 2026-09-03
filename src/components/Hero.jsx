@@ -113,7 +113,9 @@ export default function Hero() {
       const bandTopPct = Math.max(4, landscapeTopPct * 0.15)
       const bandHeightPct = Math.max(10, landscapeTopPct * 0.7)
 
-      const cols = 10
+      // sparser and bigger than a "texture" — few enough to read as individual
+      // formulas/symbols floating in the sky, not a dense wallpaper pattern
+      const cols = 5
       const rows = 2
       const cellW = 100 / cols
       const cellH = bandHeightPct / rows
@@ -123,8 +125,8 @@ export default function Hero() {
           const xPct = (col + 0.5) * cellW + (Math.random() - 0.5) * cellW * 0.5
           const yPct = bandTopPct + (row + 0.5) * cellH + (Math.random() - 0.5) * cellH * 0.5
 
-          const opacity = 0.32 + Math.random() * 0.16
-          const fontSize = 13 + Math.random() * 7
+          const opacity = 0.45 + Math.random() * 0.15
+          const fontSize = 28 + Math.random() * 16
           const rot = -5 + Math.random() * 10
           const waveAmp = 5 + Math.random() * 3
           const waveDur = 5.4 + Math.random() * 0.6
@@ -417,10 +419,10 @@ export default function Hero() {
             <line x1="0" y1="490" x2="1536" y2="490" />
             <line x1="0" y1="520" x2="1536" y2="520" />
           </g>
-          <use href="#prop-books" x="30" y="378" width="220" height="157" />
-          <use href="#prop-microscope" x="260" y="336" width="150" height="193" />
-          <use href="#prop-flasks" x="1170" y="322" width="185" height="206" />
-          <use href="#prop-plant" x="1385" y="342" width="140" height="172" />
+          <use href="#prop-books" x="4" y="378" width="220" height="157" />
+          <use href="#prop-microscope" x="300" y="336" width="150" height="193" />
+          <use href="#prop-flasks" x="1210" y="322" width="185" height="206" />
+          <use href="#prop-plant" x="1400" y="342" width="140" height="172" />
         </svg>
       </div>
     </div>
