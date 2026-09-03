@@ -698,56 +698,6 @@ h1{
     transparent 92%
   );
 }
-/* orange margin bands: visible only in the TRUE outer margins (left of / right of this
-   section's own 1560px content width), never behind the actual panels/copy, at any
-   viewport width or browser zoom level. The trick is a linear mask whose transparent
-   (hidden) middle zone is defined in real px (calc(50% - 780px) to calc(50% + 780px),
-   780 = half of 1560) rather than percentages of the full-bleed width — a percentage
-   would shift with viewport width, but this stays locked to the section's actual content
-   width regardless of how wide the browser window or --zoom is. Below ~1560px+padding
-   the transparent zone consumes the whole element and the bands simply don't show,
-   which is correct (no true margin exists to put them in). */
-.how-side-bands{
-  position:absolute; top:0; bottom:0; left:50%; z-index:0; pointer-events:none;
-  width: calc(100vw / var(--zoom, 1));
-  margin-left: calc(-50vw / var(--zoom, 1));
-  background: rgba(221,107,46,.18);
-  -webkit-mask-image: linear-gradient(to right,
-    black 0, black calc(50% - 780px),
-    transparent calc(50% - 780px), transparent calc(50% + 780px),
-    black calc(50% + 780px), black 100%
-  );
-  mask-image: linear-gradient(to right,
-    black 0, black calc(50% - 780px),
-    transparent calc(50% - 780px), transparent calc(50% + 780px),
-    black calc(50% + 780px), black 100%
-  );
-}
-/* white floating symbols living inside those same bands (same mask, so they never
-   wander into the readable center column) — a plain SymbolField instance colored white,
-   layered above the orange band so the white actually shows against it */
-.how-side-symbols{
-  position:absolute; top:0; bottom:0; left:50%; z-index:0; pointer-events:none;
-  width: calc(100vw / var(--zoom, 1));
-  margin-left: calc(-50vw / var(--zoom, 1));
-  /* forces this onto its own compositing layer — without it, Chromium fails to apply
-     the mask below to the animated SymbolField spans inside (they render fully
-     invisible, even though the identical mask correctly clips the plain-background
-     .how-side-bands right above it) */
-  transform: translateZ(0);
-  -webkit-mask-image: linear-gradient(to right,
-    black 0, black calc(50% - 780px),
-    transparent calc(50% - 780px), transparent calc(50% + 780px),
-    black calc(50% + 780px), black 100%
-  );
-  mask-image: linear-gradient(to right,
-    black 0, black calc(50% - 780px),
-    transparent calc(50% - 780px), transparent calc(50% + 780px),
-    black calc(50% + 780px), black 100%
-  );
-}
-@media (max-width:900px){ .how-side-bands, .how-side-symbols{ display:none; } }
-
 /* ambient background texture for the whole section — true edge-to-edge breakout (same
    --zoom-compensated formula as .how-landscape below) so symbols can actually occupy the
    real page margins outside this section's own ~1560px content width, not just repeat
@@ -822,7 +772,7 @@ h1{
 .how-visual{ width:100%; display:flex; justify-content:center; }
 .how-panel{
   position:relative; width:100%; max-width:760px; min-height:410px;
-  background:var(--card-bg); border:1px solid var(--card-border); border-radius:24px;
+  background:var(--card-bg); border:1.5px solid rgba(221,107,46,.4); border-radius:24px;
   padding:32px 36px; display:flex; flex-direction:column; align-items:center; justify-content:center;
   /* two-layer shadow — a big soft ambient glow plus a tighter, darker contact shadow
      close to the card — reads as properly lifted/"popped" instead of just faintly hazy */
