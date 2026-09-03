@@ -162,6 +162,7 @@ export default function Hero() {
       </div>
 
       <div className="landscape-wrap" ref={landscapeRef}>
+        <div className="hero-hills-glow" aria-hidden="true" />
         <svg className="scene-svg" viewBox="0 0 1536 538" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
           <polygon points="0,560 0,320 90,260 180,300 260,230 340,280 430,190 520,260 610,210 700,150 780,200 860,160 950,220 1040,180 1130,240 1220,190 1310,250 1400,210 1480,260 1536,230 1536,560" fill="var(--sage-back)" />
 

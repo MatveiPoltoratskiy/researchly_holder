@@ -408,7 +408,22 @@ h1{
 
 /* ---------- illustrated low-poly scene ---------- */
 .landscape-wrap{ position:relative; z-index:2; margin-top:-56px; }
+/* warm glow sitting behind the mountain silhouette — the hill polygons have no "sky"
+   fill above their own peaks, so this shows through the gaps around and between the
+   ridgeline, reading as light spilling out from behind the hills rather than a wash
+   over them. Sits behind the svg (z-index below it) so the opaque sage layers still
+   occlude it lower down the scene. */
+.hero-hills-glow{
+  position:absolute; inset:0; z-index:0; pointer-events:none;
+  background: radial-gradient(ellipse 68% 52% at 50% 38%,
+    rgba(221,107,46,.55) 0%,
+    rgba(221,107,46,.32) 34%,
+    rgba(217,164,65,.16) 60%,
+    transparent 82%
+  );
+}
 .scene-svg{
+  position:relative; z-index:1;
   display:block; width:100%; height:auto;
   -webkit-mask-image: linear-gradient(to bottom, black 0%, black 90%, transparent 100%);
   mask-image: linear-gradient(to bottom, black 0%, black 90%, transparent 100%);
