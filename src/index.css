@@ -199,8 +199,10 @@ svg{ display:block; }
 .th-flank{ position:relative; display:flex; align-items:flex-end; align-self:end; }
 /* pushed toward the OUTER page edge (not the center gutter) so they hug the sides of
    the screen the way the two flanking props (books/microscope, flasks/plant) do */
-.th-flank--left{ justify-content:flex-start; }
-.th-flank--right{ justify-content:flex-end; }
+/* inset from the true frame edge (not flush) — leaves a clear gap so the book stack /
+   flask rack read as sitting beside the phone instead of disappearing behind it */
+.th-flank--left{ justify-content:flex-start; padding-left:64px; }
+.th-flank--right{ justify-content:flex-end; padding-right:64px; }
 .th-card-shell{
   width:100%; max-width:340px; transform: rotate(var(--rot,0));
   animation: content-in .8s ease-out .3s both, card-float 6.4s ease-in-out infinite;
