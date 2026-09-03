@@ -211,7 +211,7 @@ export default function HowItWorks() {
         <SymbolField
           rows={10}
           cols={12}
-          opacityRange={[0.18, 0.3]}
+          opacityRange={[0.1, 0.16]}
           fontSizeRange={[14, 24]}
           colors={['var(--symbol-tan)', 'var(--cover-dark)', 'var(--ribbon)', 'var(--gold)']}
         />
