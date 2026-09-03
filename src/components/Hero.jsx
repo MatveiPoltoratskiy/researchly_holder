@@ -242,6 +242,10 @@ export default function Hero() {
             <div className="th-phone" data-tilt>
               <div className="th-phone-notch" />
               <div className="th-phone-camera" />
+              <div className="th-phone-btn th-phone-btn--mute" />
+              <div className="th-phone-btn th-phone-btn--vol-up" />
+              <div className="th-phone-btn th-phone-btn--vol-down" />
+              <div className="th-phone-btn th-phone-btn--power" />
               <div className="th-phone-screen">
                 <div className="th-phone-status">
                   <span>9:41</span>
@@ -312,6 +316,10 @@ export default function Hero() {
               </div>
               <div className="th-phone-notch" />
               <div className="th-phone-camera" />
+              <div className="th-phone-btn th-phone-btn--mute" />
+              <div className="th-phone-btn th-phone-btn--vol-up" />
+              <div className="th-phone-btn th-phone-btn--vol-down" />
+              <div className="th-phone-btn th-phone-btn--power" />
               <div className="th-phone-screen">
                 <div className="th-phone-status">
                   <span>9:41</span>
@@ -398,6 +406,11 @@ export default function Hero() {
           </div>
         </div>
       </div>
+
+      {/* solid-color ground band sitting IN FRONT of the phones (higher z-index) — this is
+          what gives them a hard, flat cutoff at the bottom instead of a rounded case edge,
+          as if they're planted in the plaza rather than floating in front of it */}
+      <div className="th-ground-cutoff" aria-hidden="true" />
 
       <div className="landscape-wrap" ref={landscapeRef}>
         <div className="hero-hills-glow" aria-hidden="true" />

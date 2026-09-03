@@ -150,8 +150,13 @@ svg{ display:block; }
 
 /* wide, near-full-bleed frame (not the sitewide 1280px .container) */
 .th-frame{
-  position:relative; z-index:5; max-width:1920px; margin:0 auto; padding:0 32px;
-  display:grid; grid-template-columns: minmax(0,380px) minmax(0,720px) minmax(0,380px);
+  position:relative; z-index:5; max-width:1920px; margin:0 auto; padding:0 24px;
+  /* equal `1fr` flanks (not two independent minmax(0,380px) tracks) — with fixed
+     max-width tracks on each side, the browser's track-sizing pass can resolve them to
+     genuinely different widths once content-driven minimums come into play (the center
+     column's headline/CTA has its own minimum), which read as "one phone bigger than
+     the other." 1fr guarantees the two outer tracks always share leftover space equally. */
+  display:grid; grid-template-columns: 1fr minmax(0,720px) 1fr;
   align-items:end; gap:0;
   padding-top: 12px;
 }
@@ -210,19 +215,27 @@ svg{ display:block; }
 .th-flank--right .th-card-shell{ animation-delay:.4s; }
 
 .th-phone{
-  position:relative; border-radius:48px; padding:14px 12px 24px;
-  /* faint metal-edge gradient instead of a flat fill, plus a hairline rim highlight —
-     reads as an actual device bezel rather than a flat rounded rectangle */
-  background: linear-gradient(155deg, #2A3350, var(--navy) 40%, #171D33);
-  box-shadow: 0 42px 84px -30px rgba(30,37,64,.32), 0 10px 26px -8px rgba(30,37,64,.14), inset 0 0 0 1.5px rgba(255,255,255,.08);
+  position:relative; border-radius:48px; padding:10px 8px 26px;
+  /* real device silver/titanium bezel — a light metal gradient with a brighter highlight
+     along the top-left edge (where light would catch a rounded metal rail) instead of
+     the flat dark slab used before */
+  background: linear-gradient(150deg, #F1F2F4 0%, #C7C9CE 22%, #9A9CA3 48%, #DEDFE3 62%, #B4B6BC 100%);
+  box-shadow: 0 42px 84px -30px rgba(30,37,64,.32), 0 10px 26px -8px rgba(30,37,64,.14), inset 0 0 0 1px rgba(255,255,255,.65), inset 0 0 0 2.5px rgba(30,37,64,.18);
   transform-style:preserve-3d; transition: transform .12s ease-out; cursor:default;
 }
 .th-phone.is-tilting{ transition: transform .06s linear; }
 .th-phone-camera{
-  position:absolute; top:20px; left:50%; transform:translateX(-50%); z-index:4;
+  position:absolute; top:16px; left:50%; transform:translateX(-50%); z-index:4;
   width:8px; height:8px; border-radius:50%;
   background: radial-gradient(circle at 35% 35%, #4A5578, #0B0F1C 70%);
 }
+/* side buttons — small raised nubs on the silver rail, just enough to read as a real
+   device silhouette instead of a flat rounded rectangle */
+.th-phone-btn{ position:absolute; background: linear-gradient(90deg, #A6A8AE, #DBDCE0); border-radius:2px; z-index:1; }
+.th-phone-btn--mute{ left:-3px; top:100px; width:3px; height:22px; }
+.th-phone-btn--vol-up{ left:-3px; top:140px; width:3px; height:38px; }
+.th-phone-btn--vol-down{ left:-3px; top:188px; width:3px; height:38px; }
+.th-phone-btn--power{ right:-3px; top:150px; width:3px; height:58px; }
 
 /* mascot perched beside the right-hand phone — same figure/entrance/bob as the rest
    of the site's mascot appearances, just placed here instead of over a single card */
@@ -234,8 +247,8 @@ svg{ display:block; }
 .th-mascot img{ width:100%; height:auto; display:block; filter: drop-shadow(0 16px 18px rgba(30,37,64,.32)); }
 @media (max-width: 1180px){ .th-mascot{ display:none; } }
 .th-phone-notch{
-  position:absolute; top:14px; left:50%; transform:translateX(-50%); z-index:3;
-  width:80px; height:18px; background: var(--navy); border-radius:0 0 13px 13px;
+  position:absolute; top:12px; left:50%; transform:translateX(-50%); z-index:3;
+  width:80px; height:18px; background:#14161F; border-radius:0 0 13px 13px;
 }
 .th-phone-screen{
   position:relative; overflow:hidden; border-radius:34px; background: var(--card-bg);
@@ -603,6 +616,15 @@ h1{
 /* pulled up so the ground/plaza level (where the books/microscope/flasks/plant sit)
    lands right around the phones' feet instead of appearing as a separate section below
    them — z-index below .th-frame (5) so the phones stay in front of the scene */
+/* flat ground-color band, positioned above the phones (z-index 6 > .th-frame's 5) so it
+   crops their bottoms with a hard edge instead of showing a rounded case corner — same
+   color as the SVG plaza rect below it (var(--stone)) so the seam is invisible */
+.th-ground-cutoff{
+  position:absolute; left:0; right:0; bottom:0; height:28px; z-index:6;
+  background: var(--stone); pointer-events:none;
+}
+@media (max-width: 1180px){ .th-ground-cutoff{ display:none; } }
+
 .landscape-wrap{ position:relative; z-index:2; margin-top:-460px; }
 @media (max-width: 1180px){ .landscape-wrap{ display:none; } }
 /* warm glow sitting behind the mountain silhouette — the hill polygons have no "sky"
