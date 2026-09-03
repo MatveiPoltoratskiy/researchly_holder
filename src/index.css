@@ -627,7 +627,7 @@ h1{
    crops their bottoms with a hard edge instead of showing a rounded case corner — same
    color as the SVG plaza rect below it (var(--stone)) so the seam is invisible */
 .th-ground-cutoff{
-  position:absolute; left:0; right:0; bottom:0; height:28px; z-index:6;
+  position:absolute; left:0; right:0; bottom:0; height:60px; z-index:6;
   background: var(--stone); pointer-events:none;
 }
 @media (max-width: 1180px){ .th-ground-cutoff{ display:none; } }
