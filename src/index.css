@@ -212,7 +212,10 @@ h1{
    scrolls in from below, faded at both edges instead of hard-clipped */
 .hero-scroll-word{
   position:relative; display:inline-block; overflow:hidden;
-  height:1em; line-height:1; vertical-align:top;
+  /* taller than 1em (with matching row-height/translate below) — a true 1em row clipped
+     the ascenders/descenders of the row above/below into a hard, ugly edge instead of
+     the intended soft fade */
+  height:1.32em; line-height:1.32; vertical-align:top;
   font-style:italic;
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%);
   mask-image: linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%);
@@ -222,8 +225,8 @@ h1{
   transition: transform .52s cubic-bezier(.4,0,.2,1);
 }
 .hero-scroll-viewport em{
-  display:block; height:1em; line-height:1;
-  font-family: "Poppins","Segoe UI",system-ui,sans-serif; font-weight:800;
+  display:block; height:1.32em; line-height:1.32;
+  font-family: var(--font-title); font-weight:700;
 }
 @media (prefers-reduced-motion: reduce){
   .hero-scroll-viewport{ transition:none; }

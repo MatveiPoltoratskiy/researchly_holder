@@ -49,7 +49,7 @@ function FlickerWord() {
     <span className="circle-mark hero-scroll-word">
       <span
         className="hero-scroll-viewport"
-        style={{ transform: `translateY(-${step}em)`, transition: animated ? undefined : 'none' }}
+        style={{ transform: `translateY(-${step * 1.32}em)`, transition: animated ? undefined : 'none' }}
       >
         {LOOP_WORDS.map((word, i) => (
           <em key={i}>{word}</em>
