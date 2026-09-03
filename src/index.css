@@ -39,9 +39,10 @@ body{
   font-family: Georgia, "Iowan Old Style", serif;
   overflow-x:hidden;
   /* .site-nav is position:fixed (floats over the page, transparent, follows scroll) and so
-     is out of normal flow — this replaces the space it used to reserve, plus extra room so
-     the header doesn't crowd the content directly beneath it. */
-  padding-top: 148px;
+     is out of normal flow — this replaces the space it used to reserve. Matches the nav's
+     own rendered height (14px+14px padding + ~36px tallest row content + 1px border) —
+     kept thin on purpose so the hero below gets more of the viewport's height. */
+  padding-top: 66px;
 }
 svg{ display:block; }
 .visually-hidden{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
@@ -80,26 +81,26 @@ svg{ display:block; }
    header band across the whole viewport, with the nav content centered inside it */
 .site-nav-bar{
   position:fixed; top:0; left:0; right:0; z-index:100;
-  background: rgba(244,233,208,.72);
+  background: rgba(255,255,255,.82);
   -webkit-backdrop-filter: blur(7px); backdrop-filter: blur(7px);
   border-bottom: 1px solid rgba(30,37,64,.08);
 }
 .site-nav{
   display:flex; align-items:center; justify-content:space-between;
-  padding-top: 24px; padding-bottom: 24px;
+  padding-top: 14px; padding-bottom: 14px;
 }
-.brand{ display:flex; align-items:center; gap:9px; text-decoration:none; cursor:pointer; }
-.brand img{ height:40px; width:auto; display:block; }
+.brand{ display:flex; align-items:center; gap:8px; text-decoration:none; cursor:pointer; }
+.brand img{ height:30px; width:auto; display:block; }
 .brand span{
-  font-size:21px; font-weight:700; letter-spacing:-.01em;
+  font-size:18px; font-weight:700; letter-spacing:-.01em;
   color: #081100;
   font-family: "Poppins","Segoe UI",system-ui,sans-serif;
 }
 .nav-cta{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; font-weight:700;
-  border:none; cursor:pointer;
+  display:inline-block; font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; font-weight:700;
+  border:none; cursor:pointer; text-decoration:none;
   background: var(--cover); color:#FFF6EC;
-  padding:13px 25px; border-radius:999px;
+  padding:9px 19px; border-radius:999px;
   box-shadow: 0 10px 20px -10px rgba(169,79,30,.55);
   transition: transform .18s ease, box-shadow .18s ease;
 }
@@ -114,37 +115,20 @@ svg{ display:block; }
 @media (max-width:520px){ .nav-right{ gap:14px; } }
 
 /* ---------- hero shell ---------- */
+/* two phone showcases flanking a centered headline+CTA, over the site's own illustrated
+   low-poly scene (mountains, books, microscope, flasks, plant, mascot) — the layout
+   shape borrows from a reference mockup but the art/palette stays fully Researchly's.
+   All new rules below are scoped to the "th-" (template hero) prefix so they can't
+   collide with the `.opp-*`/`.iq-*`-shaped classes already used by /opportunities. */
 .hero{
   position:relative; flex:1; overflow:hidden;
-  /* no background of its own — shows the page's --cream-deep body color through, so it
-     reads as one continuous warm cream field with How It Works/FAQ/Contact below it
-     instead of a lighter, separately-colored band at the top of the page */
-  padding-bottom: 0;
+  /* no background of its own — shows the page's --cream-deep body color through */
+  padding-bottom: 40px;
 }
-
-/* faint decorative sketches scattered across the cream field */
-.hero-sketch{ position:absolute; color: var(--navy-faint); pointer-events:none; z-index:1; }
-.hero-sketch svg{ display:block; overflow:visible; }
-.sketch-hex-b{ right:6%; top:6%; width:150px; opacity:.16; }
-.sketch-hex-a{ left:3%; top:19%; width:120px; color: rgba(30,37,64,.12); }
-.sketch-note{
-  font-family:"Bradley Hand","Segoe Print","Comic Sans MS",cursive;
-  font-size:17px; line-height:1.35; color: rgba(30,37,64,.12);
-  max-width:150px;
-}
-.sketch-note-b{ left:2%; top:41%; transform: rotate(-3deg); }
-.sketch-formula{
-  font-family: Georgia, serif; font-style:italic; font-size:14px; color: var(--navy-faint);
-}
-.formula-a{ right:9%; top:14%; }
-
 @media (max-width: 900px){ .hero-sketch{ display:none; } }
 
-/* research-symbol texture: a single even band just above the landscape, nowhere else */
+/* research-symbol texture floating in the sky band above the landscape */
 .symbol-field{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
-/* hero's own symbol band sits right where the orange glow is strongest — white instead
-   of the sitewide tan so the symbols pop out of the orange instead of blending into it */
-.hero .symbol-field span{ color:#fff; text-shadow: 0 1px 3px rgba(30,37,64,.12); }
 .symbol-field span{
   position:absolute; color: var(--symbol-tan);
   font-family: "SF Mono", "Courier New", ui-monospace, monospace;
@@ -159,6 +143,172 @@ svg{ display:block; }
 }
 @media (prefers-reduced-motion: reduce){ .symbol-field span{ animation:none; } }
 @media (max-width: 900px){ .symbol-field{ display:none; } }
+
+/* wide, near-full-bleed frame (not the sitewide 1280px .container) */
+.th-frame{
+  position:relative; z-index:5; max-width:1920px; margin:0 auto; padding:0 32px;
+  display:grid; grid-template-columns: minmax(0,380px) minmax(0,720px) minmax(0,380px);
+  align-items:end; gap:0;
+  padding-top: 12px;
+}
+
+/* ---------- headline ---------- */
+.th-center{ text-align:center; align-self:center; animation: content-in .8s ease-out .1s both; padding-bottom:24px; }
+.th-hero h1{
+  margin:0 0 16px; font-family: var(--font-title); font-weight:700;
+  -webkit-text-stroke: .5px currentColor;
+  font-size: clamp(30px, 3.4vw, 46px); line-height:1.18; color: var(--navy); text-wrap:balance;
+}
+.th-sub{
+  margin:0 auto 22px; max-width:600px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:17px; line-height:1.55; color: var(--navy-soft);
+}
+.th-word{
+  position:relative; display:inline-block; overflow:hidden; height:1.28em; line-height:1.28;
+  vertical-align:-.22em; font-style:italic;
+  /* width is set inline per-word (see FlickerWord's width measurement) — this only
+     smooths the change between one word's width and the next */
+  transition: width .3s cubic-bezier(.4,0,.2,1);
+}
+.th-word-viewport{ display:flex; flex-direction:column; align-items:center; transition: transform .52s cubic-bezier(.4,0,.2,1); }
+.th-word-viewport em{
+  display:block; height:1.28em; line-height:1.28; font-family: var(--font-title); font-weight:700;
+  color: var(--cover-dark); -webkit-text-fill-color: var(--cover-dark); white-space:nowrap;
+}
+@media (prefers-reduced-motion: reduce){ .th-word-viewport{ transition:none; } .th-word{ transition:none; } }
+
+.th-cta-wrap{ display:flex; flex-direction:column; align-items:center; gap:10px; }
+.th-cta-btn{
+  display:inline-block; font-family: var(--font-title); font-weight:700; font-size:16px;
+  border:none; cursor:pointer; text-decoration:none;
+  background: linear-gradient(180deg, #FFB258, #FF9A3D);
+  color:#3B2205; padding:15px 34px; border-radius:999px;
+  box-shadow: 0 14px 30px -12px rgba(169,79,30,.5);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.th-cta-btn:hover{ transform: translateY(-2px); box-shadow: 0 18px 34px -12px rgba(169,79,30,.55); }
+.th-cta-hint{ font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:600; color: var(--navy-faint); margin:0; }
+
+/* ---------- showcase phones ---------- */
+/* full phones, no crop/fade — they sit naturally over the illustrated ground/plaza
+   level of the landscape scene below, like a real object placed in the picture. */
+.th-flank{ position:relative; display:flex; align-items:flex-end; align-self:end; }
+/* pushed toward the OUTER page edge (not the center gutter) so they hug the sides of
+   the screen the way the two flanking props (books/microscope, flasks/plant) do */
+.th-flank--left{ justify-content:flex-start; }
+.th-flank--right{ justify-content:flex-end; }
+.th-card-shell{
+  width:100%; max-width:340px; transform: rotate(var(--rot,0));
+  animation: content-in .8s ease-out .3s both, card-float 6.4s ease-in-out infinite;
+}
+.th-flank--right .th-card-shell{ animation-delay:.4s; }
+
+.th-phone{
+  position:relative; border-radius:48px; padding:14px 12px 24px;
+  /* faint metal-edge gradient instead of a flat fill, plus a hairline rim highlight —
+     reads as an actual device bezel rather than a flat rounded rectangle */
+  background: linear-gradient(155deg, #2A3350, var(--navy) 40%, #171D33);
+  box-shadow: 0 42px 84px -30px rgba(30,37,64,.32), 0 10px 26px -8px rgba(30,37,64,.14), inset 0 0 0 1.5px rgba(255,255,255,.08);
+  transform-style:preserve-3d; transition: transform .12s ease-out; cursor:default;
+}
+.th-phone.is-tilting{ transition: transform .06s linear; }
+.th-phone-camera{
+  position:absolute; top:20px; left:50%; transform:translateX(-50%); z-index:4;
+  width:8px; height:8px; border-radius:50%;
+  background: radial-gradient(circle at 35% 35%, #4A5578, #0B0F1C 70%);
+}
+
+/* mascot perched beside the right-hand phone — same figure/entrance/bob as the rest
+   of the site's mascot appearances, just placed here instead of over a single card */
+.th-mascot{
+  position:absolute; top:-9%; right:-16%; width:22%; z-index:8;
+  pointer-events:none; opacity:0;
+  animation: mascot-in 1.15s cubic-bezier(.22,.85,.32,1.05) 1.05s both, mascot-bob 3.8s ease-in-out 2.2s infinite;
+}
+.th-mascot img{ width:100%; height:auto; display:block; filter: drop-shadow(0 16px 18px rgba(30,37,64,.32)); }
+@media (max-width: 1180px){ .th-mascot{ display:none; } }
+.th-phone-notch{
+  position:absolute; top:14px; left:50%; transform:translateX(-50%); z-index:3;
+  width:80px; height:18px; background: var(--navy); border-radius:0 0 13px 13px;
+}
+.th-phone-screen{
+  position:relative; overflow:hidden; border-radius:34px; background: var(--card-bg);
+  min-height:600px; padding:36px 20px 24px;
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 90%, transparent 100%);
+}
+.th-phone-status{
+  position:absolute; top:0; left:0; right:0; height:34px;
+  display:flex; align-items:center; justify-content:space-between; padding:0 22px;
+  font-family: var(--font-title); font-weight:700; font-size:13px; color: var(--navy);
+}
+.th-phone-battery{ width:22px; height:11px; border:1.4px solid var(--navy); border-radius:3px; position:relative; opacity:.8; }
+.th-phone-battery::before{ content:""; position:absolute; top:1.5px; left:1.5px; bottom:1.5px; width:70%; background: var(--navy); border-radius:1px; }
+.th-phone-battery::after{ content:""; position:absolute; top:3px; right:-3px; width:2px; height:5px; background: var(--navy); border-radius:0 1px 1px 0; }
+.th-chrome{ display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+.th-chrome-dots{ display:flex; gap:5px; }
+.th-chrome-dots span{ width:6px; height:6px; border-radius:50%; background: var(--card-border); }
+.th-chrome-label{ font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:700; color: var(--navy-soft); letter-spacing:.02em; }
+.th-chrome-meta{ font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:700; color: var(--cover-dark); }
+
+.th-iq-question{ font-family: var(--font-title); font-weight:700; font-size:22px; line-height:1.25; color: var(--navy); margin:0 0 16px; }
+.th-iq-option{
+  display:flex; align-items:center; gap:12px; padding:14px 16px; margin-bottom:10px;
+  border-radius:16px; border:1.5px solid var(--card-border); background:#fff;
+}
+.th-iq-option.is-selected{ border-color: var(--cover); background: rgba(221,107,46,.06); box-shadow:0 8px 20px -12px rgba(221,107,46,.4); }
+.th-iq-icon{
+  width:38px; height:38px; border-radius:11px; flex:none; display:flex; align-items:center; justify-content:center;
+  background: var(--pill-amber-bg); color: var(--cover-dark);
+}
+.th-iq-main{ flex:1; min-width:0; }
+.th-iq-label{ font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:14.5px; color: var(--navy); display:block; }
+.th-iq-desc{ font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; color: var(--navy-soft); }
+.th-iq-check{ width:22px; height:22px; border-radius:50%; flex:none; border:2px solid var(--card-border); position:relative; }
+.th-iq-option.is-selected .th-iq-check{ border-color: var(--cover); background: var(--cover); }
+.th-iq-option.is-selected .th-iq-check::after{ content:""; position:absolute; inset:5px; border-radius:50%; background:#fff; }
+.th-iq-continue{
+  width:100%; margin-top:6px; font-family: var(--font-title); font-weight:700; font-size:15px;
+  background: var(--navy); color:#fff; border:none; border-radius:14px; padding:14px; cursor:pointer;
+}
+
+.th-crest{ width:38px; height:38px; flex:none; position:relative; }
+.th-crest svg{ width:100%; height:100%; display:block; }
+.th-crest span{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  font-family: var(--font-title); font-weight:700; font-size:13px; color:#fff; padding-bottom:3px;
+}
+.th-opp{ border:1.5px solid var(--card-border); border-radius:18px; padding:16px 18px; margin-bottom:12px; background:#fff; }
+.th-opp:last-child{ margin-bottom:0; }
+.th-opp-head{ display:flex; align-items:flex-start; gap:12px; }
+.th-opp-heading{ flex:1; min-width:0; }
+.th-opp-title{ font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:15px; color: var(--navy); margin:0 0 1px; }
+.th-opp-org{ font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; color: var(--navy-soft); margin:0; }
+.th-opp-save{
+  flex:none; width:30px; height:30px; border-radius:9px; border:1.5px solid var(--card-border);
+  display:flex; align-items:center; justify-content:center; color: var(--cover);
+}
+.th-opp-detail-row{ display:flex; gap:14px; margin-top:10px; }
+.th-opp-detail{ display:flex; align-items:center; gap:5px; font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:600; color: var(--navy-soft); }
+.th-opp-detail svg{ width:13px; height:13px; color: var(--cover-dark); }
+.th-opp-tags{ display:flex; gap:6px; margin-top:10px; flex-wrap:wrap; }
+.th-opp-tag{ font-family:"Segoe UI",system-ui,sans-serif; font-size:10.5px; font-weight:700; padding:3px 9px; border-radius:999px; background: var(--pill-bg); color: var(--pill-text); }
+.th-opp-tag.th-tag-green{ background: var(--pill-green-bg); color: var(--pill-green-text); }
+
+@keyframes card-float{ 0%,100%{ transform:translateY(0) rotate(var(--rot,0)); } 50%{ transform:translateY(-9px) rotate(var(--rot,0)); } }
+
+@media (max-width: 1180px){
+  .th-frame{ grid-template-columns:1fr; }
+  .th-flank{ display:none; }
+}
+@media (prefers-reduced-motion: reduce){
+  /* stop the bobbing/entrance animation but keep the deliberate static tilt (matching
+     card-float's 0% frame) — zeroing transform entirely here would flatten the phones
+     back to perfectly upright whenever the OS "reduce motion" setting is on */
+  .th-center{ animation:none; opacity:1; }
+  .th-card-shell{ animation:none; transform: rotate(var(--rot,0)); }
+  .th-mascot{ animation:none; opacity:1; }
+}
 
 .hero-top{
   position:relative; z-index:5; width:100%;
@@ -444,7 +594,11 @@ h1{
 }
 
 /* ---------- illustrated low-poly scene ---------- */
-.landscape-wrap{ position:relative; z-index:2; margin-top:-56px; }
+/* pulled up so the ground/plaza level (where the books/microscope/flasks/plant sit)
+   lands right around the phones' feet instead of appearing as a separate section below
+   them — z-index below .th-frame (5) so the phones stay in front of the scene */
+.landscape-wrap{ position:relative; z-index:2; margin-top:-320px; }
+@media (max-width: 1180px){ .landscape-wrap{ display:none; } }
 /* warm glow sitting behind the mountain silhouette — the hill polygons have no "sky"
    fill above their own peaks, so this shows through the gaps around and between the
    ridgeline, reading as light spilling out from behind the hills rather than a wash
@@ -519,9 +673,10 @@ h1{
 /* ---------- testimonial carousel: floats over the plaza/prop level, like the mockup card floats over the mountains ---------- */
 .reviews-section{
   position:relative; z-index:6;
-  /* smaller pull-up than before: still floats over the hero art, but no longer overshoots past
-     its own content height and drags the section below it (FAQ) up into the hero too */
-  margin-top: clamp(-340px, -27vw, -200px);
+  /* the template-matched hero (src/components/Hero.jsx) has no illustrated landscape for
+     this to float over anymore — it now just sits in normal flow below the hero's own
+     padding-bottom, instead of the large negative pull-up the old landscape-art hero needed */
+  margin-top: 0;
   padding-bottom: 8px;
 }
 .reviews-kicker{

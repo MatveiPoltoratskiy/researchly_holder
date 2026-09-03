@@ -35,9 +35,6 @@ export default function Navbar() {
           <a className="nav-link" href="/how-it-works" onClick={handleHowItWorksClick}>
             How it works
           </a>
-          <Link className="nav-link" to="/contact">
-            Contact us
-          </Link>
           {/* dev links to the private prototypes moved to a gated entry point in the
               footer (see devAccess.js) — no longer shown here unconditionally */}
           <button className="nav-cta" type="button" onClick={handleJoinClick}>

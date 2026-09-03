@@ -28,7 +28,7 @@ export default function ReviewCarousel() {
 
   return (
     <section className="reviews-section">
-      <p className="reviews-kicker">Beta testers say&hellip;</p>
+      <p className="reviews-kicker">Students like you say&hellip;</p>
       <div className="reviews-track-wrap">
         <div className="reviews-track">
           {looped.map((review, i) => (
