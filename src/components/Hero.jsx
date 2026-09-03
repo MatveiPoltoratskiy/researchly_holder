@@ -7,25 +7,24 @@ import Waitlist from './Waitlist'
 // so the headline names the whole range of what students feel while they're searching,
 // not just one word of it
 const FLICKER_WORDS = ['lost', 'overwhelmed', 'afraid', 'behind', 'confused', 'stuck']
+// one extra copy of the first word tacked on the end — scrolling onto that duplicate
+// and then snapping the track back to real index 0 (same word, so the snap is invisible)
+// is what makes the vertical scroll read as an endless loop instead of visibly resetting
+const LOOP_WORDS = [...FLICKER_WORDS, FLICKER_WORDS[0]]
 
 function FlickerWord() {
-  const [index, setIndex] = useState(0)
-  const [glitching, setGlitching] = useState(false)
+  const [step, setStep] = useState(0)
+  const [animated, setAnimated] = useState(true)
 
   useEffect(() => {
     if (prefersReducedMotion()) return
     const STEADY_DELAY = 2200 // where it settles once it slows down
-    const GLITCH_MS = 130
+    const SCROLL_MS = 520 // must match the CSS transition duration below
     let delay = 260 // rapid on page load
     let timer
 
     function tick() {
-      setGlitching(true)
-      setTimeout(() => {
-        setIndex((i) => (i + 1) % FLICKER_WORDS.length)
-        setGlitching(false)
-      }, GLITCH_MS)
-
+      setStep((s) => s + 1)
       delay = Math.min(STEADY_DELAY, delay * 1.4 + 90) // ramps down from rapid to a steady pace
       timer = setTimeout(tick, delay)
     }
@@ -34,9 +33,29 @@ function FlickerWord() {
     return () => clearTimeout(timer)
   }, [])
 
+  useEffect(() => {
+    if (step !== LOOP_WORDS.length - 1) return
+    // scrolled onto the duplicate — once that slide finishes, snap back to the real
+    // first word with no transition, then re-enable it on the next frame
+    const t = setTimeout(() => {
+      setAnimated(false)
+      setStep(0)
+      requestAnimationFrame(() => requestAnimationFrame(() => setAnimated(true)))
+    }, 520)
+    return () => clearTimeout(t)
+  }, [step])
+
   return (
-    <span className="circle-mark hero-flicker-word">
-      <em className={glitching ? 'is-glitching' : ''}>{FLICKER_WORDS[index]}</em>.
+    <span className="circle-mark hero-scroll-word">
+      <span
+        className="hero-scroll-viewport"
+        style={{ transform: `translateY(-${step}em)`, transition: animated ? undefined : 'none' }}
+      >
+        {LOOP_WORDS.map((word, i) => (
+          <em key={i}>{word}</em>
+        ))}
+      </span>
+      .
     </span>
   )
 }

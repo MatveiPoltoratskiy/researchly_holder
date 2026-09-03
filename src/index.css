@@ -207,26 +207,26 @@ h1{
   pointer-events:none;
 }
 /* the word cycling through lost/overwhelmed/afraid/... under the same highlighter mark —
-   width:100% + inline-block em keeps the swap from reflowing the rest of the headline as
-   word length changes; the italic is a synthetic slant (Six Caps has no true italic face),
-   which reads fine on a short condensed display word */
-.hero-flicker-word em{
-  display:inline-block;
-  font-style: italic;
+   a fixed one-line-tall window onto a vertical stack of every word, translated up by
+   whole steps so each swap reads as one word scrolling out the top while the next
+   scrolls in from below, faded at both edges instead of hard-clipped */
+.hero-scroll-word{
+  position:relative; display:inline-block; overflow:hidden;
+  height:1em; line-height:1; vertical-align:top;
+  font-style:italic;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%);
 }
-/* a quick jittery multi-flash rather than a smooth fade — reads as a glitchy swap between
-   words instead of a gentle crossfade, matching the "flicker" ask */
-.hero-flicker-word em.is-glitching{ animation: hero-word-glitch .13s steps(2, end); }
-@keyframes hero-word-glitch{
-  0%{ opacity:1; transform:translateX(0); }
-  20%{ opacity:.15; transform:translateX(-3px); }
-  40%{ opacity:1; transform:translateX(2px); }
-  60%{ opacity:.2; transform:translateX(-2px); }
-  80%{ opacity:1; transform:translateX(1px); }
-  100%{ opacity:.1; transform:translateX(0); }
+.hero-scroll-viewport{
+  display:flex; flex-direction:column;
+  transition: transform .52s cubic-bezier(.4,0,.2,1);
+}
+.hero-scroll-viewport em{
+  display:block; height:1em; line-height:1;
+  font-family: "Poppins","Segoe UI",system-ui,sans-serif; font-weight:800;
 }
 @media (prefers-reduced-motion: reduce){
-  .hero-flicker-word em.is-glitching{ animation:none; }
+  .hero-scroll-viewport{ transition:none; }
 }
 .tagline{
   margin: 14px 0 0;
