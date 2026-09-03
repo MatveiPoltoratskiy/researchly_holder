@@ -10,25 +10,33 @@ const FLICKER_WORDS = ['lost', 'overwhelmed', 'afraid', 'behind', 'confused', 's
 
 function FlickerWord() {
   const [index, setIndex] = useState(0)
-  const [fading, setFading] = useState(false)
+  const [glitching, setGlitching] = useState(false)
 
   useEffect(() => {
     if (prefersReducedMotion()) return
-    const swapEvery = 2200
-    const fadeMs = 220
-    const timer = setInterval(() => {
-      setFading(true)
+    const STEADY_DELAY = 2200 // where it settles once it slows down
+    const GLITCH_MS = 130
+    let delay = 260 // rapid on page load
+    let timer
+
+    function tick() {
+      setGlitching(true)
       setTimeout(() => {
         setIndex((i) => (i + 1) % FLICKER_WORDS.length)
-        setFading(false)
-      }, fadeMs)
-    }, swapEvery)
-    return () => clearInterval(timer)
+        setGlitching(false)
+      }, GLITCH_MS)
+
+      delay = Math.min(STEADY_DELAY, delay * 1.4 + 90) // ramps down from rapid to a steady pace
+      timer = setTimeout(tick, delay)
+    }
+
+    timer = setTimeout(tick, delay)
+    return () => clearTimeout(timer)
   }, [])
 
   return (
     <span className="circle-mark hero-flicker-word">
-      <em className={fading ? 'is-fading' : ''}>{FLICKER_WORDS[index]}</em>.
+      <em className={glitching ? 'is-glitching' : ''}>{FLICKER_WORDS[index]}</em>.
     </span>
   )
 }
@@ -87,7 +95,7 @@ export default function Hero() {
           const xPct = (col + 0.5) * cellW + (Math.random() - 0.5) * cellW * 0.4
           const yPct = bandTopPct + (row + 0.5) * cellH + (Math.random() - 0.5) * cellH * 0.4
 
-          const opacity = 0.22 + Math.random() * 0.06
+          const opacity = 0.4 + Math.random() * 0.18
           const fontSize = 12 + Math.random() * 6
           const rot = -5 + Math.random() * 10
           const waveAmp = 5 + Math.random() * 3
@@ -179,7 +187,7 @@ export default function Hero() {
           <h1>
             Come <FlickerWord />
             <br />
-            Leave knowing exactly where to start.
+            Leave with real research opportunities.
           </h1>
           <p className="sub">
             Get a personalized roadmap of research opportunities, internships, and summer programs
@@ -194,7 +202,10 @@ export default function Hero() {
       <div className="landscape-wrap" ref={landscapeRef}>
         <div className="hero-hills-glow" aria-hidden="true" />
         <svg className="scene-svg" viewBox="0 0 1536 538" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
-          <polygon points="0,560 0,320 90,260 180,300 260,230 340,280 430,190 520,260 610,210 700,150 780,200 860,160 950,220 1040,180 1130,240 1220,190 1310,250 1400,210 1480,260 1536,230 1536,560" fill="var(--sage-back)" />
+          {/* thin dark rim on the ridge facing the glow — without it the pale sage silhouette
+              reads as blended/washed into the orange behind it instead of a distinct shape
+              popping out in front of it */}
+          <polygon points="0,560 0,320 90,260 180,300 260,230 340,280 430,190 520,260 610,210 700,150 780,200 860,160 950,220 1040,180 1130,240 1220,190 1310,250 1400,210 1480,260 1536,230 1536,560" fill="var(--sage-back)" stroke="rgba(65,92,57,.3)" strokeWidth="2.5" strokeLinejoin="round" />
 
           <polygon points="0,560 0,380 70,330 150,360 230,300 310,350 400,290 480,340 570,270 650,330 730,280 820,340 900,290 990,350 1080,300 1170,360 1260,310 1350,350 1440,300 1536,340 1536,560" fill="var(--sage-mid)" />
 

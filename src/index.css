@@ -22,10 +22,10 @@
   --container-max-width: 1280px;
   --container-pad: 48px;
 
-  /* tall, condensed display caps — used only for the landing page's big section titles
-     (Hero/How It Works/FAQ/Contact), never on the gated app screens, so the quirky/poster
-     voice stays a landing-page thing rather than bleeding into the product itself */
-  --font-title: "Six Caps", "Arial Narrow", Impact, sans-serif;
+  /* bold, chunky, rounded display face — used only for the landing page's big section
+     titles (Hero/How It Works/FAQ/Contact), never on the gated app screens, so the
+     playful voice stays a landing-page thing rather than bleeding into the product */
+  --font-title: "Baloo 2", "Segoe UI", system-ui, sans-serif;
 }
 @media (max-width: 1023px){ :root{ --container-pad: 32px; } }
 @media (max-width: 767px){ :root{ --container-pad: 20px; } }
@@ -142,6 +142,9 @@ svg{ display:block; }
 
 /* research-symbol texture: a single even band just above the landscape, nowhere else */
 .symbol-field{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+/* hero's own symbol band sits right where the orange glow is strongest — white instead
+   of the sitewide tan so the symbols pop out of the orange instead of blending into it */
+.hero .symbol-field span{ color:#fff; text-shadow: 0 1px 3px rgba(30,37,64,.12); }
 .symbol-field span{
   position:absolute; color: var(--symbol-tan);
   font-family: "SF Mono", "Courier New", ui-monospace, monospace;
@@ -173,16 +176,14 @@ svg{ display:block; }
 h1{
   margin:0;
   font-family: var(--font-title);
-  font-weight: 400;
-  letter-spacing: .01em;
-  font-size: clamp(42px, 6vw, 68px);
-  line-height:1.05;
+  font-weight: 700;
+  font-size: clamp(36px, 4.8vw, 56px);
+  line-height:1.15;
   color: var(--navy);
   text-wrap: balance;
-  /* the old shimmer (animated background-position + background-clip:text) rendered as a
-     faint ghosted double-exposure of the text with Six Caps' unusually tall glyph metrics
-     — a font-specific compositing glitch, not present with the previous serif face. Six
-     Caps is already a bold enough statement on its own without it. */
+  /* no shimmer/gradient text-clip here — an earlier condensed display face rendered it as
+     a faint ghosted double-exposure (a font-metrics-specific compositing glitch), and a
+     bold rounded face like this is already a strong enough statement without it */
 }
 @keyframes shimmer-text{
   0%{ background-position: 0% 50%; }
@@ -212,12 +213,20 @@ h1{
 .hero-flicker-word em{
   display:inline-block;
   font-style: italic;
-  transition: opacity .22s ease, transform .22s ease;
-  opacity: 1; transform: translateY(0);
 }
-.hero-flicker-word em.is-fading{ opacity:0; transform: translateY(-.12em); }
+/* a quick jittery multi-flash rather than a smooth fade — reads as a glitchy swap between
+   words instead of a gentle crossfade, matching the "flicker" ask */
+.hero-flicker-word em.is-glitching{ animation: hero-word-glitch .13s steps(2, end); }
+@keyframes hero-word-glitch{
+  0%{ opacity:1; transform:translateX(0); }
+  20%{ opacity:.15; transform:translateX(-3px); }
+  40%{ opacity:1; transform:translateX(2px); }
+  60%{ opacity:.2; transform:translateX(-2px); }
+  80%{ opacity:1; transform:translateX(1px); }
+  100%{ opacity:.1; transform:translateX(0); }
+}
 @media (prefers-reduced-motion: reduce){
-  .hero-flicker-word em{ transition:none; }
+  .hero-flicker-word em.is-glitching{ animation:none; }
 }
 .tagline{
   margin: 14px 0 0;
@@ -430,11 +439,14 @@ h1{
    occlude it lower down the scene. */
 .hero-hills-glow{
   position:absolute; inset:0; z-index:0; pointer-events:none;
-  background: radial-gradient(ellipse 68% 52% at 50% 38%,
-    rgba(221,107,46,.55) 0%,
-    rgba(221,107,46,.32) 34%,
-    rgba(217,164,65,.16) 60%,
-    transparent 82%
+  /* centered higher (26% vs the ridgeline's own ~28-48%) so the hottest part of the glow
+     sits above the peaks, already fading by the time it reaches the ridge — reads as
+     light spilling up from behind the hills instead of a wash sitting on top of them */
+  background: radial-gradient(ellipse 62% 42% at 50% 26%,
+    rgba(221,107,46,.3) 0%,
+    rgba(221,107,46,.17) 32%,
+    rgba(217,164,65,.08) 58%,
+    transparent 80%
   );
 }
 .scene-svg{
@@ -556,8 +568,8 @@ h1{
 .faq-heading{
   margin: 0 0 12px;
   font-family: var(--font-title);
-  font-weight:400; letter-spacing:.01em;
-  font-size: clamp(50px, 6.6vw, 80px); line-height:1.02;
+  font-weight:700;
+  font-size: clamp(38px, 5vw, 60px); line-height:1.1;
   color: var(--navy); text-wrap: balance;
 }
 .faq-heading-underline{
@@ -747,8 +759,8 @@ h1{
 .how-head{ position:relative; z-index:2; max-width:1140px; margin:0 auto 64px; text-align:center; }
 .how-statement{
   margin:0; font-family: var(--font-title);
-  font-weight:400; letter-spacing:.01em;
-  font-size: clamp(34px, 4.4vw, 52px); line-height:1.18;
+  font-weight:700;
+  font-size: clamp(28px, 3.6vw, 44px); line-height:1.3;
   color: var(--navy);
 }
 .how-statement-underline{
