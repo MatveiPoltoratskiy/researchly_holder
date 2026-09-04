@@ -58,7 +58,7 @@ function FlickerWord() {
     <span className="th-word" style={width ? { width } : undefined}>
       <span
         className="th-word-viewport"
-        style={{ transform: `translateY(-${step * 1.28}em)`, transition: animated ? undefined : 'none' }}
+        style={{ transform: `translateY(-${step * 1.5}em)`, transition: animated ? undefined : 'none' }}
       >
         {LOOP_WORDS.map((word, i) => (
           <em key={i} ref={(el) => { emRefs.current[i] = el }}>{word}</em>
