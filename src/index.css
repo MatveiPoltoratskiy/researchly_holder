@@ -1047,10 +1047,31 @@ h1{
   font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:14px;
 }
 .how-spine-mascot{ flex:none; display:flex; justify-content:center; }
-.how-mascot{
-  display:block; width:80px; height:auto;
-  filter: drop-shadow(0 14px 18px rgba(30,37,64,.28));
+.how-mascot-figure{
+  position:relative; display:block; width:80px;
   animation: mascot-bounce 2.2s cubic-bezier(.32,.6,.4,1.6) infinite; animation-delay: var(--bob-delay, 0s);
+}
+.how-mascot{
+  display:block; width:100%; height:auto;
+  filter: drop-shadow(0 14px 18px rgba(30,37,64,.28));
+}
+/* ground contact shadow, squashing in sync with the bounce (see keyframes) so the
+   figure reads as actually landing instead of just floating up and down */
+.how-mascot-shadow{
+  position:absolute; left:50%; bottom:-8px; width:60%; height:10px;
+  transform:translateX(-50%); border-radius:50%; pointer-events:none;
+  background: radial-gradient(ellipse at center, rgba(30,37,64,.32) 0%, rgba(30,37,64,.12) 60%, transparent 80%);
+  animation: mascot-shadow-pulse 2.2s cubic-bezier(.32,.6,.4,1.6) infinite; animation-delay: var(--bob-delay, 0s);
+}
+/* small prop badge — what the mascot is "holding" for this step (chat bubble, magnifying
+   glass, bookmark, checkmark), same idea as the FAQ mascot's magnifying glass but themed
+   per step instead of one fixed pose */
+.how-mascot-badge{
+  position:absolute; right:-6px; top:2px; z-index:1;
+  width:26px; height:26px; border-radius:50%;
+  background: var(--cover); color:#fff; display:flex; align-items:center; justify-content:center;
+  border:2px solid var(--card-bg); box-shadow: 0 6px 12px -4px rgba(30,37,64,.4);
+  transform: rotate(var(--badge-rot, 0deg));
 }
 @keyframes mascot-bounce{
   0%,100%{ transform: translateY(0) scale(1,1); }
@@ -1058,7 +1079,12 @@ h1{
   55%{ transform: translateY(0) scale(1.06,.93); }
   75%{ transform: translateY(-4px) scale(.99,1.02); }
 }
-@media (prefers-reduced-motion: reduce){ .how-mascot{ animation:none; } }
+@keyframes mascot-shadow-pulse{
+  0%,100%{ transform: translateX(-50%) scale(1); opacity:.8; }
+  35%{ transform: translateX(-50%) scale(.62); opacity:.4; }
+  55%{ transform: translateX(-50%) scale(1.08); opacity:.85; }
+}
+@media (prefers-reduced-motion: reduce){ .how-mascot-figure, .how-mascot-shadow{ animation:none; } }
 .how-kicker{
   margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:14px; font-weight:700;
   letter-spacing:.1em; color:var(--cover-dark);

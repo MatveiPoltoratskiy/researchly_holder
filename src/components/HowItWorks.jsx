@@ -11,7 +11,10 @@ const STEPS = [
     title: "A few questions, then you're done.",
     desc: "We ask what you want to study, what year you're in, where you are, when you're free, and whether the position has to pay. Each answer cuts the list down. There's no long form and nothing to write.",
     meta: 'Field → Level → Location → Timeline → Pay',
-    mascot: 'mascot-ask',
+    // small prop icon worn by the mascot for this step, echoing what it's "doing" —
+    // same idea as the FAQ mascot's magnifying glass, just per-step instead of one-off
+    badgeIcon: 'icon-chat',
+    badgeRot: -10,
     Visual: InterviewVisual,
   },
   {
@@ -19,7 +22,8 @@ const STEPS = [
     title: "We search so you don't open 40 tabs.",
     desc: "Instead of thousands of links, you get a short list of programs, labs, and internships that take students at your year, in your field, on your schedule.",
     meta: 'Summer · Year-round · Paid · Remote',
-    mascot: 'mascot-scout',
+    badgeIcon: 'icon-search',
+    badgeRot: 8,
     Visual: MatchVisual,
   },
   {
@@ -27,7 +31,8 @@ const STEPS = [
     title: 'See everything, keep what fits.',
     desc: "Every match sits on a real list (and a map) with its deadline, pay, and location right on the card. One tap saves it instead of losing it in a browser tab you'll forget to go back to.",
     meta: 'Filter by major, level, and cost',
-    mascot: 'mascot-map',
+    badgeIcon: 'icon-bookmark-filled',
+    badgeRot: -8,
     Visual: BrowseVisual,
   },
   {
@@ -35,7 +40,8 @@ const STEPS = [
     title: 'Then you apply.',
     desc: "Work down the roadmap. Dates, links, and what each program asks for sit in one place. We can't get you accepted, but you won't miss something because you never heard of it.",
     meta: 'Links, dates, and guidance in one place',
-    mascot: 'mascot-cheer',
+    badgeIcon: 'icon-badge-check',
+    badgeRot: 10,
     Visual: ApplyVisual,
   },
 ]
@@ -78,11 +84,13 @@ function StepRow({ step, index }) {
         <p className="how-meta">{step.meta}</p>
       </div>
       <div className="how-spine-mascot">
-        <img
-          className="how-mascot"
-          src="/assets/mascot-logo.png" alt="" aria-hidden="true"
-          style={{ '--bob-delay': `${index * 0.4}s` }}
-        />
+        <span className="how-mascot-figure" style={{ '--bob-delay': `${index * 0.4}s` }}>
+          <img className="how-mascot" src="/assets/mascot-logo.png" alt="" aria-hidden="true" />
+          <span className="how-mascot-shadow" aria-hidden="true" />
+          <span className="how-mascot-badge" style={{ '--badge-rot': `${step.badgeRot}deg` }} aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24"><use href={`#${step.badgeIcon}`} /></svg>
+          </span>
+        </span>
       </div>
       <div className="how-visual">
         <Visual />
