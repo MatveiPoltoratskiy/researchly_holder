@@ -812,7 +812,11 @@ h1{
 .faq-section{
   position:relative; z-index:5; overflow:hidden;
   max-width: 1500px;
-  margin-top: -60px;
+  /* pulled up over most of .how-landscape's own cream foreground-cutoff (that curve is
+     already the page's cream color, so overlapping it is invisible — same reasoning as
+     the hero's ground-cutoff band) instead of just the 60px that left a wide dead-cream
+     gap between the mountain scene and this section's own content */
+  margin-top: -200px;
   padding: 20px 0 110px;
   display:flex; align-items:flex-start; justify-content:space-between; gap:50px;
 }
