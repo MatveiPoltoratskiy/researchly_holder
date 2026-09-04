@@ -1005,7 +1005,7 @@ h1{
 }
 @media (max-width:900px){ .how-ambient-symbol-field{ display:none; } }
 
-.how-head{ position:relative; z-index:2; max-width:1140px; margin:0 auto 28px; text-align:center; }
+.how-head{ position:relative; z-index:2; max-width:1140px; margin:0 auto 70px; text-align:center; }
 .how-statement{
   margin:0; font-family: var(--font-title);
   font-weight:700; -webkit-text-stroke: .5px currentColor;
