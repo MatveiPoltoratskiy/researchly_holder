@@ -1013,7 +1013,7 @@ h1{
 }
 @media (max-width:900px){ .how-ambient-symbol-field{ display:none; } }
 
-.how-head{ position:relative; z-index:2; max-width:1140px; margin:0 auto 64px; text-align:center; }
+.how-head{ position:relative; z-index:2; max-width:1140px; margin:0 auto 28px; text-align:center; }
 .how-statement{
   margin:0; font-family: var(--font-title);
   font-weight:700; -webkit-text-stroke: .5px currentColor;
@@ -1041,7 +1041,15 @@ h1{
 .how-step:last-child{ margin-bottom:24px; }
 .how-step.is-in{ opacity:1; transform:none; }
 
-.how-copy{ max-width:560px; }
+/* own bordered card, matching the visual panel's orange outline on the other side of
+   each step — keeps the step's text (kicker/title/desc/meta) visually grouped and
+   separate from the section's own headline above, instead of floating loose on the page */
+.how-copy{
+  max-width:560px;
+  border: 1.5px solid rgba(221,107,46,.4); border-radius:20px;
+  padding: 26px 28px; background: var(--card-bg);
+  box-shadow: 0 20px 40px -22px rgba(30,37,64,.28);
+}
 .how-copy-top{ display:flex; align-items:center; gap:12px; margin-bottom:14px; }
 .how-node{
   flex:none; width:34px; height:34px; border-radius:50%;
@@ -1129,7 +1137,11 @@ h1{
    margins so .how-mock-card's gap is the ONLY thing controlling spacing between major
    sections — the actual fix, not just a smaller number. */
 .how-panel .how-panel-chrome-row{ margin-bottom:0; }
-.how-panel .interview-question{ margin:0; }
+/* the real /interview app intentionally uses Times New Roman here (a deliberate contrast
+   with the landing page's own type, see --font-title's comment) — but this mockup is a
+   landing-page preview of that screen, not the real thing, so it should read in the
+   landing page's own font instead of picking up the app's serif via the reused class */
+.how-panel .interview-question{ margin:0; font-family: var(--font-title); }
 .how-panel .im-matches-eyebrow{ margin:0; }
 .how-panel .im-match-list{ margin:0; gap:12px; }
 .how-panel .im-match-card{ padding:16px 20px; gap:16px; }
@@ -1214,8 +1226,14 @@ h1{
   /* height locked to the svg viewBox's own aspect ratio (340/1400) instead of a flat
      min-height — a mismatched aspect ratio was silently cropping ~94 viewBox units off the
      TOP of the scene under xMidYMax-slice scaling (tallest peak, most of the dashed thread,
-     all invisible, not just faded), which is what was flattening it out */
+     all invisible, not just faded), which is what was flattening it out. Capped with
+     max-height — on very wide/ultra-wide screens this formula otherwise keeps growing,
+     and most of that growth is the SVG's own foreground cutoff (a cream-filled curve
+     standing in for a near hillside), which just reads as a dead blank-cream gap before
+     the FAQ section at that size. overflow:hidden + the svg's own xMidYMax-slice scaling
+     means capping this just crops in from the sides instead of distorting anything. */
   height: calc((100vw / var(--zoom, 1)) * 340 / 1400);
+  max-height: 480px;
   overflow:hidden;
 }
 .how-landscape-svg{
