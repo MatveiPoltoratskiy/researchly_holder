@@ -986,25 +986,10 @@ h1{
 }
 
 /* ---------- how it works ---------- */
-.how-section{ position:relative; z-index:5; max-width:1560px; padding: 70px 0 120px; }
+/* flat, solid background (was a radial white/orange "spotlight" glow) — the floating
+   symbol field below is the only texture layer now, instead of stacking a second one */
+.how-section{ position:relative; z-index:5; max-width:1560px; padding: 70px 0 120px; background: var(--cream-deep); }
 
-/* white circle core (matches the panel cards' own near-white background) fading through
-   the page's normal cream, up to a soft orange peak, then back down to fully transparent
-   — a bounded glow/ring, not a wash that plateaus and fills the rest of the (very tall)
-   section with a flat, unbroken tan block. */
-.how-ambient-glow{
-  position:absolute; top:0; bottom:0; left:50%; z-index:0; pointer-events:none;
-  width: calc(100vw / var(--zoom, 1));
-  margin-left: calc(-50vw / var(--zoom, 1));
-  background: radial-gradient(
-    ellipse 55% 32% at 50% 50%,
-    #fff 0%,
-    var(--cream) 30%,
-    rgba(221,107,46,.08) 55%,
-    rgba(221,107,46,.04) 75%,
-    transparent 92%
-  );
-}
 /* ambient background texture for the whole section — true edge-to-edge breakout (same
    --zoom-compensated formula as .how-landscape below) so symbols can actually occupy the
    real page margins outside this section's own ~1560px content width, not just repeat
@@ -1027,14 +1012,10 @@ h1{
   font-size: clamp(28px, 3.6vw, 44px); line-height:1.3;
   color: var(--navy);
 }
-.how-statement-underline{
-  position:relative; display:inline-block; margin-top:6px;
-}
-.how-statement-underline::after{
-  content:""; position:absolute; left:2%; right:2%; bottom:-16px; height:16px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 26' preserveAspectRatio='none'%3E%3Cpath d='M2,15 C18,4 32,24 48,13 C64,3 80,22 96,12 C112,3 128,21 144,11 C160,3 176,20 192,10 C208,3 224,19 240,10 C254,4 268,16 284,9 C290,7 294,8 298,7' fill='none' stroke='%23DD6B2E' stroke-width='4.5' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat:no-repeat; background-size:100% 100%;
-  pointer-events:none;
+/* same treatment as the hero's flicker word (Come <curious/ready/driven>) — an orange,
+   italic accent instead of an underline, so the two headlines read as one family */
+.how-statement-accent{
+  font-style:italic; color: var(--cover-dark); -webkit-text-fill-color: var(--cover-dark);
 }
 
 .how-trail{ list-style:none; margin:0 auto; padding:0; max-width:1320px; position:relative; z-index:2; }
@@ -1052,10 +1033,11 @@ h1{
    each step — keeps the step's text (kicker/title/desc/meta) visually grouped and
    separate from the section's own headline above, instead of floating loose on the page */
 .how-copy{
-  max-width:620px;
-  border: 1.5px solid rgba(221,107,46,.4); border-radius:24px;
-  padding: 44px 46px; background: var(--card-bg);
-  box-shadow: 0 20px 40px -22px rgba(30,37,64,.28);
+  max-width:620px; min-height:340px;
+  border: 2px solid rgba(221,107,46,.55); border-radius:24px;
+  padding: 44px 46px 48px; background: var(--card-bg);
+  box-shadow: 0 30px 56px -22px rgba(10,12,20,.45), 0 10px 22px -10px rgba(10,12,20,.3);
+  display:flex; flex-direction:column; justify-content:center;
 }
 .how-copy-top{ display:flex; align-items:center; gap:14px; margin-bottom:20px; }
 .how-node{
@@ -1066,8 +1048,15 @@ h1{
 }
 .how-spine-mascot{ flex:none; display:flex; justify-content:center; }
 .how-mascot{
-  display:block; filter: drop-shadow(0 10px 14px rgba(30,37,64,.2));
-  animation: mascot-bob 3.6s ease-in-out infinite; animation-delay: var(--bob-delay, 0s);
+  display:block; width:80px; height:auto;
+  filter: drop-shadow(0 14px 18px rgba(30,37,64,.28));
+  animation: mascot-bounce 2.2s cubic-bezier(.32,.6,.4,1.6) infinite; animation-delay: var(--bob-delay, 0s);
+}
+@keyframes mascot-bounce{
+  0%,100%{ transform: translateY(0) scale(1,1); }
+  35%{ transform: translateY(-18px) scale(.97,1.04); }
+  55%{ transform: translateY(0) scale(1.06,.93); }
+  75%{ transform: translateY(-4px) scale(.99,1.02); }
 }
 @media (prefers-reduced-motion: reduce){ .how-mascot{ animation:none; } }
 .how-kicker{
@@ -1075,8 +1064,8 @@ h1{
   letter-spacing:.1em; color:var(--cover-dark);
 }
 .how-title{
-  margin:0 0 20px; font-family:"Poppins","Segoe UI",system-ui,sans-serif;
-  font-weight:700; letter-spacing:-.01em;
+  margin:0 0 20px; font-family: var(--font-title);
+  font-weight:700; letter-spacing:-.01em; -webkit-text-stroke:.5px currentColor;
   font-size:clamp(30px,3.4vw,42px); line-height:1.28; color:var(--navy);
 }
 .how-desc{ margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:19.5px; line-height:1.8; color:rgba(30,37,64,.85); }
@@ -1088,18 +1077,18 @@ h1{
 .how-visual{ width:100%; display:flex; justify-content:center; }
 .how-panel{
   position:relative; width:100%; max-width:760px; min-height:410px;
-  background:var(--card-bg); border:1.5px solid rgba(221,107,46,.4); border-radius:24px;
+  background:var(--card-bg); border:2px solid rgba(221,107,46,.55); border-radius:24px;
   padding:32px 36px; display:flex; flex-direction:column; align-items:center; justify-content:center;
-  /* two-layer shadow — a big soft ambient glow plus a tighter, darker contact shadow
-     close to the card — reads as properly lifted/"popped" instead of just faintly hazy */
-  box-shadow: 0 34px 64px -24px rgba(30,37,64,.4), 0 10px 24px -12px rgba(30,37,64,.28);
+  /* three-layer shadow — a near-black contact shadow for real lift, plus an orange glow
+     for accent color — punchier than the old all-navy pairing */
+  box-shadow: 0 36px 68px -22px rgba(10,12,20,.55), 0 12px 26px -10px rgba(10,12,20,.4);
 }
 /* one comfortable orange glow across all 4 (was a different accent color per panel) —
    matches the page's new orange ambient background instead of competing with it */
-.how-panel--01{ box-shadow: 0 34px 64px -24px rgba(30,37,64,.4), 0 10px 24px -12px rgba(30,37,64,.28), 0 0 100px -16px rgba(221,107,46,.5); transform:rotate(0.7deg); }
-.how-panel--02{ box-shadow: 0 34px 64px -24px rgba(30,37,64,.4), 0 10px 24px -12px rgba(30,37,64,.28), 0 0 100px -16px rgba(221,107,46,.5); transform:rotate(-0.6deg); }
-.how-panel--03{ box-shadow: 0 34px 64px -24px rgba(30,37,64,.4), 0 10px 24px -12px rgba(30,37,64,.28), 0 0 100px -16px rgba(221,107,46,.5); transform:rotate(0.6deg); }
-.how-panel--04{ box-shadow: 0 34px 64px -24px rgba(30,37,64,.4), 0 10px 24px -12px rgba(30,37,64,.28), 0 0 100px -16px rgba(221,107,46,.5); transform:rotate(-0.7deg); }
+.how-panel--01{ box-shadow: 0 36px 68px -22px rgba(10,12,20,.55), 0 12px 26px -10px rgba(10,12,20,.4), 0 0 110px -14px rgba(221,107,46,.65); transform:rotate(0.7deg); }
+.how-panel--02{ box-shadow: 0 36px 68px -22px rgba(10,12,20,.55), 0 12px 26px -10px rgba(10,12,20,.4), 0 0 110px -14px rgba(221,107,46,.65); transform:rotate(-0.6deg); }
+.how-panel--03{ box-shadow: 0 36px 68px -22px rgba(10,12,20,.55), 0 12px 26px -10px rgba(10,12,20,.4), 0 0 110px -14px rgba(221,107,46,.65); transform:rotate(0.6deg); }
+.how-panel--04{ box-shadow: 0 36px 68px -22px rgba(10,12,20,.55), 0 12px 26px -10px rgba(10,12,20,.4), 0 0 110px -14px rgba(221,107,46,.65); transform:rotate(-0.7deg); }
 
 /* shared "real interface" header used across all 4 mockups */
 .how-panel-chrome{ display:flex; align-items:center; gap:6px; width:100%; margin-bottom:14px; }

@@ -78,13 +78,11 @@ function StepRow({ step, index }) {
         <p className="how-meta">{step.meta}</p>
       </div>
       <div className="how-spine-mascot">
-        <svg
+        <img
           className="how-mascot"
-          width="88" height="88" viewBox="0 0 72 72" aria-hidden="true"
+          src="/assets/mascot-logo.png" alt="" aria-hidden="true"
           style={{ '--bob-delay': `${index * 0.4}s` }}
-        >
-          <use href={`#${step.mascot}`} />
-        </svg>
+        />
       </div>
       <div className="how-visual">
         <Visual />
@@ -197,12 +195,6 @@ export default function HowItWorks() {
 
   return (
     <section className="how-section container" id="how-it-works" ref={sectionRef}>
-      {/* a warm color "ring" behind the symbol field — the interview page's own deeper
-          cream (--cream-deep) glowing at the center and fading to the normal page cream,
-          so the fade zone itself reads as a deliberate glow, not just an absence of
-          symbols. Rendered first (behind) at the same z-index so DOM order alone puts it
-          under the symbol layer above. */}
-      <div className="how-ambient-glow" aria-hidden="true" />
       {/* ambient background texture for the whole section (not just one step) — faded
           out behind the actual step content via a radial mask (see CSS), more present
           toward the edges/margins so it adds personality without competing for
@@ -219,7 +211,7 @@ export default function HowItWorks() {
       <div className="how-head">
         <h2 className="how-statement">
           Researchly asks a handful of questions, then does<br />
-          <span className="how-statement-underline">the digging for you...</span>
+          <span className="how-statement-accent">the digging for you...</span>
         </h2>
       </div>
 
