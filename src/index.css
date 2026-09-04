@@ -206,8 +206,8 @@ svg{ display:block; }
    the screen the way the two flanking props (books/microscope, flasks/plant) do */
 /* inset from the true frame edge (not flush) — leaves a clear gap so the book stack /
    flask rack read as sitting beside the phone instead of disappearing behind it */
-.th-flank--left{ justify-content:flex-start; padding-left:40px; }
-.th-flank--right{ justify-content:flex-end; padding-right:40px; }
+.th-flank--left{ justify-content:flex-start; padding-left:120px; }
+.th-flank--right{ justify-content:flex-end; padding-right:120px; }
 .th-card-shell{
   width:100%; max-width:340px; transform: translateY(var(--stagger,0px)) rotate(var(--rot,0));
   animation: content-in .8s ease-out .3s both, card-float-th 6.4s ease-in-out infinite;
@@ -628,11 +628,12 @@ h1{
    color as the SVG plaza rect below it (var(--stone)) so the seam is invisible */
 .th-ground-cutoff{
   position:absolute; left:0; right:0; bottom:0; height:60px; z-index:6;
-  background: var(--stone); pointer-events:none;
+  /* sampled directly from hero-scene.png's own ground band so the seam is invisible */
+  background: #F0DBB5; pointer-events:none;
 }
 @media (max-width: 1180px){ .th-ground-cutoff{ display:none; } }
 
-.landscape-wrap{ position:relative; z-index:2; margin-top:-460px; }
+.landscape-wrap{ position:relative; z-index:2; margin-top:-760px; }
 @media (max-width: 1180px){ .landscape-wrap{ display:none; } }
 /* warm glow sitting behind the mountain silhouette — the hill polygons have no "sky"
    fill above their own peaks, so this shows through the gaps around and between the
@@ -651,7 +652,7 @@ h1{
     transparent 80%
   );
 }
-.scene-svg{
+.scene-img{
   position:relative; z-index:1;
   display:block; width:100%; height:auto;
   -webkit-mask-image: linear-gradient(to bottom, black 0%, black 90%, transparent 100%);
