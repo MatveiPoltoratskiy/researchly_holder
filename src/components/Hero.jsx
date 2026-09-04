@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { prefersReducedMotion, usePauseAnimationsOffscreen } from '../lib/motion'
 import { Link } from '../lib/router'
+import SymbolField from './SymbolField'
 
 // the "before" side of the promise — cycled in place of "curious" so the headline
 // still reads naturally no matter which one is showing when a visitor lands
@@ -105,6 +106,18 @@ export default function Hero() {
 
   return (
     <div className="hero th-hero" ref={heroRef}>
+      {/* ambient background texture, same treatment as the how-it-works/contact
+          sections — faded out behind the headline/phones via a radial mask so it only
+          reads near the edges instead of competing with the actual content */}
+      <div className="hero-ambient-symbol-field" aria-hidden="true">
+        <SymbolField
+          rows={6}
+          cols={14}
+          opacityRange={[0.1, 0.16]}
+          fontSizeRange={[12, 20]}
+          colors={['var(--symbol-tan)', 'var(--cover-dark)']}
+        />
+      </div>
       <div className="th-frame">
         <div className="th-flank th-flank--left">
           <div className="th-card-shell" style={{ '--rot': '-8deg', '--stagger': '132px' }}>

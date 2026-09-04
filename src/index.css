@@ -22,10 +22,10 @@
   --container-max-width: 1280px;
   --container-pad: 48px;
 
-  /* bold, sharp-edged geometric display face — used only for the landing page's big
+  /* bold, rounded, friendly display face — used only for the landing page's big
      section titles (Hero/How It Works/FAQ/Contact), never on the gated app screens, so
      the quirky voice stays a landing-page thing rather than bleeding into the product */
-  --font-title: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --font-title: "Baloo 2", "Segoe UI", system-ui, sans-serif;
 }
 @media (max-width: 1023px){ :root{ --container-pad: 32px; } }
 @media (max-width: 767px){ :root{ --container-pad: 20px; } }
@@ -131,6 +131,18 @@ svg{ display:block; }
 }
 @media (max-width: 900px){ .hero-sketch{ display:none; } }
 
+/* same edges-only ambient texture as .how-ambient-symbol-field — faded out behind the
+   headline/phones via a radial mask so the symbols only read near the outer margins.
+   z-index 3 sits above the scene art (.landscape-wrap, z-index 2 — the PNG is fully
+   opaque even where it looks like plain cream sky, so anything behind it is invisible)
+   but below the phones/ground-cutoff (5/6) so it never competes with the actual UI. */
+.hero-ambient-symbol-field{
+  position:absolute; inset:0; z-index:3; pointer-events:none;
+  -webkit-mask-image: radial-gradient(ellipse 60% 42% at 50% 30%, transparent 0%, transparent 32%, black 80%);
+  mask-image: radial-gradient(ellipse 60% 42% at 50% 30%, transparent 0%, transparent 32%, black 80%);
+}
+@media (max-width: 900px){ .hero-ambient-symbol-field{ display:none; } }
+
 /* research-symbol texture floating in the sky band above the landscape */
 .symbol-field{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
 .symbol-field span{
@@ -182,6 +194,7 @@ svg{ display:block; }
 .th-word-viewport{ display:flex; flex-direction:column; align-items:center; transition: transform .52s cubic-bezier(.4,0,.2,1); }
 .th-word-viewport em{
   display:block; height:1.28em; line-height:1.28; font-family: var(--font-title); font-weight:700;
+  -webkit-text-stroke: .5px currentColor;
   color: var(--cover-dark); -webkit-text-fill-color: var(--cover-dark); white-space:nowrap;
 }
 @media (prefers-reduced-motion: reduce){ .th-word-viewport{ transition:none; } .th-word{ transition:none; } }
