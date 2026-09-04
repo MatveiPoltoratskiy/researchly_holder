@@ -644,7 +644,7 @@ h1{
    at z-index 2) doesn't overlap and hide the bottom row of props (the "Biology" label,
    the full flask rack) — margin-bottom trims the dead flat-color tail past them, not
    the props themselves */
-.landscape-wrap{ position:relative; z-index:2; margin-top:-760px; margin-bottom:-50px; }
+.landscape-wrap{ position:relative; z-index:2; margin-top:-760px; margin-bottom:-95px; }
 @media (max-width: 1180px){ .landscape-wrap{ display:none; } }
 /* warm glow sitting behind the mountain silhouette — the hill polygons have no "sky"
    fill above their own peaks, so this shows through the gaps around and between the
@@ -727,7 +727,7 @@ h1{
   padding-bottom: 8px;
 }
 .reviews-head{
-  position:relative; display:flex; align-items:center; justify-content:center; margin-bottom:18px;
+  position:relative; display:flex; align-items:center; justify-content:center; margin-bottom:4px;
 }
 .reviews-kicker{
   text-align:center;
