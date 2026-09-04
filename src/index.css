@@ -982,7 +982,7 @@ h1{
 }
 
 /* ---------- how it works ---------- */
-.how-section{ position:relative; z-index:5; max-width:1560px; padding: 170px 0 120px; }
+.how-section{ position:relative; z-index:5; max-width:1560px; padding: 70px 0 120px; }
 
 /* white circle core (matches the panel cards' own near-white background) fading through
    the page's normal cream, up to a soft orange peak, then back down to fully transparent
@@ -1048,17 +1048,17 @@ h1{
    each step — keeps the step's text (kicker/title/desc/meta) visually grouped and
    separate from the section's own headline above, instead of floating loose on the page */
 .how-copy{
-  max-width:560px;
-  border: 1.5px solid rgba(221,107,46,.4); border-radius:20px;
-  padding: 26px 28px; background: var(--card-bg);
+  max-width:620px;
+  border: 1.5px solid rgba(221,107,46,.4); border-radius:24px;
+  padding: 44px 46px; background: var(--card-bg);
   box-shadow: 0 20px 40px -22px rgba(30,37,64,.28);
 }
-.how-copy-top{ display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+.how-copy-top{ display:flex; align-items:center; gap:14px; margin-bottom:20px; }
 .how-node{
-  flex:none; width:34px; height:34px; border-radius:50%;
+  flex:none; width:40px; height:40px; border-radius:50%;
   background:var(--card-bg); border:1.5px solid var(--cover); color:var(--cover-dark);
   display:flex; align-items:center; justify-content:center;
-  font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:12.5px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:14px;
 }
 .how-spine-mascot{ flex:none; display:flex; justify-content:center; }
 .how-mascot{
@@ -1067,17 +1067,17 @@ h1{
 }
 @media (prefers-reduced-motion: reduce){ .how-mascot{ animation:none; } }
 .how-kicker{
-  margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:700;
+  margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:14px; font-weight:700;
   letter-spacing:.1em; color:var(--cover-dark);
 }
 .how-title{
-  margin:0 0 16px; font-family:"Poppins","Segoe UI",system-ui,sans-serif;
+  margin:0 0 20px; font-family:"Poppins","Segoe UI",system-ui,sans-serif;
   font-weight:700; letter-spacing:-.01em;
-  font-size:clamp(28px,3.2vw,38px); line-height:1.28; color:var(--navy);
+  font-size:clamp(30px,3.4vw,42px); line-height:1.28; color:var(--navy);
 }
-.how-desc{ margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:18.5px; line-height:1.75; color:rgba(30,37,64,.85); }
+.how-desc{ margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:19.5px; line-height:1.8; color:rgba(30,37,64,.85); }
 .how-meta{
-  margin:18px 0 0; font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; font-weight:700;
+  margin:24px 0 0; font-family:"Segoe UI",system-ui,sans-serif; font-size:14px; font-weight:700;
   color:var(--navy-soft);
 }
 
@@ -1280,7 +1280,7 @@ h1{
   .how-step:nth-child(odd){ transform:translateX(-28px); }
   .how-step:nth-child(even){ transform:translateX(28px); }
   .how-step.is-in{ transform:none; }
-  .how-copy{ flex:1 1 0; max-width:480px; }
+  .how-copy{ flex:1 1 0; max-width:520px; }
   .how-spine-mascot{ margin:0 42px; }
   .how-visual{ flex:1 1 0; max-width:780px; overflow:visible; }
   /* let the panel push past the trail's own edge toward the page margin — whichever
