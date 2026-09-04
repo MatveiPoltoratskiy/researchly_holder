@@ -216,11 +216,11 @@ svg{ display:block; }
 
 .th-phone{
   position:relative; border-radius:48px; padding:10px 8px 26px;
-  /* real device silver/titanium bezel — a light metal gradient with a brighter highlight
+  /* dark graphite/space-black bezel — a charcoal metal gradient with a faint highlight
      along the top-left edge (where light would catch a rounded metal rail) instead of
-     the flat dark slab used before */
-  background: linear-gradient(150deg, #F1F2F4 0%, #C7C9CE 22%, #9A9CA3 48%, #DEDFE3 62%, #B4B6BC 100%);
-  box-shadow: 0 42px 84px -30px rgba(30,37,64,.32), 0 10px 26px -8px rgba(30,37,64,.14), inset 0 0 0 1px rgba(255,255,255,.65), inset 0 0 0 2.5px rgba(30,37,64,.18);
+     the silver/titanium tone used before */
+  background: linear-gradient(150deg, #4A4C52 0%, #2B2D33 22%, #131418 48%, #38393F 62%, #1C1D21 100%);
+  box-shadow: 0 42px 84px -30px rgba(30,37,64,.32), 0 10px 26px -8px rgba(30,37,64,.14), inset 0 0 0 1px rgba(255,255,255,.16), inset 0 0 0 2.5px rgba(0,0,0,.35);
   transform-style:preserve-3d; transition: transform .12s ease-out; cursor:default;
 }
 .th-phone.is-tilting{ transition: transform .06s linear; }
@@ -229,9 +229,9 @@ svg{ display:block; }
   width:8px; height:8px; border-radius:50%;
   background: radial-gradient(circle at 35% 35%, #4A5578, #0B0F1C 70%);
 }
-/* side buttons — small raised nubs on the silver rail, just enough to read as a real
+/* side buttons — small raised nubs on the dark rail, just enough to read as a real
    device silhouette instead of a flat rounded rectangle */
-.th-phone-btn{ position:absolute; background: linear-gradient(90deg, #A6A8AE, #DBDCE0); border-radius:2px; z-index:1; }
+.th-phone-btn{ position:absolute; background: linear-gradient(90deg, #232428, #47484E); border-radius:2px; z-index:1; }
 .th-phone-btn--mute{ left:-3px; top:100px; width:3px; height:22px; }
 .th-phone-btn--vol-up{ left:-3px; top:140px; width:3px; height:38px; }
 .th-phone-btn--vol-down{ left:-3px; top:188px; width:3px; height:38px; }
