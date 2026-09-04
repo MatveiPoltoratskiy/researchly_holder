@@ -111,9 +111,9 @@ export default function Hero() {
           reads near the edges instead of competing with the actual content */}
       <div className="hero-ambient-symbol-field" aria-hidden="true">
         <SymbolField
-          rows={6}
-          cols={14}
-          opacityRange={[0.1, 0.16]}
+          rows={9}
+          cols={20}
+          opacityRange={[0.16, 0.24]}
           fontSizeRange={[12, 20]}
           colors={['var(--symbol-tan)', 'var(--cover-dark)']}
         />
