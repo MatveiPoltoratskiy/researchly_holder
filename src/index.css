@@ -25,7 +25,7 @@
   /* bold, rounded, friendly display face — used only for the landing page's big
      section titles (Hero/How It Works/FAQ/Contact), never on the gated app screens, so
      the quirky voice stays a landing-page thing rather than bleeding into the product */
-  --font-title: "Baloo 2", "Segoe UI", system-ui, sans-serif;
+  --font-title: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
 }
 @media (max-width: 1023px){ :root{ --container-pad: 32px; } }
 @media (max-width: 767px){ :root{ --container-pad: 20px; } }
