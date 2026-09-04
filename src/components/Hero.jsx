@@ -135,40 +135,37 @@ export default function Hero() {
                 </div>
                 <div className="th-chrome">
                   <div className="th-chrome-dots"><span /><span /><span /></div>
-                  <span className="th-chrome-meta">Step 1 of 5</span>
+                  <span className="th-chrome-meta">Map view</span>
                 </div>
-                <p className="th-iq-question">What kind of opportunity?</p>
-                <div className="th-iq-option">
-                  <span className="th-iq-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24"><use href="#icon-search" /></svg>
-                  </span>
-                  <span className="th-iq-main">
-                    <span className="th-iq-label">Research internship</span>
-                    <span className="th-iq-desc">Hands-on work in a real lab</span>
-                  </span>
-                  <span className="th-iq-check" />
+                <p className="th-iq-question">Opportunities near you</p>
+                <div className="th-globe-wrap">
+                  <svg className="th-globe" viewBox="0 0 220 220" aria-hidden="true">
+                    <defs>
+                      <radialGradient id="th-globe-sphere" cx="38%" cy="32%" r="75%">
+                        <stop offset="0%" stopColor="var(--sage-back)" />
+                        <stop offset="55%" stopColor="var(--sage-mid)" />
+                        <stop offset="100%" stopColor="var(--pine)" />
+                      </radialGradient>
+                    </defs>
+                    <circle cx="110" cy="110" r="98" fill="url(#th-globe-sphere)" />
+                    <ellipse cx="110" cy="110" rx="98" ry="34" fill="none" stroke="rgba(255,255,255,.4)" strokeWidth="1.3" />
+                    <ellipse cx="110" cy="110" rx="98" ry="68" fill="none" stroke="rgba(255,255,255,.28)" strokeWidth="1.2" />
+                    <ellipse cx="110" cy="110" rx="60" ry="98" fill="none" stroke="rgba(255,255,255,.3)" strokeWidth="1.2" />
+                    <line x1="12" y1="110" x2="208" y2="110" stroke="rgba(255,255,255,.28)" strokeWidth="1.2" />
+                    <circle cx="110" cy="110" r="98" fill="none" stroke="var(--card-border)" strokeWidth="1.5" />
+                    {/* pin markers scattered across the visible face — same teardrop mark and
+                        field-color palette as the real opportunity map (OpportunityMap.jsx) */}
+                    <g style={{ '--pin-stroke': 'var(--cover)' }}><use href="#scene-pin" x="60" y="52" width="20" height="27" /></g>
+                    <g style={{ '--pin-stroke': 'var(--navy)' }}><use href="#scene-pin" x="128" y="42" width="18" height="24" /></g>
+                    <g style={{ '--pin-stroke': 'var(--gold)' }}><use href="#scene-pin" x="146" y="96" width="20" height="27" /></g>
+                    <g style={{ '--pin-stroke': 'var(--ribbon)' }}><use href="#scene-pin" x="52" y="118" width="18" height="24" /></g>
+                    <g style={{ '--pin-stroke': 'var(--cover)' }}><use href="#scene-pin" x="94" y="132" width="22" height="29" /></g>
+                  </svg>
                 </div>
-                <div className="th-iq-option is-selected">
-                  <span className="th-iq-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24"><use href="#icon-calendar" /></svg>
-                  </span>
-                  <span className="th-iq-main">
-                    <span className="th-iq-label">Summer program</span>
-                    <span className="th-iq-desc">A structured multi-week program</span>
-                  </span>
-                  <span className="th-iq-check" />
+                <div className="th-globe-legend">
+                  <span className="th-globe-legend-dot" style={{ '--dot-color': 'var(--cover)' }} />
+                  24 opportunities plotted near you
                 </div>
-                <div className="th-iq-option">
-                  <span className="th-iq-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24"><use href="#icon-replay" /></svg>
-                  </span>
-                  <span className="th-iq-main">
-                    <span className="th-iq-label">Year-round program</span>
-                    <span className="th-iq-desc">An ongoing school-year commitment</span>
-                  </span>
-                  <span className="th-iq-check" />
-                </div>
-                <button className="th-iq-continue" type="button">Continue</button>
               </div>
             </div>
           </div>

@@ -178,7 +178,7 @@ svg{ display:block; }
 .th-hero h1{
   margin:0 0 16px; font-family: var(--font-title); font-weight:700;
   -webkit-text-stroke: .5px currentColor;
-  font-size: clamp(28px, 2.8vw, 40px); line-height:1.2; color: var(--navy); text-wrap:balance;
+  font-size: clamp(32px, 3.3vw, 47px); line-height:1.2; color: var(--navy); text-wrap:balance;
 }
 .th-sub{
   margin:0 auto 22px; max-width:460px;
@@ -198,7 +198,7 @@ svg{ display:block; }
 .th-word-viewport em{
   display:block; height:1.5em; line-height:1.5; font-family: var(--font-title); font-weight:700;
   -webkit-text-stroke: .5px currentColor;
-  color: var(--cover-dark); -webkit-text-fill-color: var(--cover-dark); white-space:nowrap;
+  color: var(--cover); -webkit-text-fill-color: var(--cover); white-space:nowrap;
 }
 @media (prefers-reduced-motion: reduce){ .th-word-viewport{ transition:none; } .th-word{ transition:none; } }
 
@@ -287,6 +287,15 @@ svg{ display:block; }
 .th-chrome-meta{ font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:700; color: var(--cover-dark); }
 
 .th-iq-question{ font-family: var(--font-title); font-weight:700; font-size:22px; line-height:1.25; color: var(--navy); margin:0 0 16px; }
+/* left phone's "map view" mockup — a globe standing in for the real Leaflet map
+   (OpportunityMap.jsx), with teardrop pins in the same field-color palette */
+.th-globe-wrap{ display:flex; justify-content:center; margin:8px 0 18px; }
+.th-globe{ width:220px; height:220px; filter: drop-shadow(0 14px 22px rgba(30,37,64,.22)); }
+.th-globe-legend{
+  display:flex; align-items:center; gap:8px; justify-content:center;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; font-weight:700; color: var(--navy-soft);
+}
+.th-globe-legend-dot{ width:9px; height:9px; border-radius:50%; background: var(--dot-color, var(--cover)); flex:none; }
 .th-iq-option{
   display:flex; align-items:center; gap:12px; padding:14px 16px; margin-bottom:10px;
   border-radius:16px; border:1.5px solid var(--card-border); background:#fff;
