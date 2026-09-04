@@ -167,7 +167,7 @@ function HowLandscape() {
         {/* foreground cutoff: a wide, shallow curve in the page's cream color standing in
             for a near hillside — dips lowest at center so the castle/path stay visible,
             rises at the edges to cover more of the tree line, instead of a straight cut */}
-        <path d="M0,205 C350,305 1050,305 1400,205 L1400,340 L0,340Z" fill="var(--cream)" />
+        <path d="M0,205 C350,305 1050,305 1400,205 L1400,340 L0,340Z" fill="var(--cream-deep)" />
       </svg>
     </div>
   )
