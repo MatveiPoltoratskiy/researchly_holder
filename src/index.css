@@ -189,7 +189,7 @@ svg{ display:block; }
      the dot on its "i") were getting clipped by the old, tighter box on some words but
      not others, since it left near-zero buffer above the glyphs' actual rendered extent */
   position:relative; display:inline-block; overflow:hidden; height:1.5em; line-height:1.5;
-  vertical-align:-.33em; font-style:italic;
+  vertical-align:-.38em; font-style:italic;
   /* width is set inline per-word (see FlickerWord's width measurement) — this only
      smooths the change between one word's width and the next */
   transition: width .3s cubic-bezier(.4,0,.2,1);
