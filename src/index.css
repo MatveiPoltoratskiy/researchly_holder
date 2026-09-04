@@ -730,7 +730,7 @@ h1{
   position:relative; display:flex; align-items:center; justify-content:center; margin-bottom:4px;
 }
 .reviews-kicker{
-  text-align:center;
+  margin:0; text-align:center;
   font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; letter-spacing:.14em;
   text-transform:uppercase; font-weight:700; color: var(--cover-dark);
   background:#fff; border-radius:999px;
