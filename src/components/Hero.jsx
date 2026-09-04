@@ -137,34 +137,36 @@ export default function Hero() {
                   <div className="th-chrome-dots"><span /><span /><span /></div>
                   <span className="th-chrome-meta">Map view</span>
                 </div>
-                <p className="th-iq-question">Opportunities near you</p>
-                <div className="th-globe-wrap">
-                  <svg className="th-globe" viewBox="0 0 220 220" aria-hidden="true">
-                    <defs>
-                      <radialGradient id="th-globe-sphere" cx="38%" cy="32%" r="75%">
-                        <stop offset="0%" stopColor="var(--sage-back)" />
-                        <stop offset="55%" stopColor="var(--sage-mid)" />
-                        <stop offset="100%" stopColor="var(--pine)" />
-                      </radialGradient>
-                    </defs>
-                    <circle cx="110" cy="110" r="98" fill="url(#th-globe-sphere)" />
-                    <ellipse cx="110" cy="110" rx="98" ry="34" fill="none" stroke="rgba(255,255,255,.4)" strokeWidth="1.3" />
-                    <ellipse cx="110" cy="110" rx="98" ry="68" fill="none" stroke="rgba(255,255,255,.28)" strokeWidth="1.2" />
-                    <ellipse cx="110" cy="110" rx="60" ry="98" fill="none" stroke="rgba(255,255,255,.3)" strokeWidth="1.2" />
-                    <line x1="12" y1="110" x2="208" y2="110" stroke="rgba(255,255,255,.28)" strokeWidth="1.2" />
-                    <circle cx="110" cy="110" r="98" fill="none" stroke="var(--card-border)" strokeWidth="1.5" />
-                    {/* pin markers scattered across the visible face — same teardrop mark and
-                        field-color palette as the real opportunity map (OpportunityMap.jsx) */}
-                    <g style={{ '--pin-stroke': 'var(--cover)' }}><use href="#scene-pin" x="60" y="52" width="20" height="27" /></g>
-                    <g style={{ '--pin-stroke': 'var(--navy)' }}><use href="#scene-pin" x="128" y="42" width="18" height="24" /></g>
-                    <g style={{ '--pin-stroke': 'var(--gold)' }}><use href="#scene-pin" x="146" y="96" width="20" height="27" /></g>
-                    <g style={{ '--pin-stroke': 'var(--ribbon)' }}><use href="#scene-pin" x="52" y="118" width="18" height="24" /></g>
-                    <g style={{ '--pin-stroke': 'var(--cover)' }}><use href="#scene-pin" x="94" y="132" width="22" height="29" /></g>
-                  </svg>
+                {/* location banner — same personalization the real map screen leads with
+                    (see brand brief's "hospital 4km away" feature), not just a decorative map */}
+                <div className="th-map-banner">
+                  <span className="th-map-banner-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24"><use href="#icon-pin" /></svg>
+                  </span>
+                  <span className="th-map-banner-text">
+                    <strong>You live in Richmond Hill, ON</strong>
+                    Here are 18 opportunities near you
+                  </span>
                 </div>
-                <div className="th-globe-legend">
-                  <span className="th-globe-legend-dot" style={{ '--dot-color': 'var(--cover)' }} />
-                  24 opportunities plotted near you
+                <div className="th-map-wrap">
+                  <svg className="th-map" viewBox="0 0 260 200" aria-hidden="true">
+                    {/* soft, non-literal landmass shapes — this is a marketing mockup standing
+                        in for the real Leaflet map (OpportunityMap.jsx), not an actual map */}
+                    <rect x="0" y="0" width="260" height="200" rx="18" fill="var(--pages)" />
+                    <path d="M-10,120 C40,90 70,140 110,110 C150,82 180,120 230,95 C255,83 270,100 280,90 L280,220 L-10,220Z" fill="var(--sage-back)" />
+                    <path d="M-10,150 C50,130 90,165 140,145 C190,126 210,160 280,140 L280,220 L-10,220Z" fill="var(--sage-mid)" opacity=".7" />
+                    {/* pin clusters — small colored circle markers, echoing the real map's
+                        org-logo pins without needing actual logo art here */}
+                    <g><circle cx="76" cy="70" r="10" fill="var(--cover)" stroke="#fff" strokeWidth="2.5" /></g>
+                    <g><circle cx="98" cy="86" r="8" fill="var(--navy)" stroke="#fff" strokeWidth="2.5" /></g>
+                    <g><circle cx="120" cy="64" r="9" fill="var(--gold)" stroke="#fff" strokeWidth="2.5" /></g>
+                    <g><circle cx="140" cy="92" r="11" fill="var(--ribbon)" stroke="#fff" strokeWidth="2.5" /></g>
+                    <g><circle cx="112" cy="102" r="7" fill="var(--cover)" stroke="#fff" strokeWidth="2.5" /></g>
+                    <g><circle cx="160" cy="78" r="8" fill="var(--pine)" stroke="#fff" strokeWidth="2.5" /></g>
+                    {/* "you are here" marker, larger and ringed, tying back to the banner above */}
+                    <circle cx="128" cy="83" r="15" fill="none" stroke="var(--cover)" strokeWidth="2" opacity=".5" />
+                    <use href="#scene-pin" x="118" y="60" width="20" height="27" style={{ '--pin-stroke': 'var(--cover)' }} />
+                  </svg>
                 </div>
               </div>
             </div>

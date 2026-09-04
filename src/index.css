@@ -287,15 +287,24 @@ svg{ display:block; }
 .th-chrome-meta{ font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:700; color: var(--cover-dark); }
 
 .th-iq-question{ font-family: var(--font-title); font-weight:700; font-size:22px; line-height:1.25; color: var(--navy); margin:0 0 16px; }
-/* left phone's "map view" mockup — a globe standing in for the real Leaflet map
-   (OpportunityMap.jsx), with teardrop pins in the same field-color palette */
-.th-globe-wrap{ display:flex; justify-content:center; margin:8px 0 18px; }
-.th-globe{ width:220px; height:220px; filter: drop-shadow(0 14px 22px rgba(30,37,64,.22)); }
-.th-globe-legend{
-  display:flex; align-items:center; gap:8px; justify-content:center;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; font-weight:700; color: var(--navy-soft);
+/* left phone's "map view" mockup — a flat map standing in for the real Leaflet map
+   (OpportunityMap.jsx), led by the same location-personalization banner the real
+   product uses (see brand brief's "hospital 4km away" feature) */
+.th-map-banner{
+  display:flex; align-items:center; gap:12px; margin-bottom:16px;
+  padding:12px 14px; border-radius:14px; background: var(--pill-amber-bg); border:1.5px solid rgba(221,107,46,.3);
 }
-.th-globe-legend-dot{ width:9px; height:9px; border-radius:50%; background: var(--dot-color, var(--cover)); flex:none; }
+.th-map-banner-icon{
+  flex:none; width:32px; height:32px; border-radius:50%; background: var(--cover); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+}
+.th-map-banner-text{
+  display:flex; flex-direction:column; gap:2px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; color: var(--navy-soft);
+}
+.th-map-banner-text strong{ font-size:14.5px; color: var(--navy); }
+.th-map-wrap{ border-radius:18px; overflow:hidden; box-shadow: 0 14px 26px -14px rgba(30,37,64,.3); }
+.th-map{ display:block; width:100%; height:auto; }
 .th-iq-option{
   display:flex; align-items:center; gap:12px; padding:14px 16px; margin-bottom:10px;
   border-radius:16px; border:1.5px solid var(--card-border); background:#fff;
