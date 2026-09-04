@@ -628,8 +628,9 @@ h1{
    color as the SVG plaza rect below it (var(--stone)) so the seam is invisible */
 .th-ground-cutoff{
   position:absolute; left:0; right:0; bottom:0; height:60px; z-index:6;
-  /* sampled directly from hero-scene.png's own ground band so the seam is invisible */
-  background: #F0DBB5; pointer-events:none;
+  /* matches the reviews section's own background (not the scene's ground color) so this
+     band disappears into the page instead of reading as a separate colored strip */
+  background: var(--cream-deep); pointer-events:none;
 }
 @media (max-width: 1180px){ .th-ground-cutoff{ display:none; } }
 
