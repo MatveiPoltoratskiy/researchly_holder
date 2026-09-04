@@ -1395,7 +1395,12 @@ h1{
   /* bottom:0 (not a negative offset) so this never bleeds past .contact-section's own
      box into the footer below it — the section has no overflow:hidden to clip it (that
      would also clip the 100vw breakout width), so the band's own box has to stay inside */
-  position:absolute; left:50%; bottom:0; width:100vw; transform:translateX(-50%);
+  position:absolute; left:50%; bottom:0; transform:translateX(-50%);
+  /* the contact page renders inside .compact-page (zoom:0.88 — see its own comment),
+     and `vw` always reads relative to the true, un-zoomed viewport, so a plain 100vw
+     here only reached 88% of the way to the real screen edges. Same --zoom-compensated
+     formula as .how-ambient-symbol-field so this actually spans edge to edge. */
+  width: calc(100vw / var(--zoom, 1));
   height:440px; z-index:0; overflow:hidden; pointer-events:none;
   -webkit-mask-image: radial-gradient(ellipse 55% 80% at 50% 55%, transparent 0%, transparent 16%, black 58%);
   mask-image: radial-gradient(ellipse 55% 80% at 50% 55%, transparent 0%, transparent 16%, black 58%);
