@@ -721,11 +721,18 @@ h1{
 /* ---------- testimonial carousel: floats over the plaza/prop level, like the mockup card floats over the mountains ---------- */
 .reviews-section{
   position:relative; z-index:6;
-  /* the template-matched hero (src/components/Hero.jsx) has no illustrated landscape for
-     this to float over anymore — it now just sits in normal flow below the hero's own
-     padding-bottom, instead of the large negative pull-up the old landscape-art hero needed */
   margin-top: 0;
   padding-bottom: 8px;
+}
+/* pulled up over the hero's ground-cutoff band (also z-index 6, but earlier in the DOM so
+   this paints on top) — safe because that band is solid-color and matches this section's
+   own background, so the overlap is invisible; this doesn't touch the hero's own box
+   height, so it can't clip the illustrated scene the way tuning the hero's pull-up margins
+   would. Scoped to the same min-width as .landscape-wrap/.th-ground-cutoff (1181px) —
+   below that the scene art and ground band are hidden and the hero is much shorter, so
+   this pull-up would drag the kicker pill straight into the hero's own CTA button. */
+@media (min-width: 1181px){
+  .reviews-section{ margin-top: -60px; }
 }
 .reviews-head{
   position:relative; display:flex; align-items:center; justify-content:center; margin-bottom:4px;
