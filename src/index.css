@@ -305,6 +305,17 @@ svg{ display:block; }
 .th-map-banner-text strong{ font-size:14.5px; color: var(--navy); }
 .th-map-wrap{ border-radius:18px; overflow:hidden; box-shadow: 0 14px 26px -14px rgba(30,37,64,.3); }
 .th-map{ display:block; width:100%; height:auto; }
+/* what the pins on the map actually are — fills the space below the map instead of
+   leaving it empty, and answers "18 opportunities" with real (if illustrative) ones */
+.th-map-list{ margin-top:14px; display:flex; flex-direction:column; gap:10px; }
+.th-map-list-row{ display:flex; align-items:center; gap:12px; }
+.th-crest--sm{ width:30px; height:30px; }
+.th-crest--sm span{ font-size:11px; }
+.th-map-list-text{
+  display:flex; flex-direction:column; gap:1px; min-width:0;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; color: var(--navy-soft);
+}
+.th-map-list-text strong{ font-size:14px; font-weight:700; color: var(--navy); }
 .th-iq-option{
   display:flex; align-items:center; gap:12px; padding:14px 16px; margin-bottom:10px;
   border-radius:16px; border:1.5px solid var(--card-border); background:#fff;

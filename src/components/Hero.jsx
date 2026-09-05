@@ -168,6 +168,30 @@ export default function Hero() {
                     <use href="#scene-pin" x="118" y="60" width="20" height="27" style={{ '--pin-stroke': 'var(--cover)' }} />
                   </svg>
                 </div>
+                {/* the pins on the map are these — same list the real map screen shows
+                    alongside it, not just dots with nothing behind them */}
+                <div className="th-map-list">
+                  <div className="th-map-list-row">
+                    <span className="th-crest th-crest--sm" style={{ color: 'var(--cover)' }}>
+                      <svg viewBox="0 0 24 24"><use href="#crest-shield" /></svg>
+                      <span>M</span>
+                    </span>
+                    <span className="th-map-list-text">
+                      <strong>MaRS Discovery District</strong>
+                      2.1 km away · Paid
+                    </span>
+                  </div>
+                  <div className="th-map-list-row">
+                    <span className="th-crest th-crest--sm" style={{ color: 'var(--pine)' }}>
+                      <svg viewBox="0 0 24 24"><use href="#crest-shield" /></svg>
+                      <span>Y</span>
+                    </span>
+                    <span className="th-map-list-text">
+                      <strong>York University Biology Lab</strong>
+                      4.6 km away · High School
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
