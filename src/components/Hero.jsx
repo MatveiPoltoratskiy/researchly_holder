@@ -128,7 +128,7 @@ export default function Hero() {
               <div className="th-phone-btn th-phone-btn--vol-up" />
               <div className="th-phone-btn th-phone-btn--vol-down" />
               <div className="th-phone-btn th-phone-btn--power" />
-              <div className="th-phone-screen">
+              <div className="th-phone-screen th-phone-screen--map">
                 <div className="th-phone-status">
                   <span>9:41</span>
                   <span className="th-phone-battery" />
@@ -137,61 +137,11 @@ export default function Hero() {
                   <div className="th-chrome-dots"><span /><span /><span /></div>
                   <span className="th-chrome-meta">Map view</span>
                 </div>
-                {/* location banner — same personalization the real map screen leads with
-                    (see brand brief's "hospital 4km away" feature), not just a decorative map */}
-                <div className="th-map-banner">
-                  <span className="th-map-banner-icon">
-                    <svg width="16" height="16" viewBox="0 0 24 24"><use href="#icon-pin" /></svg>
-                  </span>
-                  <span className="th-map-banner-text">
-                    <strong>You live in Richmond Hill, ON</strong>
-                    Here are 18 opportunities near you
-                  </span>
-                </div>
-                <div className="th-map-wrap">
-                  <svg className="th-map" viewBox="0 0 260 200" aria-hidden="true">
-                    {/* soft, non-literal landmass shapes — this is a marketing mockup standing
-                        in for the real Leaflet map (OpportunityMap.jsx), not an actual map */}
-                    <rect x="0" y="0" width="260" height="200" rx="18" fill="var(--pages)" />
-                    <path d="M-10,120 C40,90 70,140 110,110 C150,82 180,120 230,95 C255,83 270,100 280,90 L280,220 L-10,220Z" fill="var(--sage-back)" />
-                    <path d="M-10,150 C50,130 90,165 140,145 C190,126 210,160 280,140 L280,220 L-10,220Z" fill="var(--sage-mid)" opacity=".7" />
-                    {/* pin clusters — small colored circle markers, echoing the real map's
-                        org-logo pins without needing actual logo art here */}
-                    <g><circle cx="76" cy="70" r="10" fill="var(--cover)" stroke="#fff" strokeWidth="2.5" /></g>
-                    <g><circle cx="98" cy="86" r="8" fill="var(--navy)" stroke="#fff" strokeWidth="2.5" /></g>
-                    <g><circle cx="120" cy="64" r="9" fill="var(--gold)" stroke="#fff" strokeWidth="2.5" /></g>
-                    <g><circle cx="140" cy="92" r="11" fill="var(--ribbon)" stroke="#fff" strokeWidth="2.5" /></g>
-                    <g><circle cx="112" cy="102" r="7" fill="var(--cover)" stroke="#fff" strokeWidth="2.5" /></g>
-                    <g><circle cx="160" cy="78" r="8" fill="var(--pine)" stroke="#fff" strokeWidth="2.5" /></g>
-                    {/* "you are here" marker, larger and ringed, tying back to the banner above */}
-                    <circle cx="128" cy="83" r="15" fill="none" stroke="var(--cover)" strokeWidth="2" opacity=".5" />
-                    <use href="#scene-pin" x="118" y="60" width="20" height="27" style={{ '--pin-stroke': 'var(--cover)' }} />
-                  </svg>
-                </div>
-                {/* the pins on the map are these — same list the real map screen shows
-                    alongside it, not just dots with nothing behind them */}
-                <div className="th-map-list">
-                  <div className="th-map-list-row">
-                    <span className="th-crest th-crest--sm" style={{ color: 'var(--cover)' }}>
-                      <svg viewBox="0 0 24 24"><use href="#crest-shield" /></svg>
-                      <span>M</span>
-                    </span>
-                    <span className="th-map-list-text">
-                      <strong>MaRS Discovery District</strong>
-                      2.1 km away · Paid
-                    </span>
-                  </div>
-                  <div className="th-map-list-row">
-                    <span className="th-crest th-crest--sm" style={{ color: 'var(--pine)' }}>
-                      <svg viewBox="0 0 24 24"><use href="#crest-shield" /></svg>
-                      <span>Y</span>
-                    </span>
-                    <span className="th-map-list-text">
-                      <strong>York University Biology Lab</strong>
-                      4.6 km away · High School
-                    </span>
-                  </div>
-                </div>
+                {/* cropped from the provided mockup image — just the screen content (the
+                    "You have 100+ opportunities" banner, map, pins, nav bar), fitted into
+                    our own coded bezel/status-bar/chrome above instead of the whole photo's
+                    own phone frame, so it matches the right phone's presentation */}
+                <img className="th-map-screenshot" src="/assets/hero-map-screen.png" alt="" />
               </div>
             </div>
           </div>
