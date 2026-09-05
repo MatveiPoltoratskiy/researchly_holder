@@ -121,29 +121,12 @@ export default function Hero() {
       <div className="th-frame">
         <div className="th-flank th-flank--left">
           <div className="th-card-shell" style={{ '--rot': '-8deg', '--stagger': '132px' }}>
-            <div className="th-phone" data-tilt>
-              <div className="th-phone-notch" />
-              <div className="th-phone-camera" />
-              <div className="th-phone-btn th-phone-btn--mute" />
-              <div className="th-phone-btn th-phone-btn--vol-up" />
-              <div className="th-phone-btn th-phone-btn--vol-down" />
-              <div className="th-phone-btn th-phone-btn--power" />
-              <div className="th-phone-screen th-phone-screen--map">
-                <div className="th-phone-status">
-                  <span>9:41</span>
-                  <span className="th-phone-battery" />
-                </div>
-                <div className="th-chrome">
-                  <div className="th-chrome-dots"><span /><span /><span /></div>
-                  <span className="th-chrome-meta">Map view</span>
-                </div>
-                {/* cropped from the provided mockup image — just the screen content (the
-                    "You have 100+ opportunities" banner, map, pins, nav bar), fitted into
-                    our own coded bezel/status-bar/chrome above instead of the whole photo's
-                    own phone frame, so it matches the right phone's presentation */}
-                <img className="th-map-screenshot" src="/assets/hero-map-screen.png" alt="" />
-              </div>
-            </div>
+            {/* the provided mockup photo, used whole (its own bezel, notch, and tilt) rather
+                than cropping just the screen into our coded bezel — that split the phone's
+                natural camera-angle tilt from a dead-straight bezel, so the map/banner inside
+                looked crooked. Using the photo as a single unit keeps everything consistent,
+                masked out of its own background/props so it drops into the scene cleanly. */}
+            <img className="th-phone-image" src="/assets/hero-phone-map.png" alt="" data-tilt />
           </div>
         </div>
 
