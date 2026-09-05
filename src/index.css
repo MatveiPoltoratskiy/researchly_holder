@@ -240,6 +240,14 @@ svg{ display:block; }
   transform-style:preserve-3d; transition: transform .12s ease-out; cursor:default;
 }
 .th-phone.is-tilting{ transition: transform .06s linear; }
+/* left phone — the provided mockup photo used as one unit (see Hero.jsx comment for why),
+   masked out of its own background so it drops into the scene cleanly */
+.th-phone-image{
+  display:block; width:100%; height:auto;
+  filter: drop-shadow(0 30px 54px rgba(30,37,64,.32)) drop-shadow(0 8px 18px rgba(30,37,64,.18));
+  transform-style:preserve-3d; transition: transform .12s ease-out; cursor:default;
+}
+.th-phone-image.is-tilting{ transition: transform .06s linear; }
 .th-phone-camera{
   position:absolute; top:16px; left:50%; transform:translateX(-50%); z-index:4;
   width:8px; height:8px; border-radius:50%;
@@ -287,15 +295,6 @@ svg{ display:block; }
 .th-chrome-meta{ font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:700; color: var(--cover-dark); }
 
 .th-iq-question{ font-family: var(--font-title); font-weight:700; font-size:22px; line-height:1.25; color: var(--navy); margin:0 0 16px; }
-/* left phone's "map view" screen — cropped from a provided finished mockup image (see
-   Hero.jsx comment) rather than built from scratch, fitted into our own coded bezel/
-   status-bar/chrome above like the right phone's screen content */
-.th-phone-screen--map{ padding-bottom:0; }
-.th-map-screenshot{
-  display:block; width:calc(100% + 40px); margin:0 -20px -24px; max-width:none;
-  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 92%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 0%, black 92%, transparent 100%);
-}
 .th-iq-option{
   display:flex; align-items:center; gap:12px; padding:14px 16px; margin-bottom:10px;
   border-radius:16px; border:1.5px solid var(--card-border); background:#fff;
