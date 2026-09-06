@@ -3169,11 +3169,17 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
    scale below grew, so this screen alone gets more horizontal room to spread into */
 .interview-container--matches{ max-width:1320px; }
 
-.im-match-list{ display:grid; grid-template-columns:repeat(2, 1fr); align-items:start; gap:18px; margin:22px 0 26px; }
+/* multi-column (masonry-style), not a 2-col grid — a grid syncs both columns' row
+   heights, so a short card sharing a row with a tall one leaves a big uneven gap
+   underneath it before the next row starts. Columns pack each card right under the
+   previous one in its own column regardless of the other column's heights, which is what
+   actually keeps the gaps between cards even. */
+.im-match-list{ columns:2; column-gap:18px; margin:22px 0 26px; }
 .im-match-card{
   display:flex; align-items:flex-start; gap:20px; text-align:left; text-decoration:none;
   background:var(--cream); border:1.5px solid rgba(30,37,64,.14); border-radius:20px;
-  padding:22px 26px; transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  padding:22px 26px; margin-bottom:18px; break-inside:avoid;
+  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
 }
 .im-match-card:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(30,37,64,.12); border-color:var(--focus-color, var(--cover)); }
 
@@ -3220,7 +3226,7 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 .im-matches-cta{ width:100%; justify-content:center; }
 
 @media (max-width:600px){
-  .im-match-list{ grid-template-columns:1fr; }
+  .im-match-list{ columns:1; }
   .im-matches-card{ padding:22px 18px; }
   /* stack instead of wrap — flex-wrap alone left .im-match-main squeezed into whatever
      narrow space remained next to the logo, wrapping the org name one word per line */
