@@ -60,3 +60,23 @@ export function sweepExpired() {
     if (now - bucket.windowStart > bucket.windowMs) buckets.delete(key)
   }
 }
+
+/**
+ * Rejects a request whose declared Content-Length exceeds maxBytes, before any rate-limit
+ * bookkeeping or JSON parsing happens. None of these endpoints legitimately need more
+ * than a few KB — this is a cheap backstop against someone repeatedly sending oversized
+ * payloads to burn parse/compute time, on top of each handler's own
+ * `export const config = { api: { bodyParser: { sizeLimit } } }` (the mechanism Vercel's
+ * Node runtime itself uses to cap how much of the body it will even parse).
+ * Honest limitation: a request sent without a Content-Length header (e.g. chunked
+ * transfer-encoding) isn't caught by this specific check and relies on the bodyParser
+ * config instead.
+ */
+export function rejectIfOversized(req, res, maxBytes) {
+  const len = Number(req.headers['content-length'])
+  if (Number.isFinite(len) && len > maxBytes) {
+    res.status(413).json({ error: 'Request too large' })
+    return true
+  }
+  return false
+}

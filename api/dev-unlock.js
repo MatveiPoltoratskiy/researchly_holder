@@ -1,5 +1,9 @@
 import crypto from 'node:crypto'
-import { checkRateLimit, getClientIp, sweepExpired } from './_rateLimit.js'
+import { checkRateLimit, getClientIp, rejectIfOversized, sweepExpired } from './_rateLimit.js'
+
+// Caps how much of the body Vercel's Node runtime will even parse — a passphrase check
+// never needs more than a few hundred bytes.
+export const config = { api: { bodyParser: { sizeLimit: '1kb' } } }
 
 // Vercel Node.js Serverless Function (zero-config: any file under /api gets deployed as
 // one automatically). This is the piece that makes the /interview and /opportunities
@@ -23,6 +27,7 @@ export default function handler(req, res) {
       res.setHeader('Allow', 'POST')
       return res.status(405).json({ error: 'Method not allowed' })
     }
+    if (rejectIfOversized(req, res, 1024)) return
 
     sweepExpired()
     const ip = getClientIp(req)

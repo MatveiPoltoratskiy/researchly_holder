@@ -1,5 +1,9 @@
 import crypto from 'node:crypto'
-import { checkRateLimit, getClientIp, sweepExpired } from './_rateLimit.js'
+import { checkRateLimit, getClientIp, rejectIfOversized, sweepExpired } from './_rateLimit.js'
+
+// Caps how much of the body Vercel's Node runtime will even parse — a token check never
+// needs more than a few hundred bytes.
+export const config = { api: { bodyParser: { sizeLimit: '1kb' } } }
 
 // Verifies a token minted by dev-unlock.js. The client cannot forge a valid token
 // itself — it never has DEV_GATE_SECRET — so this is a real server-side check, not a
@@ -13,6 +17,7 @@ export default function handler(req, res) {
       res.setHeader('Allow', 'POST')
       return res.status(405).json({ error: 'Method not allowed' })
     }
+    if (rejectIfOversized(req, res, 1024)) return
 
     sweepExpired()
     const ip = getClientIp(req)

@@ -1,9 +1,14 @@
-import { checkRateLimit, getClientIp, sweepExpired } from './_rateLimit.js'
+import { checkRateLimit, getClientIp, rejectIfOversized, sweepExpired } from './_rateLimit.js'
 import { getSupabaseAdmin } from './_supabaseAdmin.js'
 
 // The sole write path for contact_messages once supabase/lockdown.sql has been run (see
 // that file) — the anon key can no longer INSERT directly, so this rate-limited,
 // server-validated endpoint, using the service-role key (_supabaseAdmin.js), is it.
+
+// Caps how much of the body Vercel's Node runtime will even parse. Generous relative to
+// the actual field limits below (name/email/subject/message add up to well under this)
+// to leave room for multi-byte UTF-8 text, while still far below the platform default.
+export const config = { api: { bodyParser: { sizeLimit: '32kb' } } }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const MAX_EMAIL_LENGTH = 320
@@ -23,6 +28,7 @@ export default async function handler(req, res) {
       res.setHeader('Allow', 'POST')
       return res.status(405).json({ error: 'Method not allowed' })
     }
+    if (rejectIfOversized(req, res, 32 * 1024)) return
 
     sweepExpired()
     const ip = getClientIp(req)
