@@ -588,11 +588,30 @@ export function OpportunityDetailModal({ o, onClose, interviewAnswers, matchProf
   )
 }
 
+const SESSION_FILTER_KEYS = ['rsly_opp_active_fields', 'rsly_opp_level', 'rsly_opp_cost_filters', 'rsly_opp_stipend_only']
+
 export default function OpportunityExplorer() {
   // read once per mount (not per module load, so a second visit within the same SPA
   // session — after the handoff below has cleared it — correctly falls back to
   // defaults instead of replaying a stale first-visit snapshot forever)
-  const [interviewHandoff] = useState(() => peekInterviewFilters())
+  const [interviewHandoff] = useState(() => {
+    const handoff = peekInterviewFilters()
+    // a just-completed interview must win over whatever filter state an earlier,
+    // unrelated visit to this page left in sessionStorage this tab session — otherwise
+    // every useSessionStorageState call below finds an existing stored value for its key
+    // and uses THAT instead of ever running its own handoff-aware initializer, so a fresh
+    // interview's answers silently get ignored (this is what let "All levels" and every
+    // major stay checked even right after specifying real preferences).
+    if (handoff) {
+      try {
+        SESSION_FILTER_KEYS.forEach((k) => sessionStorage.removeItem(k))
+      } catch {
+        // sessionStorage unavailable — the useSessionStorageState hooks below will fall
+        // back to their own defaults regardless, same as everywhere else in this file
+      }
+    }
+    return handoff
+  })
   const interviewAnswers = interviewHandoff?.answers || null
   // filter state persists across a page refresh (sessionStorage) but not across the tab
   // actually closing, so a reload never silently throws away what someone had picked —
