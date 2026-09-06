@@ -11678,5 +11678,454 @@ export const CANADA_OPPORTUNITIES = [
     "isGrant": false,
     "confidence": "low",
     "blurb": "A 6-10 week lab research placement at Imperial, working directly with a research group. No program fee. Imperial's own students get a paid bursary automatically; external/visiting undergrads can still arrange the same placement with a supervisor, just without that funding, so budget for your own living costs."
+  },
+  {
+    "id": "maxsip-max-planck",
+    "name": "Max Planck Summer Internship Program (MaxSIP)",
+    "org": "Max Planck Institute of Biochemistry / IMPRS for Molecular Life Sciences",
+    "url": "https://imprs-ls.opencampus.net/en/MaxSIP",
+    "focus": [
+      "biology",
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Munich area, Germany",
+    "lat": 48.1093,
+    "lon": 11.4306,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": 1000,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": true,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A fully funded lab placement at one of the Max Planck life-sciences institutes for bachelor's (2nd year+) and master's students with some prior lab experience, from any country. Pays roughly €1,000/month plus travel and housing support. Extremely selective — recent years saw around 4,000 applicants for 17 spots."
+  },
+  {
+    "id": "inria-internship",
+    "name": "INRIA Internship",
+    "org": "Inria (French National Institute for Research in Digital Science and Technology)",
+    "url": "https://www.inria.fr/en/do-internship",
+    "focus": [
+      "computer-science",
+      "mathematics"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Multiple cities, France",
+    "lat": 48.8566,
+    "lon": 2.3376,
+    "availability": "both",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": true,
+    "multiSite": true,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A 2-4 month placement (final-year undergrad) or 3-6 months (master's) with a computer science/math research team at one of Inria's centers across France (Paris, Lyon, Rennes, Sophia Antipolis, and others). Pays a monthly grant. Open to students worldwide, but you find and contact a specific project team yourself rather than applying to one central deadline."
+  },
+  {
+    "id": "ifj-pan-particle-physics",
+    "name": "IFJ PAN Particle Physics Summer Student Programme",
+    "org": "Institute of Nuclear Physics, Polish Academy of Sciences",
+    "url": "https://ppss.ifj.edu.pl/",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Krakow, Poland",
+    "lat": 50.0647,
+    "lon": 19.945,
+    "availability": "summer",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "moderate",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A 4-week particle physics research programme in Krakow. Partial or full lodging support is available for students coming from outside Krakow, including from abroad, based on ranking. No application fee."
+  },
+  {
+    "id": "nordita-summer-internship",
+    "name": "Summer Internship Program",
+    "org": "Nordita (Nordic Institute for Theoretical Physics)",
+    "url": "https://nordita.org/education/summer-internship-program/",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Stockholm, Sweden",
+    "lat": 59.3293,
+    "lon": 18.0686,
+    "availability": "both",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 2-4 month theoretical physics research stay in Stockholm, working with a Nordita supervisor on condensed matter, particle physics, astrophysics, or quantum information topics. No application fee, but Nordita itself provides no funding — most past interns have covered the cost through their home university or an outside scholarship (e.g. Erasmus Mundus)."
+  },
+  {
+    "id": "esa-student-internship",
+    "name": "Student Internship Programme",
+    "org": "European Space Agency (ESA)",
+    "url": "https://www.esa.int/About_Us/Careers_at_ESA/Student_Internships2",
+    "focus": [
+      "physics",
+      "computer-science",
+      "mathematics",
+      "engineering"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Multiple sites, Europe (HQ: Noordwijk, Netherlands)",
+    "lat": 52.213,
+    "lon": 4.434,
+    "availability": "both",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": true,
+    "multiSite": true,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 3-6 month internship at an ESA site working on real space-mission technical or scientific work, for students nearing the end of a bachelor's or in the first half of a master's. Unpaid but comes with a monthly living allowance. Note: only open to citizens of ESA member/associate states (most of Europe) or Canada."
+  },
+  {
+    "id": "desy-summer-student",
+    "name": "DESY Summer Student Programme",
+    "org": "Deutsches Elektronen-Synchrotron (DESY)",
+    "url": "https://summerstudents.desy.de/",
+    "focus": [
+      "physics",
+      "computer-science"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Hamburg, Germany",
+    "lat": 53.5511,
+    "lon": 9.9937,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": 1482,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 7.5-week research placement at DESY's particle-physics/photon-science campus, in either synchrotron radiation research, accelerator/particle physics, or astroparticle physics. Pays about €28.50/day (roughly €1,480 total) plus travel reimbursement and accommodation. Open worldwide."
+  },
+  {
+    "id": "esrf-ill-summer-programme",
+    "name": "International Student Summer Programme (X-Ray and Neutron Science)",
+    "org": "ESRF & ILL (European Photon & Neutron Science Campus)",
+    "url": "https://www.esrf.fr/home/education/summer-student-programme.html",
+    "focus": [
+      "physics",
+      "chemistry",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Grenoble, France",
+    "lat": 45.1885,
+    "lon": 5.7245,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 4-week programme combining intro lectures with a hands-on X-ray/neutron science research project at the ESRF or ILL synchrotron/reactor facilities, for undergrads (2nd year and up) in physics, chemistry, biology, or a related field. Financial support and free accommodation included; only about 20 spots. Note: only open to students at universities in ESRF/ILL member or scientific associate countries (most of Europe, plus a few others)."
+  },
+  {
+    "id": "epfl-summer-research-cs",
+    "name": "Summer@EPFL Research Internship",
+    "org": "École Polytechnique Fédérale de Lausanne (EPFL)",
+    "url": "https://summer.epfl.ch/",
+    "focus": [
+      "computer-science",
+      "engineering",
+      "mathematics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Lausanne, Switzerland",
+    "lat": 46.5197,
+    "lon": 6.6323,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "2-3 months in an EPFL computer science, communication systems, or engineering research lab, funded, for students at other universities (EPFL's own students aren't eligible for this particular track). Flexible start dates between May and September."
+  },
+  {
+    "id": "epfl-summer-research-life-sciences",
+    "name": "School of Life Sciences Summer Research Program",
+    "org": "École Polytechnique Fédérale de Lausanne (EPFL)",
+    "url": "https://www.epfl.ch/schools/sv/education/summer-research-program/",
+    "focus": [
+      "biology",
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Lausanne, Switzerland",
+    "lat": 46.5197,
+    "lon": 6.6323,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "8 weeks of lab immersion at EPFL for international bachelor's/1st-year-master's students in biology, biophysics, chemistry, bioengineering, bioinformatics, or quantitative biology. Runs alongside the sister SUR programme at the University of Lausanne, with shared seminars."
+  },
+  {
+    "id": "psi-summer-student",
+    "name": "PSI Summer Student Programme",
+    "org": "Paul Scherrer Institute",
+    "url": "https://www.psi.ch/en/summerstudents",
+    "focus": [
+      "physics",
+      "chemistry",
+      "computer-science",
+      "engineering"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Villigen, Switzerland",
+    "lat": 47.535,
+    "lon": 8.228,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "An 8-12 week research project at Switzerland's largest research institute for natural and engineering sciences, for students who've finished at least 3 years of university study (bachelor's-completing through master's). Financial support toward living costs is provided; exact amount varies by center."
+  },
+  {
+    "id": "kit-minternship",
+    "name": "International MINTernship Program",
+    "org": "Karlsruhe Institute of Technology (KIT)",
+    "url": "https://www.kit.edu/kit/english/22418.php",
+    "focus": [
+      "engineering",
+      "physics",
+      "computer-science",
+      "mathematics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Karlsruhe, Germany",
+    "lat": 49.0069,
+    "lon": 8.4037,
+    "availability": "both",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "moderate",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "Up to 6 months doing a technical internship in a KIT lab or research group, plus a side program of German classes, seminars, and excursions. Restricted to students from English-speaking countries (US, UK, Canada, Ireland, Australia, etc.)."
+  },
+  {
+    "id": "institut-curie-internship",
+    "name": "Student & Research Internships",
+    "org": "Institut Curie",
+    "url": "https://institut-curie.org/internships-students-and-doctors",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Paris, France",
+    "lat": 48.8462,
+    "lon": 2.3431,
+    "availability": "both",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "Research or clinical-research internships in oncology at one of France's leading cancer research centers, open to French and international students alike. There's no single deadline — you contact one of Institut Curie's research teams directly with a project proposal to arrange it."
+  },
+  {
+    "id": "vienna-biocenter-summer-school",
+    "name": "Vienna BioCenter Summer School",
+    "org": "Vienna BioCenter (IMP, IMBA, GMI, Max Perutz Labs)",
+    "url": "https://training.vbc.ac.at/summer-school/",
+    "focus": [
+      "biology",
+      "neuroscience",
+      "computer-science"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Vienna, Austria",
+    "lat": 48.2082,
+    "lon": 16.3738,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": 1400,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 9-week life-sciences research project in a lab across Vienna's BioCenter campus (biochemistry, stem cells, RNA biology, bioinformatics, immunology, and more), for bachelor's/master's students worldwide with at least 2 years of life-sciences study. Pays roughly €1,400 after tax, plus free housing and a faculty lecture series."
+  },
+  {
+    "id": "unil-sur-programme",
+    "name": "Summer Undergraduate Research (SUR) Programme",
+    "org": "University of Lausanne (UNIL), Faculty of Biology and Medicine",
+    "url": "https://www.unil.ch/fbm/en/home/menuinst/formation/short-continuing-postgraduate-training/sur-programme.html",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Lausanne, Switzerland",
+    "lat": 46.5197,
+    "lon": 6.6323,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": 1500,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "8 weeks (July-August) running an individual research project in a Faculty of Biology and Medicine lab, for about 15 bachelor's students worldwide per year in biology, medicine, or a related field. Pays a CHF 1,500 living stipend plus free accommodation, travel costs, and visa help. Shared seminars with the sister programme at EPFL."
+  },
+  {
+    "id": "eso-science-communication-internship",
+    "name": "Science Communication Internship",
+    "org": "European Southern Observatory (ESO)",
+    "url": "https://www.eso.org/public/employment/",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Garching bei München, Germany",
+    "lat": 48.261,
+    "lon": 11.6737,
+    "availability": "both",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A 3-6 month fully funded internship at Europe's astronomy agency, working on public outreach and science communication around real ESO research (not lab research itself) — a good fit if you're into astronomy and also enjoy the writing/media side of science."
   }
 ]
