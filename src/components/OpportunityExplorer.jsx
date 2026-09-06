@@ -609,6 +609,16 @@ export default function OpportunityExplorer() {
     { serialize: (s) => JSON.stringify([...s]), deserialize: (raw) => new Set(JSON.parse(raw)) }
   )
   const [equityOnly, setEquityOnly] = useSessionStorageState('rsly_opp_equity_only', false)
+  // separate from costFilters (free/costs-money-to-attend) — whether a program pays the
+  // student a stipend is an unrelated field (o.paid) from whether attending costs them
+  // money (o.cost), so "Paid only" in the interview needs its own filter, not a third
+  // option OR'd into the cost-to-attend set (that would show stipend-paying results OR
+  // free-to-attend results instead of narrowing to both, which isn't what either checkbox
+  // means on its own)
+  const [stipendOnly, setStipendOnly] = useSessionStorageState(
+    'rsly_opp_stipend_only',
+    () => Boolean(interviewHandoff?.filters?.stipendOnly)
+  )
   const saved = useSavedOpportunities()
   const [sortKey, setSortKey] = useSessionStorageState('rsly_opp_sort_key', 'recommended')
   const [userLocation, setUserLocation] = useState(() => interviewHandoff?.filters?.locationCoords || null)
@@ -751,6 +761,11 @@ export default function OpportunityExplorer() {
     scrollToResults()
   }
 
+  function toggleStipendFilter() {
+    setStipendOnly((prev) => !prev)
+    scrollToResults()
+  }
+
   // powers the "Recommended for you" sort: big-name/near-you ranking needs real
   // coordinates, which only the browser's own Geolocation API can give us here (no
   // geocoding service or API key wired up for this prototype)
@@ -806,6 +821,8 @@ export default function OpportunityExplorer() {
 
       if (equityOnly && !o.equityNote) return false
 
+      if (stipendOnly && !o.paid) return false
+
       return true
     })
 
@@ -859,7 +876,7 @@ export default function OpportunityExplorer() {
 
     const sortFn = SORTS[sortKey]?.fn
     return sortFn ? [...list].sort(sortFn) : list
-  }, [activeFields, level, costFilters, equityOnly, sortKey, userLocation, interviewAnswers, matchProfile])
+  }, [activeFields, level, costFilters, equityOnly, stipendOnly, sortKey, userLocation, interviewAnswers, matchProfile])
 
   const filteredLenRef = useRef(filtered.length)
   filteredLenRef.current = filtered.length
@@ -1017,6 +1034,31 @@ export default function OpportunityExplorer() {
                     </button>
                   )
                 })}
+                {/* its own independent toggle, not a third cost-to-attend option — whether
+                    a program pays a stipend (o.paid) is unrelated to whether it costs the
+                    student money to attend (o.cost), so this ANDs on top of the two above
+                    instead of OR'ing into the same set */}
+                <button
+                  type="button"
+                  className={`opp-major-row is-live ${stipendOnly ? 'is-checked' : ''}`}
+                  onClick={toggleStipendFilter}
+                >
+                  <span className="opp-major-check" aria-hidden="true">
+                    {stipendOnly && (
+                      <svg width="10" height="8" viewBox="0 0 10 8">
+                        <path
+                          d="M1 4.2 3.6 6.8 9 1.2"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    )}
+                  </span>
+                  <span className="opp-major-label">Pays a stipend</span>
+                </button>
               </div>
             </div>
 

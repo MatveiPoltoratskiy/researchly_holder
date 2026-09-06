@@ -301,7 +301,12 @@ function explorerFiltersFromAnswers(answers) {
   return {
     focus: mappedFocus ? [mappedFocus] : null,
     level,
+    // "free to attend" and "paid only" are answers to the SAME interview question but
+    // map to two different data fields (o.cost vs o.paid — whether it costs the student
+    // money to attend is unrelated to whether the program pays them a stipend), so they
+    // seed two different explorer filters rather than one.
     cost: answers.paidPref === 'free-to-attend' ? ['free'] : [],
+    stipendOnly: answers.paidPref === 'paid-only',
     locationCoords: answers.remoteOnly ? null : answers.locationCoords || null,
   }
 }
