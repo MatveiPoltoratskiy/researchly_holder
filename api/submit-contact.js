@@ -1,10 +1,9 @@
 import { checkRateLimit, getClientIp, sweepExpired } from './_rateLimit.js'
 import { getSupabaseAdmin } from './_supabaseAdmin.js'
 
-// Same shape as submit-waitlist.js — see its comment for why this is the sole write
-// path once supabase/lockdown.sql has been run. Tighter limit than the waitlist form (5
-// / 10 min, not 10) since a real visitor sends one contact message per sitting, not
-// several.
+// The sole write path for contact_messages once supabase/lockdown.sql has been run (see
+// that file) — the anon key can no longer INSERT directly, so this rate-limited,
+// server-validated endpoint, using the service-role key (_supabaseAdmin.js), is it.
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const MAX_EMAIL_LENGTH = 320

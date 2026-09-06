@@ -1,8 +1,8 @@
 /**
- * Posts to the rate-limited serverless endpoints that now front the waitlist/contact
- * tables (see api/submit-waitlist.js, api/submit-contact.js) instead of writing to
- * Supabase directly from the browser — see supabase/lockdown.sql for why that move
- * matters (it's what lets the public anon key's INSERT privilege be revoked entirely).
+ * Posts to the rate-limited serverless endpoint that fronts the contact_messages table
+ * (see api/submit-contact.js) instead of writing to Supabase directly from the browser —
+ * see supabase/lockdown.sql for why that move matters (it's what lets the public anon
+ * key's INSERT privilege be revoked entirely).
  */
 
 async function postJson(path, body) {
@@ -17,10 +17,6 @@ async function postJson(path, body) {
   } catch {
     return { ok: false, data: {} }
   }
-}
-
-export function submitWaitlist({ email, hp }) {
-  return postJson('/api/submit-waitlist', { email, hp })
 }
 
 export function submitContact({ name, email, subject, message, hp }) {

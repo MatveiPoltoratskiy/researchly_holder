@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useRouter } from '../lib/router'
-import { submitWaitlist } from '../lib/formSubmit'
 import { verifyDevAccess, unlockDevAccess } from '../lib/devAccess'
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 // Scrolls to a homepage section id, navigating home first if we're on another route —
 // same pattern Navbar uses for its "How it works" link.
@@ -22,10 +19,6 @@ function scrollToSection(id, path, navigate) {
 
 export default function Footer() {
   const { path, navigate } = useRouter()
-  const [email, setEmail] = useState('')
-  const [status, setStatus] = useState('idle') // idle | submitting | success | error
-  const [message, setMessage] = useState('')
-  const [hp, setHp] = useState('') // honeypot — see .hp-field in index.css for the full explanation
 
   // real server-verified access (see lib/devAccess.js) — keeps the in-progress
   // prototype routes off the public internet before launch, so a cofounder can test
@@ -62,39 +55,6 @@ export default function Footer() {
     }
   }
 
-  async function handleSubmit(e) {
-    e.preventDefault()
-    if (status === 'submitting') return
-
-    const trimmed = email.trim()
-    if (!EMAIL_RE.test(trimmed)) {
-      setStatus('error')
-      setMessage('Enter a valid email address.')
-      return
-    }
-    if (hp.trim()) {
-      setStatus('success')
-      setMessage("You're subscribed.")
-      setEmail('')
-      return
-    }
-    setStatus('submitting')
-    setMessage('')
-
-    const { ok, data } = await submitWaitlist({ email: trimmed, hp })
-
-    if (ok && data.ok) {
-      setStatus('success')
-      setMessage("You're subscribed.")
-      setEmail('')
-      return
-    }
-    setStatus('error')
-    setMessage(data.error || 'Something went wrong. Please try again.')
-  }
-
-  const isSubmitting = status === 'submitting'
-
   return (
     <footer className="site-footer">
       <div className="footer-card">
@@ -126,64 +86,6 @@ export default function Footer() {
               FAQ
             </a>
           </nav>
-
-          <div className="footer-newsletter">
-            <p className="footer-col-title footer-col-title--accent">Stay in the loop</p>
-            <p className="footer-newsletter-copy">Get an email when we add new opportunities and features.</p>
-
-            {status === 'success' ? (
-              <p className="footer-newsletter-success">{message}</p>
-            ) : (
-              <form className="footer-email-form" onSubmit={handleSubmit} noValidate>
-                <input
-                  type="text"
-                  name="company"
-                  className="hp-field"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  aria-hidden="true"
-                  value={hp}
-                  onChange={(e) => setHp(e.target.value)}
-                />
-                <svg className="footer-email-icon" width="18" height="18" aria-hidden="true"><use href="#icon-mail" /></svg>
-                <label htmlFor="footer-email" className="visually-hidden">Email address</label>
-                <input
-                  id="footer-email"
-                  type="email"
-                  inputMode="email"
-                  autoComplete="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value)
-                    if (status === 'error') { setStatus('idle'); setMessage('') }
-                  }}
-                  disabled={isSubmitting}
-                  aria-invalid={status === 'error'}
-                  required
-                />
-                <button className="footer-email-submit" type="submit" disabled={isSubmitting} aria-label="Subscribe for updates">
-                  {isSubmitting ? (
-                    <svg className="btn-spinner" viewBox="0 0 24 24" aria-hidden="true">
-                      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeDasharray="34 100" />
-                    </svg>
-                  ) : (
-                    <svg width="16" height="16" aria-hidden="true"><use href="#icon-arrow" /></svg>
-                  )}
-                </button>
-              </form>
-            )}
-
-            {status === 'error' && (
-              <p className="footer-newsletter-error" role="alert">{message}</p>
-            )}
-            {status !== 'success' && (
-              <p className="footer-newsletter-note">
-                <svg width="12" height="12" aria-hidden="true"><use href="#icon-lock" /></svg>
-                No spam. Ever. Unsubscribe anytime.
-              </p>
-            )}
-          </div>
         </div>
 
         <hr className="footer-divider" />
