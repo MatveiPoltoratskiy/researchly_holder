@@ -112,6 +112,22 @@ const PAID_PREFS = [
 
 const STEP_LABELS = ['Field', 'Focus', 'Format', 'Level', 'Location', 'Experience', 'Timeline', 'Pay']
 
+// Location is meant to stay at city/zip granularity (see the "City or zip works" copy
+// below) — matching only needs that much precision, and a typed street address is both
+// unnecessary detail and more than we want to ask a student to hand over. This is a
+// heuristic, not a full address parser: a leading house number followed by a street-suffix
+// word, or an apartment/suite/unit marker, is enough to catch the common cases without
+// flagging a plain city name or zip/postal code (neither has a street-suffix word).
+const STREET_ADDRESS_RE =
+  /^\s*\d+[a-z]?\s+\S+.*\b(st(reet)?|ave(nue)?|rd|road|blvd|boulevard|dr(ive)?|ln|lane|way|ct|court|pl(ace)?|terr(ace)?|cir(cle)?|cres(cent)?|hwy|highway|pkwy|parkway|trl|trail|sq(uare)?|alley|loop)\b/i
+const ADDRESS_UNIT_RE = /\b(apt|apartment|suite|ste|unit)\.?\s*#?\s*\d+|#\d+/i
+
+function looksLikeStreetAddress(value) {
+  const v = value.trim()
+  if (!v) return false
+  return STREET_ADDRESS_RE.test(v) || ADDRESS_UNIT_RE.test(v)
+}
+
 function hasSubfocus(fieldId) {
   return (FIELD_BY_ID[fieldId]?.subfocus?.length || 0) > 0
 }
@@ -379,6 +395,7 @@ export default function Interview() {
   })
   const [locationStatus, setLocationStatus] = useState('idle') // idle | loading | granted | denied | unsupported
   const [locationConfirmed, setLocationConfirmed] = useState(false)
+  const [locationTooSpecific, setLocationTooSpecific] = useState(false)
   const [suggestions, setSuggestions] = useState([])
   const [showSuggestions, setShowSuggestions] = useState(false)
   // a single enum instead of two booleans — 'loading' and 'matches' being separate
@@ -495,6 +512,7 @@ export default function Interview() {
     // no longer typed
     setAnswers((a) => ({ ...a, location: value, locationCoords: null }))
     setLocationConfirmed(false)
+    setLocationTooSpecific(looksLikeStreetAddress(value))
     const matches = searchCities(value)
     setSuggestions(matches)
     setShowSuggestions(matches.length > 0)
@@ -528,12 +546,14 @@ export default function Interview() {
   function pickSuggestion(city) {
     setAnswers((a) => ({ ...a, location: city, locationCoords: null }))
     setSuggestions([])
+    setLocationTooSpecific(false)
     confirmLocation()
     geocodeLocation(city)
   }
 
   function handleLocationContinue(e) {
     e.preventDefault()
+    if (locationTooSpecific) return
     if (answers.location.trim() && !locationConfirmed) {
       confirmLocation()
       if (!answers.locationCoords) geocodeLocation(answers.location.trim())
@@ -544,6 +564,7 @@ export default function Interview() {
 
   function handleRemoteToggle(checked) {
     setAnswers((a) => ({ ...a, remoteOnly: checked, ...(checked ? { location: '', locationCoords: null } : {}) }))
+    setLocationTooSpecific(false)
     if (checked) {
       confirmLocation()
     } else {
@@ -820,6 +841,12 @@ export default function Interview() {
                       </button>
                     )}
 
+                    {locationTooSpecific && (
+                      <p className="interview-location-note">
+                        Just the city or zip code works — no need for a street address.
+                      </p>
+                    )}
+
                     {locationStatus === 'denied' && !locationConfirmed && (
                       <p className="interview-location-note">
                         Location access was denied. Type your city above, or check remote only.
@@ -839,7 +866,7 @@ export default function Interview() {
                     <button
                       type="submit"
                       className="interview-continue-btn"
-                      disabled={!answers.remoteOnly && !answers.location.trim()}
+                      disabled={!answers.remoteOnly && (!answers.location.trim() || locationTooSpecific)}
                     >
                       Continue
                       <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow" /></svg>
