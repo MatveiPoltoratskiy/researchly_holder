@@ -606,7 +606,7 @@ export default function Interview() {
   if (phase === 'matches') {
     // computed once, right when this phase is entered — answers are settled by now, no
     // need to re-score on every keystroke earlier in the flow
-    const matches = getTopMatches(CANADA_OPPORTUNITIES, answers, 4)
+    const matches = getTopMatches(CANADA_OPPORTUNITIES, answers, 8)
     return (
       <InterviewMatches
         matches={matches}
