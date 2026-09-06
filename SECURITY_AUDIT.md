@@ -281,3 +281,43 @@ Scope: every table, query, API response, and server function touching data, per 
 1. **Run `supabase/lockdown.sql` in the Supabase SQL editor now** — this is the actual fix; everything above it in this repo was already correct.
 2. **Delete the two probe rows** listed above from the Table Editor.
 3. **Consider reviewing the full table list in your Supabase dashboard directly** — this audit could only confirm the two tables the app's code references; schema introspection via the API is correctly blocked for anon, so a from-outside enumeration of *every* table in the project wasn't possible from this environment.
+
+---
+
+## Infrastructure audit — 2026-09-06 (security, DDoS, bot abuse, scraping)
+
+Architecture: Vercel-hosted static SPA + 3 Vercel Node serverless functions, no traditional origin server to expose (Vercel's edge *is* the entry point — there's no separate backend host/IP that could leak). Went through every area requested; findings sorted by what's actually actionable from here.
+
+### Fixed in this repo (code-level)
+
+- **No security headers beyond the baseline set in an earlier session.** Added to `vercel.json`: `Strict-Transport-Security` (2yr, includeSubDomains — the site has no legitimate same-origin `http://` flow, so forcing HTTPS costs nothing), `Cross-Origin-Opener-Policy: same-origin` (safe — confirmed zero `window.open`/`postMessage` usage anywhere in the app, so nothing depends on cross-origin window access), and a **`Content-Security-Policy-Report-Only`**. That last one is deliberately Report-Only, not enforcing: it logs violations to the browser console without ever blocking a resource, which is the only way to safely introduce a CSP to a codebase without a live environment to test against first. Its allowlist was built by enumerating every actual resource-loading external domain in the app (not the ~250 university/org domains in the opportunities dataset — those are just outbound `<a href>` link targets, which CSP doesn't restrict): `fonts.googleapis.com`/`fonts.gstatic.com` (Google Fonts), `cdn.vercel-insights.com` (Vercel Analytics), `www.google.com`/`icons.duckduckgo.com` (org favicon images), `server.arcgisonline.com` (Leaflet map tiles), `nominatim.openstreetmap.org` (geocoding fetch calls). `style-src` needs `'unsafe-inline'` because the app uses React inline `style={{}}` extensively — removing it would break real styling, not a security gap worth that cost for a site with no XSS found.
+- **No `robots.txt` existed.** Added a minimal one disallowing the three pre-launch gated routes (`/interview`, `/opportunities`, `/my-opportunities` — a crawler gets nothing from them anyway since they're client-rendered and passphrase-gated) and allowing everything else.
+- **Rate limiting, oversized-request caps, and the `X-Forwarded-For` spoofing fix** from earlier sessions were re-verified still in place and correct — not re-touched here.
+
+### Reviewed, no code change needed
+
+- **CORS**: none of the 3 API endpoints set any `Access-Control-Allow-Origin` header, which is correct — nothing calls them cross-origin, so the browser's same-origin default is exactly the right posture. Adding a CORS policy here would only be needed if a third-party site were meant to call these endpoints, which none is.
+- **Origin server exposure**: not applicable — there's no separate backend to expose. Vercel serverless functions have no persistent host/IP a client could target directly to bypass the platform's own edge routing.
+- **HTTPS / mixed content**: Vercel auto-provisions TLS for all deployments. Grepped for `http://` in every actively-loaded resource — the only hits are the SVG XML namespace string (`http://www.w3.org/2000/svg`, a required spec string, never fetched) and 2 outbound `"url"` fields in the opportunities dataset pointing at organizations' own `http://` websites (an `<a href>` a visitor might click, not a resource this app loads — browsers don't block that as mixed content, just show it as an insecure link).
+- **Production vs development config**: confirmed no source maps ship in `dist/` (`vite.config.js` never overrides Vite's `sourcemap: false` default), zero `console.log` debug statements anywhere in `src/`, no `NODE_ENV`/`import.meta.env.DEV` branching that could leave a dev-only code path reachable in production.
+- **Public API enumeration**: the only 3 endpoints (`dev-unlock`, `dev-verify`, `submit-contact`) were already covered in the prior API-abuse audit (rate-limited, body-size-capped, no user enumeration). Nothing new found.
+
+### Requires hosting/provider configuration (cannot be done from this repo)
+
+- **DDoS protection tier**: Vercel's platform absorbs volumetric (L3/L4) attacks at the edge regardless of plan, but *application-layer* abuse mitigation, custom traffic rules, and bot-challenge features are part of **Vercel Firewall / Attack Challenge Mode**, which requires a Pro or Enterprise plan and dashboard configuration — not something expressible in this repo's config files.
+- **WAF**: Vercel's own WAF (part of Vercel Firewall) or a third-party WAF (Cloudflare in front of Vercel, etc.) would need to be enabled/configured in that provider's dashboard. Nothing in this app's request/response shapes (standard JSON POSTs, standard headers) would conflict with a WAF being added later.
+- **Distributed rate limiting**: the current limiter (`api/_rateLimit.js`) is honestly documented as in-memory/per-warm-instance — real resistance to a sustained, distributed attack would need a shared store (Vercel Firewall rate limiting, or Upstash Redis) rather than more application code. Flagged as a future upgrade path, not implemented now since the current limiter already closes the realistic single-script-abuse threat these endpoints actually face.
+- **HSTS preload list submission**: added the header itself (see above), but submitting the domain to browsers' built-in HSTS preload list (hstspreload.org) is a deliberate, hard-to-reverse commitment that should be the site owner's explicit choice, not something silently done via code.
+- **Verify headers are actually served**: `vercel.json` headers only take effect on a real Vercel deployment (same caveat as the original Aug 20 audit) — run `curl -I https://<your-domain>/` after deploying and confirm the new headers appear, and check the browser devtools console on a few pages for `Content-Security-Policy-Report-Only` violation reports before ever considering switching it to enforcing.
+
+### Scraping — cannot realistically be prevented (and isn't a code bug)
+
+Once the passphrase gate comes off at launch, the ~315-listing opportunities dataset will be fully public, client-rendered content — anyone with a browser (or a trivial headless-browser script) can read everything on the page, the same way they could scrape any public directory/listing site (Yelp, Indeed, a university's own course catalog). No rate limit, CAPTCHA, or bot-detection product can prevent a determined scraper from reading content that's *by design* shown to every visitor without login — those tools only raise the cost for unsophisticated bots, they don't stop a real headless browser driven by a person who wants the data. This isn't a vulnerability to fix; it's the inherent nature of a public content site. The only thing actually worth doing here is what's already in place: keeping the write paths (contact form) rate-limited and validated, since *those* are the parts an attacker could abuse for cost or spam rather than just reading public information.
+
+### Manual infrastructure checklist (separate from code)
+
+1. Run `supabase/lockdown.sql` (see above — unrelated to this section but still outstanding).
+2. Decide whether to enable Vercel Firewall / Attack Challenge Mode (Pro+ plan feature) for stronger DDoS/bot mitigation than the app-level rate limiter alone provides.
+3. Decide whether to submit the domain to the HSTS preload list.
+4. After deploying, `curl -I` the production domain to confirm the new headers are present, and check for CSP-Report-Only console violations across the main pages before ever switching CSP to enforcing mode.
+5. Confirm the production Vercel plan/tier matches the actual expected traffic and abuse-resistance needs at launch — this is a business decision, not something inferable from the codebase.

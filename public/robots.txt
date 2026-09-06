@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /interview
+Disallow: /opportunities
+Disallow: /my-opportunities
+Allow: /
