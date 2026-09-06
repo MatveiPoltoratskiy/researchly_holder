@@ -12184,5 +12184,133 @@ export const CANADA_OPPORTUNITIES = [
     "isGrant": false,
     "confidence": "medium",
     "blurb": "About 12 weeks of full-time photonics research at ICFO near Barcelona, with a Group Leader as mentor. Pays a €600/month gross stipend for students not already living in Catalunya, plus travel costs."
+  },
+  {
+    "id": "amgen-lmu-munich",
+    "name": "Amgen Scholars Program",
+    "org": "Ludwig-Maximilians-Universität München (LMU Munich)",
+    "url": "https://amgenscholars.com/university/lmu-munich/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Munich, Germany",
+    "lat": 48.1508,
+    "lon": 11.5802,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "One of 5 official European Amgen Scholars sites: a funded summer research program in science and biotechnology."
+  },
+  {
+    "id": "amgen-eth-zurich",
+    "name": "Amgen Scholars Program",
+    "org": "ETH Zurich",
+    "url": "https://amgenscholars.com/university/eth-zurich/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Zurich, Switzerland",
+    "lat": 47.3763,
+    "lon": 8.5476,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "One of 5 official European Amgen Scholars sites: a funded summer research program in science and biotechnology."
+  },
+  {
+    "id": "amgen-karolinska",
+    "name": "Amgen Scholars Program",
+    "org": "Karolinska Institutet",
+    "url": "https://amgenscholars.com/university/karolinska-institutet-sweden/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Stockholm, Sweden",
+    "lat": 59.3498,
+    "lon": 18.03,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "One of 5 official European Amgen Scholars sites: a funded summer research program in science and biotechnology."
+  },
+  {
+    "id": "amgen-cambridge",
+    "name": "Amgen Scholars Program",
+    "org": "University of Cambridge",
+    "url": "https://amgenscholars.com/university/university-of-cambridge/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Cambridge, UK",
+    "lat": 52.2043,
+    "lon": 0.1149,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "One of 5 official European Amgen Scholars sites: a funded summer research program in science and biotechnology."
   }
 ]
