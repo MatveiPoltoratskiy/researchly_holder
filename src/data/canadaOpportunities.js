@@ -11612,5 +11612,71 @@ export const CANADA_OPPORTUNITIES = [
     "isGrant": false,
     "confidence": "medium",
     "blurb": "A 10-13 week research internship matched with a doctoral-student mentor at a German university or research institute, in biology, chemistry, physics, earth sciences, engineering, or computer science. Covers a monthly stipend, insurance, and travel help. Note: only open to undergrads studying in the US, Canada, or UK (at least two years completed)."
+  },
+  {
+    "id": "nus-iris",
+    "name": "Internship and Research Immersion in Singapore (IRIS)",
+    "org": "National University of Singapore",
+    "url": "https://nusgs.nus.edu.sg/page/irisnus/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics",
+      "computer-science",
+      "mathematics"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Singapore",
+    "lat": 1.2966,
+    "lon": 103.7764,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": 1200,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A funded research placement in an NUS lab for undergrads who've completed at least 2 years of study with a 3.5/4.0 GPA. Pays SGD 1,200/month plus a SGD 600 travel allowance and free on-campus housing. Open to students worldwide."
+  },
+  {
+    "id": "imperial-urop-external",
+    "name": "Undergraduate Research Opportunities Programme (UROP)",
+    "org": "Imperial College London",
+    "url": "https://www.imperial.ac.uk/students/undergraduate-research-opportunities-programme/what-is-urop/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics",
+      "computer-science",
+      "mathematics",
+      "engineering"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "London, UK",
+    "lat": 51.4988,
+    "lon": -0.1749,
+    "availability": "summer",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "moderate",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A 6-10 week lab research placement at Imperial, working directly with a research group. No program fee. Imperial's own students get a paid bursary automatically; external/visiting undergrads can still arrange the same placement with a supervisor, just without that funding, so budget for your own living costs."
   }
 ]
