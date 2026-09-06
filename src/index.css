@@ -1187,7 +1187,9 @@ h1{
    landing page's own font instead of picking up the app's serif via the reused class */
 .how-panel .interview-question{ margin:0; font-family: var(--font-title); }
 .how-panel .im-matches-eyebrow{ margin:0; }
-.how-panel .im-match-list{ margin:0; gap:12px; }
+/* this preview only ever shows 2 cards and stays narrow inside the how-it-works panel —
+   keep it a single stacked column regardless of the real matches page's 2-column grid */
+.how-panel .im-match-list{ display:flex; flex-direction:column; margin:0; gap:12px; }
 .how-panel .im-match-card{ padding:16px 20px; gap:16px; }
 .how-panel .im-match-name{ font-size:21px; }
 .how-panel .im-match-pct-num{ font-size:29px; }
@@ -3164,7 +3166,7 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
    scale below grew, so this screen alone gets more horizontal room to spread into */
 .interview-container--matches{ max-width:1320px; }
 
-.im-match-list{ display:flex; flex-direction:column; gap:18px; margin:22px 0 26px; }
+.im-match-list{ display:grid; grid-template-columns:repeat(2, 1fr); align-items:start; gap:18px; margin:22px 0 26px; }
 .im-match-card{
   display:flex; align-items:flex-start; gap:20px; text-align:left; text-decoration:none;
   background:var(--cream); border:1.5px solid rgba(30,37,64,.14); border-radius:20px;
@@ -3215,6 +3217,7 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 .im-matches-cta{ width:100%; justify-content:center; }
 
 @media (max-width:600px){
+  .im-match-list{ grid-template-columns:1fr; }
   .im-matches-card{ padding:22px 18px; }
   /* stack instead of wrap — flex-wrap alone left .im-match-main squeezed into whatever
      narrow space remained next to the logo, wrapping the org name one word per line */
