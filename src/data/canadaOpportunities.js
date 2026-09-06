@@ -12127,5 +12127,62 @@ export const CANADA_OPPORTUNITIES = [
     "isGrant": false,
     "confidence": "low",
     "blurb": "A 3-6 month fully funded internship at Europe's astronomy agency, working on public outreach and science communication around real ESO research (not lab research itself) — a good fit if you're into astronomy and also enjoy the writing/media side of science."
+  },
+  {
+    "id": "infn-lnf-summer-student",
+    "name": "LNF Summer Student Program",
+    "org": "INFN Laboratori Nazionali di Frascati",
+    "url": "https://user.lnf.infn.it/summer-student-opportunities/",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Frascati, Italy",
+    "lat": 41.8078,
+    "lon": 12.6773,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A 2-month fellowship (5 spots/year) at Italy's Frascati particle-physics laboratory, open to Italian or foreign undergrads (or grads within a year of finishing) in physics or a related technical field. Work spans data analysis, detector R&D, and live experiment operations."
+  },
+  {
+    "id": "icfo-summer-fellowships",
+    "name": "ICFO Summer Fellowships",
+    "org": "ICFO – The Institute of Photonic Sciences",
+    "url": "https://www.icfo.eu/studies/internship/fellowships/student_research_fellowships/",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Castelldefels (Barcelona), Spain",
+    "lat": 41.2757,
+    "lon": 1.988,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": 600,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "About 12 weeks of full-time photonics research at ICFO near Barcelona, with a Group Leader as mentor. Pays a €600/month gross stipend for students not already living in Catalunya, plus travel costs."
   }
 ]
