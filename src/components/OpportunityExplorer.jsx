@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
 import { FIELDS } from '../data/fields'
 import OpportunityMap from './OpportunityMap'
+import FeedbackPrompt from './FeedbackPrompt'
 import SymbolField from './SymbolField'
 import { peekInterviewFilters, clearInterviewFilters } from '../lib/interviewHandoff'
 import { scoreOpportunity } from '../lib/matchOpportunities'
@@ -1190,6 +1191,8 @@ export default function OpportunityExplorer() {
           saved={saved}
         />
       )}
+
+      <FeedbackPrompt />
     </section>
   )
 }
