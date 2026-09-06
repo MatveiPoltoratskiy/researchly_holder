@@ -247,3 +247,37 @@ New findings this pass:
 2. **Waitlist email enumeration via `alreadyRegistered` (FIXED).** `api/submit-waitlist.js` returned `alreadyRegistered: true` when the submitted email hit the table's unique constraint, which `Footer.jsx` surfaced as "You're already subscribed." vs "You're subscribed." That let anyone check whether a specific email address was on the waitlist by submitting it and reading the response — rate-limited (10/10min/IP) but not prevented, and trivially parallelized across IPs. Confirmed with the site owner and fixed: a duplicate-email insert is now treated identically to a fresh one (both return `{ ok: true }`, no `alreadyRegistered` field), and the client always shows "You're subscribed."
 
 3. **Stale doc, not a vulnerability:** `VITE_SUPABASE_ANON_KEY` is no longer read anywhere in `src/` (writes moved server-side, per point 1 above) — it's unused dead configuration at this point, not a risk, but can be removed from Vercel's env vars and `.env.local` whenever convenient.
+
+Also this pass: the footer email-signup form was removed entirely at the site owner's request (it was the last thing writing to `waitlist`), along with `api/submit-waitlist.js` and `submitWaitlist()` in `formSubmit.js`, since nothing called them anymore. `api/_supabaseAdmin.js` now only backs `contact_messages`.
+
+---
+
+## Focused database/privacy audit — 2026-09-06
+
+Scope: every table, query, API response, and server function touching data, per the site owner's request. Only two tables exist anywhere in the app: `waitlist` and `contact_messages`, both write-only from the app's perspective (no `SELECT`/read path exists anywhere in the code).
+
+**🔴 Critical, CONFIRMED LIVE, FIXED IN REPO — needs a manual SQL run to take effect.** Black-box tested the production Supabase REST API directly with the public anon key (same test methodology as the original Aug 20 audit's #6):
+
+| Operation | waitlist | contact_messages |
+|---|---|---|
+| SELECT | 401 denied ✅ | 401 denied ✅ |
+| INSERT | **201 succeeded ❌** | **201 succeeded ❌** |
+| DELETE | 401 denied ✅ | 401 denied ✅ |
+
+`supabase/lockdown.sql` — written in an earlier session specifically to revoke the anon key's INSERT privilege once `api/submit-contact.js` took over as the intended sole write path — was **never actually executed** against the live database. Right now, anyone with the public anon key (which ships in Supabase's own client libraries' documentation pattern and was previously visible in this app's older client bundles) can INSERT directly into both tables, completely bypassing `api/submit-contact.js`'s rate limiting, email/length validation, and honeypot check. This is a write-integrity/abuse issue, not a confidentiality breach — SELECT, UPDATE, and DELETE are all correctly blocked, so no existing row (anyone's contact message or waitlist email) can be read, modified, or deleted by anon. No other tables were found to be exposed via the REST API (schema introspection itself is correctly blocked for anon, so a full enumeration wasn't possible from here — see manual step below).
+
+**Two throwaway test rows were inserted during this test** (unavoidable to prove/disprove the finding, same disclosure practice as the original audit): `email = rls-probe-not-inserted@example.invalid` in both `waitlist` and `contact_messages` (with `name`/`subject`/`message` = `"probe"` in the latter). DELETE is correctly blocked for anon, so this repo has no way to remove them — **please delete both from the Supabase Table Editor.**
+
+**Fixed in `supabase/lockdown.sql`** (not yet applied — this is SQL, not application code, so it requires you to run it): added `alter table ... enable row level security` for both tables as a second, independent layer on top of the existing `revoke all` statements — RLS with zero policies denies anon/authenticated by default even if a grant is ever accidentally restored later, without relying on the revoke being the only thing standing guard. Neither the revoke nor RLS affects `_supabaseAdmin.js`'s service-role client, which bypasses both by Postgres/Supabase design.
+
+**Everything else checked out:**
+- **IDOR / predictable IDs:** not reachable — no read endpoint exists anywhere in the app for either table.
+- **Sensitive fields returned to clients:** none — `api/submit-contact.js` returns only `{ ok: true }` or a generic error, never the inserted row or its ID.
+- **Service-role key client-side exposure:** confirmed absent from the built client bundle (fresh `vite build` + grep); `SUPABASE_SERVICE_ROLE_KEY` is read only in `api/_supabaseAdmin.js`, never imported by anything under `src/`.
+- **Query manipulation via user input:** not applicable — the only database calls anywhere in the app are two hardcoded `.insert({...})` calls via the Supabase JS client's query builder; no raw SQL, no `.rpc()`, no user input ever reaches a query string.
+- **Per-user data isolation:** not applicable — no user-account system exists; the app's only "per-user" state (saved opportunities, roadmap progress, interview answers) lives in each visitor's own `localStorage`/`sessionStorage`, never touches a server or database, and is therefore isolated by the browser itself.
+
+**Manual steps required (cannot be done from this repo):**
+1. **Run `supabase/lockdown.sql` in the Supabase SQL editor now** — this is the actual fix; everything above it in this repo was already correct.
+2. **Delete the two probe rows** listed above from the Table Editor.
+3. **Consider reviewing the full table list in your Supabase dashboard directly** — this audit could only confirm the two tables the app's code references; schema introspection via the API is correctly blocked for anon, so a from-outside enumeration of *every* table in the project wasn't possible from this environment.
