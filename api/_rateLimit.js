@@ -8,8 +8,25 @@
 const buckets = new Map()
 
 export function getClientIp(req) {
+  // x-real-ip is the single IP Vercel's edge itself observed the connection from — not
+  // something a client can override, since Vercel sets it fresh rather than passing
+  // through a client-supplied header of the same name. Prefer it.
+  //
+  // x-forwarded-for is NOT safe to trust at position [0]: that's the earliest hop in the
+  // chain, which is exactly the value a client can set to whatever they want in their own
+  // request before it ever reaches Vercel's edge (each proxy is only supposed to APPEND
+  // its own observed address, never rewrite what's already there) — reading [0] lets
+  // every rate limit in this file be bypassed by sending a different fake value on every
+  // request. The last entry is the one nearest the actual TCP connection, so it's the
+  // one Vercel's own edge appended and the one that's actually trustworthy.
+  const realIp = req.headers['x-real-ip']
+  if (typeof realIp === 'string' && realIp.trim()) return realIp.trim()
+
   const forwarded = req.headers['x-forwarded-for']
-  if (typeof forwarded === 'string' && forwarded.length > 0) return forwarded.split(',')[0].trim()
+  if (typeof forwarded === 'string' && forwarded.length > 0) {
+    const parts = forwarded.split(',').map((p) => p.trim()).filter(Boolean)
+    if (parts.length > 0) return parts[parts.length - 1]
+  }
   return req.socket?.remoteAddress || 'unknown'
 }
 
