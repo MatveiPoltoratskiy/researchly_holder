@@ -9750,5 +9750,1487 @@ export const CANADA_OPPORTUNITIES = [
     "isGrant": false,
     "confidence": "medium",
     "blurb": "A radio astronomy research placement at ALMA, the world's largest millimeter/submillimeter observatory in the Atacama Desert, for 3rd- and 4th-year astronomy undergraduates at Chilean universities. Runs during the Southern Hemisphere summer (January-February)."
+  },
+  {
+    "id": "unc-charlotte-reu-secure-computing",
+    "name": "Smart and Secure Future Computing REU",
+    "org": "UNC Charlotte",
+    "url": "https://reu.charlotte.edu/",
+    "focus": [
+      "computer-science"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "UNC Charlotte, Charlotte, NC",
+    "lat": 35.3075,
+    "lon": -80.7311,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 9-week NSF-funded REU in cybersecurity and artificial intelligence research at UNC Charlotte."
+  },
+  {
+    "id": "usc-reu-quantum-computing",
+    "name": "Quantum Computing REU",
+    "org": "University of South Carolina",
+    "url": "https://reu.cse.sc.edu/",
+    "focus": [
+      "computer-science",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "University of South Carolina, Columbia, SC",
+    "lat": 34.0007,
+    "lon": -81.0348,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "An NSF REU site focused on quantum computing research for undergraduates."
+  },
+  {
+    "id": "apa-super-fellowship",
+    "name": "Summer Undergraduate Psychology Experience in Research (SUPER) Fellowship",
+    "org": "American Psychological Association",
+    "url": "https://www.apa.org/science/programs/super-fellowship",
+    "focus": [
+      "psychology"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Your own undergraduate institution (US or Canada)",
+    "lat": null,
+    "lon": null,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": 4000,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": true,
+    "confidence": "medium",
+    "blurb": "Up to 25 fellowships funding a student-led, student-designed psychological science research project at your own institution, with a $4,000 stipend plus $1,000 for your faculty mentor. Open to students at any accredited US or Canadian undergraduate institution."
+  },
+  {
+    "id": "noaa-hollings-scholarship",
+    "name": "Ernest F. Hollings Undergraduate Scholarship",
+    "org": "NOAA",
+    "url": "https://www.noaa.gov/office-education/hollings-scholarship",
+    "focus": [
+      "environmental-science"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3"
+    ],
+    "mode": "in-person",
+    "locationLabel": "A NOAA facility (varies by placement)",
+    "lat": null,
+    "lon": null,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": true,
+    "confidence": "medium",
+    "blurb": "Two years of academic scholarship money (up to $9,500/year) plus a paid 10-week NOAA internship ($700/week) the summer between them, for students in oceanic, environmental, atmospheric, or related sciences."
+  },
+  {
+    "id": "wilson-center-internships",
+    "name": "Internships",
+    "org": "Woodrow Wilson International Center for Scholars",
+    "url": "https://www.wilsoncenter.org/careers-fellowships-internships",
+    "focus": [
+      "humanitarian"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Woodrow Wilson Center, Washington, DC",
+    "lat": 38.8951,
+    "lon": -77.0364,
+    "availability": "year-round",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "Research-assistant internships supporting visiting scholars at a non-partisan policy think tank, across programs covering environmental change, global security, and regional studies. Most positions are unpaid."
+  },
+  {
+    "id": "ncsu-drums-reu",
+    "name": "DRUMS (Data, Research, Undergrads, Math, Statistics) REU",
+    "org": "North Carolina State University",
+    "url": "https://drums.wordpress.ncsu.edu/",
+    "focus": [
+      "mathematics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "North Carolina State University, Raleigh, NC",
+    "lat": 35.7847,
+    "lon": -78.6821,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Pairs math and statistics students for interdisciplinary summer research spanning atmospheric science, materials science, cardiovascular disease, precision medicine, climate, and wildfire modeling."
+  },
+  {
+    "id": "usc-math-data-science-reu",
+    "name": "Mathematical Foundations of Data Science REU",
+    "org": "University of South Carolina",
+    "url": "https://www.cosw.sc.edu/study/colleges_schools/artsandsciences/mathematics/research/rtg/reu_with_application_form.php",
+    "focus": [
+      "mathematics",
+      "computer-science"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "University of South Carolina, Columbia, SC",
+    "lat": 34.0007,
+    "lon": -81.0348,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A ~6-week NSF-funded REU on the mathematics underpinning data science, for about 20 undergraduates a year."
+  },
+  {
+    "id": "biosphere2-reu",
+    "name": "Research Experiences for Undergrads (REU)",
+    "org": "University of Arizona Biosphere 2",
+    "url": "https://biosphere2.org/education/university-programs/research-experiences-undergrads-reu",
+    "focus": [
+      "environmental-science"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Biosphere 2, Oracle, AZ",
+    "lat": 32.5779,
+    "lon": -110.8517,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Guided environmental and Earth systems science research inside the world's largest closed-ecosystem research facility, recruiting about 10 students a summer."
+  },
+  {
+    "id": "unl-microplastics-reu",
+    "name": "REU: Integrated Environmental Science of Microplastics",
+    "org": "University of Nebraska-Lincoln",
+    "url": "https://newsroom.unl.edu/announce/unlcive/19813/105634",
+    "focus": [
+      "environmental-science",
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "University of Nebraska-Lincoln, Lincoln, NE",
+    "lat": 40.8202,
+    "lon": -96.7005,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A mentored NSF REU team project designing research on environmental microplastic contamination."
+  },
+  {
+    "id": "fred-hutch-ship",
+    "name": "Summer High School Internship Program (SHIP)",
+    "org": "Fred Hutchinson Cancer Center",
+    "url": "https://www.fredhutch.org/en/education-training/high-school-students.html",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Fred Hutchinson Cancer Center, Seattle, WA",
+    "lat": 47.6274,
+    "lon": -122.3414,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "An 8-week paid internship for rising/current high school seniors: 2 weeks of lab-technique training, then 6 weeks in a Fred Hutch faculty member's cancer-research lab. Prioritizes students from underrepresented backgrounds."
+  },
+  {
+    "id": "city-of-hope-roberts-academy",
+    "name": "Eugene and Ruth Roberts Summer Student Academy",
+    "org": "City of Hope",
+    "url": "https://www.cityofhope.org/education/student-programs/summer-student-academy",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "City of Hope, Duarte, CA",
+    "lat": 34.1397,
+    "lon": -117.9486,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Ten weeks designing and running your own biomedical research project at a major cancer research center, mentored by City of Hope scientists, ending in a public symposium."
+  },
+  {
+    "id": "paris-saclay-international-internships",
+    "name": "International Internships",
+    "org": "Université Paris-Saclay",
+    "url": "https://www.universite-paris-saclay.fr/en/admission/etudiants-internationaux/internship-universite-paris-saclay",
+    "focus": [
+      "physics",
+      "chemistry",
+      "biology",
+      "computer-science",
+      "mathematics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Université Paris-Saclay, France (lab varies)",
+    "lat": null,
+    "lon": null,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "One of France's largest research universities, spanning 220 laboratories, welcomes international interns who contact a lab directly. Internships over two months typically come with a stipend of roughly 630 EUR/month."
+  },
+  {
+    "id": "tamu-sociology-reu",
+    "name": "Sociology Research Experience for Undergraduates",
+    "org": "Texas A&M University",
+    "url": "https://artsci.tamu.edu/sociology/research/reu/index.html",
+    "focus": [
+      "humanitarian"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Texas A&M University, College Station, TX",
+    "lat": 30.6187,
+    "lon": -96.3365,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "An NSF-funded summer sociology research program, funded again for 2026, giving undergraduates hands-on experience studying real social issues."
+  },
+  {
+    "id": "amgen-scholars-karolinska",
+    "name": "Amgen Scholars Program",
+    "org": "Karolinska Institutet",
+    "url": "https://education.ki.se/student-at-ki/studies-and-traineeships-abroad/amgen-scholars-program-at-karolinska-institutet",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Karolinska Institutet, Stockholm, Sweden",
+    "lat": 59.3505,
+    "lon": 18.0273,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "8 weeks of biomedical research at one of Europe's top medical universities, part of the international Amgen Scholars network. Stipend of about 1,000 EUR/month plus covered housing and round-trip travel."
+  },
+  {
+    "id": "instituto-balseiro-summer-scholarship",
+    "name": "Summer Scholarship Program",
+    "org": "Instituto Balseiro",
+    "url": "https://www.ib.edu.ar/extension-course-english-version/",
+    "focus": [
+      "physics",
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Centro Atómico Bariloche, Bariloche, Argentina",
+    "lat": -41.1335,
+    "lon": -71.3103,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A one-month research placement (usually February) at Argentina's leading physics research center, open to advanced physics/chemistry/engineering undergraduates worldwide - about 15 of ~100 applicants are chosen each year. Transport, food, and lodging covered by CNEA."
+  },
+  {
+    "id": "und-biomedical-reu",
+    "name": "NSF REU in Biomedical Sciences",
+    "org": "University of North Dakota",
+    "url": "https://med.und.edu/education-training/biomedical-sciences/reu/index.html",
+    "focus": [
+      "neuroscience",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "University of North Dakota, Grand Forks, ND",
+    "lat": 47.9089,
+    "lon": -97.0568,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A 10-week research program on environmental effects on gene expression, spanning neuroscience, cell biology, developmental biology, genetics, and molecular biology."
+  },
+  {
+    "id": "utah-chemistry-reu",
+    "name": "Chemistry REU",
+    "org": "University of Utah",
+    "url": "https://www.chemistry.utah.edu/research/reu/",
+    "focus": [
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "University of Utah, Salt Lake City, UT",
+    "lat": 40.7649,
+    "lon": -111.8421,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "An NSF-funded chemistry REU running late May through early August."
+  },
+  {
+    "id": "unt-chemistry-reu",
+    "name": "NSF-REU Program",
+    "org": "University of North Texas",
+    "url": "https://chemistry.unt.edu/nsf-reu-program/index.html",
+    "focus": [
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "University of North Texas, Denton, TX",
+    "lat": 33.214,
+    "lon": -97.1489,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A 10-week NSF-funded chemistry research experience for undergraduates."
+  },
+  {
+    "id": "perimeter-institute-undergrad-summer",
+    "name": "Undergraduate Summer Programs",
+    "org": "Perimeter Institute",
+    "url": "https://perimeterinstitute.ca/undergraduate-summer-programs",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Perimeter Institute, Waterloo, ON",
+    "lat": 43.4723,
+    "lon": -80.5449,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A free two-week theoretical physics summer school, with strong students invited to stay on for a paid research internship of up to 15 weeks. Travel, accommodation, and food covered."
+  },
+  {
+    "id": "eth-zurich-summer-fellowship",
+    "name": "Student Summer Research Fellowship",
+    "org": "ETH Zurich",
+    "url": "https://ethz.ch/en/studies/non-degree-courses/summer-offers/summer-projects.html",
+    "focus": [
+      "physics",
+      "biology",
+      "computer-science",
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "ETH Zurich, Zurich, Switzerland",
+    "lat": 47.3763,
+    "lon": 8.548,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A fully-funded two-month research internship open to students worldwide, across ETH's science and engineering departments. CHF 4,000 to cover housing/living costs; applied for via the SiROP portal by preferred research area."
+  },
+  {
+    "id": "crg-barcelona-summer-internship",
+    "name": "CRG Summer Internship Programme",
+    "org": "Centre for Genomic Regulation (CRG)",
+    "url": "https://www.crg.eu/en/content/training-undergraduates/crg-summer-internship-programme",
+    "focus": [
+      "biology"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Centre for Genomic Regulation, Barcelona, Spain",
+    "lat": 41.387,
+    "lon": 2.12,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": 400,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 2-month summer research internship in genomics and molecular biology, open to any nationality. EUR 400/month stipend, meal vouchers, and a travel ticket if you're not from Barcelona."
+  },
+  {
+    "id": "irb-barcelona-future-biomedicine",
+    "name": "A Future in Biomedicine",
+    "org": "Institute for Research in Biomedicine (IRB Barcelona)",
+    "url": "https://www.irbbarcelona.org/en/careers/young-scientists/future-biomedicine-2025",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "IRB Barcelona, Barcelona, Spain",
+    "lat": 41.3875,
+    "lon": 2.1136,
+    "availability": "academic-year",
+    "paid": true,
+    "cost": 0,
+    "stipend": 200,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Up to 20 hours/week in an IRB Barcelona lab during your final undergraduate year (not a summer program), mentored by a senior researcher. EUR 200/month stipend. Restricted to students already enrolled at a Barcelona-area university."
+  },
+  {
+    "id": "cshl-stars",
+    "name": "STARS Program",
+    "org": "Cold Spring Harbor Laboratory DNA Learning Center",
+    "url": "https://summercamps.dnalc.org/camps/stars.html",
+    "focus": [
+      "biology"
+    ],
+    "levels": [
+      "hs-10",
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Cold Spring Harbor, NY",
+    "lat": 40.8618,
+    "lon": -73.4585,
+    "availability": "summer",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A free two-week hands-on molecular biology research experience for high schoolers at the DNA Learning Center, distinct from CSHL's longer 10-week undergraduate program."
+  },
+  {
+    "id": "uky-physics-astronomy-reu",
+    "name": "Physics & Astronomy REU",
+    "org": "University of Kentucky",
+    "url": "https://pa.as.uky.edu/reu",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "University of Kentucky, Lexington, KY",
+    "lat": 38.0307,
+    "lon": -84.5045,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A 10-week NSF-funded REU with mentored projects in nuclear physics, condensed matter, and astronomy."
+  },
+  {
+    "id": "rochester-physics-astronomy-reu",
+    "name": "Research Experience for Undergraduates",
+    "org": "University of Rochester",
+    "url": "https://www.pas.rochester.edu/undergraduate/reu/index.html",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "University of Rochester, Rochester, NY",
+    "lat": 43.1305,
+    "lon": -77.6244,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A 10-week NSF-funded physics and astronomy REU hosting ten students each summer."
+  },
+  {
+    "id": "ut-austin-astronomy-reu",
+    "name": "Astronomy NSF REU Program",
+    "org": "University of Texas at Austin",
+    "url": "https://astronomy.utexas.edu/research/student-research-opportunities/ut-austin-astronomy-nsf-reu-program",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "University of Texas at Austin, Austin, TX",
+    "lat": 30.2849,
+    "lon": -97.7341,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A 10-week NSF-funded astronomy research experience for undergraduates."
+  },
+  {
+    "id": "lsu-physics-astronomy-reu",
+    "name": "Research Experiences for Undergraduates in Physics & Astronomy",
+    "org": "Louisiana State University",
+    "url": "https://www.lsu.edu/physics/undergraduate-programs/reu.php",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Louisiana State University, Baton Rouge, LA",
+    "lat": 30.4133,
+    "lon": -91.18,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A 10-week NSF-funded physics and astronomy REU at LSU."
+  },
+  {
+    "id": "byu-physics-astronomy-reu",
+    "name": "Summer Research Programs",
+    "org": "Brigham Young University",
+    "url": "https://reu.byu.edu/home",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Brigham Young University, Provo, UT",
+    "lat": 40.2518,
+    "lon": -111.6493,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A 10-week NSF-funded physics and astronomy REU at BYU."
+  },
+  {
+    "id": "ncsu-hs-forestry-ecology",
+    "name": "High School Summer Research Program",
+    "org": "NC State University College of Natural Resources",
+    "url": "https://cnr.ncsu.edu/",
+    "focus": [
+      "environmental-science"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "North Carolina State University, Raleigh, NC",
+    "lat": 35.7847,
+    "lon": -78.6821,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": 1000,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A free program (up to a $1,000 stipend) for rising HS juniors/seniors interested in forestry, natural resources, and ecology, working with faculty mentors on fieldwork, lab research, and data analysis."
+  },
+  {
+    "id": "suny-oneonta-biological-field-station-hs",
+    "name": "Pre-College Program in Urban Aquatic Ecology",
+    "org": "SUNY Oneonta Biological Field Station",
+    "url": "https://suny.oneonta.edu/biological-field-station",
+    "focus": [
+      "environmental-science",
+      "biology"
+    ],
+    "levels": [
+      "hs-10",
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "SUNY Oneonta Biological Field Station, Cooperstown, NY",
+    "lat": 42.7003,
+    "lon": -74.9243,
+    "availability": "summer",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A summer field- and lab-research program in aquatic ecology for New York high schoolers, working alongside undergraduates and field station scientists."
+  },
+  {
+    "id": "upenn-trees-program",
+    "name": "Teen Research and Education in Environmental Science (TREES)",
+    "org": "University of Pennsylvania (Center of Excellence in Environmental Toxicology)",
+    "url": "https://ceet.upenn.edu/education-training/high-school/",
+    "focus": [
+      "environmental-science"
+    ],
+    "levels": [
+      "hs-10",
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "University of Pennsylvania, Philadelphia, PA",
+    "lat": 39.9522,
+    "lon": -75.1932,
+    "availability": "summer",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A tuition-free, mentored environmental-science research program for high schoolers at Penn's CEET - one-on-one project with a mentor after two weeks of lab-skills training. Has skipped some years (confirm it's actually running before counting on it)."
+  },
+  {
+    "id": "wisest-summer-research-alberta",
+    "name": "WISEST Summer Research Program",
+    "org": "University of Alberta",
+    "url": "https://www.ualberta.ca/en/wisest/programs/summer-research-program/index.html",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics",
+      "computer-science",
+      "environmental-science"
+    ],
+    "levels": [
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "University of Alberta, Edmonton, AB",
+    "lat": 53.5232,
+    "lon": -113.5263,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Six weeks placed in a real science/engineering/tech lab, $15 CAD/hour, for 40 rising Grade 12 students with a Canadian Social Insurance Number."
+  },
+  {
+    "id": "aalto-science-institute-summer",
+    "name": "Aalto Science Institute International Summer Research Programme",
+    "org": "Aalto University",
+    "url": "https://www.aalto.fi/en/aalto-science-institute-asci/aalto-science-institute-international-summer-research-programme",
+    "focus": [
+      "physics",
+      "computer-science",
+      "mathematics",
+      "chemistry"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Aalto University, Espoo, Finland",
+    "lat": 60.1841,
+    "lon": 24.8281,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A research assistantship at Finland's top technical university, placing 50+ students a year across departments - 57 interns from 25 countries in a recent summer. Open to bachelor's, master's, and exceptional students worldwide."
+  },
+  {
+    "id": "cruk-cambridge-summer-research",
+    "name": "Undergraduate Summer Research Programme",
+    "org": "Cancer Research UK Cambridge Institute",
+    "url": "https://www.cruk.cam.ac.uk/students/undergraduate-summer-research-programme/",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3"
+    ],
+    "mode": "in-person",
+    "locationLabel": "University of Cambridge, Cambridge, UK",
+    "lat": 52.173,
+    "lon": 0.1397,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A cancer-research placement at one of the UK's leading cancer institutes, with free single accommodation at Corpus Christi College for the duration."
+  },
+  {
+    "id": "carnegie-vacation-scholarships",
+    "name": "Vacation Scholarships",
+    "org": "The Carnegie Trust for the Universities of Scotland",
+    "url": "https://carnegie-trust.org/award-schemes/vacation-scholarships/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics",
+      "mathematics",
+      "environmental-science"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Universities across Scotland",
+    "lat": null,
+    "lon": null,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": true,
+    "confidence": "low",
+    "blurb": "Funds an independent summer research project for undergraduates at Scottish universities, aimed at students from lower-income households."
+  },
+  {
+    "id": "rse-cormack-piazzi-smyth",
+    "name": "Cormack & Piazzi Smyth Undergraduate Vacation Research Scholarship",
+    "org": "Royal Society of Edinburgh",
+    "url": "https://www.rse.org.uk/cormack-and-piazzi-smyth-bequest-fund/",
+    "focus": [
+      "mathematics",
+      "physics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Universities across Scotland",
+    "lat": 55.9533,
+    "lon": -3.1883,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": true,
+    "confidence": "low",
+    "blurb": "A Scottish scholarship funding summer vacation research in mathematics, physics, or astronomy for undergraduates at Scottish universities."
+  },
+  {
+    "id": "rice-psychological-sciences-reu",
+    "name": "Translating Research in the Psychological Sciences to the Real World REU",
+    "org": "Rice University",
+    "url": "https://pd28.blogs.rice.edu/",
+    "focus": [
+      "psychology"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Rice University, Houston, TX",
+    "lat": 29.7174,
+    "lon": -95.4018,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "An 8-week NSF-funded REU applying psychological science research to real-world problems."
+  },
+  {
+    "id": "brooklyn-college-psych-neuro-reu",
+    "name": "Psychology and Neuroscience REU",
+    "org": "Brooklyn College",
+    "url": "https://www.brooklyn.edu/psychology/undergraduate/reu/",
+    "focus": [
+      "psychology",
+      "neuroscience"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Brooklyn College, Brooklyn, NY",
+    "lat": 40.6313,
+    "lon": -73.954,
+    "availability": "academic-year",
+    "paid": true,
+    "cost": 0,
+    "stipend": 3100,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "An NSF REU running the spring semester (late January-mid May) rather than summer, with a $3,100 stipend for psychology/neuroscience research."
+  },
+  {
+    "id": "wvu-behavior-science-reu",
+    "name": "Translational Research in Behavior Science REU",
+    "org": "West Virginia University",
+    "url": "https://www.psyc-reu-wvu.com/",
+    "focus": [
+      "psychology"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "West Virginia University, Morgantown, WV",
+    "lat": 39.6295,
+    "lon": -79.9559,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": 6300,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "An NSF REU in behavior science research, paying $700/week ($6,300 total) plus food stipend and lodging."
+  },
+  {
+    "id": "geneseo-psych-neuro-reu",
+    "name": "Psychology and Neuroscience REUs",
+    "org": "SUNY Geneseo",
+    "url": "https://www.geneseo.edu/psychology/psychology-and-neuroscience-research-experiences-undergraduates-reus/",
+    "focus": [
+      "psychology",
+      "neuroscience"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "SUNY Geneseo, Geneseo, NY",
+    "lat": 42.7967,
+    "lon": -77.8127,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "An NSF-funded psychology and neuroscience summer research experience for undergraduates."
+  },
+  {
+    "id": "yale-peabody-evolutions",
+    "name": "EVOLUTIONS Internship",
+    "org": "Yale Peabody Museum of Natural History",
+    "url": "https://evolutions.peabody.yale.edu/evo-internships",
+    "focus": [
+      "biology",
+      "environmental-science"
+    ],
+    "levels": [
+      "hs-10",
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Yale Peabody Museum, New Haven, CT",
+    "lat": 41.3163,
+    "lon": -72.9223,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A paid ~100-hour summer research placement for high schoolers at Yale's natural history museum, in fields from vertebrate paleontology to geochemistry, ending in a public presentation."
+  },
+  {
+    "id": "mcmaster-secondary-school-research-bursary",
+    "name": "Secondary School Research Bursary",
+    "org": "Hamilton Health Sciences / McMaster University",
+    "url": "https://www.hamiltonhealthsciences.ca/research-innovation/research/secondary-school-research-bursary/",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "McMaster University Medical Centre, Hamilton, ON",
+    "lat": 43.2609,
+    "lon": -79.9192,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 7-week internship in basic or clinical health-sciences research at Hamilton Health Sciences/McMaster, for senior secondary students headed toward Health or Life Sciences. Open province-wide to Ontario high schoolers, applications open four times a year."
+  },
+  {
+    "id": "davis-projects-for-peace",
+    "name": "Projects for Peace",
+    "org": "Davis Projects for Peace",
+    "url": "https://davisprojectsforpeace.org/",
+    "focus": [
+      "humanitarian"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Wherever your project takes place (must attend a partner university)",
+    "lat": null,
+    "lon": null,
+    "availability": "summer",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": true,
+    "confidence": "medium",
+    "blurb": "$10,000 grants for undergraduates to design and run their own summer peacebuilding project anywhere in the world, addressing a root cause of conflict in a community. Must attend one of the initiative's partner universities."
+  },
+  {
+    "id": "georgetown-uniandes-bogota-human-rights",
+    "name": "Summer in Bogotá: Human Rights and Conflict Resolution",
+    "org": "Universidad de los Andes",
+    "url": "https://global.georgetown.edu/activities/summer-in-bogota-colombia-human-rights-and-conflict-resolution-universidad-de-los-andes",
+    "focus": [
+      "humanitarian"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Universidad de los Andes, Bogotá, Colombia",
+    "lat": 4.6014,
+    "lon": -74.0661,
+    "availability": "summer",
+    "paid": false,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "An immersive summer program studying human rights and conflict resolution at Colombia's Universidad de los Andes, exploring the country's history of conflict and peacebuilding. Likely involves a program fee - confirm directly."
+  },
+  {
+    "id": "champalimaud-research-internships",
+    "name": "Research Internships",
+    "org": "Champalimaud Foundation",
+    "url": "http://neuro.fchampalimaud.org/en/education/research-internships/",
+    "focus": [
+      "neuroscience",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Champalimaud Foundation, Lisbon, Portugal",
+    "lat": 38.7003,
+    "lon": -9.2034,
+    "availability": "year-round",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "Design your own project with a principal investigator at one of Europe's leading neuroscience research centers. Applicants pick up to 5 labs to apply to; internships can run up to 6 months, rolling admissions."
+  },
+  {
+    "id": "natgeo-young-explorers-grant",
+    "name": "Young Explorers Program",
+    "org": "National Geographic Society",
+    "url": "https://www.nationalgeographic.org/society/projects/young-explorer-program/",
+    "focus": [
+      "environmental-science",
+      "humanitarian"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Project location varies worldwide",
+    "lat": null,
+    "lon": null,
+    "availability": "year-round",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": true,
+    "confidence": "medium",
+    "blurb": "Grants of roughly $2,000-$5,000 for 18-25 year olds to run their own research, conservation, or exploration project anywhere in the world, plus training and networking support."
+  },
+  {
+    "id": "earthwatch-girls-in-science",
+    "name": "Girls in Science",
+    "org": "Earthwatch",
+    "url": "https://earthwatch.org/expeditions/girls-in-science",
+    "focus": [
+      "environmental-science"
+    ],
+    "levels": [
+      "hs-10",
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Expedition site varies (US-based programs)",
+    "lat": null,
+    "lon": null,
+    "availability": "summer",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A 7-day environmental field research expedition led by women scientists, for high-school-aged girls from underserved schools and communities. Girls-only by design."
+  },
+  {
+    "id": "siam-simons-undergrad-reu",
+    "name": "SIAM-Simons Undergraduate Summer Research Program",
+    "org": "Society for Industrial and Applied Mathematics / Simons Foundation",
+    "url": "https://www.siam.org/programs-initiatives/programs/siam-simons-undergraduate-summer-research-program/",
+    "focus": [
+      "mathematics",
+      "computer-science"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "5 US host sites (varies by year)",
+    "lat": null,
+    "lon": null,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Applied math and computational science research at one of 5 US sites, aimed at students from underrepresented groups. $1,000/week stipend, housing/meals/travel covered, plus a trip to the Flatiron Institute and the SIAM Annual Meeting the following year. No prior research experience required."
+  },
+  {
+    "id": "flatiron-institute-summer-internships",
+    "name": "Summer Research Internships",
+    "org": "Flatiron Institute (Simons Foundation)",
+    "url": "https://www.simonsfoundation.org/summer-at-simons/",
+    "focus": [
+      "physics",
+      "mathematics",
+      "computer-science",
+      "neuroscience",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Flatiron Institute, New York, NY",
+    "lat": 40.742,
+    "lon": -73.9891,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A research-assistant summer internship at one of five Flatiron centers - computational astrophysics, biology, mathematics, neuroscience, or quantum physics - working on a mentor-designed project."
+  },
+  {
+    "id": "yale-pathways-research-internships",
+    "name": "Yale Pathways Research Internships (YPRI)",
+    "org": "Yale University",
+    "url": "https://ssri.sites.yale.edu/",
+    "focus": [
+      "biology",
+      "chemistry",
+      "psychology"
+    ],
+    "levels": [
+      "hs-11",
+      "hs-12"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Yale University, New Haven, CT",
+    "lat": 41.3083,
+    "lon": -72.9279,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A 7-week summer research internship connecting New Haven-area public high schoolers with Yale science labs. Preference to juniors and students new to research."
   }
 ]
