@@ -47,7 +47,7 @@ body{
 svg{ display:block; }
 .visually-hidden{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
 
-/* honeypot fields on the public write forms (Waitlist, Footer newsletter, Contact) — off
+/* honeypot fields on the public write forms (Footer newsletter, Contact) — off
    screen rather than display:none/visibility:hidden, since some bots specifically skip
    filling fields hidden that way but miss ones just positioned off-canvas */
 .hp-field{ position:absolute; left:-9999px; top:-9999px; width:1px; height:1px; opacity:0; pointer-events:none; }
@@ -222,13 +222,21 @@ svg{ display:block; }
    the screen the way the two flanking props (books/microscope, flasks/plant) do */
 /* inset from the true frame edge (not flush) — leaves a clear gap so the book stack /
    flask rack read as sitting beside the phone instead of disappearing behind it */
-.th-flank--left{ justify-content:flex-start; padding-left:120px; }
+/* left flank gets a much smaller inset than the right — the left phone is a tilted photo
+   that reads noticeably smaller than the right's coded bezel at the same width (see
+   .th-flank--left .th-card-shell below), so it needs nearly the full flank width to match
+   the right phone's visual size instead of the symmetric 120px both sides used to share */
+.th-flank--left{ justify-content:flex-start; padding-left:20px; }
 .th-flank--right{ justify-content:flex-end; padding-right:120px; }
 .th-card-shell{
   width:100%; max-width:340px; transform: translateY(var(--stagger,0px)) rotate(var(--rot,0));
   animation: content-in .8s ease-out .3s both, card-float-th 6.4s ease-in-out infinite;
 }
 .th-flank--right .th-card-shell{ animation-delay:.4s; }
+/* the left phone is a tilted photo (perspective-foreshortened), so at the same max-width
+   as the right phone's straight-on coded bezel it reads noticeably smaller — sized up so
+   the two feel like a matched pair instead of one dominating */
+.th-flank--left .th-card-shell{ max-width:470px; }
 
 .th-phone{
   position:relative; border-radius:48px; padding:10px 8px 26px;
@@ -461,13 +469,12 @@ h1{
   -webkit-box-decoration-break: clone; box-decoration-break: clone;
   padding: 1px 4px;
 }
-.cta-wrap{ margin-top: 30px; display:flex; flex-direction:column; align-items:flex-start; gap:14px; }
 .cta-btn{
-  font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:22px;
-  border:none; cursor:pointer;
-  display:inline-flex; align-items:center; gap:12px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:26px;
+  border:none; cursor:pointer; text-decoration:none;
+  display:inline-flex; align-items:center; gap:14px;
   background: #FF7A33; color: #FFF7EC;
-  padding: 20px 56px; border-radius: 999px;
+  padding: 26px 68px; border-radius: 999px;
   box-shadow: 0 14px 26px -10px rgba(169,79,30,.55), inset 0 -5px 0 var(--cover-dark);
   transition: transform .18s ease, box-shadow .18s ease;
 }
@@ -1107,6 +1114,13 @@ h1{
   margin:24px 0 0; font-family:"Segoe UI",system-ui,sans-serif; font-size:14px; font-weight:700;
   color:var(--navy-soft);
 }
+.how-coming-soon{
+  margin-top:14px; display:inline-flex; align-items:center;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:700;
+  letter-spacing:.04em; text-transform:uppercase; color:var(--cover-dark);
+  background: rgba(221,107,46,.12); border:1.5px solid rgba(221,107,46,.4);
+  border-radius:999px; padding:6px 14px;
+}
 
 .how-visual{ width:100%; display:flex; justify-content:center; }
 .how-panel{
@@ -1326,20 +1340,7 @@ h1{
   .how-landscape-cta p{ font-size:17px; }
 }
 
-/* ---------- waitlist form ---------- */
-.waitlist-form{ display:flex; align-items:stretch; gap:12px; flex-wrap:wrap; width:100%; }
-.waitlist-input{
-  flex:1 1 260px; min-width:200px;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:16px; color: var(--navy);
-  background: var(--card-bg);
-  border: 1.5px solid var(--cover-dark);
-  border-radius: 14px;
-  padding: 16px 20px;
-  outline:none;
-}
-.waitlist-input::placeholder{ color: var(--navy-soft); }
-.waitlist-input:focus{ border-color: var(--cover); box-shadow: 0 0 0 3px rgba(169,79,30,.15); }
-.waitlist-input:disabled{ opacity:.7; }
+/* ---------- shared submit-button styling (reused by Contact) ---------- */
 .waitlist-submit{
   font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:16.5px;
   border:none; cursor:pointer; white-space:nowrap;
@@ -1355,18 +1356,6 @@ h1{
 .btn-spinner{ width:20px; height:20px; animation: btn-spin .8s linear infinite; }
 @keyframes btn-spin{ to{ transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce){ .btn-spinner{ animation-duration: 1.6s; } }
-.waitlist-success{
-  display:flex; align-items:center; gap:12px;
-  width:100%;
-  background: var(--card-bg);
-  border: 1.5px solid var(--glass-rim);
-  border-radius: 16px;
-  padding: 18px 22px;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:16.5px; font-weight:600;
-  color: var(--navy);
-  animation: content-in .5s ease-out both;
-}
-.waitlist-success-icon{ width:19px; height:19px; flex:none; color: var(--cover-dark); }
 
 .waitlist-status{
   margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px;
@@ -1375,28 +1364,8 @@ h1{
 .waitlist-status svg{ width:14px; height:14px; flex:none; }
 .waitlist-status.is-trust{ color: var(--navy-soft); }
 .waitlist-status.is-error{ color: var(--cover-dark); font-weight:700; }
-.waitlist-count{ display:flex; align-items:center; gap:8px; color: var(--match-green); font-weight:700; }
-.waitlist-count-dot{
-  width:9px; height:9px; flex:none; border-radius:50%;
-  background: var(--match-green);
-  box-shadow: 0 0 0 0 rgba(46,122,76,.6);
-  animation: waitlist-pulse 1.6s ease-in-out infinite;
-}
-@keyframes waitlist-pulse{
-  0%{ box-shadow: 0 0 0 0 rgba(46,122,76,.55); opacity:1; }
-  70%{ box-shadow: 0 0 0 6px rgba(46,122,76,0); opacity:.55; }
-  100%{ box-shadow: 0 0 0 0 rgba(46,122,76,0); opacity:1; }
-}
-@media (prefers-reduced-motion: reduce){
-  .waitlist-count-dot{ animation:none; }
-}
 @media (max-width:520px){
-  .waitlist-form{ flex-direction:column; }
-  /* .waitlist-input's flex-basis:260px means width in row layout, but becomes height once
-     the form stacks into a column here — reset it so the input doesn't balloon to 260px tall */
-  .waitlist-input{ flex:none; width:100%; }
   .waitlist-submit{ width:100%; justify-content:center; }
-  .waitlist-success{ text-align:left; }
 }
 
 /* ---------- contact page ---------- */
@@ -1734,7 +1703,6 @@ a.footer-link:hover{ color: var(--cover-dark); }
 @media (max-width: 900px){
   .hero-top{ flex-direction:column; align-items:center; text-align:center; padding-top:12px; }
   .hero-text{ max-width:100%; min-width:0; padding-top:8px; align-items:center; }
-  .cta-wrap{ align-items:center; }
   .sub{ margin-left:auto; margin-right:auto; }
   .hero-card-wrap{ max-width:400px; min-width:0; margin-top:8px; }
   .landscape-wrap{ margin-top:-10px; }

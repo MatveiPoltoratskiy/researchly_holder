@@ -11,7 +11,7 @@ export default function Contact() {
   const [form, setForm] = useState(initialForm)
   const [status, setStatus] = useState('idle') // idle | submitting | success | error
   const [errorMsg, setErrorMsg] = useState('')
-  const [hp, setHp] = useState('') // honeypot — see Waitlist.jsx for the full explanation
+  const [hp, setHp] = useState('') // honeypot — see .hp-field in index.css for the full explanation
   const badgeRef = useRef(null)
 
   useEffect(() => {

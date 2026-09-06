@@ -29,11 +29,11 @@ const FAQS = [
   },
   {
     q: 'Is Researchly free?',
-    a: "The waitlist is completely free. Pricing for the full platform hasn't been announced yet.",
+    a: "Yes, Researchly is completely free to use right now. Pricing for the full platform hasn't been announced yet.",
   },
   {
     q: 'When can I start?',
-    a: "Researchly is in early access. Join the waitlist and we'll reach out as spots open. We're building it for students, and we'll share the details on access as we get closer.",
+    a: "Right now — take the short interview and get your matched opportunities today. Researchly is in early access, and we're still rolling out new features as we build it for students.",
   },
   {
     q: "Does Researchly guarantee I'll get accepted?",

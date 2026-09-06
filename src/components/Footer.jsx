@@ -25,7 +25,7 @@ export default function Footer() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState('idle') // idle | submitting | success | error
   const [message, setMessage] = useState('')
-  const [hp, setHp] = useState('') // honeypot — see Waitlist.jsx for the full explanation
+  const [hp, setHp] = useState('') // honeypot — see .hp-field in index.css for the full explanation
 
   // real server-verified access (see lib/devAccess.js) — keeps the in-progress
   // prototype routes off the public internet before launch, so a cofounder can test
@@ -74,7 +74,7 @@ export default function Footer() {
     }
     if (hp.trim()) {
       setStatus('success')
-      setMessage("You're on the list.")
+      setMessage("You're subscribed.")
       setEmail('')
       return
     }
@@ -85,7 +85,7 @@ export default function Footer() {
 
     if (ok && data.ok) {
       setStatus('success')
-      setMessage(data.alreadyRegistered ? "You're already on the list." : "You're on the list.")
+      setMessage(data.alreadyRegistered ? "You're already subscribed." : "You're subscribed.")
       setEmail('')
       return
     }
@@ -129,7 +129,7 @@ export default function Footer() {
 
           <div className="footer-newsletter">
             <p className="footer-col-title footer-col-title--accent">Stay in the loop</p>
-            <p className="footer-newsletter-copy">Join the waitlist and be the first to know when we launch.</p>
+            <p className="footer-newsletter-copy">Get an email when we add new opportunities and features.</p>
 
             {status === 'success' ? (
               <p className="footer-newsletter-success">{message}</p>
@@ -162,7 +162,7 @@ export default function Footer() {
                   aria-invalid={status === 'error'}
                   required
                 />
-                <button className="footer-email-submit" type="submit" disabled={isSubmitting} aria-label="Join the waitlist">
+                <button className="footer-email-submit" type="submit" disabled={isSubmitting} aria-label="Subscribe for updates">
                   {isSubmitting ? (
                     <svg className="btn-spinner" viewBox="0 0 24 24" aria-hidden="true">
                       <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeDasharray="34 100" />

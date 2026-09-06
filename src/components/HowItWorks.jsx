@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { prefersReducedMotion, usePauseAnimationsOffscreen } from '../lib/motion'
-import { useRouter } from '../lib/router'
-import { goToWaitlist } from '../lib/waitlist'
+import { Link } from '../lib/router'
 import { InterviewVisual, MatchVisual, BrowseVisual, ApplyVisual } from './HowItWorksVisuals'
 import SymbolField from './SymbolField'
 
@@ -40,6 +39,7 @@ const STEPS = [
     title: 'Then you apply.',
     desc: "Work down the roadmap. Dates, links, and what each program asks for sit in one place. We can't get you accepted, but you won't miss something because you never heard of it.",
     meta: 'Links, dates, and guidance in one place',
+    comingSoon: 'Coming soon',
     badgeIcon: 'icon-badge-check',
     badgeRot: 10,
     Visual: ApplyVisual,
@@ -82,6 +82,7 @@ function StepRow({ step, index }) {
         <h3 className="how-title">{step.title}</h3>
         <p className="how-desc">{step.desc}</p>
         <p className="how-meta">{step.meta}</p>
+        {step.comingSoon && <span className="how-coming-soon">{step.comingSoon}</span>}
       </div>
       <div className="how-spine-mascot">
         <span className="how-mascot-figure" style={{ '--bob-delay': `${index * 0.4}s` }}>
@@ -180,18 +181,16 @@ function HowLandscape() {
 }
 
 function HowCta() {
-  const { navigate } = useRouter()
-
   return (
     <div className="how-landscape-cta">
       <p>Ready to find your path?</p>
       <span className="cta-btn-shake">
-        <button type="button" className="cta-btn" onClick={() => goToWaitlist(navigate)}>
-          Join the waitlist
+        <Link className="cta-btn" to="/interview">
+          Get your Opportunities
           <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
             <use href="#icon-arrow" />
           </svg>
-        </button>
+        </Link>
       </span>
     </div>
   )

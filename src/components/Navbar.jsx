@@ -1,12 +1,7 @@
 import { Link, useRouter } from '../lib/router'
-import { goToWaitlist } from '../lib/waitlist'
 
 export default function Navbar() {
   const { path, navigate } = useRouter()
-
-  function handleJoinClick() {
-    goToWaitlist(navigate)
-  }
 
   // "How it works" now lives as a section on the homepage — scroll to it directly when
   // already there, otherwise navigate home first and land on it once rendered. Can't use
@@ -40,9 +35,9 @@ export default function Navbar() {
           </Link>
           {/* dev links to the private prototypes moved to a gated entry point in the
               footer (see devAccess.js) — no longer shown here unconditionally */}
-          <button className="nav-cta" type="button" onClick={handleJoinClick}>
-            Join the waitlist
-          </button>
+          <Link className="nav-cta" to="/interview">
+            Get your Opportunities
+          </Link>
         </div>
       </div>
     </div>
