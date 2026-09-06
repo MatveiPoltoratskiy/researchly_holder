@@ -226,7 +226,7 @@ svg{ display:block; }
    that reads noticeably smaller than the right's coded bezel at the same width (see
    .th-flank--left .th-card-shell below), so it needs nearly the full flank width to match
    the right phone's visual size instead of the symmetric 120px both sides used to share */
-.th-flank--left{ justify-content:flex-start; padding-left:20px; }
+.th-flank--left{ justify-content:flex-start; padding-left:40px; }
 .th-flank--right{ justify-content:flex-end; padding-right:120px; }
 .th-card-shell{
   width:100%; max-width:340px; transform: translateY(var(--stagger,0px)) rotate(var(--rot,0));
@@ -236,7 +236,7 @@ svg{ display:block; }
 /* the left phone is a tilted photo (perspective-foreshortened), so at the same max-width
    as the right phone's straight-on coded bezel it reads noticeably smaller — sized up so
    the two feel like a matched pair instead of one dominating */
-.th-flank--left .th-card-shell{ max-width:470px; }
+.th-flank--left .th-card-shell{ max-width:410px; }
 
 .th-phone{
   position:relative; border-radius:48px; padding:10px 8px 26px;

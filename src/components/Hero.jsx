@@ -120,7 +120,7 @@ export default function Hero() {
       </div>
       <div className="th-frame">
         <div className="th-flank th-flank--left">
-          <div className="th-card-shell" style={{ '--rot': '-8deg', '--stagger': '102px' }}>
+          <div className="th-card-shell" style={{ '--rot': '-3deg', '--stagger': '102px' }}>
             {/* the provided mockup photo, used whole (its own bezel, notch, and tilt) rather
                 than cropping just the screen into our coded bezel — that split the phone's
                 natural camera-angle tilt from a dead-straight bezel, so the map/banner inside
