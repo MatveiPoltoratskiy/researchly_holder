@@ -12312,5 +12312,96 @@ export const CANADA_OPPORTUNITIES = [
     "isGrant": false,
     "confidence": "medium",
     "blurb": "One of 5 official European Amgen Scholars sites: a funded summer research program in science and biotechnology."
+  },
+  {
+    "id": "biozentrum-basel-research-summer",
+    "name": "Biozentrum Research Summer",
+    "org": "Biozentrum, University of Basel",
+    "url": "https://www.biozentrum.unibas.ch/researchsummer",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics",
+      "computer-science"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Basel, Switzerland",
+    "lat": 47.5596,
+    "lon": 7.5886,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": 2060,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "7-9 weeks (12-15 spots) doing a research project at the Biozentrum, matched to a host lab across biology, chemistry, physics, nanosciences, or computational science. Pays CHF 2,060/month. Note: only open to Swiss/EU citizens or Swiss C-permit holders, not open internationally beyond that."
+  },
+  {
+    "id": "uzh-buss",
+    "name": "Zurich Biology Undergraduate Summer School (BUSS)",
+    "org": "University of Zurich / ETH Zurich",
+    "url": "https://www.buss.uzh.ch/",
+    "focus": [
+      "biology"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Zurich, Switzerland",
+    "lat": 47.3769,
+    "lon": 8.5417,
+    "availability": "summer",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A hands-on life-sciences research project in a UZH or ETH Zurich lab, open to bachelor's students worldwide at any stage. Travel and housing are covered for students coming from outside Switzerland; no stipend beyond that."
+  },
+  {
+    "id": "crag-summer-internship",
+    "name": "CRAG Severo Ochoa Summer Internship Program",
+    "org": "Centre for Research in Agricultural Genomics (CRAG)",
+    "url": "https://www.cragenomica.es/training/undegraduate-students",
+    "focus": [
+      "biology"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Barcelona, Spain",
+    "lat": 41.5,
+    "lon": 2.1092,
+    "availability": "summer",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 4-week hands-on introduction to plant and animal genomics research, working in a CRAG lab under a principal investigator's group. Free student housing and travel to/from Barcelona covered for students from outside the city; open to international undergrads."
   }
 ]
