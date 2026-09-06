@@ -12403,5 +12403,197 @@ export const CANADA_OPPORTUNITIES = [
     "isGrant": false,
     "confidence": "medium",
     "blurb": "A 4-week hands-on introduction to plant and animal genomics research, working in a CRAG lab under a principal investigator's group. Free student housing and travel to/from Barcelona covered for students from outside the city; open to international undergrads."
+  },
+  {
+    "id": "anu-summer-research-scholarships",
+    "name": "Summer Research Scholarships",
+    "org": "Australian National University",
+    "url": "https://rses.anu.edu.au/study/summer-research-scholarships",
+    "focus": [
+      "physics",
+      "chemistry",
+      "biology",
+      "environmental-science",
+      "mathematics",
+      "computer-science"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Canberra, Australia",
+    "lat": -35.2777,
+    "lon": 149.1185,
+    "availability": "both",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A short research project at ANU under a faculty supervisor, with full board on campus, a weekly allowance, and travel to Canberra covered. Note: only open to students currently enrolled full-time at a university in Australia or New Zealand, in the 3rd/4th year of an honours-track degree."
+  },
+  {
+    "id": "monash-vacation-research-scholarship",
+    "name": "Summer Vacation Research Scholarship Program",
+    "org": "Monash University",
+    "url": "https://www.monash.edu/study/fees-scholarships/scholarships/summer-winter",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics",
+      "environmental-science",
+      "computer-science",
+      "mathematics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Melbourne, Australia",
+    "lat": -37.9105,
+    "lon": 145.1362,
+    "availability": "both",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "moderate",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A vacation research placement at Monash, paying around $500/week plus travel allowance for interstate students. Note: only open to students already enrolled in an undergraduate or postgraduate program at an Australian or New Zealand higher education provider, past their 2nd year."
+  },
+  {
+    "id": "auckland-summer-research-scholarship",
+    "name": "Summer Research Scholarship",
+    "org": "University of Auckland",
+    "url": "https://www.auckland.ac.nz/en/study/scholarships-and-awards/scholarship-types/undergraduate-scholarships/summer-research-scholarships.html",
+    "focus": [
+      "biology",
+      "chemistry",
+      "physics",
+      "environmental-science",
+      "computer-science",
+      "mathematics",
+      "psychology"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Auckland, New Zealand",
+    "lat": -36.8523,
+    "lon": 174.769,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": 6820,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "A 10-week research project (Nov-Feb) with a University of Auckland supervisor, paying a tax-free stipend of about NZ$6,820. Note: you must already be enrolled at a New Zealand university with at least 2 years completed and a strong GPA."
+  },
+  {
+    "id": "icipe-internship-program",
+    "name": "ICIPE Internship Program",
+    "org": "International Centre of Insect Physiology and Ecology (icipe)",
+    "url": "https://www.icipe.org/capacity_building",
+    "focus": [
+      "biology",
+      "environmental-science"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Nairobi, Kenya",
+    "lat": -1.2233,
+    "lon": 36.8961,
+    "availability": "both",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "moderate",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "3-12 months of hands-on entomology/food-security research at one of Africa's leading insect-science institutes, open to undergraduate and graduate students worldwide. Requires a letter of recommendation; funding and exact terms are arranged case-by-case, so budget for your own costs unless told otherwise."
+  },
+  {
+    "id": "cgiar-research-internship",
+    "name": "CGIAR Research Internship Program",
+    "org": "CGIAR (incl. ILRI Kenya, IITA Nigeria, and other centers)",
+    "url": "https://www.cgiar.org/careers/",
+    "focus": [
+      "biology",
+      "environmental-science",
+      "economics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Multiple African sites (incl. Nairobi, Kenya & Ibadan, Nigeria)",
+    "lat": -1.2921,
+    "lon": 36.8219,
+    "availability": "both",
+    "paid": false,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "moderate",
+    "isDirectory": true,
+    "multiSite": true,
+    "isGrant": false,
+    "confidence": "low",
+    "blurb": "A 3-6 month research internship at one of CGIAR's agriculture/food-security research centers across Africa (ILRI in Kenya, IITA in Nigeria, and others), open to undergrads in agriculture, environmental science, biotech, economics, engineering, or data science. Positions are posted individually on each center's careers page rather than one central application."
+  },
+  {
+    "id": "trend-in-africa",
+    "name": "TReND in Africa Schools & Courses",
+    "org": "TReND in Africa",
+    "url": "https://trendinafrica.org/courses/",
+    "focus": [
+      "neuroscience",
+      "computer-science",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Multiple locations, Africa",
+    "lat": null,
+    "lon": null,
+    "availability": "both",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": true,
+    "multiSite": true,
+    "isGrant": false,
+    "confidence": "medium",
+    "blurb": "Intensive, fully funded schools in neuroscience, computational neuroscience, and machine learning, rotating across host countries in Africa each year (round-trip travel, accommodation, and meals covered). Note: restricted to students and researchers residing in African countries — a great fit if that's you, not otherwise."
   }
 ]
