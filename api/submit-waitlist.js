@@ -38,7 +38,7 @@ export default async function handler(req, res) {
     // endpoint a bot would have to hit directly to bypass the UI at all.
     const hp = req.body?.hp
     if (typeof hp === 'string' && hp.trim()) {
-      return res.status(200).json({ ok: true, alreadyRegistered: false })
+      return res.status(200).json({ ok: true })
     }
 
     const admin = getSupabaseAdmin()
@@ -49,11 +49,13 @@ export default async function handler(req, res) {
 
     const { error } = await admin.from('waitlist').insert({ email })
 
-    if (!error) {
-      return res.status(200).json({ ok: true, alreadyRegistered: false })
-    }
-    if (error.code === '23505') {
-      return res.status(200).json({ ok: true, alreadyRegistered: true })
+    // a duplicate email (unique-constraint violation, code 23505) is treated the same as
+    // a fresh insert — the email is on the list either way, and NOT distinguishing the
+    // two in the response is deliberate: telling a caller "this email is already
+    // registered" vs not is a zero-effort way to check whether a specific address is on
+    // the waitlist (email enumeration), for no real benefit to a genuine visitor.
+    if (!error || error.code === '23505') {
+      return res.status(200).json({ ok: true })
     }
 
     console.error('submit-waitlist: insert error', error)

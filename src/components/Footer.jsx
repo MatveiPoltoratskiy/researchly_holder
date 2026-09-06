@@ -85,7 +85,7 @@ export default function Footer() {
 
     if (ok && data.ok) {
       setStatus('success')
-      setMessage(data.alreadyRegistered ? "You're already subscribed." : "You're subscribed.")
+      setMessage("You're subscribed.")
       setEmail('')
       return
     }
