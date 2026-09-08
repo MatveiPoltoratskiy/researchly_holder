@@ -3078,9 +3078,63 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 }
 .pf-edit-btn:hover{ color:var(--cover-dark); }
 
+/* segmented control choosing how the background gets filled in — mirrors a reference
+   screenshot's "Upload a PDF" / "No resume? Type it" pair, restyled in brand colors */
+.pf-mode-toggle{
+  display:inline-flex; align-self:flex-start; background:var(--cream-deep);
+  border:1px solid var(--card-border); border-radius:999px; padding:4px; gap:2px;
+}
+.pf-mode-btn{
+  font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:13.5px;
+  color:var(--navy-soft); background:none; border:none; border-radius:999px;
+  padding:9px 18px; cursor:pointer; transition:background .15s ease, color .15s ease;
+}
+.pf-mode-btn.is-active{ background:var(--cover); color:#FFF6EC; }
+.pf-mode-btn:not(.is-active):hover{ color:var(--navy); }
+
+.pf-dropzone{
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+  text-align:center; cursor:pointer; padding:32px 20px;
+  border:1.5px dashed rgba(30,37,64,.22); border-radius:14px; background:var(--cream);
+  color:var(--navy); transition:border-color .15s ease, background .15s ease;
+}
+.pf-dropzone:hover, .pf-dropzone:focus-visible{ border-color:var(--cover); background:rgba(221,107,46,.05); }
+.pf-dropzone.is-dragging{ border-color:var(--cover); background:rgba(221,107,46,.08); }
+.pf-dropzone.is-error{ border-color:var(--rose); }
+.pf-dropzone svg{ color:var(--cover-dark); }
+.pf-dropzone-input{ display:none; }
+.pf-dropzone-text{ font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; color:var(--navy); margin:0; }
+.pf-dropzone-hint{ font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; color:var(--navy-soft); margin:0; }
+.pf-dropzone-error{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:700; color:var(--cover-dark); margin:6px 0 0;
+}
+.pf-dropzone-spinner{
+  width:24px; height:24px; border-radius:999px;
+  border:2.5px solid rgba(30,37,64,.15); border-top-color:var(--cover);
+  animation:interview-spin .7s linear infinite;
+}
+
+.pf-resume-done{
+  display:flex; align-items:center; gap:12px; padding:16px 18px;
+  border:1.5px solid rgba(46,122,76,.35); border-radius:14px; background:rgba(46,122,76,.07);
+  color:var(--match-green);
+}
+.pf-resume-done-info{ display:flex; flex-direction:column; gap:2px; flex:1; min-width:0; }
+.pf-resume-done-name{
+  font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:14.5px; color:var(--navy);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.pf-resume-done-sub{ font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; color:var(--navy-soft); }
+.pf-resume-remove{
+  font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:13px; color:var(--navy-soft);
+  background:none; border:1px solid var(--card-border); border-radius:999px; padding:7px 14px; cursor:pointer; flex:none;
+}
+.pf-resume-remove:hover{ color:var(--cover-dark); border-color:var(--cover); }
+
 @media (max-width:600px){
   .pf-summary-row{ flex-direction:column; gap:2px; }
   .pf-summary-value{ text-align:left; white-space:normal; }
+  .pf-resume-done{ flex-wrap:wrap; }
 }
 
 /* ---------- interview match results (post-loading, pre-/opportunities) ---------- */
