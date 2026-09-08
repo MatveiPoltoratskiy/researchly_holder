@@ -8,53 +8,19 @@ import Contact from './components/Contact'
 import HowItWorks from './components/HowItWorks'
 import Footer from './components/Footer'
 import { RouterProvider, useRouter } from './lib/router'
-import { DevAccessProvider, useDevAccess } from './lib/devAccessContext'
 
 // Lazy-loaded, NOT statically imported, so each gets its own chunk that only ever ships
-// to a browser that actually navigates there — the single main JS bundle never carries
-// this code/data regardless of gating. For the still-gated components below, that
-// chunk is also only ever *requested* after verifyDevAccess() succeeds (see DEV_ROUTES).
-// Interview and OpportunityExplorer are public now, so their chunks — and the full
-// opportunity dataset both need — ship to anyone who visits those routes, gated or not.
+// to a browser that actually navigates there, instead of bloating the single main JS
+// bundle everyone downloads on page load — pure code-splitting, no access gate involved
+// (the passphrase gate that used to sit in front of these routes was removed; all four
+// are public now).
 const OpportunityExplorer = lazy(() => import('./components/OpportunityExplorer'))
 const Interview = lazy(() => import('./components/Interview'))
 const MyOpportunities = lazy(() => import('./components/MyOpportunities'))
 const ProfessorFinder = lazy(() => import('./components/ProfessorFinder'))
 
-// /interview and /opportunities are public — anyone can take the quiz and browse the
-// full list. /my-opportunities (a signed-in-feeling saved list) and /professor-finder
-// (directory/email-drafting not built yet) stay behind the passphrase gate.
-const DEV_ROUTES = new Set(['/my-opportunities', '/professor-finder'])
-
-// deliberately plain and uninteresting — this is a real server-verified gate (see
-// lib/devAccess.js + api/dev-verify.js), but the page still shouldn't invite curiosity
-// by looking like it's hiding something worth finding
-function RouteUnavailable() {
-  return (
-    <div className="route-unavailable">
-      <p>This page isn't available right now.</p>
-      <a href="/">Back home</a>
-    </div>
-  )
-}
-
 function Page() {
   const { path } = useRouter()
-  const isDevRoute = DEV_ROUTES.has(path)
-  // shared with Navbar/Footer (see DevAccessProvider) so there's one verify round-trip
-  // for the whole app, not a separate one per gated route. `checked` stays false only
-  // for the instant that round-trip is in flight, so a legitimately unlocked visitor
-  // never flashes the "unavailable" page before it resolves.
-  const { unlocked, checked } = useDevAccess()
-
-  if (isDevRoute && !unlocked) {
-    return (
-      <>
-        <IconSprite />
-        {checked && <RouteUnavailable />}
-      </>
-    )
-  }
 
   // the interview, the opportunities explorer, and My Opportunities are all fully
   // standalone, distraction-free screens: no nav, no footer, no zoom-out wrapper. Each
@@ -133,9 +99,7 @@ function Page() {
 export default function App() {
   return (
     <RouterProvider>
-      <DevAccessProvider>
-        <Page />
-      </DevAccessProvider>
+      <Page />
     </RouterProvider>
   )
 }

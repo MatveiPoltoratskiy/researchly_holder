@@ -1,7 +1,4 @@
-import { useState } from 'react'
 import { Link, useRouter } from '../lib/router'
-import { unlockDevAccess } from '../lib/devAccess'
-import { useDevAccess } from '../lib/devAccessContext'
 
 // Scrolls to a homepage section id, navigating home first if we're on another route —
 // same pattern Navbar uses for its "How it works" link.
@@ -20,33 +17,6 @@ function scrollToSection(id, path, navigate) {
 
 export default function Footer() {
   const { path, navigate } = useRouter()
-
-  // real server-verified access (see lib/devAccess.js) — keeps the in-progress
-  // prototype routes off the public internet before launch, so a cofounder can test
-  // without them being publicly linked yet. `unlocked` is shared app-wide (see
-  // DevAccessProvider) so a successful unlock here immediately un-grays the Professor
-  // Finder nav link too, with no page reload needed.
-  const { unlocked: devUnlocked, setUnlocked } = useDevAccess()
-  const [devPromptOpen, setDevPromptOpen] = useState(false)
-  const [devPassInput, setDevPassInput] = useState('')
-  const [devSubmitting, setDevSubmitting] = useState(false)
-  const [devError, setDevError] = useState(false)
-
-  async function handleDevSubmit(e) {
-    e.preventDefault()
-    if (devSubmitting) return
-    setDevSubmitting(true)
-    const ok = await unlockDevAccess(devPassInput)
-    setDevSubmitting(false)
-    if (ok) {
-      setUnlocked(true)
-      setDevPromptOpen(false)
-      setDevPassInput('')
-      setDevError(false)
-    } else {
-      setDevError(true)
-    }
-  }
 
   return (
     <footer className="site-footer">
@@ -84,17 +54,7 @@ export default function Footer() {
         <hr className="footer-divider" />
 
         <div className="footer-bottom">
-          <p className="footer-copyright">
-            &copy; {new Date().getFullYear()} Researchly. All rights reserved.
-            {' '}
-            <button
-              type="button"
-              className="footer-dev-dot"
-              aria-label="."
-              tabIndex={-1}
-              onClick={() => setDevPromptOpen((v) => !v)}
-            />
-          </p>
+          <p className="footer-copyright">&copy; {new Date().getFullYear()} Researchly. All rights reserved.</p>
           <div className="footer-legal">
             <span className="footer-link footer-link--static">Privacy Policy</span>
             <span className="footer-link footer-link--static">Terms of Service</span>
@@ -107,31 +67,6 @@ export default function Footer() {
             </span>
           </div>
         </div>
-
-        {devPromptOpen && !devUnlocked && (
-          <form className="footer-dev-prompt" onSubmit={handleDevSubmit}>
-            <input
-              type="password"
-              className="footer-dev-input"
-              placeholder="Passphrase"
-              value={devPassInput}
-              onChange={(e) => { setDevPassInput(e.target.value); setDevError(false) }}
-              autoFocus
-              aria-invalid={devError}
-            />
-            <button type="submit" className="footer-dev-submit" disabled={devSubmitting}>
-              {devSubmitting ? '...' : 'Unlock'}
-            </button>
-            {devError && <span className="footer-dev-error">Not it.</span>}
-          </form>
-        )}
-        {devUnlocked && (
-          <p className="footer-dev-links">
-            <Link to="/interview">Interview</Link>
-            <Link to="/opportunities">Opportunities</Link>
-            <Link to="/professor-finder">Professor Finder</Link>
-          </p>
-        )}
       </div>
     </footer>
   )

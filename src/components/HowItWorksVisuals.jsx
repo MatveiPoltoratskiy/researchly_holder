@@ -1,13 +1,13 @@
 // The first three visuals are built from the SAME CSS classes the real, live screens use
 // (interview option rows, the match-results card, an opportunity card) — never imported
 // directly from those components, since Interview.jsx/InterviewMatches.jsx/
-// OpportunityExplorer.jsx are all lazy-loaded behind the dev passphrase gate (see
-// App.jsx) specifically so an unauthenticated visitor's browser never fetches that code
-// or the opportunity dataset. Reusing the classnames keeps these panels pixel-true to
-// production without pulling any of that gated code into the public landing-page
-// bundle. Content is simplified/trimmed (fewer rows, shorter copy) for a quick, clean
-// read — not a dense literal screenshot. ApplyVisual (the 4th, "checklist" panel) is
-// the original hand-illustrated mockup, kept as-is per explicit request.
+// OpportunityExplorer.jsx are all lazy-loaded (see App.jsx) and there's no reason for the
+// public landing-page bundle to carry that code or the opportunity dataset just to render
+// a few illustrative rows. Reusing the classnames keeps these panels pixel-true to
+// production without pulling any of that code in. Content is simplified/trimmed (fewer
+// rows, shorter copy) for a quick, clean read — not a dense literal screenshot.
+// ApplyVisual (the 4th, "checklist" panel) is the original hand-illustrated mockup, kept
+// as-is per explicit request.
 
 function PanelChrome({ label }) {
   return (

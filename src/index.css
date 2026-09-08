@@ -23,8 +23,9 @@
   --container-pad: 48px;
 
   /* bold, rounded, friendly display face — used only for the landing page's big
-     section titles (Hero/How It Works/FAQ/Contact), never on the gated app screens, so
-     the quirky voice stays a landing-page thing rather than bleeding into the product */
+     section titles (Hero/How It Works/FAQ/Contact), never on the interview/opportunities/
+     professor-finder app screens, so the quirky voice stays a landing-page thing rather
+     than bleeding into the product */
   --font-title: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
 }
 @media (max-width: 1023px){ :root{ --container-pad: 32px; } }
@@ -116,8 +117,6 @@ svg{ display:block; }
   transition: color .18s ease;
 }
 .nav-link:hover{ color: var(--cover-dark); }
-.nav-link--locked{ color: var(--navy-faint); cursor:not-allowed; user-select:none; }
-.nav-link--locked:hover{ color: var(--navy-faint); }
 @media (max-width:520px){ .nav-right{ gap:14px; } }
 
 /* ---------- hero shell ---------- */
@@ -1612,45 +1611,6 @@ a.footer-link:hover{ color: var(--cover-dark); }
   color: var(--navy);
 }
 
-/* subtle, not invisible — findable if you know to look right after the copyright line,
-   easy to overlook if you don't. opacity:0 (the previous version) was a mistake: that
-   made it un-clickable-by-sight for the intended user too, not just easy to miss. */
-.footer-dev-dot{
-  display:inline-block; width:6px; height:6px; margin-left:6px; vertical-align:middle;
-  background:var(--card-border); border:none; border-radius:999px; padding:0; cursor:pointer;
-  opacity:1; transition:background .15s ease;
-}
-.footer-dev-dot:hover{ background:var(--navy-soft); }
-.footer-dev-prompt{
-  display:flex; align-items:center; gap:8px; margin-top:12px;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:13px;
-}
-.footer-dev-input{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; color:var(--navy);
-  background:var(--cream); border:1px solid var(--card-border); border-radius:8px;
-  padding:6px 10px; width:180px; outline:none;
-}
-.footer-dev-input:focus{ border-color:var(--cover); }
-.footer-dev-submit{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:700; color:var(--navy);
-  background:none; border:1px solid var(--card-border); border-radius:8px; padding:6px 12px; cursor:pointer;
-}
-.footer-dev-submit:hover{ border-color:var(--navy); }
-.footer-dev-error{ font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; color:var(--navy-soft); }
-.footer-dev-links{
-  display:flex; gap:14px; margin:10px 0 0;
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px;
-}
-.footer-dev-links a{ color:var(--navy-soft); text-decoration:underline; }
-.footer-dev-links a:hover{ color:var(--navy); }
-
-.route-unavailable{
-  min-height:60vh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
-  font-family:"Segoe UI",system-ui,sans-serif; color:var(--navy-soft); text-align:center; padding:40px 20px;
-}
-.route-unavailable a{ color:var(--cover); font-weight:700; text-decoration:none; }
-.route-unavailable a:hover{ text-decoration:underline; }
-
 @media (max-width:640px){
   .contact-grid{ grid-template-columns:1fr; }
   .contact-card{ padding:26px 22px 24px; }
@@ -1672,7 +1632,7 @@ a.footer-link:hover{ color: var(--cover-dark); }
   .footer-bottom{ flex-direction:column; align-items:flex-start; }
 }
 
-/* ---------- opportunity explorer (private prototype, not linked from live nav) ---------- */
+/* ---------- opportunity explorer ---------- */
 html{ scroll-behavior:smooth; }
 @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
 
@@ -2641,7 +2601,7 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 .opp-tag--recommend{ background:rgba(30,37,64,.09); color:var(--navy); font-weight:800; }
 
 
-/* ---------- interview (private prototype, not linked from live nav) ---------- */
+/* ---------- interview ---------- */
 /* position:fixed takes this fully out of document flow, so body's own scrollHeight
    (padding-top:148px reserved for the fixed nav bar on every other page, plus whatever
    else) never comes into play — this is exactly one viewport, no more, no less, and the
@@ -3071,9 +3031,9 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
   .interview-loading-glow{ opacity:.6; }
 }
 
-/* ---------- professor finder background sheet (private prototype, not saved) ---------- */
+/* ---------- professor finder background sheet (nothing saved/sent) ---------- */
 /* reuses .interview-page/.interview-container/.interview-card/.interview-card-scroll for
-   the shell (same fixed one-viewport gated layout as the quiz) and .contact-field/
+   the shell (same fixed one-viewport layout as the quiz) and .contact-field/
    .contact-input/.contact-textarea for field styling, so this stays visually consistent
    with the interview and contact form without redefining input chrome a third time. */
 .pf-privacy-badge{
