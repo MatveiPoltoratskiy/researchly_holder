@@ -20,8 +20,9 @@ import { verifyDevAccess } from './lib/devAccess'
 const OpportunityExplorer = lazy(() => import('./components/OpportunityExplorer'))
 const Interview = lazy(() => import('./components/Interview'))
 const MyOpportunities = lazy(() => import('./components/MyOpportunities'))
+const ProfessorFinder = lazy(() => import('./components/ProfessorFinder'))
 
-const DEV_ROUTES = new Set(['/interview', '/opportunities', '/my-opportunities'])
+const DEV_ROUTES = new Set(['/interview', '/opportunities', '/my-opportunities', '/professor-finder'])
 
 // deliberately plain and uninteresting — this is a real server-verified gate (see
 // lib/devAccess.js + api/dev-verify.js), but the page still shouldn't invite curiosity
@@ -85,6 +86,17 @@ function Page() {
         <IconSprite />
         <Suspense fallback={null}>
           {path === '/opportunities' ? <OpportunityExplorer /> : <MyOpportunities />}
+        </Suspense>
+      </>
+    )
+  }
+
+  if (path === '/professor-finder') {
+    return (
+      <>
+        <IconSprite />
+        <Suspense fallback={null}>
+          <ProfessorFinder />
         </Suspense>
       </>
     )

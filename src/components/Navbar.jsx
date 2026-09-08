@@ -35,6 +35,9 @@ export default function Navbar() {
           </Link>
           {/* dev links to the private prototypes moved to a gated entry point in the
               footer (see devAccess.js) — no longer shown here unconditionally */}
+          <Link className="nav-link" to="/professor-finder">
+            Professor Finder
+          </Link>
           <Link className="nav-cta" to="/interview">
             Get your Opportunities
           </Link>

@@ -3069,6 +3069,58 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
   .interview-loading-glow{ opacity:.6; }
 }
 
+/* ---------- professor finder background sheet (private prototype, not saved) ---------- */
+/* reuses .interview-page/.interview-container/.interview-card/.interview-card-scroll for
+   the shell (same fixed one-viewport gated layout as the quiz) and .contact-field/
+   .contact-input/.contact-textarea for field styling, so this stays visually consistent
+   with the interview and contact form without redefining input chrome a third time. */
+.pf-privacy-badge{
+  display:inline-flex; align-items:center; gap:7px; margin-bottom:14px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:700;
+  color:var(--pine); background:rgba(65,92,57,.1); border:1px solid rgba(65,92,57,.22);
+  border-radius:999px; padding:7px 14px;
+}
+.pf-privacy-badge svg{ color:inherit; flex:none; }
+.pf-required{ color:var(--cover-dark); }
+
+.pf-form{ display:flex; flex-direction:column; gap:20px; }
+.pf-submit-row{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-top:4px; }
+
+.pf-done{ display:flex; flex-direction:column; align-items:center; text-align:center; padding:12px 0 4px; }
+.pf-done .interview-question, .pf-done .interview-subtext{ text-align:center; text-wrap:balance; }
+.pf-done-badge{
+  width:64px; height:64px; border-radius:50%; margin-bottom:20px;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(46,122,76,.12); color:var(--match-green);
+  box-shadow:0 8px 20px -8px rgba(46,122,76,.4);
+}
+.pf-summary{
+  width:100%; max-width:460px; margin:22px 0 6px; text-align:left;
+  background:var(--cream-deep); border:1px solid var(--card-border); border-radius:16px; padding:6px 20px;
+}
+.pf-summary-row{
+  display:flex; justify-content:space-between; gap:16px; padding:13px 0;
+  border-bottom:1px solid var(--card-border);
+}
+.pf-summary-row:last-child{ border-bottom:none; }
+.pf-summary-label{ font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:700; color:var(--navy-soft); flex:none; }
+.pf-summary-value{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:14px; color:var(--navy); text-align:right;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.pf-done-actions{ display:flex; align-items:center; gap:14px; margin-top:26px; flex-wrap:wrap; justify-content:center; }
+.pf-edit-btn{
+  background:none; border:none; cursor:pointer;
+  font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:15px; color:var(--navy-soft);
+  padding:10px 4px; text-decoration:underline; text-decoration-color:var(--card-border);
+}
+.pf-edit-btn:hover{ color:var(--cover-dark); }
+
+@media (max-width:600px){
+  .pf-summary-row{ flex-direction:column; gap:2px; }
+  .pf-summary-value{ text-align:left; white-space:normal; }
+}
+
 /* ---------- interview match results (post-loading, pre-/opportunities) ---------- */
 /* "zoomed out" relative to the quiz steps on purpose — this screen shows 4 full cards at
    once and the goal is all of them comfortably in view on a typical viewport, not a

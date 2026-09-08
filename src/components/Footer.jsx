@@ -136,6 +136,7 @@ export default function Footer() {
           <p className="footer-dev-links">
             <Link to="/interview">Interview</Link>
             <Link to="/opportunities">Opportunities</Link>
+            <Link to="/professor-finder">Professor Finder</Link>
           </p>
         )}
       </div>
