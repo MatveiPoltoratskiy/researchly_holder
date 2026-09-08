@@ -12,20 +12,19 @@ import { DevAccessProvider, useDevAccess } from './lib/devAccessContext'
 
 // Lazy-loaded, NOT statically imported, so each gets its own chunk that only ever ships
 // to a browser that actually navigates there — the single main JS bundle never carries
-// this code/data regardless of gating. For the three still-gated components below, that
-// chunk is also only ever *requested* after verifyDevAccess() succeeds (see DEV_ROUTES),
-// so an unauthenticated visitor's browser never fetches them at all. Interview is the
-// one exception: it's public now, so its chunk — and the opportunity dataset it needs to
-// show real matches — ships to anyone who visits /interview, gated or not.
+// this code/data regardless of gating. For the still-gated components below, that
+// chunk is also only ever *requested* after verifyDevAccess() succeeds (see DEV_ROUTES).
+// Interview and OpportunityExplorer are public now, so their chunks — and the full
+// opportunity dataset both need — ship to anyone who visits those routes, gated or not.
 const OpportunityExplorer = lazy(() => import('./components/OpportunityExplorer'))
 const Interview = lazy(() => import('./components/Interview'))
 const MyOpportunities = lazy(() => import('./components/MyOpportunities'))
 const ProfessorFinder = lazy(() => import('./components/ProfessorFinder'))
 
-// /interview is public — anyone can take the quiz. /opportunities, /my-opportunities,
-// and /professor-finder stay behind the passphrase gate (the full opportunity explorer
-// and the professor directory/email-drafting feature aren't ready to be public yet).
-const DEV_ROUTES = new Set(['/opportunities', '/my-opportunities', '/professor-finder'])
+// /interview and /opportunities are public — anyone can take the quiz and browse the
+// full list. /my-opportunities (a signed-in-feeling saved list) and /professor-finder
+// (directory/email-drafting not built yet) stay behind the passphrase gate.
+const DEV_ROUTES = new Set(['/my-opportunities', '/professor-finder'])
 
 // deliberately plain and uninteresting — this is a real server-verified gate (see
 // lib/devAccess.js + api/dev-verify.js), but the page still shouldn't invite curiosity
