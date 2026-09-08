@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link, useRouter } from '../lib/router'
-import { verifyDevAccess, unlockDevAccess } from '../lib/devAccess'
+import { unlockDevAccess } from '../lib/devAccess'
+import { useDevAccess } from '../lib/devAccessContext'
 
 // Scrolls to a homepage section id, navigating home first if we're on another route —
 // same pattern Navbar uses for its "How it works" link.
@@ -22,22 +23,14 @@ export default function Footer() {
 
   // real server-verified access (see lib/devAccess.js) — keeps the in-progress
   // prototype routes off the public internet before launch, so a cofounder can test
-  // without them being publicly linked yet
+  // without them being publicly linked yet. `unlocked` is shared app-wide (see
+  // DevAccessProvider) so a successful unlock here immediately un-grays the Professor
+  // Finder nav link too, with no page reload needed.
+  const { unlocked: devUnlocked, setUnlocked } = useDevAccess()
   const [devPromptOpen, setDevPromptOpen] = useState(false)
   const [devPassInput, setDevPassInput] = useState('')
-  const [devUnlocked, setDevUnlocked] = useState(false)
   const [devSubmitting, setDevSubmitting] = useState(false)
   const [devError, setDevError] = useState(false)
-
-  useEffect(() => {
-    let cancelled = false
-    verifyDevAccess().then((ok) => {
-      if (!cancelled) setDevUnlocked(ok)
-    })
-    return () => {
-      cancelled = true
-    }
-  }, [])
 
   async function handleDevSubmit(e) {
     e.preventDefault()
@@ -46,7 +39,7 @@ export default function Footer() {
     const ok = await unlockDevAccess(devPassInput)
     setDevSubmitting(false)
     if (ok) {
-      setDevUnlocked(true)
+      setUnlocked(true)
       setDevPromptOpen(false)
       setDevPassInput('')
       setDevError(false)

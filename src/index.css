@@ -116,6 +116,8 @@ svg{ display:block; }
   transition: color .18s ease;
 }
 .nav-link:hover{ color: var(--cover-dark); }
+.nav-link--locked{ color: var(--navy-faint); cursor:not-allowed; user-select:none; }
+.nav-link--locked:hover{ color: var(--navy-faint); }
 @media (max-width:520px){ .nav-right{ gap:14px; } }
 
 /* ---------- hero shell ---------- */

@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { lazy, Suspense } from 'react'
 import IconSprite from './components/IconSprite'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -8,21 +8,24 @@ import Contact from './components/Contact'
 import HowItWorks from './components/HowItWorks'
 import Footer from './components/Footer'
 import { RouterProvider, useRouter } from './lib/router'
-import { verifyDevAccess } from './lib/devAccess'
+import { DevAccessProvider, useDevAccess } from './lib/devAccessContext'
 
-// Lazy-loaded, NOT statically imported: everything reachable from these two components
-// (the interview flow, the map, the ~180-program dataset) previously shipped in the
-// single main JS bundle regardless of the passphrase gate, since Vite bundles static
-// imports together by default — meaning anyone could pull the full dataset and UI code
-// out of the network tab without ever unlocking anything. Dynamic import() gives each
-// its own chunk that's only ever requested after verifyDevAccess() below succeeds, so an
-// unauthenticated visitor's browser never fetches this code or data in the first place.
+// Lazy-loaded, NOT statically imported, so each gets its own chunk that only ever ships
+// to a browser that actually navigates there — the single main JS bundle never carries
+// this code/data regardless of gating. For the three still-gated components below, that
+// chunk is also only ever *requested* after verifyDevAccess() succeeds (see DEV_ROUTES),
+// so an unauthenticated visitor's browser never fetches them at all. Interview is the
+// one exception: it's public now, so its chunk — and the opportunity dataset it needs to
+// show real matches — ships to anyone who visits /interview, gated or not.
 const OpportunityExplorer = lazy(() => import('./components/OpportunityExplorer'))
 const Interview = lazy(() => import('./components/Interview'))
 const MyOpportunities = lazy(() => import('./components/MyOpportunities'))
 const ProfessorFinder = lazy(() => import('./components/ProfessorFinder'))
 
-const DEV_ROUTES = new Set(['/interview', '/opportunities', '/my-opportunities', '/professor-finder'])
+// /interview is public — anyone can take the quiz. /opportunities, /my-opportunities,
+// and /professor-finder stay behind the passphrase gate (the full opportunity explorer
+// and the professor directory/email-drafting feature aren't ready to be public yet).
+const DEV_ROUTES = new Set(['/opportunities', '/my-opportunities', '/professor-finder'])
 
 // deliberately plain and uninteresting — this is a real server-verified gate (see
 // lib/devAccess.js + api/dev-verify.js), but the page still shouldn't invite curiosity
@@ -39,27 +42,17 @@ function RouteUnavailable() {
 function Page() {
   const { path } = useRouter()
   const isDevRoute = DEV_ROUTES.has(path)
-  // checking | granted | denied — starts at "checking" so a legitimately unlocked
-  // visitor never flashes the "unavailable" page while the server round-trip resolves
-  const [devAccess, setDevAccess] = useState('checking')
+  // shared with Navbar/Footer (see DevAccessProvider) so there's one verify round-trip
+  // for the whole app, not a separate one per gated route. `checked` stays false only
+  // for the instant that round-trip is in flight, so a legitimately unlocked visitor
+  // never flashes the "unavailable" page before it resolves.
+  const { unlocked, checked } = useDevAccess()
 
-  useEffect(() => {
-    if (!isDevRoute) return
-    let cancelled = false
-    setDevAccess('checking')
-    verifyDevAccess().then((ok) => {
-      if (!cancelled) setDevAccess(ok ? 'granted' : 'denied')
-    })
-    return () => {
-      cancelled = true
-    }
-  }, [path, isDevRoute])
-
-  if (isDevRoute && devAccess !== 'granted') {
+  if (isDevRoute && !unlocked) {
     return (
       <>
         <IconSprite />
-        {devAccess === 'denied' && <RouteUnavailable />}
+        {checked && <RouteUnavailable />}
       </>
     )
   }
@@ -141,7 +134,9 @@ function Page() {
 export default function App() {
   return (
     <RouterProvider>
-      <Page />
+      <DevAccessProvider>
+        <Page />
+      </DevAccessProvider>
     </RouterProvider>
   )
 }
