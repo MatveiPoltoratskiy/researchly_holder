@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { prefersReducedMotion, usePauseAnimationsOffscreen } from '../lib/motion'
-import { Link } from '../lib/router'
 import { InterviewVisual, MatchVisual, BrowseVisual, ApplyVisual } from './HowItWorksVisuals'
 import SymbolField from './SymbolField'
+import InterviewCta from './InterviewCta'
 
 const STEPS = [
   {
@@ -185,12 +185,12 @@ function HowCta() {
     <div className="how-landscape-cta">
       <p>Ready to find your path?</p>
       <span className="cta-btn-shake">
-        <Link className="cta-btn" to="/interview">
+        <InterviewCta className="cta-btn">
           Get your Opportunities
           <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
             <use href="#icon-arrow" />
           </svg>
-        </Link>
+        </InterviewCta>
       </span>
     </div>
   )

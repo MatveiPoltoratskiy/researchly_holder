@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { prefersReducedMotion, usePauseAnimationsOffscreen } from '../lib/motion'
-import { Link } from '../lib/router'
 import SymbolField from './SymbolField'
+import InterviewCta from './InterviewCta'
 
 // the "before" side of the promise — cycled in place of "curious" so the headline
 // still reads naturally no matter which one is showing when a visitor lands
@@ -141,7 +141,7 @@ export default function Hero() {
             helps you find research opportunities that actually fit you.
           </p>
           <div className="th-cta-wrap">
-            <Link className="th-cta-btn" to="/interview">Build my research path →</Link>
+            <InterviewCta className="th-cta-btn">Build my research path →</InterviewCta>
             <p className="th-cta-hint">Takes about 1 minute.</p>
           </div>
         </div>

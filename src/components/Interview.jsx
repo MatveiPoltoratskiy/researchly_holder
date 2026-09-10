@@ -5,6 +5,7 @@ import { searchCities } from '../data/worldCities'
 import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
 import { getTopMatches, FIELD_TO_FOCUS } from '../lib/matchOpportunities'
 import { setInterviewFilters } from '../lib/interviewHandoff'
+import { consumeVoiceAnswers } from '../lib/voiceInterviewHandoff'
 import { markInterviewDone } from '../lib/activityTracking'
 import { burstConfetti } from '../lib/confetti'
 import Glyph from './InterviewIcons'
@@ -31,7 +32,7 @@ const MULTI_SELECT_STEPS = new Set([2, 3])
 // cut to keep the list from padding itself with options that will mostly disappoint.
 // Humanitarian stays: it's named explicitly in the brand brief as a core focal type.
 const HIDDEN_FIELD_IDS = new Set(['economics', 'political-science', 'business', 'law'])
-const DISPLAYED_FIELDS = FIELDS.filter((f) => !HIDDEN_FIELD_IDS.has(f.id))
+export const DISPLAYED_FIELDS = FIELDS.filter((f) => !HIDDEN_FIELD_IDS.has(f.id))
 
 const FIELD_META = {
   biology: { glyph: 'dna', color: 'var(--pine)' },
@@ -61,7 +62,7 @@ const SUBFOCUS_GLYPH = {
   'ai-ml': 'robot', software: 'laptop', 'systems-security': 'lock', 'computational-science': 'barChart', theory: 'integralSymbol', robotics: 'robot',
 }
 
-const OPP_TYPES = [
+export const OPP_TYPES = [
   { id: 'research-internship', glyph: 'magnifier', label: 'Research internship', desc: 'Hands-on work in a real lab or research group' },
   { id: 'summer-program', glyph: 'calendar', label: 'Summer program', desc: 'A structured multi-week program, often with a cohort' },
   { id: 'year-round-program', glyph: 'refresh', label: 'Year-round program', desc: 'An ongoing commitment during the school year' },
@@ -72,7 +73,7 @@ const OPP_TYPES = [
 // undifferentiated list of eight numbered rows — teal for HS keeps it distinct from the
 // orange already used everywhere else for grade/experience, while undergrad keeps that
 // existing orange rather than inventing a third color with nothing to anchor it to
-const LEVEL_GROUPS = [
+export const LEVEL_GROUPS = [
   {
     label: 'High school',
     glyph: 'schoolBuilding',
@@ -97,14 +98,14 @@ const LEVEL_GROUPS = [
   },
 ]
 
-const EXPERIENCE_LEVELS = [
+export const EXPERIENCE_LEVELS = [
   { id: 'exploring', num: '1', label: 'Exploring', desc: "New to this, still figuring out what excites me" },
   { id: 'some-experience', num: '2', label: 'Some experience', desc: 'A class project, a club, or dabbling on my own' },
   { id: 'regular-practice', num: '3', label: 'Regular practice', desc: "Stuck with it: coursework, competitions, self-study" },
   { id: 'experienced', num: '4', label: 'Experienced', desc: 'Prior research, publications, or advanced coursework' },
 ]
 
-const PAID_PREFS = [
+export const PAID_PREFS = [
   { id: 'paid-only', glyph: 'dollarCoin', label: 'Paid only', desc: 'I need this to come with a stipend or salary' },
   { id: 'free-to-attend', glyph: 'priceTag', label: 'Free to attend', desc: 'It just needs to cost nothing to join' },
   { id: 'doesnt-matter', glyph: 'either', label: "Doesn't matter", desc: 'Show me everything' },
@@ -130,6 +131,37 @@ function looksLikeStreetAddress(value) {
 
 function hasSubfocus(fieldId) {
   return (FIELD_BY_ID[fieldId]?.subfocus?.length || 0) > 0
+}
+
+const DEFAULT_ANSWERS = {
+  field: null,
+  subfocus: [],
+  oppType: [],
+  level: null,
+  location: '',
+  locationCoords: null, // {lat, lon} when known (real geolocation), null for a typed city
+  remoteOnly: false,
+  experience: null,
+  applyStart: null, // ISO date string, or null if skipped ("I'm flexible on timing")
+  applyEnd: null,
+  paidPref: null,
+}
+
+// Used to land a voice-prefilled interview on the first question that's still actually
+// unanswered, skipping past whatever the speech parser already caught, rather than
+// silently re-asking (or worse, replaying) something the student already said. Returns
+// TOTAL_STEPS + 1 when every step is already filled, which the caller treats as "skip
+// the quiz entirely and go straight to the loading/matches phase."
+function computeStartStep(answers) {
+  if (!answers.field) return 1
+  if (hasSubfocus(answers.field) && answers.subfocus.length === 0) return 2
+  if (answers.oppType.length === 0) return 3
+  if (!answers.level) return 4
+  if (!answers.remoteOnly && !answers.location.trim()) return 5
+  if (!answers.experience) return 6
+  if (!answers.applyStart) return 7
+  if (!answers.paidPref) return 8
+  return TOTAL_STEPS + 1
 }
 
 // ---- small local date helpers for the Timeline step — no timezone library, everything
@@ -281,29 +313,31 @@ function NumberRow({ num, label, desc, color, selected, onClick }) {
 
 export default function Interview() {
   const { navigate } = useRouter()
-  const [step, setStep] = useState(1)
-  const [answers, setAnswers] = useState({
-    field: null,
-    subfocus: [],
-    oppType: [],
-    level: null,
-    location: '',
-    locationCoords: null, // {lat, lon} when known (real geolocation), null for a typed city
-    remoteOnly: false,
-    experience: null,
-    applyStart: null, // ISO date string, or null if skipped ("I'm flexible on timing")
-    applyEnd: null,
-    paidPref: null,
-  })
+  // consumed at most once, ever, per mount — see voiceInterviewHandoff.js. A guarded ref
+  // assignment (not a hook) so it survives StrictMode's double-render without eating a
+  // second, wasted consume that would otherwise silently wipe the parsed answers.
+  const voiceAnswersRef = useRef(undefined)
+  if (voiceAnswersRef.current === undefined) voiceAnswersRef.current = consumeVoiceAnswers()
+  const voiceAnswers = voiceAnswersRef.current
+
+  const initialAnswers = voiceAnswers ? { ...DEFAULT_ANSWERS, ...voiceAnswers } : DEFAULT_ANSWERS
+  const initialStep = voiceAnswers ? computeStartStep(initialAnswers) : 1
+
+  const [step, setStep] = useState(initialStep > TOTAL_STEPS ? 1 : initialStep)
+  const [answers, setAnswers] = useState(initialAnswers)
   const [locationStatus, setLocationStatus] = useState('idle') // idle | loading | granted | denied | unsupported
-  const [locationConfirmed, setLocationConfirmed] = useState(false)
+  const [locationConfirmed, setLocationConfirmed] = useState(
+    !!(initialAnswers.remoteOnly || initialAnswers.location.trim())
+  )
   const [locationTooSpecific, setLocationTooSpecific] = useState(false)
   const [suggestions, setSuggestions] = useState([])
   const [showSuggestions, setShowSuggestions] = useState(false)
   // a single enum instead of two booleans — 'loading' and 'matches' being separate
   // flags meant nothing prevented both being true (or "loading" staying stuck true
   // forever once set, since nothing ever reset it back to false) at once
-  const [phase, setPhase] = useState('quiz') // quiz | loading | matches
+  // every step already answered from voice — skip the quiz entirely and go straight to
+  // the same loading/matches transition the last question normally hands off to
+  const [phase, setPhase] = useState(initialStep > TOTAL_STEPS ? 'loading' : 'quiz') // quiz | loading | matches
 
   const locationCheckRef = useRef(null)
   const advanceTimerRef = useRef(null)
@@ -400,9 +434,12 @@ export default function Interview() {
   }
 
   // auto-request the moment this step is reached, so the browser's permission prompt
-  // shows up without the student having to find and press a button first
+  // shows up without the student having to find and press a button first. Skipped if a
+  // location is already known (e.g. carried over from a voice-prefilled interview) —
+  // otherwise navigating Back to this step after skipping past it would silently
+  // overwrite what was already captured with a fresh GPS prompt.
   useEffect(() => {
-    if (step === 5 && locationStatus === 'idle' && !answers.remoteOnly) {
+    if (step === 5 && locationStatus === 'idle' && !answers.remoteOnly && !answers.location.trim()) {
       requestLocation()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

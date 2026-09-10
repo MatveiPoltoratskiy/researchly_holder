@@ -1,4 +1,5 @@
 import { Link, useRouter } from '../lib/router'
+import InterviewCta from './InterviewCta'
 
 export default function Navbar() {
   const { path, navigate } = useRouter()
@@ -36,9 +37,7 @@ export default function Navbar() {
           <Link className="nav-link" to="/professor-finder">
             Professor Finder
           </Link>
-          <Link className="nav-cta" to="/interview">
-            Get your Opportunities
-          </Link>
+          <InterviewCta className="nav-cta">Get your Opportunities</InterviewCta>
         </div>
       </div>
     </div>

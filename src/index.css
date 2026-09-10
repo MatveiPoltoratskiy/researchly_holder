@@ -3031,6 +3031,136 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
   .interview-loading-glow{ opacity:.6; }
 }
 
+/* ---------- interview mode picker (modal over the normal scrolling landing page) ---------- */
+.im-mode-overlay{
+  position:fixed; inset:0; z-index:200; background:rgba(30,37,64,.55);
+  display:flex; align-items:center; justify-content:center; padding:20px;
+  animation:im-mode-fade .18s ease-out both;
+}
+@keyframes im-mode-fade{ from{ opacity:0; } to{ opacity:1; } }
+.im-mode-card{
+  position:relative; width:100%; max-width:620px; background:var(--card-bg);
+  border:1.5px solid var(--card-border); border-radius:26px; padding:40px 40px 36px;
+  box-shadow:0 2px 6px rgba(30,37,64,.08), 0 32px 60px rgba(30,37,64,.28);
+  animation:content-in .28s ease-out both;
+}
+.im-mode-close{
+  position:absolute; top:18px; right:18px; width:32px; height:32px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; color:var(--navy-soft);
+  background:none; border:1px solid var(--card-border); cursor:pointer;
+}
+.im-mode-close:hover{ color:var(--navy); border-color:var(--navy-faint); }
+.im-mode-title{
+  font-family:"Times New Roman",Times,Georgia,Arial,sans-serif; font-weight:800; letter-spacing:-.01em;
+  font-size:clamp(22px,2.6vw,28px); color:var(--navy); margin:0 0 8px; text-align:center;
+}
+.im-mode-sub{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; color:var(--navy-soft);
+  text-align:center; margin:0 0 26px;
+}
+.im-mode-options{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.im-mode-option{
+  display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px;
+  background:var(--cream); border:1.5px solid var(--card-border); border-radius:18px;
+  padding:26px 18px 22px; cursor:pointer; transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.im-mode-option:hover:not(:disabled){ transform:translateY(-3px); box-shadow:0 14px 28px -12px rgba(30,37,64,.25); border-color:var(--cover); }
+.im-mode-option:disabled{ opacity:.55; cursor:not-allowed; }
+.im-mode-option-icon{
+  width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  margin-bottom:6px;
+}
+.im-mode-option-icon--voice{ background:rgba(221,107,46,.14); color:var(--cover-dark); }
+.im-mode-option-icon--guided{ background:rgba(30,37,64,.08); color:var(--navy); }
+.im-mode-option-title{ font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:16px; color:var(--navy); }
+.im-mode-option-desc{ font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; color:var(--navy-soft); line-height:1.45; }
+.im-mode-option-note{ font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:700; color:var(--cover-dark); }
+.im-mode-option-btn{
+  display:inline-block; margin-top:10px; font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:13.5px;
+  padding:9px 18px; border-radius:999px;
+}
+.im-mode-option-btn--voice{ background:var(--cover); color:#FFF6EC; }
+.im-mode-option-btn--guided{ background:var(--navy); color:#fff; }
+
+@media (max-width:560px){
+  .im-mode-card{ padding:30px 22px 26px; }
+  .im-mode-options{ grid-template-columns:1fr; }
+}
+@media (prefers-reduced-motion: reduce){
+  .im-mode-overlay, .im-mode-card{ animation:none; }
+  .im-mode-option:hover:not(:disabled){ transform:none; }
+}
+
+/* ---------- voice interview (speech-to-answers) ---------- */
+/* reuses .interview-page/.interview-container/.interview-card for the shell, same as
+   the guided quiz — this is a different screen, not a different layout system */
+.voice-center{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px; padding:20px 0; }
+.voice-center .interview-question{ text-align:center; text-wrap:balance; }
+.voice-center .interview-subtext{ text-align:center; max-width:480px; }
+
+.voice-mic-btn{
+  width:88px; height:88px; border-radius:50%; border:none; cursor:pointer;
+  background:var(--cover); color:#FFF6EC; display:flex; align-items:center; justify-content:center;
+  box-shadow:0 14px 28px -10px rgba(169,79,30,.55); transition:transform .15s ease;
+  margin-bottom:4px;
+}
+.voice-mic-btn:hover{ transform:translateY(-2px); }
+.voice-mic-btn.is-listening{ cursor:default; animation:voice-pulse 1.6s ease-out infinite; }
+@keyframes voice-pulse{
+  0%{ box-shadow:0 14px 28px -10px rgba(169,79,30,.55), 0 0 0 0 rgba(221,107,46,.45); }
+  70%{ box-shadow:0 14px 28px -10px rgba(169,79,30,.55), 0 0 0 22px rgba(221,107,46,0); }
+  100%{ box-shadow:0 14px 28px -10px rgba(169,79,30,.55), 0 0 0 0 rgba(221,107,46,0); }
+}
+
+.voice-icon-badge{
+  width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  background:rgba(46,122,76,.12); color:var(--match-green); margin-bottom:2px;
+}
+.voice-icon-badge--muted{ background:rgba(30,37,64,.08); color:var(--navy-soft); }
+
+.voice-timer{ font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:700; color:var(--navy-soft); margin:0; }
+
+.voice-transcript{
+  width:100%; max-width:520px; min-height:88px; max-height:180px; overflow-y:auto;
+  background:var(--cream); border:1px solid var(--card-border); border-radius:14px;
+  padding:16px 18px; font-family:"Segoe UI",system-ui,sans-serif; font-size:15px; line-height:1.55; color:var(--navy);
+  text-align:left;
+}
+.voice-transcript-placeholder{ color:var(--navy-faint); font-style:italic; }
+
+.voice-actions{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:4px; }
+.voice-secondary-btn{
+  font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:14.5px; color:var(--navy);
+  background:none; border:1.5px solid var(--card-border); border-radius:999px; padding:12px 22px; cursor:pointer;
+}
+.voice-secondary-btn:hover{ border-color:var(--navy); }
+
+.voice-skip-link{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; color:var(--navy-soft);
+  background:none; border:none; text-decoration:underline; text-decoration-color:var(--card-border);
+  cursor:pointer; margin-top:6px;
+}
+.voice-skip-link:hover{ color:var(--cover-dark); }
+
+.voice-error{ font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:700; color:var(--cover-dark); max-width:420px; }
+
+.voice-analyzing-spinner{
+  width:40px; height:40px; border-radius:999px; margin-bottom:4px;
+  border:3px solid rgba(30,37,64,.15); border-top-color:var(--cover);
+  animation:interview-spin .7s linear infinite;
+}
+
+.voice-chip-row{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; max-width:520px; }
+.voice-chip{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:700; color:var(--navy);
+  background:var(--cream-deep); border:1px solid var(--card-border); border-radius:999px; padding:7px 14px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .voice-mic-btn.is-listening{ animation:none; }
+  .voice-analyzing-spinner{ animation:none; }
+}
+
 /* ---------- professor finder background sheet (nothing saved/sent) ---------- */
 /* reuses .interview-page/.interview-container/.interview-card/.interview-card-scroll for
    the shell (same fixed one-viewport layout as the quiz) and .contact-field/

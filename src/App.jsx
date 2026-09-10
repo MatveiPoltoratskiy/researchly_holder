@@ -16,6 +16,7 @@ import { RouterProvider, useRouter } from './lib/router'
 // are public now).
 const OpportunityExplorer = lazy(() => import('./components/OpportunityExplorer'))
 const Interview = lazy(() => import('./components/Interview'))
+const InterviewVoice = lazy(() => import('./components/InterviewVoice'))
 const MyOpportunities = lazy(() => import('./components/MyOpportunities'))
 const ProfessorFinder = lazy(() => import('./components/ProfessorFinder'))
 
@@ -27,12 +28,12 @@ function Page() {
   // manages its own fixed, exactly-one-viewport layout (no page-level scroll at all) —
   // the site chrome above/below would either get clipped by that or force scroll back in,
   // so it's left out entirely rather than fought with via CSS.
-  if (path === '/interview') {
+  if (path === '/interview' || path === '/interview-voice') {
     return (
       <>
         <IconSprite />
         <Suspense fallback={null}>
-          <Interview />
+          {path === '/interview' ? <Interview /> : <InterviewVoice />}
         </Suspense>
       </>
     )
