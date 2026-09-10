@@ -342,6 +342,11 @@ export default function Interview() {
   const locationCheckRef = useRef(null)
   const advanceTimerRef = useRef(null)
   const locationAdvanceTimerRef = useRef(null)
+  // tracks whichever geocode is currently in flight (typing/picking a city geocodes in
+  // the background, never blocking the quiz) so the matches screen's "see all matches"
+  // handoff can await it before navigating — otherwise locationCoords is still null at
+  // that moment and the opportunities map never gets a "you are here" pin
+  const geocodePromiseRef = useRef(null)
 
   function set(key, value) {
     setAnswers((a) => ({ ...a, [key]: value }))
@@ -465,20 +470,32 @@ export default function Interview() {
   // types their city instead of granting GPS — which is likely most people). Guarded
   // against a stale overwrite: only applies if the location field still matches what was
   // geocoded, in case the student changed it again while the request was in flight.
+  // Returns the resolved {lat, lon} (or null) in addition to setAnswers-ing it, so a
+  // caller that awaits this directly (see the matches screen's onContinue below) can use
+  // the coordinates right away instead of re-reading `answers` — which, being a normal
+  // closure variable, would still be the stale pre-geocode value from whatever render
+  // created that closure, React state update or not.
   async function geocodeLocation(cityText) {
+    // bounded so a hung/slow request (Nominatim is a shared, unauthenticated public API)
+    // can never stall the matches screen's handoff indefinitely — see geocodePromiseRef
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 4000)
     try {
       const res = await fetch(
         `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(cityText)}&limit=1`,
-        { headers: { Accept: 'application/json' } }
+        { headers: { Accept: 'application/json' }, signal: controller.signal }
       )
       const data = await res.json()
       const hit = data?.[0]
-      if (!hit) return
-      setAnswers((a) =>
-        a.location === cityText ? { ...a, locationCoords: { lat: parseFloat(hit.lat), lon: parseFloat(hit.lon) } } : a
-      )
+      if (!hit) return null
+      const coords = { lat: parseFloat(hit.lat), lon: parseFloat(hit.lon) }
+      setAnswers((a) => (a.location === cityText ? { ...a, locationCoords: coords } : a))
+      return coords
     } catch {
       // best-effort only — locationCoords just stays null, same as before this fix
+      return null
+    } finally {
+      clearTimeout(timeout)
     }
   }
 
@@ -487,7 +504,7 @@ export default function Interview() {
     setSuggestions([])
     setLocationTooSpecific(false)
     confirmLocation()
-    geocodeLocation(city)
+    geocodePromiseRef.current = geocodeLocation(city)
   }
 
   function handleLocationContinue(e) {
@@ -495,7 +512,7 @@ export default function Interview() {
     if (locationTooSpecific) return
     if (answers.location.trim() && !locationConfirmed) {
       confirmLocation()
-      if (!answers.locationCoords) geocodeLocation(answers.location.trim())
+      if (!answers.locationCoords) geocodePromiseRef.current = geocodeLocation(answers.location.trim())
       return
     }
     goTo(step + 1)
@@ -544,10 +561,23 @@ export default function Interview() {
     return (
       <InterviewMatches
         matches={matches}
-        onContinue={() => {
+        onContinue={async () => {
+          // a typed/picked city geocodes in the background (see geocodePromiseRef) and
+          // is usually done well before a student finishes reading the matches screen,
+          // but wait for it here if it's still in flight — otherwise locationCoords is
+          // still null at the exact moment of handoff and the opportunities map never
+          // gets a "you are here" pin, even though the geocode succeeds moments later.
+          // Uses the promise's own resolved value rather than re-reading `answers` after
+          // the await, since `answers` here is just this render's closure — a setAnswers
+          // call inside geocodeLocation wouldn't retroactively update it.
+          let finalAnswers = answers
+          if (geocodePromiseRef.current) {
+            const coords = await geocodePromiseRef.current
+            if (coords && !finalAnswers.locationCoords) finalAnswers = { ...finalAnswers, locationCoords: coords }
+          }
           // hands the same answers that scored these matches over to the explorer, so
           // "see all your matches" actually opens pre-filtered instead of the full list
-          setInterviewFilters(explorerHandoffFromAnswers(answers))
+          setInterviewFilters(explorerHandoffFromAnswers(finalAnswers))
           navigate('/opportunities')
         }}
       />
