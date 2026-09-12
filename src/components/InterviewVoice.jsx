@@ -157,6 +157,27 @@ export default function InterviewVoice() {
     []
   )
 
+  // Ask for the mic right away, on page load, instead of waiting for the "tap to start"
+  // click — so a student sees the browser's permission prompt the moment they land here,
+  // not one extra tap later. SpeechRecognition.start() would ask too, but only once the
+  // user has already committed to tapping; requesting via getUserMedia up front surfaces
+  // any denial immediately (see micDenied banner) instead of after their first attempt.
+  useEffect(() => {
+    if (!SpeechRecognitionCtor || typeof navigator === 'undefined' || !navigator.mediaDevices?.getUserMedia) return
+    let cancelled = false
+    navigator.mediaDevices
+      .getUserMedia({ audio: true })
+      .then((stream) => {
+        stream.getTracks().forEach((track) => track.stop())
+      })
+      .catch(() => {
+        if (!cancelled) setMicDenied(true)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
   function handleContinue() {
     setVoiceAnswers(parsedAnswers)
     navigate('/interview')
