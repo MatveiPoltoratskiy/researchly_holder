@@ -188,6 +188,11 @@ export default function InterviewVoice() {
 
   return (
     <section className="interview-page voice-page">
+      <button type="button" className="voice-brand" onClick={() => navigate('/')} aria-label="Researchly home">
+        <img src="/assets/mascot-logo.png" alt="" />
+        <span>Researchly</span>
+      </button>
+
       <button type="button" className="interview-back-float" onClick={() => navigate('/')}>
         <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-home" /></svg>
         Home
@@ -212,23 +217,86 @@ export default function InterviewVoice() {
           )}
 
           {status === 'idle' && (
-            <div className="voice-center">
-              <button type="button" className="voice-mic-btn" onClick={handleStart} aria-label="Start speaking">
-                <svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-mic" /></svg>
+            <div className="voice-center voice-hero">
+              <div className="voice-mascot-stage">
+                <span className="voice-mascot-shadow" aria-hidden="true" />
+                <div className="voice-mascot-figure">
+                  <img src="/assets/mascot-logo.png" alt="" />
+                </div>
+                <span className="voice-mascot-callout" aria-hidden="true">Ask me anything!</span>
+              </div>
+
+              <div className="voice-bubble">
+                <span className="voice-bubble-tail" aria-hidden="true" />
+                <p className="voice-bubble-lead">
+                  Hi! I'm <span className="voice-bubble-brand">Researchly</span> — your AI research companion.
+                </p>
+                <p className="voice-bubble-sub">
+                  Talk for about a minute about your interests, grade, location, timing, and whether it
+                  needs to pay. We'll turn it into your interview automatically.
+                </p>
+              </div>
+
+              <button type="button" className="voice-start-btn" onClick={handleStart}>
+                <span className="voice-start-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-mic" /></svg>
+                </span>
+                Start talking
+                <span className="voice-start-wave" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24"><use href="#icon-waveform" /></svg>
+                </span>
               </button>
-              <h1 className="interview-question">Tap to start talking</h1>
-              <p className="interview-subtext">
-                Talk for about a minute about your interests, grade, location, timing, and whether it needs to pay.
-                We'll turn it into your interview automatically.
-              </p>
+              <p className="voice-start-hint">Your microphone is used only to build your roadmap.</p>
+
               {micDenied && (
                 <p className="voice-error">
                   Microphone access was denied. Allow it in your browser's site settings, then try again.
                 </p>
               )}
-              <button type="button" className="voice-skip-link" onClick={() => navigate('/interview')}>
+
+              <button type="button" className="voice-skip-link voice-skip-pill" onClick={() => navigate('/interview')}>
                 Prefer typing? Take the guided interview instead
+                <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow" /></svg>
               </button>
+
+              <div className="voice-feature-strip">
+                <div className="voice-feature">
+                  <span className="voice-feature-icon voice-feature-icon--a">
+                    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-search" /></svg>
+                  </span>
+                  <div>
+                    <strong>Find opportunities</strong>
+                    <p>Research, internships, programs.</p>
+                  </div>
+                </div>
+                <div className="voice-feature">
+                  <span className="voice-feature-icon voice-feature-icon--b">
+                    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-grad-cap" /></svg>
+                  </span>
+                  <div>
+                    <strong>Get matched</strong>
+                    <p>AI tailored to your goals.</p>
+                  </div>
+                </div>
+                <div className="voice-feature">
+                  <span className="voice-feature-icon voice-feature-icon--c">
+                    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-compass" /></svg>
+                  </span>
+                  <div>
+                    <strong>Build your future</strong>
+                    <p>Make informed decisions.</p>
+                  </div>
+                </div>
+                <div className="voice-feature">
+                  <span className="voice-feature-icon voice-feature-icon--d">
+                    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-people" /></svg>
+                  </span>
+                  <div>
+                    <strong>For high schoolers + undergrads</strong>
+                    <p>All in one place.</p>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
 
