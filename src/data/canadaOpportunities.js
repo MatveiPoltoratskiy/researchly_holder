@@ -13721,5 +13721,553 @@ export const CANADA_OPPORTUNITIES = [
     "confidence": "high",
     "verified": false,
     "blurb": "Argentina's flagship national undergrad-research fellowship, run by the public-university council (CIN) across every field from engineering to health to humanities. You need to have passed at least half your degree's coursework and a 6/10 average; in exchange you get a 12-month monthly stipend for roughly 12 hours/week of research with a university mentor. The 2026 call ran July-August, so watch for the next annual window at evc.cin.edu.ar."
+  },
+
+  // ---- India batch 2: added 2026-09-12, IITs (Bombay/Kanpur/Gandhinagar/Madras/
+  // Hyderabad/Roorkee/Delhi), SINP, VECC, IMSc, CMI, ATREE, Wildlife Institute of India,
+  // Ashoka AISRP, CCMB, NCBS/PRISM, BITS Pilani. All verified:false — spot-check before
+  // promoting to verified. See opportunitySchema.js.
+  {
+    "id": "iitb-research-internship-award",
+    "name": "IITB Research Internship Award",
+    "org": "IIT Bombay (IRCC)",
+    "url": "https://www.ircc.iitb.ac.in/IRCC-Webpage/IITBInternship/",
+    "focus": [
+      "engineering",
+      "computer-science",
+      "physics",
+      "chemistry",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Mumbai, India",
+    "lat": 19.1334,
+    "lon": 72.9133,
+    "availability": "year-round",
+    "paid": true,
+    "cost": 0,
+    "stipend": 15000,
+    "deadline": "2026-09-23",
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "verified": false,
+    "blurb": "A 4-6 month, faculty-supervised research placement on a specific IIT Bombay project, open to 2nd/3rd-year students nationwide, with a Rs 15,000/month stipend and shared campus housing for outstation interns. The 2026-27 cycle's application window runs 23 August to 23 September 2026."
+  },
+  {
+    "id": "iitk-surge-program",
+    "name": "SURGE (Students-Undergraduate Research Graduate Excellence) Program",
+    "org": "IIT Kanpur",
+    "url": "https://surge.iitk.ac.in/",
+    "focus": [
+      "engineering",
+      "computer-science",
+      "physics",
+      "chemistry",
+      "biology",
+      "mathematics"
+    ],
+    "levels": [
+      "ugrad-3"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Kanpur, India",
+    "lat": 26.5123,
+    "lon": 80.2329,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": 16000,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "verified": false,
+    "blurb": "An 8-week summer research immersion at IIT Kanpur for 3rd-year B.Tech/BE/BS and 1st-year M.Sc students from India and SAARC countries, running mid-May to mid-July. Support ranges from full institute funding (around Rs 16,000) to partial funding depending on the project and mentor."
+  },
+  {
+    "id": "iitgn-srip",
+    "name": "Summer Research Internship Program (SRIP)",
+    "org": "IIT Gandhinagar",
+    "url": "https://srip.iitgn.ac.in/info/",
+    "focus": [
+      "engineering",
+      "computer-science",
+      "physics",
+      "chemistry",
+      "biology",
+      "environmental-science"
+    ],
+    "levels": [
+      "ugrad-1",
+      "ugrad-2",
+      "ugrad-3"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Gandhinagar, India",
+    "lat": 23.2156,
+    "lon": 72.6836,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "verified": false,
+    "blurb": "An 8-week (minimum) hands-on research internship under an IIT Gandhinagar faculty mentor, for non-IITGN undergrads and 1st-year postgrads across engineering, science, and humanities. Pays roughly Rs 2,000/week, and standout interns can be nominated for a Rs 50,000 research excellence award."
+  },
+  {
+    "id": "iitm-summer-fellowship-programme",
+    "name": "Summer Fellowship Programme",
+    "org": "IIT Madras",
+    "url": "https://ssp.iitm.ac.in/summer-fellowship-registration",
+    "focus": [
+      "engineering",
+      "physics",
+      "chemistry",
+      "mathematics",
+      "computer-science"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Chennai, India",
+    "lat": 12.9915,
+    "lon": 80.2337,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": 15000,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "verified": false,
+    "blurb": "A two-month, on-campus mini-research-project at IIT Madras for non-IITM students who've finished their 3rd year of engineering or science, with a Rs 15,000/month stipend and paid hostel/mess subject to availability. Registration usually opens in February and closes the first week of March."
+  },
+  {
+    "id": "iith-sure-program",
+    "name": "Summer Undergraduate Research Exposure (SURE)",
+    "org": "IIT Hyderabad",
+    "url": "https://iith.ac.in/research/SURE/",
+    "focus": [
+      "engineering",
+      "mathematics",
+      "physics",
+      "chemistry",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Sangareddy, Telangana, India",
+    "lat": 17.5945,
+    "lon": 78.121,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": 7500,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "verified": false,
+    "blurb": "A 1-2 month research internship for non-IITH students in the top 20% of their class, across math, physics, chemistry, biology, and all engineering branches, with 250 seats (100 reserved for women). Stipend scales with duration, from about Rs 7,500 for one month up to Rs 15,000 for two."
+  },
+  {
+    "id": "iitr-spark-program",
+    "name": "SPARK Summer Internship Program",
+    "org": "IIT Roorkee",
+    "url": "https://spark.iitr.ac.in/",
+    "focus": [
+      "engineering",
+      "computer-science",
+      "physics",
+      "chemistry",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Roorkee, India",
+    "lat": 29.8543,
+    "lon": 77.888,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "verified": false,
+    "blurb": "A 6-8 week, institute-funded summer research internship at IIT Roorkee open to strong undergrads from any Indian institution (minimum CGPA requirement varies by home institute), paying roughly Rs 3,000/week. Interns are paired one-on-one with a faculty mentor on a defined research problem."
+  },
+  {
+    "id": "iitd-summer-research-fellowship",
+    "name": "Summer Research Fellowship Programme",
+    "org": "IIT Delhi",
+    "url": "https://srfp.iitd.ac.in/srf/login.php",
+    "focus": [
+      "engineering",
+      "computer-science",
+      "physics",
+      "chemistry",
+      "mathematics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3"
+    ],
+    "mode": "in-person",
+    "locationLabel": "New Delhi, India",
+    "lat": 28.545,
+    "lon": 77.1926,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "verified": false,
+    "blurb": "An 8-week, project-based summer fellowship at IIT Delhi for exceptionally qualified undergrad and postgrad students from OTHER engineering institutes (IIT Delhi's own students aren't eligible), with boarding, lodging, travel support, and roughly Rs 2,000/week. Applications typically open in mid-March."
+  },
+  {
+    "id": "sinp-summer-students-programme",
+    "name": "Summer Students' Programme",
+    "org": "Saha Institute of Nuclear Physics",
+    "url": "https://www.saha.ac.in/web/summer-program",
+    "focus": [
+      "physics",
+      "chemistry",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Kolkata, India",
+    "lat": 22.5726,
+    "lon": 88.3639,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": 9000,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "verified": false,
+    "blurb": "A 60-day (mid-May to mid-July) research placement at SINP in either a Physical Sciences or Biophysical Sciences stream, for students finishing 3rd-year B.Tech/MBBS/B.Pharm or in 1st-year M.Sc. Pays about Rs 9,000/month plus round-trip sleeper-class train fare and free shared housing for outstation students."
+  },
+  {
+    "id": "vecc-summer-training",
+    "name": "Training/Internship of Students",
+    "org": "Variable Energy Cyclotron Centre (Department of Atomic Energy)",
+    "url": "https://www.vecc.gov.in/training-students",
+    "focus": [
+      "physics"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Kolkata, India",
+    "lat": 22.5726,
+    "lon": 88.3639,
+    "availability": "year-round",
+    "paid": false,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "verified": false,
+    "blurb": "A field-project/internship placement at India's cyclotron and accelerator physics research centre, aimed at B.Sc (Physics Hons)/M.Sc (Physics)/B.Tech students with a strong physics interest. No centralized online portal — apply by emailing the training coordinators directly; unpaid, and the site gives little detail on duration or intake cycles."
+  },
+  {
+    "id": "imsc-summer-research-programme",
+    "name": "Summer Research Programme",
+    "org": "Institute of Mathematical Sciences (IMSc), Chennai",
+    "url": "https://www.imsc.res.in/summer_research_programme",
+    "focus": [
+      "mathematics",
+      "computer-science",
+      "physics",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Chennai, India",
+    "lat": 13.0827,
+    "lon": 80.2707,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "verified": false,
+    "blurb": "A 6-8 week (May-July) research visit to IMSc for about 25 students a year in theoretical computer science, mathematics, theoretical physics, or computational biology, for those in their pre-final/final UG year or 1st-year Master's. Covers round-trip 2nd-class train fare plus Rs 200/day and hostel space, subject to availability."
+  },
+  {
+    "id": "cmi-internship-program",
+    "name": "CMI Internship Program (Mathematics & Computer Science)",
+    "org": "Chennai Mathematical Institute",
+    "url": "https://www.cmi.ac.in/admissions/internships.php",
+    "focus": [
+      "computer-science",
+      "mathematics"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Chennai, India",
+    "lat": 13.0827,
+    "lon": 80.2707,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "verified": false,
+    "blurb": "CMI runs its own computer-science internship (one month to a full semester, for students with some programming/algorithms background, not usually before 2nd year) via an online form; math projects instead run through the joint IAS-NASI-INSA fellowship with a CMI faculty guide. A paid fellowship covers hostel food; no travel support."
+  },
+  {
+    "id": "atree-internship-program",
+    "name": "ATREE Internship Programme",
+    "org": "Ashoka Trust for Research in Ecology and the Environment (ATREE)",
+    "url": "https://www.atree.org/internship/",
+    "focus": [
+      "environmental-science",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Bengaluru, India (with field sites in Karnataka, Tamil Nadu, Kerala)",
+    "lat": 12.9716,
+    "lon": 77.5946,
+    "availability": "year-round",
+    "paid": false,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": true,
+    "multiSite": true,
+    "isGrant": false,
+    "confidence": "high",
+    "verified": false,
+    "blurb": "A minimum 8-week internship on real ecology/conservation projects at ATREE's Bangalore campus or one of its community-based conservation centres (Biligiri Rangaswamy Temple Tiger Reserve, Agasthyamalai, Vembanad, and others). Rolling admissions year-round, generally unpaid, though a modest scholarship is sometimes available at the supervisor's discretion."
+  },
+  {
+    "id": "wii-internship-dissertation-program",
+    "name": "Internship & Dissertation Programme",
+    "org": "Wildlife Institute of India",
+    "url": "https://wii.gov.in/internships-and-dissertations",
+    "focus": [
+      "environmental-science",
+      "biology"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Dehradun, India",
+    "lat": 30.3165,
+    "lon": 78.0322,
+    "availability": "year-round",
+    "paid": false,
+    "cost": 5000,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "medium",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "high",
+    "verified": false,
+    "blurb": "A wildlife-research internship (up to 6 months) or dissertation placement (up to a year) under a WII scientist, open from undergraduate level up. Current students pay a non-refundable Rs 5,000 fee since paid slots are reserved for those who've already finished their Bachelor's/Master's and are working on a funded project."
+  },
+  {
+    "id": "ashoka-aisrp",
+    "name": "Ashoka International Summer Research Programme (AISRP)",
+    "org": "Ashoka University",
+    "url": "https://www.ashoka.edu.in/research-internships-unique-programmes/",
+    "focus": [
+      "biology",
+      "environmental-science",
+      "psychology"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Sonipat, India",
+    "lat": 28.9538,
+    "lon": 77.0708,
+    "availability": "summer",
+    "paid": false,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "verified": false,
+    "blurb": "An 8-10 week mentor-led summer research placement inside one of Ashoka University's research centres — sustainability, biology, health, or science policy among them — open to undergrads from partner and non-partner universities alike. Funding is limited and varies by project, so budget for an unfunded or lightly-funded placement."
+  },
+  {
+    "id": "ccmb-summer-training-program",
+    "name": "Summer Training Program",
+    "org": "CSIR-Centre for Cellular and Molecular Biology (CCMB)",
+    "url": "https://e-portal.ccmb.res.in/app_space/stp/",
+    "focus": [
+      "biology",
+      "pre-med"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Hyderabad, India",
+    "lat": 17.4126,
+    "lon": 78.5512,
+    "availability": "summer",
+    "paid": false,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "very-high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "verified": false,
+    "blurb": "A 60-day, no-break lab placement at one of India's top molecular biology institutes, for life-science students from B.Sc graduates/1st-year M.Sc up through B.Tech/B.Pharm and integrated-degree students. CCMB reports under a 10% acceptance rate; students arrange their own Hyderabad accommodation and there's no stipend."
+  },
+  {
+    "id": "ncbs-prism-fellowship",
+    "name": "PRISM Fellowship (Promoting Research and Inclusion in STEM)",
+    "org": "National Centre for Biological Sciences (NCBS) & Project EduAccess",
+    "url": "https://www.projecteduaccess.com/india/prism-fellowship",
+    "focus": [
+      "biology",
+      "neuroscience",
+      "environmental-science"
+    ],
+    "levels": [
+      "ugrad-3",
+      "ugrad-4"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Bengaluru, India",
+    "lat": 13.0713,
+    "lon": 77.5945,
+    "availability": "summer",
+    "paid": true,
+    "cost": 0,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": false,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "medium",
+    "verified": false,
+    "blurb": "A 2-month residential research fellowship inside NCBS Bangalore labs — genetics, ecology, neurobiology, bioinformatics — built specifically for life-science undergrads facing economic, social, or geographic barriers to a research career. Covers accommodation and a living stipend; the 2026 cohort started in June."
+  },
+  {
+    "id": "bits-pilani-visri",
+    "name": "Visiting Summer Research Internship (ViSRI)",
+    "org": "BITS Pilani",
+    "url": "https://www.bits-pilani.ac.in/careers/summer-research-internship-sri/",
+    "focus": [
+      "engineering",
+      "computer-science"
+    ],
+    "levels": [
+      "ugrad-2",
+      "ugrad-3"
+    ],
+    "mode": "in-person",
+    "locationLabel": "Pilani, India",
+    "lat": 28.367,
+    "lon": 75.5875,
+    "availability": "summer",
+    "paid": true,
+    "cost": null,
+    "stipend": null,
+    "deadline": null,
+    "selectivity": "high",
+    "isDirectory": true,
+    "multiSite": false,
+    "isGrant": false,
+    "confidence": "low",
+    "verified": false,
+    "blurb": "A roughly 8-week summer research placement (late May-mid July) with a BITS Pilani faculty mentor, specifically for students from OTHER institutions. Individual project postings vary by department (recent examples include 3D generative AI work); stipend amount isn't published up front and is confirmed only after selection."
   }
 ]
