@@ -164,7 +164,7 @@ Added baseline security headers via `vercel.json`, applied to every route:
 - `X-Content-Type-Options: nosniff`
 - `X-Frame-Options: DENY` (the site has no legitimate embedding use case; blocks clickjacking)
 - `Referrer-Policy: strict-origin-when-cross-origin`
-- `Permissions-Policy: camera=(), microphone=(), payment=(), usb=(), geolocation=(self)` (geolocation stays enabled — required for the interview's location step)
+- `Permissions-Policy: camera=(), microphone=(self), payment=(), usb=(), geolocation=(self)` (geolocation stays enabled — required for the interview's location step; microphone opened to `self` on 2026-09-12 — the original blanket `microphone=()` predated the voice-interview feature and was silently blocking mic access in every browser, with no prompt ever shown, until this was caught)
 - `Cache-Control: no-store` specifically on `/api/*` responses (auth-adjacent responses shouldn't be cached by intermediaries)
 
 **Could not verify live**: `vercel.json` headers only take effect on an actual Vercel deployment; there is no local equivalent (`vite dev`/`vite preview` don't read this file). **Recommend**: after deploying, run `curl -I https://<your-domain>/` and confirm the headers above are present.
