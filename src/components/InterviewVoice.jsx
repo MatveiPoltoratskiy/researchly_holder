@@ -40,6 +40,22 @@ const VOICE_STEPS = [
 const SpeechRecognitionCtor =
   typeof window !== 'undefined' ? window.SpeechRecognition || window.webkitSpeechRecognition : null
 
+// The Web Speech API's recognition quality varies a lot by regional accent — Chrome ships
+// separate acoustic/language models per locale (en-IN, en-GB, en-AU, en-US, ...), and
+// hardcoding en-US meant every non-American accent (Indian English very much included)
+// was being run through the wrong one. Picks the best-matching English locale from the
+// browser's own language preferences instead: an exact "en-*" preference wins outright;
+// failing that, borrow the region from whatever the top preference is (a browser/OS set to
+// "hi-IN" still gets "en-IN" — a regional English model — rather than defaulting to US).
+function bestEnglishLocale() {
+  if (typeof navigator === 'undefined') return 'en-US'
+  const prefs = (navigator.languages?.length ? navigator.languages : [navigator.language]).filter(Boolean)
+  const englishPref = prefs.find((l) => l.toLowerCase().startsWith('en'))
+  if (englishPref) return englishPref
+  const region = prefs[0]?.split('-')[1]
+  return region ? `en-${region}` : 'en-US'
+}
+
 // How long a question waits after the student stops talking before auto-advancing, and a
 // hard cap per question in case they never pause (or recognition never fires a result at
 // all) so the flow can't get stuck forever on one step.
@@ -113,7 +129,7 @@ export default function InterviewVoice() {
     const recognition = new SpeechRecognitionCtor()
     recognition.continuous = true
     recognition.interimResults = true
-    recognition.lang = 'en-US'
+    recognition.lang = bestEnglishLocale()
     recognition.onresult = (event) => {
       let interim = ''
       for (let i = event.resultIndex; i < event.results.length; i++) {
