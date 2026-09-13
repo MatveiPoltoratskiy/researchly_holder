@@ -1,7 +1,9 @@
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useLocalStorageState } from './storage'
+import { getVisitorId } from './visitorId'
 
 const STORAGE_KEY = 'rsly_saved_opportunities'
+const SYNC_DEBOUNCE_MS = 1500
 
 /** The pipeline a saved opportunity moves through — order matters, used for display. */
 export const SAVE_STATUSES = [
@@ -20,6 +22,56 @@ const SAVE_STATUS_IDS = new Set(SAVE_STATUSES.map((s) => s.id))
  */
 export function useSavedOpportunities() {
   const [savedMap, setSavedMap] = useLocalStorageState(STORAGE_KEY, {})
+  const hasMergedServerCopy = useRef(false)
+  const syncTimerRef = useRef(null)
+
+  // One-time pull on mount: fold in anything the server has for this visitor_id that
+  // isn't already in the local copy (local wins on conflicts — it's the more recent
+  // truth for this browser). This is what makes the "durable" part durable, not just
+  // localStorage, without ever letting a stale server copy clobber fresh local edits.
+  useEffect(() => {
+    const visitorId = getVisitorId()
+    if (!visitorId) return // localStorage unavailable — sync silently skipped
+
+    let cancelled = false
+    fetch(`/api/saved-opportunities?visitorId=${encodeURIComponent(visitorId)}`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (cancelled || !data?.savedMap) return
+        setSavedMap((prev) => {
+          const merged = { ...data.savedMap, ...prev }
+          return merged
+        })
+      })
+      .catch(() => {}) // offline / server hiccup — local copy still works fine on its own
+      .finally(() => {
+        hasMergedServerCopy.current = true
+      })
+
+    return () => {
+      cancelled = true
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // Background sync on every change, debounced — fire-and-forget, never blocks the UI
+  // and never surfaces a failure (the local copy is what every consumer actually reads).
+  useEffect(() => {
+    if (!hasMergedServerCopy.current) return // don't push before the initial merge lands
+    const visitorId = getVisitorId()
+    if (!visitorId) return
+
+    clearTimeout(syncTimerRef.current)
+    syncTimerRef.current = setTimeout(() => {
+      fetch('/api/saved-opportunities', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ visitorId, savedMap }),
+      }).catch(() => {})
+    }, SYNC_DEBOUNCE_MS)
+
+    return () => clearTimeout(syncTimerRef.current)
+  }, [savedMap])
 
   const save = useCallback(
     (id, status = DEFAULT_SAVE_STATUS) => {
