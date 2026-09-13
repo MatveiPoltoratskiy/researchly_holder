@@ -3324,11 +3324,7 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
    stretching to the shared 1120px interview width, with generous breathing room ("a few
    cm") on every side rather than sitting flush against the viewport edges */
 .interview-container--compact{ max-width:600px; }
-.voice-card--idle{
-  flex:none; width:auto; align-self:center; padding:48px 40px;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-}
+.voice-card--idle{ flex:none; width:auto; align-self:center; padding:48px 40px; }
 
 /* short viewports: this page is position:fixed/overflow:hidden (see the fixed-page-overlay-
    clipping note wherever this codebase discusses /interview-voice), so anything taller than
