@@ -3242,7 +3242,11 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 .voice-skip-pill svg{ color:inherit; }
 
 /* ---------- guided voice question flow: step dots + question + recording panel ---------- */
-.voice-question{ gap:16px; width:100%; max-width:520px; }
+/* .interview-card has no align-items set (defaults to stretch), and this element's own
+   max-width clamps its stretched width down — flexbox then leaves it flush to the
+   cross-start (left) edge instead of centering it in the leftover space. margin:0 auto is
+   the standard fix: it's respected as centering on a flex item along the cross axis. */
+.voice-question{ gap:16px; width:100%; max-width:520px; margin:0 auto; }
 
 .voice-steps{ display:flex; align-items:center; justify-content:center; }
 .voice-step-track{ display:flex; align-items:center; }
