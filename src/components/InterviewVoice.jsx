@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from '../lib/router'
-import { FIELD_BY_ID } from '../data/fields'
-import { LEVEL_GROUPS, EXPERIENCE_LEVELS, PAID_PREFS, OPP_TYPES } from './Interview'
 import { parseSpokenAnswers } from '../lib/parseSpokenAnswers'
 import { setVoiceAnswers } from '../lib/voiceInterviewHandoff'
 import VoiceWaveBackground from './VoiceWaveBackground'
@@ -34,15 +32,6 @@ const SpeechRecognitionCtor =
 const SILENCE_ADVANCE_MS = 1500
 const MAX_QUESTION_MS = 20000
 
-const MONTH_NAMES = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December',
-]
-
-const LEVEL_LABEL_BY_ID = Object.fromEntries(
-  LEVEL_GROUPS.flatMap((g) => g.items.map((item) => [item.id, `${g.label} · ${item.label}`]))
-)
-
 const EMPTY_ANSWERS = parseSpokenAnswers('')
 
 // Each question's transcript is parsed independently (same free-form parser, just handed a
@@ -64,51 +53,19 @@ function mergeAnswers(base, patch) {
   }
 }
 
-// `new Date("2027-06-01")` parses as UTC midnight, which reads back as May 31st in any
-// timezone behind UTC — the same footgun Interview.jsx's own fromISODate avoids. Split
-// the string manually instead of trusting the Date constructor with a bare ISO string.
-function fromISODate(s) {
-  const [y, m, day] = s.split('-').map(Number)
-  return new Date(y, m - 1, day)
-}
-
-// Turns the parsed answers into a short list of plain-English chips for the recap
-// screen — so a student sees exactly what got caught before committing to it, instead
-// of the parse just silently steering the rest of the quiz.
-function describeAnswers(a) {
-  const chips = []
-  if (a.field) chips.push(FIELD_BY_ID[a.field]?.label || a.field)
-  if (a.subfocus?.length) {
-    const field = FIELD_BY_ID[a.field]
-    const labels = field?.subfocus?.filter((sf) => a.subfocus.includes(sf.id)).map((sf) => sf.label)
-    if (labels?.length) chips.push(labels.join(', '))
-  }
-  if (a.oppType?.length) {
-    chips.push(OPP_TYPES.filter((t) => a.oppType.includes(t.id)).map((t) => t.label).join(', '))
-  }
-  if (a.level) chips.push(LEVEL_LABEL_BY_ID[a.level] || a.level)
-  if (a.remoteOnly) chips.push('Remote only')
-  else if (a.location) chips.push(a.location)
-  if (a.experience) chips.push(EXPERIENCE_LEVELS.find((l) => l.id === a.experience)?.label)
-  if (a.applyStart) {
-    const d = fromISODate(a.applyStart)
-    chips.push(`${MONTH_NAMES[d.getMonth()]} ${d.getFullYear()}`)
-  }
-  if (a.paidPref) chips.push(PAID_PREFS.find((p) => p.id === a.paidPref)?.label)
-  return chips.filter(Boolean)
-}
-
 export default function InterviewVoice() {
   const { navigate } = useRouter()
-  // idle | question | analyzing | recap | unsupported
+  // idle | question | analyzing | unsupported
+  // (no "recap" screen — as little friction as possible, straight into /interview once
+  // the last question's silence-timer or hard cap fires)
   const [status, setStatus] = useState(SpeechRecognitionCtor ? 'idle' : 'unsupported')
   const [stepIndex, setStepIndex] = useState(0)
   const [interimText, setInterimText] = useState('')
   const [finalText, setFinalText] = useState('')
   const [micDenied, setMicDenied] = useState(false)
-  const [answers, setAnswers] = useState(EMPTY_ANSWERS)
 
   const recognitionRef = useRef(null)
+  const answersRef = useRef(EMPTY_ANSWERS)
   const stepFinalRef = useRef('')
   const interimRef = useRef('')
   const hasSpeechRef = useRef(false)
@@ -168,7 +125,7 @@ export default function InterviewVoice() {
       return
     }
     setMicDenied(false)
-    setAnswers(EMPTY_ANSWERS)
+    answersRef.current = EMPTY_ANSWERS
     setStepIndex(0)
     setStatus('question')
     try {
@@ -209,23 +166,26 @@ export default function InterviewVoice() {
   function completeStep() {
     const stepText = (stepFinalRef.current || interimRef.current).trim()
     const parsed = parseSpokenAnswers(stepText)
-    setAnswers((prev) => {
-      const merged = mergeAnswers(prev, parsed)
-      if (stepIndex + 1 >= VOICE_STEPS.length) {
-        try {
-          recognitionRef.current?.stop()
-        } catch {
-          // already stopped
-        }
-        setStatus('analyzing')
-        // a short, deliberate pause rather than an instant jump — matches the loading beat
-        // every other transition in this app has, even though the parse itself is instant
-        setTimeout(() => setStatus('recap'), 700)
-      } else {
-        setStepIndex(stepIndex + 1)
+    const merged = mergeAnswers(answersRef.current, parsed)
+    answersRef.current = merged
+    if (stepIndex + 1 >= VOICE_STEPS.length) {
+      try {
+        recognitionRef.current?.stop()
+      } catch {
+        // already stopped
       }
-      return merged
-    })
+      setStatus('analyzing')
+      // a short, deliberate pause (matches the loading beat every other transition in
+      // this app has, even though the parse itself is instant), then straight into the
+      // guided interview — no confirmation screen/extra tap in between, as little
+      // friction as possible
+      setTimeout(() => {
+        setVoiceAnswers(merged)
+        navigate('/interview')
+      }, 700)
+    } else {
+      setStepIndex(stepIndex + 1)
+    }
   }
 
   function triggerAdvance() {
@@ -264,13 +224,7 @@ export default function InterviewVoice() {
       })
   }, [])
 
-  function handleContinue() {
-    setVoiceAnswers(answers)
-    navigate('/interview')
-  }
-
   const liveTranscript = [finalText, interimText].filter(Boolean).join(' ').trim()
-  const chips = describeAnswers(answers)
   const currentStep = VOICE_STEPS[stepIndex]
 
   return (
@@ -420,33 +374,6 @@ export default function InterviewVoice() {
             <div className="voice-center">
               <span className="voice-analyzing-spinner" aria-hidden="true" />
               <h1 className="interview-question">Turning that into your interview…</h1>
-            </div>
-          )}
-
-          {status === 'recap' && (
-            <div className="voice-center">
-              <div className="voice-icon-badge">
-                <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-check" /></svg>
-              </div>
-              <h1 className="interview-question">
-                {chips.length ? "Here's what we picked up" : "We didn't catch much"}
-              </h1>
-              <p className="interview-subtext">
-                {chips.length
-                  ? "We'll skip straight past these and ask about anything we missed."
-                  : "No worries, let's fill it in together, one question at a time."}
-              </p>
-              {chips.length > 0 && (
-                <div className="voice-chip-row">
-                  {chips.map((chip, i) => (
-                    <span className="voice-chip" key={i}>{chip}</span>
-                  ))}
-                </div>
-              )}
-              <button type="button" className="interview-continue-btn" onClick={handleContinue}>
-                Continue
-                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow" /></svg>
-              </button>
             </div>
           )}
         </div>
