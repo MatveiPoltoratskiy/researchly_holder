@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from '../lib/router'
 import { parseSpokenAnswers } from '../lib/parseSpokenAnswers'
-import { setVoiceAnswers } from '../lib/voiceInterviewHandoff'
+import { explorerHandoffFromAnswers } from '../lib/matchOpportunities'
+import { setInterviewFilters } from '../lib/interviewHandoff'
+import { markInterviewDone } from '../lib/activityTracking'
 import VoiceWaveBackground from './VoiceWaveBackground'
 
 // Same order as VOICE_STEPS below (the idle screen's promise) so the guided voice flow
@@ -223,12 +225,15 @@ export default function InterviewVoice() {
     if (stepIndex + 1 >= VOICE_STEPS.length) {
       setStatus('analyzing')
       // a short, deliberate pause (matches the loading beat every other transition in
-      // this app has, even though the parse itself is instant), then straight into the
-      // guided interview — no confirmation screen/extra tap in between, as little
-      // friction as possible
+      // this app has, even though the parse itself is instant), then straight to the
+      // opportunities finder — voice already asked everything the guided quiz would, so
+      // there's no quiz (or even a "here's what we picked up" preview) left to show,
+      // just the same filters/answers handoff Interview.jsx hands the explorer when a
+      // student finishes it normally
       setTimeout(() => {
-        setVoiceAnswers(merged)
-        navigate('/interview')
+        markInterviewDone()
+        setInterviewFilters(explorerHandoffFromAnswers(merged))
+        navigate('/opportunities')
       }, 700)
     } else {
       setStepIndex(stepIndex + 1)
@@ -315,10 +320,16 @@ export default function InterviewVoice() {
 
           {status === 'idle' && (
             <div className="voice-center voice-hero">
-              <div className="voice-mascot-stage">
-                <span className="voice-mascot-shadow" aria-hidden="true" />
-                <div className="voice-mascot-figure">
-                  <img src="/assets/mascot-straight.png" alt="Researchly" />
+              <div className="voice-question-header">
+                <div className="voice-speech-bubble">
+                  <p className="voice-speech-title">Click when you're ready, or just speak your mind!</p>
+                  <span className="voice-speech-tail" aria-hidden="true" />
+                </div>
+                <div className="voice-mascot-stage">
+                  <span className="voice-mascot-shadow" aria-hidden="true" />
+                  <div className="voice-mascot-figure">
+                    <img src="/assets/mascot-straight.png" alt="Researchly" />
+                  </div>
                 </div>
               </div>
 

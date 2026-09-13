@@ -3173,7 +3173,7 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
    One even gap governs the whole vertical rhythm (mascot -> board -> button -> hint ->
    skip link) — no per-element margin overrides fighting it. */
 .voice-hero{ gap:26px; }
-.voice-mascot-stage{ position:relative; width:400px; height:400px; }
+.voice-mascot-stage{ position:relative; width:260px; height:260px; }
 .voice-mascot-figure{
   width:100%; height:100%;
   animation: mascot-in .9s cubic-bezier(.22,.85,.32,1.05) both, mascot-bob 3.8s ease-in-out .9s infinite;

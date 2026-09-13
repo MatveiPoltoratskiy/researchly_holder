@@ -3,9 +3,8 @@ import { useRouter } from '../lib/router'
 import { FIELDS, FIELD_BY_ID } from '../data/fields'
 import { searchCities } from '../data/worldCities'
 import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
-import { getTopMatches, FIELD_TO_FOCUS } from '../lib/matchOpportunities'
+import { getTopMatches, explorerHandoffFromAnswers } from '../lib/matchOpportunities'
 import { setInterviewFilters } from '../lib/interviewHandoff'
-import { consumeVoiceAnswers } from '../lib/voiceInterviewHandoff'
 import { markInterviewDone } from '../lib/activityTracking'
 import { burstConfetti } from '../lib/confetti'
 import Glyph from './InterviewIcons'
@@ -147,23 +146,6 @@ const DEFAULT_ANSWERS = {
   paidPref: null,
 }
 
-// Used to land a voice-prefilled interview on the first question that's still actually
-// unanswered, skipping past whatever the speech parser already caught, rather than
-// silently re-asking (or worse, replaying) something the student already said. Returns
-// TOTAL_STEPS + 1 when every step is already filled, which the caller treats as "skip
-// the quiz entirely and go straight to the loading/matches phase."
-function computeStartStep(answers) {
-  if (!answers.field) return 1
-  if (hasSubfocus(answers.field) && answers.subfocus.length === 0) return 2
-  if (answers.oppType.length === 0) return 3
-  if (!answers.level) return 4
-  if (!answers.remoteOnly && !answers.location.trim()) return 5
-  if (!answers.experience) return 6
-  if (!answers.applyStart) return 7
-  if (!answers.paidPref) return 8
-  return TOTAL_STEPS + 1
-}
-
 // ---- small local date helpers for the Timeline step — no timezone library, everything
 // stays in the browser's local calendar month (a student picking "June" means their own
 // June, never a UTC-shifted neighbor) ----
@@ -218,34 +200,6 @@ function MonthPicker({ selectedStartISO, onSelect }) {
       })}
     </div>
   )
-}
-
-// translates interview answers into the explorer's own filter shape (a subset of its
-// four live focus tags, a level bucket, a cost bucket, and known coordinates) — reuses
-// the same field mapping matchOpportunities.js scores against, so the pre-filtered list
-// and the ranked matches the student just saw agree with each other
-function explorerFiltersFromAnswers(answers) {
-  const mappedFocus = answers.field ? FIELD_TO_FOCUS[answers.field] : null
-  const level = answers.level?.startsWith('hs') ? 'hs' : answers.level?.startsWith('ugrad') ? 'undergrad' : 'all'
-  return {
-    focus: mappedFocus ? [mappedFocus] : null,
-    level,
-    // "free to attend" and "paid only" are answers to the SAME interview question but
-    // map to two different data fields (o.cost vs o.paid — whether it costs the student
-    // money to attend is unrelated to whether the program pays them a stipend), so they
-    // seed two different explorer filters rather than one.
-    cost: answers.paidPref === 'free-to-attend' ? ['free'] : [],
-    stipendOnly: answers.paidPref === 'paid-only',
-    locationCoords: answers.remoteOnly ? null : answers.locationCoords || null,
-  }
-}
-
-// wraps explorerFiltersFromAnswers plus the raw answers themselves — the explorer needs
-// the derived filters for its initial checkbox/level/cost state, but needs the full
-// answers object (field/oppType/paidPref/etc, not just the trimmed-down filter shape) to
-// compute a real per-card match % via scoreOpportunity when a listing is opened
-function explorerHandoffFromAnswers(answers) {
-  return { filters: explorerFiltersFromAnswers(answers), answers }
 }
 
 // the trailing selection indicator for both row types below — a plain ring when
@@ -313,31 +267,18 @@ function NumberRow({ num, label, desc, color, selected, onClick }) {
 
 export default function Interview() {
   const { navigate } = useRouter()
-  // consumed at most once, ever, per mount — see voiceInterviewHandoff.js. A guarded ref
-  // assignment (not a hook) so it survives StrictMode's double-render without eating a
-  // second, wasted consume that would otherwise silently wipe the parsed answers.
-  const voiceAnswersRef = useRef(undefined)
-  if (voiceAnswersRef.current === undefined) voiceAnswersRef.current = consumeVoiceAnswers()
-  const voiceAnswers = voiceAnswersRef.current
 
-  const initialAnswers = voiceAnswers ? { ...DEFAULT_ANSWERS, ...voiceAnswers } : DEFAULT_ANSWERS
-  const initialStep = voiceAnswers ? computeStartStep(initialAnswers) : 1
-
-  const [step, setStep] = useState(initialStep > TOTAL_STEPS ? 1 : initialStep)
-  const [answers, setAnswers] = useState(initialAnswers)
+  const [step, setStep] = useState(1)
+  const [answers, setAnswers] = useState(DEFAULT_ANSWERS)
   const [locationStatus, setLocationStatus] = useState('idle') // idle | loading | granted | denied | unsupported
-  const [locationConfirmed, setLocationConfirmed] = useState(
-    !!(initialAnswers.remoteOnly || initialAnswers.location.trim())
-  )
+  const [locationConfirmed, setLocationConfirmed] = useState(false)
   const [locationTooSpecific, setLocationTooSpecific] = useState(false)
   const [suggestions, setSuggestions] = useState([])
   const [showSuggestions, setShowSuggestions] = useState(false)
   // a single enum instead of two booleans — 'loading' and 'matches' being separate
   // flags meant nothing prevented both being true (or "loading" staying stuck true
   // forever once set, since nothing ever reset it back to false) at once
-  // every step already answered from voice — skip the quiz entirely and go straight to
-  // the same loading/matches transition the last question normally hands off to
-  const [phase, setPhase] = useState(initialStep > TOTAL_STEPS ? 'loading' : 'quiz') // quiz | loading | matches
+  const [phase, setPhase] = useState('quiz') // quiz | loading | matches
 
   const locationCheckRef = useRef(null)
   const advanceTimerRef = useRef(null)

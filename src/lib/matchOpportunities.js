@@ -257,3 +257,34 @@ export function getTopMatches(opportunities, answers, limit = 3) {
     return { ...o, matchPct: Math.round(93 + norm * 6) }
   })
 }
+
+// translates interview (or voice) answers into the explorer's own filter shape (a subset
+// of its four live focus tags, a level bucket, a cost bucket, and known coordinates) —
+// reuses the same field mapping this file scores matches against, so the pre-filtered
+// list and whatever ranked matches the student saw agree with each other. Shared by
+// Interview.jsx (finishing the guided quiz) and InterviewVoice.jsx (finishing voice) —
+// both hand a full/best-effort answers object off to the opportunities explorer the same
+// way, so there's exactly one place that knows how an answers object becomes filters.
+export function explorerFiltersFromAnswers(answers) {
+  const mappedFocus = answers.field ? FIELD_TO_FOCUS[answers.field] : null
+  const level = answers.level?.startsWith('hs') ? 'hs' : answers.level?.startsWith('ugrad') ? 'undergrad' : 'all'
+  return {
+    focus: mappedFocus ? [mappedFocus] : null,
+    level,
+    // "free to attend" and "paid only" are answers to the SAME interview question but
+    // map to two different data fields (o.cost vs o.paid — whether it costs the student
+    // money to attend is unrelated to whether the program pays them a stipend), so they
+    // seed two different explorer filters rather than one.
+    cost: answers.paidPref === 'free-to-attend' ? ['free'] : [],
+    stipendOnly: answers.paidPref === 'paid-only',
+    locationCoords: answers.remoteOnly ? null : answers.locationCoords || null,
+  }
+}
+
+// wraps explorerFiltersFromAnswers plus the raw answers themselves — the explorer needs
+// the derived filters for its initial checkbox/level/cost state, but needs the full
+// answers object (field/oppType/paidPref/etc, not just the trimmed-down filter shape) to
+// compute a real per-card match % via scoreOpportunity when a listing is opened
+export function explorerHandoffFromAnswers(answers) {
+  return { filters: explorerFiltersFromAnswers(answers), answers }
+}
