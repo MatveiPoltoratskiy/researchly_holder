@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from '../lib/router'
 import { parseSpokenAnswers } from '../lib/parseSpokenAnswers'
-import { explorerHandoffFromAnswers } from '../lib/matchOpportunities'
+import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
+import { getTopMatches, explorerHandoffFromAnswers } from '../lib/matchOpportunities'
 import { setInterviewFilters } from '../lib/interviewHandoff'
 import { markInterviewDone } from '../lib/activityTracking'
+import InterviewLoading from './InterviewLoading'
+import InterviewMatches from './InterviewMatches'
 import VoiceWaveBackground from './VoiceWaveBackground'
 
 // Same order as VOICE_STEPS below (the idle screen's promise) so the guided voice flow
@@ -77,11 +80,13 @@ function mergeAnswers(base, patch) {
 
 export default function InterviewVoice() {
   const { navigate } = useRouter()
-  // idle | ready | listening | analyzing | unsupported
+  // idle | ready | listening | loading | matches | unsupported
   // "ready": the question is shown, mic isn't capturing yet — read it, then tap "Ready?"
   // "listening": actually recording this question's answer, with "Next" as a manual override
-  // (no "recap" screen — as little friction as possible, straight into /interview once
-  // the last question's silence-timer or hard cap fires)
+  // "loading"/"matches" reuse the exact same InterviewLoading/InterviewMatches components
+  // Interview.jsx shows when the guided quiz finishes normally — voice already asked
+  // everything the quiz would, so there's no quiz screen here, just the same finishing
+  // beat and curated shortlist, computed from what voice actually captured.
   const [status, setStatus] = useState(SpeechRecognitionCtor ? 'idle' : 'unsupported')
   const [stepIndex, setStepIndex] = useState(0)
   const [interimText, setInterimText] = useState('')
@@ -223,18 +228,7 @@ export default function InterviewVoice() {
       // already stopped
     }
     if (stepIndex + 1 >= VOICE_STEPS.length) {
-      setStatus('analyzing')
-      // a short, deliberate pause (matches the loading beat every other transition in
-      // this app has, even though the parse itself is instant), then straight to the
-      // opportunities finder — voice already asked everything the guided quiz would, so
-      // there's no quiz (or even a "here's what we picked up" preview) left to show,
-      // just the same filters/answers handoff Interview.jsx hands the explorer when a
-      // student finishes it normally
-      setTimeout(() => {
-        markInterviewDone()
-        setInterviewFilters(explorerHandoffFromAnswers(merged))
-        navigate('/opportunities')
-      }, 700)
+      setStatus('loading')
     } else {
       setStepIndex(stepIndex + 1)
       setStatus('ready')
@@ -279,6 +273,25 @@ export default function InterviewVoice() {
 
   const liveTranscript = [finalText, interimText].filter(Boolean).join(' ').trim()
   const currentStep = VOICE_STEPS[stepIndex]
+
+  if (status === 'loading') {
+    return <InterviewLoading onDone={() => { markInterviewDone(); setStatus('matches') }} />
+  }
+
+  if (status === 'matches') {
+    // computed once, right when this phase is entered — same pattern Interview.jsx uses
+    // when the guided quiz finishes normally
+    const matches = getTopMatches(CANADA_OPPORTUNITIES, answersRef.current, 8)
+    return (
+      <InterviewMatches
+        matches={matches}
+        onContinue={() => {
+          setInterviewFilters(explorerHandoffFromAnswers(answersRef.current))
+          navigate('/opportunities')
+        }}
+      />
+    )
+  }
 
   return (
     <section className="interview-page voice-page">
@@ -471,12 +484,6 @@ export default function InterviewVoice() {
             </div>
           )}
 
-          {status === 'analyzing' && (
-            <div className="voice-center">
-              <span className="voice-analyzing-spinner" aria-hidden="true" />
-              <h1 className="interview-question">Turning that into your interview…</h1>
-            </div>
-          )}
         </div>
       </div>
     </section>

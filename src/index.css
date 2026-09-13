@@ -3119,12 +3119,6 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 
 .voice-error{ font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:700; color:var(--cover-dark); max-width:420px; }
 
-.voice-analyzing-spinner{
-  width:40px; height:40px; border-radius:999px; margin-bottom:4px;
-  border:3px solid rgba(30,37,64,.15); border-top-color:var(--cover);
-  animation:interview-spin .7s linear infinite;
-}
-
 /* small corner logo lockup, distinct from the bottom-left "Home" pill — this page has no
    marketing nav (no How it works/Features/Contact links, this isn't the homepage), just
    the brand mark so a student always knows whose voice they're talking to */
@@ -3376,7 +3370,6 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 }
 
 @media (prefers-reduced-motion: reduce){
-  .voice-analyzing-spinner{ animation:none; }
   .voice-start-ring{ animation:none; opacity:0; }
   .voice-record-mic, .voice-record-dot{ animation:none; }
   .voice-mascot-figure, .voice-mascot-shadow,
