@@ -3171,6 +3171,47 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 }
 @media (max-width:600px){ .voice-brand{ left:14px; top:14px; } .voice-brand span{ display:none; } }
 
+/* ---------- ambient warm-lit desk scene behind the voice card ----------
+   Deliberately not the sky/mountains a reference mockup used — this brand avoids sky/cloud
+   imagery, so "more enthusiastic" is done instead with a warm gold glow (the brand guide's
+   "warm lighting") plus the prop-books/prop-plant desk props (already in IconSprite, unused
+   until now), softly blurred like the guide's "blurred bookshelves" suggestion, and a few
+   drifting deco-page shapes for the guide's "floating pages" option. Sits at z-index:0,
+   behind .interview-container's z-index:1, inside .interview-page's own overflow:hidden. */
+.voice-scene{ position:absolute; inset:0; z-index:0; overflow:hidden; }
+.voice-scene-glow{
+  position:absolute; left:50%; top:34%; width:min(900px,90vw); height:min(900px,90vw);
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle, rgba(217,164,65,.4) 0%, rgba(242,145,90,.22) 42%, transparent 72%);
+  filter:blur(30px);
+  animation: voice-glow-breathe 7s ease-in-out infinite;
+}
+@keyframes voice-glow-breathe{
+  0%,100%{ opacity:.85; transform:translate(-50%,-50%) scale(1); }
+  50%{ opacity:1; transform:translate(-50%,-50%) scale(1.06); }
+}
+.voice-scene-books{
+  position:absolute; left:-36px; bottom:-26px; width:240px; height:auto; opacity:.5; filter:blur(1.6px);
+}
+.voice-scene-plant{
+  position:absolute; right:-16px; bottom:-18px; width:160px; height:auto; opacity:.55; filter:blur(1.6px);
+}
+.voice-scene-page{
+  position:absolute; width:40px; height:auto; opacity:.32; filter:blur(.4px);
+  animation: voice-page-drift 11s ease-in-out infinite;
+}
+.voice-scene-page--a{ left:9%; top:18%; animation-duration:12s; }
+.voice-scene-page--b{ right:12%; top:14%; width:32px; animation-duration:9.5s; animation-delay:-3s; transform:rotate(8deg); }
+.voice-scene-page--c{ left:16%; bottom:14%; width:30px; animation-duration:13.5s; animation-delay:-6s; transform:rotate(-6deg); }
+@keyframes voice-page-drift{
+  0%,100%{ transform:translateY(0) rotate(-4deg); }
+  50%{ transform:translateY(-16px) rotate(4deg); }
+}
+@media (max-width:760px){ .voice-scene-books, .voice-scene-plant{ width:150px; opacity:.4; } .voice-scene-page{ display:none; } }
+@media (prefers-reduced-motion: reduce){
+  .voice-scene-glow, .voice-scene-page{ animation:none; }
+}
+
 /* ---------- idle screen: mascot + speech bubble + "Start talking" hero ----------
    Reuses the exact mascot-in/mascot-bob choreography from .hero-mascot (RoadmapPreview) —
    jiggle-and-settle entrance, then a slow continuous bob — so this reads as the same

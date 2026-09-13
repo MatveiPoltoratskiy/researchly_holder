@@ -188,6 +188,19 @@ export default function InterviewVoice() {
 
   return (
     <section className="interview-page voice-page">
+      {/* warm-lit desk scene, not the mockup's sky/mountains — this brand avoids sky/cloud
+          imagery, so the "more enthusiastic background" ask is met with a warm glow plus
+          the existing (previously unused) prop-books/prop-plant desk props instead, blurred
+          into the background like the brand guide's "blurred bookshelves" suggestion */}
+      <div className="voice-scene" aria-hidden="true">
+        <span className="voice-scene-glow" />
+        <svg className="voice-scene-books" viewBox="0 0 210 150"><use href="#prop-books" /></svg>
+        <svg className="voice-scene-plant" viewBox="0 0 130 160"><use href="#prop-plant" /></svg>
+        <svg className="voice-scene-page voice-scene-page--a" viewBox="0 0 40 52"><use href="#deco-page" /></svg>
+        <svg className="voice-scene-page voice-scene-page--b" viewBox="0 0 40 52"><use href="#deco-page" /></svg>
+        <svg className="voice-scene-page voice-scene-page--c" viewBox="0 0 40 52"><use href="#deco-page" /></svg>
+      </div>
+
       <button type="button" className="voice-brand" onClick={() => navigate('/')} aria-label="Researchly home">
         <img src="/assets/mascot-logo.png" alt="" />
         <span>Researchly</span>

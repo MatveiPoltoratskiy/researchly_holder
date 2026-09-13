@@ -137,6 +137,15 @@ export default function IconSprite() {
             <circle cx="120" cy="65" r="4" /><circle cx="60" cy="75" r="4" /><circle cx="95" cy="90" r="4" />
           </g>
         </symbol>
+        {/* a single loose page, corner turned up — used floating/drifting in ambient
+            backgrounds (e.g. the voice interview page) as the brand guide's "floating
+            pages" alternative to sky/cloud imagery */}
+        <symbol id="deco-page" viewBox="0 0 40 52">
+          <path d="M2 2h30l6 6v42H2Z" fill="var(--pages)" stroke="var(--card-border)" strokeWidth="1.4" strokeLinejoin="round" />
+          <path d="M32 2v6h6Z" fill="var(--pages-shadow)" />
+          <path d="M8 16h20M8 24h24M8 32h24M8 40h16" stroke="var(--card-border)" strokeWidth="1.6" strokeLinecap="round" />
+        </symbol>
+
         {/* scene pieces */}
         <symbol id="scene-pin" viewBox="0 0 24 32">
           <path d="M12 1c6 0 10 4.6 10 10.2C22 18.6 12 31 12 31S2 18.6 2 11.2C2 5.6 6 1 12 1Z" fill="var(--pin-fill,#fff)" stroke="var(--pin-stroke,#A94F1E)" strokeWidth="1.8" />
