@@ -400,6 +400,17 @@ export default function InterviewVoice() {
 
               {status === 'listening' && (
                 <>
+                  <div className="voice-timer-pill">
+                    <span className="voice-timer-clock">{formatSeconds(remaining)}</span>
+                    <div className="voice-timer-track" aria-hidden="true">
+                      <div
+                        className="voice-timer-fill"
+                        style={{ width: `${Math.max(0, Math.min(100, (remaining / TOTAL_SECONDS) * 100))}%` }}
+                      />
+                    </div>
+                    <span className="voice-timer-label">left</span>
+                  </div>
+
                   <div className="voice-record-panel">
                     <div className="voice-record-status">
                       <span className="voice-record-mic">
@@ -412,7 +423,6 @@ export default function InterviewVoice() {
                         <span className="voice-record-dot" aria-hidden="true" />
                         Listening
                       </span>
-                      <span className="voice-record-time">{formatSeconds(remaining)} left</span>
                     </div>
                     <div className="voice-record-transcript" aria-live="polite">
                       {liveTranscript || (
