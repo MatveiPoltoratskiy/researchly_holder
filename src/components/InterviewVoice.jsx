@@ -4,6 +4,15 @@ import { FIELD_BY_ID } from '../data/fields'
 import { LEVEL_GROUPS, EXPERIENCE_LEVELS, PAID_PREFS, OPP_TYPES } from './Interview'
 import { parseSpokenAnswers } from '../lib/parseSpokenAnswers'
 import { setVoiceAnswers } from '../lib/voiceInterviewHandoff'
+import SymbolField from './SymbolField'
+
+const BOARD_TOPICS = [
+  { icon: 'icon-compass', label: 'Interests' },
+  { icon: 'icon-grad-cap', label: 'Grade' },
+  { icon: 'icon-pin', label: 'Location' },
+  { icon: 'icon-calendar', label: 'Timing' },
+  { icon: 'icon-dollar', label: 'Paid?' },
+]
 
 const SpeechRecognitionCtor =
   typeof window !== 'undefined' ? window.SpeechRecognition || window.webkitSpeechRecognition : null
@@ -200,6 +209,15 @@ export default function InterviewVoice() {
         <svg className="voice-scene-page voice-scene-page--b" viewBox="0 0 40 52"><use href="#deco-page" /></svg>
         <svg className="voice-scene-page voice-scene-page--c" viewBox="0 0 40 52"><use href="#deco-page" /></svg>
       </div>
+      <div className="interview-symbol-field" aria-hidden="true">
+        <SymbolField
+          rows={6}
+          cols={12}
+          opacityRange={[0.1, 0.16]}
+          fontSizeRange={[15, 24]}
+          colors={['var(--symbol-tan)', 'var(--cover-dark)', 'var(--ribbon)', 'var(--navy)', 'var(--gold)']}
+        />
+      </div>
 
       <button type="button" className="voice-brand" onClick={() => navigate('/')} aria-label="Researchly home">
         <img src="/assets/mascot-logo.png" alt="" />
@@ -220,7 +238,7 @@ export default function InterviewVoice() {
               </span>
               <h1 className="interview-question">Voice isn't available here</h1>
               <p className="interview-subtext">
-                Voice input needs Chrome or Edge. Take the guided interview instead — it only takes about a minute.
+                Voice input needs Chrome or Edge. Take the guided interview instead, it only takes about a minute.
               </p>
               <button type="button" className="interview-continue-btn" onClick={() => navigate('/interview')}>
                 Start the guided interview
@@ -236,27 +254,33 @@ export default function InterviewVoice() {
                 <div className="voice-mascot-figure">
                   <img src="/assets/mascot-logo.png" alt="" />
                 </div>
-                <span className="voice-mascot-callout" aria-hidden="true">Ask me anything!</span>
               </div>
 
-              <div className="voice-bubble">
-                <span className="voice-bubble-tail" aria-hidden="true" />
-                <p className="voice-bubble-lead">
-                  Hi! I'm <span className="voice-bubble-brand">Researchly</span> — your AI research companion.
-                </p>
-                <p className="voice-bubble-sub">
-                  Talk for about a minute about your interests, grade, location, timing, and whether it
-                  needs to pay. We'll turn it into your interview automatically.
-                </p>
+              <h1 className="voice-hero-title">
+                Hi, I'm <span className="voice-hero-brand">Researchly</span>.
+                <br />Your AI research companion.
+              </h1>
+
+              <div className="voice-board">
+                <span className="voice-board-label">What I'll ask about</span>
+                <div className="voice-board-grid">
+                  {BOARD_TOPICS.map((t) => (
+                    <div className="voice-board-item" key={t.label}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href={`#${t.icon}`} /></svg>
+                      <span>{t.label}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <button type="button" className="voice-start-btn" onClick={handleStart}>
+                <span className="voice-start-ring" aria-hidden="true" />
                 <span className="voice-start-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-mic" /></svg>
+                  <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-mic" /></svg>
                 </span>
                 Start talking
                 <span className="voice-start-wave" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24"><use href="#icon-waveform" /></svg>
+                  <svg width="22" height="22" viewBox="0 0 24 24"><use href="#icon-waveform" /></svg>
                 </span>
               </button>
               <p className="voice-start-hint">Your microphone is used only to build your roadmap.</p>
@@ -271,45 +295,6 @@ export default function InterviewVoice() {
                 Prefer typing? Take the guided interview instead
                 <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow" /></svg>
               </button>
-
-              <div className="voice-feature-strip">
-                <div className="voice-feature">
-                  <span className="voice-feature-icon voice-feature-icon--a">
-                    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-search" /></svg>
-                  </span>
-                  <div>
-                    <strong>Find opportunities</strong>
-                    <p>Research, internships, programs.</p>
-                  </div>
-                </div>
-                <div className="voice-feature">
-                  <span className="voice-feature-icon voice-feature-icon--b">
-                    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-grad-cap" /></svg>
-                  </span>
-                  <div>
-                    <strong>Get matched</strong>
-                    <p>AI tailored to your goals.</p>
-                  </div>
-                </div>
-                <div className="voice-feature">
-                  <span className="voice-feature-icon voice-feature-icon--c">
-                    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-compass" /></svg>
-                  </span>
-                  <div>
-                    <strong>Build your future</strong>
-                    <p>Make informed decisions.</p>
-                  </div>
-                </div>
-                <div className="voice-feature">
-                  <span className="voice-feature-icon voice-feature-icon--d">
-                    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-people" /></svg>
-                  </span>
-                  <div>
-                    <strong>For high schoolers + undergrads</strong>
-                    <p>All in one place.</p>
-                  </div>
-                </div>
-              </div>
             </div>
           )}
 
@@ -329,7 +314,7 @@ export default function InterviewVoice() {
               <div className="voice-transcript" aria-live="polite">
                 {liveTranscript || (
                   <span className="voice-transcript-placeholder">
-                    {status === 'listening' ? "We're listening — go ahead." : 'Nothing caught yet.'}
+                    {status === 'listening' ? "We're listening, go ahead." : 'Nothing caught yet.'}
                   </span>
                 )}
               </div>
@@ -368,7 +353,7 @@ export default function InterviewVoice() {
               <p className="interview-subtext">
                 {chips.length
                   ? "We'll skip straight past these and ask about anything we missed."
-                  : "No worries — let's fill it in together, one question at a time."}
+                  : "No worries, let's fill it in together, one question at a time."}
               </p>
               {chips.length > 0 && (
                 <div className="voice-chip-row">
