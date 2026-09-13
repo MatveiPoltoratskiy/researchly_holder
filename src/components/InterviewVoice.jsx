@@ -4,7 +4,7 @@ import { FIELD_BY_ID } from '../data/fields'
 import { LEVEL_GROUPS, EXPERIENCE_LEVELS, PAID_PREFS, OPP_TYPES } from './Interview'
 import { parseSpokenAnswers } from '../lib/parseSpokenAnswers'
 import { setVoiceAnswers } from '../lib/voiceInterviewHandoff'
-import SymbolField from './SymbolField'
+import VoiceWaveBackground from './VoiceWaveBackground'
 
 const BOARD_TOPICS = [
   { icon: 'icon-compass', label: 'Interests' },
@@ -14,10 +14,26 @@ const BOARD_TOPICS = [
   { icon: 'icon-dollar', label: 'Paid?' },
 ]
 
+// Same order as BOARD_TOPICS above (the idle screen's promise) and CLAUDE.md's stated
+// interview order (level, then location, then timing, then paid) so the guided voice
+// flow actually delivers on what the idle screen told the student to expect.
+const VOICE_STEPS = [
+  { key: 'interest', icon: 'icon-compass', question: "What are you interested in?", hint: 'Say a field, like biology or computer science.' },
+  { key: 'level', icon: 'icon-grad-cap', question: 'What grade or year are you in?', hint: 'A high school grade or a college year both work.' },
+  { key: 'location', icon: 'icon-pin', question: 'Where are you located?', hint: 'Say your city, or say remote only.' },
+  { key: 'timing', icon: 'icon-calendar', question: 'When are you available?', hint: 'Summer, year round, or both.' },
+  { key: 'paid', icon: 'icon-dollar', question: 'Does it need to be paid?', hint: 'Paid, unpaid, or say it does not matter.' },
+]
+
 const SpeechRecognitionCtor =
   typeof window !== 'undefined' ? window.SpeechRecognition || window.webkitSpeechRecognition : null
 
-const MAX_SECONDS = 90
+// How long a question waits after the student stops talking before auto-advancing, and a
+// hard cap per question in case they never pause (or recognition never fires a result at
+// all) so the flow can't get stuck forever on one step.
+const SILENCE_ADVANCE_MS = 1500
+const MAX_QUESTION_MS = 20000
+
 const MONTH_NAMES = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December',
@@ -27,18 +43,33 @@ const LEVEL_LABEL_BY_ID = Object.fromEntries(
   LEVEL_GROUPS.flatMap((g) => g.items.map((item) => [item.id, `${g.label} · ${item.label}`]))
 )
 
+const EMPTY_ANSWERS = parseSpokenAnswers('')
+
+// Each question's transcript is parsed independently (same free-form parser, just handed a
+// much shorter, focused utterance), then merged in — a later step never blanks out
+// something an earlier step already caught, it only adds to it.
+function mergeAnswers(base, patch) {
+  return {
+    field: patch.field || base.field,
+    subfocus: patch.subfocus?.length ? patch.subfocus : base.subfocus,
+    oppType: patch.oppType?.length ? patch.oppType : base.oppType,
+    level: patch.level || base.level,
+    location: patch.location || base.location,
+    locationCoords: patch.locationCoords || base.locationCoords,
+    remoteOnly: patch.remoteOnly || base.remoteOnly,
+    experience: patch.experience || base.experience,
+    applyStart: patch.applyStart || base.applyStart,
+    applyEnd: patch.applyEnd || base.applyEnd,
+    paidPref: patch.paidPref || base.paidPref,
+  }
+}
+
 // `new Date("2027-06-01")` parses as UTC midnight, which reads back as May 31st in any
 // timezone behind UTC — the same footgun Interview.jsx's own fromISODate avoids. Split
 // the string manually instead of trusting the Date constructor with a bare ISO string.
 function fromISODate(s) {
   const [y, m, day] = s.split('-').map(Number)
   return new Date(y, m - 1, day)
-}
-
-function formatSeconds(total) {
-  const m = Math.floor(total / 60)
-  const s = total % 60
-  return `${m}:${String(s).padStart(2, '0')}`
 }
 
 // Turns the parsed answers into a short list of plain-English chips for the recap
@@ -69,17 +100,26 @@ function describeAnswers(a) {
 
 export default function InterviewVoice() {
   const { navigate } = useRouter()
-  // idle | listening | stopped | analyzing | recap | unsupported
+  // idle | question | analyzing | recap | unsupported
   const [status, setStatus] = useState(SpeechRecognitionCtor ? 'idle' : 'unsupported')
+  const [stepIndex, setStepIndex] = useState(0)
   const [interimText, setInterimText] = useState('')
   const [finalText, setFinalText] = useState('')
-  const [elapsed, setElapsed] = useState(0)
   const [micDenied, setMicDenied] = useState(false)
-  const [parsedAnswers, setParsedAnswers] = useState(null)
+  const [answers, setAnswers] = useState(EMPTY_ANSWERS)
 
   const recognitionRef = useRef(null)
-  const finalTranscriptRef = useRef('')
-  const finishRef = useRef(() => {})
+  const stepFinalRef = useRef('')
+  const interimRef = useRef('')
+  const hasSpeechRef = useRef(false)
+  const advancingRef = useRef(false)
+  const lastSpeechAtRef = useRef(0)
+  const stepStartedAtRef = useRef(0)
+  const statusRef = useRef(status)
+
+  useEffect(() => {
+    statusRef.current = status
+  }, [status])
 
   function ensureRecognition() {
     if (recognitionRef.current || !SpeechRecognitionCtor) return recognitionRef.current
@@ -91,20 +131,31 @@ export default function InterviewVoice() {
       let interim = ''
       for (let i = event.resultIndex; i < event.results.length; i++) {
         const result = event.results[i]
-        if (result.isFinal) finalTranscriptRef.current += `${result[0].transcript} `
+        if (result.isFinal) stepFinalRef.current += `${result[0].transcript} `
         else interim += result[0].transcript
       }
+      interimRef.current = interim
+      hasSpeechRef.current = true
+      lastSpeechAtRef.current = Date.now()
       setInterimText(interim)
-      setFinalText(finalTranscriptRef.current)
+      setFinalText(stepFinalRef.current)
     }
     recognition.onerror = (event) => {
       if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
         setMicDenied(true)
-        setStatus('idle')
       }
     }
     recognition.onend = () => {
-      setStatus((s) => (s === 'listening' ? 'stopped' : s))
+      // continuous recognition can still stop on its own (a network hiccup, a browser's
+      // own idle timeout) — restart it as long as the question flow is still going, so a
+      // dropped connection doesn't just silently strand the student mid-question
+      if (statusRef.current === 'question') {
+        try {
+          recognition.start()
+        } catch {
+          // already starting — fine
+        }
+      }
     }
     recognitionRef.current = recognition
     return recognition
@@ -117,43 +168,71 @@ export default function InterviewVoice() {
       return
     }
     setMicDenied(false)
-    setElapsed(0)
+    setAnswers(EMPTY_ANSWERS)
+    setStepIndex(0)
+    setStatus('question')
     try {
       recognition.start()
-      setStatus('listening')
     } catch {
-      // start() throws if a session is already active — treat as already listening
-      setStatus('listening')
+      // start() throws if a session is already active — already listening either way
     }
   }
 
-  function handleFinish() {
-    try {
-      recognitionRef.current?.stop()
-    } catch {
-      // already stopped — nothing to do
-    }
-    setStatus('analyzing')
-    const transcript = (finalTranscriptRef.current || interimText).trim()
-    const parsed = parseSpokenAnswers(transcript)
-    setParsedAnswers(parsed)
-    // a short, deliberate pause rather than an instant jump — matches the loading beat
-    // every other transition in this app has, even though the parse itself is instant
-    setTimeout(() => setStatus('recap'), 700)
-  }
-  finishRef.current = handleFinish
-
+  // Runs once per question: resets that question's transcript buffers, then polls for
+  // either 1.5s of silence after the student has said something, or a 20s hard cap, and
+  // advances to the next question (or finishes) either way.
   useEffect(() => {
-    if (status !== 'listening') return
+    if (status !== 'question') return
+    advancingRef.current = false
+    hasSpeechRef.current = false
+    stepFinalRef.current = ''
+    interimRef.current = ''
+    setInterimText('')
+    setFinalText('')
+    const now = Date.now()
+    lastSpeechAtRef.current = now
+    stepStartedAtRef.current = now
+
     const id = setInterval(() => {
-      setElapsed((e) => {
-        const next = e + 1
-        if (next >= MAX_SECONDS) finishRef.current()
-        return next
-      })
-    }, 1000)
+      if (advancingRef.current) return
+      const silentLongEnough = hasSpeechRef.current && Date.now() - lastSpeechAtRef.current >= SILENCE_ADVANCE_MS
+      const timedOut = Date.now() - stepStartedAtRef.current >= MAX_QUESTION_MS
+      if (silentLongEnough || timedOut) {
+        advancingRef.current = true
+        completeStep()
+      }
+    }, 300)
     return () => clearInterval(id)
-  }, [status])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status, stepIndex])
+
+  function completeStep() {
+    const stepText = (stepFinalRef.current || interimRef.current).trim()
+    const parsed = parseSpokenAnswers(stepText)
+    setAnswers((prev) => {
+      const merged = mergeAnswers(prev, parsed)
+      if (stepIndex + 1 >= VOICE_STEPS.length) {
+        try {
+          recognitionRef.current?.stop()
+        } catch {
+          // already stopped
+        }
+        setStatus('analyzing')
+        // a short, deliberate pause rather than an instant jump — matches the loading beat
+        // every other transition in this app has, even though the parse itself is instant
+        setTimeout(() => setStatus('recap'), 700)
+      } else {
+        setStepIndex(stepIndex + 1)
+      }
+      return merged
+    })
+  }
+
+  function triggerAdvance() {
+    if (advancingRef.current) return
+    advancingRef.current = true
+    completeStep()
+  }
 
   useEffect(
     () => () => {
@@ -171,9 +250,8 @@ export default function InterviewVoice() {
   // in browsers (Chrome/Edge) that don't require a click first. Safari/WebKit, though,
   // requires an actual user gesture to show that dialog at all — calling getUserMedia
   // without one gets an instant NotAllowedError with NO dialog ever shown, which is NOT
-  // a real denial. So this attempt never sets micDenied on failure; only the user's own
-  // tap (handleStart -> recognition.start(), via the onerror handler below) can report a
-  // genuine denial — otherwise Safari users would see "access denied" before ever being asked.
+  // a real denial. So this attempt never sets micDenied on failure; only a denial during
+  // an actual question (a real gesture already happened to get there) is trustworthy.
   useEffect(() => {
     if (!SpeechRecognitionCtor || typeof navigator === 'undefined' || !navigator.mediaDevices?.getUserMedia) return
     navigator.mediaDevices
@@ -182,41 +260,30 @@ export default function InterviewVoice() {
         stream.getTracks().forEach((track) => track.stop())
       })
       .catch(() => {
-        // Ignored — see comment above. A real denial still surfaces via handleStart's
-        // own recognition.onerror once the user actually taps.
+        // Ignored — see comment above.
       })
   }, [])
 
   function handleContinue() {
-    setVoiceAnswers(parsedAnswers)
+    setVoiceAnswers(answers)
     navigate('/interview')
   }
 
   const liveTranscript = [finalText, interimText].filter(Boolean).join(' ').trim()
-  const chips = parsedAnswers ? describeAnswers(parsedAnswers) : []
+  const chips = describeAnswers(answers)
+  const currentStep = VOICE_STEPS[stepIndex]
 
   return (
     <section className="interview-page voice-page">
-      {/* warm-lit desk scene, not the mockup's sky/mountains — this brand avoids sky/cloud
-          imagery, so the "more enthusiastic background" ask is met with a warm glow plus
-          the existing (previously unused) prop-books/prop-plant desk props instead, blurred
-          into the background like the brand guide's "blurred bookshelves" suggestion */}
+      {/* animated wave-dot background, orange highlights on the page's own cream (not the
+          black the reference used) — replaces the earlier symbol-field background */}
+      <VoiceWaveBackground />
+      {/* warm-lit desk accents — not the mockup's sky/mountains, this brand avoids sky/
+          cloud imagery, so "enthusiastic" is a warm glow plus blurred desk props instead */}
       <div className="voice-scene" aria-hidden="true">
         <span className="voice-scene-glow" />
         <svg className="voice-scene-books" viewBox="0 0 210 150"><use href="#prop-books" /></svg>
         <svg className="voice-scene-plant" viewBox="0 0 130 160"><use href="#prop-plant" /></svg>
-        <svg className="voice-scene-page voice-scene-page--a" viewBox="0 0 40 52"><use href="#deco-page" /></svg>
-        <svg className="voice-scene-page voice-scene-page--b" viewBox="0 0 40 52"><use href="#deco-page" /></svg>
-        <svg className="voice-scene-page voice-scene-page--c" viewBox="0 0 40 52"><use href="#deco-page" /></svg>
-      </div>
-      <div className="interview-symbol-field" aria-hidden="true">
-        <SymbolField
-          rows={6}
-          cols={12}
-          opacityRange={[0.1, 0.16]}
-          fontSizeRange={[15, 24]}
-          colors={['var(--symbol-tan)', 'var(--cover-dark)', 'var(--ribbon)', 'var(--navy)', 'var(--gold)']}
-        />
       </div>
 
       <button type="button" className="voice-brand" onClick={() => navigate('/')} aria-label="Researchly home">
@@ -298,37 +365,59 @@ export default function InterviewVoice() {
             </div>
           )}
 
-          {(status === 'listening' || status === 'stopped') && (
-            <div className="voice-center">
-              <button
-                type="button"
-                className={`voice-mic-btn ${status === 'listening' ? 'is-listening' : ''}`}
-                onClick={status === 'listening' ? undefined : handleStart}
-                aria-label={status === 'listening' ? 'Listening' : 'Resume speaking'}
-              >
-                <svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true">
-                  <use href={status === 'listening' ? '#icon-waveform' : '#icon-mic'} />
-                </svg>
-              </button>
-              <p className="voice-timer">{formatSeconds(elapsed)} / {formatSeconds(MAX_SECONDS)}</p>
-              <div className="voice-transcript" aria-live="polite">
-                {liveTranscript || (
-                  <span className="voice-transcript-placeholder">
-                    {status === 'listening' ? "We're listening, go ahead." : 'Nothing caught yet.'}
+          {status === 'question' && (
+            <div className="voice-center voice-question">
+              <div className="voice-steps" aria-hidden="true">
+                {VOICE_STEPS.map((s, i) => (
+                  <div className="voice-step-track" key={s.key}>
+                    <span className={`voice-step-dot${i < stepIndex ? ' is-done' : ''}${i === stepIndex ? ' is-current' : ''}`}>
+                      {i < stepIndex ? (
+                        <svg width="12" height="12" viewBox="0 0 24 24"><use href="#icon-check" /></svg>
+                      ) : (
+                        i + 1
+                      )}
+                    </span>
+                    {i < VOICE_STEPS.length - 1 && (
+                      <span className={`voice-step-line${i < stepIndex ? ' is-done' : ''}`} />
+                    )}
+                  </div>
+                ))}
+              </div>
+              <p className="voice-step-label">Step {stepIndex + 1} of {VOICE_STEPS.length}</p>
+
+              <h1 className="voice-question-title">{currentStep.question}</h1>
+              <p className="interview-subtext voice-question-hint">{currentStep.hint}</p>
+
+              <div className="voice-record-panel">
+                <div className="voice-record-status">
+                  <span className="voice-record-mic">
+                    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-mic" /></svg>
                   </span>
-                )}
+                  <span className="voice-record-wave" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24"><use href="#icon-waveform" /></svg>
+                  </span>
+                  <span className="voice-record-live">
+                    <span className="voice-record-dot" aria-hidden="true" />
+                    Listening
+                  </span>
+                </div>
+                <div className="voice-record-transcript" aria-live="polite">
+                  {liveTranscript || (
+                    <span className="voice-transcript-placeholder">Go ahead, we're listening.</span>
+                  )}
+                </div>
               </div>
-              <div className="voice-actions">
-                {status === 'stopped' && (
-                  <button type="button" className="voice-secondary-btn" onClick={handleStart}>
-                    Keep talking
-                  </button>
-                )}
-                <button type="button" className="interview-continue-btn" onClick={handleFinish}>
-                  {status === 'stopped' ? 'Analyze what I said' : "Done, find my matches"}
-                  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow" /></svg>
-                </button>
-              </div>
+
+              {micDenied && (
+                <p className="voice-error">
+                  Microphone access was denied. Allow it in your browser's site settings, then try again.
+                </p>
+              )}
+
+              <button type="button" className="interview-continue-btn" onClick={triggerAdvance}>
+                Continue
+                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow" /></svg>
+              </button>
               <button type="button" className="voice-skip-link" onClick={() => navigate('/interview')}>
                 Prefer typing? Take the guided interview instead
               </button>
