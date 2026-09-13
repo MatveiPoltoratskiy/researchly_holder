@@ -1,10 +1,19 @@
 import { useEffect, useRef } from 'react'
 import { prefersReducedMotion } from '../lib/motion'
 
-// A grid of dots whose size/brightness ripples like a rolling wave (sin/cos interference
-// over time), echoing the reference image's perspective wave-mesh but rendered flat and in
-// the brand's orange/gold rather than a stark white-on-black — kept in the page's own warm
-// cream, not swapped to black, per the "background colour should remain the same" ask.
+// Short research glyphs only — long strings like "E = mc²" don't read cleanly at small
+// wave-grid sizes, unlike SymbolField's landing/quiz use where cells are bigger.
+const SYMBOL_POOL = [
+  'α', 'β', 'γ', 'δ', 'λ', 'μ', 'π', 'Ω', 'Σ', 'Δ', 'θ', 'φ',
+  'H₂O', 'CO₂', 'NaCl', 'O₂', 'DNA', 'RNA', 'ATP',
+  '∫', '∇', '∂', '∞', '√', '±',
+]
+
+// A grid of research symbols whose size/brightness ripples like a rolling wave (sin/cos
+// interference over time) — the reference image's perspective wave-mesh, rendered flat and
+// in the brand's orange rather than a stark white-on-black, and stocked with research
+// glyphs instead of plain dots. Each cell's symbol is picked once (stable), only its size/
+// opacity animates, so the grid doesn't flicker with new characters every frame.
 export default function VoiceWaveBackground() {
   const canvasRef = useRef(null)
 
@@ -20,10 +29,19 @@ export default function VoiceWaveBackground() {
     let rafId = null
     let t = 0
     let visible = true
+    let cells = []
 
-    const SPACING = 26
-    const DOT_BASE = 1.1
-    const DOT_AMP = 1.6
+    const SPACING = 54
+    const FONT_BASE = 13
+    const FONT_AMP = 9
+
+    function seededSymbol(i, j) {
+      // deterministic pseudo-random pick per cell, so a resize rebuild doesn't reshuffle
+      // symbols the student has already glanced at
+      const n = Math.sin(i * 12.9898 + j * 78.233) * 43758.5453
+      const frac = n - Math.floor(n)
+      return SYMBOL_POOL[Math.floor(frac * SYMBOL_POOL.length)]
+    }
 
     function resize() {
       const rect = canvas.getBoundingClientRect()
@@ -32,24 +50,28 @@ export default function VoiceWaveBackground() {
       canvas.width = width * dpr
       canvas.height = height * dpr
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+
+      const cols = Math.ceil(width / SPACING) + 1
+      const rows = Math.ceil(height / SPACING) + 1
+      cells = []
+      for (let j = 0; j < rows; j++) {
+        for (let i = 0; i < cols; i++) {
+          cells.push({ x: i * SPACING, y: j * SPACING, i, j, symbol: seededSymbol(i, j) })
+        }
+      }
     }
 
     function draw() {
       ctx.clearRect(0, 0, width, height)
-      const cols = Math.ceil(width / SPACING) + 1
-      const rows = Math.ceil(height / SPACING) + 1
-      for (let j = 0; j < rows; j++) {
-        for (let i = 0; i < cols; i++) {
-          const x = i * SPACING
-          const y = j * SPACING
-          const wave = Math.sin(i * 0.35 + t) * Math.cos(j * 0.3 + t * 0.8)
-          const r = DOT_BASE + DOT_AMP * ((wave + 1) / 2)
-          const alpha = 0.06 + 0.16 * ((wave + 1) / 2)
-          ctx.beginPath()
-          ctx.arc(x, y, r, 0, Math.PI * 2)
-          ctx.fillStyle = `rgba(221,107,46,${alpha.toFixed(3)})`
-          ctx.fill()
-        }
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'middle'
+      for (const c of cells) {
+        const wave = Math.sin(c.i * 0.32 + t) * Math.cos(c.j * 0.28 + t * 0.75)
+        const size = FONT_BASE + FONT_AMP * ((wave + 1) / 2)
+        const alpha = 0.16 + 0.34 * ((wave + 1) / 2)
+        ctx.font = `700 ${size.toFixed(1)}px "Segoe UI", system-ui, sans-serif`
+        ctx.fillStyle = `rgba(221,107,46,${alpha.toFixed(3)})`
+        ctx.fillText(c.symbol, c.x, c.y)
       }
     }
 
@@ -58,7 +80,7 @@ export default function VoiceWaveBackground() {
         rafId = requestAnimationFrame(tick)
         return
       }
-      t += 0.012
+      t += 0.014
       draw()
       rafId = requestAnimationFrame(tick)
     }

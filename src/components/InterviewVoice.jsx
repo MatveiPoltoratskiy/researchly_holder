@@ -278,16 +278,13 @@ export default function InterviewVoice() {
       {/* animated wave-dot background, orange highlights on the page's own cream (not the
           black the reference used) — replaces the earlier symbol-field background */}
       <VoiceWaveBackground />
-      {/* warm-lit desk accents — not the mockup's sky/mountains, this brand avoids sky/
-          cloud imagery, so "enthusiastic" is a warm glow plus blurred desk props instead */}
+      {/* warm-lit background glow, no book/plant props anymore, just the mascot itself now */}
       <div className="voice-scene" aria-hidden="true">
         <span className="voice-scene-glow" />
-        <svg className="voice-scene-books" viewBox="0 0 210 150"><use href="#prop-books" /></svg>
-        <svg className="voice-scene-plant" viewBox="0 0 130 160"><use href="#prop-plant" /></svg>
       </div>
 
       <button type="button" className="voice-brand" onClick={() => navigate('/')} aria-label="Researchly home">
-        <img src="/assets/mascot-logo.png" alt="" />
+        <img src="/assets/mascot-straight.png" alt="" />
         <span>Researchly</span>
       </button>
 
@@ -296,8 +293,8 @@ export default function InterviewVoice() {
         Home
       </button>
 
-      <div className="container interview-container">
-        <div className="interview-card voice-card">
+      <div className={`container interview-container${status === 'idle' ? ' interview-container--compact' : ''}`}>
+        <div className={`interview-card voice-card${status === 'idle' ? ' voice-card--idle' : ''}`}>
           {status === 'unsupported' && (
             <div className="voice-center">
               <span className="voice-icon-badge voice-icon-badge--muted">
@@ -319,14 +316,9 @@ export default function InterviewVoice() {
               <div className="voice-mascot-stage">
                 <span className="voice-mascot-shadow" aria-hidden="true" />
                 <div className="voice-mascot-figure">
-                  <img src="/assets/mascot-logo.png" alt="" />
+                  <img src="/assets/mascot-straight.png" alt="Researchly" />
                 </div>
               </div>
-
-              <h1 className="voice-hero-title">
-                Hi, I'm <span className="voice-hero-brand">Researchly</span>.
-                <br />Your AI research companion.
-              </h1>
 
               <div className="voice-board">
                 <span className="voice-board-label">What I'll ask about</span>
