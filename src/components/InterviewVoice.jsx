@@ -4,21 +4,30 @@ import { parseSpokenAnswers } from '../lib/parseSpokenAnswers'
 import { setVoiceAnswers } from '../lib/voiceInterviewHandoff'
 import VoiceWaveBackground from './VoiceWaveBackground'
 
+// Same order as VOICE_STEPS below (the idle screen's promise) so the guided voice flow
+// actually delivers on what it told the student to expect.
 const BOARD_TOPICS = [
   { icon: 'icon-compass', label: 'Interests' },
+  { icon: 'icon-flask', label: 'Type' },
   { icon: 'icon-grad-cap', label: 'Grade' },
   { icon: 'icon-pin', label: 'Location' },
+  { icon: 'icon-trending-up', label: 'Experience' },
   { icon: 'icon-calendar', label: 'Timing' },
   { icon: 'icon-dollar', label: 'Paid?' },
 ]
 
-// Same order as BOARD_TOPICS above (the idle screen's promise) and CLAUDE.md's stated
-// interview order (level, then location, then timing, then paid) so the guided voice
-// flow actually delivers on what the idle screen told the student to expect.
+// Mirrors Interview.jsx's own 8-step order collapsed to 7 (its steps 1+2, field and
+// subfocus, become one voice question here — parseSpokenAnswers detects both from the
+// same utterance): field/subfocus, oppType, level, location, experience, applyStart,
+// paidPref. Covering all of it here means computeStartStep() in Interview.jsx sees every
+// field already filled and skips the quiz entirely, straight to the loading/matches
+// handoff — asking a student the same things twice is worse than one longer voice pass.
 const VOICE_STEPS = [
   { key: 'interest', icon: 'icon-compass', question: "What are you interested in?", hint: 'Say a field, like biology or computer science.' },
+  { key: 'oppType', icon: 'icon-flask', question: 'What kind of opportunity?', hint: 'A research internship, a summer program, or something year round.' },
   { key: 'level', icon: 'icon-grad-cap', question: 'What grade or year are you in?', hint: 'A high school grade or a college year both work.' },
   { key: 'location', icon: 'icon-pin', question: 'Where are you located?', hint: 'Say your city, or say remote only.' },
+  { key: 'experience', icon: 'icon-trending-up', question: 'How much research experience do you have already?', hint: 'New to it, a little, or already experienced, whatever is true.' },
   { key: 'timing', icon: 'icon-calendar', question: 'When are you available?', hint: 'Summer, year round, or both.' },
   { key: 'paid', icon: 'icon-dollar', question: 'Does it need to be paid?', hint: 'Paid, unpaid, or say it does not matter.' },
 ]
@@ -32,9 +41,10 @@ const SpeechRecognitionCtor =
 const SILENCE_ADVANCE_MS = 1500
 const MAX_QUESTION_MS = 20000
 
-// Overall time budget across all 5 questions, shown as "X:XX left" so a student can pace
-// themselves — purely informational, nothing forces the flow to end early when it hits 0.
-const TOTAL_SECONDS = 90
+// Overall time budget across all of VOICE_STEPS, shown as "X:XX left" so a student can
+// pace themselves — purely informational, nothing forces the flow to end early when it
+// hits 0. ~17s/question now that there are 7 of them (was 90s for the original 5).
+const TOTAL_SECONDS = 120
 
 function formatSeconds(total) {
   const m = Math.floor(total / 60)

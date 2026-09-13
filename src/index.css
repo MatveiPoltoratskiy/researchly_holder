@@ -3093,7 +3093,11 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 
 /* ---------- voice interview (speech-to-answers) ---------- */
 /* reuses .interview-page/.interview-container/.interview-card for the shell, same as
-   the guided quiz — this is a different screen, not a different layout system */
+   the guided quiz — this is a different screen, not a different layout system. Thinner
+   than the shared .interview-card default across every voice state (not just idle, which
+   has its own further override below) — the mascot/question are the point, the card
+   itself should read as a light frame around them, not a heavy slab. */
+.voice-card{ padding:28px 40px; }
 .voice-center{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px; padding:20px 0; }
 .voice-center .interview-question{ text-align:center; text-wrap:balance; }
 .voice-center .interview-subtext{ text-align:center; max-width:480px; }
@@ -3169,7 +3173,7 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
    One even gap governs the whole vertical rhythm (mascot -> board -> button -> hint ->
    skip link) — no per-element margin overrides fighting it. */
 .voice-hero{ gap:26px; }
-.voice-mascot-stage{ position:relative; width:320px; height:320px; }
+.voice-mascot-stage{ position:relative; width:400px; height:400px; }
 .voice-mascot-figure{
   width:100%; height:100%;
   animation: mascot-in .9s cubic-bezier(.22,.85,.32,1.05) both, mascot-bob 3.8s ease-in-out .9s infinite;
@@ -3353,7 +3357,7 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
    stretching to the shared 1120px interview width, with generous breathing room ("a few
    cm") on every side rather than sitting flush against the viewport edges */
 .interview-container--compact{ max-width:600px; }
-.voice-card--idle{ flex:none; width:auto; align-self:center; padding:48px 40px; }
+.voice-card--idle{ flex:none; width:auto; align-self:center; padding:36px 40px; }
 
 /* short viewports: this page is position:fixed/overflow:hidden (see the fixed-page-overlay-
    clipping note wherever this codebase discusses /interview-voice), so anything taller than
