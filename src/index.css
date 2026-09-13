@@ -3247,6 +3247,13 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
    cross-start (left) edge instead of centering it in the leftover space. margin:0 auto is
    the standard fix: it's respected as centering on a flex item along the cross axis. */
 .voice-question{ gap:16px; width:100%; max-width:520px; margin:0 auto; }
+/* .voice-start-btn/.voice-start-hint are shared with the idle screen, where their long
+   baked-in animation-delay (.62s/.8s) makes sense as part of a one-time entrance cascade —
+   reused as-is here, every single question would sit invisible for over half a second
+   before "Ready?" even appeared. Short, near-immediate delays instead. */
+.voice-question .voice-start-btn{ animation-delay: 0s; }
+.voice-question .voice-start-hint{ animation-delay: .08s; }
+.voice-question .interview-continue-btn{ opacity:0; animation: voice-rise-in .35s ease-out .1s both; }
 
 .voice-steps{ display:flex; align-items:center; justify-content:center; }
 .voice-step-track{ display:flex; align-items:center; }
@@ -3272,12 +3279,15 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
    just smaller, and topped with a bubble instead of standing alone. Normal document flow
    (bubble, then mascot, stacked by the parent's own gap) rather than absolute positioning,
    so the bubble can never overlap the step-dots above it. */
-.voice-question-header{ display:flex; flex-direction:column; align-items:center; gap:8px; }
-.voice-mascot-stage--question{ width:180px; height:180px; }
+.voice-question-header{ display:flex; flex-direction:column; align-items:center; gap:10px; }
+/* the mascot + what it's asking are the centerpiece of this screen — sized well past the
+   idle screen's own mascot so there's no doubt what to look at first */
+.voice-mascot-stage--question{ width:260px; height:260px; }
 .voice-speech-bubble{
-  position:relative; width:max-content; max-width:340px; background:var(--card-bg);
-  border:1.5px solid var(--card-border); border-radius:20px; padding:16px 20px 22px;
+  position:relative; width:max-content; max-width:460px; background:var(--card-bg);
+  border:1.5px solid var(--card-border); border-radius:22px; padding:22px 28px 28px;
   box-shadow:0 10px 24px rgba(30,37,64,.12);
+  opacity:0; animation: voice-rise-in .4s ease-out both;
 }
 .voice-speech-tail{
   position:absolute; left:50%; bottom:-8px; width:16px; height:16px; transform:translateX(-50%) rotate(45deg);
@@ -3285,31 +3295,34 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 }
 .voice-speech-title{
   margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; letter-spacing:-.01em;
-  font-size:clamp(20px,2.6vw,26px); line-height:1.25; color:var(--navy); text-wrap:balance;
+  font-size:clamp(28px,3.6vw,36px); line-height:1.2; color:var(--navy); text-wrap:balance;
 }
 .voice-speech-hint{
-  margin:6px 0 0; font-family:"Segoe UI",system-ui,sans-serif; font-size:14px; color:var(--navy); opacity:.68;
+  margin:8px 0 0; font-family:"Segoe UI",system-ui,sans-serif; font-size:16px; color:var(--navy); opacity:.68;
 }
 /* an actual counter, not just a text label — a real digit readout plus a bar that
-   visibly drains as the overall time budget ticks down */
+   visibly drains as the overall time budget ticks down. Kept thin/low-profile on purpose —
+   it's supporting information, not the centerpiece (that's the mascot + question above). */
 .voice-timer-pill{
-  display:flex; align-items:center; gap:12px; width:100%;
+  display:flex; align-items:center; gap:10px; width:100%;
   background:var(--cream); border:1px solid var(--card-border); border-radius:999px;
-  padding:10px 18px;
+  padding:6px 14px;
+  opacity:0; animation: voice-rise-in .35s ease-out both;
 }
 .voice-timer-clock{
   font-family:"Segoe UI",system-ui,sans-serif; font-variant-numeric:tabular-nums;
-  font-size:20px; font-weight:800; color:var(--navy); flex-shrink:0;
+  font-size:15px; font-weight:800; color:var(--navy); flex-shrink:0;
 }
-.voice-timer-track{ flex:1; height:6px; border-radius:999px; background:var(--card-border); overflow:hidden; }
+.voice-timer-track{ flex:1; height:4px; border-radius:999px; background:var(--card-border); overflow:hidden; }
 .voice-timer-fill{ height:100%; border-radius:999px; background:var(--cover); transition:width 1s linear; }
 .voice-timer-label{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:700; color:var(--navy-faint); flex-shrink:0;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:11px; font-weight:700; color:var(--navy-faint); flex-shrink:0;
 }
 
 .voice-record-panel{
   width:100%; background:var(--card-bg); border:1.5px solid var(--card-border); border-radius:20px;
   padding:20px 22px; box-shadow:0 10px 24px rgba(30,37,64,.1);
+  opacity:0; animation: voice-rise-in .35s ease-out .05s both;
 }
 .voice-record-status{ display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:14px; }
 .voice-record-mic{
@@ -3363,7 +3376,9 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
   .voice-start-ring{ animation:none; opacity:0; }
   .voice-record-mic, .voice-record-dot{ animation:none; }
   .voice-mascot-figure, .voice-mascot-shadow,
-  .voice-board, .voice-start-btn, .voice-start-hint{ animation:none; opacity:1; }
+  .voice-board, .voice-start-btn, .voice-start-hint,
+  .voice-speech-bubble, .voice-timer-pill, .voice-record-panel,
+  .voice-question .interview-continue-btn{ animation:none; opacity:1; }
 }
 
 /* ---------- professor finder background sheet (nothing saved/sent) ---------- */
