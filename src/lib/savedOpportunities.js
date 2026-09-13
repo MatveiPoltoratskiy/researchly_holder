@@ -34,7 +34,7 @@ export function useSavedOpportunities() {
     if (!visitorId) return // localStorage unavailable — sync silently skipped
 
     let cancelled = false
-    fetch(`/api/saved-opportunities?visitorId=${encodeURIComponent(visitorId)}`)
+    fetch('/api/saved-opportunities', { headers: { 'X-Visitor-Id': visitorId } })
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
         if (cancelled || !data?.savedMap) return

@@ -14,6 +14,10 @@ const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
 const ALLOWED_STATUSES = new Set(['saved', 'applied'])
 const MAX_ENTRIES = 500
 const MAX_ID_LENGTH = 200
+// Must stay <= the `saved_opportunities_map_size` check in
+// supabase/saved_opportunities_setup.sql — validating against the same number here means
+// a payload that passes this check can never fail as a surprise 500 at the DB constraint.
+const MAX_SERIALIZED_MAP_LENGTH = 20000
 
 function isValidVisitorId(value) {
   return typeof value === 'string' && UUID_RE.test(value)
@@ -29,6 +33,7 @@ function cleanSavedMap(value) {
     if (!ALLOWED_STATUSES.has(status)) return null
     cleaned[id] = status
   }
+  if (JSON.stringify(cleaned).length > MAX_SERIALIZED_MAP_LENGTH) return null
   return cleaned
 }
 
@@ -58,7 +63,10 @@ export default async function handler(req, res) {
     }
 
     if (req.method === 'GET') {
-      const visitorId = req.query?.visitorId
+      // Read from a header, not a query param — a query string is the one place this
+      // bearer-token-like id could end up sitting in Vercel's access logs or a browser's
+      // own history, both wider exposure than a request header for no benefit.
+      const visitorId = req.headers['x-visitor-id']
       if (!isValidVisitorId(visitorId)) {
         return res.status(400).json({ error: 'Invalid visitor id' })
       }
