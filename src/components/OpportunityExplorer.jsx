@@ -8,7 +8,7 @@ import { peekInterviewFilters, clearInterviewFilters } from '../lib/interviewHan
 import { scoreOpportunity } from '../lib/matchOpportunities'
 import { computeMatchScore, resolveMatchScore } from '../lib/matchScore'
 import { useSavedOpportunities, SAVE_STATUSES } from '../lib/savedOpportunities'
-import { useSessionStorageState } from '../lib/storage'
+import { useLocalStorageStateWithExpiry } from '../lib/storage'
 import { Link } from '../lib/router'
 import { burstConfettiAtPoint } from '../lib/confetti'
 import { prefersReducedMotion } from '../lib/motion'
@@ -589,7 +589,7 @@ export function OpportunityDetailModal({ o, onClose, interviewAnswers, matchProf
   )
 }
 
-const SESSION_FILTER_KEYS = ['rsly_opp_active_fields', 'rsly_opp_level', 'rsly_opp_cost_filters', 'rsly_opp_stipend_only']
+const PERSISTED_FILTER_KEYS = ['rsly_opp_active_fields', 'rsly_opp_level', 'rsly_opp_cost_filters', 'rsly_opp_stipend_only']
 
 export default function OpportunityExplorer() {
   // read once per mount (not per module load, so a second visit within the same SPA
@@ -597,50 +597,53 @@ export default function OpportunityExplorer() {
   // defaults instead of replaying a stale first-visit snapshot forever)
   const [interviewHandoff] = useState(() => {
     const handoff = peekInterviewFilters()
-    // a just-completed interview must win over whatever filter state an earlier,
-    // unrelated visit to this page left in sessionStorage this tab session — otherwise
-    // every useSessionStorageState call below finds an existing stored value for its key
-    // and uses THAT instead of ever running its own handoff-aware initializer, so a fresh
-    // interview's answers silently get ignored (this is what let "All levels" and every
-    // major stay checked even right after specifying real preferences).
+    // a just-completed interview must win over whatever filter state an earlier visit
+    // (this tab session, or a genuine return visit up to 30 days ago — see
+    // useLocalStorageStateWithExpiry) left saved — otherwise every filter hook below
+    // finds an existing stored value for its key and uses THAT instead of ever running
+    // its own handoff-aware initializer, so a fresh interview's answers silently get
+    // ignored (this is what let "All levels" and every major stay checked even right
+    // after specifying real preferences).
     if (handoff) {
       try {
-        SESSION_FILTER_KEYS.forEach((k) => sessionStorage.removeItem(k))
+        PERSISTED_FILTER_KEYS.forEach((k) => localStorage.removeItem(k))
       } catch {
-        // sessionStorage unavailable — the useSessionStorageState hooks below will fall
-        // back to their own defaults regardless, same as everywhere else in this file
+        // localStorage unavailable — the filter hooks below will fall back to their own
+        // defaults regardless, same as everywhere else in this file
       }
     }
     return handoff
   })
   const interviewAnswers = interviewHandoff?.answers || null
-  // filter state persists across a page refresh (sessionStorage) but not across the tab
-  // actually closing, so a reload never silently throws away what someone had picked —
-  // only ever falls back to the interview handoff / plain defaults on a genuinely new tab
-  const [activeFields, setActiveFields] = useSessionStorageState(
+  // Filters persist in localStorage (not just across a reload, across an actual return
+  // visit — closing the tab, coming back next week) for up to 30 days, so a visitor who
+  // customized their view once doesn't land back on generic defaults every time — but
+  // still expires on its own rather than remembering someone's choices indefinitely. A
+  // fresh interview handoff always wins over whatever was saved, per the clearing above.
+  const [activeFields, setActiveFields] = useLocalStorageStateWithExpiry(
     'rsly_opp_active_fields',
     () => (interviewHandoff?.filters?.focus?.length ? new Set(interviewHandoff.filters.focus) : new Set(FIELD_ORDER)),
     { serialize: (s) => JSON.stringify([...s]), deserialize: (raw) => new Set(JSON.parse(raw)) }
   )
-  const [level, setLevel] = useSessionStorageState('rsly_opp_level', () => interviewHandoff?.filters?.level || 'all')
-  const [costFilters, setCostFilters] = useSessionStorageState(
+  const [level, setLevel] = useLocalStorageStateWithExpiry('rsly_opp_level', () => interviewHandoff?.filters?.level || 'all')
+  const [costFilters, setCostFilters] = useLocalStorageStateWithExpiry(
     'rsly_opp_cost_filters',
     () => new Set(interviewHandoff?.filters?.cost || []),
     { serialize: (s) => JSON.stringify([...s]), deserialize: (raw) => new Set(JSON.parse(raw)) }
   )
-  const [equityOnly, setEquityOnly] = useSessionStorageState('rsly_opp_equity_only', false)
+  const [equityOnly, setEquityOnly] = useLocalStorageStateWithExpiry('rsly_opp_equity_only', false)
   // separate from costFilters (free/costs-money-to-attend) — whether a program pays the
   // student a stipend is an unrelated field (o.paid) from whether attending costs them
   // money (o.cost), so "Paid only" in the interview needs its own filter, not a third
   // option OR'd into the cost-to-attend set (that would show stipend-paying results OR
   // free-to-attend results instead of narrowing to both, which isn't what either checkbox
   // means on its own)
-  const [stipendOnly, setStipendOnly] = useSessionStorageState(
+  const [stipendOnly, setStipendOnly] = useLocalStorageStateWithExpiry(
     'rsly_opp_stipend_only',
     () => Boolean(interviewHandoff?.filters?.stipendOnly)
   )
   const saved = useSavedOpportunities()
-  const [sortKey, setSortKey] = useSessionStorageState('rsly_opp_sort_key', 'recommended')
+  const [sortKey, setSortKey] = useLocalStorageStateWithExpiry('rsly_opp_sort_key', 'recommended')
   const [userLocation, setUserLocation] = useState(() => interviewHandoff?.filters?.locationCoords || null)
   const [locationStatus, setLocationStatus] = useState(() =>
     interviewHandoff?.filters?.locationCoords ? 'granted' : 'idle'
