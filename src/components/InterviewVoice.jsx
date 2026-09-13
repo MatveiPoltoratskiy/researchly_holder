@@ -32,6 +32,16 @@ const SpeechRecognitionCtor =
 const SILENCE_ADVANCE_MS = 1500
 const MAX_QUESTION_MS = 20000
 
+// Overall time budget across all 5 questions, shown as "X:XX left" so a student can pace
+// themselves — purely informational, nothing forces the flow to end early when it hits 0.
+const TOTAL_SECONDS = 90
+
+function formatSeconds(total) {
+  const m = Math.floor(total / 60)
+  const s = total % 60
+  return `${m}:${String(s).padStart(2, '0')}`
+}
+
 const EMPTY_ANSWERS = parseSpokenAnswers('')
 
 // Each question's transcript is parsed independently (same free-form parser, just handed a
@@ -55,7 +65,9 @@ function mergeAnswers(base, patch) {
 
 export default function InterviewVoice() {
   const { navigate } = useRouter()
-  // idle | question | analyzing | unsupported
+  // idle | ready | listening | analyzing | unsupported
+  // "ready": the question is shown, mic isn't capturing yet — read it, then tap "Ready?"
+  // "listening": actually recording this question's answer, with "Next" as a manual override
   // (no "recap" screen — as little friction as possible, straight into /interview once
   // the last question's silence-timer or hard cap fires)
   const [status, setStatus] = useState(SpeechRecognitionCtor ? 'idle' : 'unsupported')
@@ -63,6 +75,7 @@ export default function InterviewVoice() {
   const [interimText, setInterimText] = useState('')
   const [finalText, setFinalText] = useState('')
   const [micDenied, setMicDenied] = useState(false)
+  const [remaining, setRemaining] = useState(TOTAL_SECONDS)
 
   const recognitionRef = useRef(null)
   const answersRef = useRef(EMPTY_ANSWERS)
@@ -103,10 +116,12 @@ export default function InterviewVoice() {
       }
     }
     recognition.onend = () => {
-      // continuous recognition can still stop on its own (a network hiccup, a browser's
-      // own idle timeout) — restart it as long as the question flow is still going, so a
-      // dropped connection doesn't just silently strand the student mid-question
-      if (statusRef.current === 'question') {
+      // each question is its own start()/stop() session (stopped explicitly in
+      // completeStep below), but recognition can still end on its own mid-question (a
+      // network hiccup, a browser's own idle timeout) — restart it only while we're
+      // actually still listening; by the time our OWN stop() call's onend fires, status
+      // has already moved on to "ready"/"analyzing", so this won't fight that
+      if (statusRef.current === 'listening') {
         try {
           recognition.start()
         } catch {
@@ -127,19 +142,33 @@ export default function InterviewVoice() {
     setMicDenied(false)
     answersRef.current = EMPTY_ANSWERS
     setStepIndex(0)
-    setStatus('question')
+    setRemaining(TOTAL_SECONDS)
+    setStatus('ready')
+  }
+
+  // Tapping "Ready?" is what actually starts capturing this question's answer — gives the
+  // student a beat to read the question first instead of recognition (and the recognition
+  // permission prompt, on a cold start) firing the instant the question appears.
+  function handleReady() {
+    const recognition = ensureRecognition()
+    if (!recognition) {
+      setStatus('unsupported')
+      return
+    }
+    setMicDenied(false)
     try {
       recognition.start()
     } catch {
-      // start() throws if a session is already active — already listening either way
+      // start() throws if a session is already active — fine, already listening
     }
+    setStatus('listening')
   }
 
-  // Runs once per question: resets that question's transcript buffers, then polls for
-  // either 1.5s of silence after the student has said something, or a 20s hard cap, and
-  // advances to the next question (or finishes) either way.
+  // Runs once per question, only once actually listening: resets that question's
+  // transcript buffers, then polls for either 1.5s of silence after the student has said
+  // something, or a 20s hard cap, and advances (or finishes) either way.
   useEffect(() => {
-    if (status !== 'question') return
+    if (status !== 'listening') return
     advancingRef.current = false
     hasSpeechRef.current = false
     stepFinalRef.current = ''
@@ -163,17 +192,25 @@ export default function InterviewVoice() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, stepIndex])
 
+  // Overall time budget, ticking across both "ready" and "listening" phases of every
+  // question — purely informational (see TOTAL_SECONDS), never forces the flow to end.
+  useEffect(() => {
+    if (status !== 'ready' && status !== 'listening') return
+    const id = setInterval(() => setRemaining((r) => Math.max(0, r - 1)), 1000)
+    return () => clearInterval(id)
+  }, [status])
+
   function completeStep() {
     const stepText = (stepFinalRef.current || interimRef.current).trim()
     const parsed = parseSpokenAnswers(stepText)
     const merged = mergeAnswers(answersRef.current, parsed)
     answersRef.current = merged
+    try {
+      recognitionRef.current?.stop()
+    } catch {
+      // already stopped
+    }
     if (stepIndex + 1 >= VOICE_STEPS.length) {
-      try {
-        recognitionRef.current?.stop()
-      } catch {
-        // already stopped
-      }
       setStatus('analyzing')
       // a short, deliberate pause (matches the loading beat every other transition in
       // this app has, even though the parse itself is instant), then straight into the
@@ -185,6 +222,7 @@ export default function InterviewVoice() {
       }, 700)
     } else {
       setStepIndex(stepIndex + 1)
+      setStatus('ready')
     }
   }
 
@@ -311,7 +349,7 @@ export default function InterviewVoice() {
             </div>
           )}
 
-          {status === 'question' && (
+          {(status === 'ready' || status === 'listening') && (
             <div className="voice-center voice-question">
               <div className="voice-steps" aria-hidden="true">
                 {VOICE_STEPS.map((s, i) => (
@@ -331,28 +369,64 @@ export default function InterviewVoice() {
               </div>
               <p className="voice-step-label">Step {stepIndex + 1} of {VOICE_STEPS.length}</p>
 
-              <h1 className="voice-question-title">{currentStep.question}</h1>
-              <p className="interview-subtext voice-question-hint">{currentStep.hint}</p>
-
-              <div className="voice-record-panel">
-                <div className="voice-record-status">
-                  <span className="voice-record-mic">
-                    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-mic" /></svg>
-                  </span>
-                  <span className="voice-record-wave" aria-hidden="true">
-                    <svg width="18" height="18" viewBox="0 0 24 24"><use href="#icon-waveform" /></svg>
-                  </span>
-                  <span className="voice-record-live">
-                    <span className="voice-record-dot" aria-hidden="true" />
-                    Listening
-                  </span>
+              <div className="voice-question-header">
+                <div className="voice-speech-bubble">
+                  <h1 className="voice-speech-title">{currentStep.question}</h1>
+                  <p className="voice-speech-hint">{currentStep.hint}</p>
+                  <span className="voice-speech-tail" aria-hidden="true" />
                 </div>
-                <div className="voice-record-transcript" aria-live="polite">
-                  {liveTranscript || (
-                    <span className="voice-transcript-placeholder">Go ahead, we're listening.</span>
-                  )}
+                <div className="voice-mascot-stage voice-mascot-stage--question">
+                  <span className="voice-mascot-shadow" aria-hidden="true" />
+                  <div className="voice-mascot-figure">
+                    <img src="/assets/mascot-straight.png" alt="" />
+                  </div>
                 </div>
               </div>
+
+              {status === 'ready' && (
+                <>
+                  <button type="button" className="voice-start-btn" onClick={handleReady}>
+                    <span className="voice-start-ring" aria-hidden="true" />
+                    <span className="voice-start-icon">
+                      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-mic" /></svg>
+                    </span>
+                    Ready?
+                  </button>
+                  <p className="voice-start-hint">
+                    Read the question, then tap when you are ready. {formatSeconds(remaining)} left overall.
+                  </p>
+                </>
+              )}
+
+              {status === 'listening' && (
+                <>
+                  <div className="voice-record-panel">
+                    <div className="voice-record-status">
+                      <span className="voice-record-mic">
+                        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-mic" /></svg>
+                      </span>
+                      <span className="voice-record-wave" aria-hidden="true">
+                        <svg width="18" height="18" viewBox="0 0 24 24"><use href="#icon-waveform" /></svg>
+                      </span>
+                      <span className="voice-record-live">
+                        <span className="voice-record-dot" aria-hidden="true" />
+                        Listening
+                      </span>
+                      <span className="voice-record-time">{formatSeconds(remaining)} left</span>
+                    </div>
+                    <div className="voice-record-transcript" aria-live="polite">
+                      {liveTranscript || (
+                        <span className="voice-transcript-placeholder">Take your time.</span>
+                      )}
+                    </div>
+                  </div>
+
+                  <button type="button" className="interview-continue-btn" onClick={triggerAdvance}>
+                    Next
+                    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow" /></svg>
+                  </button>
+                </>
+              )}
 
               {micDenied && (
                 <p className="voice-error">
@@ -360,10 +434,6 @@ export default function InterviewVoice() {
                 </p>
               )}
 
-              <button type="button" className="interview-continue-btn" onClick={triggerAdvance}>
-                Continue
-                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow" /></svg>
-              </button>
               <button type="button" className="voice-skip-link" onClick={() => navigate('/interview')}>
                 Prefer typing? Take the guided interview instead
               </button>

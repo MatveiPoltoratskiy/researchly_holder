@@ -3263,11 +3263,33 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
   text-transform:uppercase; color:var(--navy-faint);
 }
 
-.voice-question-title{
-  margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; letter-spacing:-.01em;
-  font-size:clamp(26px,3.8vw,38px); line-height:1.2; color:var(--navy); text-wrap:balance;
+/* mascot + speech bubble presenting the question, echoing the same reusable stage as the
+   idle hero (same mascot-in/mascot-bob choreography, and reused .voice-mascot-shadow) —
+   just smaller, and topped with a bubble instead of standing alone. Normal document flow
+   (bubble, then mascot, stacked by the parent's own gap) rather than absolute positioning,
+   so the bubble can never overlap the step-dots above it. */
+.voice-question-header{ display:flex; flex-direction:column; align-items:center; gap:8px; }
+.voice-mascot-stage--question{ width:180px; height:180px; }
+.voice-speech-bubble{
+  position:relative; width:max-content; max-width:340px; background:var(--card-bg);
+  border:1.5px solid var(--card-border); border-radius:20px; padding:16px 20px 22px;
+  box-shadow:0 10px 24px rgba(30,37,64,.12);
 }
-.voice-question-hint{ margin:0 0 4px; }
+.voice-speech-tail{
+  position:absolute; left:50%; bottom:-8px; width:16px; height:16px; transform:translateX(-50%) rotate(45deg);
+  background:var(--card-bg); border-right:1.5px solid var(--card-border); border-bottom:1.5px solid var(--card-border);
+}
+.voice-speech-title{
+  margin:0; font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; letter-spacing:-.01em;
+  font-size:clamp(20px,2.6vw,26px); line-height:1.25; color:var(--navy); text-wrap:balance;
+}
+.voice-speech-hint{
+  margin:6px 0 0; font-family:"Segoe UI",system-ui,sans-serif; font-size:14px; color:var(--navy); opacity:.68;
+}
+.voice-record-time{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; font-weight:700; color:var(--navy-faint);
+  margin-left:2px;
+}
 
 .voice-record-panel{
   width:100%; background:var(--card-bg); border:1.5px solid var(--card-border); border-radius:20px;
@@ -3302,7 +3324,11 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
    stretching to the shared 1120px interview width, with generous breathing room ("a few
    cm") on every side rather than sitting flush against the viewport edges */
 .interview-container--compact{ max-width:600px; }
-.voice-card--idle{ flex:none; width:auto; align-self:center; padding:48px 40px; }
+.voice-card--idle{
+  flex:none; width:auto; align-self:center; padding:48px 40px;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
 
 /* short viewports: this page is position:fixed/overflow:hidden (see the fixed-page-overlay-
    clipping note wherever this codebase discusses /interview-voice), so anything taller than

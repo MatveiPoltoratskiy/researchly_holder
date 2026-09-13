@@ -31,9 +31,9 @@ export default function VoiceWaveBackground() {
     let visible = true
     let cells = []
 
-    const SPACING = 54
-    const FONT_BASE = 13
-    const FONT_AMP = 9
+    const SPACING = 84
+    const FONT_BASE = 12
+    const FONT_AMP = 8
 
     function seededSymbol(i, j) {
       // deterministic pseudo-random pick per cell, so a resize rebuild doesn't reshuffle
@@ -68,7 +68,7 @@ export default function VoiceWaveBackground() {
       for (const c of cells) {
         const wave = Math.sin(c.i * 0.32 + t) * Math.cos(c.j * 0.28 + t * 0.75)
         const size = FONT_BASE + FONT_AMP * ((wave + 1) / 2)
-        const alpha = 0.16 + 0.34 * ((wave + 1) / 2)
+        const alpha = 0.07 + 0.16 * ((wave + 1) / 2)
         ctx.font = `700 ${size.toFixed(1)}px "Segoe UI", system-ui, sans-serif`
         ctx.fillStyle = `rgba(221,107,46,${alpha.toFixed(3)})`
         ctx.fillText(c.symbol, c.x, c.y)
