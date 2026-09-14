@@ -2,10 +2,62 @@ import { useMemo, useState } from 'react'
 import { Link } from '../lib/router'
 import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
 import { useSavedOpportunities, SAVE_STATUSES } from '../lib/savedOpportunities'
+import { useDeadlineReminders } from '../lib/deadlineReminders'
+import { daysUntil, formatDeadlineLong } from '../lib/calendarEvent'
+import { useDeadlineCountdown } from '../lib/useDeadlineCountdown'
+import CalendarPickerModal from './CalendarPickerModal'
 import { OpportunityCard, OpportunityDetailModal, recommendTagFor } from './OpportunityExplorer'
 
 const OPP_BY_ID = new Map(CANADA_OPPORTUNITIES.map((o) => [o.id, o]))
 const STATUS_ORDER = SAVE_STATUSES.map((s) => s.id)
+
+// deadline-reminder entries sort soonest-first, with anything already past pushed below
+// every still-active one (and, within the past group, most-recently-passed first)
+function sortDeadlineEntries(entries) {
+  return [...entries].sort((a, b) => {
+    const da = daysUntil(a.o.deadline)
+    const db = daysUntil(b.o.deadline)
+    const aPast = da < 0
+    const bPast = db < 0
+    if (aPast !== bPast) return aPast ? 1 : -1
+    return aPast ? db - da : da - db
+  })
+}
+
+// compact row for the Deadlines tab — deliberately not a full OpportunityCard (no blurb,
+// tags, or match score here; just what you need to triage an approaching deadline). Clicking
+// the row opens the same detail modal every other list uses; the bell removes the reminder
+// directly, with no confirmation, same as unsaving elsewhere in this app.
+function DeadlineCard({ o, reminders, onOpenDetail }) {
+  const countdown = useDeadlineCountdown(o.deadline)
+
+  return (
+    <article className={`deadline-card ${countdown.isPast ? 'is-past' : ''}`}>
+      <button type="button" className="deadline-card-main" onClick={() => onOpenDetail(o.id)}>
+        <span className="deadline-card-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24"><use href="#icon-calendar" /></svg>
+        </span>
+        <span className="deadline-card-info">
+          <span className="deadline-card-name">{o.name}</span>
+          <span className="deadline-card-org">{o.org}</span>
+        </span>
+        <span className="deadline-card-date">{formatDeadlineLong(o.deadline)}</span>
+        <span className={`deadline-card-countdown ${countdown.cls}`}>{countdown.label}</span>
+      </button>
+      <button
+        type="button"
+        className="deadline-card-remove"
+        onClick={() => reminders.remove(o.id)}
+        aria-label="Remove deadline reminder"
+        title="Remove deadline reminder"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      </button>
+    </article>
+  )
+}
 
 /**
  * The "My Opportunities" pipeline page — a simple stacked list of saved opportunities
@@ -15,8 +67,10 @@ const STATUS_ORDER = SAVE_STATUSES.map((s) => s.id)
  */
 export default function MyOpportunities() {
   const saved = useSavedOpportunities()
+  const reminders = useDeadlineReminders()
   const [statusFilter, setStatusFilter] = useState('all')
   const [detailId, setDetailId] = useState(null)
+  const [reminderPickerId, setReminderPickerId] = useState(null)
 
   const savedEntries = useMemo(() => {
     const entries = Object.entries(saved.savedMap)
@@ -26,10 +80,20 @@ export default function MyOpportunities() {
     return entries
   }, [saved.savedMap])
 
+  const deadlineEntries = useMemo(() => {
+    const entries = Object.keys(reminders.remindersMap)
+      .map((id) => ({ id, o: OPP_BY_ID.get(id) }))
+      .filter((entry) => entry.o && entry.o.deadline)
+    return sortDeadlineEntries(entries)
+  }, [reminders.remindersMap])
+
   const visibleEntries =
-    statusFilter === 'all' ? savedEntries : savedEntries.filter((entry) => entry.status === statusFilter)
+    statusFilter === 'all' || statusFilter === 'deadlines'
+      ? savedEntries
+      : savedEntries.filter((entry) => entry.status === statusFilter)
 
   const detailOpportunity = detailId ? OPP_BY_ID.get(detailId) : null
+  const reminderPickerOpportunity = reminderPickerId ? OPP_BY_ID.get(reminderPickerId) : null
 
   return (
     <section className="opp-explorer opp-fixed-page myopp-page">
@@ -68,10 +132,30 @@ export default function MyOpportunities() {
               <span className="myopp-status-count">{saved.countsByStatus[s.id] || 0}</span>
             </button>
           ))}
+          <button
+            type="button"
+            className={`myopp-status-btn ${statusFilter === 'deadlines' ? 'is-active' : ''}`}
+            onClick={() => setStatusFilter('deadlines')}
+          >
+            Deadlines
+            <span className="myopp-status-count">{reminders.totalReminders}</span>
+          </button>
         </div>
 
         <div className="myopp-scroll">
-          {visibleEntries.length === 0 ? (
+          {statusFilter === 'deadlines' ? (
+            deadlineEntries.length === 0 ? (
+              <div className="opp-empty">
+                No deadline reminders yet. Tap the bell icon on any opportunity with a deadline to add one.
+              </div>
+            ) : (
+              <div className="deadline-list">
+                {deadlineEntries.map((entry) => (
+                  <DeadlineCard key={entry.id} o={entry.o} reminders={reminders} onOpenDetail={setDetailId} />
+                ))}
+              </div>
+            )
+          ) : visibleEntries.length === 0 ? (
             <div className="opp-empty">
               {saved.totalSaved === 0
                 ? "You haven't saved any opportunities yet. Browse the list and tap Save on anything worth a second look."
@@ -88,6 +172,8 @@ export default function MyOpportunities() {
                   onOpenDetail={setDetailId}
                   recommendTag={recommendTagFor(entry.o)}
                   saved={saved}
+                  reminders={reminders}
+                  onOpenReminderPicker={setReminderPickerId}
                   mapContext={false}
                 />
               ))}
@@ -104,7 +190,25 @@ export default function MyOpportunities() {
       </div>
 
       {detailOpportunity && (
-        <OpportunityDetailModal o={detailOpportunity} onClose={() => setDetailId(null)} saved={saved} />
+        <OpportunityDetailModal
+          o={detailOpportunity}
+          onClose={() => setDetailId(null)}
+          saved={saved}
+          reminders={reminders}
+          onOpenReminderPicker={setReminderPickerId}
+        />
+      )}
+
+      {reminderPickerOpportunity && (
+        <CalendarPickerModal
+          o={reminderPickerOpportunity}
+          pageUrl={`${window.location.origin}/opportunities`}
+          onClose={() => setReminderPickerId(null)}
+          onPicked={(calendar) => {
+            reminders.add(reminderPickerId, calendar)
+            setReminderPickerId(null)
+          }}
+        />
       )}
     </section>
   )
