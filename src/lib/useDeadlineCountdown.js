@@ -3,7 +3,7 @@ import { daysUntil } from './calendarEvent'
 
 function computeCountdown(iso) {
   const diffDays = daysUntil(iso)
-  if (diffDays === null) return { label: '', diffDays: null, isPast: false, cls: '' }
+  if (diffDays === null) return { label: 'Not confirmed', diffDays: null, isPast: false, cls: 'is-unknown' }
   if (diffDays < 0) return { label: 'Deadline passed', diffDays, isPast: true, cls: 'is-past' }
   if (diffDays === 0) return { label: 'Today', diffDays, isPast: false, cls: 'is-urgent' }
   if (diffDays === 1) return { label: 'Tomorrow', diffDays, isPast: false, cls: 'is-urgent' }

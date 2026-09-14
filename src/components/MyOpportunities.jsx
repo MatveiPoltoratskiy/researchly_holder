@@ -12,15 +12,19 @@ const OPP_BY_ID = new Map(CANADA_OPPORTUNITIES.map((o) => [o.id, o]))
 const STATUS_ORDER = SAVE_STATUSES.map((s) => s.id)
 
 // deadline-reminder entries sort soonest-first, with anything already past pushed below
-// every still-active one (and, within the past group, most-recently-passed first)
+// every still-active one (most-recently-passed first within that group) — and anything
+// whose deadline isn't confirmed yet (daysUntil -> null) pushed below even that, since
+// there's no date to rank it by; alphabetical among themselves for a stable order
 function sortDeadlineEntries(entries) {
+  const groupOf = (days) => (days === null ? 2 : days < 0 ? 1 : 0)
   return [...entries].sort((a, b) => {
     const da = daysUntil(a.o.deadline)
     const db = daysUntil(b.o.deadline)
-    const aPast = da < 0
-    const bPast = db < 0
-    if (aPast !== bPast) return aPast ? 1 : -1
-    return aPast ? db - da : da - db
+    const ga = groupOf(da)
+    const gb = groupOf(db)
+    if (ga !== gb) return ga - gb
+    if (ga === 2) return a.o.name.localeCompare(b.o.name)
+    return ga === 1 ? db - da : da - db
   })
 }
 
@@ -44,15 +48,16 @@ function DeadlineCard({ o, reminders, onOpenDetail, onOpenCalendarPicker }) {
           <span className="deadline-card-name">{o.name}</span>
           <span className="deadline-card-org">{o.org}</span>
         </span>
-        <span className="deadline-card-date">{formatDeadlineLong(o.deadline)}</span>
+        <span className="deadline-card-date">{o.deadline ? formatDeadlineLong(o.deadline) : 'Not confirmed'}</span>
         <span className={`deadline-card-countdown ${countdown.cls}`}>{countdown.label}</span>
       </button>
       <button
         type="button"
         className={`deadline-card-calendar ${hasCalendar ? 'has-calendar' : ''}`}
-        onClick={() => onOpenCalendarPicker(o.id)}
+        onClick={() => o.deadline && onOpenCalendarPicker(o.id)}
+        disabled={!o.deadline}
         aria-label={hasCalendar ? 'Change calendar' : 'Add to calendar'}
-        title={hasCalendar ? 'Change calendar' : 'Add to calendar'}
+        title={o.deadline ? (hasCalendar ? 'Change calendar' : 'Add to calendar') : 'Available once the deadline is confirmed'}
       >
         <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
           <use href="#icon-calendar" />
@@ -97,7 +102,7 @@ export default function MyOpportunities() {
   const deadlineEntries = useMemo(() => {
     const entries = Object.keys(reminders.remindersMap)
       .map((id) => ({ id, o: OPP_BY_ID.get(id) }))
-      .filter((entry) => entry.o && entry.o.deadline)
+      .filter((entry) => entry.o)
     return sortDeadlineEntries(entries)
   }, [reminders.remindersMap])
 
@@ -160,7 +165,7 @@ export default function MyOpportunities() {
           {statusFilter === 'deadlines' ? (
             deadlineEntries.length === 0 ? (
               <div className="opp-empty">
-                No deadline reminders yet. Tap the bell icon on any opportunity with a deadline to add one.
+                No deadline reminders yet. Tap the bell icon on any opportunity to track it here.
               </div>
             ) : (
               <div className="deadline-list">

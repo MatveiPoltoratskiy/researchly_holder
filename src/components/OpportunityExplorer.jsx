@@ -250,11 +250,13 @@ function SaveControl({ id, saved }) {
 
 // deadline-reminder bell — only rendered when the opportunity actually has a deadline.
 // One click adds or removes it from the Deadlines tab immediately, same directness as the
-// bookmark button right next to it — no calendar picker in the way. Exporting to an actual
-// calendar app is a separate, secondary action available from the Deadlines tab itself,
-// once something is already being tracked there.
-function ReminderControl({ id, deadline, reminders }) {
-  if (!deadline) return null
+// bookmark button right next to it — no calendar picker in the way. Shown on every card,
+// not just ones with a confirmed deadline: most listings in this dataset don't have one yet,
+// and the Deadlines tab itself is exactly where a visitor would want to keep an eye on an
+// opportunity until its date firms up — it shows "Not confirmed" there rather than a date.
+// Exporting to an actual calendar app is a separate, secondary action available from the
+// Deadlines tab itself, once something is already being tracked there.
+function ReminderControl({ id, reminders }) {
   const active = reminders.has(id)
 
   return (
@@ -340,7 +342,7 @@ export function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, 
           </div>
           <div className="opp-card-actions">
             {reminders && (
-              <ReminderControl id={o.id} deadline={o.deadline} reminders={reminders} />
+              <ReminderControl id={o.id} reminders={reminders} />
             )}
             <SaveControl id={o.id} saved={saved} />
           </div>
@@ -573,7 +575,7 @@ export function OpportunityDetailModal({ o, onClose, interviewAnswers, matchProf
           {o.locationLabel && <span className="opp-modal-status-item">{o.locationLabel}</span>}
           <span className="opp-modal-status-item">{MODE_LABEL[o.mode] || o.mode}</span>
           {reminders && (
-            <ReminderControl id={o.id} deadline={o.deadline} reminders={reminders} />
+            <ReminderControl id={o.id} reminders={reminders} />
           )}
           <SaveControl id={o.id} saved={saved} />
         </div>
