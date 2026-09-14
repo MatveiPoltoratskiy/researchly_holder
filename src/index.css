@@ -195,7 +195,14 @@ svg{ display:block; }
      smooths the change between one word's width and the next */
   transition: width .3s cubic-bezier(.4,0,.2,1);
 }
-.th-word-viewport{ display:flex; flex-direction:column; align-items:center; transition: transform .52s cubic-bezier(.4,0,.2,1); }
+.th-word-viewport{
+  /* left-aligned, not centered — .th-word's clip window is anchored at x:0 and sized to
+     exactly the CURRENT word's own width, so any word shorter than the widest one in the
+     set (which is what sizes this flex column) would get pushed rightward by centering
+     and have its right edge clipped by that window. Left-aligning keeps every word flush
+     with x:0, matching where the window actually is, so nothing spills past its edge. */
+  display:flex; flex-direction:column; align-items:flex-start; transition: transform .52s cubic-bezier(.4,0,.2,1);
+}
 .th-word-viewport em{
   display:block; height:1.5em; line-height:1.5; font-family: var(--font-title); font-weight:700;
   -webkit-text-stroke: .5px currentColor;

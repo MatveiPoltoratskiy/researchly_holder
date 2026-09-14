@@ -39,7 +39,10 @@ function FlickerWord() {
   // a box wide enough for the longest one, reading as an awkward gap after "Come"
   useEffect(() => {
     const el = emRefs.current[step]
-    if (el) setWidth(el.getBoundingClientRect().width)
+    // +6px buffer: italic text's rightmost ink (especially with the text-stroke this font
+    // gets) can paint slightly past its own layout box — without this, whichever word
+    // happens to be widest gets its last letter shaved off by .th-word's overflow:hidden.
+    if (el) setWidth(el.getBoundingClientRect().width + 6)
   }, [step])
 
   useEffect(() => {
