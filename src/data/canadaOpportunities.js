@@ -5376,36 +5376,6 @@ export const CANADA_OPPORTUNITIES = [
     "blurb": "A cancer-research lab placement for Wisconsin high schoolers at UW's Carbone Cancer Center."
   },
   {
-    "id": "mmsd-uwmadison-hs-research",
-    "name": "High School Science Research Internship Program",
-    "org": "Madison Metropolitan School District + UW-Madison",
-    "url": "https://www.madison.k12.wi.us/curriculum-instruction/science/high-school-science-research-internship-program",
-    "focus": [
-      "biology",
-      "chemistry",
-      "physics"
-    ],
-    "levels": [
-      "hs-11"
-    ],
-    "mode": "in-person",
-    "locationLabel": "Madison, WI",
-    "lat": 43.0766,
-    "lon": -89.4125,
-    "availability": "summer",
-    "paid": true,
-    "cost": null,
-    "stipend": null,
-    "deadline": "2026-01-15",
-    "selectivity": "high",
-    "isDirectory": false,
-    "multiSite": false,
-    "isGrant": false,
-    "confidence": "high",
-    "blurb": "A 9-week authentic science research internship for Madison-district 11th graders, with UW-Madison.",
-    "equityNote": "Madison school district students only"
-  },
-  {
     "id": "mcgill-youth-biodiversity",
     "name": "Youth Biodiversity Internships Program",
     "org": "McGill University (Gault Nature Reserve)",
@@ -9591,29 +9561,6 @@ export const CANADA_OPPORTUNITIES = [
     "blurb": "A two-month paid internship giving UK undergraduate science students hands-on environmental research experience, part of a widening-participation doctoral training initiative (SEEDS = Supporting Equity, Engagement and Development in Science)."
   },
   {
-    "id": "tcd-sure-ireland",
-    "name": "Summer Undergraduate Research Experience (SURE)",
-    "org": "Trinity College Dublin",
-    "url": "https://www.sure.tcd.ie",
-    "focus": ["physics", "chemistry"],
-    "levels": ["ugrad-2", "ugrad-3", "ugrad-4"],
-    "mode": "in-person",
-    "locationLabel": "Trinity College Dublin, Dublin, Ireland",
-    "lat": 53.3438,
-    "lon": -6.2546,
-    "availability": "summer",
-    "paid": true,
-    "cost": 0,
-    "stipend": null,
-    "deadline": null,
-    "selectivity": "high",
-    "isDirectory": false,
-    "multiSite": false,
-    "isGrant": false,
-    "confidence": "medium",
-    "blurb": "An 11-week lab placement in physics, chemistry, or electronic/electrical engineering, funded by Science Foundation Ireland's UREKA initiative and open to science/engineering undergraduates from Ireland and abroad, not just Trinity's own."
-  },
-  {
     "id": "cern-summer-student-programme",
     "name": "Summer Student Programme",
     "org": "CERN",
@@ -10515,35 +10462,6 @@ export const CANADA_OPPORTUNITIES = [
     "blurb": "A 10-week NSF-funded astronomy research experience for undergraduates."
   },
   {
-    "id": "lsu-physics-astronomy-reu",
-    "name": "Research Experiences for Undergraduates in Physics & Astronomy",
-    "org": "Louisiana State University",
-    "url": "https://www.lsu.edu/physics/undergraduate-programs/reu.php",
-    "focus": [
-      "physics"
-    ],
-    "levels": [
-      "ugrad-2",
-      "ugrad-3",
-      "ugrad-4"
-    ],
-    "mode": "in-person",
-    "locationLabel": "Louisiana State University, Baton Rouge, LA",
-    "lat": 30.4133,
-    "lon": -91.18,
-    "availability": "summer",
-    "paid": true,
-    "cost": 0,
-    "stipend": null,
-    "deadline": null,
-    "selectivity": "medium",
-    "isDirectory": false,
-    "multiSite": false,
-    "isGrant": false,
-    "confidence": "low",
-    "blurb": "A 10-week NSF-funded physics and astronomy REU at LSU."
-  },
-  {
     "id": "byu-physics-astronomy-reu",
     "name": "Summer Research Programs",
     "org": "Brigham Young University",
@@ -10660,37 +10578,6 @@ export const CANADA_OPPORTUNITIES = [
     "blurb": "A tuition-free, mentored environmental-science research program for high schoolers at Penn's CEET - one-on-one project with a mentor after two weeks of lab-skills training. Has skipped some years (confirm it's actually running before counting on it)."
   },
   {
-    "id": "wisest-summer-research-alberta",
-    "name": "WISEST Summer Research Program",
-    "org": "University of Alberta",
-    "url": "https://www.ualberta.ca/en/wisest/programs/summer-research-program/index.html",
-    "focus": [
-      "biology",
-      "chemistry",
-      "physics",
-      "computer-science",
-      "environmental-science"
-    ],
-    "levels": [
-      "hs-12"
-    ],
-    "mode": "in-person",
-    "locationLabel": "University of Alberta, Edmonton, AB",
-    "lat": 53.5232,
-    "lon": -113.5263,
-    "availability": "summer",
-    "paid": true,
-    "cost": 0,
-    "stipend": null,
-    "deadline": null,
-    "selectivity": "high",
-    "isDirectory": true,
-    "multiSite": false,
-    "isGrant": false,
-    "confidence": "medium",
-    "blurb": "Six weeks placed in a real science/engineering/tech lab, $15 CAD/hour, for 40 rising Grade 12 students with a Canadian Social Insurance Number."
-  },
-  {
     "id": "aalto-science-institute-summer",
     "name": "Aalto Science Institute International Summer Research Programme",
     "org": "Aalto University",
@@ -10782,35 +10669,6 @@ export const CANADA_OPPORTUNITIES = [
     "isGrant": true,
     "confidence": "low",
     "blurb": "Funds an independent summer research project for undergraduates at Scottish universities, aimed at students from lower-income households."
-  },
-  {
-    "id": "rse-cormack-piazzi-smyth",
-    "name": "Cormack & Piazzi Smyth Undergraduate Vacation Research Scholarship",
-    "org": "Royal Society of Edinburgh",
-    "url": "https://www.rse.org.uk/cormack-and-piazzi-smyth-bequest-fund/",
-    "focus": [
-      "mathematics",
-      "physics"
-    ],
-    "levels": [
-      "ugrad-2",
-      "ugrad-3"
-    ],
-    "mode": "in-person",
-    "locationLabel": "Universities across Scotland",
-    "lat": 55.9533,
-    "lon": -3.1883,
-    "availability": "summer",
-    "paid": true,
-    "cost": 0,
-    "stipend": null,
-    "deadline": null,
-    "selectivity": "high",
-    "isDirectory": true,
-    "multiSite": false,
-    "isGrant": true,
-    "confidence": "low",
-    "blurb": "A Scottish scholarship funding summer vacation research in mathematics, physics, or astronomy for undergraduates at Scottish universities."
   },
   {
     "id": "rice-psychological-sciences-reu",
@@ -11322,70 +11180,6 @@ export const CANADA_OPPORTUNITIES = [
     "isGrant": false,
     "confidence": "medium",
     "blurb": "A fully funded 2-month neuroscience lab internship just outside Tokyo, plus an optional 5-day intensive lecture course, open to students worldwide beyond high school level (about 85% of past interns come from outside Japan). No application fee; travel and living costs are covered."
-  },
-  {
-    "id": "astar-sipga",
-    "name": "Singapore International Pre-Graduate Award (SIPGA)",
-    "org": "A*STAR (Agency for Science, Technology and Research)",
-    "url": "https://www.a-star.edu.sg/Scholarships/for-undergraduate-studies/singapore-international-pre-graduate-award-sipga",
-    "focus": [
-      "biology",
-      "chemistry",
-      "physics",
-      "computer-science"
-    ],
-    "levels": [
-      "ugrad-3",
-      "ugrad-4"
-    ],
-    "mode": "in-person",
-    "locationLabel": "Singapore",
-    "lat": 1.3521,
-    "lon": 103.8198,
-    "availability": "both",
-    "paid": true,
-    "cost": null,
-    "stipend": 2000,
-    "deadline": null,
-    "selectivity": "very-high",
-    "isDirectory": false,
-    "multiSite": true,
-    "isGrant": false,
-    "confidence": "medium",
-    "blurb": "A 2-6 month research attachment at an A*STAR research institute in biomedical science, physical science, or engineering, for international 3rd/4th-year undergrads (or master's students) with a strong academic record. Pays a S$2,000/month stipend."
-  },
-  {
-    "id": "weizmann-kupcinet-getz",
-    "name": "Kupcinet-Getz International Summer Program",
-    "org": "Weizmann Institute of Science",
-    "url": "https://www.weizmann.ac.il/wsos/admissions/kupcinet-getz-international-summer-school/about-program-0",
-    "focus": [
-      "biology",
-      "chemistry",
-      "physics",
-      "mathematics",
-      "computer-science"
-    ],
-    "levels": [
-      "ugrad-2",
-      "ugrad-3",
-      "ugrad-4"
-    ],
-    "mode": "in-person",
-    "locationLabel": "Rehovot, Israel",
-    "lat": 31.907,
-    "lon": 34.809,
-    "availability": "summer",
-    "paid": false,
-    "cost": 0,
-    "stipend": null,
-    "deadline": null,
-    "selectivity": "very-high",
-    "isDirectory": false,
-    "multiSite": false,
-    "isGrant": false,
-    "confidence": "low",
-    "blurb": "An 8-week research immersion where undergrads (past their first year, GPA equivalent of 3.6/4.0) join a real Weizmann Institute lab or theoretical research group in the physical, chemical, or life sciences, math, or computer science. No application fee. Check the current cycle's page for the latest housing/stipend terms."
   },
   {
     "id": "kaist-x-summer",
@@ -12101,34 +11895,6 @@ export const CANADA_OPPORTUNITIES = [
     "blurb": "8 weeks (July-August) running an individual research project in a Faculty of Biology and Medicine lab, for about 15 bachelor's students worldwide per year in biology, medicine, or a related field. Pays a CHF 1,500 living stipend plus free accommodation, travel costs, and visa help. Shared seminars with the sister programme at EPFL."
   },
   {
-    "id": "eso-science-communication-internship",
-    "name": "Science Communication Internship",
-    "org": "European Southern Observatory (ESO)",
-    "url": "https://www.eso.org/public/employment/",
-    "focus": [
-      "physics"
-    ],
-    "levels": [
-      "ugrad-3",
-      "ugrad-4"
-    ],
-    "mode": "in-person",
-    "locationLabel": "Garching bei München, Germany",
-    "lat": 48.261,
-    "lon": 11.6737,
-    "availability": "both",
-    "paid": true,
-    "cost": 0,
-    "stipend": null,
-    "deadline": null,
-    "selectivity": "high",
-    "isDirectory": false,
-    "multiSite": false,
-    "isGrant": false,
-    "confidence": "low",
-    "blurb": "A 3-6 month fully funded internship at Europe's astronomy agency, working on public outreach and science communication around real ESO research (not lab research itself) — a good fit if you're into astronomy and also enjoy the writing/media side of science."
-  },
-  {
     "id": "infn-lnf-summer-student",
     "name": "LNF Summer Student Program",
     "org": "INFN Laboratori Nazionali di Frascati",
@@ -12184,70 +11950,6 @@ export const CANADA_OPPORTUNITIES = [
     "isGrant": false,
     "confidence": "medium",
     "blurb": "About 12 weeks of full-time photonics research at ICFO near Barcelona, with a Group Leader as mentor. Pays a €600/month gross stipend for students not already living in Catalunya, plus travel costs."
-  },
-  {
-    "id": "amgen-lmu-munich",
-    "name": "Amgen Scholars Program",
-    "org": "Ludwig-Maximilians-Universität München (LMU Munich)",
-    "url": "https://amgenscholars.com/university/lmu-munich/",
-    "focus": [
-      "biology",
-      "chemistry",
-      "pre-med"
-    ],
-    "levels": [
-      "ugrad-1",
-      "ugrad-2",
-      "ugrad-3",
-      "ugrad-4"
-    ],
-    "mode": "in-person",
-    "locationLabel": "Munich, Germany",
-    "lat": 48.1508,
-    "lon": 11.5802,
-    "availability": "summer",
-    "paid": true,
-    "cost": null,
-    "stipend": null,
-    "deadline": null,
-    "selectivity": "very-high",
-    "isDirectory": false,
-    "multiSite": false,
-    "isGrant": false,
-    "confidence": "medium",
-    "blurb": "One of 5 official European Amgen Scholars sites: a funded summer research program in science and biotechnology."
-  },
-  {
-    "id": "amgen-eth-zurich",
-    "name": "Amgen Scholars Program",
-    "org": "ETH Zurich",
-    "url": "https://amgenscholars.com/university/eth-zurich/",
-    "focus": [
-      "biology",
-      "chemistry",
-      "pre-med"
-    ],
-    "levels": [
-      "ugrad-1",
-      "ugrad-2",
-      "ugrad-3",
-      "ugrad-4"
-    ],
-    "mode": "in-person",
-    "locationLabel": "Zurich, Switzerland",
-    "lat": 47.3763,
-    "lon": 8.5476,
-    "availability": "summer",
-    "paid": true,
-    "cost": null,
-    "stipend": null,
-    "deadline": null,
-    "selectivity": "very-high",
-    "isDirectory": false,
-    "multiSite": false,
-    "isGrant": false,
-    "confidence": "medium",
-    "blurb": "One of 5 official European Amgen Scholars sites: a funded summer research program in science and biotechnology."
   },
   {
     "id": "amgen-karolinska",
@@ -12346,36 +12048,6 @@ export const CANADA_OPPORTUNITIES = [
     "blurb": "7-9 weeks (12-15 spots) doing a research project at the Biozentrum, matched to a host lab across biology, chemistry, physics, nanosciences, or computational science. Pays CHF 2,060/month. Note: only open to Swiss/EU citizens or Swiss C-permit holders, not open internationally beyond that."
   },
   {
-    "id": "uzh-buss",
-    "name": "Zurich Biology Undergraduate Summer School (BUSS)",
-    "org": "University of Zurich / ETH Zurich",
-    "url": "https://www.buss.uzh.ch/",
-    "focus": [
-      "biology"
-    ],
-    "levels": [
-      "ugrad-1",
-      "ugrad-2",
-      "ugrad-3",
-      "ugrad-4"
-    ],
-    "mode": "in-person",
-    "locationLabel": "Zurich, Switzerland",
-    "lat": 47.3769,
-    "lon": 8.5417,
-    "availability": "summer",
-    "paid": false,
-    "cost": 0,
-    "stipend": null,
-    "deadline": null,
-    "selectivity": "high",
-    "isDirectory": false,
-    "multiSite": false,
-    "isGrant": false,
-    "confidence": "low",
-    "blurb": "A hands-on life-sciences research project in a UZH or ETH Zurich lab, open to bachelor's students worldwide at any stage. Travel and housing are covered for students coming from outside Switzerland; no stipend beyond that."
-  },
-  {
     "id": "crag-summer-internship",
     "name": "CRAG Severo Ochoa Summer Internship Program",
     "org": "Centre for Research in Agricultural Genomics (CRAG)",
@@ -12403,39 +12075,6 @@ export const CANADA_OPPORTUNITIES = [
     "isGrant": false,
     "confidence": "medium",
     "blurb": "A 4-week hands-on introduction to plant and animal genomics research, working in a CRAG lab under a principal investigator's group. Free student housing and travel to/from Barcelona covered for students from outside the city; open to international undergrads."
-  },
-  {
-    "id": "anu-summer-research-scholarships",
-    "name": "Summer Research Scholarships",
-    "org": "Australian National University",
-    "url": "https://rses.anu.edu.au/study/summer-research-scholarships",
-    "focus": [
-      "physics",
-      "chemistry",
-      "biology",
-      "environmental-science",
-      "mathematics",
-      "computer-science"
-    ],
-    "levels": [
-      "ugrad-3",
-      "ugrad-4"
-    ],
-    "mode": "in-person",
-    "locationLabel": "Canberra, Australia",
-    "lat": -35.2777,
-    "lon": 149.1185,
-    "availability": "both",
-    "paid": true,
-    "cost": 0,
-    "stipend": null,
-    "deadline": null,
-    "selectivity": "high",
-    "isDirectory": false,
-    "multiSite": false,
-    "isGrant": false,
-    "confidence": "medium",
-    "blurb": "A short research project at ANU under a faculty supervisor, with full board on campus, a weekly allowance, and travel to Canberra covered. Note: only open to students currently enrolled full-time at a university in Australia or New Zealand, in the 3rd/4th year of an honours-track degree."
   },
   {
     "id": "monash-vacation-research-scholarship",
