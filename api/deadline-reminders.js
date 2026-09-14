@@ -30,7 +30,7 @@ function cleanRemindersMap(value) {
   for (const [id, entry] of entries) {
     if (typeof id !== 'string' || !id || id.length > MAX_ID_LENGTH) return null
     if (!entry || typeof entry !== 'object' || Array.isArray(entry)) return null
-    if (!ALLOWED_CALENDARS.has(entry.calendar)) return null
+    if (entry.calendar !== null && !ALLOWED_CALENDARS.has(entry.calendar)) return null
     if (typeof entry.addedAt !== 'string' || !ISO_TIMESTAMP_RE.test(entry.addedAt)) return null
     cleaned[id] = { calendar: entry.calendar, addedAt: entry.addedAt }
   }

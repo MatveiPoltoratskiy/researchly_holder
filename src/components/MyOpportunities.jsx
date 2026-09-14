@@ -26,10 +26,13 @@ function sortDeadlineEntries(entries) {
 
 // compact row for the Deadlines tab — deliberately not a full OpportunityCard (no blurb,
 // tags, or match score here; just what you need to triage an approaching deadline). Clicking
-// the row opens the same detail modal every other list uses; the bell removes the reminder
-// directly, with no confirmation, same as unsaving elsewhere in this app.
-function DeadlineCard({ o, reminders, onOpenDetail }) {
+// the row opens the same detail modal every other list uses. The calendar icon is the only
+// place the Google/Apple/Outlook/.ics picker lives now — adding to this tab (the bell, on
+// any card) is a one-click, no-picker action, so exporting to a real calendar is a deliberate
+// second step, not a requirement for just tracking a deadline here.
+function DeadlineCard({ o, reminders, onOpenDetail, onOpenCalendarPicker }) {
   const countdown = useDeadlineCountdown(o.deadline)
+  const hasCalendar = Boolean(reminders.remindersMap[o.id]?.calendar)
 
   return (
     <article className={`deadline-card ${countdown.isPast ? 'is-past' : ''}`}>
@@ -46,10 +49,21 @@ function DeadlineCard({ o, reminders, onOpenDetail }) {
       </button>
       <button
         type="button"
+        className={`deadline-card-calendar ${hasCalendar ? 'has-calendar' : ''}`}
+        onClick={() => onOpenCalendarPicker(o.id)}
+        aria-label={hasCalendar ? 'Change calendar' : 'Add to calendar'}
+        title={hasCalendar ? 'Change calendar' : 'Add to calendar'}
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+          <use href="#icon-calendar" />
+        </svg>
+      </button>
+      <button
+        type="button"
         className="deadline-card-remove"
         onClick={() => reminders.remove(o.id)}
-        aria-label="Remove deadline reminder"
-        title="Remove deadline reminder"
+        aria-label="Remove from Deadlines tab"
+        title="Remove from Deadlines tab"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
@@ -151,7 +165,13 @@ export default function MyOpportunities() {
             ) : (
               <div className="deadline-list">
                 {deadlineEntries.map((entry) => (
-                  <DeadlineCard key={entry.id} o={entry.o} reminders={reminders} onOpenDetail={setDetailId} />
+                  <DeadlineCard
+                    key={entry.id}
+                    o={entry.o}
+                    reminders={reminders}
+                    onOpenDetail={setDetailId}
+                    onOpenCalendarPicker={setReminderPickerId}
+                  />
                 ))}
               </div>
             )
@@ -173,7 +193,6 @@ export default function MyOpportunities() {
                   recommendTag={recommendTagFor(entry.o)}
                   saved={saved}
                   reminders={reminders}
-                  onOpenReminderPicker={setReminderPickerId}
                   mapContext={false}
                 />
               ))}
@@ -195,7 +214,6 @@ export default function MyOpportunities() {
           onClose={() => setDetailId(null)}
           saved={saved}
           reminders={reminders}
-          onOpenReminderPicker={setReminderPickerId}
         />
       )}
 

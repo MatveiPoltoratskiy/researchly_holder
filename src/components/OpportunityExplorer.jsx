@@ -9,7 +9,6 @@ import { scoreOpportunity } from '../lib/matchOpportunities'
 import { computeMatchScore, resolveMatchScore } from '../lib/matchScore'
 import { useSavedOpportunities, SAVE_STATUSES } from '../lib/savedOpportunities'
 import { useDeadlineReminders } from '../lib/deadlineReminders'
-import CalendarPickerModal from './CalendarPickerModal'
 import { useLocalStorageStateWithExpiry } from '../lib/storage'
 import { Link } from '../lib/router'
 import { burstConfettiAtPoint } from '../lib/confetti'
@@ -250,10 +249,11 @@ function SaveControl({ id, saved }) {
 }
 
 // deadline-reminder bell — only rendered when the opportunity actually has a deadline.
-// Adding one opens the calendar picker (handled by the caller, which owns the modal so it
-// isn't nested inside a clickable card); removing one is a direct, no-confirmation toggle,
-// same as unsaving. Never shows for an opportunity without a confirmed deadline.
-function ReminderControl({ id, deadline, reminders, onOpenPicker }) {
+// One click adds or removes it from the Deadlines tab immediately, same directness as the
+// bookmark button right next to it — no calendar picker in the way. Exporting to an actual
+// calendar app is a separate, secondary action available from the Deadlines tab itself,
+// once something is already being tracked there.
+function ReminderControl({ id, deadline, reminders }) {
   if (!deadline) return null
   const active = reminders.has(id)
 
@@ -263,12 +263,11 @@ function ReminderControl({ id, deadline, reminders, onOpenPicker }) {
       className={`opp-reminder-btn ${active ? 'is-active' : ''}`}
       onClick={(e) => {
         e.stopPropagation()
-        if (active) reminders.remove(id)
-        else onOpenPicker(id)
+        reminders.toggle(id)
       }}
       aria-pressed={active}
-      aria-label={active ? 'Remove deadline reminder' : 'Add deadline reminder'}
-      title={active ? 'Remove deadline reminder' : 'Add deadline reminder'}
+      aria-label={active ? 'Remove from Deadlines tab' : 'Add to Deadlines tab'}
+      title={active ? 'Remove from Deadlines tab' : 'Add to Deadlines tab'}
     >
       <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
         <use href={active ? '#icon-bell-filled' : '#icon-bell'} />
@@ -303,7 +302,7 @@ function MatchBadge({ score, open, onToggle }) {
 
 // exported so the My Opportunities page can render visually identical cards (same
 // component, not a re-implementation) instead of drifting out of sync over time
-export function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, recommendTag, saved, reminders, onOpenReminderPicker, matchProfile, interviewAnswers, mapContext = true }) {
+export function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, recommendTag, saved, reminders, matchProfile, interviewAnswers, mapContext = true }) {
   const primary = FIELD_ORDER.find((f) => o.focus.includes(f)) || o.focus[0]
   const [whyOpen, setWhyOpen] = useState(false)
   const score = useMemo(
@@ -341,7 +340,7 @@ export function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, 
           </div>
           <div className="opp-card-actions">
             {reminders && (
-              <ReminderControl id={o.id} deadline={o.deadline} reminders={reminders} onOpenPicker={onOpenReminderPicker} />
+              <ReminderControl id={o.id} deadline={o.deadline} reminders={reminders} />
             )}
             <SaveControl id={o.id} saved={saved} />
           </div>
@@ -505,7 +504,7 @@ function MajorsFilter({ activeFields, toggleField }) {
   )
 }
 
-export function OpportunityDetailModal({ o, onClose, interviewAnswers, matchProfile, saved, reminders, onOpenReminderPicker }) {
+export function OpportunityDetailModal({ o, onClose, interviewAnswers, matchProfile, saved, reminders }) {
   // Escape-to-close, and lock page scroll while open so the backdrop reads as modal, not
   // just an overlapping card
   useEffect(() => {
@@ -574,7 +573,7 @@ export function OpportunityDetailModal({ o, onClose, interviewAnswers, matchProf
           {o.locationLabel && <span className="opp-modal-status-item">{o.locationLabel}</span>}
           <span className="opp-modal-status-item">{MODE_LABEL[o.mode] || o.mode}</span>
           {reminders && (
-            <ReminderControl id={o.id} deadline={o.deadline} reminders={reminders} onOpenPicker={onOpenReminderPicker} />
+            <ReminderControl id={o.id} deadline={o.deadline} reminders={reminders} />
           )}
           <SaveControl id={o.id} saved={saved} />
         </div>
@@ -680,7 +679,6 @@ export default function OpportunityExplorer() {
   )
   const saved = useSavedOpportunities()
   const reminders = useDeadlineReminders()
-  const [reminderPickerId, setReminderPickerId] = useState(null)
   const [sortKey, setSortKey] = useLocalStorageStateWithExpiry('rsly_opp_sort_key', 'recommended')
   const [userLocation, setUserLocation] = useState(() => interviewHandoff?.filters?.locationCoords || null)
   const [locationStatus, setLocationStatus] = useState(() =>
@@ -972,7 +970,6 @@ export default function OpportunityExplorer() {
 
   const activeFieldLabels = FIELD_ORDER.filter((f) => activeFields.has(f)).map((f) => FIELD_META[f].label)
   const detailOpportunity = detailId ? CANADA_OPPORTUNITIES.find((o) => o.id === detailId) : null
-  const reminderPickerOpportunity = reminderPickerId ? CANADA_OPPORTUNITIES.find((o) => o.id === reminderPickerId) : null
 
   return (
     <section className="opp-explorer opp-fixed-page">
@@ -1197,7 +1194,6 @@ export default function OpportunityExplorer() {
                     recommendTag={recommendTagFor(o)}
                     saved={saved}
                     reminders={reminders}
-                    onOpenReminderPicker={setReminderPickerId}
                     matchProfile={matchProfile}
                     interviewAnswers={interviewAnswers}
                     cardRef={(el) => {
@@ -1234,19 +1230,6 @@ export default function OpportunityExplorer() {
           matchProfile={matchProfile}
           saved={saved}
           reminders={reminders}
-          onOpenReminderPicker={setReminderPickerId}
-        />
-      )}
-
-      {reminderPickerOpportunity && (
-        <CalendarPickerModal
-          o={reminderPickerOpportunity}
-          pageUrl={`${window.location.origin}/opportunities`}
-          onClose={() => setReminderPickerId(null)}
-          onPicked={(calendar) => {
-            reminders.add(reminderPickerId, calendar)
-            setReminderPickerId(null)
-          }}
         />
       )}
 

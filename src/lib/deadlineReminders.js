@@ -63,14 +63,17 @@ export function useDeadlineReminders() {
   }, [remindersMap])
 
   // idempotent by construction: adding an already-active id just overwrites its one
-  // entry, so a duplicate click can never create a second reminder for the same id
+  // entry, so a duplicate click can never create a second reminder for the same id.
+  // `calendar` is optional — the bell adds a reminder with no calendar chosen yet
+  // (calendar: null); picking one later from the Deadlines tab just fills it in, without
+  // resetting addedAt.
   const add = useCallback(
-    (id, calendar) => {
+    (id, calendar = null) => {
       setRemindersMap((prev) => ({
         ...prev,
         [id]: {
-          calendar: REMINDER_CALENDARS.has(calendar) ? calendar : 'ics',
-          addedAt: new Date().toISOString(),
+          calendar: calendar && REMINDER_CALENDARS.has(calendar) ? calendar : null,
+          addedAt: prev[id]?.addedAt || new Date().toISOString(),
         },
       }))
     },
@@ -89,10 +92,27 @@ export function useDeadlineReminders() {
     [setRemindersMap]
   )
 
+  // the bell's one-click action: no calendar picker, just an immediate add/remove from
+  // the Deadlines tab, same directness as the bookmark button
+  const toggle = useCallback(
+    (id) => {
+      setRemindersMap((prev) => {
+        if (prev[id]) {
+          const next = { ...prev }
+          delete next[id]
+          return next
+        }
+        return { ...prev, [id]: { calendar: null, addedAt: new Date().toISOString() } }
+      })
+    },
+    [setRemindersMap]
+  )
+
   return {
     remindersMap, // { [opportunityId]: { calendar, addedAt } }
     add,
     remove,
+    toggle,
     has: (id) => Boolean(remindersMap[id]),
     totalReminders: Object.keys(remindersMap).length,
   }

@@ -2419,6 +2419,18 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 .deadline-card-countdown.is-urgent{ background:color-mix(in srgb, var(--cover) 18%, var(--pill-amber-bg)); color:var(--cover-dark); }
 .deadline-card-countdown.is-past{ background:rgba(30,37,64,.06); color:var(--navy-faint); }
 .deadline-card.is-past{ opacity:.72; }
+/* secondary action: export to an actual calendar app. Muted by default so it doesn't
+   compete with the main add/remove-from-tab action (the bell, on the card above); tinted
+   ribbon-green once a calendar has actually been picked, so that state is visible without
+   opening the picker again */
+.deadline-card-calendar{
+  flex:none; align-self:center; margin-right:2px;
+  display:flex; align-items:center; justify-content:center;
+  width:28px; height:28px; border-radius:50%; background:none; border:1px solid transparent;
+  color:var(--navy-faint); cursor:pointer; transition:border-color .12s ease, color .12s ease, background .12s ease;
+}
+.deadline-card-calendar:hover{ color:var(--cover-dark); background:rgba(221,107,46,.1); border-color:rgba(221,107,46,.25); }
+.deadline-card-calendar.has-calendar{ color:var(--ribbon); }
 .deadline-card-remove{
   flex:none; align-self:center; margin-right:10px;
   display:flex; align-items:center; justify-content:center;
