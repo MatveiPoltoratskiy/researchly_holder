@@ -119,6 +119,28 @@ svg{ display:block; }
 .nav-link:hover{ color: var(--cover-dark); }
 @media (max-width:520px){ .nav-right{ gap:14px; } }
 
+/* below ~540px the brand + 3 nav-links + CTA can no longer share one row without the
+   CTA (the most important element here — the primary "get started" action) getting
+   pushed past the viewport edge and silently clipped. Wrap onto two rows instead of
+   shrinking text to the point of illegibility: brand stays on its own top row, the
+   links + CTA reposition onto a second row and wrap internally so nothing is ever cut
+   off. body's reserved top padding (see body{padding-top} above) grows to match —
+   scoped with :has() to pages that actually render this nav, since body{padding-top}
+   is a sitewide rule and /opportunities, /interview etc. render no navbar at all (they
+   only inherited the base 66px as an unrelated pre-existing gap; growing it here would
+   have made that gap worse on those routes for no reason). */
+@media (max-width:560px){
+  .site-nav{ flex-wrap:wrap; row-gap:10px; padding-top:12px; padding-bottom:12px; }
+  .nav-right{ width:100%; flex-wrap:wrap; row-gap:10px; column-gap:18px; gap:18px; }
+  .nav-cta{ width:100%; text-align:center; }
+  body:has(.site-nav-bar){ padding-top:148px; }
+}
+@media (max-width:360px){
+  .nav-right{ column-gap:14px; }
+  .nav-link{ font-size:14px; }
+  body:has(.site-nav-bar){ padding-top:182px; }
+}
+
 /* ---------- hero shell ---------- */
 /* two phone showcases flanking a centered headline+CTA, over the site's own illustrated
    low-poly scene (mountains, books, microscope, flasks, plant, mascot) — the layout
@@ -2531,12 +2553,47 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
   .opp-sidebar{ height:auto; overflow-y:visible; }
   .opp-results{ height:auto; }
   .opp-list-scroll{ overflow:visible; padding-right:0; margin-right:0; }
+  /* a long location/org name inside a fact pill (e.g. "Boston Children's Hospital,
+     Boston, MA") is a single nowrap span on desktop by design (see .opp-detail-item
+     above) — on a narrow stacked card there isn't room for that on one line, and
+     nowrap was forcing the whole card (and page) wider than the viewport instead of
+     just wrapping. Let it wrap here only; desktop's single-line rhythm is untouched. */
+  .opp-detail-item{ white-space:normal; max-width:100%; }
+  .opp-card{ padding:18px 16px; }
+  /* same nowrap-overflow shape as .opp-detail-item above — o.equityNote is free-text
+     data (e.g. "First-gen / low-income friendly") and a few entries run long enough
+     that the pill itself, not just its row, was wider than a narrow phone card. */
+  .opp-tag{ white-space:normal; max-width:100%; }
+  /* .opp-card-heading (title/org column) sits between the 64px logo badge and the
+     30px bell+save buttons in .opp-card-head. As a flex:1;min-width:0 item it was
+     free to shrink arbitrarily far — on a narrow phone it was getting squeezed down
+     to ~70px, at which point even ordinary short words like "Amgen" no longer fit and
+     broke one syllable per line. Giving it a real minimum instead means the badge and
+     buttons can no longer both fit on the title's row once the card gets this narrow,
+     so flex-wrap (below) moves the buttons onto their own row and the badge+title keep
+     this comfortable minimum instead. */
+  .opp-card-heading{ min-width:150px; }
+  /* .opp-card-heading is align-items:flex-start (column flex), so without an explicit
+     width its children size via fit-content rather than filling the column — and with
+     overflow-wrap:break-word specifically, Chrome's fit-content pass doesn't reliably
+     clamp to the available space when there's a long slash-joined run in the text
+     (e.g. "(Physics/Biophysics/Astronomy)", no space to break on), so the title could
+     still render wider than its own parent. width:100% forces a definite box (100% of
+     the now min-width:150px-guaranteed column above) instead of relying on fit-content
+     at all; break-word then only breaks that long run as a last resort, so ordinary
+     titles still wrap on whole words rather than one-syllable-per-line (which
+     `overflow-wrap:anywhere` did — tried and reverted). */
+  .opp-title, .opp-org{ width:100%; overflow-wrap:break-word; }
+  /* moved up from the 600px block below so it also covers 600-860px, the same range
+     .opp-card-heading's new min-width now applies to — without this the bell+save
+     buttons couldn't actually move to their own row when the title needed the space. */
+  .opp-card-head{ flex-wrap:wrap; }
+  .opp-card-actions{ margin-left:auto; }
 }
 
 @media (max-width: 600px){
-  .opp-card-head{ flex-wrap:wrap; }
-  .opp-card-actions{ margin-left:auto; }
   .opp-link{ width:100%; text-align:right; }
+  .opp-detail-row{ column-gap:14px; row-gap:10px; }
 }
 
 /* ---- opportunity detail modal ---- */
@@ -3485,6 +3542,41 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
    cm") on every side rather than sitting flush against the viewport edges */
 .interview-container--compact{ max-width:600px; }
 .voice-card--idle{ flex:none; width:auto; align-self:center; padding:36px 40px; }
+/* below ~600px the idle card's shrink-to-fit natural width (mascot + the "what I'll
+   ask about" board + the mic button, ~540px) is wider than the viewport itself, and
+   since this whole page is position:fixed/overflow:hidden (see the fixed-page-overlay-
+   clipping note referenced above), that isn't a scrollbar — it's real content (the
+   last board chip, the mic button's own label) silently clipped off past the edge with
+   no way to reach it. Fill the container instead of shrink-wrapping once there's no
+   room left for "breathing room on every side" to mean anything. */
+@media (max-width:620px){
+  .voice-card--idle{ width:100%; padding:28px 20px; }
+  /* flex-wrap left this list of 7 chips mostly one-per-row at this width (most
+     individual pills are too wide to pair up two-per-line on their own), which made
+     the board much taller than on desktop and pushed the actual "Start talking" mic
+     button — the one control this whole screen exists for — below the fold on common
+     phone heights (this page can't scroll; see the fixed-page-overlay-clipping note
+     above). A fixed 2-column grid keeps it to a predictable, more compact 4 rows. */
+  .voice-board-grid{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .voice-board-item{ justify-content:center; }
+  /* width:max-content (see base rule above) means this bubble always sizes to its full
+     unwrapped headline text regardless of how little room is actually available — on
+     desktop that's intentional (a snug bubble around short text), but on a narrow phone
+     it was forcing the bubble, and the headline inside it, wider than the screen and
+     getting clipped symmetrically on both edges by this fixed/overflow:hidden page.
+     width:auto lets it shrink-wrap within the available space instead. */
+  .voice-speech-bubble{ width:auto; max-width:100%; padding:16px 20px; }
+  /* wrapping within the phone's real width (previous rule) means this headline, at the
+     desktop clamp's 28-36px, now wraps to 4+ lines instead of 2 — tall enough on its
+     own to push the mic button below the fold on a 390x844-class phone even though
+     that's not a short viewport by the max-height brackets below. This reduction is
+     keyed off width, not height, since it's the narrower wrap that drives it. */
+  .voice-speech-title{ font-size:20px; }
+  .voice-board{ padding:16px 18px; }
+  .voice-board-item{ padding:6px 10px; font-size:12.5px; }
+  .voice-hero{ gap:16px; }
+  .voice-start-btn{ padding:16px 30px; font-size:18px; }
+}
 
 /* short viewports: this page is position:fixed/overflow:hidden (see the fixed-page-overlay-
    clipping note wherever this codebase discusses /interview-voice), so anything taller than
@@ -3492,14 +3584,54 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
    since the mic button is the only thing that actually matters */
 @media (max-height:820px){
   .voice-mascot-stage{ width:220px; height:220px; }
-  .voice-hero{ gap:18px; }
+  .voice-hero{ gap:12px; }
+  /* same "mic button is the only thing that actually matters" reasoning as the
+     board-grid fix above — the idle screen's own vertical stack (speech bubble +
+     mascot + board + button + hint + skip link) added up to taller than a lot of real
+     phone viewports even after the mascot shrink already here, pushing the button
+     itself below the fold. Trim padding/gaps across the stack rather than the mascot
+     alone. */
+  .voice-speech-bubble{ padding:14px 18px; }
+  /* the speech bubble now wraps within the phone's real width instead of its old
+     max-content overflow (see the ≤620px-width fix above) — at the desktop clamp's
+     28-36px this headline wraps to 4+ lines in that narrower box, which is what pushed
+     the mic button below the fold again even after every other trim in this block. */
+  .voice-speech-title{ font-size:17px; }
+  .voice-board{ padding:16px 18px; }
+  .voice-board-label{ margin-bottom:8px; }
+  .voice-board-item{ padding:6px 10px; font-size:12.5px; }
+  .voice-start-btn{ padding:14px 26px; }
+  .voice-start-hint{ margin-top:4px; font-size:12px; }
 }
 @media (max-height:680px){
   .voice-mascot-stage{ width:150px; height:150px; }
   .voice-question-title{ font-size:clamp(22px,3.2vw,28px); }
+  .voice-hero{ gap:8px; }
+  .voice-speech-bubble{ padding:10px 16px; }
+  .voice-speech-title{ font-size:15px; }
+  .voice-board{ padding:12px 16px; }
+  .voice-board-grid{ gap:6px; }
+  .voice-board-item{ padding:5px 9px; }
+  .voice-skip-pill{ margin-top:0; padding-top:6px; padding-bottom:6px; }
 }
-@media (max-height:560px){
-  .voice-mascot-stage{ width:100px; height:100px; }
+/* iPhone SE and similarly short-but-not-tiny phones (568px tall) land between the two
+   brackets above — mascot still 150px there, which was enough on its own to push the
+   "prefer typing" fallback link below the fold. Widened from 560 to cover it too. */
+@media (max-height:600px){
+  .voice-mascot-stage{ width:70px; height:70px; }
+  .voice-hero{ gap:4px; }
+  .voice-start-hint{ margin-top:2px; font-size:11px; }
+  .voice-skip-pill{ font-size:13px; padding-top:5px; padding-bottom:5px; }
+  /* the page's own bottom-left "Home" pill is position:fixed (see .interview-back-float)
+     and sits right under where this much-compacted stack now lands, overlapping the
+     skip-pill link below it. Tightening padding alone wasn't enough clearance, so the
+     board also drops to a 3-column grid here (was 2 — see the ≤620px-width rule) to
+     shave off a whole row; 7 chips is few enough that 3-per-row still reads fine this
+     small (see .voice-board-item's reduced padding/font at this bracket). */
+  .voice-board{ padding:10px 14px; }
+  .voice-board-grid{ grid-template-columns:repeat(3,1fr); gap:4px; }
+  .voice-board-item{ padding:4px 6px; font-size:11px; gap:4px; }
+  .voice-speech-bubble{ padding:10px 14px; }
 }
 
 @media (prefers-reduced-motion: reduce){
