@@ -1,35 +1,66 @@
 import { useEffect, useRef, useState } from 'react'
 import { prefersReducedMotion } from '../lib/motion'
+import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
+import { OrgLogo, iconForOrg } from './OrgLogo'
+import { deadlineCellLabel } from '../lib/deadlineStatus'
+import { Link } from '../lib/router'
 
-const REVIEWS = [
-  { color: 'var(--cover)', text: "Bro this is actually sick, I found research internships that I didn’t know even existed even with my resume being cooked." },
-  { color: 'var(--pine)', text: "Clean layout overall. Didn’t feel overwhelming, which is rare for research and all of these websites in one." },
-  { color: 'var(--navy)', text: "ngl I thought this was gonna be another ChatGPT wrapper but it’s actually saving my med school requirements." },
-  { color: 'var(--cover)', text: "Everything just makes sense. It’s like a mix of Khan Academy and research opportunities in one." },
-  { color: 'var(--pine)', text: "This would’ve saved me days when I was looking for summer research a few months ago, crazy find." },
-  { color: 'var(--navy)', text: "Finally something that is a free tool for students, and I actually understand what I’m supposed to do next instead of opening 15 tabs." },
-  { color: 'var(--cover)', text: "I didn’t even realize there were research programs for high school students. This roadmap helped me understand where I could start!" },
-  { color: 'var(--pine)', text: "It feels like the kind of tool I wish existed when I first started looking into research, would’ve saved me hours." },
-  { color: 'var(--navy)', text: "I finally know where to start, I’m so mad I didn’t have this during summer internship season…" },
+// A hand-picked, deliberately varied set of real records from the live dataset — different
+// fields, levels, countries, price points, and (on purpose) different deadline states, so
+// the strip itself demonstrates the deadline system rather than just listing programs.
+// Looked up by id at render time, never copied, so an edit to the underlying record (a
+// confirmed deadline landing, say) shows up here automatically with nothing to keep in sync.
+const FEATURED_IDS = [
+  'perimeter-issyp',
+  'amgen-stanford',
+  'umanitoba-science-usra',
+  'sickkids-ssure',
+  'natgeo-young-explorers-grant',
+  'rockefeller-surf',
+  'triumf-undergrad-coop',
+  'shad-canada',
+  'simons-summer-research-sbu',
+  'mcgill-youth-biodiversity',
 ]
+const FEATURED = FEATURED_IDS.map((id) => CANADA_OPPORTUNITIES.find((o) => o.id === id)).filter(Boolean)
 
-function ReviewCard({ color, text }) {
+function opportunityType(o) {
+  if (o.isGrant) return 'Grant / Award'
+  if (o.availability === 'academic-year') return 'Academic-Year Program'
+  if (o.availability === 'year-round') return 'Year-Round Program'
+  return 'Summer Program'
+}
+
+function FeaturedCard({ o }) {
   return (
-    <div className="review-card">
-      <div className="review-head">
-        <span className="review-quote" style={{ background: color }}>&ldquo;</span>
-        <span className="review-stars">★★★★★</span>
+    <Link to="/opportunities" className="feature-card">
+      <div className="feature-card-head">
+        <div className="feature-card-badge">
+          <OrgLogo org={o.org} url={o.url} iconId={iconForOrg(o.org)} />
+        </div>
+        <span className="feature-card-type">{opportunityType(o)}</span>
       </div>
-      <p className="review-text">{text}</p>
-    </div>
+      <h3 className="feature-card-name">{o.name}</h3>
+      <div className="feature-card-org">{o.org}</div>
+      <div className="feature-card-meta">
+        <span className="feature-card-meta-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-pin" /></svg>
+          <span className="feature-card-meta-text">{o.locationLabel}</span>
+        </span>
+        <span className="feature-card-meta-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-calendar" /></svg>
+          <span className="feature-card-meta-text">{deadlineCellLabel(o)}</span>
+        </span>
+      </div>
+    </Link>
   )
 }
 
 const SPEED_PX_PER_SEC = 36
 
-export default function ReviewCarousel() {
+export default function FeaturedOpportunities() {
   // rendered twice back-to-back so a -50% translateX loop is seamless
-  const looped = [...REVIEWS, ...REVIEWS]
+  const looped = [...FEATURED, ...FEATURED]
 
   const trackRef = useRef(null)
   const posRef = useRef(0) // current translateX, always <= 0
@@ -86,7 +117,7 @@ export default function ReviewCarousel() {
   function step(dir) {
     setPaused(true)
     const track = trackRef.current
-    const first = track?.querySelector('.review-card')
+    const first = track?.querySelector('.feature-card')
     const cardStep = first ? first.getBoundingClientRect().width + 22 : 300
     const setWidth = setWidthRef.current
     posRef.current -= dir * cardStep
@@ -106,7 +137,7 @@ export default function ReviewCarousel() {
   return (
     <section className="reviews-section">
       <div className="reviews-head">
-        <p className="reviews-kicker">Students like you say&hellip;</p>
+        <p className="reviews-kicker">Already on Researchly&hellip;</p>
         <div className="reviews-controls">
           <button type="button" className="reviews-control" onClick={() => setPaused((p) => !p)}>
             {paused ? (
@@ -124,22 +155,27 @@ export default function ReviewCarousel() {
       </div>
 
       <div className="reviews-row">
-        <button type="button" className="reviews-arrow reviews-arrow--prev" aria-label="Previous reviews" onClick={() => step(-1)}>
+        <button type="button" className="reviews-arrow reviews-arrow--prev" aria-label="Previous opportunities" onClick={() => step(-1)}>
           <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
         </button>
 
         <div className="reviews-track-wrap">
           <div className="reviews-track" ref={trackRef}>
-            {looped.map((review, i) => (
-              <ReviewCard key={i} {...review} />
+            {looped.map((o, i) => (
+              <FeaturedCard key={`${o.id}-${i}`} o={o} />
             ))}
           </div>
         </div>
 
-        <button type="button" className="reviews-arrow reviews-arrow--next" aria-label="Next reviews" onClick={() => step(1)}>
+        <button type="button" className="reviews-arrow reviews-arrow--next" aria-label="Next opportunities" onClick={() => step(1)}>
           <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
         </button>
       </div>
+
+      <Link to="/opportunities" className="feature-view-all">
+        Browse all opportunities
+        <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg>
+      </Link>
     </section>
   )
 }

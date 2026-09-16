@@ -2,7 +2,6 @@ import { lazy, Suspense } from 'react'
 import IconSprite from './components/IconSprite'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import ReviewCarousel from './components/ReviewCarousel'
 import Faq from './components/Faq'
 import Contact from './components/Contact'
 import HowItWorks from './components/HowItWorks'
@@ -15,6 +14,11 @@ import { RouterProvider, useRouter } from './lib/router'
 // (the passphrase gate that used to sit in front of these routes was removed; all four
 // are public now).
 const OpportunityExplorer = lazy(() => import('./components/OpportunityExplorer'))
+// Lazy too, and for the same reason as OpportunityExplorer above: it pulls in the full
+// ~440KB canadaOpportunities dataset (461 records) just to read 10 of them, so keeping it
+// out of the main landing bundle matters even though it renders above the fold — the
+// browser fetches this chunk in parallel with the rest instead of it blocking first paint.
+const FeaturedOpportunities = lazy(() => import('./components/FeaturedOpportunities'))
 const Interview = lazy(() => import('./components/Interview'))
 const InterviewVoice = lazy(() => import('./components/InterviewVoice'))
 const MyOpportunities = lazy(() => import('./components/MyOpportunities'))
@@ -73,7 +77,9 @@ function Page() {
       ) : (
         <>
           <Hero />
-          <ReviewCarousel />
+          <Suspense fallback={null}>
+            <FeaturedOpportunities />
+          </Suspense>
           {/* these two run noticeably larger than the rest of the page at a normal browser
               zoom — scale them down independently of .compact-page (which only wraps the
               other routes, so it never interacts with this) */}

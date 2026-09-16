@@ -779,7 +779,10 @@ h1{
 
 .after-hero{ height: 7vh; }
 
-/* ---------- testimonial carousel: floats over the plaza/prop level, like the mockup card floats over the mountains ---------- */
+/* ---------- featured-opportunities carousel: floats over the plaza/prop level, like the
+   mockup card floats over the mountains. The .reviews-* chrome (kicker/controls/arrows/
+   track/mask) is shared as-is with what used to be the testimonial strip here — only the
+   card content changed, real opportunities instead of quotes. ---------- */
 .reviews-section{
   position:relative; z-index:6;
   margin-top: 0;
@@ -832,25 +835,61 @@ h1{
 
 .reviews-track-wrap{ flex:1; min-width:0; overflow:hidden; width:100%; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
 .reviews-track{ display:flex; gap:22px; width:max-content; will-change: transform; }
-.review-card{
-  flex: 0 0 auto; width: 285px;
+
+/* real-opportunity card: same shell (size/shadow/radius) the old review card used, so it
+   drops into the identical marquee rhythm — only what's inside changed */
+.feature-card{
+  flex: 0 0 auto; width: 285px; display:block; text-decoration:none; color:inherit;
   background: var(--card-bg); border:1px solid var(--card-border); border-radius:16px;
   padding: 18px 20px; box-shadow: 0 24px 46px -22px rgba(30,37,64,.32);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
-.review-head{ display:flex; align-items:center; justify-content:space-between; }
-.review-quote{
-  width:32px; height:32px; border-radius:10px; flex:none;
+.feature-card:hover{
+  transform: translateY(-3px); border-color: rgba(221,107,46,.35);
+  box-shadow: 0 30px 52px -22px rgba(30,37,64,.4);
+}
+.feature-card-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.feature-card-badge{
+  width:40px; height:40px; border-radius:12px; flex:none; overflow:hidden;
   display:flex; align-items:center; justify-content:center;
-  color:#fff; font-family: Georgia, serif; font-size:22px; line-height:1;
+  background:#fff; border:1px solid var(--card-border); color: var(--cover-dark);
 }
-.review-stars{ color: var(--cover); font-size:14px; letter-spacing:2.2px; }
-.review-text{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; line-height:1.55;
-  color: var(--navy-soft); margin: 12px 0 0;
+.feature-card-badge .opp-logo-img{ width:100%; height:100%; object-fit:contain; padding:4px; }
+.feature-card-type{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:10.5px; font-weight:700;
+  color: var(--pill-text); background: var(--pill-bg); border-radius:999px;
+  padding:4px 10px; white-space:nowrap;
 }
+.feature-card-name{
+  font-family:"Iowan Old Style",Palatino,Georgia,serif; font-weight:700; font-size:15.5px;
+  line-height:1.3; color: var(--navy); margin: 12px 0 2px;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
+.feature-card-org{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; color: var(--navy-soft);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.feature-card-meta{ display:flex; flex-direction:column; gap:7px; margin-top:12px; }
+.feature-card-meta-item{
+  display:flex; align-items:center; gap:8px; min-width:0;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; font-weight:600; color: var(--navy);
+}
+.feature-card-meta-item svg{ flex:none; color: var(--cover); }
+.feature-card-meta-text{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0; }
+
+.feature-view-all{
+  display:flex; align-items:center; justify-content:center; gap:7px; width:max-content;
+  margin: 20px auto 0;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; font-weight:800; color: var(--cover-dark);
+  background:#fff; border:1.5px solid var(--card-border); text-decoration:none;
+  padding:10px 20px; border-radius:999px; box-shadow: 0 14px 30px -18px rgba(30,37,64,.3);
+  transition: background-color .18s ease, border-color .18s ease, transform .18s ease;
+}
+.feature-view-all:hover{ background: var(--pill-amber-bg); border-color: rgba(221,107,46,.35); transform:translateY(-1px); }
+
 @media (max-width: 900px){
   .reviews-section{ margin-top: 16px; }
-  .review-card{ width:250px; }
+  .feature-card{ width:250px; }
 }
 
 /* ---------- faq ---------- */
