@@ -36,6 +36,10 @@ function sortDeadlineEntries(entries) {
 // second step, not a requirement for just tracking a deadline here.
 function DeadlineCard({ o, reminders, onOpenDetail, onOpenCalendarPicker }) {
   const countdown = useDeadlineCountdown(o.deadline)
+  const isRolling = !o.deadline && o.deadlineStatus === 'rolling'
+  const dateLabel = o.deadline ? formatDeadlineLong(o.deadline) : isRolling ? 'Rolling admissions' : 'Not confirmed'
+  const countdownLabel = isRolling ? 'Rolling' : countdown.label
+  const countdownCls = isRolling ? 'is-rolling' : countdown.cls
   const hasCalendar = Boolean(reminders.remindersMap[o.id]?.calendar)
 
   return (
@@ -48,8 +52,8 @@ function DeadlineCard({ o, reminders, onOpenDetail, onOpenCalendarPicker }) {
           <span className="deadline-card-name">{o.name}</span>
           <span className="deadline-card-org">{o.org}</span>
         </span>
-        <span className="deadline-card-date">{o.deadline ? formatDeadlineLong(o.deadline) : 'Not confirmed'}</span>
-        <span className={`deadline-card-countdown ${countdown.cls}`}>{countdown.label}</span>
+        <span className="deadline-card-date">{dateLabel}</span>
+        <span className={`deadline-card-countdown ${countdownCls}`}>{countdownLabel}</span>
       </button>
       <button
         type="button"

@@ -21,13 +21,39 @@ import { VALID_FOCUS_IDS } from '../data/fields.js'
  *   paid         boolean — true if the student RECEIVES money (stipend/salary)
  *   cost         number | null — what the student PAYS. 0 = free. null = unknown/varies.
  *   stipend      number | null — amount received, if known
- *   deadline     ISO date string | null — null when unverified; never guess
+ *   deadline     ISO date string | null — the CLOSING date of the current application
+ *                cycle, and ONLY that: never a scholarship/early-bird/priority/recommendation-
+ *                letter/registration deadline, an event date, or a past cycle's date carried
+ *                forward without evidence it still applies. null when unverified — never guess,
+ *                and never infer a precise date solely from a typical/previous cycle.
  *   selectivity  'very-high' | 'high' | 'medium' | 'open'
  *   isDirectory  boolean (optional) — a network where each site takes its OWN application
  *                (e.g. NSF REU). Present these as "browse sites", not "apply".
  *   multiSite    boolean (optional) — ONE application, but placement across several
  *                campuses (e.g. SSP). Present normally; just don't promise a location.
  *   verified     boolean — has a human checked this against the official page this cycle?
+ *
+ *   deadlineStatus   'confirmed' | 'rolling' (optional, omitted == unconfirmed) — 'confirmed'
+ *                means `deadline` was read off the official site for the CURRENT cycle;
+ *                'rolling' means the official site explicitly says applications are accepted
+ *                on a rolling basis (deadline stays null either way — this field is what tells
+ *                the UI "rolling" from "we just don't know"). Omit entirely rather than writing
+ *                'unconfirmed' — absence IS the unconfirmed state, same as `deadline: null`.
+ *   deadlineSource   string | null (optional) — absolute URL of the SPECIFIC page the deadline
+ *                (or rolling-admission statement) was read from, which may not be the same
+ *                page as `url` (e.g. a dedicated "Important Dates" or FAQ page). Required
+ *                alongside deadlineStatus: 'confirmed' — a confirmed deadline with no source
+ *                is a smell, not a fact.
+ *   deadlineNote     string | null (optional) — one short human-readable line on why this is
+ *                considered current/verified (e.g. "2026 cycle dates, from the program's
+ *                Important Dates page, checked 2026-09-15"), or a caveat (e.g. "site states
+ *                only 'typically opens January' — no exact date announced yet, kept
+ *                unconfirmed"). This is the paper trail a fabrication complaint gets checked
+ *                against, so write it like someone will.
+ *   applicationOpens ISO date string | null (optional) — the cycle's OPENING date, when the
+ *                official site states an application window ("opens Jan 15, closes Mar 30")
+ *                rather than just a closing deadline. `deadline` still carries the closing
+ *                date in that case; this is purely additive context.
  *
  * isDirectory and multiSite both exempt a record from the coordinate requirement, but they
  * are NOT interchangeable — they imply different application instructions for the student.
@@ -41,6 +67,7 @@ export const LEVELS = [
 export const MODES = ['in-person', 'remote', 'hybrid']
 export const AVAILABILITY = ['summer', 'year-round', 'academic-year']
 export const SELECTIVITY = ['very-high', 'high', 'medium', 'open']
+export const DEADLINE_STATUSES = ['confirmed', 'rolling']
 
 const REQUIRED = ['id', 'name', 'org', 'url', 'focus', 'levels', 'mode', 'location', 'availability', 'paid']
 
@@ -78,6 +105,22 @@ export function validateOpportunity(o, seenIds = new Set()) {
   if (o.paid !== undefined && typeof o.paid !== 'boolean') errs.push(at('paid must be a boolean'))
   if (o.url && !/^https?:\/\//.test(o.url)) errs.push(at('url must be absolute'))
   if (o.deadline && Number.isNaN(Date.parse(o.deadline))) errs.push(at(`unparseable deadline "${o.deadline}"`))
+  if (o.applicationOpens && Number.isNaN(Date.parse(o.applicationOpens))) {
+    errs.push(at(`unparseable applicationOpens "${o.applicationOpens}"`))
+  }
+  if (o.deadlineStatus !== undefined && !DEADLINE_STATUSES.includes(o.deadlineStatus)) {
+    errs.push(at(`deadlineStatus must be one of ${DEADLINE_STATUSES.join(', ')}, or omitted`))
+  }
+  if (o.deadlineStatus === 'confirmed' && !o.deadline) {
+    errs.push(at('deadlineStatus is "confirmed" but deadline is null'))
+  }
+  if (o.deadlineStatus === 'confirmed' && !o.deadlineSource) {
+    errs.push(at('deadlineStatus is "confirmed" but deadlineSource is missing — a confirmed deadline needs a source'))
+  }
+  if (o.deadlineStatus === 'rolling' && o.deadline) {
+    errs.push(at('deadlineStatus is "rolling" but deadline is set — rolling admissions has no fixed date'))
+  }
+  if (o.deadlineSource && !/^https?:\/\//.test(o.deadlineSource)) errs.push(at('deadlineSource must be an absolute URL'))
 
   // in-person programs need coordinates for distance matching, unless they legitimately
   // have no single location (a directory of sites, or one application placed across campuses)
