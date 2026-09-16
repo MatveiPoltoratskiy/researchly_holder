@@ -9,6 +9,7 @@ import { scoreOpportunity } from '../lib/matchOpportunities'
 import { computeMatchScore, resolveMatchScore } from '../lib/matchScore'
 import { useSavedOpportunities, SAVE_STATUSES } from '../lib/savedOpportunities'
 import { useDeadlineReminders } from '../lib/deadlineReminders'
+import { deadlineCellLabel, deadlineCellSource } from '../lib/deadlineStatus'
 import { useLocalStorageStateWithExpiry } from '../lib/storage'
 import { Link } from '../lib/router'
 import { burstConfettiAtPoint } from '../lib/confetti'
@@ -123,25 +124,10 @@ function levelRangeLabel(levels) {
   return parts.join(' · ')
 }
 
-const MONTH_ABBR = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'Jun.', 'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.']
-
-// "2026-04-15" -> "Apr. 15, 2026" — parsed manually rather than via `new Date(iso)` since
-// that parses as UTC midnight and can print the wrong day in negative-offset timezones
-function formatDeadline(iso) {
-  if (!iso) return null
-  const [y, m, d] = iso.split('-').map(Number)
-  if (!y || !m || !d) return iso
-  return `${MONTH_ABBR[m - 1]} ${d}, ${y}`
-}
-
-// what the card/modal shows in place of a real date: rolling admissions is a confirmed
-// fact from the official site (distinct from just not knowing yet), so it gets its own
-// label rather than collapsing into "Not confirmed"
-function deadlineDisplay(o) {
-  if (o.deadline) return formatDeadline(o.deadline)
-  if (o.deadlineStatus === 'rolling') return 'Rolling admissions'
-  return null
-}
+// deadlineCellLabel/deadlineCellSource (imported above from ../lib/deadlineStatus) are the
+// one place "what does the deadline cell say" is decided — real deadline, rolling, closed
+// with whatever's known about reopening, or genuinely unconfirmed — so the card, this
+// modal, and the Deadlines tab can never show contradictory text for the same record.
 
 function payLabel(o) {
   if (!o.paid) return 'Unpaid'
@@ -378,16 +364,14 @@ export function OpportunityCard({ o, selected, onSelect, onOpenDetail, cardRef, 
               {costLabel(o)}
             </span>
           )}
-          {deadlineDisplay(o) && (
-            <span className="opp-detail-item">
-              <span className="opp-detail-icon">
-                <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
-                  <use href="#icon-calendar" />
-                </svg>
-              </span>
-              {o.deadline ? `Deadline ${deadlineDisplay(o)}` : deadlineDisplay(o)}
+          <span className="opp-detail-item">
+            <span className="opp-detail-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+                <use href="#icon-calendar" />
+              </svg>
             </span>
-          )}
+            {o.deadline ? `Deadline ${deadlineCellLabel(o)}` : deadlineCellLabel(o)}
+          </span>
           {o.locationLabel && (
             <span className="opp-detail-item">
               <span className="opp-detail-icon">
@@ -544,18 +528,11 @@ export function OpportunityDetailModal({ o, onClose, interviewAnswers, matchProf
   // a confirmed deadline (or a confirmed rolling-admissions policy) always names the exact
   // page it was read off — this is the paper trail a "did you just make that up" question
   // gets checked against, so it's surfaced right next to the date, not buried in the data file
-  const deadlineSourceDomain = o.deadlineSource ? domainFromUrl(o.deadlineSource) : null
-  const deadlineCaption =
-    o.deadlineStatus === 'confirmed' && deadlineSourceDomain
-      ? `Verified via ${deadlineSourceDomain} →`
-      : o.deadlineStatus === 'rolling'
-        ? deadlineSourceDomain
-          ? `Rolling admissions — confirmed via ${deadlineSourceDomain} →`
-          : 'Rolling admissions, per the official site'
-        : null
+  const deadlineSource = deadlineCellSource(o)
+  const deadlineCaption = deadlineSource ? `${deadlineSource.prefix} ${domainFromUrl(deadlineSource.url)} →` : null
 
   const details = [
-    ['Application deadline', deadlineDisplay(o) || 'Not confirmed', deadlineCaption, o.deadlineSource],
+    ['Application deadline', deadlineCellLabel(o), deadlineCaption, deadlineSource?.url],
     ['Program dates', AVAILABILITY_LABEL[o.availability] || o.availability],
     ['Eligibility', levelRangeLabel(o.levels) || 'Not confirmed'],
     ['Cost to attend', costLabel(o) || 'Not confirmed'],

@@ -2442,6 +2442,7 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 .deadline-card-countdown.is-past{ background:rgba(30,37,64,.06); color:var(--navy-faint); }
 .deadline-card-countdown.is-unknown{ background:rgba(30,37,64,.06); color:var(--navy-faint); font-weight:700; }
 .deadline-card-countdown.is-rolling{ background:color-mix(in srgb, var(--ribbon) 16%, var(--card-bg)); color:var(--ribbon); }
+.deadline-card-countdown.is-closed{ background:rgba(30,37,64,.08); color:var(--navy-soft); }
 .deadline-card.is-past{ opacity:.72; }
 /* secondary action: export to an actual calendar app. Muted by default so it doesn't
    compete with the main add/remove-from-tab action (the bell, on the card above); tinted

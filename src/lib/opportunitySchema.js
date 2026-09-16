@@ -55,6 +55,44 @@ import { VALID_FOCUS_IDS } from '../data/fields.js'
  *                rather than just a closing deadline. `deadline` still carries the closing
  *                date in that case; this is purely additive context.
  *
+ * ---- the CURRENT cycle is closed, and there's no closing date to give (nextOpening*) ----
+ * These fields are the other half of "not confirmed": `deadline`/`applicationOpens` above are
+ * for when we know a window's dates; `nextOpening*` is for when the current cycle has closed
+ * and the official site says something about when the NEXT one starts, but not the eventual
+ * deadline. Never both at once — a record with a real `deadline` is not "closed" in this sense.
+ *
+ *   applicationStatus 'closed' (optional, omitted == open or unknown) — set ONLY when the
+ *                official site itself says the current cycle is closed/not yet open. Requires
+ *                `deadline` to stay null (if you know a real upcoming deadline, use `deadline`
+ *                + deadlineStatus: 'confirmed' instead — that's a MORE precise fact than this).
+ *   nextOpeningPrecision  'exact' | 'month' | 'year' | 'pattern' | 'vague' (optional) — how
+ *                specific the official site's statement about reopening actually is. Only set
+ *                alongside applicationStatus: 'closed'. Pick the weakest one the evidence
+ *                actually supports — do not round a vaguer statement up to a more precise one:
+ *                  'exact'   — a full date ("applications open March 1, 2027"). -> nextOpeningDate
+ *                  'month'   — month + year for the confirmed upcoming cycle ("opens January
+ *                              2027", "check back in December 2026"). -> nextOpeningMonth + nextOpeningYear
+ *                  'year'    — only a year for the confirmed upcoming cycle ("reopens in 2027",
+ *                              or "next year" when today's date resolves that unambiguously).
+ *                              -> nextOpeningYear only
+ *                  'pattern' — a recurring/typical month, NOT tied to a confirmed upcoming year
+ *                              ("applications typically open every January"). -> nextOpeningMonth
+ *                              only (never nextOpeningYear — that would claim more than "typically")
+ *                  'vague'   — closed, reopening mentioned with no usable month or year at all
+ *                              ("applications will reopen next year" with no date to anchor it,
+ *                              or "check back later") -> neither field set; the fact alone is
+ *                              recorded via nextOpeningNote
+ *   nextOpeningDate   ISO date string | null (optional) — set only when precision is 'exact'.
+ *   nextOpeningMonth  integer 1-12 | null (optional) — set when precision is 'month' or 'pattern'.
+ *   nextOpeningYear   integer | null (optional) — set when precision is 'month' or 'year'.
+ *   nextOpeningSource string | null (optional) — absolute URL of the specific page this was
+ *                read from. Required whenever nextOpeningPrecision is set, same reasoning as
+ *                deadlineSource — an unsourced "next opening" claim is exactly as much of a
+ *                smell as an unsourced deadline.
+ *   nextOpeningNote   string | null (optional) — one short line: the actual quote/paraphrase
+ *                and where it came from. This is what lets someone re-verify "typically opens
+ *                January" is really what the site said, not an inference from past cycles.
+ *
  * isDirectory and multiSite both exempt a record from the coordinate requirement, but they
  * are NOT interchangeable — they imply different application instructions for the student.
  */
@@ -68,6 +106,8 @@ export const MODES = ['in-person', 'remote', 'hybrid']
 export const AVAILABILITY = ['summer', 'year-round', 'academic-year']
 export const SELECTIVITY = ['very-high', 'high', 'medium', 'open']
 export const DEADLINE_STATUSES = ['confirmed', 'rolling']
+export const APPLICATION_STATUSES = ['closed']
+export const NEXT_OPENING_PRECISIONS = ['exact', 'month', 'year', 'pattern', 'vague']
 
 const REQUIRED = ['id', 'name', 'org', 'url', 'focus', 'levels', 'mode', 'location', 'availability', 'paid']
 
@@ -121,6 +161,48 @@ export function validateOpportunity(o, seenIds = new Set()) {
     errs.push(at('deadlineStatus is "rolling" but deadline is set — rolling admissions has no fixed date'))
   }
   if (o.deadlineSource && !/^https?:\/\//.test(o.deadlineSource)) errs.push(at('deadlineSource must be an absolute URL'))
+
+  if (o.applicationStatus !== undefined && !APPLICATION_STATUSES.includes(o.applicationStatus)) {
+    errs.push(at(`applicationStatus must be one of ${APPLICATION_STATUSES.join(', ')}, or omitted`))
+  }
+  if (o.applicationStatus === 'closed' && o.deadline) {
+    errs.push(at('applicationStatus is "closed" but deadline is set — use deadline + deadlineStatus instead of applicationStatus/nextOpening for a known future date'))
+  }
+  if (o.nextOpeningPrecision !== undefined) {
+    if (!NEXT_OPENING_PRECISIONS.includes(o.nextOpeningPrecision)) {
+      errs.push(at(`nextOpeningPrecision must be one of ${NEXT_OPENING_PRECISIONS.join(', ')}, or omitted`))
+    }
+    if (o.applicationStatus !== 'closed') {
+      errs.push(at('nextOpeningPrecision is set but applicationStatus is not "closed"'))
+    }
+    if (!o.nextOpeningSource) {
+      errs.push(at('nextOpeningPrecision is set but nextOpeningSource is missing — an unsourced next-opening claim is a smell, not a fact'))
+    }
+    if (o.nextOpeningPrecision === 'exact' && !o.nextOpeningDate) {
+      errs.push(at('nextOpeningPrecision is "exact" but nextOpeningDate is missing'))
+    }
+    if (o.nextOpeningPrecision === 'month' && (!o.nextOpeningMonth || !o.nextOpeningYear)) {
+      errs.push(at('nextOpeningPrecision is "month" but nextOpeningMonth/nextOpeningYear is missing'))
+    }
+    if (o.nextOpeningPrecision === 'year' && (!o.nextOpeningYear || o.nextOpeningMonth)) {
+      errs.push(at('nextOpeningPrecision is "year" requires nextOpeningYear and no nextOpeningMonth'))
+    }
+    if (o.nextOpeningPrecision === 'pattern' && (!o.nextOpeningMonth || o.nextOpeningYear)) {
+      errs.push(at('nextOpeningPrecision is "pattern" requires nextOpeningMonth and no nextOpeningYear (a pattern is not tied to one confirmed year)'))
+    }
+    if (o.nextOpeningPrecision === 'vague' && (o.nextOpeningMonth || o.nextOpeningYear)) {
+      errs.push(at('nextOpeningPrecision is "vague" but a month/year is set — use "month"/"year"/"pattern" instead if it\'s actually that specific'))
+    }
+  }
+  if (o.nextOpeningDate && Number.isNaN(Date.parse(o.nextOpeningDate))) {
+    errs.push(at(`unparseable nextOpeningDate "${o.nextOpeningDate}"`))
+  }
+  if (o.nextOpeningMonth != null && (o.nextOpeningMonth < 1 || o.nextOpeningMonth > 12)) {
+    errs.push(at('nextOpeningMonth must be 1-12'))
+  }
+  if (o.nextOpeningSource && !/^https?:\/\//.test(o.nextOpeningSource)) {
+    errs.push(at('nextOpeningSource must be an absolute URL'))
+  }
 
   // in-person programs need coordinates for distance matching, unless they legitimately
   // have no single location (a directory of sites, or one application placed across campuses)

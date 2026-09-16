@@ -3,7 +3,8 @@ import { Link } from '../lib/router'
 import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
 import { useSavedOpportunities, SAVE_STATUSES } from '../lib/savedOpportunities'
 import { useDeadlineReminders } from '../lib/deadlineReminders'
-import { daysUntil, formatDeadlineLong } from '../lib/calendarEvent'
+import { daysUntil } from '../lib/calendarEvent'
+import { deadlineCellLabel } from '../lib/deadlineStatus'
 import { useDeadlineCountdown } from '../lib/useDeadlineCountdown'
 import CalendarPickerModal from './CalendarPickerModal'
 import { OpportunityCard, OpportunityDetailModal, recommendTagFor } from './OpportunityExplorer'
@@ -37,13 +38,14 @@ function sortDeadlineEntries(entries) {
 function DeadlineCard({ o, reminders, onOpenDetail, onOpenCalendarPicker }) {
   const countdown = useDeadlineCountdown(o.deadline)
   const isRolling = !o.deadline && o.deadlineStatus === 'rolling'
-  const dateLabel = o.deadline ? formatDeadlineLong(o.deadline) : isRolling ? 'Rolling admissions' : 'Not confirmed'
-  const countdownLabel = isRolling ? 'Rolling' : countdown.label
-  const countdownCls = isRolling ? 'is-rolling' : countdown.cls
+  const isClosed = !o.deadline && !isRolling && o.applicationStatus === 'closed'
+  const dateLabel = deadlineCellLabel(o)
+  const countdownLabel = isRolling ? 'Rolling' : isClosed ? 'Closed' : countdown.label
+  const countdownCls = isRolling ? 'is-rolling' : isClosed ? 'is-closed' : countdown.cls
   const hasCalendar = Boolean(reminders.remindersMap[o.id]?.calendar)
 
   return (
-    <article className={`deadline-card ${countdown.isPast ? 'is-past' : ''}`}>
+    <article className={`deadline-card ${countdown.isPast || isClosed ? 'is-past' : ''}`}>
       <button type="button" className="deadline-card-main" onClick={() => onOpenDetail(o.id)}>
         <span className="deadline-card-icon" aria-hidden="true">
           <svg width="16" height="16" viewBox="0 0 24 24"><use href="#icon-calendar" /></svg>
