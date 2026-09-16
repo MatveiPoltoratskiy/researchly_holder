@@ -1,4 +1,4 @@
-import { formatDeadlineLong } from './calendarEvent'
+import { formatDeadlineLong, deadlineToDate } from './calendarEvent'
 
 // Single source of truth for "what does the deadline cell say" — used by the opportunity
 // card, its detail modal, and the Deadlines tab, so the three never show contradictory text
@@ -48,6 +48,28 @@ export function nextOpeningLabel(o) {
     default:
       return 'Next opening not confirmed'
   }
+}
+
+// The date a live countdown should count down to, if any, and whether that date is a real
+// known day or an ESTIMATE derived from month-only information (a countdown built from one
+// of these must say so — see useDeadlineCountdown.js, which is the only consumer of this).
+// Deliberately conservative about which precisions even get a number: 'exact' (a real date)
+// and 'month' (day 1 of that month — bounded ~30-day error, hedgeable with "~") both do;
+// 'year' alone does NOT, because its error margin (up to 365 days) is wide enough that any
+// day-count would read as far more precise than the source actually said — a bare year stays
+// label-only, same as 'pattern'/'vague'/no-info. Same reasoning either way: never manufacture
+// false precision the underlying fact doesn't support.
+export function countdownTargetDate(o) {
+  if (o.deadline) return { date: deadlineToDate(o.deadline), isEstimate: false }
+  if (o.applicationStatus === 'closed') {
+    if (o.nextOpeningPrecision === 'exact' && o.nextOpeningDate) {
+      return { date: deadlineToDate(o.nextOpeningDate), isEstimate: false }
+    }
+    if (o.nextOpeningPrecision === 'month' && o.nextOpeningMonth && o.nextOpeningYear) {
+      return { date: new Date(o.nextOpeningYear, o.nextOpeningMonth - 1, 1), isEstimate: true }
+    }
+  }
+  return null
 }
 
 // the label for the deadline-ish cell on the card/modal/Deadlines tab — always returns a

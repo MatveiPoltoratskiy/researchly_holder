@@ -3,8 +3,7 @@ import { Link } from '../lib/router'
 import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
 import { useSavedOpportunities, SAVE_STATUSES } from '../lib/savedOpportunities'
 import { useDeadlineReminders } from '../lib/deadlineReminders'
-import { daysUntil } from '../lib/calendarEvent'
-import { deadlineCellLabel } from '../lib/deadlineStatus'
+import { deadlineCellLabel, countdownTargetDate } from '../lib/deadlineStatus'
 import { useDeadlineCountdown } from '../lib/useDeadlineCountdown'
 import CalendarPickerModal from './CalendarPickerModal'
 import { OpportunityCard, OpportunityDetailModal, recommendTagFor } from './OpportunityExplorer'
@@ -12,15 +11,28 @@ import { OpportunityCard, OpportunityDetailModal, recommendTagFor } from './Oppo
 const OPP_BY_ID = new Map(CANADA_OPPORTUNITIES.map((o) => [o.id, o]))
 const STATUS_ORDER = SAVE_STATUSES.map((s) => s.id)
 
+// whole days between today and whatever date this entry's countdown counts down to — a
+// real deadline, or (see countdownTargetDate) an estimated reopening date — so an entry
+// with only a month/year reopening estimate sorts by that estimate instead of always
+// falling into the "no date at all" bucket below. null when there's truly nothing to rank by.
+const DAY_MS = 24 * 60 * 60 * 1000
+function daysUntilTarget(o) {
+  const target = countdownTargetDate(o)
+  if (!target) return null
+  const now = new Date()
+  const todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  return Math.round((target.date - todayMidnight) / DAY_MS)
+}
+
 // deadline-reminder entries sort soonest-first, with anything already past pushed below
 // every still-active one (most-recently-passed first within that group) — and anything
-// whose deadline isn't confirmed yet (daysUntil -> null) pushed below even that, since
-// there's no date to rank it by; alphabetical among themselves for a stable order
+// with no rankable date at all pushed below even that; alphabetical among themselves for
+// a stable order
 function sortDeadlineEntries(entries) {
   const groupOf = (days) => (days === null ? 2 : days < 0 ? 1 : 0)
   return [...entries].sort((a, b) => {
-    const da = daysUntil(a.o.deadline)
-    const db = daysUntil(b.o.deadline)
+    const da = daysUntilTarget(a.o)
+    const db = daysUntilTarget(b.o)
     const ga = groupOf(da)
     const gb = groupOf(db)
     if (ga !== gb) return ga - gb
@@ -36,16 +48,24 @@ function sortDeadlineEntries(entries) {
 // any card) is a one-click, no-picker action, so exporting to a real calendar is a deliberate
 // second step, not a requirement for just tracking a deadline here.
 function DeadlineCard({ o, reminders, onOpenDetail, onOpenCalendarPicker }) {
-  const countdown = useDeadlineCountdown(o.deadline)
+  const countdown = useDeadlineCountdown(o)
   const isRolling = !o.deadline && o.deadlineStatus === 'rolling'
-  const isClosed = !o.deadline && !isRolling && o.applicationStatus === 'closed'
+  // "closed, and there's nothing to count down to" — pattern/vague/no-info precisions, or
+  // no next-opening info at all. countdown.diffDays is null in exactly this case (see
+  // countdownTargetDate in deadlineStatus.js), so this stays in sync automatically instead
+  // of re-deriving its own notion of "closed" that could drift from what the hook decided.
+  const isClosedNoCountdown = !o.deadline && !isRolling && o.applicationStatus === 'closed' && countdown.diffDays === null
   const dateLabel = deadlineCellLabel(o)
-  const countdownLabel = isRolling ? 'Rolling' : isClosed ? 'Closed' : countdown.label
-  const countdownCls = isRolling ? 'is-rolling' : isClosed ? 'is-closed' : countdown.cls
+  const countdownLabel = isRolling ? 'Rolling' : isClosedNoCountdown ? 'Closed' : countdown.label
+  const countdownCls = isRolling
+    ? 'is-rolling'
+    : isClosedNoCountdown
+      ? 'is-closed'
+      : `${countdown.cls} ${countdown.isEstimate ? 'is-estimate' : ''}`
   const hasCalendar = Boolean(reminders.remindersMap[o.id]?.calendar)
 
   return (
-    <article className={`deadline-card ${countdown.isPast || isClosed ? 'is-past' : ''}`}>
+    <article className={`deadline-card ${countdown.isPast || isClosedNoCountdown ? 'is-past' : ''}`}>
       <button type="button" className="deadline-card-main" onClick={() => onOpenDetail(o.id)}>
         <span className="deadline-card-icon" aria-hidden="true">
           <svg width="16" height="16" viewBox="0 0 24 24"><use href="#icon-calendar" /></svg>
