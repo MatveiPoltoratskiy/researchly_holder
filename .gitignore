@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# scripts/enrich-next-opening.mjs's search cache and per-run candidate reports — local
+# working files, never something to commit (the cache in particular is just an API-cost
+# saver, not data anyone else needs)
+scripts/.cache
+scripts/.output
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

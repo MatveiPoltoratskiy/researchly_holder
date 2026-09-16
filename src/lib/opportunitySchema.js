@@ -88,7 +88,25 @@ import { VALID_FOCUS_IDS } from '../data/fields.js'
  *   nextOpeningSource string | null (optional) — absolute URL of the specific page this was
  *                read from. Required whenever nextOpeningPrecision is set, same reasoning as
  *                deadlineSource — an unsourced "next opening" claim is exactly as much of a
- *                smell as an unsourced deadline.
+ *                smell as an unsourced deadline. If the only lead was a search-result snippet
+ *                that couldn't be verified by opening the actual page, this still points at
+ *                whatever page the snippet came from (for a reader to check themselves) — but
+ *                nextOpeningConfidence must be 'anticipated' in that case, never 'confirmed'.
+ *   nextOpeningConfidence 'confirmed' | 'anticipated' (optional) — ONLY applies to precision
+ *                'exact'/'month'/'year' (a 'pattern' or 'vague' claim is inherently soft, so
+ *                this is omitted for those). 'confirmed' means an official, non-hedged
+ *                statement that was actually read on the source page ("applications open
+ *                January 2027", "closed until January 2027"). 'anticipated' means the
+ *                reopening itself is stated with a hedge ("we plan to reopen in January
+ *                2027", "expected to reopen"), is contingent on something else (e.g. pending
+ *                grant renewal), or was found only via a search-result snippet that couldn't
+ *                be independently verified by reading the actual source page. When in doubt,
+ *                pick 'anticipated' — this field exists specifically so a tentative signal
+ *                doesn't get displayed with the same confidence as a definitive one.
+ *   nextOpeningCheckedAt ISO date string | null (optional) — the date this specific fact was
+ *                last verified (research/check date, not a value read off the official site).
+ *                Set alongside nextOpeningPrecision so a stale claim can be told from a fresh
+ *                one later without re-deriving it from git history.
  *   nextOpeningNote   string | null (optional) — one short line: the actual quote/paraphrase
  *                and where it came from. This is what lets someone re-verify "typically opens
  *                January" is really what the site said, not an inference from past cycles.
@@ -108,6 +126,7 @@ export const SELECTIVITY = ['very-high', 'high', 'medium', 'open']
 export const DEADLINE_STATUSES = ['confirmed', 'rolling']
 export const APPLICATION_STATUSES = ['closed']
 export const NEXT_OPENING_PRECISIONS = ['exact', 'month', 'year', 'pattern', 'vague']
+export const NEXT_OPENING_CONFIDENCES = ['confirmed', 'anticipated']
 
 const REQUIRED = ['id', 'name', 'org', 'url', 'focus', 'levels', 'mode', 'location', 'availability', 'paid']
 
@@ -193,6 +212,15 @@ export function validateOpportunity(o, seenIds = new Set()) {
     if (o.nextOpeningPrecision === 'vague' && (o.nextOpeningMonth || o.nextOpeningYear)) {
       errs.push(at('nextOpeningPrecision is "vague" but a month/year is set — use "month"/"year"/"pattern" instead if it\'s actually that specific'))
     }
+    if (['exact', 'month', 'year'].includes(o.nextOpeningPrecision) && !o.nextOpeningConfidence) {
+      errs.push(at(`nextOpeningPrecision is "${o.nextOpeningPrecision}" but nextOpeningConfidence is missing — say whether this was a definitive statement or a hedged/unverified one`))
+    }
+    if (['pattern', 'vague'].includes(o.nextOpeningPrecision) && o.nextOpeningConfidence) {
+      errs.push(at(`nextOpeningConfidence doesn't apply to precision "${o.nextOpeningPrecision}" — a pattern/vague claim is inherently soft`))
+    }
+  }
+  if (o.nextOpeningConfidence !== undefined && !NEXT_OPENING_CONFIDENCES.includes(o.nextOpeningConfidence)) {
+    errs.push(at(`nextOpeningConfidence must be one of ${NEXT_OPENING_CONFIDENCES.join(', ')}, or omitted`))
   }
   if (o.nextOpeningDate && Number.isNaN(Date.parse(o.nextOpeningDate))) {
     errs.push(at(`unparseable nextOpeningDate "${o.nextOpeningDate}"`))

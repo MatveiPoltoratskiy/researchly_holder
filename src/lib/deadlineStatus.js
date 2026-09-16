@@ -21,14 +21,24 @@ export function formatMonthYear(month, year) {
   return `${formatMonthName(month)} ${year}`
 }
 
-// null when applicationStatus isn't 'closed' (nothing to say here) — callers branch on that
+// null when applicationStatus isn't 'closed' (nothing to say here) — callers branch on that.
+// 'exact'/'month' get their own wording per nextOpeningConfidence: a definitive official
+// statement reads as "Reopens ..."; a hedged, contingent, or snippet-only-and-unverified one
+// reads as "Expected to ..." instead, so the same precision never overstates how sure this is.
+// Year-only precision always reads as "Expected" regardless of confidence — a bare year is
+// inherently less actionable than a month, so it never gets the more confident phrasing.
 export function nextOpeningLabel(o) {
   if (o.applicationStatus !== 'closed') return null
+  const confirmed = o.nextOpeningConfidence === 'confirmed'
   switch (o.nextOpeningPrecision) {
     case 'exact':
-      return `Opens ${formatDeadlineLong(o.nextOpeningDate)}`
+      return confirmed
+        ? `Reopens ${formatDeadlineLong(o.nextOpeningDate)}`
+        : `Expected to open ${formatDeadlineLong(o.nextOpeningDate)}`
     case 'month':
-      return `Expected to open ${formatMonthYear(o.nextOpeningMonth, o.nextOpeningYear)}`
+      return confirmed
+        ? `Reopens ${formatMonthYear(o.nextOpeningMonth, o.nextOpeningYear)}`
+        : `Expected to reopen ${formatMonthYear(o.nextOpeningMonth, o.nextOpeningYear)}`
     case 'year':
       return `Expected to reopen in ${o.nextOpeningYear}`
     case 'pattern':
@@ -60,7 +70,7 @@ export function deadlineCellSource(o) {
     return { url: o.deadlineSource, prefix: 'Rolling admissions — confirmed via' }
   }
   if (o.applicationStatus === 'closed' && o.nextOpeningSource) {
-    return { url: o.nextOpeningSource, prefix: 'Per' }
+    return { url: o.nextOpeningSource, prefix: o.nextOpeningConfidence === 'confirmed' ? 'Per' : 'Anticipated per' }
   }
   return null
 }
