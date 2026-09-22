@@ -1,8 +1,9 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from '../lib/router'
 import { FIELD_BY_ID } from '../data/fields'
 import { SCHOOLS, SCHOOL_BY_ID } from '../data/schools'
 import { OrgLogo } from './OrgLogo'
+import { peekProfessorFieldHandoff, clearProfessorFieldHandoff } from '../lib/professorFinderHandoff'
 import PROFESSORS from '../data/professors.json'
 
 // A handful of the taxonomy's fields get their own color + icon so the most common
@@ -67,7 +68,14 @@ export default function ProfessorDirectory() {
   const { navigate } = useRouter()
   const [query, setQuery] = useState('')
   const [schoolId, setSchoolId] = useState('all')
-  const [fieldId, setFieldId] = useState('all')
+  // pre-filtered when arriving via the Professor Finder's field-picker popup (see
+  // lib/professorFinderHandoff.js); a direct visit (navbar, back button, bookmark)
+  // finds nothing to peek and just falls back to 'all', same as before this existed.
+  const [fieldId, setFieldId] = useState(() => peekProfessorFieldHandoff() || 'all')
+
+  useEffect(() => {
+    clearProfessorFieldHandoff()
+  }, [])
 
   const fieldsInData = useMemo(
     () => Array.from(new Set(PROFESSORS.map((p) => p.field))).sort((a, b) => (FIELD_BY_ID[a]?.label || a).localeCompare(FIELD_BY_ID[b]?.label || b)),

@@ -4156,3 +4156,15 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
   .pfl-step.is-current{ animation:none; }
   .pfl-status-dots span{ animation:none; opacity:.7; }
 }
+
+/* ---------- Professor Finder — field-picker popup (upload-resume path) ---------- */
+/* reuses .im-mode-overlay/.im-mode-card (from InterviewModeModal) for the chrome, and
+   .interview-field-card/.interview-grid--field (from the interview's own step 1) for
+   the tiles — this override just widens the card and re-tunes the grid's column count
+   for that width, since .interview-grid--field's own breakpoints key off the viewport,
+   not this card's (narrower) width. */
+.pff-card{ max-width:980px; max-height:88vh; overflow-y:auto; }
+.pff-field-grid{ grid-template-columns:repeat(3,1fr); margin-top:6px; }
+@media (max-width:820px){ .pff-field-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:520px){ .pff-field-grid{ grid-template-columns:1fr; } }
+@media (max-width:560px){ .pff-card{ padding:30px 22px 26px; } }

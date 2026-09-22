@@ -1,6 +1,9 @@
 import { useRef, useState } from 'react'
 import { useRouter } from '../lib/router'
 import ProfessorFinderLoading from './ProfessorFinderLoading'
+import ProfessorFieldModal from './ProfessorFieldModal'
+import InterviewLoading from './InterviewLoading'
+import { setProfessorFieldHandoff } from '../lib/professorFinderHandoff'
 
 // Deliberately plain useState, not localStorage/sessionStorage/a lib/*.js persistence
 // helper, and no network call anywhere in this file. A student's name, school, and
@@ -158,7 +161,7 @@ export default function ProfessorFinder() {
   const [resumeText, setResumeText] = useState('')
   const [resumeStatus, setResumeStatus] = useState('idle') // idle | parsing | ready | error
   const [resumeError, setResumeError] = useState('')
-  const [phase, setPhase] = useState('form') // form | loading | done
+  const [phase, setPhase] = useState('form') // form | loading | field-pick | shuffling | done
   const [error, setError] = useState('')
 
   // A parsed resume already carries a name and school — asking for them again is friction
@@ -240,6 +243,32 @@ export default function ProfessorFinder() {
     setPhase('form')
   }
 
+  // Stores the pick right away (not on the shuffle's onDone) so the handoff is
+  // committed the instant the student chooses, before the shuffle animation even starts.
+  function handleFieldPick(fieldId) {
+    setProfessorFieldHandoff(fieldId)
+    setPhase('shuffling')
+  }
+
+  // Resume-upload only (see handleSubmit's loading step below): a full-viewport popup
+  // reusing the interview's own step-1 field tiles verbatim, then a full-viewport card
+  // shuffle straight into the directory — the ask was literally "shuffle cards to the
+  // professor database," so these two intentionally bypass the .pf-page/.interview-card
+  // shell entirely, same as Interview.jsx's own loading/matches phases do.
+  if (phase === 'field-pick') {
+    return <ProfessorFieldModal onPick={handleFieldPick} onClose={() => setPhase('done')} />
+  }
+
+  if (phase === 'shuffling') {
+    return (
+      <InterviewLoading
+        title="Shuffling your matches"
+        subtext="Pulling professors from the Ivy League directory"
+        onDone={() => navigate('/professor-directory')}
+      />
+    )
+  }
+
   return (
     <section className="interview-page pf-page">
       <button type="button" className="interview-back-float" onClick={() => navigate('/')}>
@@ -252,7 +281,7 @@ export default function ProfessorFinder() {
           {phase === 'loading' ? (
             <ProfessorFinderLoading
               interests={profile.interests}
-              onDone={() => setPhase('done')}
+              onDone={() => setPhase(mode === 'upload' ? 'field-pick' : 'done')}
               onCancel={() => setPhase('form')}
             />
           ) : phase === 'done' ? (

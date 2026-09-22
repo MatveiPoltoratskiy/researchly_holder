@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from '../lib/router'
-import { FIELDS, FIELD_BY_ID } from '../data/fields'
+import { FIELD_BY_ID, DISPLAYED_FIELDS, FIELD_DISPLAY as FIELD_META } from '../data/fields'
 import { searchCities } from '../data/worldCities'
 import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
 import { getTopMatches, explorerHandoffFromAnswers } from '../lib/matchOpportunities'
@@ -25,31 +25,10 @@ const TOTAL_STEPS = 8
 // bottom Continue button instead of auto-advancing on the first click
 const MULTI_SELECT_STEPS = new Set([2, 3])
 
-// trimmed from the full taxonomy: economics, political science, business, and law are
-// real fields but have the thinnest, least popular research-opportunity pools of the
-// bunch for this age group (mostly internships/shadowing, not bench or lab research) —
-// cut to keep the list from padding itself with options that will mostly disappoint.
-// Humanitarian stays: it's named explicitly in the brand brief as a core focal type.
-const HIDDEN_FIELD_IDS = new Set(['economics', 'political-science', 'business', 'law'])
-export const DISPLAYED_FIELDS = FIELDS.filter((f) => !HIDDEN_FIELD_IDS.has(f.id))
-
-const FIELD_META = {
-  biology: { glyph: 'dna', color: 'var(--pine)' },
-  'pre-med': { glyph: 'stethoscope', color: 'var(--cover)' },
-  neuroscience: { glyph: 'brain', color: 'var(--rose)' },
-  chemistry: { glyph: 'flask', color: 'var(--gold)' },
-  'computer-science': { glyph: 'laptop', color: 'var(--spine)' },
-  physics: { glyph: 'atom', color: 'var(--navy)' },
-  engineering: { glyph: 'wrench', color: 'var(--face)' },
-  mathematics: { glyph: 'mathSymbol', color: 'var(--ribbon)' },
-  psychology: { glyph: 'brain', color: 'var(--mauve)' },
-  'environmental-science': { glyph: 'leaf', color: 'var(--sage-front)' },
-  economics: { glyph: 'barChart', color: 'var(--cover-dark)' },
-  'political-science': { glyph: 'flag', color: 'var(--slate-brown)' },
-  humanitarian: { glyph: 'globe', color: 'var(--teal-deep)' },
-  business: { glyph: 'briefcase', color: 'var(--amber-dark)' },
-  law: { glyph: 'scale', color: 'var(--glass-rim-dark)' },
-}
+// DISPLAYED_FIELDS and FIELD_META (icon glyph + accent color per field) now live in
+// ../data/fields.js as DISPLAYED_FIELDS/FIELD_DISPLAY — moved there so the professor
+// finder's field-picker popup can reuse the exact same field tiles without importing
+// this whole module (and the ~330KB canadaOpportunities dataset that comes with it).
 
 // keyed by subfocus id (unique across every field, see data/fields.js). only tier-1
 // fields have subfocus lists today, so this only ever needs to cover those

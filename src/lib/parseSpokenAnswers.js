@@ -12,7 +12,8 @@
  * answered.
  */
 
-import { DISPLAYED_FIELDS, OPP_TYPES, EXPERIENCE_LEVELS, PAID_PREFS } from '../components/Interview'
+import { OPP_TYPES, EXPERIENCE_LEVELS, PAID_PREFS } from '../components/Interview'
+import { DISPLAYED_FIELDS } from '../data/fields'
 import { WORLD_CITIES } from '../data/worldCities'
 
 function escapeRegex(s) {
