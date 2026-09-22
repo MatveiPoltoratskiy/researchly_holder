@@ -23,6 +23,7 @@ const Interview = lazy(() => import('./components/Interview'))
 const InterviewVoice = lazy(() => import('./components/InterviewVoice'))
 const MyOpportunities = lazy(() => import('./components/MyOpportunities'))
 const ProfessorFinder = lazy(() => import('./components/ProfessorFinder'))
+const ProfessorDirectory = lazy(() => import('./components/ProfessorDirectory'))
 
 function Page() {
   const { path } = useRouter()
@@ -54,12 +55,12 @@ function Page() {
     )
   }
 
-  if (path === '/professor-finder') {
+  if (path === '/professor-finder' || path === '/professor-directory') {
     return (
       <>
         <IconSprite />
         <Suspense fallback={null}>
-          <ProfessorFinder />
+          {path === '/professor-finder' ? <ProfessorFinder /> : <ProfessorDirectory />}
         </Suspense>
       </>
     )

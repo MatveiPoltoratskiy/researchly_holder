@@ -7,7 +7,11 @@ import { burstConfetti } from '../lib/confetti'
 // pattern wholesale.
 const CARD_COLORS = ['var(--cover)', 'var(--pine)', 'var(--gold)']
 
-export default function InterviewLoading({ onDone }) {
+export default function InterviewLoading({
+  onDone,
+  title = 'Finding your best matches',
+  subtext = 'Ranking by fit, timing, and location',
+}) {
   const [burst, setBurst] = useState(false)
   const iconRef = useRef(null)
   // the parent passes a fresh inline arrow function on every one of its own re-renders —
@@ -48,8 +52,8 @@ export default function InterviewLoading({ onDone }) {
           ))}
         </div>
       </div>
-      <h1 className="interview-loading-title">Finding your best matches</h1>
-      <p className="interview-loading-subtext">Ranking by fit, timing, and location</p>
+      <h1 className="interview-loading-title">{title}</h1>
+      <p className="interview-loading-subtext">{subtext}</p>
     </div>
   )
 }

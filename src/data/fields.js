@@ -114,3 +114,37 @@ export const FIELD_BY_ID = Object.fromEntries(FIELDS.map((f) => [f.id, f]))
 
 /** Every valid focus tag, for validating opportunity records against typos. */
 export const VALID_FOCUS_IDS = FIELDS.map((f) => f.id)
+
+/**
+ * Display metadata (icon glyph + accent color) for a field's quiz tile / field-picker
+ * card. Lives here, alongside the taxonomy itself, rather than inside Interview.jsx, so
+ * any surface that needs "field -> glyph + color" — the interview's step 1, the
+ * professor finder's field-picker popup — shares one definition instead of drifting out
+ * of sync, and so a lightweight consumer (the field-picker) never has to import
+ * Interview.jsx's own module graph (canadaOpportunities.js et al) just to read it.
+ */
+export const FIELD_DISPLAY = {
+  biology: { glyph: 'dna', color: 'var(--pine)' },
+  'pre-med': { glyph: 'stethoscope', color: 'var(--cover)' },
+  neuroscience: { glyph: 'brain', color: 'var(--rose)' },
+  chemistry: { glyph: 'flask', color: 'var(--gold)' },
+  'computer-science': { glyph: 'laptop', color: 'var(--spine)' },
+  physics: { glyph: 'atom', color: 'var(--navy)' },
+  engineering: { glyph: 'wrench', color: 'var(--face)' },
+  mathematics: { glyph: 'mathSymbol', color: 'var(--ribbon)' },
+  psychology: { glyph: 'brain', color: 'var(--mauve)' },
+  'environmental-science': { glyph: 'leaf', color: 'var(--sage-front)' },
+  economics: { glyph: 'barChart', color: 'var(--cover-dark)' },
+  'political-science': { glyph: 'flag', color: 'var(--slate-brown)' },
+  humanitarian: { glyph: 'globe', color: 'var(--teal-deep)' },
+  business: { glyph: 'briefcase', color: 'var(--amber-dark)' },
+  law: { glyph: 'scale', color: 'var(--glass-rim-dark)' },
+}
+
+// trimmed from the full taxonomy for any field-picker UI: economics, political science,
+// business, and law have the thinnest, least popular pools (of opportunities AND of
+// directory professors) for this age group — cut to keep quick-pick UI from padding
+// itself with options that will mostly disappoint. Humanitarian stays: named explicitly
+// in the brand brief as a core focal type.
+const HIDDEN_FIELD_IDS = new Set(['economics', 'political-science', 'business', 'law'])
+export const DISPLAYED_FIELDS = FIELDS.filter((f) => !HIDDEN_FIELD_IDS.has(f.id))

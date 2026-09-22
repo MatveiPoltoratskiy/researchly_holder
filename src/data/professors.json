@@ -1,0 +1,642 @@
+[
+  {
+    "id": "brown-kaun",
+    "name": "Karla Kaun",
+    "schoolId": "brown",
+    "department": "Department of Neuroscience",
+    "field": "neuroscience",
+    "researchArea": "She uses fruit flies to study how alcohol and drugs hijack the brain's memory systems to create cravings and addiction.",
+    "workTitle": "Characterizing choice behavior in Drosophila olfactory classical conditioning (Journal of Experimental Biology, 2026)",
+    "workUrl": "https://journals.biologists.com/jeb/article/doi/10.1242/jeb.253164/372936/"
+  },
+  {
+    "id": "brown-littman",
+    "name": "Michael L. Littman",
+    "schoolId": "brown",
+    "department": "Department of Computer Science",
+    "field": "computer-science",
+    "researchArea": "He studies how computers can learn to make good decisions on their own, a field called reinforcement learning that underlies much of modern AI.",
+    "workTitle": "Google Scholar profile",
+    "workUrl": "https://scholar.google.com/citations?user=iRMZ2hoAAAAJ&hl=en"
+  },
+  {
+    "id": "brown-wang",
+    "name": "Lai-Sheng Wang",
+    "schoolId": "brown",
+    "department": "Department of Chemistry",
+    "field": "chemistry",
+    "researchArea": "He creates and studies tiny clusters of atoms, like all-boron molecules shaped like soccer balls, to learn how matter behaves at the smallest scales.",
+    "workTitle": "Relativistic collapse of the classical triple bond in the CBi− molecular ion (Science, 2026)",
+    "workUrl": "https://doi.org/10.1126/science.aei1285"
+  },
+  {
+    "id": "brown-sedivy",
+    "name": "John Sedivy",
+    "schoolId": "brown",
+    "department": "Department of Molecular Biology, Cell Biology, and Biochemistry",
+    "field": "biology",
+    "researchArea": "He studies why cells age, including how ancient viral-like DNA sequences reactivate in old cells and contribute to age-related disease.",
+    "workTitle": "Google Scholar profile",
+    "workUrl": "https://scholar.google.com/citations?user=GD1rQqcAAAAJ&hl=en"
+  },
+  {
+    "id": "brown-pober",
+    "name": "Jonathan Pober",
+    "schoolId": "brown",
+    "department": "Department of Physics",
+    "field": "physics",
+    "researchArea": "He builds ultra-sensitive radio telescopes to detect faint signals from hydrogen gas left over from the very early universe.",
+    "workTitle": "Low Frequency Radio Astronomy Group (lab site)",
+    "workUrl": "https://sites.brown.edu/poberlab/"
+  },
+  {
+    "id": "brown-cobb",
+    "name": "Kim Cobb",
+    "schoolId": "brown",
+    "department": "Institute at Brown for Environment and Society / Earth, Environmental and Planetary Sciences",
+    "field": "environmental-science",
+    "researchArea": "She analyzes ancient coral skeletons and modern climate data to understand how climate change is driving extreme weather and coastal flooding.",
+    "workTitle": "Google Scholar profile",
+    "workUrl": "https://scholar.google.com/citations?user=9zHbSKUAAAAJ&hl=en"
+  },
+  {
+    "id": "brown-jain",
+    "name": "Mukesh K. Jain",
+    "schoolId": "brown",
+    "department": "Warren Alpert Medical School — Department of Molecular Biology, Cell Biology and Biochemistry",
+    "field": "pre-med",
+    "researchArea": "A physician-scientist who studies how a family of proteins called Kruppel-like factors keeps blood vessels, the heart, and the aging brain healthy.",
+    "workTitle": "Endothelial KLF4 depletion drives age-related neurovascular dysfunction and neuropsychiatric impairment (PNAS, 2026)",
+    "workUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13291589/"
+  },
+  {
+    "id": "brown-sasaki",
+    "name": "Yuka Sasaki",
+    "schoolId": "brown",
+    "department": "Department of Cognitive and Psychological Sciences",
+    "field": "psychology",
+    "researchArea": "She studies how sleep helps the brain lock in new skills and knowledge, and why sleep quality affects how well people learn.",
+    "workTitle": "Sleep-Dependent Facilitation of Visual Perceptual Learning Is Consistent with a Learning-Dependent Model (PubMed)",
+    "workUrl": "https://pubmed.ncbi.nlm.nih.gov/35022218/"
+  },
+  {
+    "id": "columbia-prives",
+    "name": "Carol Prives",
+    "schoolId": "columbia",
+    "department": "Department of Biological Sciences",
+    "field": "biology",
+    "researchArea": "Studies the p53 protein, a 'guardian' gene that normally stops cells from turning cancerous, and how its malfunction drives most human cancers.",
+    "workTitle": "Mutant p53 regulates cancer cell invasion through mevalonate pathway signaling (PNAS, 2025)",
+    "workUrl": "https://www.pnas.org/doi/10.1073/pnas.2424904122"
+  },
+  {
+    "id": "columbia-losonczy",
+    "name": "Attila Losonczy",
+    "schoolId": "columbia",
+    "department": "Zuckerman Mind Brain Behavior Institute / Department of Neuroscience",
+    "field": "neuroscience",
+    "researchArea": "Watches neurons fire in the brains of mice as they learn and navigate, to understand how the brain forms, stores, and organizes memories.",
+    "workTitle": "Losonczy Lab publications",
+    "workUrl": "https://www.losonczylab.org/publications/"
+  },
+  {
+    "id": "columbia-kaufman",
+    "name": "Laura Kaufman",
+    "schoolId": "columbia",
+    "department": "Department of Chemistry",
+    "field": "chemistry",
+    "researchArea": "Uses microscopy and physical chemistry techniques to study how molecules move and jam together in crowded systems like gels, glasses, and cancer cell environments.",
+    "workTitle": "Google Scholar profile",
+    "workUrl": "https://scholar.google.com/citations?user=epdrD9wAAAAJ&hl=en"
+  },
+  {
+    "id": "columbia-vondrick",
+    "name": "Carl Vondrick",
+    "schoolId": "columbia",
+    "department": "Department of Computer Science",
+    "field": "computer-science",
+    "researchArea": "Builds AI systems that learn to see and make sense of the world from video and images, working across computer vision and robotics.",
+    "workTitle": "LookThere! Sparse Vision by Reinforced Selection (2026)",
+    "workUrl": "https://arxiv.org/abs/2609.04698"
+  },
+  {
+    "id": "columbia-acharyya",
+    "name": "Swarnali Acharyya",
+    "schoolId": "columbia",
+    "department": "Institute for Cancer Genetics, Vagelos College of Physicians and Surgeons",
+    "field": "pre-med",
+    "researchArea": "Studies how breast and lung cancer spreads to the brain and other organs, and why tumors become resistant to treatment.",
+    "workTitle": "A new, immunocompetent brain-metastatic mouse model of HER2-positive breast cancer (2025)",
+    "workUrl": "https://pubmed.ncbi.nlm.nih.gov/40220135/"
+  },
+  {
+    "id": "columbia-marka",
+    "name": "Szabolcs Márka",
+    "schoolId": "columbia",
+    "department": "Department of Physics",
+    "field": "physics",
+    "researchArea": "Works on the LIGO detector, which senses gravitational waves — tiny ripples in space-time caused by colliding black holes and neutron stars.",
+    "workTitle": "Enhancing the significance of astrophysical events with multimessenger coincidences (2024)",
+    "workUrl": "https://arxiv.org/abs/2407.08732"
+  },
+  {
+    "id": "columbia-commane",
+    "name": "Róisín Commane",
+    "schoolId": "columbia",
+    "department": "Department of Earth and Environmental Sciences / Lamont-Doherty Earth Observatory",
+    "field": "environmental-science",
+    "researchArea": "Measures greenhouse gases like methane and carbon dioxide in city air to pinpoint where leaks and emissions are actually coming from.",
+    "workTitle": "Missing wintertime methane emissions from New York City related to combustion (2025)",
+    "workUrl": "https://acp.copernicus.org/articles/25/15683/2025/"
+  },
+  {
+    "id": "columbia-danino",
+    "name": "Tal Danino",
+    "schoolId": "columbia",
+    "department": "Department of Biomedical Engineering",
+    "field": "engineering",
+    "researchArea": "Engineers bacteria with genetic 'circuits' that can seek out tumors and deliver cancer-fighting treatments directly inside them.",
+    "workTitle": "Engineered bacteria launch and control an oncolytic virus (Nature Biomedical Engineering, 2025)",
+    "workUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12696630/"
+  },
+  {
+    "id": "cornell-weinberger",
+    "name": "Kilian Q. Weinberger",
+    "schoolId": "cornell",
+    "department": "Department of Computer Science",
+    "field": "computer-science",
+    "researchArea": "He builds machine learning systems that let computers learn patterns from data, with work spanning self-driving car perception, computer vision, and efficient deep learning.",
+    "workTitle": "Google Scholar profile",
+    "workUrl": "https://scholar.google.com/citations?user=8RVWMycAAAAJ&hl=en"
+  },
+  {
+    "id": "cornell-yang",
+    "name": "Yao Yang",
+    "schoolId": "cornell",
+    "department": "Department of Chemistry and Chemical Biology",
+    "field": "chemistry",
+    "researchArea": "He studies chemical reactions happening at the atomic scale on battery and fuel-cell surfaces, aiming to make clean energy technologies like CO2 conversion and hydrogen production more efficient.",
+    "workTitle": "Operando heating/cooling electrochemical 4D-STEM study (JACS, 2025 cover story)",
+    "workUrl": "https://yang.chem.cornell.edu"
+  },
+  {
+    "id": "cornell-cerchietti",
+    "name": "Leandro Cerchietti",
+    "schoolId": "cornell",
+    "department": "Weill Cornell Medicine — Hematology and Medical Oncology",
+    "field": "pre-med",
+    "researchArea": "He is a physician-scientist who studies lymphoma, growing tumor samples from real patients in the lab to figure out why some blood cancers resist chemotherapy and how to overcome that resistance.",
+    "workTitle": "Google Scholar profile",
+    "workUrl": "https://scholar.google.com/citations?hl=en&user=2Xp_Xh0AAAAJ"
+  },
+  {
+    "id": "cornell-yapici",
+    "name": "Nilay Yapici",
+    "schoolId": "cornell",
+    "department": "Department of Neurobiology and Behavior",
+    "field": "neuroscience",
+    "researchArea": "She studies how the brain turns hunger and other body signals into decisions about what and when to eat, using fruit flies and mice to trace the neural circuits involved.",
+    "workTitle": "Gut-brain communication in Drosophila melanogaster (Current Opinion in Neurobiology, 2025)",
+    "workUrl": "http://yapicilab.com/"
+  },
+  {
+    "id": "cornell-clark",
+    "name": "Andrew G. Clark",
+    "schoolId": "cornell",
+    "department": "Department of Molecular Biology and Genetics",
+    "field": "biology",
+    "researchArea": "He studies how differences in DNA between individuals in a population lead to differences in traits and disease risk, using both human genetic data and fruit fly experiments.",
+    "workTitle": "Clark Lab publications",
+    "workUrl": "https://blogs.cornell.edu/andyclarklab/home/"
+  },
+  {
+    "id": "cornell-ault",
+    "name": "Toby R. Ault",
+    "schoolId": "cornell",
+    "department": "Department of Earth and Atmospheric Sciences",
+    "field": "environmental-science",
+    "researchArea": "He studies how climate change is shifting drought risk, the timing of seasons, and Pacific Ocean weather cycles, combining historical climate records with computer models.",
+    "workTitle": "Emerging Climate Risk Lab publications",
+    "workUrl": "https://ecrl.eas.cornell.edu/"
+  },
+  {
+    "id": "cornell-bean",
+    "name": "Rachel Bean",
+    "schoolId": "cornell",
+    "department": "Department of Astronomy",
+    "field": "physics",
+    "researchArea": "She studies the origin and structure of the universe, using telescope observations of ancient light and galaxies to test theories about dark energy and dark matter.",
+    "workTitle": "Research updates and publications",
+    "workUrl": "https://blogs.cornell.edu/rachelbean/"
+  },
+  {
+    "id": "cornell-fischbach",
+    "name": "Claudia Fischbach",
+    "schoolId": "cornell",
+    "department": "Meinig School of Biomedical Engineering",
+    "field": "engineering",
+    "researchArea": "She builds lab-grown, engineered tissue models that mimic the environment around a tumor, to understand how surrounding cells and tissue stiffness help cancer grow and resist treatment.",
+    "workTitle": "Collagen microarchitecture mechanically controls myofibroblast differentiation (PNAS, 2020)",
+    "workUrl": "https://scholar.google.com/citations?user=tPRwpXAAAAAJ"
+  },
+  {
+    "id": "dartmouth-calsbeek",
+    "name": "Ryan Calsbeek",
+    "schoolId": "dartmouth",
+    "department": "Department of Biological Sciences",
+    "field": "biology",
+    "researchArea": "He studies how evolution acts differently on males and females, using wood frogs (including frogs living in polluted ponds) to understand how animals adapt to changing environments.",
+    "workTitle": "Calsbeek Lab publications",
+    "workUrl": "https://sites.dartmouth.edu/calsbeeklab/publications/"
+  },
+  {
+    "id": "dartmouth-pletneva",
+    "name": "Ekaterina V. Pletneva",
+    "schoolId": "dartmouth",
+    "department": "Department of Chemistry (Chair)",
+    "field": "chemistry",
+    "researchArea": "She studies iron-containing proteins to understand how they shuttle electrons inside cells, work relevant to energy science and fighting bacterial infections.",
+    "workTitle": "Structure of the diheme cytochrome c4 from Neisseria gonorrhoeae (2024)",
+    "workUrl": "https://pubmed.ncbi.nlm.nih.gov/38330683/"
+  },
+  {
+    "id": "dartmouth-wager",
+    "name": "Tor Wager",
+    "schoolId": "dartmouth",
+    "department": "Department of Psychological and Brain Sciences",
+    "field": "neuroscience",
+    "researchArea": "He uses brain imaging to study how pain, emotion, and stress work in the brain, and has shown that a person's beliefs and expectations can actually change how much pain they feel.",
+    "workTitle": "Chronic pain is specifically associated with updating working memory: a longitudinal twin study (PAIN, 2025)",
+    "workUrl": "https://pubmed.ncbi.nlm.nih.gov/39106461/"
+  },
+  {
+    "id": "dartmouth-kotz",
+    "name": "David Kotz",
+    "schoolId": "dartmouth",
+    "department": "Department of Computer Science",
+    "field": "computer-science",
+    "researchArea": "He builds systems that protect people's privacy and safety on smart home devices and wireless networks, figuring out how to keep personal data secure as more everyday objects connect to the internet.",
+    "workTitle": "Moat: Adaptive Inside/Outside Detection System for Smart Homes (2024)",
+    "workUrl": "https://www.cs.dartmouth.edu/~kotz/research/wang-insideout/wang-insideout.pdf"
+  },
+  {
+    "id": "dartmouth-hickox",
+    "name": "Ryan Hickox",
+    "schoolId": "dartmouth",
+    "department": "Department of Physics and Astronomy (Chair)",
+    "field": "physics",
+    "researchArea": "He studies supermassive black holes at the centers of galaxies, using X-ray and infrared telescopes to figure out how they grow and how that growth shapes the galaxies around them.",
+    "workTitle": "What drives the growth of black holes: a decade of progress (2025)",
+    "workUrl": "https://arxiv.org/abs/2506.19166"
+  },
+  {
+    "id": "dartmouth-vancitters",
+    "name": "Douglas Van Citters",
+    "schoolId": "dartmouth",
+    "department": "Thayer School of Engineering (Dean)",
+    "field": "engineering",
+    "researchArea": "He studies why artificial hip and knee joints wear out over time by examining implants removed from patients, using what he learns to help design longer-lasting replacement joints.",
+    "workTitle": "Oxidized Zirconium Femoral Components in Total Knee Arthroplasty: A Retrieval Study of the Tibial Bearing (2025)",
+    "workUrl": "https://www.arthroplastyjournal.org/article/S0883-5403(25)00092-0/abstract"
+  },
+  {
+    "id": "dartmouth-otoole",
+    "name": "George A. O'Toole Jr.",
+    "schoolId": "dartmouth",
+    "department": "Geisel School of Medicine — Department of Microbiology and Immunology",
+    "field": "pre-med",
+    "researchArea": "He studies biofilms, the slimy bacterial communities that form on medical devices and in the lungs of people with cystic fibrosis, to understand how bacteria resist antibiotics and cause infections.",
+    "workTitle": "Interplay of virulence factors and signaling molecules: albumin and calcium-mediated biofilm regulation in Bordetella bronchiseptica (Journal of Bacteriology, 2025)",
+    "workUrl": "https://pubmed.ncbi.nlm.nih.gov/40135913/"
+  },
+  {
+    "id": "dartmouth-allen",
+    "name": "Treb Allen",
+    "schoolId": "dartmouth",
+    "department": "Department of Economics",
+    "field": "economics",
+    "researchArea": "He studies how trade between cities and countries shapes which places grow economically, using data on transportation, geography, and history to explain why some regions thrive and others don't.",
+    "workTitle": "Research and working papers",
+    "workUrl": "https://sites.google.com/site/treballen/research"
+  },
+  {
+    "id": "harvard-liu",
+    "name": "David R. Liu",
+    "schoolId": "harvard",
+    "department": "Department of Chemistry and Chemical Biology",
+    "field": "chemistry",
+    "researchArea": "He invents new chemistry tools, like base editing and prime editing, that let scientists precisely rewrite tiny mistakes in DNA to potentially treat genetic diseases.",
+    "workTitle": "Liu Group recent publications",
+    "workUrl": "https://www.liugroup.us/publications"
+  },
+  {
+    "id": "harvard-dulac",
+    "name": "Catherine Dulac",
+    "schoolId": "harvard",
+    "department": "Department of Molecular and Cellular Biology",
+    "field": "neuroscience",
+    "researchArea": "She studies how the brains of mice control instinctive social behaviors, like parenting, mating, and aggression, and how these circuits differ between males and females.",
+    "workTitle": "Dulac Lab publications",
+    "workUrl": "https://www.dulaclab.com/publications"
+  },
+  {
+    "id": "harvard-wood",
+    "name": "Robert J. Wood",
+    "schoolId": "harvard",
+    "department": "John A. Paulson School of Engineering and Applied Sciences",
+    "field": "engineering",
+    "researchArea": "He designs tiny, insect-inspired flying and crawling robots, using new methods for building machines at a very small scale.",
+    "workTitle": "Google Scholar profile",
+    "workUrl": "https://scholar.google.com/citations?user=FTYtHb4AAAAJ&hl=en"
+  },
+  {
+    "id": "harvard-dwork",
+    "name": "Cynthia Dwork",
+    "schoolId": "harvard",
+    "department": "John A. Paulson School of Engineering and Applied Sciences — Computer Science",
+    "field": "computer-science",
+    "researchArea": "She develops mathematical methods, like differential privacy, that let researchers and companies learn useful patterns from large datasets without exposing any single person's private information.",
+    "workTitle": "Publications list",
+    "workUrl": "https://dwork.seas.harvard.edu/publications"
+  },
+  {
+    "id": "harvard-franklin",
+    "name": "Melissa Franklin",
+    "schoolId": "harvard",
+    "department": "Department of Physics",
+    "field": "physics",
+    "researchArea": "She is an experimental particle physicist who studies collisions of protons at the Large Hadron Collider to learn about the fundamental building blocks of matter, including work that helped confirm the top quark and the Higgs boson.",
+    "workTitle": "Google Scholar profile",
+    "workUrl": "https://scholar.google.com/citations?user=hQOr_QIAAAAJ&hl=en"
+  },
+  {
+    "id": "harvard-hoekstra",
+    "name": "Hopi E. Hoekstra",
+    "schoolId": "harvard",
+    "department": "Department of Organismic and Evolutionary Biology",
+    "field": "biology",
+    "researchArea": "She studies wild deer mice to figure out which genes and brain circuits produce differences in behavior and body traits between species, revealing how evolution shapes animals over generations.",
+    "workTitle": "The neural basis of species-specific defensive behaviour in Peromyscus mice (Nature, 2025)",
+    "workUrl": "https://www.nature.com/articles/s41586-025-09241-2"
+  },
+  {
+    "id": "harvard-seidman",
+    "name": "Christine E. Seidman",
+    "schoolId": "harvard",
+    "department": "Harvard Medical School — Department of Genetics; Cardiovascular Medicine, Brigham and Women's Hospital",
+    "field": "pre-med",
+    "researchArea": "She is a physician-scientist who discovers the genetic mutations that cause inherited heart diseases, work that has led to better genetic testing and new heart medications.",
+    "workTitle": "Seidman Lab publications",
+    "workUrl": "https://seidman.hms.harvard.edu/?page_id=43"
+  },
+  {
+    "id": "harvard-banaji",
+    "name": "Mahzarin R. Banaji",
+    "schoolId": "harvard",
+    "department": "Department of Psychology",
+    "field": "psychology",
+    "researchArea": "She studies the gap between people's conscious beliefs and their automatic, unconscious biases, and has more recently begun testing whether AI language models show humanlike psychological patterns too.",
+    "workTitle": "Kernels of selfhood: GPT-4o shows humanlike patterns of cognitive dissonance moderated by free choice (PNAS, 2025)",
+    "workUrl": "https://www.pnas.org/doi/10.1073/pnas.2501823122"
+  },
+  {
+    "id": "penn-luo",
+    "name": "Wenqin Luo",
+    "schoolId": "penn",
+    "department": "Department of Neuroscience, Perelman School of Medicine",
+    "field": "neuroscience",
+    "researchArea": "Studies how nerves and brain circuits let us feel touch, pain, and itch, aiming to understand chronic pain and itch conditions.",
+    "workTitle": "Asymmetric lateral habenula function and peripheral neural mechanisms in regulating itch-evoked scratching (Current Biology, 2025)",
+    "workUrl": "https://www.sciencedirect.com/science/article/pii/S0960982225014617"
+  },
+  {
+    "id": "penn-rader",
+    "name": "Daniel J. Rader",
+    "schoolId": "penn",
+    "department": "Department of Genetics (Chair) and Division of Translational Medicine and Human Genetics, Perelman School of Medicine",
+    "field": "pre-med",
+    "researchArea": "Uses human genetics to figure out why some people develop heart disease and high cholesterol, looking for new ways to prevent and treat it.",
+    "workTitle": "Targeting Lipoprotein(a) — the Next Frontier in Cardiovascular Disease (New England Journal of Medicine, 2025)",
+    "workUrl": "https://www.nejm.org/doi/abs/10.1056/NEJMe2503824"
+  },
+  {
+    "id": "penn-kozlowski",
+    "name": "Marisa C. Kozlowski",
+    "schoolId": "penn",
+    "department": "Department of Chemistry",
+    "field": "chemistry",
+    "researchArea": "Designs new catalysts, which are like chemical helpers, to make building complex molecules for medicines faster, cheaper, and less wasteful.",
+    "workTitle": "Photocatalytic Oxidative Dimerization of Electronically Diverse Phenols Using Borate to Prevent Overoxidation (JACS, 2025)",
+    "workUrl": "https://pubs.acs.org/doi/10.1021/jacs.5c12438"
+  },
+  {
+    "id": "penn-callison-burch",
+    "name": "Chris Callison-Burch",
+    "schoolId": "penn",
+    "department": "Department of Computer and Information Science",
+    "field": "computer-science",
+    "researchArea": "Builds and studies AI language models like chatbots, working on both making them more capable and figuring out how to detect AI-generated text.",
+    "workTitle": "Building Auditable AI Text Detectors with Sparse Autoencoders (EMNLP, 2026)",
+    "workUrl": "https://openreview.net/forum?id=6uk8iny9FB"
+  },
+  {
+    "id": "penn-schmidt",
+    "name": "Paul Schmidt",
+    "schoolId": "penn",
+    "department": "Department of Biology",
+    "field": "biology",
+    "researchArea": "Studies wild fruit fly populations to understand how species rapidly evolve and adapt to changing seasons and climate.",
+    "workTitle": "Drosophila melanogaster pigmentation demonstrates adaptive phenotypic parallelism over multiple spatiotemporal scales (Evolution Letters, 2025)",
+    "workUrl": "https://academic.oup.com/evlett/advance-article/doi/10.1093/evlett/qraf008/8108314"
+  },
+  {
+    "id": "penn-zeng",
+    "name": "Yao Zeng",
+    "schoolId": "penn",
+    "department": "Finance Department, The Wharton School",
+    "field": "business",
+    "researchArea": "Studies how banks, payment technology, and financial companies interact, and what makes the financial system fragile or stable.",
+    "workTitle": "The Effect of Instant Payments on the Banking System: Liquidity Transformation and Risk-Taking (SSRN, 2025)",
+    "workUrl": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5250569"
+  },
+  {
+    "id": "penn-thompson-schill",
+    "name": "Sharon Thompson-Schill",
+    "schoolId": "penn",
+    "department": "Department of Psychology",
+    "field": "psychology",
+    "researchArea": "Studies how the brain's frontal lobe helps people use language, form memories, and control their own thoughts and attention.",
+    "workTitle": "Publications list, Thompson-Schill Lab",
+    "workUrl": "https://psychology.sas.upenn.edu/node/419"
+  },
+  {
+    "id": "penn-mann",
+    "name": "Michael E. Mann",
+    "schoolId": "penn",
+    "department": "Department of Earth and Environmental Science",
+    "field": "environmental-science",
+    "researchArea": "Studies how Earth's climate has changed throughout history and why extreme weather events, like hurricanes, are becoming more intense today.",
+    "workTitle": "Mann Research Group — publications",
+    "workUrl": "https://web.sas.upenn.edu/mannresearchgroup/"
+  },
+  {
+    "id": "princeton-bassler",
+    "name": "Bonnie Bassler",
+    "schoolId": "princeton",
+    "department": "Department of Molecular Biology",
+    "field": "biology",
+    "researchArea": "Studies how bacteria 'talk' to each other using chemical signals to coordinate group behaviors, like forming infections or glowing in the dark, a process called quorum sensing.",
+    "workTitle": "Vibrio cholerae biofilm gene-expression study (PLOS Biology, 2025)",
+    "workUrl": "https://journals.plos.org/plosbiology/article?id=10.1371%2Fjournal.pbio.3003187"
+  },
+  {
+    "id": "princeton-kastner",
+    "name": "Sabine Kastner",
+    "schoolId": "princeton",
+    "department": "Princeton Neuroscience Institute / Department of Psychology",
+    "field": "neuroscience",
+    "researchArea": "Studies how the brain's attention system, including a deep relay region called the thalamus, helps us focus on what matters and filter out distractions.",
+    "workTitle": "Higher-order thalamic bursts are drivers of attention control (Neuron, 2026)",
+    "workUrl": "https://pubmed.ncbi.nlm.nih.gov/42361794/"
+  },
+  {
+    "id": "princeton-macmillan",
+    "name": "David MacMillan",
+    "schoolId": "princeton",
+    "department": "Department of Chemistry",
+    "field": "chemistry",
+    "researchArea": "Invents new ways to build complex molecules efficiently, including catalysts and methods that have advanced drug discovery and cancer research (2021 Nobel Prize in Chemistry).",
+    "workTitle": "MacMillan Group current research and publications",
+    "workUrl": "https://macmillan.princeton.edu"
+  },
+  {
+    "id": "princeton-russakovsky",
+    "name": "Olga Russakovsky",
+    "schoolId": "princeton",
+    "department": "Department of Computer Science",
+    "field": "computer-science",
+    "researchArea": "Builds computer vision systems that let computers understand images and video, and studies how to make those AI systems fairer and less biased.",
+    "workTitle": "Google Scholar profile",
+    "workUrl": "https://scholar.google.com/citations?user=TB5OwW8AAAAJ&hl=en"
+  },
+  {
+    "id": "princeton-page",
+    "name": "Lyman Page",
+    "schoolId": "princeton",
+    "department": "Department of Physics",
+    "field": "physics",
+    "researchArea": "Measures the faint afterglow of the Big Bang, called the cosmic microwave background, using ground-based telescopes to learn how the universe began and evolved.",
+    "workTitle": "Atacama Cosmology Telescope: DR6 Power Spectra, Likelihoods and Lambda-CDM Parameters (arXiv, 2025)",
+    "workUrl": "https://arxiv.org/abs/2503.14452"
+  },
+  {
+    "id": "princeton-oppenheimer",
+    "name": "Michael Oppenheimer",
+    "schoolId": "princeton",
+    "department": "Department of Geosciences / School of Public and International Affairs",
+    "field": "environmental-science",
+    "researchArea": "Studies how climate change affects sea levels, ice sheets, and coastlines, and works on the science behind policies to prepare for and reduce those risks.",
+    "workTitle": "Tropical cyclone precipitation study (Journal of Hydrometeorology)",
+    "workUrl": "https://journals.ametsoc.org/view/journals/hydr/25/1/JHM-D-23-0065.1.xml"
+  },
+  {
+    "id": "princeton-bhargava",
+    "name": "Manjul Bhargava",
+    "schoolId": "princeton",
+    "department": "Department of Mathematics",
+    "field": "mathematics",
+    "researchArea": "Solves deep puzzles in number theory, such as counting and classifying whole-number solutions to equations, using elegant geometric methods.",
+    "workTitle": "Galois groups of random integer polynomials and van der Waerden's Conjecture (arXiv)",
+    "workUrl": "https://arxiv.org/abs/2111.06507"
+  },
+  {
+    "id": "princeton-shapiro",
+    "name": "Jacob Shapiro",
+    "schoolId": "princeton",
+    "department": "School of Public and International Affairs (Politics)",
+    "field": "political-science",
+    "researchArea": "Studies why political violence and terrorism happen and what strategies actually work to reduce them, using real-world data from conflict zones.",
+    "workTitle": "Civilian Harm, Wartime Informing, and Counterinsurgent Operations (Quarterly Journal of Political Science, 2025)",
+    "workUrl": "https://doi.org/10.1561/100.00024061"
+  },
+  {
+    "id": "yale-didychuk",
+    "name": "Allison Didychuk",
+    "schoolId": "yale",
+    "department": "Department of Molecular Biophysics and Biochemistry, Yale School of Medicine",
+    "field": "biology",
+    "researchArea": "Studies how herpesviruses, including the one that causes Kaposi's sarcoma, hijack a cell's machinery to copy their genes, using structural biology and virology tools.",
+    "workTitle": "KSHV TBP-mimic paper, Nucleic Acids Research (2025)",
+    "workUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12407922/"
+  },
+  {
+    "id": "yale-arnsten",
+    "name": "Amy Arnsten",
+    "schoolId": "yale",
+    "department": "Department of Neuroscience, Yale School of Medicine",
+    "field": "neuroscience",
+    "researchArea": "Studies how brain chemicals like dopamine and norepinephrine affect memory and focus in the brain's prefrontal cortex, and how that system breaks down in aging and mental illness.",
+    "workTitle": "Kynurenic acid signaling and prefrontal cortex paper, Molecular Psychiatry (2026)",
+    "workUrl": "https://www.ncbi.nlm.nih.gov/pubmed/41413200/"
+  },
+  {
+    "id": "yale-schatz",
+    "name": "David Schatz",
+    "schoolId": "yale",
+    "department": "Department of Immunobiology, Yale School of Medicine",
+    "field": "pre-med",
+    "researchArea": "Studies how the immune system builds the huge variety of antibodies and T-cell receptors needed to fight infection; discovered the RAG1/RAG2 genes that make this process possible.",
+    "workTitle": "ELOF1 and somatic hypermutation paper, Molecular Cell (2025)",
+    "workUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11972161/"
+  },
+  {
+    "id": "yale-crawford",
+    "name": "Jason Crawford",
+    "schoolId": "yale",
+    "department": "Department of Chemistry and Department of Microbial Pathogenesis, Yale University",
+    "field": "chemistry",
+    "researchArea": "Searches for small molecules made by bacteria in the human gut and elsewhere to understand how they affect drugs and disease, hunting for leads for new medicines.",
+    "workTitle": "Gut microbiota and GPCR drug metabolism paper, Nature Chemistry (2025)",
+    "workUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12412589/"
+  },
+  {
+    "id": "yale-ying",
+    "name": "Rex Ying",
+    "schoolId": "yale",
+    "department": "Department of Computer Science, Yale University",
+    "field": "computer-science",
+    "researchArea": "Builds AI systems that can understand complex, connected data — like social networks, molecules, or medical records — represented as graphs.",
+    "workTitle": "RephQA paper, arXiv (2025)",
+    "workUrl": "https://arxiv.org/abs/2509.16360"
+  },
+  {
+    "id": "yale-cheng",
+    "name": "Meng Cheng",
+    "schoolId": "yale",
+    "department": "Department of Physics, Yale University",
+    "field": "physics",
+    "researchArea": "Studies exotic, unusual states of quantum matter that don't behave like ordinary solids or liquids, to uncover fundamental rules that govern materials.",
+    "workTitle": "Google Scholar profile",
+    "workUrl": "https://scholar.google.com/citations?hl=en&user=3lyNWR0AAAAJ"
+  },
+  {
+    "id": "yale-leiserowitz",
+    "name": "Anthony Leiserowitz",
+    "schoolId": "yale",
+    "department": "Yale School of the Environment — Yale Program on Climate Change Communication",
+    "field": "environmental-science",
+    "researchArea": "Studies how people think and feel about climate change — what they believe, which policies they support, and what would get them to act — through national surveys.",
+    "workTitle": "Climate Change in the American Mind: Politics & Policy, Fall 2025",
+    "workUrl": "https://climatecommunication.yale.edu/publications/climate-change-in-the-american-mind-politics-policy-fall-2025/"
+  },
+  {
+    "id": "yale-mobarak",
+    "name": "Ahmed Mushfiq Mobarak",
+    "schoolId": "yale",
+    "department": "Yale School of Management and Department of Economics, Yale University",
+    "field": "economics",
+    "researchArea": "Runs field experiments in developing countries to find out which programs actually help poor communities adopt technologies and behaviors that improve their lives.",
+    "workTitle": "Google Scholar profile",
+    "workUrl": "https://scholar.google.com/citations?user=KRXr5_oAAAAJ&hl=en"
+  }
+]

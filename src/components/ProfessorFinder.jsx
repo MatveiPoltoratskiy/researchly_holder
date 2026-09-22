@@ -1,5 +1,9 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from '../lib/router'
+import ProfessorFinderLoading from './ProfessorFinderLoading'
+import ProfessorFieldModal from './ProfessorFieldModal'
+import InterviewLoading from './InterviewLoading'
+import { setProfessorFieldHandoff } from '../lib/professorFinderHandoff'
 
 // Deliberately plain useState, not localStorage/sessionStorage/a lib/*.js persistence
 // helper, and no network call anywhere in this file. A student's name, school, and
@@ -99,7 +103,7 @@ function ResumeDropzone({ resumeStatus, resumeFile, resumeError, onFile, onRemov
         <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-check" /></svg>
         <div className="pf-resume-done-info">
           <span className="pf-resume-done-name">{resumeFile.name}</span>
-          <span className="pf-resume-done-sub">Read in your browser — never uploaded.</span>
+          <span className="pf-resume-done-sub">Read in your browser. Never uploaded.</span>
         </div>
         <button type="button" className="pf-resume-remove" onClick={onRemove}>
           Remove
@@ -141,7 +145,7 @@ function ResumeDropzone({ resumeStatus, resumeFile, resumeError, onFile, onRemov
           <p className="pf-dropzone-text">
             <strong>Drag & drop your resume</strong>, or click to browse
           </p>
-          <p className="pf-dropzone-hint">PDF only, up to 8MB. Read locally in your browser — never uploaded.</p>
+          <p className="pf-dropzone-hint">PDF only, up to 8MB. Read locally in your browser. Never uploaded.</p>
         </>
       )}
       {resumeStatus === 'error' && <p className="pf-dropzone-error">{resumeError}</p>}
@@ -157,8 +161,25 @@ export default function ProfessorFinder() {
   const [resumeText, setResumeText] = useState('')
   const [resumeStatus, setResumeStatus] = useState('idle') // idle | parsing | ready | error
   const [resumeError, setResumeError] = useState('')
-  const [submitted, setSubmitted] = useState(false)
+  const [phase, setPhase] = useState('form') // form | loading | done
   const [error, setError] = useState('')
+  // A separate, lightweight state machine from `phase` above — this one fires the moment
+  // a resume finishes parsing, independent of ever clicking "Save my background", so it
+  // needs to coexist with `phase` still being 'form' rather than replace it.
+  const [fieldFlow, setFieldFlow] = useState('idle') // idle | prompt | shuffling
+
+  // A parsed resume already carries a name and school — asking for them again is friction
+  // the upload was supposed to save. Typed mode gets no such shortcut, since there's
+  // nothing to have read them off of.
+  const hasResume = mode === 'upload' && resumeStatus === 'ready'
+
+  // Fires the field-picker the instant a resume finishes parsing — not gated behind
+  // clicking Save, since a resume alone is already enough background to jump straight to
+  // the directory. Re-fires on every successful parse (remove + re-upload a different
+  // file), since each one is a fresh "you just gave us a resume" moment.
+  useEffect(() => {
+    if (resumeStatus === 'ready') setFieldFlow('prompt')
+  }, [resumeStatus])
 
   function update(key) {
     return (e) => {
@@ -172,6 +193,7 @@ export default function ProfessorFinder() {
     setResumeText('')
     setResumeStatus('idle')
     setResumeError('')
+    setFieldFlow('idle')
   }
 
   async function handleResumeFile(file) {
@@ -179,12 +201,12 @@ export default function ProfessorFinder() {
     const looksLikePdf = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')
     if (!looksLikePdf) {
       setResumeStatus('error')
-      setResumeError('Only PDF files work right now — try exporting your resume as a PDF.')
+      setResumeError('Only PDF files work right now. Try exporting your resume as a PDF.')
       return
     }
     if (file.size > MAX_RESUME_BYTES) {
       setResumeStatus('error')
-      setResumeError('That file is too large — try a PDF under 8MB.')
+      setResumeError("That file's too large. Try a PDF under 8MB.")
       return
     }
     setResumeFile(file)
@@ -194,7 +216,7 @@ export default function ProfessorFinder() {
       const text = await extractPdfText(file)
       if (!text) {
         setResumeStatus('error')
-        setResumeError("Couldn't find any text in that PDF — it might be a scanned image. Try typing your background instead.")
+        setResumeError("Couldn't find text in that PDF. It might be scanned. Try typing your background instead.")
         return
       }
       setResumeText(text)
@@ -213,53 +235,87 @@ export default function ProfessorFinder() {
 
   function handleSubmit(e) {
     e.preventDefault()
-    const missingCore = REQUIRED_FIELDS.some((k) => !profile[k].trim())
+    const coreFields = hasResume ? ['interests'] : REQUIRED_FIELDS
+    const missingCore = coreFields.some((k) => !profile[k].trim())
     const missingBackground = mode === 'upload' ? resumeStatus !== 'ready' : !profile.experience.trim()
     if (missingCore || missingBackground) {
       setError(
         mode === 'upload'
-          ? 'Fill in the starred fields and upload a resume — a professor needs this much to take an email seriously.'
-          : 'Fill in the starred fields — a professor needs at least this much to take an email seriously.'
+          ? 'Fill in the starred fields and upload a resume. A professor needs this much to take you seriously.'
+          : 'Fill in the starred fields. A professor needs this much to take you seriously.'
       )
       return
     }
-    setSubmitted(true)
+    setPhase('loading')
   }
 
   function startOver() {
     setProfile(EMPTY_PROFILE)
     resetResume()
     setMode('type')
-    setSubmitted(false)
+    setPhase('form')
+  }
+
+  // Stores the pick right away (not on the shuffle's onDone) so the handoff is
+  // committed the instant the student chooses, before the shuffle animation even starts.
+  function handleFieldPick(fieldId) {
+    setProfessorFieldHandoff(fieldId)
+    setFieldFlow('shuffling')
+  }
+
+  // The shuffle is a full-viewport takeover straight into the directory — the ask was
+  // literally "shuffle cards to the professor database" — so, like Interview.jsx's own
+  // loading/matches phases, it bypasses the .pf-page/.interview-card shell entirely
+  // rather than rendering inside it. The prompt itself stays a true popup (rendered
+  // below, over the still-visible form) instead of an early return, since dismissing it
+  // should drop the student right back into the form they were filling out.
+  if (fieldFlow === 'shuffling') {
+    return (
+      <InterviewLoading
+        title="Shuffling your matches"
+        subtext="Pulling professors from the Ivy League directory"
+        onDone={() => navigate('/professor-directory')}
+      />
+    )
   }
 
   return (
     <section className="interview-page pf-page">
+      {fieldFlow === 'prompt' && (
+        <ProfessorFieldModal onPick={handleFieldPick} onClose={() => setFieldFlow('idle')} />
+      )}
+
       <button type="button" className="interview-back-float" onClick={() => navigate('/')}>
         <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-home" /></svg>
         Home
       </button>
 
       <div className="container interview-container">
-        <div className="interview-card pf-card" key={submitted ? 'done' : 'form'}>
-          {submitted ? (
+        <div className="interview-card pf-card" key={phase}>
+          {phase === 'loading' ? (
+            <ProfessorFinderLoading
+              interests={profile.interests}
+              onDone={() => setPhase('done')}
+              onCancel={() => setPhase('form')}
+            />
+          ) : phase === 'done' ? (
             <div className="pf-done">
               <div className="pf-done-badge">
                 <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-check" /></svg>
               </div>
               <h1 className="interview-question">Your background is ready</h1>
               <p className="interview-subtext">
-                Next, we're building the professor directory: search by school and field, then generate a cold email
-                drafted from what you just told us. Nothing you typed or uploaded has left this browser tab.
+                Browse the professor directory next to find someone in your field. Cold-email drafting is coming soon.
+                Nothing you typed or uploaded has left this browser tab.
               </p>
               <div className="pf-summary">
                 <div className="pf-summary-row">
                   <span className="pf-summary-label">Name</span>
-                  <span className="pf-summary-value">{profile.name}</span>
+                  <span className="pf-summary-value">{profile.name || 'From your resume'}</span>
                 </div>
                 <div className="pf-summary-row">
                   <span className="pf-summary-label">School &amp; grade</span>
-                  <span className="pf-summary-value">{profile.schoolGrade}</span>
+                  <span className="pf-summary-value">{profile.schoolGrade || 'From your resume'}</span>
                 </div>
                 <div className="pf-summary-row">
                   <span className="pf-summary-label">Interests</span>
@@ -273,9 +329,12 @@ export default function ProfessorFinder() {
                 </div>
               </div>
               <div className="pf-done-actions">
-                <button type="button" className="interview-continue-btn" onClick={() => navigate('/')}>
-                  Back home
+                <button type="button" className="interview-continue-btn" onClick={() => navigate('/professor-directory')}>
+                  Browse professors
                   <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow" /></svg>
+                </button>
+                <button type="button" className="pf-edit-btn" onClick={() => navigate('/')}>
+                  Back home
                 </button>
                 <button type="button" className="pf-edit-btn" onClick={startOver}>
                   Edit answers
@@ -287,12 +346,12 @@ export default function ProfessorFinder() {
               <div className="interview-card-head">
                 <span className="pf-privacy-badge">
                   <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-lock" /></svg>
-                  Never saved, never sent — this stays on your device
+                  Never saved, never sent. It stays on your device.
                 </span>
                 <h1 className="interview-question">Tell us about you</h1>
                 <p className="interview-subtext">
-                  Upload a resume, or just tell us about yourself. Either one powers your personalized emails —
-                  nothing here is uploaded to a server or stored anywhere.
+                  Upload a resume, or tell us about yourself. Either one shapes your personalized emails. Nothing here
+                  is uploaded or stored anywhere.
                 </p>
               </div>
 
@@ -322,8 +381,8 @@ export default function ProfessorFinder() {
                   <div className="contact-grid">
                     <Field
                       id="pf-name"
-                      label="Full name"
-                      required
+                      label={hasResume ? 'Full name (optional)' : 'Full name'}
+                      required={!hasResume}
                       value={profile.name}
                       onChange={update('name')}
                       placeholder="Ada Lovelace"
@@ -343,8 +402,8 @@ export default function ProfessorFinder() {
 
                   <Field
                     id="pf-school"
-                    label="School & grade"
-                    required
+                    label={hasResume ? 'School & grade (optional)' : 'School & grade'}
+                    required={!hasResume}
                     value={profile.schoolGrade}
                     onChange={update('schoolGrade')}
                     placeholder="Lincoln High School, 11th grade"
