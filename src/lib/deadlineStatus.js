@@ -50,23 +50,33 @@ export function nextOpeningLabel(o) {
   }
 }
 
-// The date a live countdown should count down to, if any, and whether that date is a real
-// known day or an ESTIMATE derived from month-only information (a countdown built from one
-// of these must say so — see useDeadlineCountdown.js, which is the only consumer of this).
-// Deliberately conservative about which precisions even get a number: 'exact' (a real date)
-// and 'month' (day 1 of that month — bounded ~30-day error, hedgeable with "~") both do;
-// 'year' alone does NOT, because its error margin (up to 365 days) is wide enough that any
-// day-count would read as far more precise than the source actually said — a bare year stays
-// label-only, same as 'pattern'/'vague'/no-info. Same reasoning either way: never manufacture
-// false precision the underlying fact doesn't support.
+// The date a live countdown should count down to, if any — and everything the wording needs
+// to know about it (see useDeadlineCountdown.js, the only consumer of this):
+//   isEstimate  true when the date is derived from month-only information (day 1 assumed),
+//               vs a real known day. Drives the day-1-of-month math itself, not just wording.
+//   kind        'deadline' (a real application deadline) vs 'opening' (a reopening date) —
+//               "12 days left" only ever makes sense for the former.
+//   confidence  for kind 'opening' only: nextOpeningConfidence verbatim ('confirmed' means
+//               "N days until reopening"; 'anticipated' means "N days until expected
+//               reopening" — see useDeadlineCountdown.js for where that wording lives).
+// Deliberately conservative about which precisions even get a number at all: 'exact' (a real
+// date) and 'month' (day 1 of that month — bounded ~30-day error) both do; 'year' alone does
+// NOT, because its error margin (up to 365 days) is wide enough that any day-count would read
+// as far more precise than the source actually said — a bare year stays label-only, same as
+// 'pattern'/'vague'/no-info. Never manufacture false precision the underlying fact doesn't support.
 export function countdownTargetDate(o) {
-  if (o.deadline) return { date: deadlineToDate(o.deadline), isEstimate: false }
+  if (o.deadline) return { date: deadlineToDate(o.deadline), isEstimate: false, kind: 'deadline', confidence: null }
   if (o.applicationStatus === 'closed') {
     if (o.nextOpeningPrecision === 'exact' && o.nextOpeningDate) {
-      return { date: deadlineToDate(o.nextOpeningDate), isEstimate: false }
+      return { date: deadlineToDate(o.nextOpeningDate), isEstimate: false, kind: 'opening', confidence: o.nextOpeningConfidence }
     }
     if (o.nextOpeningPrecision === 'month' && o.nextOpeningMonth && o.nextOpeningYear) {
-      return { date: new Date(o.nextOpeningYear, o.nextOpeningMonth - 1, 1), isEstimate: true }
+      return {
+        date: new Date(o.nextOpeningYear, o.nextOpeningMonth - 1, 1),
+        isEstimate: true,
+        kind: 'opening',
+        confidence: o.nextOpeningConfidence,
+      }
     }
   }
   return null

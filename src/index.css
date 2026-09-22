@@ -2471,21 +2471,23 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
   overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
 }
 .deadline-card-org{ font-size:13px; color:var(--navy-soft); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.deadline-card-date{ flex:none; font-size:13px; font-weight:600; color:var(--navy-soft); white-space:nowrap; }
+/* date + live countdown, stacked as two plain lines (not a boxed badge) — the countdown
+   reads as a natural continuation of the date above it, colored by urgency through text
+   color alone. No border, no background, no pill: nothing here should compete visually
+   with the opportunity's own name/org just to its left. */
+.deadline-card-status{ display:flex; flex-direction:column; align-items:flex-end; gap:2px; flex:none; text-align:right; }
+.deadline-card-date{ font-size:13px; font-weight:600; color:var(--navy-soft); white-space:nowrap; }
 .deadline-card-countdown{
-  flex:none; font-size:12.5px; font-weight:800; text-align:right; max-width:150px;
-  background:rgba(30,37,64,.08); color:var(--navy-soft); border-radius:999px; padding:5px 12px;
+  font-size:11.5px; font-weight:700; color:var(--navy-faint); white-space:nowrap; line-height:1.3;
 }
-.deadline-card-countdown.is-soon{ background:var(--pill-amber-bg); color:var(--pill-amber-text); }
-.deadline-card-countdown.is-urgent{ background:color-mix(in srgb, var(--cover) 18%, var(--pill-amber-bg)); color:var(--cover-dark); }
-.deadline-card-countdown.is-past{ background:rgba(30,37,64,.06); color:var(--navy-faint); }
-.deadline-card-countdown.is-unknown{ background:rgba(30,37,64,.06); color:var(--navy-faint); font-weight:700; }
-.deadline-card-countdown.is-rolling{ background:color-mix(in srgb, var(--ribbon) 16%, var(--card-bg)); color:var(--ribbon); }
-.deadline-card-countdown.is-closed{ background:rgba(30,37,64,.08); color:var(--navy-soft); }
+.deadline-card-countdown.is-soon{ color:var(--pill-amber-text); }
+.deadline-card-countdown.is-urgent{ color:var(--cover-dark); font-weight:800; }
+.deadline-card-countdown.is-past{ color:var(--navy-faint); }
 /* an estimated countdown (derived from a month/year-only reopening date, never a real
-   deadline) gets a dashed ring on top of whichever urgency color already applies — the "~"
-   in the text already says "approximate," this is the same signal for a quick visual scan */
-.deadline-card-countdown.is-estimate{ box-shadow: inset 0 0 0 1px currentColor; opacity:.9; }
+   deadline) is set in italics — a quieter, typographic way to say "approximate" than a
+   border or symbol would be, and it reads correctly right below a date that already says
+   "November 2026" rather than a specific day */
+.deadline-card-countdown.is-estimate{ font-style:italic; }
 .deadline-card.is-past{ opacity:.72; }
 /* secondary action: export to an actual calendar app. Muted by default so it doesn't
    compete with the main add/remove-from-tab action (the bell, on the card above); tinted
@@ -2511,8 +2513,7 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 
 @media (max-width:600px){
   .deadline-card-main{ flex-wrap:wrap; row-gap:8px; padding:14px 8px 14px 14px; }
-  .deadline-card-date{ order:1; margin-left:50px; }
-  .deadline-card-countdown{ order:2; }
+  .deadline-card-status{ margin-left:50px; }
 }
 
 .opp-blurb{

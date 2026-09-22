@@ -56,12 +56,10 @@ function DeadlineCard({ o, reminders, onOpenDetail, onOpenCalendarPicker }) {
   // of re-deriving its own notion of "closed" that could drift from what the hook decided.
   const isClosedNoCountdown = !o.deadline && !isRolling && o.applicationStatus === 'closed' && countdown.diffDays === null
   const dateLabel = deadlineCellLabel(o)
-  const countdownLabel = isRolling ? 'Rolling' : isClosedNoCountdown ? 'Closed' : countdown.label
-  const countdownCls = isRolling
-    ? 'is-rolling'
-    : isClosedNoCountdown
-      ? 'is-closed'
-      : `${countdown.cls} ${countdown.isEstimate ? 'is-estimate' : ''}`
+  // the date label alone already says everything for rolling/closed-with-nothing-to-count/
+  // fully-unconfirmed ("Rolling admissions", "Next opening not confirmed", "Deadline not
+  // confirmed") — a second line only earns its place when there's an actual number to show
+  const showCountdown = countdown.diffDays !== null
   const hasCalendar = Boolean(reminders.remindersMap[o.id]?.calendar)
 
   return (
@@ -74,8 +72,14 @@ function DeadlineCard({ o, reminders, onOpenDetail, onOpenCalendarPicker }) {
           <span className="deadline-card-name">{o.name}</span>
           <span className="deadline-card-org">{o.org}</span>
         </span>
-        <span className="deadline-card-date">{dateLabel}</span>
-        <span className={`deadline-card-countdown ${countdownCls}`}>{countdownLabel}</span>
+        <span className="deadline-card-status">
+          <span className="deadline-card-date">{dateLabel}</span>
+          {showCountdown && (
+            <span className={`deadline-card-countdown ${countdown.cls} ${countdown.isEstimate ? 'is-estimate' : ''}`}>
+              {countdown.label}
+            </span>
+          )}
+        </span>
       </button>
       <button
         type="button"
