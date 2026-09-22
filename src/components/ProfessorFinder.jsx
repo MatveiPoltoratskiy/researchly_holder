@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from '../lib/router'
 import ProfessorFinderLoading from './ProfessorFinderLoading'
 import ProfessorFieldModal from './ProfessorFieldModal'
@@ -161,13 +161,25 @@ export default function ProfessorFinder() {
   const [resumeText, setResumeText] = useState('')
   const [resumeStatus, setResumeStatus] = useState('idle') // idle | parsing | ready | error
   const [resumeError, setResumeError] = useState('')
-  const [phase, setPhase] = useState('form') // form | loading | field-pick | shuffling | done
+  const [phase, setPhase] = useState('form') // form | loading | done
   const [error, setError] = useState('')
+  // A separate, lightweight state machine from `phase` above — this one fires the moment
+  // a resume finishes parsing, independent of ever clicking "Save my background", so it
+  // needs to coexist with `phase` still being 'form' rather than replace it.
+  const [fieldFlow, setFieldFlow] = useState('idle') // idle | prompt | shuffling
 
   // A parsed resume already carries a name and school — asking for them again is friction
   // the upload was supposed to save. Typed mode gets no such shortcut, since there's
   // nothing to have read them off of.
   const hasResume = mode === 'upload' && resumeStatus === 'ready'
+
+  // Fires the field-picker the instant a resume finishes parsing — not gated behind
+  // clicking Save, since a resume alone is already enough background to jump straight to
+  // the directory. Re-fires on every successful parse (remove + re-upload a different
+  // file), since each one is a fresh "you just gave us a resume" moment.
+  useEffect(() => {
+    if (resumeStatus === 'ready') setFieldFlow('prompt')
+  }, [resumeStatus])
 
   function update(key) {
     return (e) => {
@@ -181,6 +193,7 @@ export default function ProfessorFinder() {
     setResumeText('')
     setResumeStatus('idle')
     setResumeError('')
+    setFieldFlow('idle')
   }
 
   async function handleResumeFile(file) {
@@ -247,19 +260,16 @@ export default function ProfessorFinder() {
   // committed the instant the student chooses, before the shuffle animation even starts.
   function handleFieldPick(fieldId) {
     setProfessorFieldHandoff(fieldId)
-    setPhase('shuffling')
+    setFieldFlow('shuffling')
   }
 
-  // Resume-upload only (see handleSubmit's loading step below): a full-viewport popup
-  // reusing the interview's own step-1 field tiles verbatim, then a full-viewport card
-  // shuffle straight into the directory — the ask was literally "shuffle cards to the
-  // professor database," so these two intentionally bypass the .pf-page/.interview-card
-  // shell entirely, same as Interview.jsx's own loading/matches phases do.
-  if (phase === 'field-pick') {
-    return <ProfessorFieldModal onPick={handleFieldPick} onClose={() => setPhase('done')} />
-  }
-
-  if (phase === 'shuffling') {
+  // The shuffle is a full-viewport takeover straight into the directory — the ask was
+  // literally "shuffle cards to the professor database" — so, like Interview.jsx's own
+  // loading/matches phases, it bypasses the .pf-page/.interview-card shell entirely
+  // rather than rendering inside it. The prompt itself stays a true popup (rendered
+  // below, over the still-visible form) instead of an early return, since dismissing it
+  // should drop the student right back into the form they were filling out.
+  if (fieldFlow === 'shuffling') {
     return (
       <InterviewLoading
         title="Shuffling your matches"
@@ -271,6 +281,10 @@ export default function ProfessorFinder() {
 
   return (
     <section className="interview-page pf-page">
+      {fieldFlow === 'prompt' && (
+        <ProfessorFieldModal onPick={handleFieldPick} onClose={() => setFieldFlow('idle')} />
+      )}
+
       <button type="button" className="interview-back-float" onClick={() => navigate('/')}>
         <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-home" /></svg>
         Home
@@ -281,7 +295,7 @@ export default function ProfessorFinder() {
           {phase === 'loading' ? (
             <ProfessorFinderLoading
               interests={profile.interests}
-              onDone={() => setPhase(mode === 'upload' ? 'field-pick' : 'done')}
+              onDone={() => setPhase('done')}
               onCancel={() => setPhase('form')}
             />
           ) : phase === 'done' ? (
