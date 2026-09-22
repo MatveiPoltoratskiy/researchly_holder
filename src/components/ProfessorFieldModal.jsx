@@ -31,7 +31,7 @@ export default function ProfessorFieldModal({ onPick, onClose }) {
         </button>
 
         <h2 id="pff-title" className="im-mode-title">What field are you drawn to?</h2>
-        <p className="im-mode-sub">Pick one — we'll shuffle up matching professors from the directory.</p>
+        <p className="im-mode-sub">Pick one. We'll shuffle up matching professors from the directory.</p>
 
         <div className="interview-grid interview-grid--field pff-field-grid">
           {DISPLAYED_FIELDS.map((f) => {

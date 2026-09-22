@@ -104,7 +104,7 @@ export default function ProfessorDirectory() {
         <div className="pdir-head">
           <span className="pf-privacy-badge">
             <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-grad-cap" /></svg>
-            Ivy League, verified faculty — more schools coming
+            Ivy League, verified faculty. More schools coming
           </span>
           <h1 className="interview-question">Find a professor</h1>
           <p className="interview-subtext">
@@ -151,7 +151,7 @@ export default function ProfessorDirectory() {
         ) : (
           <div className="pdir-empty">
             <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-search" /></svg>
-            <p>No professors match those filters yet — try widening your search.</p>
+            <p>No professors match those filters yet. Try widening your search.</p>
           </div>
         )}
       </div>

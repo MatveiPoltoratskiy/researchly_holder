@@ -103,7 +103,7 @@ function ResumeDropzone({ resumeStatus, resumeFile, resumeError, onFile, onRemov
         <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-check" /></svg>
         <div className="pf-resume-done-info">
           <span className="pf-resume-done-name">{resumeFile.name}</span>
-          <span className="pf-resume-done-sub">Read in your browser — never uploaded.</span>
+          <span className="pf-resume-done-sub">Read in your browser. Never uploaded.</span>
         </div>
         <button type="button" className="pf-resume-remove" onClick={onRemove}>
           Remove
@@ -145,7 +145,7 @@ function ResumeDropzone({ resumeStatus, resumeFile, resumeError, onFile, onRemov
           <p className="pf-dropzone-text">
             <strong>Drag & drop your resume</strong>, or click to browse
           </p>
-          <p className="pf-dropzone-hint">PDF only, up to 8MB. Read locally in your browser — never uploaded.</p>
+          <p className="pf-dropzone-hint">PDF only, up to 8MB. Read locally in your browser. Never uploaded.</p>
         </>
       )}
       {resumeStatus === 'error' && <p className="pf-dropzone-error">{resumeError}</p>}
@@ -201,12 +201,12 @@ export default function ProfessorFinder() {
     const looksLikePdf = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')
     if (!looksLikePdf) {
       setResumeStatus('error')
-      setResumeError('Only PDF files work right now — try exporting your resume as a PDF.')
+      setResumeError('Only PDF files work right now. Try exporting your resume as a PDF.')
       return
     }
     if (file.size > MAX_RESUME_BYTES) {
       setResumeStatus('error')
-      setResumeError('That file is too large — try a PDF under 8MB.')
+      setResumeError("That file's too large. Try a PDF under 8MB.")
       return
     }
     setResumeFile(file)
@@ -216,7 +216,7 @@ export default function ProfessorFinder() {
       const text = await extractPdfText(file)
       if (!text) {
         setResumeStatus('error')
-        setResumeError("Couldn't find any text in that PDF — it might be a scanned image. Try typing your background instead.")
+        setResumeError("Couldn't find text in that PDF. It might be scanned. Try typing your background instead.")
         return
       }
       setResumeText(text)
@@ -241,8 +241,8 @@ export default function ProfessorFinder() {
     if (missingCore || missingBackground) {
       setError(
         mode === 'upload'
-          ? 'Fill in the starred fields and upload a resume — a professor needs this much to take an email seriously.'
-          : 'Fill in the starred fields — a professor needs at least this much to take an email seriously.'
+          ? 'Fill in the starred fields and upload a resume. A professor needs this much to take you seriously.'
+          : 'Fill in the starred fields. A professor needs this much to take you seriously.'
       )
       return
     }
@@ -305,8 +305,8 @@ export default function ProfessorFinder() {
               </div>
               <h1 className="interview-question">Your background is ready</h1>
               <p className="interview-subtext">
-                Browse the professor directory next to find someone in your field — cold-email drafting from what you
-                just told us is still coming. Nothing you typed or uploaded has left this browser tab.
+                Browse the professor directory next to find someone in your field. Cold-email drafting is coming soon.
+                Nothing you typed or uploaded has left this browser tab.
               </p>
               <div className="pf-summary">
                 <div className="pf-summary-row">
@@ -346,12 +346,12 @@ export default function ProfessorFinder() {
               <div className="interview-card-head">
                 <span className="pf-privacy-badge">
                   <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-lock" /></svg>
-                  Never saved, never sent — this stays on your device
+                  Never saved, never sent. It stays on your device.
                 </span>
                 <h1 className="interview-question">Tell us about you</h1>
                 <p className="interview-subtext">
-                  Upload a resume, or just tell us about yourself. Either one powers your personalized emails —
-                  nothing here is uploaded to a server or stored anywhere.
+                  Upload a resume, or tell us about yourself. Either one shapes your personalized emails. Nothing here
+                  is uploaded or stored anywhere.
                 </p>
               </div>
 
