@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { useRouter } from '../lib/router'
+import ProfessorFinderLoading from './ProfessorFinderLoading'
 
 // Deliberately plain useState, not localStorage/sessionStorage/a lib/*.js persistence
 // helper, and no network call anywhere in this file. A student's name, school, and
@@ -157,8 +158,13 @@ export default function ProfessorFinder() {
   const [resumeText, setResumeText] = useState('')
   const [resumeStatus, setResumeStatus] = useState('idle') // idle | parsing | ready | error
   const [resumeError, setResumeError] = useState('')
-  const [submitted, setSubmitted] = useState(false)
+  const [phase, setPhase] = useState('form') // form | loading | done
   const [error, setError] = useState('')
+
+  // A parsed resume already carries a name and school — asking for them again is friction
+  // the upload was supposed to save. Typed mode gets no such shortcut, since there's
+  // nothing to have read them off of.
+  const hasResume = mode === 'upload' && resumeStatus === 'ready'
 
   function update(key) {
     return (e) => {
@@ -213,7 +219,8 @@ export default function ProfessorFinder() {
 
   function handleSubmit(e) {
     e.preventDefault()
-    const missingCore = REQUIRED_FIELDS.some((k) => !profile[k].trim())
+    const coreFields = hasResume ? ['interests'] : REQUIRED_FIELDS
+    const missingCore = coreFields.some((k) => !profile[k].trim())
     const missingBackground = mode === 'upload' ? resumeStatus !== 'ready' : !profile.experience.trim()
     if (missingCore || missingBackground) {
       setError(
@@ -223,14 +230,14 @@ export default function ProfessorFinder() {
       )
       return
     }
-    setSubmitted(true)
+    setPhase('loading')
   }
 
   function startOver() {
     setProfile(EMPTY_PROFILE)
     resetResume()
     setMode('type')
-    setSubmitted(false)
+    setPhase('form')
   }
 
   return (
@@ -241,8 +248,14 @@ export default function ProfessorFinder() {
       </button>
 
       <div className="container interview-container">
-        <div className="interview-card pf-card" key={submitted ? 'done' : 'form'}>
-          {submitted ? (
+        <div className="interview-card pf-card" key={phase}>
+          {phase === 'loading' ? (
+            <ProfessorFinderLoading
+              interests={profile.interests}
+              onDone={() => setPhase('done')}
+              onCancel={() => setPhase('form')}
+            />
+          ) : phase === 'done' ? (
             <div className="pf-done">
               <div className="pf-done-badge">
                 <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-check" /></svg>
@@ -255,11 +268,11 @@ export default function ProfessorFinder() {
               <div className="pf-summary">
                 <div className="pf-summary-row">
                   <span className="pf-summary-label">Name</span>
-                  <span className="pf-summary-value">{profile.name}</span>
+                  <span className="pf-summary-value">{profile.name || 'From your resume'}</span>
                 </div>
                 <div className="pf-summary-row">
                   <span className="pf-summary-label">School &amp; grade</span>
-                  <span className="pf-summary-value">{profile.schoolGrade}</span>
+                  <span className="pf-summary-value">{profile.schoolGrade || 'From your resume'}</span>
                 </div>
                 <div className="pf-summary-row">
                   <span className="pf-summary-label">Interests</span>
@@ -325,8 +338,8 @@ export default function ProfessorFinder() {
                   <div className="contact-grid">
                     <Field
                       id="pf-name"
-                      label="Full name"
-                      required
+                      label={hasResume ? 'Full name (optional)' : 'Full name'}
+                      required={!hasResume}
                       value={profile.name}
                       onChange={update('name')}
                       placeholder="Ada Lovelace"
@@ -346,8 +359,8 @@ export default function ProfessorFinder() {
 
                   <Field
                     id="pf-school"
-                    label="School & grade"
-                    required
+                    label={hasResume ? 'School & grade (optional)' : 'School & grade'}
+                    required={!hasResume}
                     value={profile.schoolGrade}
                     onChange={update('schoolGrade')}
                     placeholder="Lincoln High School, 11th grade"
