@@ -249,8 +249,8 @@ export default function ProfessorFinder() {
               </div>
               <h1 className="interview-question">Your background is ready</h1>
               <p className="interview-subtext">
-                Next, we're building the professor directory: search by school and field, then generate a cold email
-                drafted from what you just told us. Nothing you typed or uploaded has left this browser tab.
+                Browse the professor directory next to find someone in your field — cold-email drafting from what you
+                just told us is still coming. Nothing you typed or uploaded has left this browser tab.
               </p>
               <div className="pf-summary">
                 <div className="pf-summary-row">
@@ -273,9 +273,12 @@ export default function ProfessorFinder() {
                 </div>
               </div>
               <div className="pf-done-actions">
-                <button type="button" className="interview-continue-btn" onClick={() => navigate('/')}>
-                  Back home
+                <button type="button" className="interview-continue-btn" onClick={() => navigate('/professor-directory')}>
+                  Browse professors
                   <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow" /></svg>
+                </button>
+                <button type="button" className="pf-edit-btn" onClick={() => navigate('/')}>
+                  Back home
                 </button>
                 <button type="button" className="pf-edit-btn" onClick={startOver}>
                   Edit answers

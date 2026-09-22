@@ -3970,3 +3970,103 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
   .im-match-card:hover{ transform:none; }
   .im-matches-glow{ animation:none; opacity:.85; }
 }
+
+/* ---------- Professor Directory ---------- */
+/* deliberately NOT .interview-page (fixed + overflow:hidden, built to center one card
+   that fits in a viewport) — this page's whole point is a scrollable card grid, so it's
+   an ordinary in-flow page instead, same as the site's regular scrolling routes. */
+.pdir-page{ min-height:100vh; background:var(--cream-deep); padding:56px 0 100px; }
+.pdir-container{ max-width:1120px; }
+.pdir-head{ max-width:760px; margin:0 auto 28px; text-align:center; }
+.pdir-head .pf-privacy-badge{ margin:0 auto 16px; }
+.pdir-head .interview-question{ text-align:center; }
+.pdir-head .interview-subtext{ margin-left:auto; margin-right:auto; }
+
+.pdir-controls{
+  display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:14px;
+}
+.pdir-search{
+  flex:1 1 260px; display:flex; align-items:center; gap:9px;
+  background:var(--card-bg); border:1.5px solid rgba(30,37,64,.16); border-radius:999px;
+  padding:11px 18px; color:var(--navy-soft);
+}
+.pdir-search svg{ flex-shrink:0; color:inherit; }
+.pdir-search-input{
+  border:none; background:none; outline:none; width:100%;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:15px; color:var(--navy);
+}
+.pdir-search-input::placeholder{ color:var(--navy-faint); }
+.pdir-select{
+  flex:0 0 auto; background:var(--card-bg); border:1.5px solid rgba(30,37,64,.16); border-radius:999px;
+  padding:11px 36px 11px 18px; font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; font-weight:700;
+  color:var(--navy); cursor:pointer;
+}
+
+.pdir-count{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; font-weight:700; color:var(--navy-soft);
+  margin-bottom:14px;
+}
+
+.pdir-grid{
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:18px;
+}
+
+.pdir-card{
+  display:flex; flex-direction:column; gap:10px;
+  background:var(--card-bg); border:1.5px solid rgba(30,37,64,.12); border-radius:18px;
+  padding:20px; box-shadow:0 2px 6px rgba(30,37,64,.06);
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.pdir-card:hover{ transform:translateY(-2px); box-shadow:0 14px 28px rgba(30,37,64,.12); }
+
+.pdir-card-head{ display:flex; align-items:flex-start; gap:12px; }
+.pdir-card-logo{
+  flex-shrink:0; width:38px; height:38px; border-radius:11px; overflow:hidden;
+  display:flex; align-items:center; justify-content:center; background:var(--pill-bg); color:var(--navy-soft);
+}
+.pdir-card-heading{ flex:1; min-width:0; }
+.pdir-name{ font-family:var(--font-title); font-size:17px; font-weight:700; color:var(--navy); margin:0; }
+.pdir-school{ font-family:"Segoe UI",system-ui,sans-serif; font-size:12.5px; color:var(--navy-soft); margin-top:1px; }
+
+.pdir-tag{
+  flex-shrink:0; display:inline-flex; align-items:center; gap:4px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:700;
+  padding:5px 9px; border-radius:999px; white-space:nowrap;
+}
+.pdir-tag--bio{ background:var(--pill-green-bg); color:var(--pill-green-text); }
+.pdir-tag--premed{ background:var(--pill-amber-bg); color:var(--cover-dark); }
+.pdir-tag--neuro{ background:color-mix(in srgb, var(--rose) 16%, var(--pill-bg)); color:var(--rose); }
+.pdir-tag--chem{ background:#F4E3B8; color:#7A5A12; }
+.pdir-tag--cs{ background:rgba(140,74,34,.14); color:var(--spine); }
+.pdir-tag--physics{ background:rgba(30,37,64,.09); color:var(--navy); }
+.pdir-tag--math{ background:rgba(63,125,92,.14); color:var(--ribbon); }
+.pdir-tag--psych{ background:rgba(139,94,107,.14); color:var(--mauve); }
+.pdir-tag--envsci{ background:rgba(104,134,86,.16); color:var(--sage-front); }
+.pdir-tag--engineering{ background:rgba(92,74,58,.16); color:var(--slate-brown); }
+.pdir-tag--economics{ background:rgba(184,134,59,.18); color:var(--amber-dark); }
+.pdir-tag--polisci{ background:rgba(30,37,64,.07); color:var(--navy-soft); }
+.pdir-tag--muted{ background:var(--pill-bg); color:var(--pill-text); }
+
+.pdir-department{ font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; font-weight:700; color:var(--navy-soft); }
+.pdir-research{ font-family:"Segoe UI",system-ui,sans-serif; font-size:14px; line-height:1.5; color:var(--navy); opacity:.85; margin:0; flex:1; }
+
+.pdir-work-link{
+  display:inline-flex; align-items:center; gap:6px; align-self:flex-start;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13.5px; font-weight:700; color:var(--cover-dark);
+  text-decoration:none; margin-top:4px;
+}
+.pdir-work-link:hover{ text-decoration:underline; }
+.pdir-work-link svg{ color:inherit; }
+
+.pdir-empty{
+  display:flex; flex-direction:column; align-items:center; gap:10px; text-align:center;
+  padding:60px 20px; color:var(--navy-soft);
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:15px;
+}
+.pdir-empty svg{ color:var(--navy-faint); }
+
+@media (max-width:640px){
+  .pdir-page{ padding:44px 0 80px; }
+  .pdir-select{ flex:1 1 140px; }
+  .pdir-grid{ grid-template-columns:1fr; }
+}
