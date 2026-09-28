@@ -787,6 +787,13 @@ h1{
   position:relative; z-index:6;
   margin-top: 0;
   padding-bottom: 8px;
+  /* the seam between the illustrated hero and this section — at >=1181px this box's own
+     top edge lands exactly on the hero's ground-cutoff band (margin-top: -60px below
+     exactly cancels that band's own 60px height), so a plain border here needs no extra
+     element to sit precisely where the scene visually ends. Reuses the same hairline
+     token every card/pill border on the site already uses, so it reads as "a seam between
+     two sections" rather than a new decorative line. */
+  border-top: 1px solid var(--card-border);
 }
 /* pulled up over the hero's ground-cutoff band (also z-index 6, but earlier in the DOM so
    this paints on top) — safe because that band is solid-color and matches this section's
