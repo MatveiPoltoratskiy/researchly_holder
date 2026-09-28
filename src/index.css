@@ -695,6 +695,20 @@ h1{
 }
 @media (max-width: 1180px){ .th-ground-cutoff{ display:none; } }
 
+/* soft fade sitting directly above .th-ground-cutoff (never overlapping it — that band
+   has to stay fully opaque right at its own edge to crop the phones cleanly): dissolves
+   the scene's green ground into the page's own --cream-deep before it ever reaches that
+   hard-edged band, so the handoff from "illustrated scene" to "flat page background" reads
+   as one continuous fade instead of the scene appearing to cut off. Warm + soft on purpose,
+   matching the brand's "not sharp or geometric" rule — a hard rule/border here would read
+   like a generic UI divider, not part of the illustration. */
+.th-scene-fade{
+  position:absolute; left:0; right:0; bottom:60px; height:170px; z-index:6;
+  background: linear-gradient(180deg, transparent 0%, var(--cream-deep) 92%);
+  pointer-events:none;
+}
+@media (max-width: 1180px){ .th-scene-fade{ display:none; } }
+
 /* pulled back up via margin-bottom: hero-scene.png has a lot of flat empty ground color
    past the props, and left alone that excess just extends .hero's own box further down,
    leaving a dead gap of nothing between the phones and the reviews section below. (An

@@ -252,6 +252,10 @@ export default function Hero() {
           what gives them a hard, flat cutoff at the bottom instead of a rounded case edge,
           as if they're planted in the plaza rather than floating in front of it */}
       <div className="th-ground-cutoff" aria-hidden="true" />
+      {/* sits just above that band — fades the scene's own green into the page background
+          before it ever reaches the band's hard edge, so the scene doesn't look like it
+          cuts off abruptly into the section below */}
+      <div className="th-scene-fade" aria-hidden="true" />
 
       <div className="landscape-wrap">
         <img className="scene-img" src="/assets/hero-scene.png" alt="" aria-hidden="true" />
