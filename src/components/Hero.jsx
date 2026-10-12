@@ -146,6 +146,7 @@ export default function Hero() {
           <div className="th-cta-wrap">
             <InterviewCta className="th-cta-btn">Build my research path →</InterviewCta>
             <p className="th-cta-hint">Takes about 1 minute.</p>
+            <p className="th-cta-hint">Used by 1,500+ students.</p>
           </div>
         </div>
 
