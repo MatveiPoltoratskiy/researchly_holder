@@ -150,17 +150,16 @@ export default function Hero() {
         </div>
 
         <div className="th-flank th-flank--right">
-          <div className="th-card-shell" style={{ '--rot': '8deg', '--stagger': '102px' }}>
-            <div className="th-phone" data-tilt>
+          {/* hero-phone-frame-right.png: the same real phone photo as the left flank
+              (hero-phone-map.png), mirrored horizontally with its screen content erased
+              to a transparent window — keeps the real device bezel/notch/buttons instead
+              of the old flat CSS-drawn frame, while the screen content below (the
+              matched-opportunities cards) stays exactly as it was. */}
+          <div className="th-card-shell" style={{ '--rot': '3deg', '--stagger': '102px' }}>
+            <div className="th-phone th-phone--framed" data-tilt>
               <div className="th-mascot" aria-hidden="true">
                 <img src="/assets/mascot-logo.png" alt="" />
               </div>
-              <div className="th-phone-notch" />
-              <div className="th-phone-camera" />
-              <div className="th-phone-btn th-phone-btn--mute" />
-              <div className="th-phone-btn th-phone-btn--vol-up" />
-              <div className="th-phone-btn th-phone-btn--vol-down" />
-              <div className="th-phone-btn th-phone-btn--power" />
               <div className="th-phone-screen">
                 <div className="th-phone-status">
                   <span>9:41</span>
@@ -243,6 +242,7 @@ export default function Hero() {
                   </div>
                 </div>
               </div>
+              <img className="th-phone-frame-img" src="/assets/hero-phone-frame-right.png" alt="" aria-hidden="true" />
             </div>
           </div>
         </div>
