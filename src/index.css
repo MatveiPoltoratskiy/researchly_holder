@@ -161,8 +161,8 @@ svg{ display:block; }
    but below the phones/ground-cutoff (5/6) so it never competes with the actual UI. */
 .hero-ambient-symbol-field{
   position:absolute; inset:0; z-index:3; pointer-events:none;
-  -webkit-mask-image: radial-gradient(ellipse 60% 42% at 50% 30%, transparent 0%, transparent 32%, black 80%);
-  mask-image: radial-gradient(ellipse 60% 42% at 50% 30%, transparent 0%, transparent 32%, black 80%);
+  -webkit-mask-image: radial-gradient(ellipse 62% 58% at 50% 36%, transparent 0%, transparent 34%, black 82%);
+  mask-image: radial-gradient(ellipse 62% 58% at 50% 36%, transparent 0%, transparent 34%, black 82%);
 }
 @media (max-width: 900px){ .hero-ambient-symbol-field{ display:none; } }
 
@@ -1305,6 +1305,7 @@ h1{
    note — solid brand-orange fill instead, matching how .im-match-field-tag already
    looks in the matches panel right next to this one */
 .how-panel .opp-tag--premed{ background:var(--cover); color:#fff; }
+.how-panel .opp-tag--muted{ background:rgba(30,37,64,.14); color:var(--navy); font-weight:800; }
 .how-panel .opp-detail-icon{ box-shadow: 0 3px 8px -3px rgba(221,107,46,.35); }
 
 /* visual 04 — apply clipboard + calendar (the original hand-illustrated mockup, kept

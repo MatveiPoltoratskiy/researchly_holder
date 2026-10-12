@@ -8,6 +8,12 @@
 // rows, shorter copy) for a quick, clean read — not a dense literal screenshot.
 // ApplyVisual (the 4th, "checklist" panel) is the original hand-illustrated mockup, kept
 // as-is per explicit request.
+//
+// Org badges use the same real-logo-via-favicon approach as OrgLogo.jsx (already used on
+// FeaturedOpportunities/InterviewMatches/OpportunityExplorer) rather than a generic field
+// icon — OrgLogo itself has no heavy deps, so importing it here doesn't drag any of those
+// lazy-loaded modules into the eager landing-page bundle.
+import { OrgLogo } from './OrgLogo'
 
 function PanelChrome({ label }) {
   return (
@@ -34,15 +40,16 @@ function MockOptionCheck() {
 }
 
 // a "demo logo" per real program name reused across panels — same program always gets
-// the same icon+color wherever it reappears (seed2STEM shows up in both the matches and
-// the browse/track panels), instead of every badge being the same repeated flask, so the
-// set reads as real varied programs rather than one icon copy-pasted everywhere
+// the same real favicon+color wherever it reappears (seed2STEM shows up in both the
+// matches and the browse/track panels), instead of every badge being the same repeated
+// flask glyph. `url` is each program's actual site, same domains the live dataset
+// (src/data/canadaOpportunities.js) points at, so OrgLogo fetches their real favicon.
 const HOW_LOGO = {
-  'seed2STEM': { icon: 'icon-flask', color: 'var(--pine)' },
-  'Amgen Scholars Program': { icon: 'icon-grad-cap', color: 'var(--cover)' },
-  'MITES': { icon: 'icon-badge-check', color: 'var(--navy)' },
+  'seed2STEM': { url: 'https://icord.org/seed2stem/', icon: 'icon-flask', color: 'var(--pine)' },
+  'Amgen Scholars Program': { url: 'https://amgenscholars.com/university/university-of-toronto/', icon: 'icon-grad-cap', color: 'var(--cover)' },
+  'MITES': { url: 'https://oeop.mit.edu/programs/mites', icon: 'icon-badge-check', color: 'var(--navy)' },
 }
-const HOW_LOGO_FALLBACK = { icon: 'icon-flask', color: 'var(--cover)' }
+const HOW_LOGO_FALLBACK = { url: null, icon: 'icon-flask', color: 'var(--cover)' }
 
 // real step-3 options from Interview.jsx (OPP_TYPES) — trimmed to icons already in the
 // sitewide IconSprite (#icon-search/calendar/replay) instead of pulling InterviewIcons.jsx
@@ -113,7 +120,7 @@ export function MatchVisual() {
             return (
             <div className="im-match-card" key={m.name} style={{ '--focus-color': m.color }}>
               <span className="im-match-logo" style={{ color: logo.color }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><use href={`#${logo.icon}`} /></svg>
+                <OrgLogo org={m.org} url={logo.url} iconId={logo.icon} />
               </span>
               <span className="im-match-main">
                 <span className="im-match-top-row">
@@ -147,8 +154,12 @@ export function BrowseVisual() {
         <div className="opp-card">
           <div className="opp-card-body">
             <div className="opp-card-head">
-              <span className="opp-badge" style={{ color: HOW_LOGO['Amgen Scholars Program'].color }} aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24"><use href={`#${HOW_LOGO['Amgen Scholars Program'].icon}`} /></svg>
+              <span className="opp-badge" style={{ color: HOW_LOGO['Amgen Scholars Program'].color }}>
+                <OrgLogo
+                  org="Amgen Scholars Program"
+                  url={HOW_LOGO['Amgen Scholars Program'].url}
+                  iconId={HOW_LOGO['Amgen Scholars Program'].icon}
+                />
               </span>
               <div className="opp-card-heading">
                 <h4 className="opp-title">Amgen Scholars Program</h4>

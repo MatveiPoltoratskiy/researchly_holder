@@ -114,9 +114,9 @@ export default function Hero() {
           reads near the edges instead of competing with the actual content */}
       <div className="hero-ambient-symbol-field" aria-hidden="true">
         <SymbolField
-          rows={9}
-          cols={20}
-          opacityRange={[0.16, 0.24]}
+          rows={6}
+          cols={14}
+          opacityRange={[0.11, 0.18]}
           fontSizeRange={[12, 20]}
           colors={['var(--symbol-tan)', 'var(--cover-dark)']}
         />
@@ -145,7 +145,6 @@ export default function Hero() {
           </p>
           <div className="th-cta-wrap">
             <InterviewCta className="th-cta-btn">Build my research path →</InterviewCta>
-            <p className="th-cta-hint">Takes about 1 minute.</p>
             <p className="th-cta-hint">Used by 1,500+ students.</p>
           </div>
         </div>
