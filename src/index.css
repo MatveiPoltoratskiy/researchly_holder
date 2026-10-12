@@ -252,16 +252,21 @@ svg{ display:block; }
    the screen the way the two flanking props (books/microscope, flasks/plant) do */
 /* inset from the true frame edge (not flush) — leaves a clear gap so the book stack /
    flask rack read as sitting beside the phone instead of disappearing behind it */
+/* left flank gets a much smaller inset than the right — the left phone is a tilted photo
+   that reads noticeably smaller than the right's coded bezel at the same width (see
+   .th-flank--left .th-card-shell below), so it needs nearly the full flank width to match
+   the right phone's visual size instead of the symmetric 120px both sides used to share */
 .th-flank--left{ justify-content:flex-start; padding-left:40px; }
 .th-flank--right{ justify-content:flex-end; padding-right:120px; }
 .th-card-shell{
-  /* both phones are the same tilted-photo mockup now (hero-phone-map.png on the left,
-     its mirrored/re-framed twin on the right), so they share one max-width instead of
-     the right needing a smaller one to match a flat coded bezel */
-  width:100%; max-width:410px; transform: translateY(var(--stagger,0px)) rotate(var(--rot,0));
+  width:100%; max-width:340px; transform: translateY(var(--stagger,0px)) rotate(var(--rot,0));
   animation: content-in .8s ease-out .3s both, card-float-th 6.4s ease-in-out infinite;
 }
 .th-flank--right .th-card-shell{ animation-delay:.4s; }
+/* the left phone is a tilted photo (perspective-foreshortened), so at the same max-width
+   as the right phone's straight-on coded bezel it reads noticeably smaller — sized up so
+   the two feel like a matched pair instead of one dominating */
+.th-flank--left .th-card-shell{ max-width:410px; }
 
 .th-phone{
   position:relative; border-radius:48px; padding:10px 8px 26px;
@@ -281,19 +286,18 @@ svg{ display:block; }
   transform-style:preserve-3d; transition: transform .12s ease-out; cursor:default;
 }
 .th-phone-image.is-tilting{ transition: transform .06s linear; }
-
-/* right phone — same real-photo treatment as the left (see Hero.jsx comment), so this
-   overrides .th-phone's CSS-drawn metal/bezel box in favor of the real device photo
-   rendered as an <img> on top (.th-phone-frame-img), with .th-phone-screen's existing
-   content positioned underneath to show through its erased, transparent screen area. */
-.th-phone--framed{
-  background:none; box-shadow:none; padding:0; border-radius:0;
-  aspect-ratio: 948 / 1448;
+.th-phone-camera{
+  position:absolute; top:16px; left:50%; transform:translateX(-50%); z-index:4;
+  width:8px; height:8px; border-radius:50%;
+  background: radial-gradient(circle at 35% 35%, #4A5578, #0B0F1C 70%);
 }
-.th-phone-frame-img{
-  position:absolute; inset:0; z-index:6; width:100%; height:100%; pointer-events:none;
-  filter: drop-shadow(0 30px 54px rgba(30,37,64,.32)) drop-shadow(0 8px 18px rgba(30,37,64,.18));
-}
+/* side buttons — small raised nubs on the dark rail, just enough to read as a real
+   device silhouette instead of a flat rounded rectangle */
+.th-phone-btn{ position:absolute; background: linear-gradient(90deg, #232428, #47484E); border-radius:2px; z-index:1; }
+.th-phone-btn--mute{ left:-3px; top:100px; width:3px; height:22px; }
+.th-phone-btn--vol-up{ left:-3px; top:140px; width:3px; height:38px; }
+.th-phone-btn--vol-down{ left:-3px; top:188px; width:3px; height:38px; }
+.th-phone-btn--power{ right:-3px; top:150px; width:3px; height:58px; }
 
 /* mascot perched beside the right-hand phone — same figure/entrance/bob as the rest
    of the site's mascot appearances, just placed here instead of over a single card */
@@ -304,19 +308,15 @@ svg{ display:block; }
 }
 .th-mascot img{ width:100%; height:auto; display:block; filter: drop-shadow(0 16px 18px rgba(30,37,64,.32)); }
 @media (max-width: 1180px){ .th-mascot{ display:none; } }
+.th-phone-notch{
+  position:absolute; top:12px; left:50%; transform:translateX(-50%); z-index:3;
+  width:80px; height:18px; background:#14161F; border-radius:0 0 13px 13px;
+}
 .th-phone-screen{
   position:relative; overflow:hidden; border-radius:34px; background: var(--card-bg);
   min-height:600px; padding:36px 20px 24px;
   -webkit-mask-image: linear-gradient(to bottom, black 0%, black 90%, transparent 100%);
   mask-image: linear-gradient(to bottom, black 0%, black 90%, transparent 100%);
-}
-/* sized/positioned to land inside hero-phone-frame-right.png's erased, transparent
-   screen window (measured from that image: ~8% inset left/right, 5%/4.5% top/bottom) —
-   z-index below .th-phone-frame-img so the real bezel photo overlaps and hides any
-   card content that runs slightly past the window's rounded corners */
-.th-phone--framed .th-phone-screen{
-  position:absolute; z-index:1; inset:5% 8% 4.5%;
-  min-height:0; border-radius:26px; padding:24px 14px 16px;
 }
 .th-phone-status{
   position:absolute; top:0; left:0; right:0; height:34px;
