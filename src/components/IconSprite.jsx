@@ -175,7 +175,7 @@ export default function IconSprite() {
         </symbol>
         <symbol id="prop-books" viewBox="0 0 210 150">
           <ellipse cx="105" cy="144" rx="95" ry="8" fill="#000" opacity=".08" />
-          <g fontFamily="Segoe UI, sans-serif" fontSize="13" fontWeight="700" fill="#F6EFDD">
+          <g fontFamily="Inter, sans-serif" fontSize="13" fontWeight="700" fill="#F6EFDD">
             <rect x="10" y="108" width="190" height="30" rx="5" fill="#4C6B3E" />
             <text x="24" y="127">Biology</text>
             <rect x="16" y="80" width="178" height="30" rx="5" fill="#2A3A5C" />

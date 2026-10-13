@@ -69,7 +69,7 @@ export default function VoiceWaveBackground() {
         const wave = Math.sin(c.i * 0.32 + t) * Math.cos(c.j * 0.28 + t * 0.75)
         const size = FONT_BASE + FONT_AMP * ((wave + 1) / 2)
         const alpha = 0.07 + 0.16 * ((wave + 1) / 2)
-        ctx.font = `700 ${size.toFixed(1)}px "Segoe UI", system-ui, sans-serif`
+        ctx.font = `700 ${size.toFixed(1)}px "Inter", system-ui, sans-serif`
         ctx.fillStyle = `rgba(221,107,46,${alpha.toFixed(3)})`
         ctx.fillText(c.symbol, c.x, c.y)
       }
