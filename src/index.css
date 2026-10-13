@@ -3262,6 +3262,10 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
   font-family: var(--font-title); font-weight:800; letter-spacing:-.015em;
   font-size:clamp(30px,4.2vw,42px); color:var(--navy); margin:0 0 40px; text-align:center;
 }
+/* same italic-orange accent treatment as the hero headline's flicker word — the one
+   recurring "this part matters" signature elsewhere on the site, reused here instead of
+   inventing a one-off style */
+.im-mode-title-accent{ font-style:italic; color:var(--cover); }
 .im-mode-options{ display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:stretch; }
 .im-mode-option{
   position:relative; display:flex; flex-direction:column; text-align:center;

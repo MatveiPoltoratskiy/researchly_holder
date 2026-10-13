@@ -28,7 +28,9 @@ export default function InterviewModeModal({ onClose, onPickVoice, onPickGuided 
           </svg>
         </button>
 
-        <h2 id="im-mode-title" className="im-mode-title">Just answer 5 questions</h2>
+        <h2 id="im-mode-title" className="im-mode-title">
+          Just answer <em className="im-mode-title-accent">5 questions</em>
+        </h2>
 
         <div className="im-mode-options">
           <button
