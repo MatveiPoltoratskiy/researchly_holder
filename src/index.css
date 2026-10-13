@@ -3259,18 +3259,14 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 }
 .im-mode-close:hover{ color:var(--navy); background:var(--pill-bg); }
 .im-mode-title{
-  font-family: var(--font-title); font-weight:800; letter-spacing:-.01em;
-  font-size:clamp(26px,3.4vw,34px); color:var(--navy); margin:0 0 10px; text-align:center;
+  font-family: var(--font-title); font-weight:800; letter-spacing:-.015em;
+  font-size:clamp(30px,4.2vw,42px); color:var(--navy); margin:0 0 40px; text-align:center;
 }
-.im-mode-sub{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:16px; color:var(--navy-soft);
-  text-align:center; margin:0 auto 34px; max-width:480px; line-height:1.5;
-}
-.im-mode-options{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.im-mode-options{ display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:stretch; }
 .im-mode-option{
-  position:relative; display:flex; flex-direction:column; align-items:center; text-align:center; gap:4px;
-  border:1.5px solid transparent; border-radius:28px;
-  padding:34px 26px 28px; cursor:pointer;
+  position:relative; display:flex; flex-direction:column; text-align:center;
+  border:1.5px solid transparent; border-radius:28px 28px 0 0; overflow:visible;
+  padding:0; cursor:pointer;
   transition: transform .32s cubic-bezier(.22,1,.36,1), box-shadow .32s cubic-bezier(.22,1,.36,1), border-color .2s ease;
 }
 .im-mode-option--voice{ background: linear-gradient(165deg, #FFF3E7 0%, #FCE7D6 100%); }
@@ -3282,10 +3278,11 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
   box-shadow: 0 34px 56px -20px rgba(30,37,64,.35);
 }
 .im-mode-option--voice:hover:not(:disabled){ border-color: rgba(221,107,46,.5); }
-.im-mode-option--guided:hover:not(:disabled){ border-color: rgba(30,37,64,.3); }
+.im-mode-option--guided:hover:not(:disabled){ border-color: rgba(65,92,57,.45); }
 .im-mode-option:active:not(:disabled){ transform: translateY(-4px) scale(1.015); }
 .im-mode-option:disabled{ opacity:.55; cursor:not-allowed; }
 
+.im-mode-option-body{ display:flex; flex-direction:column; align-items:center; gap:4px; padding:34px 26px 28px; }
 .im-mode-option-art{ position:relative; width:132px; height:132px; margin:2px auto 14px; }
 .im-mode-option-mascot{
   width:100%; height:100%; object-fit:contain;
@@ -3301,28 +3298,34 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 }
 .im-mode-option:hover:not(:disabled) .im-mode-option-badge{ transform: scale(1.12) rotate(6deg); }
 .im-mode-option-badge--voice{ background:var(--cover); color:#fff; }
-.im-mode-option-badge--guided{ background:var(--navy); color:#fff; }
+.im-mode-option-badge--guided{ background:var(--pine); color:#fff; }
 
 .im-mode-option-title{ font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:19px; color:var(--navy); }
 .im-mode-option-desc{ font-family:"Segoe UI",system-ui,sans-serif; font-size:14px; color:var(--navy-soft); line-height:1.5; }
 .im-mode-option-note{ font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; font-weight:700; color:var(--cover-dark); margin-top:2px; }
-/* integrated into the card as a full-width bar, not a small pill floating in empty
-   space — reads as "the rest of this tile", and grows with it on hover */
+/* integrated into the card as its own bottom edge — flush full-width, square top (it
+   butts right up against .im-mode-option-body above it) and notched like our own
+   bookmark icon at the bottom, echoing the ribbon on the mascot's own head. Pushed to
+   the bottom of the (grid-stretched) card via the flex auto-margin, so both options'
+   ribbons land on the same line even if one card's body is taller. */
 .im-mode-option-btn{
-  display:flex; align-items:center; justify-content:center; gap:8px; width:100%;
-  margin-top:20px; font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:15.5px;
-  padding:16px 18px; border-radius:16px;
-  box-shadow: 0 10px 20px -10px rgba(30,37,64,.35);
-  transition: transform .32s cubic-bezier(.22,1,.36,1), box-shadow .32s cubic-bezier(.22,1,.36,1), filter .2s ease;
+  display:flex; align-items:center; justify-content:center; gap:9px; width:100%;
+  margin-top:auto; font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:17px;
+  padding:22px 26px 38px; border-radius:0;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 16px), 0 100%);
+  /* drop-shadow (not box-shadow) — box-shadow is drawn from the untouched rectangular
+     box and would show through the notch clip-path cuts away; drop-shadow follows the
+     actual clipped silhouette */
+  filter: drop-shadow(0 10px 14px rgba(30,37,64,.3));
+  transition: filter .28s ease;
 }
-.im-mode-option-btn svg{ transition: transform .32s cubic-bezier(.22,1,.36,1); }
+.im-mode-option-btn svg{ flex:none; transition: transform .32s cubic-bezier(.22,1,.36,1); }
 .im-mode-option:hover:not(:disabled) .im-mode-option-btn{
-  transform: translateY(-2px); filter:brightness(1.06);
-  box-shadow: 0 16px 28px -10px rgba(30,37,64,.4);
+  filter: brightness(1.08) drop-shadow(0 16px 20px rgba(30,37,64,.38));
 }
 .im-mode-option:hover:not(:disabled) .im-mode-option-btn svg{ transform: translateX(3px); }
 .im-mode-option-btn--voice{ background:var(--cover); color:#FFF6EC; }
-.im-mode-option-btn--guided{ background:var(--navy); color:#fff; }
+.im-mode-option-btn--guided{ background:var(--pine); color:#fff; }
 
 @media (max-width:760px){
   .im-mode-card{ max-width:520px; }
@@ -3331,6 +3334,8 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
   .im-mode-card{ padding:34px 24px 28px; border-radius:26px; }
   .im-mode-options{ grid-template-columns:1fr; }
   .im-mode-option-art{ width:108px; height:108px; }
+  .im-mode-option-body{ padding:28px 22px 22px; }
+  .im-mode-option-btn{ font-size:16px; padding:19px 22px 34px; }
 }
 @media (prefers-reduced-motion: reduce){
   .im-mode-overlay, .im-mode-card{ animation:none; }
