@@ -4,6 +4,7 @@ import { CANADA_OPPORTUNITIES } from '../data/canadaOpportunities'
 import { OrgLogo, iconForOrg } from './OrgLogo'
 import { deadlineCellLabel } from '../lib/deadlineStatus'
 import { Link } from '../lib/router'
+import InterviewCta from './InterviewCta'
 
 // A hand-picked, deliberately varied set of real records from the live dataset — different
 // fields, levels, countries, price points, and (on purpose) different deadline states, so
@@ -33,7 +34,10 @@ function opportunityType(o) {
 
 function FeaturedCard({ o }) {
   return (
-    <Link to="/opportunities" className="feature-card">
+    // routes into the interview (same mode-picker modal as every other "start" entry
+    // point on the site) rather than straight to /opportunities — this strip is a
+    // teaser, so the click should feed the funnel, not just browse
+    <InterviewCta className="feature-card">
       <div className="feature-card-head">
         <div className="feature-card-badge">
           <OrgLogo org={o.org} url={o.url} iconId={iconForOrg(o.org)} />
@@ -52,7 +56,7 @@ function FeaturedCard({ o }) {
           <span className="feature-card-meta-text">{deadlineCellLabel(o)}</span>
         </span>
       </div>
-    </Link>
+    </InterviewCta>
   )
 }
 
@@ -67,6 +71,10 @@ export default function FeaturedOpportunities() {
   const setWidthRef = useRef(0) // px width of one full (non-doubled) set of cards
   const rafRef = useRef(null)
   const lastTsRef = useRef(null)
+  // a card's hover "pop" (see .feature-card:hover) reads badly if the row keeps sliding
+  // out from under the cursor mid-hover — this is a ref (not state) purely so hovering
+  // doesn't trigger re-renders or fight with the Pause/Resume button's own `paused` state
+  const hoverRef = useRef(false)
   const [paused, setPaused] = useState(prefersReducedMotion())
 
   function applyTransform(withTransition) {
@@ -99,11 +107,12 @@ export default function FeaturedOpportunities() {
       const dt = (ts - lastTsRef.current) / 1000
       lastTsRef.current = ts
 
-      posRef.current -= SPEED_PX_PER_SEC * dt
-      const setWidth = setWidthRef.current
-      if (setWidth && posRef.current <= -setWidth) posRef.current += setWidth
-
-      applyTransform(false)
+      if (!hoverRef.current) {
+        posRef.current -= SPEED_PX_PER_SEC * dt
+        const setWidth = setWidthRef.current
+        if (setWidth && posRef.current <= -setWidth) posRef.current += setWidth
+        applyTransform(false)
+      }
       rafRef.current = requestAnimationFrame(tick)
     }
 
@@ -159,7 +168,11 @@ export default function FeaturedOpportunities() {
           <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
         </button>
 
-        <div className="reviews-track-wrap">
+        <div
+          className="reviews-track-wrap"
+          onMouseEnter={() => { hoverRef.current = true }}
+          onMouseLeave={() => { hoverRef.current = false }}
+        >
           <div className="reviews-track" ref={trackRef}>
             {looped.map((o, i) => (
               <FeaturedCard key={`${o.id}-${i}`} o={o} />
