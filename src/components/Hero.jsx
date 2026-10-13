@@ -150,99 +150,19 @@ export default function Hero() {
         </div>
 
         <div className="th-flank th-flank--right">
-          <div className="th-card-shell" style={{ '--rot': '8deg', '--stagger': '102px' }}>
-            <div className="th-phone" data-tilt>
-              <div className="th-mascot" aria-hidden="true">
-                <img src="/assets/mascot-logo.png" alt="" />
-              </div>
-              <div className="th-phone-notch" />
-              <div className="th-phone-camera" />
-              <div className="th-phone-btn th-phone-btn--mute" />
-              <div className="th-phone-btn th-phone-btn--vol-up" />
-              <div className="th-phone-btn th-phone-btn--vol-down" />
-              <div className="th-phone-btn th-phone-btn--power" />
-              <div className="th-phone-screen">
-                <div className="th-phone-status">
-                  <span>9:41</span>
-                  <span className="th-phone-battery" />
-                </div>
-                <div className="th-chrome">
-                  <div className="th-chrome-dots"><span /><span /><span /></div>
-                  <span className="th-chrome-meta">Matched for you</span>
-                </div>
-
-                <div className="th-opp">
-                  <div className="th-opp-head">
-                    <span className="th-crest" style={{ color: 'var(--cover)' }}>
-                      <svg viewBox="0 0 24 24"><use href="#crest-shield" /></svg>
-                      <span>A</span>
-                    </span>
-                    <div className="th-opp-heading">
-                      <p className="th-opp-title">Amgen Scholars Program</p>
-                      <p className="th-opp-org">University of Toronto</p>
-                    </div>
-                    <span className="th-opp-save">
-                      <svg width="14" height="14" viewBox="0 0 24 24"><use href="#icon-bookmark" /></svg>
-                    </span>
-                  </div>
-                  <div className="th-opp-detail-row">
-                    <span className="th-opp-detail"><svg viewBox="0 0 24 24"><use href="#icon-dollar" /></svg>Paid</span>
-                    <span className="th-opp-detail"><svg viewBox="0 0 24 24"><use href="#icon-pin" /></svg>Toronto, ON</span>
-                  </div>
-                  <div className="th-opp-tags">
-                    <span className="th-opp-tag">Pre-Med</span>
-                    <span className="th-opp-tag th-tag-green">High Match</span>
-                  </div>
-                </div>
-
-                <div className="th-opp">
-                  <div className="th-opp-head">
-                    <span className="th-crest" style={{ color: 'var(--pine)' }}>
-                      <svg viewBox="0 0 24 24"><use href="#crest-shield" /></svg>
-                      <span>M</span>
-                    </span>
-                    <div className="th-opp-heading">
-                      <p className="th-opp-title">Research Science Institute</p>
-                      <p className="th-opp-org">MIT / CEE</p>
-                    </div>
-                    <span className="th-opp-save">
-                      <svg width="14" height="14" viewBox="0 0 24 24"><use href="#icon-bookmark" /></svg>
-                    </span>
-                  </div>
-                  <div className="th-opp-detail-row">
-                    <span className="th-opp-detail"><svg viewBox="0 0 24 24"><use href="#icon-dollar" /></svg>Free</span>
-                    <span className="th-opp-detail"><svg viewBox="0 0 24 24"><use href="#icon-pin" /></svg>Cambridge, MA</span>
-                  </div>
-                  <div className="th-opp-tags">
-                    <span className="th-opp-tag">High School</span>
-                    <span className="th-opp-tag th-tag-green">High Match</span>
-                  </div>
-                </div>
-
-                <div className="th-opp">
-                  <div className="th-opp-head">
-                    <span className="th-crest" style={{ color: 'var(--navy)' }}>
-                      <svg viewBox="0 0 24 24"><use href="#crest-shield" /></svg>
-                      <span>S</span>
-                    </span>
-                    <div className="th-opp-heading">
-                      <p className="th-opp-title">Simons Summer Research</p>
-                      <p className="th-opp-org">Stony Brook University</p>
-                    </div>
-                    <span className="th-opp-save">
-                      <svg width="14" height="14" viewBox="0 0 24 24"><use href="#icon-bookmark" /></svg>
-                    </span>
-                  </div>
-                  <div className="th-opp-detail-row">
-                    <span className="th-opp-detail"><svg viewBox="0 0 24 24"><use href="#icon-dollar" /></svg>Paid</span>
-                    <span className="th-opp-detail"><svg viewBox="0 0 24 24"><use href="#icon-pin" /></svg>Stony Brook, NY</span>
-                  </div>
-                  <div className="th-opp-tags">
-                    <span className="th-opp-tag">High School</span>
-                    <span className="th-opp-tag">Good Match</span>
-                  </div>
-                </div>
-              </div>
+          {/* hero-phone-matches-right.png: a single flat image, same treatment as the
+              left phone (see that comment) rather than a live CSS overlay — the "Matched
+              for you" cards are baked in, perspective-warped to this photo's own screen
+              area in Python/PIL/OpenCV (not hand-tuned CSS), so there's no runtime
+              alignment between a photo and separately-positioned HTML to get wrong. Built
+              from: (1) hero-phone-map.png's screen erased to a transparent window, same
+              as the left phone's bezel; (2) the card content re-rendered flat via PIL
+              using the live design's own colors/type; (3) a cv2 perspective warp of (2)
+              into (1)'s screen-corner coordinates, composited and mirrored as one piece. */}
+          <div className="th-card-shell" style={{ '--rot': '3deg', '--stagger': '102px' }}>
+            <img className="th-phone-image" src="/assets/hero-phone-matches-right.png" alt="" data-tilt />
+            <div className="th-mascot" aria-hidden="true">
+              <img src="/assets/mascot-logo.png" alt="" />
             </div>
           </div>
         </div>
