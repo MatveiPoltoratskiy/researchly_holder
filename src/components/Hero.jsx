@@ -144,7 +144,7 @@ export default function Hero() {
             helps you find research opportunities that actually fit you.
           </p>
           <div className="th-cta-wrap">
-            <InterviewCta className="th-cta-btn">Build my research path →</InterviewCta>
+            <InterviewCta className="th-cta-btn">Find my free opportunities →</InterviewCta>
             <p className="th-cta-hint">Used by 1,500+ students.</p>
           </div>
         </div>
