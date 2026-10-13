@@ -3237,63 +3237,108 @@ button.roadmap-milestone-row:focus-visible{ outline:2px solid var(--cover); outl
 }
 
 /* ---------- interview mode picker (modal over the normal scrolling landing page) ---------- */
+/* Apple-ish: plain white surface, soft diffuse shadow instead of a hard border, generous
+   scale, big tappable tiles that visibly react to the cursor rather than sitting flat. */
 .im-mode-overlay{
-  position:fixed; inset:0; z-index:200; background:rgba(30,37,64,.55);
+  position:fixed; inset:0; z-index:200; background:rgba(20,23,38,.6);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   display:flex; align-items:center; justify-content:center; padding:20px;
   animation:im-mode-fade .18s ease-out both;
 }
 @keyframes im-mode-fade{ from{ opacity:0; } to{ opacity:1; } }
 .im-mode-card{
-  position:relative; width:100%; max-width:620px; background:var(--card-bg);
-  border:1.5px solid var(--card-border); border-radius:26px; padding:40px 40px 36px;
-  box-shadow:0 2px 6px rgba(30,37,64,.08), 0 32px 60px rgba(30,37,64,.28);
+  position:relative; width:100%; max-width:860px; max-height:92vh; overflow-y:auto;
+  background:#fff; border:none; border-radius:32px; padding:52px 52px 46px;
+  box-shadow:0 1px 1px rgba(30,37,64,.04), 0 50px 90px -24px rgba(20,23,38,.45);
   animation:content-in .28s ease-out both;
 }
 .im-mode-close{
-  position:absolute; top:18px; right:18px; width:32px; height:32px; border-radius:50%;
+  position:absolute; top:20px; right:20px; width:36px; height:36px; border-radius:50%;
   display:flex; align-items:center; justify-content:center; color:var(--navy-soft);
-  background:none; border:1px solid var(--card-border); cursor:pointer;
+  background:var(--cream); border:none; cursor:pointer; transition:background-color .15s ease, color .15s ease;
 }
-.im-mode-close:hover{ color:var(--navy); border-color:var(--navy-faint); }
+.im-mode-close:hover{ color:var(--navy); background:var(--pill-bg); }
 .im-mode-title{
   font-family: var(--font-title); font-weight:800; letter-spacing:-.01em;
-  font-size:clamp(22px,2.6vw,28px); color:var(--navy); margin:0 0 8px; text-align:center;
+  font-size:clamp(26px,3.4vw,34px); color:var(--navy); margin:0 0 10px; text-align:center;
 }
 .im-mode-sub{
-  font-family:"Segoe UI",system-ui,sans-serif; font-size:14.5px; color:var(--navy-soft);
-  text-align:center; margin:0 0 26px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:16px; color:var(--navy-soft);
+  text-align:center; margin:0 auto 34px; max-width:480px; line-height:1.5;
 }
-.im-mode-options{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.im-mode-options{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
 .im-mode-option{
-  display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px;
-  background:var(--cream); border:1.5px solid var(--card-border); border-radius:18px;
-  padding:26px 18px 22px; cursor:pointer; transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  position:relative; display:flex; flex-direction:column; align-items:center; text-align:center; gap:4px;
+  border:1.5px solid transparent; border-radius:28px;
+  padding:34px 26px 28px; cursor:pointer;
+  transition: transform .32s cubic-bezier(.22,1,.36,1), box-shadow .32s cubic-bezier(.22,1,.36,1), border-color .2s ease;
 }
-.im-mode-option:hover:not(:disabled){ transform:translateY(-3px); box-shadow:0 14px 28px -12px rgba(30,37,64,.25); border-color:var(--cover); }
+.im-mode-option--voice{ background: linear-gradient(165deg, #FFF3E7 0%, #FCE7D6 100%); }
+.im-mode-option--guided{ background: linear-gradient(165deg, #F3F4F8 0%, #E7E9F1 100%); }
+/* a real "pop", not a nudge — this is the thing the user is choosing between, it should
+   feel like it jumps toward the cursor */
+.im-mode-option:hover:not(:disabled){
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 0 34px 56px -20px rgba(30,37,64,.35);
+}
+.im-mode-option--voice:hover:not(:disabled){ border-color: rgba(221,107,46,.5); }
+.im-mode-option--guided:hover:not(:disabled){ border-color: rgba(30,37,64,.3); }
+.im-mode-option:active:not(:disabled){ transform: translateY(-4px) scale(1.015); }
 .im-mode-option:disabled{ opacity:.55; cursor:not-allowed; }
-.im-mode-option-icon{
-  width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center;
-  margin-bottom:6px;
+
+.im-mode-option-art{ position:relative; width:132px; height:132px; margin:2px auto 14px; }
+.im-mode-option-mascot{
+  width:100%; height:100%; object-fit:contain;
+  filter: drop-shadow(0 14px 18px rgba(30,37,64,.22));
+  transition: transform .32s cubic-bezier(.22,1,.36,1);
 }
-.im-mode-option-icon--voice{ background:rgba(221,107,46,.14); color:var(--cover-dark); }
-.im-mode-option-icon--guided{ background:rgba(30,37,64,.08); color:var(--navy); }
-.im-mode-option-title{ font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:16px; color:var(--navy); }
-.im-mode-option-desc{ font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; color:var(--navy-soft); line-height:1.45; }
-.im-mode-option-note{ font-family:"Segoe UI",system-ui,sans-serif; font-size:11.5px; font-weight:700; color:var(--cover-dark); }
+.im-mode-option:hover:not(:disabled) .im-mode-option-mascot{ transform: scale(1.07) rotate(-2deg); }
+.im-mode-option-badge{
+  position:absolute; right:-4px; bottom:6px; width:46px; height:46px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; border:3px solid #fff;
+  box-shadow: 0 8px 16px -4px rgba(30,37,64,.4);
+  transition: transform .32s cubic-bezier(.22,1,.36,1);
+}
+.im-mode-option:hover:not(:disabled) .im-mode-option-badge{ transform: scale(1.12) rotate(6deg); }
+.im-mode-option-badge--voice{ background:var(--cover); color:#fff; }
+.im-mode-option-badge--guided{ background:var(--navy); color:#fff; }
+
+.im-mode-option-title{ font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:19px; color:var(--navy); }
+.im-mode-option-desc{ font-family:"Segoe UI",system-ui,sans-serif; font-size:14px; color:var(--navy-soft); line-height:1.5; }
+.im-mode-option-note{ font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; font-weight:700; color:var(--cover-dark); margin-top:2px; }
+/* integrated into the card as a full-width bar, not a small pill floating in empty
+   space — reads as "the rest of this tile", and grows with it on hover */
 .im-mode-option-btn{
-  display:inline-block; margin-top:10px; font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:13.5px;
-  padding:9px 18px; border-radius:999px;
+  display:flex; align-items:center; justify-content:center; gap:8px; width:100%;
+  margin-top:20px; font-family:"Segoe UI",system-ui,sans-serif; font-weight:800; font-size:15.5px;
+  padding:16px 18px; border-radius:16px;
+  box-shadow: 0 10px 20px -10px rgba(30,37,64,.35);
+  transition: transform .32s cubic-bezier(.22,1,.36,1), box-shadow .32s cubic-bezier(.22,1,.36,1), filter .2s ease;
 }
+.im-mode-option-btn svg{ transition: transform .32s cubic-bezier(.22,1,.36,1); }
+.im-mode-option:hover:not(:disabled) .im-mode-option-btn{
+  transform: translateY(-2px); filter:brightness(1.06);
+  box-shadow: 0 16px 28px -10px rgba(30,37,64,.4);
+}
+.im-mode-option:hover:not(:disabled) .im-mode-option-btn svg{ transform: translateX(3px); }
 .im-mode-option-btn--voice{ background:var(--cover); color:#FFF6EC; }
 .im-mode-option-btn--guided{ background:var(--navy); color:#fff; }
 
+@media (max-width:760px){
+  .im-mode-card{ max-width:520px; }
+}
 @media (max-width:560px){
-  .im-mode-card{ padding:30px 22px 26px; }
+  .im-mode-card{ padding:34px 24px 28px; border-radius:26px; }
   .im-mode-options{ grid-template-columns:1fr; }
+  .im-mode-option-art{ width:108px; height:108px; }
 }
 @media (prefers-reduced-motion: reduce){
   .im-mode-overlay, .im-mode-card{ animation:none; }
-  .im-mode-option:hover:not(:disabled){ transform:none; }
+  .im-mode-option:hover:not(:disabled),
+  .im-mode-option:hover:not(:disabled) .im-mode-option-mascot,
+  .im-mode-option:hover:not(:disabled) .im-mode-option-badge,
+  .im-mode-option:hover:not(:disabled) .im-mode-option-btn,
+  .im-mode-option:hover:not(:disabled) .im-mode-option-btn svg{ transform:none; }
 }
 
 /* ---------- calendar picker (deadline reminder "which calendar?" menu) ---------- */

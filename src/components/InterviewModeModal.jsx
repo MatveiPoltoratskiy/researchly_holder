@@ -34,29 +34,44 @@ export default function InterviewModeModal({ onClose, onPickVoice, onPickGuided 
         <div className="im-mode-options">
           <button
             type="button"
-            className="im-mode-option"
+            className="im-mode-option im-mode-option--voice"
             onClick={onPickVoice}
             disabled={!VOICE_SUPPORTED}
             title={VOICE_SUPPORTED ? undefined : 'Voice input needs Chrome or Edge'}
           >
-            <span className="im-mode-option-icon im-mode-option-icon--voice">
-              <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-mic" /></svg>
+            {/* same mascot as the "guided" card (facing forward, our one mascot pose) —
+                the mic badge pinned at its hand is what tells the two modes apart, not a
+                second drawn pose */}
+            <span className="im-mode-option-art">
+              <img className="im-mode-option-mascot" src="/assets/mascot-straight.png" alt="" />
+              <span className="im-mode-option-badge im-mode-option-badge--voice">
+                <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-mic" /></svg>
+              </span>
             </span>
             <span className="im-mode-option-title">Just speak for a minute</span>
             <span className="im-mode-option-desc">
               Talk naturally about your interests, grade, and what you're looking for.
             </span>
             {!VOICE_SUPPORTED && <span className="im-mode-option-note">Needs Chrome or Edge</span>}
-            <span className="im-mode-option-btn im-mode-option-btn--voice">Start speaking</span>
+            <span className="im-mode-option-btn im-mode-option-btn--voice">
+              Start speaking
+              <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow" /></svg>
+            </span>
           </button>
 
-          <button type="button" className="im-mode-option" onClick={onPickGuided}>
-            <span className="im-mode-option-icon im-mode-option-icon--guided">
-              <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-list" /></svg>
+          <button type="button" className="im-mode-option im-mode-option--guided" onClick={onPickGuided}>
+            <span className="im-mode-option-art">
+              <img className="im-mode-option-mascot" src="/assets/mascot-straight.png" alt="" />
+              <span className="im-mode-option-badge im-mode-option-badge--guided">
+                <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-list" /></svg>
+              </span>
             </span>
             <span className="im-mode-option-title">Actual interview</span>
             <span className="im-mode-option-desc">Answer guided questions one stage at a time.</span>
-            <span className="im-mode-option-btn im-mode-option-btn--guided">Start interview</span>
+            <span className="im-mode-option-btn im-mode-option-btn--guided">
+              Start interview
+              <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow" /></svg>
+            </span>
           </button>
         </div>
       </div>
